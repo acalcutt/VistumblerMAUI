@@ -44,7 +44,6 @@ public static partial class MauiProgram
         // ── ViewModels ───────────────────────────────────────────────────────
         services.AddSingleton<ScanViewModel>();
         services.AddSingleton<MapViewModel>();
-        services.AddTransient<AccessPointListViewModel>();
         services.AddTransient<SettingsViewModel>();
         services.AddTransient<ImportViewModel>();
         services.AddTransient<ExportViewModel>();
@@ -52,7 +51,6 @@ public static partial class MauiProgram
         // ── Pages ────────────────────────────────────────────────────────────
         services.AddTransient<ScanPage>();
         services.AddTransient<MapPage>();
-        services.AddTransient<AccessPointListPage>();
         services.AddTransient<SettingsPage>();
         services.AddTransient<ImportPage>();
         services.AddTransient<ExportPage>();

@@ -11,10 +11,6 @@
                       Icon="tab_scan.png"
                       ContentTemplate="{DataTemplate views:ScanPage}"
                       Route="ScanPage" />
-        <ShellContent Title="APs"
-                      Icon="tab_list.png"
-                      ContentTemplate="{DataTemplate views:AccessPointListPage}"
-                      Route="AccessPointListPage" />
         <ShellContent Title="Map"
                       Icon="tab_map.png"
                       ContentTemplate="{DataTemplate views:MapPage}"

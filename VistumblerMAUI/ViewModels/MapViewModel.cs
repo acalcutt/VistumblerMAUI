@@ -341,7 +341,7 @@ public partial class MapViewModel : ObservableObject
         if (string.IsNullOrWhiteSpace(bssid)) return;
 
         IsPopupVisible = false;
-        await Shell.Current.GoToAsync($"//AccessPointListPage?bssid={Uri.EscapeDataString(bssid)}");
+        await Shell.Current.GoToAsync($"//ScanPage?bssid={Uri.EscapeDataString(bssid)}");
     }
 
     /// <summary>
