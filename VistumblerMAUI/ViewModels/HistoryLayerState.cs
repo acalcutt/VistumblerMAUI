@@ -5,8 +5,8 @@ namespace VistumblerMAUI.ViewModels;
 
 /// <summary>
 /// Represents one toggleable wifidb.net history overlay on the map.
-/// Either a GeoJSON-fetched layer (daily data) or a vector tile source-layer
-/// that is already embedded in the WifiDB style.json (weekly, monthly, …).
+/// Either a GeoJSON-fetched layer (daily data) or one-or-more per-bucket
+/// vector tile layers served by WifiDB's mvtd daemon via tilejson.php.
 /// </summary>
 public partial class HistoryLayerState : ObservableObject
 {
@@ -28,17 +28,15 @@ public partial class HistoryLayerState : ObservableObject
 
     // ── Vector tile path ──────────────────────────────────────────────────
     /// <summary>
-    /// Vector tile source already present in the WifiDB style
-    /// (e.g. "WifiDB_newest", "WifiDB", "WifiDB_cells").
-    /// Null for GeoJSON layers.
+    /// WifiDB history-bucket name(s) backing this layer (e.g. "weekly", "0to1year",
+    /// "cell_daily"), matching the bucket names mvtd/tilejson.php use. Each bucket
+    /// gets its own dynamically-added vector source ("WifiDB_{bucket}", loaded via
+    /// tilejson.php?bucket={bucket}) and circle layer ("hist_{bucket}_circles" with
+    /// source-layer "{bucket}"). Null for GeoJSON layers. Multiple buckets let one
+    /// button (e.g. "Cells") toggle several tiers at once, matching VistumblerCS's
+    /// combined Cell Networks toggle.
     /// </summary>
-    public string? VectorSourceId    { get; init; }
-
-    /// <summary>
-    /// Source-layer name inside the vector tile source
-    /// (e.g. "WifiDB_weekly", "cell_networks").
-    /// </summary>
-    public string? VectorSourceLayer { get; init; }
+    public string[]? Buckets         { get; init; }
 
     public bool IsGeoJsonLayer => GeoJsonUrl is not null;
 

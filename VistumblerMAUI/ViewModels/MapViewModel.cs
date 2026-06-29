@@ -25,8 +25,9 @@ public partial class MapViewModel : ObservableObject
     private const string EmptyGeoJson = "{\"type\":\"FeatureCollection\",\"features\":[]}";
 
     // ── Map config ────────────────────────────────────────────────────────────
-    // Use the WifiDB OSM style — it embeds WifiDB_newest / WifiDB / WifiDB_cells
-    // vector tile sources so the weekly/monthly history layers work out of the box.
+    // History-layer vector sources (per bucket, e.g. "WifiDB_weekly") are added
+    // dynamically via tilejson.php when each layer is toggled on — see
+    // AddVectorLayer() — not pre-baked into this base style.
     [ObservableProperty] private string _styleUrl     = "https://tiles.wifidb.net/styles/WDB_OSM/style.json";
     [ObservableProperty] private string _statusMessage = string.Empty;
     [ObservableProperty] private List<AccessPoint> _mappableAps = new();
@@ -69,25 +70,31 @@ public partial class MapViewModel : ObservableObject
             _controller?.UpdateLocationIndicator(d.Latitude, d.Longitude, bearing, accuracy));
     }
 
+    private static readonly string[] CellBuckets =
+    {
+        "cell_daily", "cell_weekly", "cell_monthly",
+        "cell_0to1year", "cell_1to2year", "cell_2to3year",
+        "cell_3to5year", "cell_5to10year", "cell_10yrplus",
+    };
+
     private void InitHistoryLayers()
     {
-        // Mirror the wifidb.net history sources used by vistumbler-android VectorMapActivity.
-        // GeoJSON source for daily data (fetched from API on demand).
-        // Vector tile sources for weekly/monthly/older come pre-bundled in the WifiDB style.json.
+        // Matches the bucket names WifiDB's mvtd daemon / tilejson.php / VistumblerCS
+        // all agree on: daily, weekly, monthly, 0to1year, 1to2year, 2to3year,
+        // 3to5year, 5to10year, 10yrplus (+ cell_-prefixed equivalents for Cells).
         var defs = new HistoryLayerState[]
         {
-            new() { Id = "daily",  Label = "Daily",  ActiveColor = "#3BB2D0",
+            new() { Id = "daily",     Label = "Daily",
                     GeoJsonUrl = "https://wifidb.net/api/geojson.php?func=exp_daily&json=1" },
-            new() { Id = "weekly", Label = "Weekly", ActiveColor = "#00AA00",
-                    VectorSourceId = "WifiDB_newest", VectorSourceLayer = "WifiDB_weekly" },
-            new() { Id = "monthly",Label = "Monthly",ActiveColor = "#FF8C00",
-                    VectorSourceId = "WifiDB_newest", VectorSourceLayer = "WifiDB_monthly" },
-            new() { Id = "0to1yr", Label = "< 1 yr", ActiveColor = "#FFDD00",
-                    VectorSourceId = "WifiDB_newest", VectorSourceLayer = "WifiDB_0to1year" },
-            new() { Id = "1to2yr", Label = "1–2 yr", ActiveColor = "#FF8844",
-                    VectorSourceId = "WifiDB",        VectorSourceLayer = "WifiDB_1to2year" },
-            new() { Id = "cells",  Label = "Cells",  ActiveColor = "#885FCD",
-                    VectorSourceId = "WifiDB_cells",  VectorSourceLayer = "cell_networks" },
+            new() { Id = "weekly",    Label = "Weekly",    ActiveColor = "#00AA00", Buckets = ["weekly"] },
+            new() { Id = "monthly",   Label = "Monthly",   ActiveColor = "#FF8C00", Buckets = ["monthly"] },
+            new() { Id = "0to1year",  Label = "0-1 Year",  ActiveColor = "#FFDD00", Buckets = ["0to1year"] },
+            new() { Id = "1to2year",  Label = "1-2 Year",  ActiveColor = "#FF8844", Buckets = ["1to2year"] },
+            new() { Id = "2to3year",  Label = "2-3 Year",  ActiveColor = "#FF6633", Buckets = ["2to3year"] },
+            new() { Id = "3to5year",  Label = "3-5 Year",  ActiveColor = "#E64A19", Buckets = ["3to5year"] },
+            new() { Id = "5to10year", Label = "5-10 Year", ActiveColor = "#C2185B", Buckets = ["5to10year"] },
+            new() { Id = "10yrplus",  Label = "10+ Year",  ActiveColor = "#7B1FA2", Buckets = ["10yrplus"] },
+            new() { Id = "cells",     Label = "Cells",     ActiveColor = "#885FCD", Buckets = CellBuckets },
         };
 
         foreach (var layer in defs)
@@ -238,40 +245,57 @@ public partial class MapViewModel : ObservableObject
     }
 
     /// <summary>
-    /// Add a circle layer that reads from a vector tile source already embedded in
-    /// the WifiDB style.json.  The sourceLayer parameter tells MapLibre which
-    /// named layer inside the .pbf tile to render.
+    /// Add a per-bucket vector source + circle layer for every bucket this layer
+    /// covers. The source is loaded directly from tilejson.php (same as the WifiDB
+    /// web map's mvtd-backed buttons) rather than assuming it's pre-baked into the
+    /// style — MapLibre auto-discovers the real tile URL template/zoom range from
+    /// the fetched TileJSON document.
     /// </summary>
     private void AddVectorLayer(HistoryLayerState layer)
     {
-        if (_controller is null) return;
-        var layerId = $"hist_{layer.Id}_circles";
-        if (_addedVectorLayers.Contains(layerId)) return;
+        if (_controller is null || layer.Buckets is null) return;
 
-        _controller.AddCircleLayer(
-            layerName:    layerId,
-            sourceName:   layer.VectorSourceId!,
-            belowLayerId: "ap-circles",
-            sourceLayer:  layer.VectorSourceLayer,
-            properties: new Dictionary<string, object?>
-            {
-                ["circle-radius"]       = 2.5,
-                ["circle-color"]        = layer.ActiveColor,
-                ["circle-stroke-width"] = 0.4,
-                ["circle-stroke-color"] = "#FFFFFF",
-                ["circle-opacity"]      = 0.7,
-            });
+        foreach (var bucket in layer.Buckets)
+        {
+            var layerId = $"hist_{bucket}_circles";
+            if (_addedVectorLayers.Contains(layerId)) continue;
 
-        _addedVectorLayers.Add(layerId);
+            var sourceId = $"WifiDB_{bucket}";
+            _controller.AddVectorSource(
+                sourceName:       sourceId,
+                tileUrl:          $"https://wifidb.net/api/tilejson.php?bucket={bucket}",
+                tileUrlTemplates: null,
+                minZoom: 0, maxZoom: 22);
+
+            _controller.AddCircleLayer(
+                layerName:    layerId,
+                sourceName:   sourceId,
+                belowLayerId: "ap-circles",
+                sourceLayer:  bucket,
+                properties: new Dictionary<string, object?>
+                {
+                    ["circle-radius"]       = 2.5,
+                    ["circle-color"]        = layer.ActiveColor,
+                    ["circle-stroke-width"] = 0.4,
+                    ["circle-stroke-color"] = "#FFFFFF",
+                    ["circle-opacity"]      = 0.7,
+                });
+
+            _addedVectorLayers.Add(layerId);
+        }
         StatusMessage = $"{layer.Label} layer on";
     }
 
     private void RemoveVectorLayer(HistoryLayerState layer)
     {
-        if (_controller is null) return;
-        var layerId = $"hist_{layer.Id}_circles";
-        _controller.RemoveLayer(layerId);
-        _addedVectorLayers.Remove(layerId);
+        if (_controller is null || layer.Buckets is null) return;
+
+        foreach (var bucket in layer.Buckets)
+        {
+            var layerId = $"hist_{bucket}_circles";
+            _controller.RemoveLayer(layerId);
+            _addedVectorLayers.Remove(layerId);
+        }
         StatusMessage = $"{layer.Label} layer off";
     }
 
@@ -297,7 +321,11 @@ public partial class MapViewModel : ObservableObject
         foreach (var layer in HistoryLayers)
         {
             if (!layer.IsActive) continue;
-            candidateLayers.Add(($"hist_{layer.Id}_circles", layer.Label));
+            if (layer.IsGeoJsonLayer)
+                candidateLayers.Add(($"hist_{layer.Id}_circles", layer.Label));
+            else if (layer.Buckets is { } buckets)
+                foreach (var bucket in buckets)
+                    candidateLayers.Add(($"hist_{bucket}_circles", layer.Label));
         }
 
         foreach (var (layerId, sourceLabel) in candidateLayers)
