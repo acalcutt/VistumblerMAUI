@@ -1,0 +1,95 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-windows:
+    name: Build Windows
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore workloads
+        run: dotnet workload restore VistumblerMAUI.sln
+
+      - name: Restore dependencies
+        run: dotnet restore VistumblerMAUI.sln
+
+      - name: Build (net10.0-windows10.0.19041.0)
+        run: |
+          dotnet build VistumblerMAUI/VistumblerMAUI.csproj `
+            -f net10.0-windows10.0.19041.0 `
+            -c Release `
+            --no-restore
+
+  build-android:
+    name: Build Android
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore workloads
+        run: dotnet workload restore VistumblerMAUI.sln
+
+      - name: Restore dependencies
+        run: dotnet restore VistumblerMAUI.sln
+
+      - name: Build (net10.0-android36.0)
+        run: |
+          dotnet build VistumblerMAUI/VistumblerMAUI.csproj `
+            -f net10.0-android36.0 `
+            -c Release `
+            --no-restore
+
+  build-ios:
+    name: Build iOS (simulator)
+    # Matches the runner maplibre-maui-ac uses to build its own .NET MAUI
+    # sample app against this same MapLibreNative.Maui package — the default
+    # Xcode on older runner images is too old for the .NET 10 iOS workload.
+    runs-on: macos-26
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore workloads
+        run: dotnet workload restore VistumblerMAUI.sln
+
+      - name: Select Xcode 26.5
+        run: sudo xcode-select -s /Applications/Xcode_26.5.app
+
+      - name: Build (net10.0-ios, simulator — no code signing required)
+        # No separate restore step here: this build specifies an explicit
+        # RuntimeIdentifier, so let it do its own RID-aware implicit restore
+        # rather than relying on a prior RID-less `dotnet restore`. (Couldn't
+        # test this exact path on a Mac — verify on first CI run.)
+        run: |
+          dotnet build VistumblerMAUI/VistumblerMAUI.csproj \
+            -f net10.0-ios \
+            -c Release \
+            -p:RuntimeIdentifier=iossimulator-arm64

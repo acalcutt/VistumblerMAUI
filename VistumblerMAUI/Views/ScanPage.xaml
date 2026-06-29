@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:VistumblerMAUI.ViewModels"
+             xmlns:models="clr-namespace:Vistumbler.Core.Models;assembly=Vistumbler.Core"
+             x:DataType="vm:ScanViewModel"
+             x:Class="VistumblerMAUI.Views.ScanPage"
+             Title="Scan">
+
+    <Grid RowDefinitions="Auto,Auto,*,Auto">
+
+        <!-- Status bar -->
+        <Grid Grid.Row="0" ColumnDefinitions="*,*" BackgroundColor="{AppThemeBinding Light=#1565C0, Dark=#0D47A1}" Padding="12,8">
+            <Label Grid.Column="0" Text="{Binding StatusMessage}" TextColor="White" FontSize="13" VerticalOptions="Center" />
+            <Label Grid.Column="1" Text="{Binding GpsStatus}"     TextColor="#B3E5FC" FontSize="12" VerticalOptions="Center" HorizontalOptions="End" />
+        </Grid>
+
+        <!-- Scan control + counters -->
+        <Grid Grid.Row="1" ColumnDefinitions="Auto,*,Auto,Auto" Padding="12,8" ColumnSpacing="12">
+            <Button Grid.Column="0"
+                    Text="{Binding IsScanning, Converter={StaticResource BoolToStartStop}}"
+                    Command="{Binding ToggleScanCommand}"
+                    BackgroundColor="{Binding IsScanning, Converter={StaticResource BoolToColor}}"
+                    TextColor="White"
+                    WidthRequest="90" />
+            <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                <Label Text="{Binding TotalCount, StringFormat='Total: {0}'}" FontSize="13" />
+                <Label Text="{Binding ActiveCount, StringFormat='Active: {0}'}" FontSize="13" TextColor="#1565C0" />
+            </VerticalStackLayout>
+        </Grid>
+
+        <!-- AP list -->
+        <CollectionView Grid.Row="2"
+                        ItemsSource="{Binding AccessPoints}"
+                        SelectionMode="Single">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:AccessPoint">
+                    <Grid ColumnDefinitions="*,Auto,Auto" Padding="12,8">
+                        <VerticalStackLayout Grid.Column="0" Spacing="2">
+                            <Label Text="{Binding Ssid}" FontAttributes="Bold" FontSize="14" />
+                            <Label Text="{Binding Bssid}" FontSize="11" TextColor="Gray" />
+                            <Label Text="{Binding Manufacturer}" FontSize="11" TextColor="Gray" />
+                        </VerticalStackLayout>
+                        <!-- Signal bar -->
+                        <VerticalStackLayout Grid.Column="1" WidthRequest="60" HorizontalOptions="Center" VerticalOptions="Center" Spacing="2">
+                            <Label Text="{Binding Signal, StringFormat='{0}%'}" HorizontalOptions="Center" FontSize="13" />
+                            <ProgressBar Progress="{Binding Signal, Converter={StaticResource IntToProgress}}" HeightRequest="6" />
+                        </VerticalStackLayout>
+                        <!-- Channel + security -->
+                        <VerticalStackLayout Grid.Column="2" WidthRequest="60" HorizontalOptions="End" VerticalOptions="Center" Spacing="2">
+                            <Label Text="{Binding Channel, StringFormat='Ch {0}'}" FontSize="12" HorizontalOptions="End" />
+                            <Label Text="{Binding Authentication}" FontSize="10" TextColor="#546E7A" HorizontalOptions="End" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Bottom hint -->
+        <Label Grid.Row="3" Text="Tap Start to begin scanning" HorizontalOptions="Center"
+               FontSize="12" TextColor="Gray" Padding="8"
+               IsVisible="{Binding IsScanning, Converter={StaticResource InvertBool}}" />
+    </Grid>
+
+</ContentPage>

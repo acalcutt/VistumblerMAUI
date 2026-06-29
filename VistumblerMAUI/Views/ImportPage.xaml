@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:VistumblerMAUI.ViewModels"
+             x:DataType="vm:ImportViewModel"
+             x:Class="VistumblerMAUI.Views.ImportPage"
+             Title="Import">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="0" Padding="0,8">
+
+            <Label Text="FORMAT" Style="{StaticResource SectionHeader}" />
+            <Picker Grid.Column="1"
+                    Margin="16,0"
+                    ItemsSource="{Binding ImportTypes}"
+                    SelectedItem="{Binding SelectedImportType}" />
+            <BoxView HeightRequest="1" Color="#EEEEEE" Margin="16,8" />
+
+            <Label Text="FILE" Style="{StaticResource SectionHeader}" />
+            <Grid ColumnDefinitions="*,Auto" Padding="16,4" ColumnSpacing="12">
+                <Label Grid.Column="0" Text="{Binding FileName}" VerticalOptions="Center" LineBreakMode="TailTruncation" />
+                <Button Grid.Column="1" Text="Browse…" Command="{Binding BrowseCommand}" />
+            </Grid>
+            <BoxView HeightRequest="1" Color="#EEEEEE" Margin="16,8" />
+
+            <Button Text="Import"
+                    Command="{Binding ImportCommand}"
+                    Margin="16,16"
+                    HorizontalOptions="Fill" />
+
+            <ProgressBar Progress="{Binding ProgressValue}"
+                         IsVisible="{Binding IsImporting}"
+                         Margin="16,0" />
+
+            <Label Text="{Binding StatusMessage}"
+                   FontSize="12" TextColor="Gray"
+                   Margin="16,8" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

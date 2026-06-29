@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108">
+  <defs>
+    <!-- Radial gradient: lighter periwinkle centre, deeper blue edges -->
+    <radialGradient id="bg" cx="50%" cy="38%" r="65%">
+      <stop offset="0%"   stop-color="#8B9AEE"/>
+      <stop offset="100%" stop-color="#3B52CC"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background (appicon uses full square; MAUI resizetizer clips to circle/squircle) -->
+  <rect width="108" height="108" fill="url(#bg)"/>
+
+  <!-- Head -->
+  <circle cx="54" cy="17" r="11" fill="white"/>
+
+  <!-- Arc 1 — smaller, just below head — curves downward like a smile -->
+  <path d="M28 36 Q54 56 80 36" fill="none" stroke="white" stroke-width="11" stroke-linecap="round"/>
+
+  <!-- Arc 2 — wider, lower -->
+  <path d="M10 54 Q54 78 98 54" fill="none" stroke="white" stroke-width="11" stroke-linecap="round"/>
+
+  <!-- GPS/antenna anchor: Y-shape with circle at base -->
+  <!-- Left arm -->
+  <line x1="46" y1="81" x2="28" y2="70" stroke="white" stroke-width="9" stroke-linecap="round"/>
+  <!-- Right arm -->
+  <line x1="62" y1="81" x2="80" y2="70" stroke="white" stroke-width="9" stroke-linecap="round"/>
+  <!-- Centre ball -->
+  <circle cx="54" cy="90" r="11" fill="white"/>
+</svg>

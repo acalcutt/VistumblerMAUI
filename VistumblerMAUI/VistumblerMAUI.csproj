@@ -1,0 +1,59 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net10.0-android36.0;net10.0-ios;net10.0-windows10.0.19041.0</TargetFrameworks>
+    <!--
+      macCatalyst intentionally omitted for now — WiFi scan API is not available
+      on macCatalyst without special entitlements.
+    -->
+
+    <OutputType>Exe</OutputType>
+    <RootNamespace>VistumblerMAUI</RootNamespace>
+    <UseMaui>true</UseMaui>
+    <SingleProject>true</SingleProject>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+
+    <ApplicationTitle>Vistumbler</ApplicationTitle>
+    <ApplicationId>com.vistumbler.mauiapp</ApplicationId>
+    <ApplicationDisplayVersion>0.1.0</ApplicationDisplayVersion>
+    <ApplicationVersion>1</ApplicationVersion>
+
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">26.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.19041.0</SupportedOSPlatformVersion>
+    <!-- Unpackaged Windows app — no Package.appxmanifest required -->
+    <WindowsPackageType Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">None</WindowsPackageType>
+  </PropertyGroup>
+
+  <!-- ── Android: no extra NuGet needed — WifiManager is part of the MAUI Android SDK ── -->
+
+  <!-- ── Windows: ManagedNativeWifi for WLAN API access ───────────────────── -->
+  <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
+    <PackageReference Include="ManagedNativeWifi" Version="3.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Maui.Controls" Version="10.0.20" />
+    <PackageReference Include="CommunityToolkit.Maui" Version="9.0.3" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.0" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
+    <PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.10" />
+    <PackageReference Include="MapLibreNative.Maui.Handlers" Version="3.2.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Vistumbler.Core\Vistumbler.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#3B52CC" />
+    <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#3B52CC" BaseSize="128,128" />
+    <MauiImage Include="Resources\Images\*" Exclude="Resources\Images\.gitkeep" />
+    <MauiFont Include="Resources\Fonts\*" Exclude="Resources\Fonts\.gitkeep" />
+    <MauiAsset Include="Resources\Raw\**" Exclude="Resources\Raw\**\.gitkeep" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
+</Project>

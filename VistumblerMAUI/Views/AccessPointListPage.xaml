@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:VistumblerMAUI.ViewModels"
+             xmlns:models="clr-namespace:Vistumbler.Core.Models;assembly=Vistumbler.Core"
+             x:DataType="vm:AccessPointListViewModel"
+             x:Class="VistumblerMAUI.Views.AccessPointListPage"
+             Title="Access Points">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+
+        <!-- Search bar -->
+        <SearchBar Grid.Row="0"
+                   Text="{Binding SearchText}"
+                   Placeholder="Search SSID, BSSID, manufacturer…"
+                   Margin="8,4" />
+
+        <!-- List -->
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Filtered}" SelectionMode="Single">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:AccessPoint">
+                    <Grid ColumnDefinitions="*,Auto" Padding="12,10">
+                        <VerticalStackLayout Grid.Column="0" Spacing="2">
+                            <Label Text="{Binding Ssid}" FontAttributes="Bold" FontSize="14" />
+                            <Label FontSize="11" TextColor="Gray">
+                                <Label.Text>
+                                    <MultiBinding StringFormat="{}{0}  ·  {1}  ·  Ch {2}">
+                                        <Binding Path="Bssid" />
+                                        <Binding Path="Authentication" />
+                                        <Binding Path="Channel" />
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+                            <Label Text="{Binding Manufacturer}" FontSize="11" TextColor="#78909C" />
+                        </VerticalStackLayout>
+                        <Label Grid.Column="1"
+                               Text="{Binding Signal, StringFormat='{0}%'}"
+                               FontSize="16" FontAttributes="Bold"
+                               VerticalOptions="Center" HorizontalOptions="End" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Footer status -->
+        <Label Grid.Row="2" Text="{Binding StatusMessage}" HorizontalOptions="Center"
+               FontSize="12" TextColor="Gray" Padding="8" />
+    </Grid>
+
+</ContentPage>

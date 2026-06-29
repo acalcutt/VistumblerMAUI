@@ -1,0 +1,199 @@
+name: Build and Release
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - master
+
+permissions:
+  contents: write
+
+jobs:
+  release-check:
+    name: Check if version is already released
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Get version and check GitHub releases
+        id: check
+        run: |
+          VERSION=$(grep -oP '<ApplicationDisplayVersion>\K[^<]+' VistumblerMAUI/VistumblerMAUI.csproj | head -1)
+
+          if echo "$VERSION" | grep -qP '\-(alpha|beta|rc)\.\d+'; then
+            RELEASE_TYPE="prerelease"
+          else
+            RELEASE_TYPE="regular"
+          fi
+
+          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+            "https://api.github.com/repos/${{ github.repository }}/releases/tags/v${VERSION}" \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}")
+
+          if [ "$HTTP_STATUS" = "200" ]; then
+            PUBLISHED="true"
+          else
+            PUBLISHED="false"
+          fi
+
+          echo "version=$VERSION"        >> "$GITHUB_OUTPUT"
+          echo "published=$PUBLISHED"    >> "$GITHUB_OUTPUT"
+          echo "release_type=$RELEASE_TYPE" >> "$GITHUB_OUTPUT"
+          echo "VERSION: $VERSION"
+          echo "RELEASE_TYPE: $RELEASE_TYPE"
+          echo "PUBLISHED: $PUBLISHED"
+
+    outputs:
+      published:    ${{ steps.check.outputs.published }}
+      version:      ${{ steps.check.outputs.version }}
+      release_type: ${{ steps.check.outputs.release_type }}
+
+  build-windows:
+    name: Build Windows release
+    runs-on: windows-latest
+    needs: release-check
+    if: ${{ needs.release-check.outputs.published == 'false' }}
+    environment: release
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore workloads
+        run: dotnet workload restore VistumblerMAUI.sln
+
+      - name: Restore dependencies
+        run: dotnet restore VistumblerMAUI.sln
+
+      - name: Publish win-x64
+        # No explicit -r/--self-contained: this project also targets Android/iOS
+        # in the same csproj, and forcing a RID here makes NuGet try to resolve
+        # a win-x64 Mono runtime pack (only published for mobile RIDs), which
+        # doesn't exist and fails restore. Letting the SDK pick the RID itself
+        # for net10.0-windows10.0.19041.0 resolves correctly (framework-dependent
+        # on the Windows App SDK runtime, same as VistumblerMAUI runs via F5).
+        run: |
+          dotnet publish VistumblerMAUI/VistumblerMAUI.csproj `
+            -f net10.0-windows10.0.19041.0 `
+            -c Release `
+            -p:WindowsPackageType=None `
+            --output ./publish/win-x64
+
+      - name: Package release artifact
+        shell: pwsh
+        run: |
+          $version = "${{ needs.release-check.outputs.version }}"
+          Compress-Archive `
+            -Path "./publish/win-x64/*" `
+            -DestinationPath "./Vistumbler-v${version}-win-x64.zip"
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-artifact-windows
+          path: Vistumbler-v${{ needs.release-check.outputs.version }}-win-x64.zip
+          retention-days: 7
+
+  build-android:
+    name: Build Android release
+    runs-on: windows-latest
+    needs: release-check
+    if: ${{ needs.release-check.outputs.published == 'false' }}
+    environment: release
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore workloads
+        run: dotnet workload restore VistumblerMAUI.sln
+
+      - name: Restore dependencies
+        run: dotnet restore VistumblerMAUI.sln
+
+      - name: Publish Android APK
+        # -r is required here: dotnet publish (unlike build) needs an explicit
+        # RID to resolve Android's runtime pack/produce an installable APK.
+        run: |
+          dotnet publish VistumblerMAUI/VistumblerMAUI.csproj `
+            -f net10.0-android36.0 `
+            -c Release `
+            -r android-arm64 `
+            --output ./publish/android
+
+      - name: Rename APK to release filename
+        shell: pwsh
+        run: |
+          $version = "${{ needs.release-check.outputs.version }}"
+          $apk = Get-ChildItem -Path "./publish/android" -Filter "*-Signed.apk" -Recurse | Select-Object -First 1
+          if (-not $apk) {
+            $apk = Get-ChildItem -Path "./publish/android" -Filter "*.apk" -Recurse | Select-Object -First 1
+          }
+          if (-not $apk) { throw "No APK found under ./publish/android" }
+          Copy-Item $apk.FullName -Destination "./Vistumbler-v${version}-android.apk"
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-artifact-android
+          path: Vistumbler-v${{ needs.release-check.outputs.version }}-android.apk
+          retention-days: 7
+
+  release:
+    name: Publish GitHub Release
+    runs-on: ubuntu-latest
+    needs: [release-check, build-windows, build-android]
+    if: ${{ needs.release-check.outputs.published == 'false' }}
+    environment: release
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: release-artifact-*
+          path: ./artifacts
+          merge-multiple: true
+
+      - name: Extract changelog for version
+        run: |
+          VERSION="${{ needs.release-check.outputs.version }}"
+          awk -v ver="## $VERSION" \
+            'BEGIN{p=0} $0==ver{p=1; next} /^## / && p==1{exit} p==1{print}' \
+            CHANGELOG.md > changelog_for_version.md
+          echo "--- Release notes ---"
+          cat changelog_for_version.md
+
+      - name: Determine release flags
+        id: flags
+        run: |
+          if [[ "${{ needs.release-check.outputs.release_type }}" == 'regular' ]]; then
+            echo "prerelease=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "prerelease=true"  >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Publish GitHub Release
+        uses: ncipollo/release-action@v1
+        with:
+          tag:        v${{ needs.release-check.outputs.version }}
+          name:       v${{ needs.release-check.outputs.version }}
+          bodyFile:   changelog_for_version.md
+          artifacts:  ./artifacts/Vistumbler-v${{ needs.release-check.outputs.version }}-win-x64.zip,./artifacts/Vistumbler-v${{ needs.release-check.outputs.version }}-android.apk
+          prerelease: ${{ steps.flags.outputs.prerelease }}
+          allowUpdates: true
+          draft: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

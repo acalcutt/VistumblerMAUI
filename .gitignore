@@ -1,0 +1,91 @@
+## Visual Studio / .NET / MAUI .gitignore
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio cache/options directory
+.vs/
+*.VC.db
+*.VC.VC.opendb
+
+# MSBuild Binary and Structured Log
+*.binlog
+
+# NuGet Packages
+*.nupkg
+*.snupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+*.nuget.props
+*.nuget.targets
+
+# .NET Core / .NET (Core/5+) artifacts
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# MAUI / Xamarin / Android build artifacts
+*.apk
+*.aab
+*.ap_
+*.dex
+*.keystore
+*.jks
+[Bb]in/
+[Oo]bj/
+
+# iOS / Mac build artifacts
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Rider / ReSharper
+.idea/
+*.sln.iml
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.swp
+
+# Test results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+*.VisualState.xml
+TestResult.xml
+*.coverage
+*.coveragexml
+
+# Others
+*.pdb
+*.cache
+*.tmp
+ClientBin/
+~$*
+*~
+*.dbmdl
+*.dbproj.schemaview
+*.publishsettings
