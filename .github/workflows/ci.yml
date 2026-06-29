@@ -86,10 +86,14 @@ jobs:
       - name: Build (net10.0-ios, simulator — no code signing required)
         # No separate restore step here: this build specifies an explicit
         # RuntimeIdentifier, so let it do its own RID-aware implicit restore
-        # rather than relying on a prior RID-less `dotnet restore`. (Couldn't
-        # test this exact path on a Mac — verify on first CI run.)
+        # rather than relying on a prior RID-less `dotnet restore`.
+        # -p:EnableWindowsTargeting=true: the csproj also targets
+        # net10.0-windows10.0.19041.0, and restore evaluates all
+        # TargetFrameworks even when -f picks just one — without this,
+        # restoring the Windows TFM on macOS fails with NETSDK1100.
         run: |
           dotnet build VistumblerMAUI/VistumblerMAUI.csproj \
             -f net10.0-ios \
             -c Release \
+            -p:EnableWindowsTargeting=true \
             -p:RuntimeIdentifier=iossimulator-arm64
