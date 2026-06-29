@@ -27,15 +27,15 @@ jobs:
       - name: Restore workloads
         run: dotnet workload restore VistumblerMAUI.sln
 
-      - name: Restore dependencies
-        run: dotnet restore VistumblerMAUI.sln
-
       - name: Build (net10.0-windows10.0.19041.0)
+        # No separate `dotnet restore` step: a generic RID-less restore here
+        # doesn't pull in the win-x64 runtime pack this build then needs,
+        # causing NETSDK1112. Let this RID-implicit build do its own restore
+        # in one shot instead (verified locally as a single command).
         run: |
           dotnet build VistumblerMAUI/VistumblerMAUI.csproj `
             -f net10.0-windows10.0.19041.0 `
-            -c Release `
-            --no-restore
+            -c Release
 
   build-android:
     name: Build Android
@@ -52,15 +52,12 @@ jobs:
       - name: Restore workloads
         run: dotnet workload restore VistumblerMAUI.sln
 
-      - name: Restore dependencies
-        run: dotnet restore VistumblerMAUI.sln
-
       - name: Build (net10.0-android36.0)
+        # No separate restore step, for the same reason as the Windows job above.
         run: |
           dotnet build VistumblerMAUI/VistumblerMAUI.csproj `
             -f net10.0-android36.0 `
-            -c Release `
-            --no-restore
+            -c Release
 
   build-ios:
     name: Build iOS (simulator)
