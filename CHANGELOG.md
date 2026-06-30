@@ -7,6 +7,15 @@
 ### 🐞 Bug fixes
 - _...Add new stuff here..._
 
+## 0.3.1
+### ✨ Features and improvements
+- **All history layers now use WifiDB MVT vector tiles** — the Daily layer previously fetched a one-shot GeoJSON blob from `geojson.php?func=exp_daily`; it now streams the `daily` MVT bucket via `tilejson.php?bucket=daily` just like every other age tier (and like VistumblerCS), so all ten buttons share one consistent, tile-streamed code path. Removed the now-obsolete GeoJSON-only daily machinery (the dedicated source, fetch/clear handlers, and `HttpClient`).
+- **Circle paint matched to VistumblerCS** — history dots now render as solid, softly-blurred circles (`circle-opacity` 1.0 + `circle-blur` 0.5, no outline) instead of semi-transparent white-ringed dots, so the MAUI and WPF clients look identical.
+- **"Cells" button renamed to "Cell Networks"** to match VistumblerCS.
+
+### 🐞 Bug fixes
+- **History vector layers now actually render** — upgraded `MapLibreNative.Maui.Handlers` to 3.2.10, which fixes a maplibre-native issue where a circle layer's source-layer, when set *after* the layer was added to the style (the runtime add pattern used for every history bucket), never triggered a tile relayout — so the colored history circles rendered nothing regardless of the `circle-color` expression. (An earlier theory pinned this entirely on a WifiDB server `.htaccess` header bug; that was real and separately fixed, but the source-layer relayout fix in 3.2.10 is what makes the runtime vector layers paint.)
+
 ## 0.3.0
 ### ✨ Features and improvements
 - **History layer buttons renamed to match canonical mvtd/tilejson bucket scheme** — labels now match WifiDB web map: Daily, Weekly, Monthly, 0–1yr, 1–2yr, 2–3yr, 3–5yr, 5–10yr, 10yr+, and a mirrored Cells button.

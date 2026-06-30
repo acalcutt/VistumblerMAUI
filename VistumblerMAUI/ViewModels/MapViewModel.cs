@@ -20,8 +20,6 @@ public partial class MapViewModel : ObservableObject
     // Reset on each style reload (OnMapControllerReady).
     private readonly HashSet<string> _addedVectorLayers = new();
 
-    private static readonly HttpClient _http = new();
-
     private const string EmptyGeoJson = "{\"type\":\"FeatureCollection\",\"features\":[]}";
 
     // ── Map config ────────────────────────────────────────────────────────────
@@ -131,9 +129,7 @@ public partial class MapViewModel : ObservableObject
         foreach (var layer in HistoryLayers)
         {
             if (!layer.IsActive || layer.Id == "cells") continue;
-            if (layer.IsGeoJsonLayer)
-                yield return "cell_daily";
-            else if (layer.Buckets is { } buckets)
+            if (layer.Buckets is { } buckets)
                 foreach (var b in buckets)
                     yield return "cell_" + b;
         }
@@ -167,27 +163,40 @@ public partial class MapViewModel : ObservableObject
         ["cell_10yrplus"] = new("#3d2266", "#3d2266", "#3d2266", 1.5),
     };
 
-    // MapLibre GL "case" expression: sectype==2→WEP, sectype==3→secure, default→open.
-    private static object[] SeCtypeColorExpr(BucketStyle s) =>
-    [
-        "case",
-        new object[] { "==", new object[] { "get", "sectype" }, 2 }, s.Wep,
-        new object[] { "==", new object[] { "get", "sectype" }, 3 }, s.Secure,
-        s.Open,
-    ];
-
     // MapLibre GL zoom-interpolated radius function.
-    // base=1.5 is the interpolation curve (fixed); the per-bucket size difference
-    // lives in the stop VALUES, not the base — a higher base actually yields smaller
-    // circles at intermediate zooms, which is why baseRadius drives the stop values.
+    // Holds at baseRadius from the lowest zoom up through z12 (never shrinks below
+    // the per-bucket size — a curve that scales down at low zoom makes the oldest,
+    // already-smallest tiers nearly invisible on a wide overview), then grows up
+    // to 20px by z20 so dots stay easy to tap at street level.
     private static Dictionary<string, object?> RadiusExpr(double baseRadius) => new()
     {
         ["base"]  = 1.5,
         ["stops"] = new object[] {
-            new object[] { 1,  baseRadius * 0.5 },
-            new object[] { 4,  baseRadius },
+            new object[] { 1,  baseRadius },
             new object[] { 12, baseRadius },
             new object[] { 20, 20.0 },
+        },
+    };
+
+    // Single data-driven circle-color: a property function (no "type" — defaults to
+    // Exponential) keyed on the feature's "sectype" (1=open, 2=WEP, 3=secure). sectype
+    // is always exactly 1/2/3, so the implicit interpolation between stops never blends
+    // colors in practice. Matches VistumblerCS's MaplibreWifiExtensions exactly.
+    //
+    // History: history circles failing to render was first (incorrectly) blamed entirely
+    // on WifiDB's out/tiles/.htaccess emitting "Content-Encoding: gzip" on its 404 error
+    // pages — a real bug, since fixed, that made a client drop no-data tiles, but not the
+    // whole story. The remaining cause was in maplibre-native: a vector layer's source-layer
+    // set after the layer is added (the runtime AddCircleLayer + SetSourceLayer pattern here)
+    // never triggered a tile relayout, so the circles rendered nothing regardless of the
+    // circle-color form. Fixed in the mln-cabi shipped with MapLibreNative.Maui 3.2.10.
+    private static Dictionary<string, object?> SeCtypeStopsExpr(BucketStyle s) => new()
+    {
+        ["property"] = "sectype",
+        ["stops"]    = new object[] {
+            new object[] { 1, s.Open },
+            new object[] { 2, s.Wep },
+            new object[] { 3, s.Secure },
         },
     };
 
@@ -199,8 +208,7 @@ public partial class MapViewModel : ObservableObject
         // ActiveColor = open-network color — used as the toggle-button highlight tint.
         var defs = new HistoryLayerState[]
         {
-            new() { Id = "daily",     Label = "Daily",     ActiveColor = "#1aff66",
-                    GeoJsonUrl = "https://wifidb.net/api/geojson.php?func=exp_daily&json=1" },
+            new() { Id = "daily",     Label = "Daily",     ActiveColor = "#1aff66", Buckets = ["daily"] },
             new() { Id = "weekly",    Label = "Weekly",    ActiveColor = "#1aff66", Buckets = ["weekly"] },
             new() { Id = "monthly",   Label = "Monthly",   ActiveColor = "#1aff66", Buckets = ["monthly"] },
             new() { Id = "0to1year",  Label = "0-1 Year",  ActiveColor = "#1aff66", Buckets = ["0to1year"] },
@@ -209,7 +217,7 @@ public partial class MapViewModel : ObservableObject
             new() { Id = "3to5year",  Label = "3-5 Year",  ActiveColor = "#009933", Buckets = ["3to5year"] },
             new() { Id = "5to10year", Label = "5-10 Year", ActiveColor = "#00802b", Buckets = ["5to10year"] },
             new() { Id = "10yrplus",  Label = "10+ Year",  ActiveColor = "#005c1f", Buckets = ["10yrplus"] },
-            new() { Id = "cells",     Label = "Cells",     ActiveColor = "#885fcd", Buckets = CellBuckets },
+            new() { Id = "cells",     Label = "Cell Networks", ActiveColor = "#885fcd", Buckets = CellBuckets },
         };
 
         foreach (var layer in defs)
@@ -227,55 +235,25 @@ public partial class MapViewModel : ObservableObject
     /// <summary>
     /// Called from MapPage.xaml.cs exactly once per style load, from the StyleLoaded event.
     ///
-    /// WHY THIS IS CORRECT vs. VistumblerCS:
+    /// All history layers (including daily) are MVT vector layers served by WifiDB's mvtd
+    /// daemon via tilejson.php?bucket={bucket}, exactly like VistumblerCS — each is lazily
+    /// added/removed on toggle (see AddVectorLayer / RemoveVectorLayer). This relies on the
+    /// mln-cabi fix shipped in MapLibreNative.Maui 3.2.10 that makes a vector layer's
+    /// source-layer trigger a tile relayout when set after the layer is added; before that
+    /// fix, runtime vector circle layers rendered nothing, which is why daily previously used
+    /// a GeoJSON source as a workaround.
     ///
-    /// VistumblerCS had three compounding bugs that made history circles invisible:
-    ///   1. SetWifiGeoJsonLayerData() didn't guard on _styleReady, so button clicks before
-    ///      the style finished loading silently lost the source/layer.
-    ///   2. _AddWifiCircleLayers() used reflection to set paint properties (color, radius)
-    ///      on the C++/CLI proxy object AFTER AddCircleLayer already committed it to native.
-    ///      The proxy is not reference-stable — setting .Color on it after the fact is a no-op.
-    ///   3. The sectype filter expressions didn't match the actual property values returned
-    ///      by the wifidb.net GeoJSON endpoint, so all circles were hidden by the filter.
-    ///
-    /// Here we:
-    ///   • Call AddGeoJsonSource(id, json) atomically (source + initial data in ONE call).
-    ///   • Pre-register source+layer at StyleLoaded time with empty data — the layer always
-    ///     exists in the style; toggling just swaps the source data via SetGeoJsonSource.
-    ///   • Use sectype-based color expressions (open/WEP/secure) and zoom-interpolated
-    ///     radius matching WifiDB's map.php mvt_history_layers() scheme.
-    ///   • All controller calls happen on the main thread inside the StyleLoaded callback.
+    /// Nothing is pre-registered here on a fresh load; this only re-applies layers that were
+    /// already toggled on before a style reload, in LayerOrder so each finds its belowLayerId.
+    /// All controller calls run on the main thread inside the StyleLoaded callback.
     /// </summary>
     public void OnMapControllerReady(IMapLibreMapController controller)
     {
         _controller = controller;
         _addedVectorLayers.Clear();
 
-        // Pre-register the daily GeoJSON source with empty data.
-        // Adding source+layer here (not on button click) means no style-race is possible.
-        // Toggle ON calls SetGeoJsonSource with real data; Toggle OFF sets it back to empty.
-        controller.AddGeoJsonSource("hist_daily_src", EmptyGeoJson);
-        var dailyStyle = BucketStyles["daily"];
-        controller.AddCircleLayer(
-            layerName:   "hist_daily_circles",
-            sourceName:  "hist_daily_src",
-            belowLayerId:"ap-circles",   // live APs stay on top
-            sourceLayer: null,
-            properties: new Dictionary<string, object?>
-            {
-                ["circle-radius"]       = RadiusExpr(dailyStyle.Radius),
-                ["circle-color"]        = SeCtypeColorExpr(dailyStyle),
-                ["circle-stroke-width"] = 0.4,
-                ["circle-stroke-color"] = "#FFFFFF",
-                ["circle-opacity"]      = 0.7,
-            });
-        // Track daily so BelowLayerFor() can use it as an ordering anchor.
-        _addedVectorLayers.Add("hist_daily_circles");
-
-        // Re-apply any vector layers that were active before a style reload,
-        // in LayerOrder so each one finds the correct belowLayerId.
         foreach (var layer in HistoryLayers
-            .Where(l => l.IsActive && !l.IsGeoJsonLayer)
+            .Where(l => l.IsActive)
             .OrderBy(l => l.Id == "cells" ? int.MaxValue   // cells last
                 : Array.IndexOf(LayerOrder,
                     l.Buckets?.Length > 0 ? $"hist_{l.Buckets[0]}_circles" : "")))
@@ -299,24 +277,17 @@ public partial class MapViewModel : ObservableObject
 
     // ── History layer toggle ──────────────────────────────────────────────────
 
-    private async Task ToggleHistoryLayerAsync(HistoryLayerState layer)
+    private Task ToggleHistoryLayerAsync(HistoryLayerState layer)
     {
         if (_controller is null)
         {
             StatusMessage = "Map not ready — wait for style to load";
-            return;
+            return Task.CompletedTask;
         }
 
         layer.IsActive = !layer.IsActive;
 
-        if (layer.IsGeoJsonLayer)
-        {
-            if (layer.IsActive)
-                await FetchAndApplyDailyAsync(layer);
-            else
-                ClearDailyLayer(layer);
-        }
-        else if (layer.Id == "cells")
+        if (layer.Id == "cells")
         {
             // Only activate cell sub-buckets for the wifi-age tiers currently visible,
             // matching WifiDB's web-map behaviour.
@@ -330,52 +301,8 @@ public partial class MapViewModel : ObservableObject
             else
                 RemoveVectorLayer(layer);
         }
-    }
 
-    /// <summary>
-    /// Fetch the wifidb.net daily GeoJSON and push it into the pre-registered source.
-    /// Because the source already exists (registered at StyleLoaded), this is just a
-    /// data update — no add/remove race is possible.
-    /// </summary>
-    private async Task FetchAndApplyDailyAsync(HistoryLayerState layer)
-    {
-        layer.IsLoading = true;
-        StatusMessage   = $"Fetching {layer.Label} data from wifidb.net…";
-
-        try
-        {
-            using var cts  = new CancellationTokenSource(TimeSpan.FromSeconds(20));
-            var json       = await _http.GetStringAsync(layer.GeoJsonUrl!, cts.Token)
-                                        .ConfigureAwait(false);
-            int count      = CountGeoJsonFeatures(json);
-
-            // SetGeoJsonSource must be called on the main thread (MapLibre render thread).
-            await MainThread.InvokeOnMainThreadAsync(() =>
-            {
-                _controller?.SetGeoJsonSource("hist_daily_src", json);
-                StatusMessage = $"{layer.Label}: {count} APs";
-            });
-        }
-        catch (OperationCanceledException)
-        {
-            layer.IsActive = false;
-            StatusMessage  = $"{layer.Label}: request timed out";
-        }
-        catch (Exception ex)
-        {
-            layer.IsActive = false;
-            StatusMessage  = $"{layer.Label} fetch failed: {ex.Message}";
-        }
-        finally
-        {
-            layer.IsLoading = false;
-        }
-    }
-
-    private void ClearDailyLayer(HistoryLayerState layer)
-    {
-        _controller?.SetGeoJsonSource("hist_daily_src", EmptyGeoJson);
-        StatusMessage = $"{layer.Label} hidden";
+        return Task.CompletedTask;
     }
 
     /// <summary>
@@ -401,7 +328,7 @@ public partial class MapViewModel : ObservableObject
                 tileUrlTemplates: null,
                 minZoom: 0, maxZoom: 22);
 
-            BucketStyles.TryGetValue(bucket, out var style);
+            var style = BucketStyles.TryGetValue(bucket, out var s) ? s : new BucketStyle(layer.ActiveColor, layer.ActiveColor, layer.ActiveColor, 2.5);
             _controller.AddCircleLayer(
                 layerName:    layerId,
                 sourceName:   sourceId,
@@ -409,11 +336,10 @@ public partial class MapViewModel : ObservableObject
                 sourceLayer:  bucket,
                 properties: new Dictionary<string, object?>
                 {
-                    ["circle-radius"]       = style is not null ? RadiusExpr(style.Radius) : (object)2.5,
-                    ["circle-color"]        = style is not null ? SeCtypeColorExpr(style)  : (object)layer.ActiveColor,
-                    ["circle-stroke-width"] = 0.4,
-                    ["circle-stroke-color"] = "#FFFFFF",
-                    ["circle-opacity"]      = 0.7,
+                    ["circle-radius"]  = RadiusExpr(style.Radius),
+                    ["circle-color"]   = SeCtypeStopsExpr(style),
+                    ["circle-opacity"] = 1.0,
+                    ["circle-blur"]    = 0.5,
                 });
 
             _addedVectorLayers.Add(layerId);
@@ -435,7 +361,9 @@ public partial class MapViewModel : ObservableObject
     }
 
     /// Adds cell layers for whichever wifi-age tiers are currently active,
-    /// matching the WifiDB web-map "Cell Networks" button behaviour.
+    /// matching the WifiDB web-map "Cell Networks" button behaviour. Cell towers
+    /// use `type` (LTE/GSM/etc.), not `sectype`, so a single literal (non-data-driven)
+    /// color is used per bucket — no filtering needed.
     private void AddCellLayers()
     {
         if (_controller is null) return;
@@ -450,7 +378,7 @@ public partial class MapViewModel : ObservableObject
                 tileUrl:    $"https://wifidb.net/api/tilejson.php?bucket={bucket}",
                 tileUrlTemplates: null, minZoom: 0, maxZoom: 22);
 
-            BucketStyles.TryGetValue(bucket, out var style);
+            var style = BucketStyles.TryGetValue(bucket, out var s) ? s : BucketStyles["cell_monthly"];
             _controller.AddCircleLayer(
                 layerName:    layerId,
                 sourceName:   sourceId,
@@ -458,11 +386,10 @@ public partial class MapViewModel : ObservableObject
                 sourceLayer:  bucket,
                 properties: new Dictionary<string, object?>
                 {
-                    ["circle-radius"]       = style is not null ? RadiusExpr(style.Radius) : (object)2.5,
-                    ["circle-color"]        = style is not null ? SeCtypeColorExpr(style)  : (object)"#885fcd",
-                    ["circle-stroke-width"] = 0.4,
-                    ["circle-stroke-color"] = "#FFFFFF",
-                    ["circle-opacity"]      = 0.7,
+                    ["circle-radius"]  = RadiusExpr(style.Radius),
+                    ["circle-color"]   = style.Open,   // cells: Open/Wep/Secure are all equal
+                    ["circle-opacity"] = 1.0,
+                    ["circle-blur"]    = 0.5,
                 });
             _addedVectorLayers.Add(layerId);
         }
@@ -504,9 +431,7 @@ public partial class MapViewModel : ObservableObject
         foreach (var layer in HistoryLayers)
         {
             if (!layer.IsActive) continue;
-            if (layer.IsGeoJsonLayer)
-                candidateLayers.Add(($"hist_{layer.Id}_circles", layer.Label));
-            else if (layer.Buckets is { } buckets)
+            if (layer.Buckets is { } buckets)
                 foreach (var bucket in buckets)
                     candidateLayers.Add(($"hist_{bucket}_circles", layer.Label));
         }
@@ -628,17 +553,6 @@ public partial class MapViewModel : ObservableObject
                  + $"\"signal\":{ap.Signal ?? 0},\"channel\":{ap.Channel},\"isActive\":{active}}}}}";
         });
         return $"{{\"type\":\"FeatureCollection\",\"features\":[{string.Join(",", features)}]}}";
-    }
-
-    private static int CountGeoJsonFeatures(string json)
-    {
-        int n = 0, i = 0;
-        while ((i = json.IndexOf("\"Feature\"", i, StringComparison.Ordinal)) >= 0)
-        {
-            n++;
-            i += 9;
-        }
-        return n;
     }
 }
 
