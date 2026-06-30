@@ -33,13 +33,26 @@ public partial class MapViewModel : ObservableObject
     [ObservableProperty] private List<AccessPoint> _mappableAps = new();
     [ObservableProperty] private string _apsGeoJson   = EmptyGeoJson;
 
+    // Active scanned APs = lighter than the newest WifiDB daily dots (#1aff66).
+    // Inactive scanned APs = same color as daily, same base radius.
+    // Both distinctions are driven by the "isActive" feature property in the GeoJSON.
     public IDictionary<string, object?> ApLayerProperties { get; } = new Dictionary<string, object?>
     {
-        ["circle-radius"]       = 7.0,
-        ["circle-color"]        = "#1565C0",
-        ["circle-stroke-width"] = 1.5,
+        ["circle-radius"] = new object[] {
+            "case",
+            new object[] { "==", new object[] { "get", "isActive" }, true },
+            4.0,  // active: slightly larger than daily (base 3.0)
+            3.0,  // inactive: same base radius as daily
+        },
+        ["circle-color"] = new object[] {
+            "case",
+            new object[] { "==", new object[] { "get", "isActive" }, true },
+            "#80ffb3",  // active: lighter pastel green
+            "#1aff66",  // inactive: same as daily
+        },
+        ["circle-stroke-width"] = 0.4,
         ["circle-stroke-color"] = "#FFFFFF",
-        ["circle-opacity"]      = 0.9,
+        ["circle-opacity"]      = 0.8,
     };
 
     // ── History layers ────────────────────────────────────────────────────────
@@ -77,24 +90,123 @@ public partial class MapViewModel : ObservableObject
         "cell_3to5year", "cell_5to10year", "cell_10yrplus",
     };
 
+    // Canonical z-order for all history layers: newest (closest to top) → oldest.
+    // ap-circles (local scan) is always above everything; hist_daily_circles is
+    // pre-registered at StyleLoaded and tracked in _addedVectorLayers; all others
+    // are lazy-added on toggle. BelowLayerFor() uses this to find the correct
+    // insertion point regardless of toggle order.
+    private static readonly string[] LayerOrder =
+    [
+        "hist_daily_circles",
+        "hist_weekly_circles",      "hist_monthly_circles",
+        "hist_0to1year_circles",    "hist_1to2year_circles",
+        "hist_2to3year_circles",    "hist_3to5year_circles",
+        "hist_5to10year_circles",   "hist_10yrplus_circles",
+        "hist_cell_daily_circles",  "hist_cell_weekly_circles",
+        "hist_cell_monthly_circles","hist_cell_0to1year_circles",
+        "hist_cell_1to2year_circles","hist_cell_2to3year_circles",
+        "hist_cell_3to5year_circles","hist_cell_5to10year_circles",
+        "hist_cell_10yrplus_circles",
+    ];
+
+    /// Returns the id of the nearest newer layer already in the style for the
+    /// given history layer, so it can be inserted below that layer.
+    /// Falls back to "ap-circles" (always present above all history layers).
+    private string BelowLayerFor(string layerId)
+    {
+        int idx = Array.IndexOf(LayerOrder, layerId);
+        if (idx <= 0) return "ap-circles";
+        for (int i = idx - 1; i >= 0; i--)
+        {
+            if (_addedVectorLayers.Contains(LayerOrder[i]))
+                return LayerOrder[i];
+        }
+        return "ap-circles";
+    }
+
+    /// Returns the cell bucket names matching whichever wifi-age layers are
+    /// currently enabled, so the Cells button mirrors the active tier set.
+    private IEnumerable<string> ActiveCellBuckets()
+    {
+        foreach (var layer in HistoryLayers)
+        {
+            if (!layer.IsActive || layer.Id == "cells") continue;
+            if (layer.IsGeoJsonLayer)
+                yield return "cell_daily";
+            else if (layer.Buckets is { } buckets)
+                foreach (var b in buckets)
+                    yield return "cell_" + b;
+        }
+    }
+
+    // Per-bucket paint style — open/WEP/secure colors match WifiDB's map.php
+    // mvt_history_layers(); radius scales from 2 (recent) to 3 (oldest).
+    // Cell buckets use a single graduated purple (no sectype split, matching
+    // WifiDB's CreateMvtCellLayers and VistumblerCS's CellBucketColors).
+    private record BucketStyle(string Open, string Wep, string Secure, double Radius);
+    private static readonly Dictionary<string, BucketStyle> BucketStyles = new()
+    {
+        // Radius decreases as data gets older (newest = largest + brightest).
+        ["daily"]         = new("#1aff66", "#ffad33", "#ff1a1a", 3.0),
+        ["weekly"]        = new("#1aff66", "#ffad33", "#ff1a1a", 3.0),
+        ["monthly"]       = new("#1aff66", "#ffad33", "#ff1a1a", 3.0),
+        ["0to1year"]      = new("#1aff66", "#ffad33", "#ff1a1a", 3.0),
+        ["1to2year"]      = new("#00e64d", "#ff9900", "#e60000", 2.75),
+        ["2to3year"]      = new("#00b33c", "#e68a00", "#cc0000", 2.5),
+        ["3to5year"]      = new("#009933", "#d98000", "#c00000", 2.25),
+        ["5to10year"]     = new("#00802b", "#cc7a00", "#b30000", 2.0),
+        ["10yrplus"]      = new("#005c1f", "#996000", "#800000", 1.5),
+        ["cell_daily"]    = new("#b296e3", "#b296e3", "#b296e3", 3.0),
+        ["cell_weekly"]   = new("#9d78d8", "#9d78d8", "#9d78d8", 3.0),
+        ["cell_monthly"]  = new("#885fcd", "#885fcd", "#885fcd", 3.0),
+        ["cell_0to1year"] = new("#885fcd", "#885fcd", "#885fcd", 3.0),
+        ["cell_1to2year"] = new("#7a4dc0", "#7a4dc0", "#7a4dc0", 2.75),
+        ["cell_2to3year"] = new("#6f40b3", "#6f40b3", "#6f40b3", 2.5),
+        ["cell_3to5year"] = new("#5e3599", "#5e3599", "#5e3599", 2.25),
+        ["cell_5to10year"]= new("#4d2b80", "#4d2b80", "#4d2b80", 2.0),
+        ["cell_10yrplus"] = new("#3d2266", "#3d2266", "#3d2266", 1.5),
+    };
+
+    // MapLibre GL "case" expression: sectype==2→WEP, sectype==3→secure, default→open.
+    private static object[] SeCtypeColorExpr(BucketStyle s) =>
+    [
+        "case",
+        new object[] { "==", new object[] { "get", "sectype" }, 2 }, s.Wep,
+        new object[] { "==", new object[] { "get", "sectype" }, 3 }, s.Secure,
+        s.Open,
+    ];
+
+    // MapLibre GL zoom-interpolated radius function matching WifiDB's stop values.
+    private static Dictionary<string, object?> RadiusExpr(double baseRadius) => new()
+    {
+        ["base"]  = baseRadius,
+        ["stops"] = new object[] {
+            new object[] { 1,  1.5 },
+            new object[] { 4,  2.0 },
+            new object[] { 12, 2.0 },
+            new object[] { 20, 20.0 },
+        },
+    };
+
     private void InitHistoryLayers()
     {
         // Matches the bucket names WifiDB's mvtd daemon / tilejson.php / VistumblerCS
         // all agree on: daily, weekly, monthly, 0to1year, 1to2year, 2to3year,
         // 3to5year, 5to10year, 10yrplus (+ cell_-prefixed equivalents for Cells).
+        // ActiveColor = open-network color — used as the toggle-button highlight tint.
         var defs = new HistoryLayerState[]
         {
-            new() { Id = "daily",     Label = "Daily",
+            new() { Id = "daily",     Label = "Daily",     ActiveColor = "#1aff66",
                     GeoJsonUrl = "https://wifidb.net/api/geojson.php?func=exp_daily&json=1" },
-            new() { Id = "weekly",    Label = "Weekly",    ActiveColor = "#00AA00", Buckets = ["weekly"] },
-            new() { Id = "monthly",   Label = "Monthly",   ActiveColor = "#FF8C00", Buckets = ["monthly"] },
-            new() { Id = "0to1year",  Label = "0-1 Year",  ActiveColor = "#FFDD00", Buckets = ["0to1year"] },
-            new() { Id = "1to2year",  Label = "1-2 Year",  ActiveColor = "#FF8844", Buckets = ["1to2year"] },
-            new() { Id = "2to3year",  Label = "2-3 Year",  ActiveColor = "#FF6633", Buckets = ["2to3year"] },
-            new() { Id = "3to5year",  Label = "3-5 Year",  ActiveColor = "#E64A19", Buckets = ["3to5year"] },
-            new() { Id = "5to10year", Label = "5-10 Year", ActiveColor = "#C2185B", Buckets = ["5to10year"] },
-            new() { Id = "10yrplus",  Label = "10+ Year",  ActiveColor = "#7B1FA2", Buckets = ["10yrplus"] },
-            new() { Id = "cells",     Label = "Cells",     ActiveColor = "#885FCD", Buckets = CellBuckets },
+            new() { Id = "weekly",    Label = "Weekly",    ActiveColor = "#1aff66", Buckets = ["weekly"] },
+            new() { Id = "monthly",   Label = "Monthly",   ActiveColor = "#1aff66", Buckets = ["monthly"] },
+            new() { Id = "0to1year",  Label = "0-1 Year",  ActiveColor = "#1aff66", Buckets = ["0to1year"] },
+            new() { Id = "1to2year",  Label = "1-2 Year",  ActiveColor = "#00e64d", Buckets = ["1to2year"] },
+            new() { Id = "2to3year",  Label = "2-3 Year",  ActiveColor = "#00b33c", Buckets = ["2to3year"] },
+            new() { Id = "3to5year",  Label = "3-5 Year",  ActiveColor = "#009933", Buckets = ["3to5year"] },
+            new() { Id = "5to10year", Label = "5-10 Year", ActiveColor = "#00802b", Buckets = ["5to10year"] },
+            new() { Id = "10yrplus",  Label = "10+ Year",  ActiveColor = "#005c1f", Buckets = ["10yrplus"] },
+            new() { Id = "cells",     Label = "Cells",     ActiveColor = "#885fcd", Buckets = CellBuckets },
         };
 
         foreach (var layer in defs)
@@ -127,7 +239,8 @@ public partial class MapViewModel : ObservableObject
     ///   • Call AddGeoJsonSource(id, json) atomically (source + initial data in ONE call).
     ///   • Pre-register source+layer at StyleLoaded time with empty data — the layer always
     ///     exists in the style; toggling just swaps the source data via SetGeoJsonSource.
-    ///   • Use single-color layers (no per-sectype filter), matching every feature.
+    ///   • Use sectype-based color expressions (open/WEP/secure) and zoom-interpolated
+    ///     radius matching WifiDB's map.php mvt_history_layers() scheme.
     ///   • All controller calls happen on the main thread inside the StyleLoaded callback.
     /// </summary>
     public void OnMapControllerReady(IMapLibreMapController controller)
@@ -139,6 +252,7 @@ public partial class MapViewModel : ObservableObject
         // Adding source+layer here (not on button click) means no style-race is possible.
         // Toggle ON calls SetGeoJsonSource with real data; Toggle OFF sets it back to empty.
         controller.AddGeoJsonSource("hist_daily_src", EmptyGeoJson);
+        var dailyStyle = BucketStyles["daily"];
         controller.AddCircleLayer(
             layerName:   "hist_daily_circles",
             sourceName:  "hist_daily_src",
@@ -146,16 +260,26 @@ public partial class MapViewModel : ObservableObject
             sourceLayer: null,
             properties: new Dictionary<string, object?>
             {
-                ["circle-radius"]       = 5.0,
-                ["circle-color"]        = "#3BB2D0",
-                ["circle-stroke-width"] = 0.8,
+                ["circle-radius"]       = RadiusExpr(dailyStyle.Radius),
+                ["circle-color"]        = SeCtypeColorExpr(dailyStyle),
+                ["circle-stroke-width"] = 0.4,
                 ["circle-stroke-color"] = "#FFFFFF",
-                ["circle-opacity"]      = 0.8,
+                ["circle-opacity"]      = 0.7,
             });
+        // Track daily so BelowLayerFor() can use it as an ordering anchor.
+        _addedVectorLayers.Add("hist_daily_circles");
 
-        // Re-apply any vector layers that were active before a style reload
-        foreach (var layer in HistoryLayers.Where(l => l.IsActive && !l.IsGeoJsonLayer))
-            AddVectorLayer(layer);
+        // Re-apply any vector layers that were active before a style reload,
+        // in LayerOrder so each one finds the correct belowLayerId.
+        foreach (var layer in HistoryLayers
+            .Where(l => l.IsActive && !l.IsGeoJsonLayer)
+            .OrderBy(l => l.Id == "cells" ? int.MaxValue   // cells last
+                : Array.IndexOf(LayerOrder,
+                    l.Buckets?.Length > 0 ? $"hist_{l.Buckets[0]}_circles" : "")))
+        {
+            if (layer.Id == "cells") AddCellLayers();
+            else                     AddVectorLayer(layer);
+        }
     }
 
     // ── Live AP source ────────────────────────────────────────────────────────
@@ -188,6 +312,13 @@ public partial class MapViewModel : ObservableObject
                 await FetchAndApplyDailyAsync(layer);
             else
                 ClearDailyLayer(layer);
+        }
+        else if (layer.Id == "cells")
+        {
+            // Only activate cell sub-buckets for the wifi-age tiers currently visible,
+            // matching WifiDB's web-map behaviour.
+            if (layer.IsActive) AddCellLayers();
+            else                RemoveAllCellLayers();
         }
         else
         {
@@ -267,15 +398,16 @@ public partial class MapViewModel : ObservableObject
                 tileUrlTemplates: null,
                 minZoom: 0, maxZoom: 22);
 
+            BucketStyles.TryGetValue(bucket, out var style);
             _controller.AddCircleLayer(
                 layerName:    layerId,
                 sourceName:   sourceId,
-                belowLayerId: "ap-circles",
+                belowLayerId: BelowLayerFor(layerId),
                 sourceLayer:  bucket,
                 properties: new Dictionary<string, object?>
                 {
-                    ["circle-radius"]       = 2.5,
-                    ["circle-color"]        = layer.ActiveColor,
+                    ["circle-radius"]       = style is not null ? RadiusExpr(style.Radius) : (object)2.5,
+                    ["circle-color"]        = style is not null ? SeCtypeColorExpr(style)  : (object)layer.ActiveColor,
                     ["circle-stroke-width"] = 0.4,
                     ["circle-stroke-color"] = "#FFFFFF",
                     ["circle-opacity"]      = 0.7,
@@ -297,6 +429,54 @@ public partial class MapViewModel : ObservableObject
             _addedVectorLayers.Remove(layerId);
         }
         StatusMessage = $"{layer.Label} layer off";
+    }
+
+    /// Adds cell layers for whichever wifi-age tiers are currently active,
+    /// matching the WifiDB web-map "Cell Networks" button behaviour.
+    private void AddCellLayers()
+    {
+        if (_controller is null) return;
+        foreach (var bucket in ActiveCellBuckets())
+        {
+            var layerId  = $"hist_{bucket}_circles";
+            if (_addedVectorLayers.Contains(layerId)) continue;
+
+            var sourceId = $"WifiDB_{bucket}";
+            _controller.AddVectorSource(
+                sourceName: sourceId,
+                tileUrl:    $"https://wifidb.net/api/tilejson.php?bucket={bucket}",
+                tileUrlTemplates: null, minZoom: 0, maxZoom: 22);
+
+            BucketStyles.TryGetValue(bucket, out var style);
+            _controller.AddCircleLayer(
+                layerName:    layerId,
+                sourceName:   sourceId,
+                belowLayerId: BelowLayerFor(layerId),
+                sourceLayer:  bucket,
+                properties: new Dictionary<string, object?>
+                {
+                    ["circle-radius"]       = style is not null ? RadiusExpr(style.Radius) : (object)2.5,
+                    ["circle-color"]        = style is not null ? SeCtypeColorExpr(style)  : (object)"#885fcd",
+                    ["circle-stroke-width"] = 0.4,
+                    ["circle-stroke-color"] = "#FFFFFF",
+                    ["circle-opacity"]      = 0.7,
+                });
+            _addedVectorLayers.Add(layerId);
+        }
+        StatusMessage = "Cells layer on";
+    }
+
+    /// Removes all currently-visible cell layers regardless of which tiers they cover.
+    private void RemoveAllCellLayers()
+    {
+        if (_controller is null) return;
+        foreach (var layerId in _addedVectorLayers
+            .Where(l => l.StartsWith("hist_cell_")).ToList())
+        {
+            _controller.RemoveLayer(layerId);
+            _addedVectorLayers.Remove(layerId);
+        }
+        StatusMessage = "Cells layer off";
     }
 
     // ── Tap-to-inspect popup ──────────────────────────────────────────────────
@@ -436,12 +616,13 @@ public partial class MapViewModel : ObservableObject
         if (aps.Count == 0) return EmptyGeoJson;
         var features = aps.Select(ap =>
         {
-            var ssid  = ap.Ssid?.Replace("\\", "\\\\").Replace("\"", "\\\"") ?? "";
-            var bssid = ap.Bssid?.Replace("\"", "\\\"") ?? "";
+            var ssid   = ap.Ssid?.Replace("\\", "\\\\").Replace("\"", "\\\"") ?? "";
+            var bssid  = ap.Bssid?.Replace("\"", "\\\"") ?? "";
+            var active = ap.IsActive ? "true" : "false";
             return $"{{\"type\":\"Feature\","
                  + $"\"geometry\":{{\"type\":\"Point\",\"coordinates\":[{ap.Longitude:F6},{ap.Latitude:F6}]}},"
                  + $"\"properties\":{{\"ssid\":\"{ssid}\",\"bssid\":\"{bssid}\","
-                 + $"\"signal\":{ap.Signal ?? 0},\"channel\":{ap.Channel}}}}}";
+                 + $"\"signal\":{ap.Signal ?? 0},\"channel\":{ap.Channel},\"isActive\":{active}}}}}";
         });
         return $"{{\"type\":\"FeatureCollection\",\"features\":[{string.Join(",", features)}]}}";
     }
