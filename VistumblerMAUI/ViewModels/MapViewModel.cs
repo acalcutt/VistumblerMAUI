@@ -176,14 +176,17 @@ public partial class MapViewModel : ObservableObject
         s.Open,
     ];
 
-    // MapLibre GL zoom-interpolated radius function matching WifiDB's stop values.
+    // MapLibre GL zoom-interpolated radius function.
+    // base=1.5 is the interpolation curve (fixed); the per-bucket size difference
+    // lives in the stop VALUES, not the base — a higher base actually yields smaller
+    // circles at intermediate zooms, which is why baseRadius drives the stop values.
     private static Dictionary<string, object?> RadiusExpr(double baseRadius) => new()
     {
-        ["base"]  = baseRadius,
+        ["base"]  = 1.5,
         ["stops"] = new object[] {
-            new object[] { 1,  1.5 },
-            new object[] { 4,  2.0 },
-            new object[] { 12, 2.0 },
+            new object[] { 1,  baseRadius * 0.5 },
+            new object[] { 4,  baseRadius },
+            new object[] { 12, baseRadius },
             new object[] { 20, 20.0 },
         },
     };
