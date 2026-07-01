@@ -5,6 +5,7 @@ using CommunityToolkit.Mvvm.Input;
 using MapLibreNative.Maui.Handlers;
 using Vistumbler.Core.Models;
 using Vistumbler.Core.Services;
+using VistumblerMAUI.Services;
 
 namespace VistumblerMAUI.ViewModels;
 
@@ -324,7 +325,7 @@ public partial class MapViewModel : ObservableObject
             var sourceId = $"WifiDB_{bucket}";
             _controller.AddVectorSource(
                 sourceName:       sourceId,
-                tileUrl:          $"https://wifidb.net/api/tilejson.php?bucket={bucket}",
+                tileUrl:          $"{WifiDbSettings.ApiBaseUrl}/tilejson.php?bucket={bucket}",
                 tileUrlTemplates: null,
                 minZoom: 0, maxZoom: 22);
 
@@ -375,7 +376,7 @@ public partial class MapViewModel : ObservableObject
             var sourceId = $"WifiDB_{bucket}";
             _controller.AddVectorSource(
                 sourceName: sourceId,
-                tileUrl:    $"https://wifidb.net/api/tilejson.php?bucket={bucket}",
+                tileUrl:    $"{WifiDbSettings.ApiBaseUrl}/tilejson.php?bucket={bucket}",
                 tileUrlTemplates: null, minZoom: 0, maxZoom: 22);
 
             var style = BucketStyles.TryGetValue(bucket, out var s) ? s : BucketStyles["cell_monthly"];

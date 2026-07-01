@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:scanner="clr-namespace:BarcodeScanning;assembly=BarcodeScanning.Native.Maui"
+             x:Class="VistumblerMAUI.Views.WifiDbScanPage"
+             Title="Scan WifiDB QR">
+
+    <Grid>
+        <scanner:CameraView x:Name="Camera"
+                            CameraEnabled="False"
+                            VibrationOnDetected="True"
+                            OnDetectionFinished="OnDetectionFinished" />
+
+        <VerticalStackLayout VerticalOptions="End"
+                             Padding="16,12,16,24"
+                             Spacing="10"
+                             BackgroundColor="#99000000">
+            <Label x:Name="StatusLabel"
+                   Text="Point the camera at your WifiDB registration QR code."
+                   TextColor="White"
+                   HorizontalTextAlignment="Center"
+                   FontSize="13" />
+            <Button Text="Cancel" Clicked="OnCancel" />
+        </VerticalStackLayout>
+    </Grid>
+
+</ContentPage>

@@ -9,6 +9,9 @@
 
 ## 0.3.1
 ### ✨ Features and improvements
+- **Settings: WifiDB account section** — set the WifiDB base URL, username, and API key (masked); values persist via MAUI `Preferences` and the base URL now drives the map's history-tile requests (so a self-hosted WifiDB works). Field naming matches VistumblerCS.
+- **Settings: register with WifiDB via QR code or link** — on mobile, "Register with QR code" opens the camera (via BarcodeScanning.Native.Maui) and redeems a WifiDB registration QR (`…/redeem_link.php?token=…`), auto-filling username/API key/base URL; "Register with link…" does the same from a pasted link on any platform (incl. desktop). Ported from vistumbler-android's ActivateActivity WifiDB flow.
+- **Settings: Import/Export now have a Cancel button** — returns to Settings without importing/exporting, instead of leaving you stuck on the page.
 - **All history layers now use WifiDB MVT vector tiles** — the Daily layer previously fetched a one-shot GeoJSON blob from `geojson.php?func=exp_daily`; it now streams the `daily` MVT bucket via `tilejson.php?bucket=daily` just like every other age tier (and like VistumblerCS), so all ten buttons share one consistent, tile-streamed code path. Removed the now-obsolete GeoJSON-only daily machinery (the dedicated source, fetch/clear handlers, and `HttpClient`).
 - **Circle paint matched to VistumblerCS** — history dots now render as solid, softly-blurred circles (`circle-opacity` 1.0 + `circle-blur` 0.5, no outline) instead of semi-transparent white-ringed dots, so the MAUI and WPF clients look identical.
 - **"Cells" button renamed to "Cell Networks"** to match VistumblerCS.

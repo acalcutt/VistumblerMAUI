@@ -33,6 +33,34 @@
             </Grid>
             <BoxView HeightRequest="1" Color="#EEEEEE" Margin="16,0" />
 
+            <!-- WifiDB -->
+            <Label Text="WIFIDB" Style="{StaticResource SectionHeader}" />
+            <Grid ColumnDefinitions="Auto,*" Padding="16,8" ColumnSpacing="12" RowSpacing="8"
+                  RowDefinitions="Auto,Auto,Auto">
+                <Label Grid.Row="0" Grid.Column="0" Text="Base URL" VerticalOptions="Center" />
+                <Entry Grid.Row="0" Grid.Column="1" Text="{Binding WifiDbUrl}"
+                       Placeholder="https://wifidb.net/" Keyboard="Url" />
+
+                <Label Grid.Row="1" Grid.Column="0" Text="Username" VerticalOptions="Center" />
+                <Entry Grid.Row="1" Grid.Column="1" Text="{Binding WifiDbUser}" Placeholder="username" />
+
+                <Label Grid.Row="2" Grid.Column="0" Text="API key" VerticalOptions="Center" />
+                <Entry Grid.Row="2" Grid.Column="1" Text="{Binding WifiDbApiKey}"
+                       Placeholder="API key" IsPassword="True" />
+            </Grid>
+
+            <Button Text="Register with QR code"
+                    Command="{Binding ScanWifiDbQrCommand}"
+                    Margin="16,4" HorizontalOptions="Fill" />
+            <Button Text="Register with link…"
+                    Command="{Binding RedeemWifiDbLinkCommand}"
+                    Margin="16,0,16,4" HorizontalOptions="Fill"
+                    BackgroundColor="Transparent" TextColor="#1565C0" />
+            <Label Text="{Binding WifiDbStatus}"
+                   IsVisible="{Binding WifiDbStatus, Converter={StaticResource IsNotNullOrEmpty}}"
+                   FontSize="12" TextColor="Gray" Margin="16,0,16,4" />
+            <BoxView HeightRequest="1" Color="#EEEEEE" Margin="16,4" />
+
             <!-- Data -->
             <Label Text="DATA" Style="{StaticResource SectionHeader}" />
             <Button Text="Import…"

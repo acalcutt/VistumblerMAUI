@@ -44,6 +44,10 @@ public partial class ExportViewModel : ObservableObject
         _databaseService = databaseService;
     }
 
+    /// <summary>Return to Settings without exporting.</summary>
+    [RelayCommand]
+    private static Task CancelAsync() => Shell.Current.GoToAsync("..");
+
     [RelayCommand(CanExecute = nameof(CanExport))]
     private async Task ExportAsync()
     {

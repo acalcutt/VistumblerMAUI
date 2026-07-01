@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using BarcodeScanning;
 using CommunityToolkit.Maui;
 using MapLibreNative.Maui.Handlers;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +19,7 @@ public static partial class MauiProgram
         builder
             .UseMauiApp<App>()
             .UseMauiCommunityToolkit()
+            .UseBarcodeScanning()
             .ConfigureMauiHandlers(handlers =>
             {
                 Debug.WriteLine("[MauiProgram] Registering MapLibreMap -> MapLibreMapHandler");
@@ -54,6 +56,7 @@ public static partial class MauiProgram
         services.AddTransient<SettingsPage>();
         services.AddTransient<ImportPage>();
         services.AddTransient<ExportPage>();
+        services.AddTransient<WifiDbScanPage>();
 
         Debug.WriteLine("[MauiProgram] CreateMauiApp EXIT (build)");
         return builder.Build();

@@ -25,8 +25,15 @@
 
             <Button Text="Import"
                     Command="{Binding ImportCommand}"
-                    Margin="16,16"
+                    Margin="16,16,16,4"
                     HorizontalOptions="Fill" />
+
+            <Button Text="Cancel"
+                    Command="{Binding CancelCommand}"
+                    Margin="16,0,16,8"
+                    HorizontalOptions="Fill"
+                    BackgroundColor="Transparent"
+                    TextColor="Gray" />
 
             <ProgressBar Progress="{Binding ProgressValue}"
                          IsVisible="{Binding IsImporting}"

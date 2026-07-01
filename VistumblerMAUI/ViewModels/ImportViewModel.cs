@@ -42,6 +42,10 @@ public partial class ImportViewModel : ObservableObject
         _databaseService = databaseService;
     }
 
+    /// <summary>Return to Settings without importing.</summary>
+    [RelayCommand]
+    private static Task CancelAsync() => Shell.Current.GoToAsync("..");
+
     [RelayCommand]
     private async Task BrowseAsync()
     {

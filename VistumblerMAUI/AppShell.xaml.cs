@@ -11,5 +11,6 @@ public partial class AppShell : Shell
         // Import/Export are reached via navigation (from Settings), not the tab bar.
         Routing.RegisterRoute(nameof(ImportPage), typeof(ImportPage));
         Routing.RegisterRoute(nameof(ExportPage), typeof(ExportPage));
+        Routing.RegisterRoute(nameof(WifiDbScanPage), typeof(WifiDbScanPage));
     }
 }
