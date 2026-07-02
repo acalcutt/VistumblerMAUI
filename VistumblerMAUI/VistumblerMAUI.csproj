@@ -29,9 +29,10 @@
 
   <!-- ── Android: no extra NuGet needed — WifiManager is part of the MAUI Android SDK ── -->
 
-  <!-- ── Windows: ManagedNativeWifi for WLAN API access ───────────────────── -->
+  <!-- ── Windows: ManagedNativeWifi for WLAN API; System.IO.Ports for serial/NMEA GPS ── -->
   <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
     <PackageReference Include="ManagedNativeWifi" Version="3.0.2" />
+    <PackageReference Include="System.IO.Ports" Version="10.0.0" />
   </ItemGroup>
 
   <ItemGroup>

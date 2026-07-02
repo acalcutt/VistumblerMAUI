@@ -13,6 +13,7 @@ public partial class MapViewModel : ObservableObject
 {
     private readonly IDatabaseService _db;
     private readonly IGpsService _gps;
+    private readonly ScanViewModel _scan;
 
     // Accessed from StyleLoaded and toggle commands — always on main thread.
     private IMapLibreMapController? _controller;
@@ -27,32 +28,42 @@ public partial class MapViewModel : ObservableObject
     // History-layer vector sources (per bucket, e.g. "WifiDB_weekly") are added
     // dynamically via tilejson.php when each layer is toggled on — see
     // AddVectorLayer() — not pre-baked into this base style.
-    [ObservableProperty] private string _styleUrl     = "https://tiles.wifidb.net/styles/WDB_OSM/style.json";
+    [ObservableProperty] private string _styleUrl     = MapStyles.StyleUrl;
     [ObservableProperty] private string _statusMessage = string.Empty;
     [ObservableProperty] private List<AccessPoint> _mappableAps = new();
     [ObservableProperty] private string _apsGeoJson   = EmptyGeoJson;
 
-    // Active scanned APs = lighter than the newest WifiDB daily dots (#1aff66).
-    // Inactive scanned APs = same color as daily, same base radius.
-    // Both distinctions are driven by the "isActive" feature property in the GeoJSON.
-    public IDictionary<string, object?> ApLayerProperties { get; } = new Dictionary<string, object?>
+    // Live-scan circle paint. Color is per-sectype (open/WEP/secure) AND active/dead:
+    // each feature carries a "styidx" folding both into one 1..6 value (active 1/2/3,
+    // dead 4/5/6), so active APs render in the brightest configured colors and this
+    // session's dead APs in their dimmer variants. Radius keeps active dots a touch
+    // larger. Rebuilt from MapColors by BuildApLayerProperties() / RefreshMapColors().
+    [ObservableProperty] private IDictionary<string, object?> _apLayerProperties = new Dictionary<string, object?>();
+
+    private void BuildApLayerProperties()
     {
-        ["circle-radius"] = new object[] {
-            "case",
-            new object[] { "==", new object[] { "get", "isActive" }, true },
-            4.0,  // active: slightly larger than daily (base 3.0)
-            3.0,  // inactive: same base radius as daily
-        },
-        ["circle-color"] = new object[] {
-            "case",
-            new object[] { "==", new object[] { "get", "isActive" }, true },
-            "#80ffb3",  // active: lighter pastel green
-            "#1aff66",  // inactive: same as daily
-        },
-        ["circle-stroke-width"] = 0.4,
-        ["circle-stroke-color"] = "#FFFFFF",
-        ["circle-opacity"]      = 0.8,
-    };
+        var (aOpen, aWep, aSec) = MapColors.Hashed("live_active");
+        var (dOpen, dWep, dSec) = MapColors.Hashed("live_dead");
+        ApLayerProperties = new Dictionary<string, object?>
+        {
+            ["circle-radius"] = new object[] {
+                "case",
+                new object[] { "==", new object[] { "get", "isActive" }, true },
+                4.0,  // active: slightly larger than the newest history bucket (base 3.0)
+                3.0,  // dead: same base radius
+            },
+            ["circle-color"] = new Dictionary<string, object?> {
+                ["property"] = "styidx",
+                ["stops"]    = new object[] {
+                    new object[] { 1, aOpen }, new object[] { 2, aWep }, new object[] { 3, aSec },
+                    new object[] { 4, dOpen }, new object[] { 5, dWep }, new object[] { 6, dSec },
+                },
+            },
+            ["circle-stroke-width"] = 0.4,
+            ["circle-stroke-color"] = "#FFFFFF",
+            ["circle-opacity"]      = 0.8,
+        };
+    }
 
     // ── History layers ────────────────────────────────────────────────────────
     public ObservableCollection<HistoryLayerState> HistoryLayers { get; } = new();
@@ -61,12 +72,37 @@ public partial class MapViewModel : ObservableObject
     [ObservableProperty] private MapFeatureInfo? _selectedFeature;
     [ObservableProperty] private bool _isPopupVisible;
 
-    public MapViewModel(IDatabaseService db, IGpsService gps)
+    public MapViewModel(IDatabaseService db, IGpsService gps, ScanViewModel scan)
     {
-        _db  = db;
-        _gps = gps;
+        _db   = db;
+        _gps  = gps;
+        _scan = scan;
         _gps.GpsDataReceived += OnGpsData;
         InitHistoryLayers();
+        RefreshMapColors();
+    }
+
+    // ── Map colors ──────────────────────────────────────────────────────────────
+    // Revision of MapColors that the live layer + bucket styles currently reflect.
+    // MapPage compares this against MapColors.Revision on appearing and reloads the
+    // map when the user has changed colors in Settings.
+    public int AppliedColorRevision { get; private set; }
+
+    /// <summary>Rebuild the live-layer paint and per-bucket styles from the current MapColors.</summary>
+    public void RefreshMapColors()
+    {
+        LoadBucketStyles();
+        BuildApLayerProperties();
+        AppliedColorRevision = MapColors.Revision;
+    }
+
+    /// <summary>Clear the plotted APs when switching to a new session (the live timer will
+    /// then reload from the new, empty session database).</summary>
+    public void ResetForNewSession()
+    {
+        MappableAps   = new List<AccessPoint>();
+        ApsGeoJson    = EmptyGeoJson;
+        StatusMessage = "New session";
     }
 
     private void OnGpsData(object? sender, GpsDataReceivedEventArgs e)
@@ -136,23 +172,22 @@ public partial class MapViewModel : ObservableObject
         }
     }
 
-    // Per-bucket paint style — open/WEP/secure colors match WifiDB's map.php
-    // mvt_history_layers(); radius scales from 2 (recent) to 3 (oldest).
-    // Cell buckets use a single graduated purple (no sectype split, matching
-    // WifiDB's CreateMvtCellLayers and VistumblerCS's CellBucketColors).
+    // Per-bucket paint style. Wifi open/WEP/secure colors come from MapColors (the Map
+    // settings tab) with a brightness gradient that darkens with age; radius scales from
+    // 3 (recent) down to 1.5 (oldest). Cell buckets use a single graduated purple (no
+    // sectype split) and are not user-configurable. Rebuilt by LoadBucketStyles().
     private record BucketStyle(string Open, string Wep, string Secure, double Radius);
-    private static readonly Dictionary<string, BucketStyle> BucketStyles = new()
+
+    // Wifi history bucket radii (colors are pulled from MapColors); newest = largest.
+    private static readonly (string Bucket, double Radius)[] WifiBucketRadii =
     {
-        // Radius decreases as data gets older (newest = largest + brightest).
-        ["daily"]         = new("#1aff66", "#ffad33", "#ff1a1a", 3.0),
-        ["weekly"]        = new("#1aff66", "#ffad33", "#ff1a1a", 3.0),
-        ["monthly"]       = new("#1aff66", "#ffad33", "#ff1a1a", 3.0),
-        ["0to1year"]      = new("#1aff66", "#ffad33", "#ff1a1a", 3.0),
-        ["1to2year"]      = new("#00e64d", "#ff9900", "#e60000", 2.75),
-        ["2to3year"]      = new("#00b33c", "#e68a00", "#cc0000", 2.5),
-        ["3to5year"]      = new("#009933", "#d98000", "#c00000", 2.25),
-        ["5to10year"]     = new("#00802b", "#cc7a00", "#b30000", 2.0),
-        ["10yrplus"]      = new("#005c1f", "#996000", "#800000", 1.5),
+        ("daily", 3.0), ("weekly", 3.0), ("monthly", 3.0), ("0to1year", 3.0),
+        ("1to2year", 2.75), ("2to3year", 2.5), ("3to5year", 2.25),
+        ("5to10year", 2.0), ("10yrplus", 1.5),
+    };
+
+    private static readonly Dictionary<string, BucketStyle> CellBucketStyles = new()
+    {
         ["cell_daily"]    = new("#b296e3", "#b296e3", "#b296e3", 3.0),
         ["cell_weekly"]   = new("#9d78d8", "#9d78d8", "#9d78d8", 3.0),
         ["cell_monthly"]  = new("#885fcd", "#885fcd", "#885fcd", 3.0),
@@ -163,6 +198,20 @@ public partial class MapViewModel : ObservableObject
         ["cell_5to10year"]= new("#4d2b80", "#4d2b80", "#4d2b80", 2.0),
         ["cell_10yrplus"] = new("#3d2266", "#3d2266", "#3d2266", 1.5),
     };
+
+    // Combined wifi (from MapColors) + cell (fixed) styles; rebuilt on color change.
+    private Dictionary<string, BucketStyle> _bucketStyles = new();
+
+    private void LoadBucketStyles()
+    {
+        var d = new Dictionary<string, BucketStyle>(CellBucketStyles);
+        foreach (var (bucket, radius) in WifiBucketRadii)
+        {
+            var (o, w, s) = MapColors.Hashed(bucket);
+            d[bucket] = new BucketStyle(o, w, s, radius);
+        }
+        _bucketStyles = d;
+    }
 
     // MapLibre GL zoom-interpolated radius function.
     // Holds at baseRadius from the lowest zoom up through z12 (never shrinks below
@@ -267,13 +316,14 @@ public partial class MapViewModel : ObservableObject
     // ── Live AP source ────────────────────────────────────────────────────────
 
     [RelayCommand]
-    private async Task LoadMappableApsAsync()
+    private Task LoadMappableApsAsync()
     {
-        await _db.InitializeAsync();
-        var all = await _db.GetAllAccessPointsAsync();
-        MappableAps  = all.Where(a => a.Latitude.HasValue && a.Longitude.HasValue).ToList();
+        // Plot the current scan's APs (live IsActive + coordinates), not a DB reload — so the
+        // map shows active vs dead exactly as the Scan list does, and updates as scanning runs.
+        MappableAps  = _scan.AllKnownAps.Where(a => a.Latitude.HasValue && a.Longitude.HasValue).ToList();
         ApsGeoJson   = BuildGeoJson(MappableAps);
-        StatusMessage = $"{MappableAps.Count} scanned APs with GPS";
+        StatusMessage = $"{MappableAps.Count} APs with GPS";
+        return Task.CompletedTask;
     }
 
     // ── History layer toggle ──────────────────────────────────────────────────
@@ -329,7 +379,7 @@ public partial class MapViewModel : ObservableObject
                 tileUrlTemplates: null,
                 minZoom: 0, maxZoom: 22);
 
-            var style = BucketStyles.TryGetValue(bucket, out var s) ? s : new BucketStyle(layer.ActiveColor, layer.ActiveColor, layer.ActiveColor, 2.5);
+            var style = _bucketStyles.TryGetValue(bucket, out var s) ? s : new BucketStyle(layer.ActiveColor, layer.ActiveColor, layer.ActiveColor, 2.5);
             _controller.AddCircleLayer(
                 layerName:    layerId,
                 sourceName:   sourceId,
@@ -379,7 +429,7 @@ public partial class MapViewModel : ObservableObject
                 tileUrl:    $"{WifiDbSettings.ApiBaseUrl}/tilejson.php?bucket={bucket}",
                 tileUrlTemplates: null, minZoom: 0, maxZoom: 22);
 
-            var style = BucketStyles.TryGetValue(bucket, out var s) ? s : BucketStyles["cell_monthly"];
+            var style = _bucketStyles.TryGetValue(bucket, out var s) ? s : CellBucketStyles["cell_monthly"];
             _controller.AddCircleLayer(
                 layerName:    layerId,
                 sourceName:   sourceId,
@@ -548,10 +598,16 @@ public partial class MapViewModel : ObservableObject
             var ssid   = ap.Ssid?.Replace("\\", "\\\\").Replace("\"", "\\\"") ?? "";
             var bssid  = ap.Bssid?.Replace("\"", "\\\"") ?? "";
             var active = ap.IsActive ? "true" : "false";
+            // sectype 1=open, 2=WEP, 3=secure; styidx folds active/dead + sectype into a
+            // single 1..6 value the live layer colors from (active 1/2/3, dead 4/5/6).
+            int sectype = ap.Authentication == AuthenticationType.Open
+                ? 1 : (ap.Encryption == EncryptionType.WEP ? 2 : 3);
+            int styidx  = ap.IsActive ? sectype : sectype + 3;
             return $"{{\"type\":\"Feature\","
                  + $"\"geometry\":{{\"type\":\"Point\",\"coordinates\":[{ap.Longitude:F6},{ap.Latitude:F6}]}},"
                  + $"\"properties\":{{\"ssid\":\"{ssid}\",\"bssid\":\"{bssid}\","
-                 + $"\"signal\":{ap.Signal ?? 0},\"channel\":{ap.Channel},\"isActive\":{active}}}}}";
+                 + $"\"signal\":{ap.Signal ?? 0},\"channel\":{ap.Channel},\"isActive\":{active},"
+                 + $"\"sectype\":{sectype},\"styidx\":{styidx}}}}}";
         });
         return $"{{\"type\":\"FeatureCollection\",\"features\":[{string.Join(",", features)}]}}";
     }

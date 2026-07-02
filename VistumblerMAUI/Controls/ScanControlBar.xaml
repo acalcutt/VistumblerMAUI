@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:VistumblerMAUI.ViewModels"
+             x:DataType="vm:ScanViewModel"
+             x:Class="VistumblerMAUI.Controls.ScanControlBar">
+
+    <!-- Always-visible scan/GPS controls + status, shared across all tabs
+         (bound to the singleton ScanViewModel). -->
+    <VerticalStackLayout Spacing="0">
+
+        <!-- Status line -->
+        <Grid ColumnDefinitions="*,Auto"
+              BackgroundColor="{AppThemeBinding Light=#1565C0, Dark=#0D47A1}"
+              Padding="12,6">
+            <Label Grid.Column="0" Text="{Binding StatusMessage}" TextColor="White" FontSize="13" VerticalOptions="Center" />
+            <Label Grid.Column="1" Text="{Binding GpsStatus}"     TextColor="#B3E5FC" FontSize="12" VerticalOptions="Center" HorizontalOptions="End" />
+        </Grid>
+
+        <!-- Toggles + counters -->
+        <Grid ColumnDefinitions="Auto,Auto,*" Padding="12,6" ColumnSpacing="8"
+              BackgroundColor="{AppThemeBinding Light=#F5F5F5, Dark=#1B1B1B}">
+            <Button Grid.Column="0"
+                    Text="Scan APs"
+                    Command="{Binding ToggleScanCommand}"
+                    BackgroundColor="{Binding IsScanning, Converter={StaticResource RunningToColor}}"
+                    TextColor="White" WidthRequest="92" />
+            <Button Grid.Column="1"
+                    Text="Use GPS"
+                    Command="{Binding ToggleGpsCommand}"
+                    BackgroundColor="{Binding IsGpsEnabled, Converter={StaticResource RunningToColor}}"
+                    TextColor="White" WidthRequest="92" />
+            <VerticalStackLayout Grid.Column="2" Spacing="0" VerticalOptions="Center" HorizontalOptions="End">
+                <Label Text="{Binding TotalCount, StringFormat='Total: {0}'}" FontSize="12" HorizontalOptions="End" />
+                <Label Text="{Binding ActiveCount, StringFormat='Active: {0}'}" FontSize="12" TextColor="#1565C0" HorizontalOptions="End" />
+            </VerticalStackLayout>
+        </Grid>
+
+    </VerticalStackLayout>
+</ContentView>

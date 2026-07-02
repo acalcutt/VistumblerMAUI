@@ -51,13 +51,13 @@ public class ImportService : IImportService
                 var bssidBytes = reader.ReadBytes(6);
                 ap.Bssid = BitConverter.ToString(bssidBytes).Replace("-", ":");
 
-                var maxSignal = reader.ReadInt32(); // HighSignal
-                ap.HighestSignal = maxSignal;
+                // NS1 stores signal/noise in dBm. Keep dBm as RSSI and derive the percentage.
+                var maxSignalDbm = reader.ReadInt32(); // MaxSignal (dBm)
+                ap.HighestRssi   = maxSignalDbm;
+                ap.HighestSignal = DbToPercent(maxSignalDbm);
 
                 var minNoise = reader.ReadInt32();
-
-                var maxSnr = reader.ReadInt32(); // HighRSSI
-                ap.HighestRssi = maxSnr;
+                var maxSnr   = reader.ReadInt32(); // MaxSNR (not RSSI) — informational only
 
                 var flags = reader.ReadUInt32();
                 // Map flags if needed. Bit 4 is Privacy.
@@ -94,6 +94,7 @@ public class ImportService : IImportService
                 var dataCount = reader.ReadUInt32();
 
                 // Signal History
+                int? lastDbm = null;
                 for (int j = 0; j < dataCount; j++)
                 {
                     var hist = new SignalHistory();
@@ -101,7 +102,10 @@ public class ImportService : IImportService
                     var histTime = reader.ReadInt64();
                     try { hist.Timestamp = DateTime.FromFileTimeUtc(histTime); } catch { hist.Timestamp = DateTime.MinValue; }
 
-                    hist.Signal = reader.ReadInt32();
+                    int dbm = reader.ReadInt32();      // Signal (dBm)
+                    hist.Rssi   = dbm;
+                    hist.Signal = DbToPercent(dbm);
+                    lastDbm     = dbm;
                     var histNoise = reader.ReadInt32();
 
                     var locationSource = reader.ReadInt32();
@@ -120,6 +124,11 @@ public class ImportService : IImportService
 
                     ap.SignalHistory.Add(hist);
                 }
+
+                // Current signal = the most recent sample (fall back to the AP max).
+                int currentDbm = lastDbm ?? maxSignalDbm;
+                ap.Rssi   = currentDbm;
+                ap.Signal = DbToPercent(currentDbm);
 
                 // Remaining AP fields
                 var nameLength = reader.ReadByte();
@@ -202,15 +211,15 @@ public class ImportService : IImportService
                     var snr = net.Element("snr-info");
                     if (snr != null)
                     {
-                        var maxSigStr = snr.Element("max_signal_dbm")?.Value ?? "0";
-                        var lastSigStr = snr.Element("last_signal_dbm")?.Value ?? "0";
+                        // NetXML signal values are dBm — keep them as RSSI, derive the percentage.
+                        int lastDbm = ParseInt(snr.Element("last_signal_dbm")?.Value ?? "0");
+                        int maxDbm  = ParseInt(snr.Element("max_signal_dbm")?.Value ?? "0");
+                        if (maxDbm == 0) maxDbm = lastDbm;
 
-                        ap.HighestSignal = ParseInt(maxSigStr);
-                        if (ap.HighestSignal == 0) ap.HighestSignal = ParseInt(lastSigStr);
-
-                        ap.Signal = ParseInt(lastSigStr);
-                        ap.Rssi = ap.Signal;
-                        ap.HighestRssi = ap.HighestSignal;
+                        ap.Rssi          = lastDbm;
+                        ap.Signal        = lastDbm < 0 ? DbToPercent(lastDbm) : 0;
+                        ap.HighestRssi   = maxDbm;
+                        ap.HighestSignal = maxDbm < 0 ? DbToPercent(maxDbm) : 0;
                     }
 
                     var gps = net.Element("gps-info");
@@ -228,53 +237,28 @@ public class ImportService : IImportService
                         }
                     }
 
+                    // Encryption is the au3's "<Auth>-<Encr>" string (e.g. "WPA2-Personal-CCMP").
                     var encStr = ssidElem?.Element("encryption")?.Value ?? "";
                     if (!string.IsNullOrEmpty(encStr))
                     {
-                        if (encStr.Contains("WPA"))
-                        {
-                            if (encStr.Contains("PSK")) ap.Authentication = AuthenticationType.WPA_PSK;
-                            else ap.Authentication = AuthenticationType.WPA_Enterprise;
+                        bool ent = encStr.Contains("Enterprise") || encStr.Contains("EAP");
+                        if (encStr.Contains("WPA3"))
+                            ap.Authentication = ent ? AuthenticationType.WPA3_Enterprise : AuthenticationType.WPA3_PSK;
+                        else if (encStr.Contains("WPA2"))
+                            ap.Authentication = ent ? AuthenticationType.WPA2_Enterprise : AuthenticationType.WPA2_PSK;
+                        else if (encStr.Contains("WPA"))
+                            ap.Authentication = ent ? AuthenticationType.WPA_Enterprise : AuthenticationType.WPA_PSK;
+                        else if (encStr.Contains("OWE"))
+                            ap.Authentication = AuthenticationType.OWE;
+                        else
+                            ap.Authentication = AuthenticationType.Open;
 
-                            if (encStr.Contains("AES") || encStr.Contains("CCM") || encStr.Contains("WPA2"))
-                            {
-                                if (ap.Authentication == AuthenticationType.WPA_PSK) ap.Authentication = AuthenticationType.WPA2_PSK;
-                                else ap.Authentication = AuthenticationType.WPA2_Enterprise;
-                                ap.Encryption = EncryptionType.CCMP;
-                            }
-                            else
-                            {
-                                ap.Encryption = EncryptionType.TKIP;
-                            }
-                        }
-                        else if (encStr.Contains("WEP"))
-                        {
-                            ap.Encryption = EncryptionType.WEP;
-                            ap.Authentication = AuthenticationType.Open;
-                        }
-                        else if (encStr.Contains("None") || encStr == "Open")
-                        {
-                            ap.Encryption = EncryptionType.None;
-                            ap.Authentication = AuthenticationType.Open;
-                        }
+                        ap.Encryption = ParseEncryption(encStr);   // CCMP/GCMP/TKIP/WEP/None
                     }
 
                     var typeStr = net.Attribute("type")?.Value;
                     if (typeStr == "infrastructure") ap.NetworkType = NetworkType.Infrastructure;
                     else if (typeStr == "ad-hoc") ap.NetworkType = NetworkType.Adhoc;
-
-                    // Vistumbler Custom Attributes
-                    var radioType = net.Element("bsstype")?.Value;
-                    if (!string.IsNullOrEmpty(radioType))
-                    {
-                        ap.RadioType = radioType;
-                    }
-
-                    var sigQual = net.Element("signal_quality")?.Value;
-                    if (!string.IsNullOrEmpty(sigQual))
-                    {
-                        ap.Signal = ParseInt(sigQual);
-                    }
 
                     accessPoints.Add(ap);
                 }
@@ -326,11 +310,12 @@ public class ImportService : IImportService
                 {
                     var ap = new AccessPoint { Bssid = row.Devmac ?? "" };
 
-                    var sig = (int)(row.StrongestSignal ?? 0);
-                    ap.HighestSignal = sig;
-                    ap.Signal = sig;
-                    ap.HighestRssi = sig;
-                    ap.Rssi = sig;
+                    // strongest_signal is dBm — keep as RSSI, derive the percentage.
+                    int sigDbm = (int)(row.StrongestSignal ?? 0);
+                    ap.HighestRssi   = sigDbm;
+                    ap.Rssi          = sigDbm;
+                    ap.HighestSignal = sigDbm < 0 ? DbToPercent(sigDbm) : 0;
+                    ap.Signal        = ap.HighestSignal;
 
                     ap.Latitude = row.MinLat ?? 0;
                     ap.Longitude = row.MinLon ?? 0;
@@ -447,18 +432,17 @@ public class ImportService : IImportService
         {
             if (cryptString.Contains("/"))
             {
+                // "<Auth>/<Encr>" (e.g. "WPA2-Personal/CCMP") as written by the au3 and our export.
                 var parts = cryptString.Split('/');
-                if (parts.Length >= 2)
-                {
-                    if (parts[0].Contains("WPA2") && parts[0].Contains("PSK")) ap.Authentication = AuthenticationType.WPA2_PSK;
-                    else if (parts[0].Contains("WPA") && parts[0].Contains("PSK")) ap.Authentication = AuthenticationType.WPA_PSK;
-                    else if (parts[0].Contains("Open")) ap.Authentication = AuthenticationType.Open;
+                string a = parts[0];
+                bool ent = a.Contains("Enterprise") || a.Contains("EAP");
+                if (a.Contains("WPA3"))      ap.Authentication = ent ? AuthenticationType.WPA3_Enterprise : AuthenticationType.WPA3_PSK;
+                else if (a.Contains("WPA2")) ap.Authentication = ent ? AuthenticationType.WPA2_Enterprise : AuthenticationType.WPA2_PSK;
+                else if (a.Contains("WPA"))  ap.Authentication = ent ? AuthenticationType.WPA_Enterprise : AuthenticationType.WPA_PSK;
+                else if (a.Contains("OWE"))  ap.Authentication = AuthenticationType.OWE;
+                else                         ap.Authentication = AuthenticationType.Open;
 
-                    if (parts[1].Contains("CCMP") || parts[1].Contains("AES")) ap.Encryption = EncryptionType.CCMP;
-                    else if (parts[1].Contains("TKIP")) ap.Encryption = EncryptionType.TKIP;
-                    else if (parts[1].Contains("WEP")) ap.Encryption = EncryptionType.WEP;
-                    else if (parts[1].Contains("None")) ap.Encryption = EncryptionType.None;
-                }
+                ap.Encryption = ParseEncryption(parts.Length > 1 ? parts[1] : cryptString);
             }
             else
             {
@@ -796,20 +780,83 @@ public class ImportService : IImportService
         bool isWigle = header.Contains("WigleWifi", StringComparison.OrdinalIgnoreCase) ||
                        header.Contains("MAC,SSID,AuthMode", StringComparison.OrdinalIgnoreCase);
 
+        if (isWigle)
+        {
+            for (int i = 1; i < lines.Length; i++)
+            {
+                if (string.IsNullOrWhiteSpace(lines[i])) continue;
+                var ap = ParseWigleLine(SplitCsvLine(lines[i]));
+                if (ap != null) accessPoints.Add(ap);
+            }
+            return accessPoints;
+        }
+
+        // Vistumbler Detailed CSV — one row per observation; group by BSSID and accumulate
+        // signal history (matches the _ExportToCSV Detailed=1 column layout).
+        var byBssid = new Dictionary<string, AccessPoint>(StringComparer.OrdinalIgnoreCase);
         for (int i = 1; i < lines.Length; i++)
         {
-            var line = lines[i];
-            if (string.IsNullOrWhiteSpace(line)) continue;
+            if (string.IsNullOrWhiteSpace(lines[i])) continue;
+            var p = SplitCsvLine(lines[i]);
+            if (p.Length < 17) continue;   // need at least SSID..LONGITUDE
 
-            var parts = SplitCsvLine(line);
+            var bssid = p[1].Trim();
+            if (string.IsNullOrEmpty(bssid)) continue;
 
-            AccessPoint? ap = null;
-            if (isWigle)
-                ap = ParseWigleLine(parts);
-            else
-                ap = ParseDetailedCsvLine(parts);
+            if (!byBssid.TryGetValue(bssid, out var ap))
+            {
+                ap = new AccessPoint
+                {
+                    Bssid          = bssid,
+                    Ssid           = p[0],
+                    Manufacturer   = p[2],
+                    HighestSignal  = ParseInt(p[4]),
+                    HighestRssi    = ParseInt(p[6]),
+                    Authentication = ParseAuthentication(p[7]),
+                    Encryption     = ParseEncryption(p[8]),
+                    RadioType      = p[9],
+                    Channel        = ParseInt(p[10]),
+                    BasicTransferRates = p[11],
+                    OtherTransferRates = p[12],
+                    NetworkType    = p[13].Contains("Ad", StringComparison.OrdinalIgnoreCase)
+                                     ? NetworkType.Adhoc : NetworkType.Infrastructure,
+                    Label          = p[14],
+                    FirstSeen      = DateTime.MaxValue,
+                    LastSeen       = DateTime.MinValue,
+                };
+                byBssid[bssid] = ap;
+                accessPoints.Add(ap);
+            }
 
-            if (ap != null) accessPoints.Add(ap);
+            var hist = new SignalHistory
+            {
+                Signal    = ParseInt(p[3]),
+                Rssi      = ParseInt(p[5]),
+                Latitude  = ParseDouble(p[15]),
+                Longitude = ParseDouble(p[16]),
+                Timestamp = DateTime.UtcNow,
+            };
+            if (p.Length > 25)
+            {
+                var dt = $"{p[24]} {p[25]}".Trim();
+                if (DateTime.TryParse(dt, CultureInfo.InvariantCulture,
+                        DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal, out var t))
+                    hist.Timestamp = t;
+            }
+            ap.SignalHistory.Add(hist);
+
+            // Latest sample = current; track first/last seen.
+            ap.Signal = hist.Signal;
+            ap.Rssi   = hist.Rssi;
+            if (hist.Latitude.HasValue) { ap.Latitude = hist.Latitude; ap.Longitude = hist.Longitude; }
+            if (hist.Timestamp < ap.FirstSeen) ap.FirstSeen = hist.Timestamp;
+            if (hist.Timestamp > ap.LastSeen)  ap.LastSeen  = hist.Timestamp;
+        }
+
+        foreach (var ap in accessPoints)
+        {
+            if (ap.FirstSeen == DateTime.MaxValue) ap.FirstSeen = DateTime.UtcNow;
+            if (ap.LastSeen  == DateTime.MinValue) ap.LastSeen  = ap.FirstSeen;
         }
 
         return accessPoints;
@@ -853,31 +900,6 @@ public class ImportService : IImportService
         {
             return null; // Skip malformed lines
         }
-    }
-
-    private AccessPoint? ParseDetailedCsvLine(string[] parts)
-    {
-        if (parts.Length < 10) return null;
-        try
-        {
-            // "BSSID,SSID,Channel,Authentication,Encryption,NetworkType,Signal,HighSignal,RSSI,HighRSSI,RadioType,Manufacturer,Label,Latitude,Longitude,FirstSeen,LastSeen"
-            return new AccessPoint
-            {
-                Bssid = parts[0],
-                Ssid = parts[1],
-                Channel = ParseInt(parts[2]),
-                Authentication = Enum.TryParse<AuthenticationType>(parts[3], true, out var a) ? a : AuthenticationType.Unknown,
-                Encryption = Enum.TryParse<EncryptionType>(parts[4], true, out var e) ? e : EncryptionType.Unknown,
-                NetworkType = Enum.TryParse<NetworkType>(parts[5], true, out var n) ? n : NetworkType.Unknown,
-                Signal = ParseInt(parts[6]),
-                HighestSignal = ParseInt(parts[7]),
-                Rssi = ParseInt(parts[8]),
-                HighestRssi = ParseInt(parts[9]),
-                Latitude = parts.Length > 13 ? ParseDouble(parts[13]) : null,
-                Longitude = parts.Length > 14 ? ParseDouble(parts[14]) : null,
-            };
-        }
-        catch { return null; }
     }
 
     private AccessPoint? ParseWigleLine(string[] parts)
@@ -981,6 +1003,9 @@ public class ImportService : IImportService
     }
 
     private int ParseInt(string s) => int.TryParse(s, out var i) ? i : 0;
+
+    // dBm → signal percentage (inverse of the export's "%/2 - 100"): 0% at -100 dBm, 100% at -50.
+    private static int DbToPercent(int dbm) => Math.Clamp((dbm + 100) * 2, 0, 100);
     private double? ParseDouble(string s) => double.TryParse(s, NumberStyles.Any, CultureInfo.InvariantCulture, out var d) ? d : null;
 
     private string[] SplitCsvLine(string line)

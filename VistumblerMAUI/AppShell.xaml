@@ -3,9 +3,11 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:views="clr-namespace:VistumblerMAUI.Views"
        x:Class="VistumblerMAUI.AppShell"
-       Shell.FlyoutBehavior="Disabled"
+       Shell.FlyoutBehavior="Flyout"
+       FlyoutHeaderBehavior="Fixed"
        Title="Vistumbler">
 
+    <!-- Bottom tabs (primary navigation) -->
     <TabBar>
         <ShellContent Title="Scan"
                       Icon="tab_scan.png"
@@ -15,10 +17,21 @@
                       Icon="tab_map.png"
                       ContentTemplate="{DataTemplate views:MapPage}"
                       Route="MapPage" />
+        <ShellContent Title="Channels"
+                      Icon="tab_map.png"
+                      ContentTemplate="{DataTemplate views:ChannelGraphPage}"
+                      Route="ChannelGraphPage" />
         <ShellContent Title="Settings"
                       Icon="tab_settings.png"
                       ContentTemplate="{DataTemplate views:SettingsPage}"
                       Route="SettingsPage" />
     </TabBar>
+
+    <!-- Hamburger menu actions (data + session) -->
+    <MenuItem Text="Import…"        Clicked="OnImportClicked" />
+    <MenuItem Text="Export…"        Clicked="OnExportClicked" />
+    <MenuItem Text="New Session"    Clicked="OnNewSessionClicked" />
+    <MenuItem Text="Exit (Save DB)" Clicked="OnExitSaveClicked" />
+    <MenuItem Text="Exit"           Clicked="OnExitDiscardClicked" />
 
 </Shell>

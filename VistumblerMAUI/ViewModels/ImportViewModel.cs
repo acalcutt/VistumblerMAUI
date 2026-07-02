@@ -101,10 +101,8 @@ public partial class ImportViewModel : ObservableObject
                 StatusMessage = $"Saving {importedAps.Count} access points…";
                 ProgressValue = 0.5;
 
-                for (int i = 0; i < importedAps.Count; i++)
-                {
-                    await _databaseService.UpsertAccessPointAsync(importedAps[i]);
-                }
+                // Writes AP + HIST + GPS rows and (re)computes each AP's history links.
+                await _databaseService.ImportAccessPointsAsync(importedAps);
 
                 ProgressValue = 1;
                 StatusMessage = $"Done — imported {importedAps.Count} access point(s)";

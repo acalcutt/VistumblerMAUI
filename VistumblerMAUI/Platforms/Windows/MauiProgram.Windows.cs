@@ -10,6 +10,7 @@ public static partial class MauiProgram
     static partial void RegisterPlatformServices(IServiceCollection services)
     {
         services.AddSingleton<IWiFiScannerService, WindowsWiFiScannerService>();
+        services.AddSingleton<ISerialGpsService,   SerialNmeaGpsService>();
     }
 }
 #endif

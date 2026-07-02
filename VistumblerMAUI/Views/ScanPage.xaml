@@ -3,66 +3,81 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:VistumblerMAUI.ViewModels"
              xmlns:models="clr-namespace:Vistumbler.Core.Models;assembly=Vistumbler.Core"
+             xmlns:controls="clr-namespace:VistumblerMAUI.Controls"
              x:DataType="vm:ScanViewModel"
              x:Class="VistumblerMAUI.Views.ScanPage"
              Title="Scan">
 
-    <Grid RowDefinitions="Auto,Auto,Auto,*,Auto">
+    <Grid RowDefinitions="Auto,Auto,*,Auto">
 
-        <!-- Status bar -->
-        <Grid Grid.Row="0" ColumnDefinitions="*,*" BackgroundColor="{AppThemeBinding Light=#1565C0, Dark=#0D47A1}" Padding="12,8">
-            <Label Grid.Column="0" Text="{Binding StatusMessage}" TextColor="White" FontSize="13" VerticalOptions="Center" />
-            <Label Grid.Column="1" Text="{Binding GpsStatus}"     TextColor="#B3E5FC" FontSize="12" VerticalOptions="Center" HorizontalOptions="End" />
-        </Grid>
+        <!-- Shared scan/GPS control bar (also shown on the other tabs) -->
+        <controls:ScanControlBar Grid.Row="0" />
 
-        <!-- Scan control + counters + clear -->
-        <Grid Grid.Row="1" ColumnDefinitions="Auto,*,Auto" Padding="12,8" ColumnSpacing="12">
-            <Button Grid.Column="0"
-                    Text="{Binding IsScanning, Converter={StaticResource BoolToStartStop}}"
-                    Command="{Binding ToggleScanCommand}"
-                    BackgroundColor="{Binding IsScanning, Converter={StaticResource BoolToColor}}"
-                    TextColor="White"
-                    WidthRequest="90" />
-            <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
-                <Label Text="{Binding TotalCount, StringFormat='Total: {0}'}" FontSize="13" />
-                <Label Text="{Binding ActiveCount, StringFormat='Active: {0}'}" FontSize="13" TextColor="#1565C0" />
-            </VerticalStackLayout>
+        <!-- Search bar + sort controls + clear -->
+        <Grid Grid.Row="1" ColumnDefinitions="*,Auto,Auto,Auto" Padding="8,4" ColumnSpacing="6">
+            <SearchBar Grid.Column="0"
+                       Text="{Binding SearchText}"
+                       Placeholder="Search SSID, BSSID, manufacturer…" />
+            <Picker Grid.Column="1"
+                    Title="Sort"
+                    WidthRequest="120"
+                    VerticalOptions="Center"
+                    ItemsSource="{Binding SortOptions}"
+                    SelectedItem="{Binding SelectedSortOption}" />
             <Button Grid.Column="2"
-                    Text="Clear All"
-                    Command="{Binding ClearAllCommand}"
+                    Text="{Binding SortDirectionGlyph}"
+                    Command="{Binding ToggleSortDirectionCommand}"
+                    WidthRequest="44"
+                    Padding="0"
+                    VerticalOptions="Center"
                     BackgroundColor="Transparent"
-                    TextColor="#B00020"
-                    FontSize="13"
-                    VerticalOptions="Center" />
+                    TextColor="{AppThemeBinding Light=#1565C0, Dark=#90CAF9}" />
+            <Button Grid.Column="3"
+                    Text="Clear"
+                    Command="{Binding ClearAllCommand}"
+                    Padding="8,0"
+                    VerticalOptions="Center"
+                    BackgroundColor="Transparent"
+                    TextColor="#B00020" FontSize="13" />
         </Grid>
-
-        <!-- Search bar -->
-        <SearchBar Grid.Row="2"
-                   Text="{Binding SearchText}"
-                   Placeholder="Search SSID, BSSID, manufacturer…"
-                   Margin="8,0" />
 
         <!-- AP list -->
-        <CollectionView Grid.Row="3"
+        <CollectionView Grid.Row="2"
                         ItemsSource="{Binding AccessPoints}"
-                        SelectionMode="Single">
+                        SelectionMode="Single"
+                        SelectionChanged="OnApSelected">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:AccessPoint">
-                    <Grid ColumnDefinitions="*,Auto,Auto" Padding="12,8">
+                    <Grid ColumnDefinitions="*,Auto,Auto" Padding="12,8" ColumnSpacing="8">
+                        <Grid.Triggers>
+                            <!-- Dead (not re-seen within the timeout) APs are dimmed but stay listed. -->
+                            <DataTrigger TargetType="Grid" Binding="{Binding IsActive}" Value="False">
+                                <Setter Property="Opacity" Value="0.4" />
+                            </DataTrigger>
+                        </Grid.Triggers>
                         <VerticalStackLayout Grid.Column="0" Spacing="2">
                             <Label Text="{Binding Ssid}" FontAttributes="Bold" FontSize="14" />
                             <Label Text="{Binding Bssid}" FontSize="11" TextColor="Gray" />
-                            <Label Text="{Binding Manufacturer}" FontSize="11" TextColor="Gray" />
+                            <Label Text="{Binding Manufacturer}" FontSize="11" TextColor="Gray"
+                                   IsVisible="{Binding Manufacturer, Converter={StaticResource IsNotNullOrEmpty}}" />
+                            <Label FontSize="10" TextColor="Gray" Text="{Binding FirstSeenText, StringFormat='First: {0}'}" />
+                            <Label FontSize="10" TextColor="Gray" Text="{Binding LastSeenText, StringFormat='Last: {0}'}" />
+                            <Label FontSize="10" TextColor="Gray"
+                                   Text="{Binding GpsText, StringFormat='⌖ {0}'}"
+                                   IsVisible="{Binding HasGps}" />
                         </VerticalStackLayout>
-                        <!-- Signal bar -->
-                        <VerticalStackLayout Grid.Column="1" WidthRequest="60" HorizontalOptions="Center" VerticalOptions="Center" Spacing="2">
+                        <!-- Signal % + RSSI -->
+                        <VerticalStackLayout Grid.Column="1" WidthRequest="64" HorizontalOptions="Center" VerticalOptions="Center" Spacing="2">
                             <Label Text="{Binding Signal, StringFormat='{0}%'}" HorizontalOptions="Center" FontSize="13" />
                             <ProgressBar Progress="{Binding Signal, Converter={StaticResource IntToProgress}}" HeightRequest="6" />
+                            <Label Text="{Binding Rssi, StringFormat='{0} dBm'}" HorizontalOptions="Center" FontSize="10" TextColor="Gray" />
                         </VerticalStackLayout>
-                        <!-- Channel + security -->
-                        <VerticalStackLayout Grid.Column="2" WidthRequest="60" HorizontalOptions="End" VerticalOptions="Center" Spacing="2">
+                        <!-- Channel + band + security (authentication AND encryption) -->
+                        <VerticalStackLayout Grid.Column="2" WidthRequest="96" HorizontalOptions="End" VerticalOptions="Center" Spacing="2">
                             <Label Text="{Binding Channel, StringFormat='Ch {0}'}" FontSize="12" HorizontalOptions="End" />
-                            <Label Text="{Binding Authentication}" FontSize="10" TextColor="#546E7A" HorizontalOptions="End" />
+                            <Label Text="{Binding FrequencyMhz, Converter={StaticResource FreqToBand}}" FontSize="10" TextColor="Gray" HorizontalOptions="End" />
+                            <Label Text="{Binding AuthText}" FontSize="10" TextColor="#546E7A" HorizontalOptions="End" LineBreakMode="TailTruncation" />
+                            <Label Text="{Binding EncryptionText}" FontSize="10" TextColor="#78909C" HorizontalOptions="End" />
                         </VerticalStackLayout>
                     </Grid>
                 </DataTemplate>
@@ -70,7 +85,7 @@
         </CollectionView>
 
         <!-- Bottom hint -->
-        <Label Grid.Row="4" Text="Tap Start to begin scanning" HorizontalOptions="Center"
+        <Label Grid.Row="3" Text="Tap Scan APs to begin" HorizontalOptions="Center"
                FontSize="12" TextColor="Gray" Padding="8"
                IsVisible="{Binding IsScanning, Converter={StaticResource InvertBool}}" />
     </Grid>

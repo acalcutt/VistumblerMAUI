@@ -2,6 +2,8 @@
 using ManagedNativeWifi;
 using Vistumbler.Core.Models;
 using Vistumbler.Core.Services;
+// ManagedNativeWifi also defines an EncryptionType; alias the ambiguous name to ours.
+using EncryptionType = Vistumbler.Core.Models.EncryptionType;
 
 namespace VistumblerMAUI.Platforms.Windows;
 
@@ -18,7 +20,7 @@ public class WindowsWiFiScannerService : IWiFiScannerService
     public event EventHandler<ScanErrorEventArgs>?            ScanError;
 
     public bool IsScanning     => _isScanning;
-    public int  ScanIntervalMs { get; set; } = 2000;
+    public int  ScanIntervalMs { get; set; } = 1000;
 
     public async Task StartScanningAsync(CancellationToken cancellationToken = default)
     {
@@ -61,21 +63,42 @@ public class WindowsWiFiScannerService : IWiFiScannerService
 
             var aps = new List<AccessPoint>();
 
+            // EnumerateBssNetworks() carries no security info, so build a SSID → security
+            // lookup from EnumerateAvailableNetworks() (which exposes the WLAN
+            // AuthenticationAlgorithm / CipherAlgorithm) and translate those native flags
+            // into Vistumbler's enums — the same approach as VistumblerCS's NativeWiFiScanner.
+            Guid? activeGuid = _activeAdapterId is not null && Guid.TryParse(_activeAdapterId, out var g) ? g : null;
+            var security = NativeWifi.EnumerateAvailableNetworks()
+                .Where(n => !activeGuid.HasValue || n.Interface.Id == activeGuid.Value)
+                .GroupBy(n => n.Ssid.ToString())
+                .ToDictionary(grp => grp.Key, grp => grp.First(), StringComparer.Ordinal);
+
             // EnumerateBssNetworks() returns per-BSSID detail in v3.0.2
             foreach (var bss in NativeWifi.EnumerateBssNetworks())
             {
+                var ssid = bss.Ssid.ToString();
                 var ap = new AccessPoint
                 {
                     Bssid        = bss.Bssid.ToString(),          // NetworkIdentifier.ToString() → XX:XX:XX:XX:XX:XX
-                    Ssid         = bss.Ssid.ToString(),
+                    Ssid         = ssid,
                     FrequencyMhz = bss.Frequency / 1000,          // kHz → MHz
                     Channel      = bss.Channel,                   // direct property in v3.0.2
                     Rssi         = bss.Rssi,
                     Signal       = bss.LinkQuality,
                     RadioType    = bss.PhyType.ToString(),
                     NetworkType  = NetworkType.Infrastructure,
+                    Authentication = AuthenticationType.Unknown,
+                    Encryption     = EncryptionType.Unknown,
                     IsActive     = true
                 };
+
+                // Security is per-SSID here (EnumerateBssNetworks has none per BSSID).
+                if (security.TryGetValue(ssid, out var net))
+                {
+                    ap.Authentication = MapAuthentication(net.AuthenticationAlgorithm);
+                    ap.Encryption     = MapEncryption(net.CipherAlgorithm);
+                }
+
                 aps.Add(ap);
             }
 
@@ -117,6 +140,44 @@ public class WindowsWiFiScannerService : IWiFiScannerService
 
         return await Task.FromResult(match?.Bssid.ToString());
     }
+
+    // Translate the WLAN native authentication algorithm to Vistumbler's enum.
+    // Mirrors VistumblerCS's NativeWiFiScanner.MapAuthentication (ManagedNativeWifi 3.0.2).
+    private static AuthenticationType MapAuthentication(AuthenticationAlgorithm algo) => algo switch
+    {
+        AuthenticationAlgorithm.Open         => AuthenticationType.Open,
+        AuthenticationAlgorithm.Shared       => AuthenticationType.Shared,
+        AuthenticationAlgorithm.WPA          => AuthenticationType.WPA,
+        AuthenticationAlgorithm.WPA_PSK      => AuthenticationType.WPA_PSK,
+        AuthenticationAlgorithm.WPA_NONE     => AuthenticationType.WPA_None,
+        AuthenticationAlgorithm.RSNA         => AuthenticationType.WPA2,
+        AuthenticationAlgorithm.RSNA_PSK     => AuthenticationType.WPA2_PSK,
+        AuthenticationAlgorithm.WPA3_ENT_192 => AuthenticationType.WPA3_Enterprise_192,
+        AuthenticationAlgorithm.WPA3_ENT     => AuthenticationType.WPA3_Enterprise,
+        AuthenticationAlgorithm.WPA3_SAE     => AuthenticationType.WPA3_PSK,
+        AuthenticationAlgorithm.OWE          => AuthenticationType.OWE,
+        _ => AuthenticationType.Unknown
+    };
+
+    // Translate the WLAN native cipher algorithm to Vistumbler's enum.
+    // Mirrors VistumblerCS's NativeWiFiScanner.MapEncryption (ManagedNativeWifi 3.0.2).
+    private static EncryptionType MapEncryption(CipherAlgorithm cipher) => cipher switch
+    {
+        CipherAlgorithm.None          => EncryptionType.None,
+        CipherAlgorithm.WEP           => EncryptionType.WEP,
+        CipherAlgorithm.WEP_40        => EncryptionType.WEP,
+        CipherAlgorithm.WEP_104       => EncryptionType.WEP,
+        CipherAlgorithm.TKIP          => EncryptionType.TKIP,
+        CipherAlgorithm.CCMP          => EncryptionType.CCMP,
+        CipherAlgorithm.CCMP_256      => EncryptionType.CCMP_256,
+        CipherAlgorithm.BIP           => EncryptionType.BIP,
+        CipherAlgorithm.GCMP          => EncryptionType.GCMP,
+        CipherAlgorithm.GCMP_256      => EncryptionType.GCMP_256,
+        CipherAlgorithm.BIP_GMAC_128  => EncryptionType.BIP_GMAC_128,
+        CipherAlgorithm.BIP_GMAC_256  => EncryptionType.BIP_GMAC_256,
+        CipherAlgorithm.BIP_CMAC_256  => EncryptionType.BIP_CMAC_256,
+        _ => EncryptionType.Unknown
+    };
 
     private static int FrequencyToChannel(int freqMhz) => freqMhz switch
     {

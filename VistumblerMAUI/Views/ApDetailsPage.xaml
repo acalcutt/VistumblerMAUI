@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:VistumblerMAUI.ViewModels"
+             x:DataType="vm:ApDetailsViewModel"
+             x:Class="VistumblerMAUI.Views.ApDetailsPage"
+             Title="{Binding Title}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Back" Clicked="OnBackClicked" />
+    </ContentPage.ToolbarItems>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="10">
+
+            <Button Text="‹ Back to scan list"
+                    Clicked="OnBackClicked"
+                    HorizontalOptions="Start"
+                    BackgroundColor="Transparent" TextColor="#1565C0" Padding="0"
+                    FontSize="14" />
+
+            <!-- Signal graph -->
+            <Label Text="SIGNAL HISTORY" FontSize="12" FontAttributes="Bold" TextColor="#1565C0" />
+            <Border StrokeShape="RoundRectangle 8" Stroke="#E0E0E0" Padding="4" HeightRequest="180">
+                <GraphicsView x:Name="GraphView" />
+            </Border>
+            <Label Text="{Binding HistoryStatus}" FontSize="11" TextColor="Gray" />
+
+            <!-- Details -->
+            <Label Text="DETAILS" FontSize="12" FontAttributes="Bold" TextColor="#1565C0" Margin="0,8,0,0" />
+            <Grid ColumnDefinitions="120,*" RowSpacing="6" ColumnSpacing="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" /><RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Text="SSID" TextColor="Gray" />
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Ap.Ssid}" />
+
+                <Label Grid.Row="1" Grid.Column="0" Text="BSSID" TextColor="Gray" />
+                <Label Grid.Row="1" Grid.Column="1" Text="{Binding Ap.Bssid}" />
+
+                <Label Grid.Row="2" Grid.Column="0" Text="Manufacturer" TextColor="Gray" />
+                <Label Grid.Row="2" Grid.Column="1" Text="{Binding Ap.Manufacturer}" />
+
+                <Label Grid.Row="3" Grid.Column="0" Text="Signal" TextColor="Gray" />
+                <Label Grid.Row="3" Grid.Column="1" Text="{Binding Ap.Signal, StringFormat='{0}%'}" />
+
+                <Label Grid.Row="4" Grid.Column="0" Text="RSSI" TextColor="Gray" />
+                <Label Grid.Row="4" Grid.Column="1" Text="{Binding Ap.Rssi, StringFormat='{0} dBm'}" />
+
+                <Label Grid.Row="5" Grid.Column="0" Text="Channel" TextColor="Gray" />
+                <Label Grid.Row="5" Grid.Column="1">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding Ap.Channel}" />
+                            <Span Text="{Binding Ap.FrequencyMhz, Converter={StaticResource FreqToBand}, StringFormat='  ({0})'}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label Grid.Row="6" Grid.Column="0" Text="Radio" TextColor="Gray" />
+                <Label Grid.Row="6" Grid.Column="1" Text="{Binding Ap.RadioType}" />
+
+                <Label Grid.Row="7" Grid.Column="0" Text="Security" TextColor="Gray" />
+                <Label Grid.Row="7" Grid.Column="1">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding Ap.AuthText}" />
+                            <Span Text="{Binding Ap.EncryptionText, StringFormat=' / {0}'}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label Grid.Row="8" Grid.Column="0" Text="First active" TextColor="Gray" />
+                <Label Grid.Row="8" Grid.Column="1" Text="{Binding Ap.FirstSeenText}" />
+
+                <Label Grid.Row="9" Grid.Column="0" Text="Last active" TextColor="Gray" />
+                <Label Grid.Row="9" Grid.Column="1" Text="{Binding Ap.LastSeenText}" />
+
+                <Label Grid.Row="10" Grid.Column="0" Text="GPS" TextColor="Gray" />
+                <Label Grid.Row="10" Grid.Column="1" Text="{Binding Ap.GpsText}" />
+            </Grid>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

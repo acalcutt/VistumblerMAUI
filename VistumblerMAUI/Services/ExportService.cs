@@ -50,9 +50,17 @@ public class ExportService : IExportService
                     writer.Write(new byte[6]);
                 }
 
-                writer.Write((int)(ap.HighestSignal ?? 0));
-                writer.Write((int)0); // MinNoise (unknown)
-                writer.Write((int)(ap.HighestRssi ?? 0));
+                // NetStumbler stores signal/noise in dBm (not %). Use each sample's RSSI,
+                // estimating dBm from the percentage when RSSI is missing (as the au3 does).
+                var dps = ap.SignalHistory
+                    .Select(h => (Hist: h, Dbm: h.Rssi ?? (h.Signal / 2 - 100)))
+                    .ToList();
+                int maxSignal = dps.Count > 0 ? dps.Max(d => d.Dbm) : -100;
+                int minSignal = dps.Count > 0 ? dps.Min(d => d.Dbm) : -100;
+
+                writer.Write(maxSignal);   // MaxSignal (dBm)
+                writer.Write(-150);        // MinNoise (dBm)
+                writer.Write(0);           // MaxSNR
 
                 // Flags
                 uint flags = 0;
@@ -73,13 +81,13 @@ public class ExportService : IExportService
                 writer.Write(ap.Latitude ?? 0.0);
                 writer.Write(ap.Longitude ?? 0.0);
 
-                // Signal History
-                writer.Write((uint)ap.SignalHistory.Count);
-                foreach (var hist in ap.SignalHistory)
+                // Signal History (data points) — Signal is dBm to match NetStumbler.
+                writer.Write((uint)dps.Count);
+                foreach (var (hist, dbm) in dps)
                 {
                     writer.Write(ToFileTimeSafe(hist.Timestamp));
-                    writer.Write(hist.Signal);
-                    writer.Write((int)0); // Noise
+                    writer.Write(dbm);       // Signal (dBm)
+                    writer.Write((int)-100); // Noise (dBm)
 
                     if (hist.Latitude.HasValue && hist.Longitude.HasValue)
                     {
@@ -113,8 +121,8 @@ public class ExportService : IExportService
                 writer.Write((uint)ap.Channel); // LastChannel
 
                 writer.Write((uint)0); // IP
-                writer.Write((int)(ap.Signal ?? 0)); // MinSignal
-                writer.Write((int)0); // MaxNoise
+                writer.Write(minSignal);   // MinSignal (dBm)
+                writer.Write((int)-100);   // MaxNoise (dBm)
                 writer.Write((uint)0); // DataRate
                 writer.Write((uint)0); // IPSubnet
                 writer.Write((uint)0); // IPMask
@@ -243,8 +251,11 @@ public class ExportService : IExportService
         ssidCsum = Math.Abs(ssidCsum);
         string ssidKey = ssidCsum.ToString();
 
-        int cryptSet = 0;
-        if (ap.Encryption != EncryptionType.None) cryptSet = 2;
+        // Proper Kismet crypt bitfield + "Auth/Encr" string (matches the au3), so both the
+        // authentication and encryption survive the round-trip (not just encryption).
+        string authStr = ap.Authentication.ToLegacyString();
+        string encrStr = ap.Encryption.ToLegacyString();
+        long cryptSet = KismetCryptBitfield(authStr, encrStr);
 
         var ssidRecord = new JsonObject
         {
@@ -284,7 +295,7 @@ public class ExportService : IExportService
             ["kismet.device.base.channel"] = ap.Channel.ToString(),
             ["kismet.device.base.frequency"] = freqKhz,
             ["kismet.device.base.freq_khz_map"] = freqMap,
-            ["kismet.device.base.crypt_string"] = ap.Encryption.ToString(),
+            ["kismet.device.base.crypt_string"] = $"{authStr}/{encrStr}",
             ["kismet.device.base.type"] = ap.NetworkType == NetworkType.Adhoc ? "Wi-Fi Ad-Hoc" : "Wi-Fi AP",
             ["kismet.device.base.commonname"] = ssid,
             ["dot11.device"] = dot11,
@@ -293,6 +304,28 @@ public class ExportService : IExportService
         };
 
         return device;
+    }
+
+    // Kismet dot11 crypt bitfield (packet_ieee80211.h), ported from _KismetDB_GetCryptBitfield.
+    private static long KismetCryptBitfield(string auth, string encr)
+    {
+        const long WEP = 1, WPA = 2, WPA1 = 4, WPA2 = 8;
+        const long GRP_WEP104 = 256, GRP_TKIP = 512, GRP_CCMP128 = 1024;
+        const long PW_WEP104 = 16777216, PW_TKIP = 33554432, PW_CCMP128 = 67108864;
+        const long AKM_1X = 137438953472, AKM_PSK = 274877906944;
+
+        long b = 0;
+        if (encr.Contains("WEP")) b |= WEP | GRP_WEP104 | PW_WEP104;
+        if (encr.Contains("CCMP") || encr.Contains("AES")) b |= GRP_CCMP128 | PW_CCMP128;
+        if (encr.Contains("TKIP")) b |= GRP_TKIP | PW_TKIP;
+
+        bool psk(string a) => a.Contains("PSK") || a.Contains("Personal");
+        if (auth.Contains("WPA2") || encr.Contains("WPA2"))
+            b |= WPA | WPA2 | (psk(auth) ? AKM_PSK : AKM_1X);
+        else if (auth.Contains("WPA") || encr.Contains("WPA"))
+            b |= WPA | WPA1 | (psk(auth) ? AKM_PSK : AKM_1X);
+
+        return b;
     }
 
     private long ToUnixTime(DateTime date) => new DateTimeOffset(date).ToUnixTimeSeconds();
@@ -373,7 +406,11 @@ public class ExportService : IExportService
 
     private async Task WriteNetXmlNetworkAsync(XmlWriter writer, AccessPoint ap)
     {
-        int minRssi = ap.Rssi ?? -100, maxRssi = ap.HighestRssi ?? ap.Rssi ?? -100, lastRssi = ap.Rssi ?? -100;
+        // Min/Max/Last RSSI from the signal history (au3 uses Min/Max(RSSI) over Hist).
+        var rssis = ap.SignalHistory.Where(h => h.Rssi.HasValue).Select(h => h.Rssi!.Value).ToList();
+        int lastRssi = rssis.Count > 0 ? rssis[^1]  : (ap.Rssi ?? -100);
+        int minRssi  = rssis.Count > 0 ? rssis.Min() : (ap.Rssi ?? -100);
+        int maxRssi  = rssis.Count > 0 ? rssis.Max() : (ap.HighestRssi ?? ap.Rssi ?? -100);
 
         string type = ap.NetworkType == NetworkType.Adhoc ? "ad-hoc" : "infrastructure";
         string startTime = FormatKismetDate(ap.FirstSeen);
@@ -389,17 +426,14 @@ public class ExportService : IExportService
         await writer.WriteAttributeStringAsync(null, "first-time", null, startTime);
         await writer.WriteAttributeStringAsync(null, "last-time", null, endTime);
 
-        await writer.WriteElementStringAsync(null, "type", null, "Beacon");
-        await writer.WriteElementStringAsync(null, "max-rate", null, "54.0");
+        await writer.WriteElementStringAsync(null, "type", null, type);
+        await writer.WriteElementStringAsync(null, "max-rate", null, "54");
         await writer.WriteElementStringAsync(null, "packets", null, "0");
         await writer.WriteElementStringAsync(null, "beaconrate", null, "10");
 
-        string encStr = ap.Encryption.ToString();
-        if (ap.Encryption == EncryptionType.None) encStr = "None";
-        else if (ap.Encryption == EncryptionType.WEP) encStr = "WEP";
-        else if (ap.Authentication.ToString().Contains("WPA")) encStr = ap.Authentication.ToString().Replace("_", "+");
-
-        await writer.WriteElementStringAsync(null, "encryption", null, encStr);
+        // Encryption is "<Auth>-<Encr>" as in the au3 (e.g. "WPA2-Personal-CCMP").
+        await writer.WriteElementStringAsync(null, "encryption", null,
+            $"{ap.Authentication.ToLegacyString()}-{ap.Encryption.ToLegacyString()}");
 
         await writer.WriteStartElementAsync(null, "essid", null);
         await writer.WriteAttributeStringAsync(null, "cloaked", null, string.IsNullOrEmpty(ap.Ssid) ? "true" : "false");
@@ -412,7 +446,7 @@ public class ExportService : IExportService
         await writer.WriteElementStringAsync(null, "manuf", null, ap.Manufacturer);
         await writer.WriteElementStringAsync(null, "channel", null, ap.Channel.ToString());
         await writer.WriteElementStringAsync(null, "freqmhz", null, $"{GetFreqFromChannel(ap.Channel)} 0");
-        await writer.WriteElementStringAsync(null, "maxseenrate", null, "54.0");
+        await writer.WriteElementStringAsync(null, "maxseenrate", null, "54");
 
         await writer.WriteStartElementAsync(null, "snr-info", null);
         await writer.WriteElementStringAsync(null, "last_signal_dbm", null, lastRssi.ToString());
@@ -428,20 +462,6 @@ public class ExportService : IExportService
         await writer.WriteElementStringAsync(null, "max_signal_rssi", null, maxRssi.ToString());
         await writer.WriteElementStringAsync(null, "max_noise_rssi", null, "0");
         await writer.WriteEndElementAsync(); // snr-info
-
-        if (!string.IsNullOrEmpty(ap.RadioType))
-        {
-            await writer.WriteStartElementAsync(null, "bsstype", null);
-            await writer.WriteStringAsync(ap.RadioType);
-            await writer.WriteEndElementAsync();
-        }
-
-        if (ap.Signal.HasValue)
-        {
-            await writer.WriteStartElementAsync(null, "signal_quality", null);
-            await writer.WriteStringAsync(ap.Signal.Value.ToString());
-            await writer.WriteEndElementAsync();
-        }
 
         if (ap.Latitude.HasValue || ap.Longitude.HasValue)
         {
@@ -482,7 +502,7 @@ public class ExportService : IExportService
         return 0;
     }
 
-    public async Task ExportToKmlAsync(string filePath, List<AccessPoint> accessPoints, ExportOptions options)
+    public async Task ExportToKmlAsync(string filePath, List<AccessPoint> accessPoints, ExportOptions options, List<GpsData> gpsFixes)
     {
         var settings = new XmlWriterSettings
         {
@@ -512,12 +532,61 @@ public class ExportService : IExportService
             }
         }
 
+        // GPS track line (matches the au3's <Style id="Location"> + LineString folder, split
+        // into separate segments across time gaps > 180 s).
+        if (options.ShowTrack && gpsFixes.Count > 0)
+        {
+            var inv = System.Globalization.CultureInfo.InvariantCulture;
+
+            await writer.WriteStartElementAsync(null, "Style", null);
+            await writer.WriteAttributeStringAsync(null, "id", null, "Location");
+            await writer.WriteStartElementAsync(null, "LineStyle", null);
+            await writer.WriteElementStringAsync(null, "color", null, options.TrackColor);
+            await writer.WriteElementStringAsync(null, "width", null, "4");
+            await writer.WriteEndElementAsync(); // LineStyle
+            await writer.WriteEndElementAsync(); // Style
+
+            await writer.WriteStartElementAsync(null, "Folder", null);
+            await writer.WriteElementStringAsync(null, "name", null, "GPS Track");
+
+            var ordered = gpsFixes.OrderBy(g => g.Timestamp).ToList();
+            var segment = new List<GpsData>();
+            DateTime prev = default;
+
+            async Task FlushSegmentAsync()
+            {
+                if (segment.Count < 2) { segment.Clear(); return; }
+                await writer.WriteStartElementAsync(null, "Placemark", null);
+                await writer.WriteElementStringAsync(null, "name", null, "GPS Track");
+                await writer.WriteElementStringAsync(null, "styleUrl", null, "#Location");
+                await writer.WriteStartElementAsync(null, "LineString", null);
+                await writer.WriteElementStringAsync(null, "extrude", null, "1");
+                await writer.WriteElementStringAsync(null, "tessellate", null, "1");
+                await writer.WriteElementStringAsync(null, "coordinates", null,
+                    string.Join("\n", segment.Select(g => $"{g.Longitude.ToString(inv)},{g.Latitude.ToString(inv)},0")));
+                await writer.WriteEndElementAsync(); // LineString
+                await writer.WriteEndElementAsync(); // Placemark
+                segment.Clear();
+            }
+
+            foreach (var g in ordered)
+            {
+                if (segment.Count > 0 && (g.Timestamp - prev).TotalSeconds > 180)
+                    await FlushSegmentAsync();
+                segment.Add(g);
+                prev = g.Timestamp;
+            }
+            await FlushSegmentAsync();
+
+            await writer.WriteEndElementAsync(); // Folder
+        }
+
         await writer.WriteEndElementAsync(); // Document
         await writer.WriteEndElementAsync(); // kml
         await writer.WriteEndDocumentAsync();
     }
 
-    public async Task ExportToGpxAsync(string filePath, List<AccessPoint> accessPoints)
+    public async Task ExportToGpxAsync(string filePath, List<AccessPoint> accessPoints, List<GpsData> gpsFixes)
     {
         var settings = new XmlWriterSettings
         {
@@ -546,28 +615,75 @@ public class ExportService : IExportService
             await writer.WriteEndElementAsync(); // wpt
         }
 
+        // GPS track (<trk><trkseg><trkpt>…) from the recorded fixes, ordered by time.
+        if (gpsFixes.Count > 0)
+        {
+            var inv = System.Globalization.CultureInfo.InvariantCulture;
+            await writer.WriteStartElementAsync(null, "trk", null);
+            await writer.WriteElementStringAsync(null, "name", null, "GPS Track");
+            await writer.WriteStartElementAsync(null, "trkseg", null);
+            foreach (var g in gpsFixes.OrderBy(g => g.Timestamp))
+            {
+                await writer.WriteStartElementAsync(null, "trkpt", null);
+                await writer.WriteAttributeStringAsync(null, "lat", null, g.Latitude.ToString("F7", inv));
+                await writer.WriteAttributeStringAsync(null, "lon", null, g.Longitude.ToString("F7", inv));
+                await writer.WriteElementStringAsync(null, "ele", null, (g.Altitude ?? 0).ToString("0.0", inv));
+                await writer.WriteElementStringAsync(null, "time", null, g.Timestamp.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ"));
+                await writer.WriteEndElementAsync(); // trkpt
+            }
+            await writer.WriteEndElementAsync(); // trkseg
+            await writer.WriteEndElementAsync(); // trk
+        }
+
         await writer.WriteEndElementAsync(); // gpx
         await writer.WriteEndDocumentAsync();
     }
 
-    public async Task ExportToCsvAsync(string filePath, List<AccessPoint> accessPoints, bool includeSignalHistory = false)
+    public async Task ExportToCsvAsync(string filePath, List<AccessPoint> accessPoints, List<GpsData> gpsFixes)
     {
+        var inv = System.Globalization.CultureInfo.InvariantCulture;
+        var gpsById = gpsFixes.Where(g => g.GpsId != 0)
+            .GroupBy(g => g.GpsId).ToDictionary(grp => grp.Key, grp => grp.First());
+
         using var writer = new StreamWriter(filePath, false, Encoding.UTF8);
 
+        // Vistumbler Detailed CSV — one row per observation (matches _ExportToCSV Detailed=1).
         await writer.WriteLineAsync(
-            "BSSID,SSID,Channel,Authentication,Encryption,NetworkType,Signal,HighSignal,RSSI,HighRSSI," +
-            "RadioType,Manufacturer,Label,Latitude,Longitude,FirstSeen,LastSeen");
+            "SSID,BSSID,MANUFACTURER,SIGNAL,High Signal,RSSI,High RSSI,AUTHENTICATION,ENCRYPTION," +
+            "RADIO TYPE,CHANNEL,BTX,OTX,NETWORK TYPE,LABEL,LATITUDE,LONGITUDE,SATELLITES,HDOP," +
+            "ALTITUDE,HEIGHT OF GEOID,SPEED(km/h),SPEED(MPH),TRACK ANGLE,DATE(UTC),TIME(UTC)");
+
+        static string Q(string? s) => "\"" + (s ?? string.Empty).Replace("\"", "") + "\"";
 
         foreach (var ap in accessPoints)
         {
-            var line = $"{EscapeCsv(ap.Bssid)},{EscapeCsv(ap.Ssid)},{ap.Channel}," +
-                      $"{ap.Authentication.ToLegacyString()},{ap.Encryption.ToLegacyString()},{ap.NetworkType}," +
-                      $"{ap.Signal},{ap.HighestSignal},{ap.Rssi},{ap.HighestRssi}," +
-                      $"{EscapeCsv(ap.RadioType)},{EscapeCsv(ap.Manufacturer)},{EscapeCsv(ap.Label)}," +
-                      $"{ap.Latitude},{ap.Longitude}," +
-                      $"{ap.FirstSeen:yyyy-MM-dd HH:mm:ss},{ap.LastSeen:yyyy-MM-dd HH:mm:ss}";
+            string auth = ap.Authentication.ToLegacyString();
+            string encr = ap.Encryption.ToLegacyString();
+            string net  = ap.NetworkType.ToLegacyString();
 
-            await writer.WriteLineAsync(line);
+            foreach (var h in ap.SignalHistory.Where(h => h.Signal != 0))
+            {
+                gpsById.TryGetValue(h.GpsId, out var g);
+                double? lat  = g?.Latitude ?? h.Latitude;
+                double? lon  = g?.Longitude ?? h.Longitude;
+                int    sats  = g?.NumberOfSatellites ?? 0;
+                double hdop  = g?.HorizontalDilution ?? 0;
+                double alt   = g?.Altitude ?? 0;
+                double kmh   = g?.SpeedKnots is double sk1 ? sk1 * 1.852   : 0;
+                double mph   = g?.SpeedKnots is double sk2 ? sk2 * 1.15078 : 0;
+                double track = g?.TrackAngle ?? 0;
+                var ts = (g?.Timestamp ?? h.Timestamp).ToUniversalTime();
+
+                await writer.WriteLineAsync(string.Join(",",
+                    Q(ap.Ssid), ap.Bssid, Q(ap.Manufacturer),
+                    h.Signal, ap.HighestSignal, h.Rssi, ap.HighestRssi,
+                    auth, encr, ap.RadioType, ap.Channel,
+                    Q(ap.BasicTransferRates), Q(ap.OtherTransferRates), net, Q(ap.Label),
+                    lat?.ToString(inv) ?? "", lon?.ToString(inv) ?? "",
+                    sats, hdop.ToString(inv), alt.ToString(inv), "0",
+                    kmh.ToString("0.0", inv), mph.ToString("0.0", inv), track.ToString("0.0", inv),
+                    ts.ToString("yyyy-MM-dd"), ts.ToString("HH:mm:ss")));
+            }
         }
     }
 
@@ -575,28 +691,44 @@ public class ExportService : IExportService
     {
         using var writer = new StreamWriter(filePath, false, Encoding.UTF8);
 
-        await writer.WriteLineAsync("WigleWifi-1.6,appRelease=VistumblerMAUI,model=PC,release=1.0,device=PC,display=,board=,brand=");
-        await writer.WriteLineAsync("MAC,SSID,AuthMode,FirstSeen,Channel,Frequency,RSSI,CurrentLatitude,CurrentLongitude,AltitudeMeters,AccuracyMeters,Type");
+        var inv = System.Globalization.CultureInfo.InvariantCulture;
+        // WiGLE CSV 1.6 (https://api.wigle.net/csvFormat.html) — pre-header carries the
+        // planetary coordinate frame; the data header has 14 columns (Frequency + RCOIs +
+        // MfgrId). Matches the official _WigleCSV_WriteFile UDF exactly.
+        await writer.WriteLineAsync("WigleWifi-1.6,appRelease=VistumblerMAUI,model=PC,release=1.0,device=PC,display=,board=,brand=,star=Sol,body=3,subBody=0");
+        await writer.WriteLineAsync("MAC,SSID,AuthMode,FirstSeen,Channel,Frequency,RSSI,CurrentLatitude,CurrentLongitude,AltitudeMeters,AccuracyMeters,RCOIs,MfgrId,Type");
+
+        // One row PER OBSERVATION (each GPS-tagged signal sample), like the official export.
+        // SSID commas are stripped (WiGLE rows aren't quoted); RCOIs/MfgrId are empty for WiFi.
+        string WigleRow(string mac, string ssid, string authMode, string when, int chan, int freq,
+                        string rssi, string lat, string lon)
+            => $"{mac},{ssid.Replace(",", "")},{authMode},{when},{chan},{freq},{rssi},{lat},{lon},0,0,,,WIFI";
 
         foreach (var ap in accessPoints)
         {
             string authMode = BuildWigleAuthMode(ap.Authentication, ap.Encryption, ap.NetworkType);
             int freq = GetFreqFromChannel(ap.Channel);
+            string mac = ap.Bssid.ToLowerInvariant();
 
-            var line = string.Join(",",
-                EscapeCsv(ap.Bssid),
-                EscapeCsv(ap.Ssid),
-                authMode,
-                ap.FirstSeen.ToString("yyyy-MM-dd HH:mm:ss"),
-                ap.Channel,
-                freq,
-                ap.Rssi?.ToString() ?? "",
-                ap.Latitude?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "",
-                ap.Longitude?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "",
-                "0",
-                "0",
-                "WIFI");
-            await writer.WriteLineAsync(line);
+            var samples = ap.SignalHistory
+                .Where(h => h.Signal != 0 && h.Latitude.HasValue && h.Longitude.HasValue)
+                .ToList();
+
+            if (samples.Count > 0)
+            {
+                foreach (var h in samples)
+                    await writer.WriteLineAsync(WigleRow(mac, ap.Ssid, authMode,
+                        h.Timestamp.ToString("yyyy-MM-dd HH:mm:ss"), ap.Channel, freq,
+                        h.Rssi?.ToString() ?? "",
+                        h.Latitude!.Value.ToString(inv), h.Longitude!.Value.ToString(inv)));
+            }
+            else if (ap.Latitude.HasValue && ap.Longitude.HasValue)
+            {
+                await writer.WriteLineAsync(WigleRow(mac, ap.Ssid, authMode,
+                    ap.FirstSeen.ToString("yyyy-MM-dd HH:mm:ss"), ap.Channel, freq,
+                    ap.Rssi?.ToString() ?? "",
+                    ap.Latitude.Value.ToString(inv), ap.Longitude.Value.ToString(inv)));
+            }
         }
     }
 
@@ -631,47 +763,110 @@ public class ExportService : IExportService
             flags = "[OWE]";
         else if ((auth == AuthenticationType.Open || auth == AuthenticationType.Shared) && encr == EncryptionType.WEP)
             flags = "[WEP]";
-        else if (auth == AuthenticationType.Open && encr == EncryptionType.None)
-            return "";
         else
-            flags = "";
+            flags = "";   // open network — no security flags
 
-        if (flags != "")
-        {
-            flags += netType == NetworkType.Adhoc ? "[IBSS]" : "[ESS]";
-        }
-
+        // WiGLE capabilities always carry the BSS type ([ESS] infrastructure / [IBSS] ad-hoc).
+        flags += netType == NetworkType.Adhoc ? "[IBSS]" : "[ESS]";
         return flags;
     }
 
-    public async Task ExportToVs1Async(string filePath, List<AccessPoint> accessPoints)
+    // Vistumbler VS1 "Detailed Export Version 4.0" — must match official Vistumbler exactly
+    // so it round-trips. The importer picks line type by pipe-field COUNT (12 = GPS, 15 = AP)
+    // and reads coordinates as "<hemisphere> ddmm.mmmm"; AP history references GPS ids.
+    public async Task ExportToVs1Async(string filePath, List<AccessPoint> accessPoints, List<GpsData> gpsFixes)
     {
+        var inv = System.Globalization.CultureInfo.InvariantCulture;
+        const string sep = "# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------";
         using var writer = new StreamWriter(filePath, false, Encoding.UTF8);
 
-        await writer.WriteLineAsync("# Vistumbler VS1 File");
-        await writer.WriteLineAsync($"# Exported: {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
-        await writer.WriteLineAsync("# GpsID|Latitude|Longitude|NumOfSats|HorDilPitch|Alt|Geo|SpeedInMPH|SpeedInKmH|TrackAngle|Date|Time");
-        await writer.WriteLineAsync("# APID|BSSID|SSID|CHAN|AUTH|ENCR|RADTYPE|BTX|OTX|NETTYPE|Signal|HighSignal|RSSI|HighRSSI|Latitude|Longitude|FirstSeen|LastSeen|Manufacturer|Label");
-        await writer.WriteLineAsync("# HistID|APID|GpsID|Signal|RSSI|Date|Time");
+        await writer.WriteLineAsync("# Vistumbler VS1 - Detailed Export Version 4.0");
+        await writer.WriteLineAsync("# Created By: VistumblerMAUI");
+        await writer.WriteLineAsync(sep);
+        await writer.WriteLineAsync("# GpsID|Latitude|Longitude|NumOfSatalites|HorizontalDilutionOfPrecision|Altitude(m)|HeightOfGeoidAboveWGS84Ellipsoid(m)|Speed(km/h)|Speed(MPH)|TrackAngle(Deg)|Date(UTC y-m-d)|Time(UTC h:m:s.ms)");
+        await writer.WriteLineAsync(sep);
 
+        // GPS section (12 fields each).
+        foreach (var g in gpsFixes)
+        {
+            var utc      = g.Timestamp.ToUniversalTime();
+            double kmh   = g.SpeedKnots.HasValue ? g.SpeedKnots.Value * 1.852   : 0;
+            double mph   = g.SpeedKnots.HasValue ? g.SpeedKnots.Value * 1.15078 : 0;
+            await writer.WriteLineAsync(string.Join('|',
+                g.GpsId,
+                DecimalToDmm(g.Latitude, isLat: true),
+                DecimalToDmm(g.Longitude, isLat: false),
+                g.NumberOfSatellites,
+                (g.HorizontalDilution ?? 0).ToString("0.0", inv),
+                (g.Altitude ?? 0).ToString("0.0", inv),
+                "0",                                   // geoid height — not tracked
+                kmh.ToString("0.0", inv),
+                mph.ToString("0.0", inv),
+                (g.TrackAngle ?? 0).ToString("0.0", inv),
+                utc.ToString("yyyy-MM-dd", inv),
+                utc.ToString("HH:mm:ss.fff", inv)));
+        }
+
+        await writer.WriteLineAsync("# ---------------------------------------------------------------------------------------------------------------------------------------------------------");
+        await writer.WriteLineAsync("# SSID|BSSID|MANUFACTURER|Authentication|Encryption|Security Type|Radio Type|Channel|Basic Transfer Rates|Other Transfer Rates|High Signal|High RSSI|Network Type|Label|GID,SIGNAL,RSSI");
+        await writer.WriteLineAsync("# ---------------------------------------------------------------------------------------------------------------------------------------------------------");
+
+        // AP section (15 fields each). The 15th field is the GID,SIG,RSSI history, '\'-joined.
         foreach (var ap in accessPoints)
         {
-            var line = $"AP|{ap.ApId}|{ap.Bssid}|{ap.Ssid}|{ap.Channel}|{ap.Authentication.ToLegacyString()}|{ap.Encryption.ToLegacyString()}|" +
-                      $"{ap.RadioType}|{ap.BasicTransferRates}|{ap.OtherTransferRates}|{ap.NetworkType}|" +
-                      $"{ap.Signal}|{ap.HighestSignal}|{ap.Rssi}|{ap.HighestRssi}|" +
-                      $"{ap.Latitude}|{ap.Longitude}|{ap.FirstSeen:yyyy-MM-dd HH:mm:ss}|{ap.LastSeen:yyyy-MM-dd HH:mm:ss}|" +
-                      $"{ap.Manufacturer}|{ap.Label}";
+            int secType = ap.Authentication == AuthenticationType.Open
+                ? 1 : (ap.Encryption == EncryptionType.WEP ? 2 : 3);
 
-            await writer.WriteLineAsync(line);
+            var history = string.Join('\\', ap.SignalHistory
+                .Where(h => h.GpsId > 0)
+                .Select(h => $"{h.GpsId},{h.Signal},{h.Rssi ?? SignalPercentToDb(h.Signal)}"));
+
+            // Text fields are sanitized of '|' (and newlines) so an AP row is ALWAYS exactly
+            // 15 pipe-fields and a GPS row exactly 12 — the counts the importer keys on.
+            await writer.WriteLineAsync(string.Join('|',
+                Vs1Field(ap.Ssid),
+                Vs1Field(ap.Bssid),
+                Vs1Field(ap.Manufacturer),
+                Vs1Field(ap.Authentication.ToLegacyString()),
+                Vs1Field(ap.Encryption.ToLegacyString()),
+                secType,
+                Vs1Field(ap.RadioType),
+                ap.Channel,
+                Vs1Field(ap.BasicTransferRates),
+                Vs1Field(ap.OtherTransferRates),
+                ap.HighestSignal ?? ap.Signal ?? 0,
+                ap.HighestRssi ?? ap.Rssi ?? SignalPercentToDb(ap.Signal ?? 0),
+                Vs1Field(ap.NetworkType.ToString()),
+                Vs1Field(ap.Label),
+                history));
         }
     }
 
-    public async Task ExportToVszAsync(string filePath, List<AccessPoint> accessPoints)
+    // Keep a value inside a single VS1 pipe-field: strip pipes and newlines so the row's
+    // field count (12 for GPS, 15 for AP) is never corrupted by AP text (SSID/label/etc.).
+    private static string Vs1Field(string? value)
+        => (value ?? string.Empty).Replace('|', ' ').Replace('\r', ' ').Replace('\n', ' ');
+
+    // Decimal degrees → "<hemisphere> ddmm.mmmm" (the format official Vistumbler stores/expects).
+    private static string DecimalToDmm(double dd, bool isLat)
+    {
+        char hemi = isLat ? (dd >= 0 ? 'N' : 'S') : (dd >= 0 ? 'E' : 'W');
+        double a  = Math.Abs(dd);
+        int deg   = (int)a;
+        double min = (a - deg) * 60.0;
+        double dmm = deg * 100 + min;
+        return $"{hemi} {dmm.ToString("0.0000", System.Globalization.CultureInfo.InvariantCulture)}";
+    }
+
+    // Rough signal% → dBm (0%→-100, 100%→-50), matching Vistumbler's estimate when RSSI is absent.
+    private static int SignalPercentToDb(int percent) => percent / 2 - 100;
+
+    public async Task ExportToVszAsync(string filePath, List<AccessPoint> accessPoints, List<GpsData> gpsFixes)
     {
         var tempVs1 = Path.GetTempFileName();
         try
         {
-            await ExportToVs1Async(tempVs1, accessPoints);
+            await ExportToVs1Async(tempVs1, accessPoints, gpsFixes);
 
             if (File.Exists(filePath))
                 File.Delete(filePath);

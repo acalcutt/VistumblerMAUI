@@ -5,33 +5,28 @@
              xmlns:maplibre="clr-namespace:MapLibreNative.Maui.Handlers;assembly=MapLibreNative.Maui.Handlers"
              xmlns:sources="clr-namespace:MapLibreNative.Maui.Handlers.Sources;assembly=MapLibreNative.Maui.Handlers"
              xmlns:layers="clr-namespace:MapLibreNative.Maui.Handlers.Layers;assembly=MapLibreNative.Maui.Handlers"
+             xmlns:controls="clr-namespace:VistumblerMAUI.Controls"
              x:DataType="vm:MapViewModel"
              x:Class="VistumblerMAUI.Views.MapPage"
              Title="Map">
 
-    <Grid RowDefinitions="*,Auto,Auto">
+    <Grid RowDefinitions="Auto,*">
+        <controls:ScanControlBar x:Name="ScanBar" Grid.Row="0" />
+
+        <Grid Grid.Row="1" RowDefinitions="*,Auto,Auto">
 
         <!-- ── MapLibre map ────────────────────────────────────────────── -->
+        <!--
+            The live-scan APs (source "ap-source" / layer "ap-circles") and the WifiDB
+            history overlays are all added imperatively via the controller once the style
+            has loaded (see MapPage.OnStyleLoaded / RefreshLiveApLayer). The declarative
+            GeoJsonSource can't take a raw JSON string, so we drive it from code instead.
+        -->
         <maplibre:MapLibreMap
             Grid.Row="0"
             x:Name="Map"
             StyleUrl="{Binding StyleUrl}"
-            MyLocationEnabled="True">
-
-            <!-- Live scan APs — source data is updated by MapViewModel.ApsGeoJson -->
-            <sources:GeoJsonSource SourceName="ap-source"
-                                   FeatureCollection="{Binding ApsGeoJson}" />
-            <layers:CircleLayer    SourceName="ap-source"
-                                   LayerName="ap-circles"
-                                   Properties="{Binding ApLayerProperties}" />
-
-            <!--
-                History overlay sources/layers are added imperatively via the controller
-                in MapViewModel.OnMapControllerReady() — called from StyleLoaded below.
-                This is the correct pattern: XAML declarative sources are committed first,
-                then imperative sources are added on the same StyleLoaded callback.
-            -->
-        </maplibre:MapLibreMap>
+            MyLocationEnabled="True" />
 
         <!-- ── Tap-to-inspect popup ────────────────────────────────────────
              Shown over the bottom of the map when OnMapTappedAsync finds a
@@ -150,6 +145,7 @@
                TextColor="Gray"
                Padding="8,3" />
 
+        </Grid>
     </Grid>
 
 </ContentPage>

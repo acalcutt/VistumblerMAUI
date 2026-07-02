@@ -34,8 +34,10 @@ public static partial class MauiProgram
         var services = builder.Services;
 
         // ── Infrastructure services ──────────────────────────────────────────
+        services.AddSingleton<ISessionService,   SessionService>();
         services.AddSingleton<IDatabaseService,  SqliteDatabaseService>();
-        services.AddSingleton<IGpsService,       MauiGeolocationGpsService>();
+        services.AddSingleton<MauiGeolocationGpsService>();               // Windows/OS location back-end
+        services.AddSingleton<IGpsService,       GpsRouterService>();     // selects location vs serial
         services.AddSingleton<ISoundService,     MauiSoundService>();
         services.AddSingleton<IExportService,    ExportService>();
         services.AddSingleton<IImportService,    ImportService>();
@@ -49,14 +51,21 @@ public static partial class MauiProgram
         services.AddTransient<SettingsViewModel>();
         services.AddTransient<ImportViewModel>();
         services.AddTransient<ExportViewModel>();
+        services.AddTransient<ApDetailsViewModel>();
+        services.AddTransient<SessionChooserViewModel>();
+        services.AddTransient<ChannelGraphViewModel>();
 
-        // ── Pages ────────────────────────────────────────────────────────────
+        // ── Shell + Pages ─────────────────────────────────────────────────────
+        services.AddTransient<AppShell>();
+        services.AddTransient<SessionChooserPage>();
         services.AddTransient<ScanPage>();
         services.AddTransient<MapPage>();
+        services.AddTransient<ChannelGraphPage>();
         services.AddTransient<SettingsPage>();
         services.AddTransient<ImportPage>();
         services.AddTransient<ExportPage>();
         services.AddTransient<WifiDbScanPage>();
+        services.AddTransient<ApDetailsPage>();
 
         Debug.WriteLine("[MauiProgram] CreateMauiApp EXIT (build)");
         return builder.Build();

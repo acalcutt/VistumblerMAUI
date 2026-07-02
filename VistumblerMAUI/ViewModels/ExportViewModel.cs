@@ -65,6 +65,13 @@ public partial class ExportViewModel : ObservableObject
                 return;
             }
 
+            // Load each AP's full signal/GPS history + the GPS fixes. Every format that
+            // records per-observation data (NS1, KismetDB, WiGLE, VS1/VSZ, GPS tracks in
+            // KML/GPX) needs this — the same history the official Vistumbler exports.
+            foreach (var ap in aps)
+                ap.SignalHistory = await _databaseService.GetSignalHistoryAsync(ap.ApId);
+            var gpsFixes = await _databaseService.GetAllGpsAsync();
+
             var extension = GetExtension(SelectedFormat);
             var name = string.IsNullOrWhiteSpace(FileName) ? $"vistumbler_{DateTime.Now:yyyyMMdd_HHmmss}" : FileName;
             var path = Path.Combine(
@@ -81,10 +88,10 @@ public partial class ExportViewModel : ObservableObject
                         IncludeSecureNetworks = IncludeSecureNetworks,
                         UseSignalColors = UseSignalColors
                     };
-                    await _exportService.ExportToKmlAsync(path, aps, options);
+                    await _exportService.ExportToKmlAsync(path, aps, options, gpsFixes);
                     break;
                 case ExportFormat.Gpx:
-                    await _exportService.ExportToGpxAsync(path, aps);
+                    await _exportService.ExportToGpxAsync(path, aps, gpsFixes);
                     break;
                 case ExportFormat.Ns1:
                     await _exportService.ExportToNs1Async(path, aps);
@@ -96,16 +103,16 @@ public partial class ExportViewModel : ObservableObject
                     await _exportService.ExportToNetXmlAsync(path, aps);
                     break;
                 case ExportFormat.Csv:
-                    await _exportService.ExportToCsvAsync(path, aps);
+                    await _exportService.ExportToCsvAsync(path, aps, gpsFixes);
                     break;
                 case ExportFormat.WigleCsv:
                     await _exportService.ExportToWigleCsvAsync(path, aps);
                     break;
                 case ExportFormat.Vs1:
-                    await _exportService.ExportToVs1Async(path, aps);
+                    await _exportService.ExportToVs1Async(path, aps, gpsFixes);
                     break;
                 case ExportFormat.Vsz:
-                    await _exportService.ExportToVszAsync(path, aps);
+                    await _exportService.ExportToVszAsync(path, aps, gpsFixes);
                     break;
             }
 

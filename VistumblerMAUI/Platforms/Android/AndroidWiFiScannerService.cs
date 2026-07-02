@@ -34,7 +34,7 @@ public class AndroidWiFiScannerService : IWiFiScannerService
     public event EventHandler<ScanErrorEventArgs>?            ScanError;
 
     public bool IsScanning    => _isScanning;
-    public int  ScanIntervalMs { get; set; } = 2000;
+    public int  ScanIntervalMs { get; set; } = 1000;
 
     private WifiManager EnsureWifiManager()
     {

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:VistumblerMAUI.ViewModels"
+             xmlns:svc="clr-namespace:Vistumbler.Core.Services;assembly=Vistumbler.Core"
+             x:DataType="vm:SessionChooserViewModel"
+             x:Class="VistumblerMAUI.Views.SessionChooserPage"
+             Title="Vistumbler — Sessions">
+
+    <Grid RowDefinitions="Auto,*,Auto" Padding="16" RowSpacing="12">
+
+        <Label Grid.Row="0"
+               Text="Recover a previous session or start a new one."
+               FontSize="15" />
+
+        <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding Sessions}"
+                        SelectionMode="None">
+            <CollectionView.EmptyView>
+                <Label Text="No saved sessions." TextColor="Gray" HorizontalOptions="Center" Margin="0,20" />
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="svc:SessionInfo">
+                    <Border StrokeShape="RoundRectangle 8" Stroke="#E0E0E0" Padding="12" Margin="0,4">
+                        <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8">
+                            <VerticalStackLayout Grid.Column="0" Spacing="2" VerticalOptions="Center">
+                                <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="14" />
+                                <Label Text="{Binding Created, StringFormat='{0:yyyy-MM-dd HH:mm:ss}'}" FontSize="11" TextColor="Gray" />
+                            </VerticalStackLayout>
+                            <Button Grid.Column="1"
+                                    Text="Resume"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:SessionChooserViewModel}}, Path=ResumeCommand}"
+                                    CommandParameter="{Binding .}"
+                                    BackgroundColor="#1565C0" TextColor="White" Padding="14,6" />
+                            <Button Grid.Column="2"
+                                    Text="Delete"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:SessionChooserViewModel}}, Path=DeleteCommand}"
+                                    CommandParameter="{Binding .}"
+                                    BackgroundColor="Transparent" TextColor="#B00020" Padding="10,6" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Grid.Row="2"
+                Text="Start New Session"
+                Command="{Binding NewSessionCommand}"
+                BackgroundColor="#2E7D32" TextColor="White"
+                HeightRequest="48" />
+    </Grid>
+
+</ContentPage>
