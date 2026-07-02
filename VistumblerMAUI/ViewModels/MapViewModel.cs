@@ -110,10 +110,13 @@ public partial class MapViewModel : ObservableObject
         var d = e.GpsData;
         if (d.Quality == GpsQuality.Invalid) return;
         float bearing  = (float)(d.TrackAngle ?? 0);
-        // HDOP × 10 m gives a rough horizontal accuracy estimate; cap at 5–500 m.
-        float accuracy = d.HorizontalDilution.HasValue
-            ? (float)Math.Clamp(d.HorizontalDilution.Value * 10.0, 5, 500)
-            : 20f;
+        // Prefer the source's reported horizontal accuracy (metres). Otherwise fall
+        // back to an HDOP × 10 m estimate, then a conservative default. Cap at 5–500 m.
+        double accuracyMeters =
+              d.Accuracy.HasValue           ? d.Accuracy.Value
+            : d.HorizontalDilution.HasValue ? d.HorizontalDilution.Value * 10.0
+            :                                 20.0;
+        float accuracy = (float)Math.Clamp(accuracyMeters, 5, 500);
         MainThread.BeginInvokeOnMainThread(() =>
             _controller?.UpdateLocationIndicator(d.Latitude, d.Longitude, bearing, accuracy));
     }
@@ -502,7 +505,11 @@ public partial class MapViewModel : ObservableObject
                 if (local is not null)
                 {
                     info.HasLocalRecord = true;
-                    if (string.IsNullOrWhiteSpace(info.Ssid)) info.Ssid = local.Ssid;
+                    if (string.IsNullOrWhiteSpace(info.Ssid))           info.Ssid           = local.Ssid;
+                    if (string.IsNullOrWhiteSpace(info.Authentication)) info.Authentication  = local.AuthText;
+                    if (string.IsNullOrWhiteSpace(info.Encryption))     info.Encryption      = local.EncryptionText;
+                    if (string.IsNullOrWhiteSpace(info.RadioType))      info.RadioType       = local.RadioType;
+                    if (string.IsNullOrWhiteSpace(info.Rssi) && local.Rssi.HasValue) info.Rssi = $"{local.Rssi.Value} dBm";
                     info.Manufacturer = string.IsNullOrWhiteSpace(local.Manufacturer) ? info.Manufacturer : local.Manufacturer;
                     info.FirstSeen = local.FirstSeen == default ? info.FirstSeen : local.FirstSeen.ToString("yyyy-MM-dd HH:mm");
                     info.LastSeen = local.LastSeen == default ? info.LastSeen : local.LastSeen.ToString("yyyy-MM-dd HH:mm");
@@ -597,6 +604,10 @@ public partial class MapViewModel : ObservableObject
         {
             var ssid   = ap.Ssid?.Replace("\\", "\\\\").Replace("\"", "\\\"") ?? "";
             var bssid  = ap.Bssid?.Replace("\"", "\\\"") ?? "";
+            var auth   = ap.AuthText.Replace("\"", "\\\"");
+            var encry  = ap.EncryptionText.Replace("\"", "\\\"");
+            var radio  = (ap.RadioType ?? "").Replace("\"", "\\\"");
+            var manuf  = ap.Manufacturer?.Replace("\\", "\\\\").Replace("\"", "\\\"") ?? "";
             var active = ap.IsActive ? "true" : "false";
             // sectype 1=open, 2=WEP, 3=secure; styidx folds active/dead + sectype into a
             // single 1..6 value the live layer colors from (active 1/2/3, dead 4/5/6).
@@ -606,6 +617,8 @@ public partial class MapViewModel : ObservableObject
             return $"{{\"type\":\"Feature\","
                  + $"\"geometry\":{{\"type\":\"Point\",\"coordinates\":[{ap.Longitude:F6},{ap.Latitude:F6}]}},"
                  + $"\"properties\":{{\"ssid\":\"{ssid}\",\"bssid\":\"{bssid}\","
+                 + $"\"auth\":\"{auth}\",\"encry\":\"{encry}\",\"radio\":\"{radio}\","
+                 + $"\"manuf\":\"{manuf}\",\"rssi\":{ap.Rssi ?? 0},"
                  + $"\"signal\":{ap.Signal ?? 0},\"channel\":{ap.Channel},\"isActive\":{active},"
                  + $"\"sectype\":{sectype},\"styidx\":{styidx}}}}}";
         });

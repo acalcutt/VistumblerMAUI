@@ -11,6 +11,8 @@ public class GpsData
     public double? Altitude { get; set; }
     public int NumberOfSatellites { get; set; }
     public double? HorizontalDilution { get; set; }
+    /// <summary>Horizontal accuracy in metres, when the source reports it (e.g. MAUI Geolocation).</summary>
+    public double? Accuracy { get; set; }
     public double? SpeedKnots { get; set; }
     public double? TrackAngle { get; set; }
     public DateTime Timestamp { get; set; }

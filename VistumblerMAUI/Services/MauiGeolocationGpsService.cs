@@ -107,6 +107,7 @@ public class MauiGeolocationGpsService : IGpsService
             Altitude   = loc.Altitude,
             SpeedKnots = loc.Speed.HasValue ? loc.Speed.Value / 0.514444 : null,
             TrackAngle = loc.Course,
+            Accuracy   = loc.Accuracy,
             Timestamp  = loc.Timestamp.UtcDateTime,
             Quality    = GpsQuality.GpsFix
         };
