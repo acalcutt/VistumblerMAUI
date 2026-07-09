@@ -7,6 +7,14 @@
 ### 🐞 Bug fixes
 - _...Add new stuff here..._
 
+## 0.3.2
+### ✨ Features and improvements
+- **New airspace-free map renderer (MapLibreNative.Maui.Handlers 4.1.3)** — upgraded to the 4.x renderer: Windows draws the map into a real in-tree `Image` (no floating `WS_POPUP` GL window) and Android uses a `TextureView`, so MAUI content and the nav/GPS/attribution controls layer reliably above the map on every platform. Now consumed as the released 4.1.3 package from nuget.org, so the local dev package source was removed from `nuget.config`.
+- **Offline map caching** — the map now keeps a persistent tile cache, so already-viewed areas keep rendering with no network. Two page toolbar items were added: **Save Area** pre-caches the current view (current zoom + 2 levels) for offline use, and **Go Offline / Go Online** forces MapLibre to serve only cached tiles; caching progress and offline/online state are shown in the map's status line. Downloaded tiles share the live map's cache, so they render immediately.
+
+### 🐞 Bug fixes
+- **MAUI Windows: double-tapping the nav/GPS/d-pad overlay buttons no longer leaks through to the map** — via the renderer bump to 4.1.2, the overlay buttons now handle `DoubleTapped` (previously only `Tapped`), so the second click of a fast double-click no longer bubbles past the button and zooms/pans the map behind it.
+
 ## 0.3.1
 ### ✨ Features and improvements
 - **Settings: WifiDB account section** — set the WifiDB base URL, username, and API key (masked); values persist via MAUI `Preferences` and the base URL now drives the map's history-tile requests (so a self-hosted WifiDB works). Field naming matches VistumblerCS.

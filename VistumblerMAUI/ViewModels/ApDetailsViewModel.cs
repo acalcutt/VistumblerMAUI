@@ -8,10 +8,16 @@ namespace VistumblerMAUI.ViewModels;
 /// <summary>
 /// Backs the AP details page: loads a single access point (by BSSID) plus its recorded
 /// signal history, and feeds the signal-over-time graph. Reached from the Scan list.
+/// While the page is visible the graph and AP fields refresh live every 2 seconds.
 /// </summary>
 public partial class ApDetailsViewModel : ObservableObject, IQueryAttributable
 {
     private readonly IDatabaseService _db;
+
+    private string _bssid = string.Empty;
+    private CancellationTokenSource? _liveCts;
+
+    private const int LiveRefreshIntervalMs = 2000;
 
     public ApDetailsViewModel(IDatabaseService db) => _db = db;
 
@@ -29,13 +35,44 @@ public partial class ApDetailsViewModel : ObservableObject, IQueryAttributable
     {
         if (!query.TryGetValue("bssid", out var raw) || raw is not string bssid || string.IsNullOrWhiteSpace(bssid))
             return;
-        await LoadAsync(Uri.UnescapeDataString(bssid));
+        _bssid = Uri.UnescapeDataString(bssid);
+        await _db.InitializeAsync();
+        await RefreshAsync(_bssid);
     }
 
-    private async Task LoadAsync(string bssid)
+    /// <summary>Begin the live-refresh loop. Called by the page's OnAppearing.</summary>
+    public void StartLiveUpdates()
     {
-        await _db.InitializeAsync();
+        if (string.IsNullOrWhiteSpace(_bssid)) return;
+        StopLiveUpdates();
+        _liveCts = new CancellationTokenSource();
+        _ = LiveLoopAsync(_bssid, _liveCts.Token);
+    }
 
+    /// <summary>Stop the live-refresh loop. Called by the page's OnDisappearing.</summary>
+    public void StopLiveUpdates()
+    {
+        _liveCts?.Cancel();
+        _liveCts?.Dispose();
+        _liveCts = null;
+    }
+
+    private async Task LiveLoopAsync(string bssid, CancellationToken ct)
+    {
+        try
+        {
+            while (!ct.IsCancellationRequested)
+            {
+                await Task.Delay(LiveRefreshIntervalMs, ct);
+                if (!ct.IsCancellationRequested)
+                    await RefreshAsync(bssid);
+            }
+        }
+        catch (OperationCanceledException) { }
+    }
+
+    private async Task RefreshAsync(string bssid)
+    {
         var ap = await _db.GetAccessPointByBssidAsync(bssid);
         if (ap is null)
         {

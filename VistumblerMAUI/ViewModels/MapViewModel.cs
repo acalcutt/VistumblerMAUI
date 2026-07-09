@@ -2,6 +2,7 @@ using System.Collections.ObjectModel;
 using System.Text.Json;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using MapLibreNative.Maui;
 using MapLibreNative.Maui.Handlers;
 using Vistumbler.Core.Models;
 using Vistumbler.Core.Services;
@@ -17,10 +18,14 @@ public partial class MapViewModel : ObservableObject
 
     // Accessed from StyleLoaded and toggle commands — always on main thread.
     private IMapLibreMapController? _controller;
-
     // Tracks which vector-tile circle layers have been added to the style so far.
     // Reset on each style reload (OnMapControllerReady).
     private readonly HashSet<string> _addedVectorLayers = new();
+
+    // Lazily created the first time the user pre-caches a map area for offline use.
+    // Shares the map's cache database (MbglCache.DefaultPath), so downloaded tiles are
+    // served straight to the live map — including when the network is forced offline.
+    private MbglOfflineManager? _offline;
 
     private const string EmptyGeoJson = "{\"type\":\"FeatureCollection\",\"features\":[]}";
 
@@ -32,6 +37,13 @@ public partial class MapViewModel : ObservableObject
     [ObservableProperty] private string _statusMessage = string.Empty;
     [ObservableProperty] private List<AccessPoint> _mappableAps = new();
     [ObservableProperty] private string _apsGeoJson   = EmptyGeoJson;
+
+    // ── Offline mode ──────────────────────────────────────────────────────────
+    // True while MapLibre is forced offline (serving only cached tiles). Drives the
+    // "Save Area / Go Offline·Go Online" toolbar items on MapPage.
+    [ObservableProperty] private bool _isOffline;
+    public string OfflineToggleLabel => IsOffline ? "Go Online" : "Go Offline";
+    partial void OnIsOfflineChanged(bool value) => OnPropertyChanged(nameof(OfflineToggleLabel));
 
     // Live-scan circle paint. Color is per-sectype (open/WEP/secure) AND active/dead:
     // each feature carries a "styidx" folding both into one 1..6 value (active 1/2/3,
@@ -117,8 +129,11 @@ public partial class MapViewModel : ObservableObject
             : d.HorizontalDilution.HasValue ? d.HorizontalDilution.Value * 10.0
             :                                 20.0;
         float accuracy = (float)Math.Clamp(accuracyMeters, 5, 500);
+        // Feed the GPS control overlay. Its 4-state button (Off / Show / Follow /
+        // FollowBearing) decides whether the location puck is drawn and whether the
+        // camera follows the fix — tapping the on-map GPS button cycles the mode.
         MainThread.BeginInvokeOnMainThread(() =>
-            _controller?.UpdateLocationIndicator(d.Latitude, d.Longitude, bearing, accuracy));
+            _controller?.UpdateGpsLocation(d.Latitude, d.Longitude, bearing, accuracy));
     }
 
     private static readonly string[] CellBuckets =
@@ -314,6 +329,74 @@ public partial class MapViewModel : ObservableObject
             if (layer.Id == "cells") AddCellLayers();
             else                     AddVectorLayer(layer);
         }
+    }
+
+    // ── Offline map caching ───────────────────────────────────────────────────
+
+    /// <summary>Lazily creates the shared offline manager and routes its progress/error
+    /// callbacks (raised on MapLibre's database thread) to <see cref="StatusMessage"/>.</summary>
+    private MbglOfflineManager GetOfflineManager()
+    {
+        if (_offline != null) return _offline;
+
+        _offline = new MbglOfflineManager();
+        _offline.RegionProgress += p => MainThread.BeginInvokeOnMainThread(() =>
+            StatusMessage = p.Complete
+                ? $"Offline map area ready — {p.CompletedResources} tiles, {p.CompletedBytes / 1024} KB cached"
+                : $"Caching map area… {p.CompletedResources} tiles, {p.CompletedBytes / 1024} KB");
+        _offline.RegionError += e => MainThread.BeginInvokeOnMainThread(() =>
+            StatusMessage = $"Offline download error: {e.Message}");
+        return _offline;
+    }
+
+    /// <summary>Downloads the currently visible region (current zoom, plus two levels in)
+    /// into the shared cache so it stays available with no network connection.</summary>
+    [RelayCommand]
+    private async Task SaveOfflineAreaAsync()
+    {
+        if (_controller is null)
+        {
+            StatusMessage = "Map not ready — wait for the style to load";
+            return;
+        }
+
+        try
+        {
+            var (latSw, lonSw, latNe, lonNe) = _controller.GetVisibleBounds();
+            if (double.IsNaN(latSw))
+            {
+                StatusMessage = "Map not ready — pan/zoom the map, then try again";
+                return;
+            }
+
+            double minZoom = Math.Max(0, Math.Floor(_controller.GetZoom()));
+            double maxZoom = Math.Min(minZoom + 2, 16);
+
+            var mgr = GetOfflineManager();
+            StatusMessage = $"Caching map area (z{minZoom:0}–{maxZoom:0})…";
+
+            var region = await mgr.CreateRegionAsync(
+                StyleUrl, latSw, lonSw, latNe, lonNe, minZoom, maxZoom,
+                includeIdeographs: false);
+
+            mgr.ObserveRegion(region.Id);
+            mgr.SetDownloadState(region.Id, active: true);
+        }
+        catch (Exception ex)
+        {
+            StatusMessage = $"Offline download failed: {ex.Message}";
+        }
+    }
+
+    /// <summary>Forces MapLibre offline (serve only cached tiles) or back online.</summary>
+    [RelayCommand]
+    private void ToggleOffline()
+    {
+        IsOffline = !IsOffline;
+        MbglNetwork.Online = !IsOffline;
+        StatusMessage = IsOffline
+            ? "Offline mode — showing cached map tiles only"
+            : "Online mode — map tiles load from the network";
     }
 
     // ── Live AP source ────────────────────────────────────────────────────────

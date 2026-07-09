@@ -10,6 +10,13 @@
              x:Class="VistumblerMAUI.Views.MapPage"
              Title="Map">
 
+    <!-- Offline: pre-cache the current map view, and force MapLibre to serve only cached
+         tiles. Downloaded tiles share the map's own cache, so they render with no network. -->
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save Area" Command="{Binding SaveOfflineAreaCommand}" />
+        <ToolbarItem Text="{Binding OfflineToggleLabel}" Command="{Binding ToggleOfflineCommand}" />
+    </ContentPage.ToolbarItems>
+
     <Grid RowDefinitions="Auto,*">
         <controls:ScanControlBar x:Name="ScanBar" Grid.Row="0" />
 
@@ -26,6 +33,9 @@
             Grid.Row="0"
             x:Name="Map"
             StyleUrl="{Binding StyleUrl}"
+            ShowNavigationControls="True"
+            ShowGpsControl="True"
+            ShowAttributionControl="True"
             MyLocationEnabled="True" />
 
         <!-- ── Tap-to-inspect popup ────────────────────────────────────────
