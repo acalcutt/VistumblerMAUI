@@ -17,8 +17,8 @@
 
     <ApplicationTitle>Vistumbler</ApplicationTitle>
     <ApplicationId>com.vistumbler.mauiapp</ApplicationId>
-    <ApplicationDisplayVersion>0.3.2</ApplicationDisplayVersion>
-    <ApplicationVersion>6</ApplicationVersion>
+    <ApplicationDisplayVersion>0.3.3</ApplicationDisplayVersion>
+    <ApplicationVersion>7</ApplicationVersion>
 
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">26.0</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
