@@ -52,11 +52,15 @@ jobs:
       release_type: ${{ steps.check.outputs.release_type }}
 
   build-windows:
-    name: Build Windows release
+    name: Build Windows release (${{ matrix.rid }})
     runs-on: windows-latest
     needs: release-check
     if: ${{ needs.release-check.outputs.published == 'false' }}
     environment: release
+    strategy:
+      fail-fast: false
+      matrix:
+        rid: [win-x64, win-arm64]
 
     steps:
       - uses: actions/checkout@v4
@@ -69,36 +73,44 @@ jobs:
       - name: Restore workloads
         run: dotnet workload restore VistumblerMAUI.sln
 
-      - name: Restore dependencies
-        run: dotnet restore VistumblerMAUI.sln
-
-      - name: Publish win-x64
-        # No explicit -r/--self-contained: this project also targets Android/iOS
-        # in the same csproj, and forcing a RID here makes NuGet try to resolve
-        # a win-x64 Mono runtime pack (only published for mobile RIDs), which
-        # doesn't exist and fails restore. Letting the SDK pick the RID itself
-        # for net10.0-windows10.0.19041.0 resolves correctly (framework-dependent
-        # on the Windows App SDK runtime, same as VistumblerMAUI runs via F5).
+      - name: Publish ${{ matrix.rid }}
+        # -r ${{ matrix.rid }} -p:UseMonoRuntime=false: this project also targets
+        # Android/iOS in the same csproj, so an explicit RID makes NuGet try to resolve
+        # a Mono runtime pack (Microsoft.NETCore.App.Runtime.Mono.${{ matrix.rid }}) for
+        # the Windows head, which doesn't exist and fails restore (NU1101).
+        # UseMonoRuntime=false forces the CoreCLR runtime pack. An explicit RID is
+        # required to cross-build win-arm64 on the x64 runner. No --no-restore, so
+        # publish restores the RID-specific runtime pack itself (avoids NETSDK1112).
+        #
+        # --self-contained + -p:WindowsAppSDKSelfContained=true: bundle both the .NET
+        # runtime AND the Windows App SDK runtime so users need nothing pre-installed
+        # (matches VistumblerCS's self-contained releases). NOTE: no PublishSingleFile —
+        # WinUI 3 / Windows App SDK apps don't support single-file publish, so the output
+        # is a folder of DLLs (zipped below) rather than one exe.
         run: |
           dotnet publish VistumblerMAUI/VistumblerMAUI.csproj `
             -f net10.0-windows10.0.19041.0 `
             -c Release `
+            -r ${{ matrix.rid }} `
+            --self-contained true `
             -p:WindowsPackageType=None `
-            --output ./publish/win-x64
+            -p:UseMonoRuntime=false `
+            -p:WindowsAppSDKSelfContained=true `
+            --output ./publish/${{ matrix.rid }}
 
-      - name: Package release artifact
+      - name: Package release artifact (${{ matrix.rid }})
         shell: pwsh
         run: |
           $version = "${{ needs.release-check.outputs.version }}"
           Compress-Archive `
-            -Path "./publish/win-x64/*" `
-            -DestinationPath "./Vistumbler-v${version}-win-x64.zip"
+            -Path "./publish/${{ matrix.rid }}/*" `
+            -DestinationPath "./Vistumbler-v${version}-${{ matrix.rid }}.zip"
 
-      - name: Upload build artifact
+      - name: Upload build artifact (${{ matrix.rid }})
         uses: actions/upload-artifact@v4
         with:
-          name: release-artifact-windows
-          path: Vistumbler-v${{ needs.release-check.outputs.version }}-win-x64.zip
+          name: release-artifact-windows-${{ matrix.rid }}
+          path: Vistumbler-v${{ needs.release-check.outputs.version }}-${{ matrix.rid }}.zip
           retention-days: 7
 
   build-android:
@@ -191,7 +203,7 @@ jobs:
           tag:        v${{ needs.release-check.outputs.version }}
           name:       v${{ needs.release-check.outputs.version }}
           bodyFile:   changelog_for_version.md
-          artifacts:  ./artifacts/Vistumbler-v${{ needs.release-check.outputs.version }}-win-x64.zip,./artifacts/Vistumbler-v${{ needs.release-check.outputs.version }}-android.apk
+          artifacts:  ./artifacts/Vistumbler-v${{ needs.release-check.outputs.version }}-win-x64.zip,./artifacts/Vistumbler-v${{ needs.release-check.outputs.version }}-win-arm64.zip,./artifacts/Vistumbler-v${{ needs.release-check.outputs.version }}-android.apk
           prerelease: ${{ steps.flags.outputs.prerelease }}
           allowUpdates: true
           draft: false

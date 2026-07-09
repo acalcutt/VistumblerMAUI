@@ -13,8 +13,12 @@ concurrency:
 
 jobs:
   build-windows:
-    name: Build Windows
+    name: Build Windows (${{ matrix.rid }})
     runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        rid: [win-x64, win-arm64]
 
     steps:
       - uses: actions/checkout@v4
@@ -27,15 +31,21 @@ jobs:
       - name: Restore workloads
         run: dotnet workload restore VistumblerMAUI.sln
 
-      - name: Build (net10.0-windows10.0.19041.0)
-        # No separate `dotnet restore` step: a generic RID-less restore here
-        # doesn't pull in the win-x64 runtime pack this build then needs,
-        # causing NETSDK1112. Let this RID-implicit build do its own restore
-        # in one shot instead (verified locally as a single command).
+      - name: Build (${{ matrix.rid }})
+        # No separate `dotnet restore` step: a generic RID-less restore doesn't pull
+        # the runtime pack this RID-aware build needs (NETSDK1112); let the build
+        # restore in one shot. -p:UseMonoRuntime=false: this multi-target MAUI csproj
+        # otherwise resolves a Mono runtime pack
+        # (Microsoft.NETCore.App.Runtime.Mono.${{ matrix.rid }}) for the Windows head,
+        # which doesn't exist (NU1101) — force the CoreCLR pack so an explicit RID
+        # (required to cross-build win-arm64 on an x64 runner) resolves.
         run: |
           dotnet build VistumblerMAUI/VistumblerMAUI.csproj `
             -f net10.0-windows10.0.19041.0 `
-            -c Release
+            -c Release `
+            -r ${{ matrix.rid }} `
+            -p:WindowsPackageType=None `
+            -p:UseMonoRuntime=false
 
   build-android:
     name: Build Android

@@ -9,6 +9,7 @@
 
 ## 0.3.2
 ### ✨ Features and improvements
+- **Self-contained Windows releases, now with ARM64** — Windows releases ship a native `win-arm64` build alongside `win-x64`, and both are self-contained: the .NET runtime and the Windows App SDK runtime are bundled, so users don't need to install anything first. ARM64 devices run the app and its native map engine (`mln-cabi.dll`) natively instead of under x64 emulation.
 - **New airspace-free map renderer (MapLibreNative.Maui.Handlers 4.1.3)** — upgraded to the 4.x renderer: Windows draws the map into a real in-tree `Image` (no floating `WS_POPUP` GL window) and Android uses a `TextureView`, so MAUI content and the nav/GPS/attribution controls layer reliably above the map on every platform. Now consumed as the released 4.1.3 package from nuget.org, so the local dev package source was removed from `nuget.config`.
 - **Offline map caching** — the map now keeps a persistent tile cache, so already-viewed areas keep rendering with no network. Two page toolbar items were added: **Save Area** pre-caches the current view (current zoom + 2 levels) for offline use, and **Go Offline / Go Online** forces MapLibre to serve only cached tiles; caching progress and offline/online state are shown in the map's status line. Downloaded tiles share the live map's cache, so they render immediately.
 
