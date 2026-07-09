@@ -134,14 +134,14 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore VistumblerMAUI.sln
 
-      - name: Publish Android APK
-        # -r is required here: dotnet publish (unlike build) needs an explicit
-        # RID to resolve Android's runtime pack/produce an installable APK.
+      - name: Publish Android APK (universal)
+        # No -r: the csproj sets <RuntimeIdentifiers>android-arm64;android-x64</> for the
+        # Android head, so publish builds one universal APK containing both ABIs
+        # (arm64-v8a for phones, x86_64 for emulators) with the native map engine in each.
         run: |
           dotnet publish VistumblerMAUI/VistumblerMAUI.csproj `
             -f net10.0-android36.0 `
             -c Release `
-            -r android-arm64 `
             --output ./publish/android
 
       - name: Rename APK to release filename

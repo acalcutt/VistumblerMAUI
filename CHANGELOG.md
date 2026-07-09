@@ -7,6 +7,11 @@
 ### 🐞 Bug fixes
 - _...Add new stuff here..._
 
+## 0.3.4
+### ✨ Features and improvements
+- **Universal Android APK** — the release APK now bundles both `arm64-v8a` (phones) and `x86_64` (emulators), each with the native map engine, instead of an arm64-only build. One APK runs on physical devices and emulators alike.
+
+### 🐞 Bug fixes
 ## 0.3.3
 ### ✨ Features and improvements
 - **Self-contained Windows releases, now with ARM64** — Windows releases ship a native `win-arm64` build alongside `win-x64`, and both are self-contained: the .NET runtime and the Windows App SDK runtime are bundled, so users don't need to install anything first. ARM64 devices run the app and its native map engine (`mln-cabi.dll`) natively instead of under x64 emulation.
