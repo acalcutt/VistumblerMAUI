@@ -17,8 +17,8 @@
 
     <ApplicationTitle>Vistumbler</ApplicationTitle>
     <ApplicationId>com.vistumbler.mauiapp</ApplicationId>
-    <ApplicationDisplayVersion>0.3.6</ApplicationDisplayVersion>
-    <ApplicationVersion>10</ApplicationVersion>
+    <ApplicationDisplayVersion>0.3.7</ApplicationDisplayVersion>
+    <ApplicationVersion>11</ApplicationVersion>
 
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">26.0</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
@@ -47,7 +47,7 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
     <PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.10" />
-    <PackageReference Include="MapLibreNative.Maui.Handlers" Version="4.2.0" />
+    <PackageReference Include="MapLibreNative.Maui.Handlers" Version="4.2.1" />
     <PackageReference Include="BarcodeScanning.Native.Maui" Version="3.0.4" />
   </ItemGroup>
 
@@ -61,6 +61,13 @@
     <MauiImage Include="Resources\Images\*" Exclude="Resources\Images\.gitkeep" />
     <MauiFont Include="Resources\Fonts\*" Exclude="Resources\Fonts\.gitkeep" />
     <MauiAsset Include="Resources\Raw\**" Exclude="Resources\Raw\**\.gitkeep" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <!-- Adaptive launcher icon copied from vistumbler-android: the default resource
+       globs pick up the mipmap-anydpi-v26 XML but not the per-density .webp images
+       they reference, so include those explicitly. -->
+  <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
+    <AndroidResource Include="Platforms\Android\Resources\mipmap-*\*.webp" />
   </ItemGroup>
 
 </Project>

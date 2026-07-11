@@ -39,7 +39,7 @@ public class ScanForegroundService : Service
         var notification = new Notification.Builder(this, ChannelId)
             .SetContentTitle("Vistumbler")
             .SetContentText("Scanning for access points…")
-            .SetSmallIcon(Resource.Mipmap.appicon)
+            .SetSmallIcon(Resource.Mipmap.ic_launcher)
             .SetContentIntent(openIntent)
             .SetOngoing(true)
             .Build();

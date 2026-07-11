@@ -33,8 +33,13 @@
         launchMode, intent-filter, etc). Hand-writing it here too just creates a class
         the build never compiles, since there's nothing generating it from C#.
     -->
+    <!-- Launcher icon: the vistumbler-android adaptive icon set (mipmap-anydpi-v26
+         manifest + per-density webps) copied verbatim into Platforms/Android/Resources,
+         overriding the MauiIcon-generated @mipmap/appicon on Android only. -->
     <application android:allowBackup="true"
                  android:label="Vistumbler"
-                 android:supportsRtl="true">
+                 android:supportsRtl="true"
+                 android:icon="@mipmap/ic_launcher"
+                 android:roundIcon="@mipmap/ic_launcher_round">
     </application>
 </manifest>

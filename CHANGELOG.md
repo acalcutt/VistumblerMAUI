@@ -7,6 +7,14 @@
 ### 🐞 Bug fixes
 - _...Add new stuff here..._
 
+## 0.3.7
+### ✨ Features and improvements
+- **Android launcher icon** — the app now ships vistumbler-android's adaptive icon set (per-density webps + adaptive-icon manifest) on Android, replacing the generated MAUI icon; the foreground-service notification uses the same icon.
+
+### 🐞 Bug fixes
+- **Attribution banner no longer reopens every few seconds on the map** — updated the map renderer to MapLibreNative.Maui.Handlers 4.2.1, whose attribution handling only re-expands the banner when the attribution content actually changes. Previously the live AP layer's periodic GeoJSON refresh made the banner pop open on every update.
+- **GPS track records finer detail** — the track's minimum-movement threshold now scales with the GPS fix's reported accuracy (2–10 m instead of a fixed 5 m), so corners and curves draw smoother with a good fix while stationary jitter still can't scribble.
+
 ## 0.3.6
 ### ✨ Features and improvements
 - **GPS track on the map** — new yellow "Enable Track" / "Clear Track" buttons in the map layer bar draw a live breadcrumb line (bright yellow over a dark casing) of where you've been. Points are only added after ~5 m of real movement so a stationary device doesn't grow the track, and the line breaks into separate segments when fixes stop for over 3 minutes instead of drawing a straight connector across the gap. Clearing the track never touches the recorded GPS history.

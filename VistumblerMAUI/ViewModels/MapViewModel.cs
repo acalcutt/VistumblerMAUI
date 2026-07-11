@@ -243,7 +243,11 @@ public partial class MapViewModel : ObservableObject
                 _lastTrackFixUtc = now;   // every fix counts as "GPS alive", added or not
 
                 var seg = _trackSegments[^1];
-                const double minMoveMeters = 5.0;
+                // Movement threshold scales with the fix's reported accuracy: a tight
+                // fix (2-3 m) records fine detail so corners stay smooth, a loose fix
+                // demands more movement so stationary jitter doesn't scribble. Clamped
+                // to 2-10 m.
+                double minMoveMeters = Math.Clamp((d.Accuracy ?? 10.0) * 0.5, 2.0, 10.0);
                 bool moved = seg.Count == 0;
                 if (!moved)
                 {
