@@ -12,14 +12,14 @@ namespace VistumblerMAUI.Services;
 /// </summary>
 public class GpsRouterService : IGpsService
 {
-    private readonly MauiGeolocationGpsService _location;
-    private readonly ISerialGpsService?        _serial;
-    private IGpsService?                        _active;
+    private readonly ILocationGpsService _location;
+    private readonly ISerialGpsService?  _serial;
+    private IGpsService?                  _active;
 
     public event EventHandler<GpsDataReceivedEventArgs>? GpsDataReceived;
     public event EventHandler<GpsErrorEventArgs>?        GpsError;
 
-    public GpsRouterService(MauiGeolocationGpsService location, IServiceProvider services)
+    public GpsRouterService(ILocationGpsService location, IServiceProvider services)
     {
         _location = location;
         _serial   = services.GetService<ISerialGpsService>();   // null off Windows

@@ -19,6 +19,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
     private readonly IGpsService         _gps;
     private readonly IDatabaseService    _db;
     private readonly ISoundService       _sound;
+    private readonly Services.IKeepAliveService _keepAlive;
 
     private CancellationTokenSource? _scanCts;
     private CancellationTokenSource? _gpsCts;
@@ -89,12 +90,14 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         IWiFiScannerService wifi,
         IGpsService         gps,
         IDatabaseService    db,
-        ISoundService       sound)
+        ISoundService       sound,
+        Services.IKeepAliveService keepAlive)
     {
-        _wifi  = wifi;
-        _gps   = gps;
-        _db    = db;
-        _sound = sound;
+        _wifi      = wifi;
+        _gps       = gps;
+        _db        = db;
+        _sound     = sound;
+        _keepAlive = keepAlive;
 
         // Restore the persisted sort choice (set the fields directly so the change
         // handlers don't fire before construction finishes).
@@ -191,6 +194,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         IsScanning    = true;
         StatusMessage = "Scanning…";
         _ = _wifi.StartScanningAsync(_scanCts.Token);
+        UpdateKeepAlive();
     }
 
     private void StopScan()
@@ -199,6 +203,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         _wifi.StopScanning();
         IsScanning    = false;
         StatusMessage = $"Stopped — {TotalCount} total APs";
+        UpdateKeepAlive();
     }
 
     private void StartGps()
@@ -207,6 +212,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         IsGpsEnabled = true;
         GpsStatus    = "GPS starting…";
         _ = _gps.StartAsync(_gpsCts.Token);
+        UpdateKeepAlive();
     }
 
     private void StopGps()
@@ -216,6 +222,26 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         IsGpsEnabled = false;
         _currentGps  = null;          // don't stamp stale coordinates onto later scans
         GpsStatus    = "GPS off";
+        UpdateKeepAlive();
+    }
+
+    /// <summary>
+    /// While scanning or GPS is active, run the platform keep-alive (Android foreground
+    /// service + wakelock) so collection continues with the screen off, and optionally
+    /// hold the screen awake (Settings → "Keep screen on while scanning").
+    /// </summary>
+    private void UpdateKeepAlive()
+    {
+        bool active = IsScanning || IsGpsEnabled;
+        if (active) _keepAlive.Start();
+        else        _keepAlive.Stop();
+
+        try
+        {
+            DeviceDisplay.Current.KeepScreenOn =
+                active && Preferences.Get("keep_screen_on", false);
+        }
+        catch { /* no active window (e.g. during startup) — harmless */ }
     }
 
     private async void OnAccessPointsDetected(object? sender, AccessPointsDetectedEventArgs e)
@@ -244,6 +270,13 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
                 // Merge into the existing row (updates it in place) or add a new AP.
                 if (_apMap.TryGetValue(ap.Bssid, out var existing))
                 {
+                    // Vistumbler semantics: an AP is plotted where its signal was strongest,
+                    // so only re-stamp coordinates when this detection beats the previous
+                    // best signal (or the AP has no fix yet). Overwriting on every cycle
+                    // dragged all previously-seen APs along to the device's current position.
+                    bool strongerSignal =
+                        (ap.Signal ?? int.MinValue) > (existing.HighestSignal ?? int.MinValue) ||
+                        (ap.Rssi.HasValue && ap.Rssi.Value > (existing.HighestRssi ?? int.MinValue));
                     if ((ap.Signal ?? int.MinValue) > (existing.HighestSignal ?? int.MinValue))
                         existing.HighestSignal = ap.Signal;
                     if (ap.Rssi.HasValue && ap.Rssi.Value > (existing.HighestRssi ?? int.MinValue))
@@ -254,7 +287,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
                     // Heal rows whose FirstSeen was lost (0) by the earlier overwrite bug.
                     if (existing.FirstSeen == default)
                         existing.FirstSeen = scanTime;
-                    if (gps != null)
+                    if (gps != null && (strongerSignal || !existing.Latitude.HasValue))
                     {
                         existing.Latitude  = gps.Latitude;
                         existing.Longitude = gps.Longitude;

@@ -147,6 +147,19 @@
                     Command="{Binding GoToExportCommand}"
                     Margin="16,4" HorizontalOptions="Fill" />
 
+            <!-- Advanced -->
+            <Label Text="ADVANCED" Style="{StaticResource SectionHeader}" />
+            <Grid ColumnDefinitions="*,Auto" Padding="16,8">
+                <Label Grid.Column="0" Text="Keep screen on while scanning" VerticalOptions="Center" />
+                <Switch Grid.Column="1" IsToggled="{Binding KeepScreenOn}" />
+            </Grid>
+            <Grid ColumnDefinitions="*,Auto" Padding="16,8">
+                <Label Grid.Column="0" Text="Debug logging" VerticalOptions="Center" />
+                <Switch Grid.Column="1" IsToggled="{Binding DebugLogging}" />
+            </Grid>
+            <Label Text="Writes GPS fixes and map layer refreshes to the debug log (adb logcat) for troubleshooting."
+                   FontSize="11" TextColor="Gray" Margin="16,0,16,8" />
+
         </VerticalStackLayout>
         </ScrollView>
     </Grid>

@@ -1,5 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Vistumbler.Core.Models;
 using Vistumbler.Core.Services;
 
 namespace VistumblerMAUI.ViewModels;
@@ -35,6 +36,7 @@ public partial class ExportViewModel : ObservableObject
     [ObservableProperty] private bool _includeWepNetworks = true;
     [ObservableProperty] private bool _includeSecureNetworks = true;
     [ObservableProperty] private bool _useSignalColors = true;
+    [ObservableProperty] private bool _includeGpsTrack = true;   // KML/GPX <trk>/LineString
 
     public List<ExportFormat> Formats { get; } = Enum.GetValues<ExportFormat>().ToList();
 
@@ -86,12 +88,14 @@ public partial class ExportViewModel : ObservableObject
                         IncludeOpenNetworks = IncludeOpenNetworks,
                         IncludeWepNetworks = IncludeWepNetworks,
                         IncludeSecureNetworks = IncludeSecureNetworks,
-                        UseSignalColors = UseSignalColors
+                        UseSignalColors = UseSignalColors,
+                        ShowTrack = IncludeGpsTrack
                     };
                     await _exportService.ExportToKmlAsync(path, aps, options, gpsFixes);
                     break;
                 case ExportFormat.Gpx:
-                    await _exportService.ExportToGpxAsync(path, aps, gpsFixes);
+                    await _exportService.ExportToGpxAsync(path, aps,
+                        IncludeGpsTrack ? gpsFixes : new List<GpsData>());
                     break;
                 case ExportFormat.Ns1:
                     await _exportService.ExportToNs1Async(path, aps);

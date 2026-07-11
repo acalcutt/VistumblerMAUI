@@ -18,6 +18,17 @@ public partial class SettingsViewModel : ObservableObject
     // Persist the scan interval so the scan loop can honour it (min cadence between scans).
     partial void OnScanIntervalMsChanged(int value) => Preferences.Set(ScanIntervalKey, Math.Max(250, value));
 
+    // Hold the screen awake while scanning/GPS runs (applied on the next scan/GPS
+    // start). Background collection works either way via the keep-alive service —
+    // this is just the vistumbler-android-style convenience for watching live.
+    [ObservableProperty] private bool _keepScreenOn = Preferences.Get("keep_screen_on", false);
+    partial void OnKeepScreenOnChanged(bool value) => Preferences.Set("keep_screen_on", value);
+
+    // ── Advanced ─────────────────────────────────────────────────────────────────
+    // Opt-in diagnostic logging (GPS fixes, map layer refreshes) via DebugLog.
+    [ObservableProperty] private bool _debugLogging = DebugLog.Enabled;
+    partial void OnDebugLoggingChanged(bool value) => DebugLog.Enabled = value;
+
     // ── GPS source (Windows Location API vs serial NMEA receiver) ───────────────
     public const string GpsSourceWindows = "Windows Location";
     public const string GpsSourceSerial  = "Serial NMEA (COM port)";

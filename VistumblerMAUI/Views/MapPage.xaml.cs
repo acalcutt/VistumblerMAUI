@@ -53,7 +53,8 @@ public partial class MapPage : ContentPage
                 Log("Map.DidBecomeIdle (first)");
             }
         };
-        Map.CameraIdle += (_, _) => Log($"Map.CameraIdle zoom={SafeGetZoom()}");
+        // Fires continuously while panning/zooming — opt-in only (Settings → Debug logging).
+        Map.CameraIdle += (_, _) => Services.DebugLog.Write($"{LogTag} Map.CameraIdle zoom={SafeGetZoom()}");
     }
 
     private void OnMapReady(object? sender, EventArgs e)
@@ -130,6 +131,9 @@ public partial class MapPage : ContentPage
         if (ctrl is null || !_styleLoadedFired) return;
         try
         {
+            Services.DebugLog.Write($"{LogTag} RefreshLiveApLayer aps={_vm.MappableAps.Count} " +
+                $"geojsonLen={_vm.ApsGeoJson.Length}");
+
             ctrl.RemoveLayer("ap-circles");
             ctrl.SetGeoJsonFeature("ap-source", _vm.ApsGeoJson);   // replace source data
             ctrl.AddCircleLayer("ap-circles", "ap-source", belowLayerId: null,

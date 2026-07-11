@@ -36,7 +36,8 @@ public static partial class MauiProgram
         // ── Infrastructure services ──────────────────────────────────────────
         services.AddSingleton<ISessionService,   SessionService>();
         services.AddSingleton<IDatabaseService,  SqliteDatabaseService>();
-        services.AddSingleton<MauiGeolocationGpsService>();               // Windows/OS location back-end
+        // ILocationGpsService (the OS location back-end) is registered per platform in
+        // RegisterPlatformServices — Android uses LocationManager's fused provider directly.
         services.AddSingleton<IGpsService,       GpsRouterService>();     // selects location vs serial
         services.AddSingleton<ISoundService,     MauiSoundService>();
         services.AddSingleton<IExportService,    ExportService>();

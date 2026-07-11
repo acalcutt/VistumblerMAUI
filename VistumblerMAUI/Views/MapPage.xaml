@@ -62,6 +62,7 @@
 
                 <Label Grid.Row="0" Grid.Column="0"
                        Text="{Binding SelectedFeature.Title}"
+                       TextColor="Black"
                        FontAttributes="Bold" FontSize="16" />
                 <Button Grid.Row="0" Grid.Column="1"
                         Text="✕"
@@ -69,27 +70,33 @@
                         BackgroundColor="Transparent" TextColor="Gray"
                         Padding="6,0" FontSize="14" />
 
+                <!-- This card is always rendered on a hardcoded white background (not
+                     theme-aware), so every Label/Span here pins an explicit dark color —
+                     otherwise the app's default Label style (white text in system dark
+                     mode) renders invisible white-on-white. Spans don't inherit the
+                     parent Label's TextColor, so each one needs its own. -->
                 <Label Grid.Row="1" Grid.ColumnSpan="2" FontSize="12" TextColor="Gray">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="{Binding SelectedFeature.SourceLabel}" />
-                            <Span Text=" • " />
-                            <Span Text="{Binding SelectedFeature.Bssid}" />
+                            <Span Text="{Binding SelectedFeature.SourceLabel}" TextColor="Gray" />
+                            <Span Text=" • " TextColor="Gray" />
+                            <Span Text="{Binding SelectedFeature.Bssid}" TextColor="Gray" />
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
 
-                <Label Grid.Row="2" Grid.ColumnSpan="2" FontSize="12">
+                <Label Grid.Row="2" Grid.ColumnSpan="2" FontSize="12" TextColor="Black">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="Ch " /><Span Text="{Binding SelectedFeature.Channel}" />
-                            <Span Text="  •  " /><Span Text="{Binding SelectedFeature.Authentication}" />
-                            <Span Text="/" /><Span Text="{Binding SelectedFeature.Encryption}" />
+                            <Span Text="Ch " TextColor="Black" /><Span Text="{Binding SelectedFeature.Channel}" TextColor="Black" />
+                            <Span Text="  •  " TextColor="Black" /><Span Text="{Binding SelectedFeature.Authentication}" TextColor="Black" />
+                            <Span Text="/" TextColor="Black" /><Span Text="{Binding SelectedFeature.Encryption}" TextColor="Black" />
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
 
                 <Label Grid.Row="3" Grid.ColumnSpan="2" FontSize="12"
+                       TextColor="Gray"
                        IsVisible="{Binding SelectedFeature.Manufacturer, Converter={StaticResource IsNotNullOrEmpty}}"
                        Text="{Binding SelectedFeature.Manufacturer, StringFormat='Manufacturer: {0}'}" />
 
@@ -110,11 +117,33 @@
                     Orientation="Horizontal"
                     HorizontalScrollBarVisibility="Never"
                     BackgroundColor="#F5F5F5">
+          <HorizontalStackLayout Padding="6,3">
+
+            <!-- GPS breadcrumb track: toggle recording + clear, ahead of the history
+                 layer toggles. Yellow to match the track line drawn on the map. -->
+            <Button Text="{Binding TrackToggleLabel}"
+                    Command="{Binding ToggleTrackCommand}"
+                    Padding="10,4" Margin="2,0" CornerRadius="4" FontSize="11"
+                    BackgroundColor="#FFEB3B" TextColor="#424242">
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button"
+                                 Binding="{Binding IsTrackEnabled}"
+                                 Value="True">
+                        <Setter Property="BackgroundColor" Value="#F9A825" />
+                        <Setter Property="TextColor"       Value="White" />
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
+            <Button Text="Clear Track"
+                    Command="{Binding ClearTrackCommand}"
+                    Padding="10,4" Margin="2,0" CornerRadius="4" FontSize="11"
+                    BackgroundColor="#FFF9C4" TextColor="#424242" />
+
             <FlexLayout BindableLayout.ItemsSource="{Binding HistoryLayers}"
                         Direction="Row"
                         Wrap="NoWrap"
                         AlignItems="Center"
-                        Padding="6,3">
+                        Padding="0">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate x:DataType="vm:HistoryLayerState">
                         <Button Text="{Binding Label}"
@@ -145,6 +174,7 @@
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
             </FlexLayout>
+          </HorizontalStackLayout>
         </ScrollView>
 
         <!-- ── Status label ──────────────────────────────────────────────── -->

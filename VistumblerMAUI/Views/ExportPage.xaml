@@ -41,6 +41,15 @@
                 <BoxView HeightRequest="1" Color="#EEEEEE" Margin="16,8" />
             </StackLayout>
 
+            <!-- Track-capable formats (KML/GPX) -->
+            <StackLayout IsVisible="{Binding SelectedFormat, Converter={StaticResource IsTrackFormat}}">
+                <Grid ColumnDefinitions="*,Auto" Padding="16,8">
+                    <Label Grid.Column="0" Text="Include GPS track" VerticalOptions="Center" />
+                    <Switch Grid.Column="1" IsToggled="{Binding IncludeGpsTrack}" />
+                </Grid>
+                <BoxView HeightRequest="1" Color="#EEEEEE" Margin="16,8" />
+            </StackLayout>
+
             <Button Text="Export"
                     Command="{Binding ExportCommand}"
                     Margin="16,16,16,4"

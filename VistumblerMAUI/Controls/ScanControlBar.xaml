@@ -24,12 +24,24 @@
                     Text="Scan APs"
                     Command="{Binding ToggleScanCommand}"
                     BackgroundColor="{Binding IsScanning, Converter={StaticResource RunningToColor}}"
-                    TextColor="White" WidthRequest="92" />
+                    TextColor="White" WidthRequest="92">
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button" Binding="{Binding IsScanning}" Value="True">
+                        <Setter Property="Text" Value="Stop" />
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
             <Button Grid.Column="1"
                     Text="Use GPS"
                     Command="{Binding ToggleGpsCommand}"
                     BackgroundColor="{Binding IsGpsEnabled, Converter={StaticResource RunningToColor}}"
-                    TextColor="White" WidthRequest="92" />
+                    TextColor="White" WidthRequest="92">
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button" Binding="{Binding IsGpsEnabled}" Value="True">
+                        <Setter Property="Text" Value="Stop GPS" />
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
             <VerticalStackLayout Grid.Column="2" Spacing="0" VerticalOptions="Center" HorizontalOptions="End">
                 <Label Text="{Binding TotalCount, StringFormat='Total: {0}'}" FontSize="12" HorizontalOptions="End" />
                 <Label Text="{Binding ActiveCount, StringFormat='Active: {0}'}" FontSize="12" TextColor="#1565C0" HorizontalOptions="End" />

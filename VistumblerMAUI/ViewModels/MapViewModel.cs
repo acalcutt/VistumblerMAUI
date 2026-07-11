@@ -58,11 +58,15 @@ public partial class MapViewModel : ObservableObject
         var (dOpen, dWep, dSec) = MapColors.Hashed("live_dead");
         ApLayerProperties = new Dictionary<string, object?>
         {
+            // Zoom-interpolated like the history buckets' RadiusExpr — a fixed 4px dot is
+            // near-invisible on a high-DPI phone at street zoom. Holds the base size
+            // through z12, then grows to ~22px by z20 so dots stay easy to see and tap.
+            // Active APs stay a step larger than dead ones at every zoom.
             ["circle-radius"] = new object[] {
-                "case",
-                new object[] { "==", new object[] { "get", "isActive" }, true },
-                4.0,  // active: slightly larger than the newest history bucket (base 3.0)
-                3.0,  // dead: same base radius
+                "interpolate", new object[] { "exponential", 1.5 }, new object[] { "zoom" },
+                1.0,  new object[] { "case", new object[] { "==", new object[] { "get", "isActive" }, true }, 4.0, 3.0 },
+                12.0, new object[] { "case", new object[] { "==", new object[] { "get", "isActive" }, true }, 4.0, 3.0 },
+                20.0, new object[] { "case", new object[] { "==", new object[] { "get", "isActive" }, true }, 22.0, 18.0 },
             },
             ["circle-color"] = new Dictionary<string, object?> {
                 ["property"] = "styidx",
@@ -83,6 +87,95 @@ public partial class MapViewModel : ObservableObject
     // ── Tap-to-inspect popup ──────────────────────────────────────────────────
     [ObservableProperty] private MapFeatureInfo? _selectedFeature;
     [ObservableProperty] private bool _isPopupVisible;
+
+    // ── GPS track (live breadcrumb line) ──────────────────────────────────────
+    // Mirrors the WifiDB web map's "Enable Track" feature: while enabled, every GPS
+    // fix is appended to a LineString drawn as a yellow line on the map. Points live
+    // here (singleton VM) so the track survives page navigation and style reloads.
+    [ObservableProperty] private bool _isTrackEnabled;
+    public string TrackToggleLabel => IsTrackEnabled ? "Disable Track" : "Enable Track";
+    partial void OnIsTrackEnabledChanged(bool value) => OnPropertyChanged(nameof(TrackToggleLabel));
+
+    // The track is a list of line segments rather than one line: a long silence
+    // between fixes (screen off without the keep-alive service, GPS dropout) means
+    // the path in between is unknown, so a new segment starts instead of drawing a
+    // straight connector across the gap. Same 180 s rule as the KML export.
+    private const double TrackGapSeconds = 180;
+    private readonly List<List<(double Lon, double Lat)>> _trackSegments = new();
+    private DateTime _lastTrackFixUtc;
+    private bool _trackLayerAdded;
+
+    // Deliberately independent of the session DB's GPS history: this is a live
+    // "since Enable was tapped" breadcrumb (like the WifiDB web map's track), while
+    // the DB rows remain the durable session record that KML/GPX exports draw from.
+    [RelayCommand]
+    private void ToggleTrack()
+    {
+        IsTrackEnabled = !IsTrackEnabled;
+        if (IsTrackEnabled) EnsureTrackLayer();
+        StatusMessage = IsTrackEnabled ? "Track recording on" : "Track recording off";
+    }
+
+    /// <summary>Display-only: wipes the drawn line. The recorded GPS history in the
+    /// session database (and therefore KML/GPX exports) is untouched.</summary>
+    [RelayCommand]
+    private void ClearTrack()
+    {
+        _trackSegments.Clear();
+        if (_trackLayerAdded) _controller?.SetGeoJsonSource("track-source", TrackGeoJson());
+        StatusMessage = "Track cleared (exports keep full history)";
+    }
+
+    private string TrackGeoJson()
+    {
+        // A LineString requires ≥2 positions; an empty/1-point one is invalid GeoJSON
+        // that the native parser rejects — leaving the previously rendered track on
+        // screen (Clear Track looked like it "didn't work"). Only segments with two
+        // or more points become features; with none, send a valid empty collection.
+        var inv = System.Globalization.CultureInfo.InvariantCulture;
+        var features = string.Join(",", _trackSegments
+            .Where(s => s.Count >= 2)
+            .Select(s => "{\"type\":\"Feature\",\"geometry\":{\"type\":\"LineString\","
+                       + "\"coordinates\":[" + string.Join(",", s.Select(p =>
+                             $"[{p.Lon.ToString("F6", inv)},{p.Lat.ToString("F6", inv)}]"))
+                       + "]},\"properties\":{}}"));
+        return features.Length == 0
+            ? EmptyGeoJson
+            : "{\"type\":\"FeatureCollection\",\"features\":[" + features + "]}";
+    }
+
+    /// <summary>Add the track source + line layer to the current style (once per style).</summary>
+    private void EnsureTrackLayer()
+    {
+        if (_controller is null || _trackLayerAdded) return;
+        try
+        {
+            _controller.AddGeoJsonSource("track-source", TrackGeoJson());
+            // Dark casing under a fully-opaque bright yellow line — pale yellow alone
+            // washes out against the light basemap. Both layers share the one source,
+            // so per-fix SetGeoJsonSource updates redraw them together.
+            _controller.AddLineLayer("track-line-casing", "track-source", belowLayerId: null,
+                sourceLayer: null, properties: new Dictionary<string, object?>
+                {
+                    ["line-cap"]     = "round",
+                    ["line-join"]    = "round",
+                    ["line-color"]   = "#000000",
+                    ["line-width"]   = 8.0,
+                    ["line-opacity"] = 0.4,
+                });
+            _controller.AddLineLayer("track-line", "track-source", belowLayerId: null,
+                sourceLayer: null, properties: new Dictionary<string, object?>
+                {
+                    ["line-cap"]     = "round",
+                    ["line-join"]    = "round",
+                    ["line-color"]   = "#FFE600",
+                    ["line-width"]   = 5.0,
+                    ["line-opacity"] = 1.0,
+                });
+            _trackLayerAdded = true;
+        }
+        catch { /* style not ready yet — retried on the next fix / style reload */ }
+    }
 
     public MapViewModel(IDatabaseService db, IGpsService gps, ScanViewModel scan)
     {
@@ -133,7 +226,41 @@ public partial class MapViewModel : ObservableObject
         // FollowBearing) decides whether the location puck is drawn and whether the
         // camera follows the fix — tapping the on-map GPS button cycles the mode.
         MainThread.BeginInvokeOnMainThread(() =>
-            _controller?.UpdateGpsLocation(d.Latitude, d.Longitude, bearing, accuracy));
+        {
+            _controller?.UpdateGpsLocation(d.Latitude, d.Longitude, bearing, accuracy);
+
+            // Append to the breadcrumb track only after real movement. Stationary GPS
+            // jitter wobbles a few metres between fixes, which would otherwise grow the
+            // track by a point every second without adding any visible line — so skip
+            // fixes within ~5 m of the last recorded point (below typical fix accuracy).
+            if (IsTrackEnabled)
+            {
+                var now = DateTime.UtcNow;
+                bool gap = _trackSegments.Count > 0 &&
+                           (now - _lastTrackFixUtc).TotalSeconds > TrackGapSeconds;
+                if (_trackSegments.Count == 0 || gap)
+                    _trackSegments.Add(new List<(double Lon, double Lat)>());
+                _lastTrackFixUtc = now;   // every fix counts as "GPS alive", added or not
+
+                var seg = _trackSegments[^1];
+                const double minMoveMeters = 5.0;
+                bool moved = seg.Count == 0;
+                if (!moved)
+                {
+                    var (lon0, lat0) = seg[^1];
+                    double dLat = (d.Latitude  - lat0) * 111_320.0;
+                    double dLon = (d.Longitude - lon0) * 111_320.0 * Math.Cos(lat0 * Math.PI / 180.0);
+                    moved = dLat * dLat + dLon * dLon >= minMoveMeters * minMoveMeters;
+                }
+                if (moved)
+                {
+                    seg.Add((d.Longitude, d.Latitude));
+                    EnsureTrackLayer();
+                    if (_trackLayerAdded)
+                        _controller?.SetGeoJsonSource("track-source", TrackGeoJson());
+                }
+            }
+        });
     }
 
     private static readonly string[] CellBuckets =
@@ -319,6 +446,19 @@ public partial class MapViewModel : ObservableObject
     {
         _controller = controller;
         _addedVectorLayers.Clear();
+
+        // Fresh style — the track layer (if any) was lost with the old style; re-add it
+        // so an in-progress track keeps drawing after navigation/style changes.
+        _trackLayerAdded = false;
+        if (IsTrackEnabled || _trackSegments.Count > 0)
+            EnsureTrackLayer();
+
+        // Seed the (possibly brand-new) native controller with the latest known fix.
+        // A stationary device may not raise another LocationChanged for a long time,
+        // so without this the puck/follow modes stay dormant on a freshly-opened map
+        // until the user restarts GPS (whose StartAsync publishes a cached fix).
+        if (_gps.IsActive && _gps.CurrentGpsData is { } d && d.Quality != GpsQuality.Invalid)
+            OnGpsData(this, new GpsDataReceivedEventArgs { GpsData = d });
 
         foreach (var layer in HistoryLayers
             .Where(l => l.IsActive)

@@ -11,7 +11,7 @@ namespace VistumblerMAUI.Services;
 /// still working on Android/iOS. A serial/NMEA source (like VistumblerCS's COM-port option)
 /// can be added as a second IGpsService and selected via settings.
 /// </summary>
-public class MauiGeolocationGpsService : IGpsService
+public class MauiGeolocationGpsService : ILocationGpsService
 {
     private bool _listening;
     private DateTime _lastUpdate = DateTime.MinValue;
@@ -63,6 +63,13 @@ public class MauiGeolocationGpsService : IGpsService
             }
             else
             {
+                // Listener already running but our handler may not be attached (e.g. a
+                // previous Stop() unsubscribed without managing to stop the listener).
+                // Re-attach so events always flow after a Start.
+                Geolocation.LocationChanged -= OnLocationChanged;
+                Geolocation.ListeningFailed -= OnListeningFailed;
+                Geolocation.LocationChanged += OnLocationChanged;
+                Geolocation.ListeningFailed += OnListeningFailed;
                 _listening = true;
             }
         }
@@ -90,7 +97,10 @@ public class MauiGeolocationGpsService : IGpsService
     }
 
     private void OnLocationChanged(object? sender, GeolocationLocationChangedEventArgs e)
-        => Publish(e.Location);
+    {
+        DebugLog.Write($"[GpsSvc] fix {e.Location.Latitude:F6},{e.Location.Longitude:F6} acc={e.Location.Accuracy}");
+        Publish(e.Location);
+    }
 
     private void OnListeningFailed(object? sender, GeolocationListeningFailedEventArgs e)
     {
