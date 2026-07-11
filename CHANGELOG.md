@@ -7,6 +7,22 @@
 ### 🐞 Bug fixes
 - _...Add new stuff here..._
 
+## 0.3.6
+### ✨ Features and improvements
+- **GPS track on the map** — new yellow "Enable Track" / "Clear Track" buttons in the map layer bar draw a live breadcrumb line (bright yellow over a dark casing) of where you've been. Points are only added after ~5 m of real movement so a stationary device doesn't grow the track, and the line breaks into separate segments when fixes stop for over 3 minutes instead of drawing a straight connector across the gap. Clearing the track never touches the recorded GPS history.
+- **Background scanning (Android)** — while scanning or GPS is on, the app now runs a foreground service with a partial wakelock (the WiGLE / vistumbler-android model, with a persistent notification), so Wi-Fi scanning and GPS keep collecting with the screen off or another app in front. Stops automatically when both Scan and GPS are off.
+- **"Include GPS track" export option** — KML and GPX exports show a switch (on by default) controlling whether the session's GPS track (`<trk>` / LineString) is embedded alongside the AP placemarks.
+- **Keep screen on while scanning** — optional setting (Settings → Advanced) that holds the display awake while scanning/GPS runs.
+- **Scan/GPS buttons show their action** — "Scan APs" reads "Stop" and "Use GPS" reads "Stop GPS" while active, alongside the existing color change.
+- **Live AP dots scale with zoom** — the live-scan circle radius now grows toward street-level zoom like the history layers (fixed 4 px dots were nearly invisible on high-DPI phones).
+- **Debug logging toggle** — Settings → Advanced → "Debug logging" (off by default) gates the chatty diagnostics (per-fix GPS lines, AP layer refreshes, camera idle) for field troubleshooting via `adb logcat`.
+
+### 🐞 Bug fixes
+- **Android: GPS position now updates continuously** — MAUI's Geolocation foreground listener was observed delivering a single fix and then going permanently silent (Samsung S24 / Android 16), which froze the map puck and left scans without positions until GPS was toggled off/on. Android now drives LocationManager directly, subscribing to every live provider (fused + gps) at 1 s intervals, the same multi-provider pattern WiGLE uses.
+- **Android: map puck appears immediately on the Map tab** — the freshly-created map controller is seeded with the latest known fix on style load, so Follow/Follow-bearing modes engage without waiting for the next OS fix (or restarting GPS).
+- **APs no longer follow the scanner** — an AP's plotted coordinates were overwritten with the device's current position on every scan cycle, dragging all previously-seen APs along with you (and stacking them all on one point when stationary). Coordinates now only update when a detection beats the AP's previous best signal, matching classic Vistumbler's strongest-signal semantics.
+- **Map tap popup readable in dark mode** — the AP info popup drew theme-default (white) text on its hardcoded white card, making it look empty with system dark mode on.
+
 ## 0.3.5
 ### ✨ Features and improvements
 - **Android touch gestures on the map** — via the renderer bump to MapLibreNative.Maui.Handlers 4.2.0, two-finger pinch-zoom, rotate and tilt now work on Android (previously only the on-screen zoom/rotate buttons did).
