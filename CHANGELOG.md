@@ -7,6 +7,10 @@
 ### 🐞 Bug fixes
 - _...Add new stuff here..._
 
+## 0.3.8
+### ✨ Features and improvements
+- **Reworked GPS map buttons: separate tracking and bearing controls** — updated the map renderer to the released MapLibreNative.Maui.Handlers 4.4.0 (replacing the temporary local 4.3.0 test build). The top GPS button now cycles the tracking mode Off ○ → Show ⊙ → Follow ◎ (the combined follow-bearing state is gone), and the bottom button (previously a plain reset-to-north) cycles the camera bearing mode Free ↺ → North-up N → GPS bearing ➤ — matching vistumbler-android's two-button model. Panning the map while in Follow drops back to Show (one tap re-enters Follow), and rotating the map by hand drops the bearing mode back to Free. The location puck now always points in the direction of travel.
+
 ## 0.3.7
 ### ✨ Features and improvements
 - **Android launcher icon** — the app now ships vistumbler-android's adaptive icon set (per-density webps + adaptive-icon manifest) on Android, replacing the generated MAUI icon; the foreground-service notification uses the same icon.
