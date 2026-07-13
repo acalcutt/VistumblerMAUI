@@ -328,7 +328,23 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
 
         // Persist the whole cycle in one transaction (GPS + AP upserts + HIST samples +
         // history-link maintenance) — the VistumblerMDB structure, batched for speed.
-        await _db.SaveScanCycleAsync(toPersist, gps, scanTime);
+        // This handler is async void (event handler): an unhandled exception here kills
+        // the whole app. A transient write failure (observed in the field: "attempt to
+        // write a readonly database" after backgrounding, i.e. a stale/bad connection)
+        // must instead drop this cycle's persist — the in-memory state is already
+        // updated and the next cycle re-persists everything current. Closing the
+        // connection makes the next cycle's InitializeAsync reopen a fresh one.
+        try
+        {
+            await _db.SaveScanCycleAsync(toPersist, gps, scanTime);
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"[ScanVM] SaveScanCycleAsync failed (cycle dropped): {ex.Message}");
+            StatusMessage = "DB write failed — retrying next cycle";
+            try { await _db.CloseAsync(); } catch { /* reopened on next cycle */ }
+            return;
+        }
 
         if (newCount > 0 && _sound.SoundEnabled)
             await _sound.PlayNewNetworkAsync();

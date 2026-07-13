@@ -20,6 +20,17 @@ public partial class MapPage : ContentPage
     {
         Log("ctor start");
         InitializeComponent();
+
+#if ANDROID
+        // Honour the OS "Font size" accessibility setting on the map. MapLibre only
+        // scales by display density, so enlarged text leaves map labels/circles tiny
+        // relative to the rest of the UI. UiScale is read once when the handler
+        // creates the native view — set it before the page enters the visual tree.
+        float fontScale = Android.App.Application.Context.Resources?.Configuration?.FontScale ?? 1f;
+        Map.UiScale = Math.Clamp(fontScale, 0.5, 2.0);
+        Log($"ctor: UiScale={Map.UiScale} (OS FontScale={fontScale})");
+#endif
+
         BindingContext = _vm = vm;
         ScanBar.BindingContext = scan;   // shared control bar reflects the live scan state
         Log($"ctor: BindingContext set, StyleUrl='{_vm.StyleUrl}'");

@@ -10,6 +10,10 @@
 ## 0.3.8
 ### ✨ Features and improvements
 - **Reworked GPS map buttons: separate tracking and bearing controls** — updated the map renderer to the released MapLibreNative.Maui.Handlers 4.4.0 (replacing the temporary local 4.3.0 test build). The top GPS button now cycles the tracking mode Off ○ → Show ⊙ → Follow ◎ (the combined follow-bearing state is gone), and the bottom button (previously a plain reset-to-north) cycles the camera bearing mode Free ↺ → North-up N → GPS bearing ➤ — matching vistumbler-android's two-button model. Panning the map while in Follow drops back to Show (one tap re-enters Follow), and rotating the map by hand drops the bearing mode back to Free. The location puck now always points in the direction of travel.
+- **Map honours the OS "Font size" accessibility setting (Android)** — the map is created with the renderer's new `UiScale` set from the Android font scale, so map labels and AP circles grow with enlarged system text instead of staying tiny relative to the rest of the UI.
+
+### 🐞 Bug fixes
+- **A failed database write during a scan cycle no longer crashes the app** — a transient SQLite failure (seen in the field as "attempt to write a readonly database" after backgrounding) killed the whole app from the async scan handler. The cycle's persist is now dropped with a status-bar notice, the connection is closed so the next cycle reopens a fresh one, and the next cycle re-persists everything current.
 
 ## 0.3.7
 ### ✨ Features and improvements
