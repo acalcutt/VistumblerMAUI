@@ -134,14 +134,41 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore VistumblerMAUI.sln
 
+      - name: Decode release keystore
+        # Android releases MUST be signed with the fixed keystore below. Without an
+        # explicit keystore .NET Android silently falls back to an auto-generated debug
+        # keystore, which on an ephemeral runner is a different random key every run —
+        # every release then has a different signature, so users cannot upgrade in place
+        # and must uninstall (destroying their scan database). Fail loudly rather than
+        # ever shipping a release signed with a throwaway key.
+        shell: pwsh
+        env:
+          KEYSTORE_B64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+        run: |
+          if ([string]::IsNullOrWhiteSpace($env:KEYSTORE_B64)) {
+            throw "ANDROID_KEYSTORE_BASE64 secret is not set - refusing to build an unsigned/debug-signed release."
+          }
+          $path = Join-Path $env:RUNNER_TEMP 'vistumbler-release.keystore'
+          [IO.File]::WriteAllBytes($path, [Convert]::FromBase64String($env:KEYSTORE_B64))
+          echo "ANDROID_KEYSTORE_PATH=$path" >> $env:GITHUB_ENV
+
       - name: Publish Android APK (universal)
         # No -r: the csproj sets <RuntimeIdentifiers>android-arm64;android-x64</> for the
         # Android head, so publish builds one universal APK containing both ABIs
         # (arm64-v8a for phones, x86_64 for emulators) with the native map engine in each.
+        env:
+          KEYSTORE_PASS: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          KEY_PASS: ${{ secrets.ANDROID_KEY_PASSWORD }}
         run: |
           dotnet publish VistumblerMAUI/VistumblerMAUI.csproj `
             -f net10.0-android36.0 `
             -c Release `
+            -p:AndroidKeyStore=true `
+            -p:AndroidSigningKeyStore="$env:ANDROID_KEYSTORE_PATH" `
+            -p:AndroidSigningStorePass="$env:KEYSTORE_PASS" `
+            -p:AndroidSigningKeyAlias="$env:KEY_ALIAS" `
+            -p:AndroidSigningKeyPass="$env:KEY_PASS" `
             --output ./publish/android
 
       - name: Rename APK to release filename
