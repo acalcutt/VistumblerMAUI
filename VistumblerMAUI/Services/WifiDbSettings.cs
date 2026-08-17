@@ -2,8 +2,11 @@ namespace VistumblerMAUI.Services;
 
 /// <summary>
 /// Persisted WifiDB account/connection settings, backed by MAUI <see cref="Preferences"/>.
-/// Shared by SettingsViewModel (which edits them) and MapViewModel (which reads the base
-/// URL when requesting history tiles). Field naming mirrors VistumblerCS's WifiDB settings.
+/// Edited by SettingsViewModel and read when talking to the WifiDB site. Field naming
+/// mirrors VistumblerCS's WifiDB settings.
+///
+/// This is the account, not the map data: history overlays come from the tile archives
+/// on data.wifidb.net and are resolved by <see cref="WifiDbTileSources"/>.
 /// </summary>
 public static class WifiDbSettings
 {
@@ -34,7 +37,4 @@ public static class WifiDbSettings
         get => Preferences.Get(ApiKeyKey, string.Empty);
         set => Preferences.Set(ApiKeyKey, value?.Trim() ?? string.Empty);
     }
-
-    /// <summary>API base, e.g. "https://wifidb.net/api" — append "/tilejson.php" etc.</summary>
-    public static string ApiBaseUrl => Url.TrimEnd('/') + "/api";
 }

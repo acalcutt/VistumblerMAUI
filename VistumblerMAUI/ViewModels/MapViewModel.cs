@@ -31,8 +31,8 @@ public partial class MapViewModel : ObservableObject
 
     // ── Map config ────────────────────────────────────────────────────────────
     // History-layer vector sources (per bucket, e.g. "WifiDB_weekly") are added
-    // dynamically via tilejson.php when each layer is toggled on — see
-    // AddVectorLayer() — not pre-baked into this base style.
+    // dynamically from the bucket's TileJSON when each layer is toggled on — see
+    // AddVectorLayer() and WifiDbTileSources — not pre-baked into this base style.
     [ObservableProperty] private string _styleUrl     = MapStyles.StyleUrl;
     [ObservableProperty] private string _statusMessage = string.Empty;
     [ObservableProperty] private List<AccessPoint> _mappableAps = new();
@@ -401,9 +401,10 @@ public partial class MapViewModel : ObservableObject
 
     private void InitHistoryLayers()
     {
-        // Matches the bucket names WifiDB's mvtd daemon / tilejson.php / VistumblerCS
-        // all agree on: daily, weekly, monthly, 0to1year, 1to2year, 2to3year,
-        // 3to5year, 5to10year, 10yrplus (+ cell_-prefixed equivalents for Cells).
+        // Matches the bucket names WifiDB and VistumblerCS both agree on: daily,
+        // weekly, monthly, 0to1year, 1to2year, 2to3year, 3to5year, 5to10year,
+        // 10yrplus (+ cell_-prefixed equivalents for Cells). WifiDbTileSources maps
+        // each to its published archive.
         // ActiveColor = open-network color — used as the toggle-button highlight tint.
         var defs = new HistoryLayerState[]
         {
@@ -434,8 +435,8 @@ public partial class MapViewModel : ObservableObject
     /// <summary>
     /// Called from MapPage.xaml.cs exactly once per style load, from the StyleLoaded event.
     ///
-    /// All history layers (including daily) are MVT vector layers served by WifiDB's mvtd
-    /// daemon via tilejson.php?bucket={bucket}, exactly like VistumblerCS — each is lazily
+    /// All history layers (including daily) are MVT vector layers read from the per-bucket
+    /// PMTiles archives published to data.wifidb.net (see WifiDbTileSources) — each is lazily
     /// added/removed on toggle (see AddVectorLayer / RemoveVectorLayer). This relies on the
     /// mln-cabi fix shipped in MapLibreNative.Maui 3.2.10 that makes a vector layer's
     /// source-layer trigger a tile relayout when set after the layer is added; before that
@@ -450,6 +451,11 @@ public partial class MapViewModel : ObservableObject
     {
         _controller = controller;
         _addedVectorLayers.Clear();
+
+        // Pick up bucket archives published since the last check. Deliberately not
+        // awaited: the built-in list already resolves every bucket, so nothing here
+        // waits on the network, and a refresh that fails changes nothing.
+        _ = WifiDbTileSources.RefreshIfStaleAsync();
 
         // Fresh style — the track layer (if any) was lost with the old style; re-add it
         // so an in-progress track keeps drawing after navigation/style changes.
@@ -588,10 +594,9 @@ public partial class MapViewModel : ObservableObject
 
     /// <summary>
     /// Add a per-bucket vector source + circle layer for every bucket this layer
-    /// covers. The source is loaded directly from tilejson.php (same as the WifiDB
-    /// web map's mvtd-backed buttons) rather than assuming it's pre-baked into the
-    /// style — MapLibre auto-discovers the real tile URL template/zoom range from
-    /// the fetched TileJSON document.
+    /// covers. The source is loaded from the bucket's TileJSON rather than assuming
+    /// it's pre-baked into the style — MapLibre auto-discovers the real tile URL
+    /// template/zoom range from the fetched document.
     /// </summary>
     private void AddVectorLayer(HistoryLayerState layer)
     {
@@ -605,7 +610,7 @@ public partial class MapViewModel : ObservableObject
             var sourceId = $"WifiDB_{bucket}";
             _controller.AddVectorSource(
                 sourceName:       sourceId,
-                tileUrl:          $"{WifiDbSettings.ApiBaseUrl}/tilejson.php?bucket={bucket}",
+                tileUrl:          WifiDbTileSources.TileJsonUrlFor(bucket),
                 tileUrlTemplates: null,
                 minZoom: 0, maxZoom: 22);
 
@@ -656,7 +661,7 @@ public partial class MapViewModel : ObservableObject
             var sourceId = $"WifiDB_{bucket}";
             _controller.AddVectorSource(
                 sourceName: sourceId,
-                tileUrl:    $"{WifiDbSettings.ApiBaseUrl}/tilejson.php?bucket={bucket}",
+                tileUrl:    WifiDbTileSources.TileJsonUrlFor(bucket),
                 tileUrlTemplates: null, minZoom: 0, maxZoom: 22);
 
             var style = _bucketStyles.TryGetValue(bucket, out var s) ? s : CellBucketStyles["cell_monthly"];

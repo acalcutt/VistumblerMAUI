@@ -5,7 +5,8 @@ namespace VistumblerMAUI.ViewModels;
 
 /// <summary>
 /// Represents one toggleable wifidb.net history overlay on the map — one or more
-/// per-bucket vector tile layers served by WifiDB's mvtd daemon via tilejson.php.
+/// per-bucket vector tile layers, each read from that bucket's published PMTiles
+/// archive (see <see cref="Services.WifiDbTileSources"/>).
 /// </summary>
 public partial class HistoryLayerState : ObservableObject
 {
@@ -23,11 +24,12 @@ public partial class HistoryLayerState : ObservableObject
 
     /// <summary>
     /// WifiDB history-bucket name(s) backing this layer (e.g. "daily", "weekly",
-    /// "cell_daily"), matching the bucket names mvtd/tilejson.php use. Each bucket
-    /// gets its own dynamically-added vector source ("WifiDB_{bucket}", loaded via
-    /// tilejson.php?bucket={bucket}) and circle layer ("hist_{bucket}_circles" with
-    /// source-layer "{bucket}"). Multiple buckets let one button (e.g. "Cell Networks")
-    /// toggle several tiers at once, matching VistumblerCS's combined toggle.
+    /// "cell_daily"). Each bucket gets its own dynamically-added vector source
+    /// ("WifiDB_{bucket}", loaded from the TileJSON that
+    /// <see cref="Services.WifiDbTileSources.TileJsonUrlFor"/> resolves) and circle
+    /// layer ("hist_{bucket}_circles" with source-layer "{bucket}"). Multiple buckets
+    /// let one button (e.g. "Cell Networks") toggle several tiers at once, matching
+    /// VistumblerCS's combined toggle.
     /// </summary>
     public string[]? Buckets         { get; init; }
 
