@@ -452,10 +452,11 @@ public partial class MapViewModel : ObservableObject
         _controller = controller;
         _addedVectorLayers.Clear();
 
-        // Pick up bucket archives published since the last check. Deliberately not
-        // awaited: the built-in list already resolves every bucket, so nothing here
-        // waits on the network, and a refresh that fails changes nothing.
-        _ = WifiDbTileSources.RefreshIfStaleAsync();
+        // Find out whether WifiDB's TileJSON endpoint can be reached, so the history
+        // layers fall back to the archives directly if it cannot. Deliberately not
+        // awaited: a layer is added synchronously and cannot wait for this, and until
+        // it answers the endpoint is assumed to work.
+        _ = WifiDbTileSources.ProbeAsync();
 
         // Fresh style — the track layer (if any) was lost with the old style; re-add it
         // so an in-progress track keeps drawing after navigation/style changes.

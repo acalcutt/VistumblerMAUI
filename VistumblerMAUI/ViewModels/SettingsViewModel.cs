@@ -72,6 +72,16 @@ public partial class SettingsViewModel : ObservableObject
     [ObservableProperty] private string _customMapStyleUrl = string.Empty;
     [ObservableProperty] private bool   _isCustomMapStyle;
 
+    // ── GPS follow zoom ───────────────────────────────────────────────────────
+    // How the map zooms when the GPS control's Follow mode engages. Persists via
+    // MapFollowSettings; MapPage applies it to the map control on appearing.
+    public IReadOnlyList<string> FollowZoomOptions { get; } =
+        new[] { "Auto (fit GPS accuracy)", "Manual zoom level", "Keep current zoom" };
+
+    [ObservableProperty] private string _selectedFollowZoom = string.Empty;
+    [ObservableProperty] private string _manualFollowZoom = string.Empty;
+    [ObservableProperty] private bool   _isManualFollowZoom;
+
     // ── Map AP colors ─────────────────────────────────────────────────────────
     // One row per bucket (live active/dead + WifiDB history tiers), each with Open/WEP/
     // Secure hex colors. Rows persist immediately via MapColors; the map picks up the
@@ -94,7 +104,30 @@ public partial class SettingsViewModel : ObservableObject
             _isCustomMapStyle  = true;
         }
 
+        _selectedFollowZoom = MapFollowSettings.Mode switch
+        {
+            FollowZoom.Manual      => FollowZoomOptions[1],
+            FollowZoom.KeepCurrent => FollowZoomOptions[2],
+            _                      => FollowZoomOptions[0],
+        };
+        _isManualFollowZoom = MapFollowSettings.Mode == FollowZoom.Manual;
+        _manualFollowZoom   = MapFollowSettings.ManualZoom.ToString("0.#");
+
         RefreshComPorts();
+    }
+
+    partial void OnSelectedFollowZoomChanged(string value)
+    {
+        MapFollowSettings.Mode = value == FollowZoomOptions[1] ? FollowZoom.Manual
+                               : value == FollowZoomOptions[2] ? FollowZoom.KeepCurrent
+                               : FollowZoom.Auto;
+        IsManualFollowZoom = MapFollowSettings.Mode == FollowZoom.Manual;
+    }
+
+    partial void OnManualFollowZoomChanged(string value)
+    {
+        if (double.TryParse(value, out var zoom) && zoom is >= 1 and <= 22)
+            MapFollowSettings.ManualZoom = zoom;
     }
 
     partial void OnSelectedMapStyleChanged(string value)
@@ -121,16 +154,19 @@ public partial class SettingsViewModel : ObservableObject
     }
 
     // ── WifiDB ──────────────────────────────────────────────────────────────
-    // Backed by WifiDbSettings (MAUI Preferences) so they persist and are readable
-    // by MapViewModel when it requests history tiles.
-    [ObservableProperty] private string _wifiDbUrl    = WifiDbSettings.Url;
-    [ObservableProperty] private string _wifiDbUser   = WifiDbSettings.User;
-    [ObservableProperty] private string _wifiDbApiKey = WifiDbSettings.ApiKey;
-    [ObservableProperty] private string _wifiDbStatus = string.Empty;
+    // Backed by MAUI Preferences so they persist: the account against WifiDbSettings,
+    // and the map-data origin against WifiDbTileSources, which is a different host and
+    // is read by the history overlays.
+    [ObservableProperty] private string _wifiDbUrl     = WifiDbSettings.Url;
+    [ObservableProperty] private string _wifiDbUser    = WifiDbSettings.User;
+    [ObservableProperty] private string _wifiDbApiKey  = WifiDbSettings.ApiKey;
+    [ObservableProperty] private string _wifiDbDataUrl = WifiDbTileSources.DataRoot;
+    [ObservableProperty] private string _wifiDbStatus  = string.Empty;
 
-    partial void OnWifiDbUrlChanged(string value)    => WifiDbSettings.Url    = value;
-    partial void OnWifiDbUserChanged(string value)   => WifiDbSettings.User   = value;
-    partial void OnWifiDbApiKeyChanged(string value) => WifiDbSettings.ApiKey = value;
+    partial void OnWifiDbUrlChanged(string value)     => WifiDbSettings.Url     = value;
+    partial void OnWifiDbUserChanged(string value)    => WifiDbSettings.User    = value;
+    partial void OnWifiDbApiKeyChanged(string value)  => WifiDbSettings.ApiKey  = value;
+    partial void OnWifiDbDataUrlChanged(string value) => WifiDbTileSources.DataRoot = value;
 
     /// <summary>Re-read the persisted WifiDB fields (e.g. after returning from the QR scanner).</summary>
     public void Reload()

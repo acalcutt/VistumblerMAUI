@@ -34,6 +34,23 @@
                    Text="{Binding CustomMapStyleUrl}"
                    Placeholder="https://…/style.json"
                    Keyboard="Url" />
+            <Grid ColumnDefinitions="Auto,*" Padding="16,12" ColumnSpacing="12">
+                <Label Grid.Column="0" Text="GPS follow zoom" VerticalOptions="Center" />
+                <Picker Grid.Column="1"
+                        ItemsSource="{Binding FollowZoomOptions}"
+                        SelectedItem="{Binding SelectedFollowZoom}" />
+            </Grid>
+            <Grid ColumnDefinitions="Auto,*" Padding="16,0,16,8" ColumnSpacing="12"
+                  IsVisible="{Binding IsManualFollowZoom}">
+                <Label Grid.Column="0" Text="Zoom level (1–22)" VerticalOptions="Center" />
+                <Entry Grid.Column="1"
+                       Text="{Binding ManualFollowZoom}"
+                       Keyboard="Numeric"
+                       WidthRequest="80"
+                       HorizontalOptions="Start" />
+            </Grid>
+            <Label Margin="16,0,16,8" FontSize="12" TextColor="Gray"
+                   Text="Zoom applied when the map's GPS button enters Follow mode. Auto picks a level where the fix's accuracy circle is visible; pinch-zooming afterwards sticks until Follow is re-entered." />
             <BoxView HeightRequest="1" Color="#EEEEEE" Margin="16,0" />
 
             <!-- Map AP colors -->
@@ -113,7 +130,7 @@
             <!-- WifiDB -->
             <Label Text="WIFIDB" Style="{StaticResource SectionHeader}" />
             <Grid ColumnDefinitions="Auto,*" Padding="16,8" ColumnSpacing="12" RowSpacing="8"
-                  RowDefinitions="Auto,Auto,Auto">
+                  RowDefinitions="Auto,Auto,Auto,Auto">
                 <Label Grid.Row="0" Grid.Column="0" Text="Base URL" VerticalOptions="Center" />
                 <Entry Grid.Row="0" Grid.Column="1" Text="{Binding WifiDbUrl}"
                        Placeholder="https://wifidb.net/" Keyboard="Url" />
@@ -124,7 +141,13 @@
                 <Label Grid.Row="2" Grid.Column="0" Text="API key" VerticalOptions="Center" />
                 <Entry Grid.Row="2" Grid.Column="1" Text="{Binding WifiDbApiKey}"
                        Placeholder="API key" IsPassword="True" />
+
+                <Label Grid.Row="3" Grid.Column="0" Text="Data URL" VerticalOptions="Center" />
+                <Entry Grid.Row="3" Grid.Column="1" Text="{Binding WifiDbDataUrl}"
+                       Placeholder="https://data.wifidb.net" Keyboard="Url" />
             </Grid>
+            <Label Text="Data URL serves the map history archives and the feed listing them — a different host from the site above."
+                   FontSize="11" TextColor="Gray" Margin="16,0" />
 
             <Button Text="Register with QR code"
                     Command="{Binding ScanWifiDbQrCommand}"
