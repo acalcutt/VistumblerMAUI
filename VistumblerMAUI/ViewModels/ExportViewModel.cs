@@ -76,9 +76,20 @@ public partial class ExportViewModel : ObservableObject
 
             var extension = GetExtension(SelectedFormat);
             var name = string.IsNullOrWhiteSpace(FileName) ? $"vistumbler_{DateTime.Now:yyyyMMdd_HHmmss}" : FileName;
-            var path = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                Path.GetFileNameWithoutExtension(name) + extension);
+            // SpecialFolderOption.Create, because on Android MyDocuments is
+            // /data/user/0/<package>/files/Documents and nothing has made it. The
+            // plain overload returns the path whether or not it exists, so every
+            // export on a fresh install failed with IO_PathNotFound_Path against a
+            // directory the app itself was supposed to own.
+            var folder = Environment.GetFolderPath(
+                Environment.SpecialFolder.MyDocuments,
+                Environment.SpecialFolderOption.Create);
+            // Belt and braces: the Create option is a no-op on the platforms where
+            // GetFolderPath consults the OS rather than composing a path, and a
+            // second Directory.CreateDirectory on an existing directory costs
+            // nothing.
+            Directory.CreateDirectory(folder);
+            var path = Path.Combine(folder, Path.GetFileNameWithoutExtension(name) + extension);
 
             switch (SelectedFormat)
             {
@@ -121,6 +132,16 @@ public partial class ExportViewModel : ObservableObject
             }
 
             StatusMessage = $"Exported {aps.Count} access point(s) to {path}";
+
+            // Offer the file to whatever can take it off the device.
+            //
+            // On Android the directory above is app-private internal storage: no
+            // file manager can see it and no browser can attach it, so an export
+            // that "succeeded" left the data somewhere the person who asked for it
+            // could not reach — which is the whole point of exporting. The share
+            // sheet is the platform's answer, and it is also what makes uploading a
+            // scan to WifiDB possible from the phone that recorded it.
+            await ShareAsync(path);
         }
         catch (Exception ex)
         {
@@ -129,6 +150,30 @@ public partial class ExportViewModel : ObservableObject
         finally
         {
             IsExporting = false;
+        }
+    }
+
+    /// <summary>
+    /// Hands an exported file to the platform share sheet.
+    /// </summary>
+    /// <remarks>
+    /// Never allowed to fail the export. The bytes are on disk by the time this
+    /// runs, so a device with nothing to share to, or a user who dismisses the
+    /// sheet, must not turn a successful write into "Export failed".
+    /// </remarks>
+    private static async Task ShareAsync(string path)
+    {
+        try
+        {
+            await Share.Default.RequestAsync(new ShareFileRequest
+            {
+                Title = "Vistumbler export",
+                File = new ShareFile(path)
+            });
+        }
+        catch (Exception)
+        {
+            // The file is written; where it goes next is the platform's business.
         }
     }
 
