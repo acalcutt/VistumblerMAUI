@@ -87,8 +87,31 @@ jobs:
       - name: Restore workloads
         run: dotnet workload restore VistumblerMAUI.sln
 
-      - name: Select Xcode 26.5
-        run: sudo xcode-select -s /Applications/Xcode_26.5.app
+      # Pick the newest stable Xcode on the image rather than naming a version.
+      # The .NET iOS SDK enforces a minimum Xcode and raises it as it updates,
+      # so a hard-pinned version eventually sits below what the restored
+      # workload demands: pinning 26.5 broke the build the day the SDK went to
+      # 26.5.10315, which requires 26.6.
+      #
+      # Real app bundles only, and only ones that actually carry the macOS SDK.
+      # The image ships X.Y.0 symlinks beside each Xcode_X.Y.app, and selecting
+      # a symlink leaves xcodebuild unable to locate MacOSX.sdk -- actool then
+      # dies with exit code 72, which is not obviously an Xcode-selection
+      # problem from the log. Betas are skipped; the image carries those too.
+      - name: Select the newest stable Xcode
+        run: |
+          for XCODE in $(find /Applications -maxdepth 1 -type d -name 'Xcode_*.app' \
+                         | grep -vi beta | sort -Vr); do
+            if [ -d "$XCODE/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk" ]; then
+              echo "Selecting $XCODE"
+              sudo xcode-select -s "$XCODE"
+              xcodebuild -version
+              exit 0
+            fi
+            echo "Skipping $XCODE — no macOS SDK"
+          done
+          echo "::error::No Xcode with a macOS SDK found under /Applications"
+          exit 1
 
       - name: Build (net10.0-ios, simulator — no code signing required)
         # No separate restore step here: this build specifies an explicit
