@@ -245,6 +245,15 @@ public partial class MapPage : ContentPage
             _ = StartWatchdogAsync();
         }
 
+        // Pick up the GPS follow-zoom setting; applies the next time Follow engages.
+        Map.GpsFollowZoomMode = Services.MapFollowSettings.Mode switch
+        {
+            Services.FollowZoom.Manual      => MapLibreNative.Maui.GpsFollowZoomMode.Fixed,
+            Services.FollowZoom.KeepCurrent => MapLibreNative.Maui.GpsFollowZoomMode.KeepCurrent,
+            _                               => MapLibreNative.Maui.GpsFollowZoomMode.Accuracy,
+        };
+        Map.GpsFollowZoom = Services.MapFollowSettings.ManualZoom;
+
         // Pick up a basemap style changed in Settings. Assigning StyleUrl reloads the
         // map style, and OnMapControllerReady (fired on StyleLoaded) re-applies the
         // active history layers.
