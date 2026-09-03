@@ -12,9 +12,30 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # One label for every artifact in the run, so a downloaded build says which
+  # commit it came from. Mirrors release.yml's version lookup, but never claims
+  # to be a release: the run number and short SHA are always in the name.
+  label:
+    name: Compute artifact label
+    runs-on: ubuntu-latest
+    outputs:
+      label: ${{ steps.label.outputs.label }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build the label
+        id: label
+        run: |
+          VERSION=$(grep -oP '<ApplicationDisplayVersion>\K[^<]+' VistumblerMAUI/VistumblerMAUI.csproj | head -1)
+          LABEL="v${VERSION}-ci${{ github.run_number }}-$(git rev-parse --short HEAD)"
+          echo "label=$LABEL" >> "$GITHUB_OUTPUT"
+          echo "Artifact label: $LABEL"
+
   build-windows:
     name: Build Windows (${{ matrix.rid }})
     runs-on: windows-latest
+    needs: label
     strategy:
       fail-fast: false
       matrix:
@@ -31,25 +52,51 @@ jobs:
       - name: Restore workloads
         run: dotnet workload restore VistumblerMAUI.sln
 
-      - name: Build (${{ matrix.rid }})
-        # No separate `dotnet restore` step: a generic RID-less restore doesn't pull
-        # the runtime pack this RID-aware build needs (NETSDK1112); let the build
-        # restore in one shot. -p:UseMonoRuntime=false: this multi-target MAUI csproj
-        # otherwise resolves a Mono runtime pack
-        # (Microsoft.NETCore.App.Runtime.Mono.${{ matrix.rid }}) for the Windows head,
-        # which doesn't exist (NU1101) — force the CoreCLR pack so an explicit RID
-        # (required to cross-build win-arm64 on an x64 runner) resolves.
+      - name: Publish ${{ matrix.rid }}
+        # Publishes rather than builds, with the same switches release.yml uses, so
+        # this job exercises the path that actually ships — a publish-only failure
+        # (self-contained runtime packs, Windows App SDK bundling) now surfaces on a
+        # PR instead of during a release.
+        #
+        # No separate `dotnet restore`: a generic RID-less restore doesn't pull the
+        # runtime pack this RID-aware publish needs (NETSDK1112); let publish restore
+        # in one shot. -p:UseMonoRuntime=false: this multi-target MAUI csproj otherwise
+        # resolves a Mono runtime pack (Microsoft.NETCore.App.Runtime.Mono.<rid>) for
+        # the Windows head, which doesn't exist (NU1101) — force the CoreCLR pack so an
+        # explicit RID (required to cross-build win-arm64 on an x64 runner) resolves.
+        #
+        # --self-contained + WindowsAppSDKSelfContained: bundle both runtimes so the
+        # artifact runs with nothing pre-installed. No PublishSingleFile — WinUI 3 apps
+        # don't support it, so the output is a folder, zipped below.
         run: |
-          dotnet build VistumblerMAUI/VistumblerMAUI.csproj `
+          dotnet publish VistumblerMAUI/VistumblerMAUI.csproj `
             -f net10.0-windows10.0.19041.0 `
             -c Release `
             -r ${{ matrix.rid }} `
+            --self-contained true `
             -p:WindowsPackageType=None `
-            -p:UseMonoRuntime=false
+            -p:UseMonoRuntime=false `
+            -p:WindowsAppSDKSelfContained=true `
+            --output ./publish/${{ matrix.rid }}
+
+      - name: Package ${{ matrix.rid }}
+        shell: pwsh
+        run: |
+          Compress-Archive `
+            -Path "./publish/${{ matrix.rid }}/*" `
+            -DestinationPath "./Vistumbler-${{ needs.label.outputs.label }}-${{ matrix.rid }}.zip"
+
+      - name: Upload ${{ matrix.rid }} app
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-app-windows-${{ matrix.rid }}
+          path: Vistumbler-${{ needs.label.outputs.label }}-${{ matrix.rid }}.zip
+          retention-days: 7
 
   build-android:
     name: Build Android
     runs-on: windows-latest
+    needs: label
 
     steps:
       - uses: actions/checkout@v4
@@ -62,12 +109,43 @@ jobs:
       - name: Restore workloads
         run: dotnet workload restore VistumblerMAUI.sln
 
-      - name: Build (net10.0-android36.0)
-        # No separate restore step, for the same reason as the Windows job above.
+      - name: Restore dependencies
+        run: dotnet restore VistumblerMAUI.sln
+
+      - name: Publish Android APK (universal)
+        # Deliberately NOT signed with the release keystore, unlike release.yml.
+        # Secrets are unavailable to pull requests from forks, so requiring them
+        # would make CI unrunnable for outside contributions; and a CI build has no
+        # business carrying the release signature. .NET Android falls back to an
+        # auto-generated debug key, which differs every run — so this APK installs
+        # fine on a clean device but will NOT upgrade over a release install. The
+        # artifact name says debug-signed for that reason.
+        #
+        # No -r: the csproj sets <RuntimeIdentifiers>android-arm64;android-x64</> for
+        # the Android head, so this produces one universal APK carrying both
+        # (arm64-v8a for phones, x86_64 for emulators), matching release.yml.
         run: |
-          dotnet build VistumblerMAUI/VistumblerMAUI.csproj `
+          dotnet publish VistumblerMAUI/VistumblerMAUI.csproj `
             -f net10.0-android36.0 `
-            -c Release
+            -c Release `
+            --output ./publish/android
+
+      - name: Rename APK
+        shell: pwsh
+        run: |
+          $apk = Get-ChildItem -Path "./publish/android" -Filter "*-Signed.apk" -Recurse | Select-Object -First 1
+          if (-not $apk) {
+            $apk = Get-ChildItem -Path "./publish/android" -Filter "*.apk" -Recurse | Select-Object -First 1
+          }
+          if (-not $apk) { throw "No APK found under ./publish/android" }
+          Copy-Item $apk.FullName -Destination "./Vistumbler-${{ needs.label.outputs.label }}-android-debug-signed.apk"
+
+      - name: Upload Android APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-app-android
+          path: Vistumbler-${{ needs.label.outputs.label }}-android-debug-signed.apk
+          retention-days: 7
 
   build-ios:
     name: Build iOS (simulator)
@@ -75,6 +153,7 @@ jobs:
     # sample app against this same MapLibreNative.Maui package — the default
     # Xcode on older runner images is too old for the .NET 10 iOS workload.
     runs-on: macos-26
+    needs: label
 
     steps:
       - uses: actions/checkout@v4
@@ -114,6 +193,10 @@ jobs:
           exit 1
 
       - name: Build (net10.0-ios, simulator — no code signing required)
+        # Stays a build rather than a publish: there is no iOS release to mirror,
+        # and a device publish would need signing assets CI does not have. The
+        # simulator .app is the runnable artifact.
+        #
         # No separate restore step here: this build specifies an explicit
         # RuntimeIdentifier, so let it do its own RID-aware implicit restore
         # rather than relying on a prior RID-less `dotnet restore`.
@@ -127,3 +210,30 @@ jobs:
             -c Release \
             -p:EnableWindowsTargeting=true \
             -p:RuntimeIdentifier=iossimulator-arm64
+
+      - name: Package simulator app
+        # ditto rather than zip: it preserves the bundle's executable bits and
+        # symlinks, which actions/upload-artifact would otherwise drop, leaving a
+        # .app the simulator refuses to launch.
+        run: |
+          BASE=VistumblerMAUI/bin/Release/net10.0-ios/iossimulator-arm64
+          # Prefer the bundle sitting directly in the output directory; only widen
+          # the search if it isn't there, so a nested .app can never be picked over
+          # the real one.
+          APP=$(find "$BASE" -maxdepth 1 -name '*.app' -type d | head -1)
+          [ -z "$APP" ] && APP=$(find "$BASE" -name '*.app' -type d | head -1)
+          if [ -z "$APP" ]; then
+            echo "::error::No .app bundle found under $BASE"
+            find "$BASE" -maxdepth 3 || true
+            exit 1
+          fi
+          echo "Packaging $APP"
+          ditto -c -k --sequesterRsrc --keepParent "$APP" \
+            "Vistumbler-${{ needs.label.outputs.label }}-iossimulator-arm64.zip"
+
+      - name: Upload simulator app
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-app-ios-simulator
+          path: Vistumbler-${{ needs.label.outputs.label }}-iossimulator-arm64.zip
+          retention-days: 7
