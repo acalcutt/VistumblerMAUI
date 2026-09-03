@@ -19,6 +19,32 @@
             <Entry Margin="16,0" Text="{Binding FileName}" Placeholder="vistumbler_export" />
             <BoxView HeightRequest="1" Color="#EEEEEE" Margin="16,8" />
 
+            <Label Text="LOCATION" Style="{StaticResource SectionHeader}" />
+            <Grid ColumnDefinitions="*,Auto" Margin="16,0" ColumnSpacing="8">
+                <Label Grid.Column="0"
+                       Text="{Binding ExportFolder}"
+                       LineBreakMode="HeadTruncation"
+                       VerticalOptions="Center" />
+                <Button Grid.Column="1"
+                        Text="Browse…"
+                        Command="{Binding BrowseFolderCommand}"
+                        Padding="12,0"
+                        HeightRequest="36" />
+            </Grid>
+            <Button Text="Use default folder"
+                    Command="{Binding UseDefaultFolderCommand}"
+                    IsVisible="{Binding IsCustomFolder}"
+                    Margin="16,8,16,0"
+                    HorizontalOptions="Start"
+                    Padding="12,0"
+                    HeightRequest="32"
+                    BackgroundColor="Transparent"
+                    TextColor="Gray" />
+            <Label Text="The file is offered to the share sheet after every export, so it can be sent on wherever it was written."
+                   FontSize="12" TextColor="Gray"
+                   Margin="16,8,16,0" />
+            <BoxView HeightRequest="1" Color="#EEEEEE" Margin="16,8" />
+
             <!-- KML-only options -->
             <StackLayout IsVisible="{Binding SelectedFormat, Converter={StaticResource IsKmlFormat}}">
                 <Label Text="KML OPTIONS" Style="{StaticResource SectionHeader}" />
