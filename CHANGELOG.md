@@ -2,6 +2,13 @@
 
 ## master
 ### ✨ Features and improvements
+- _...Add new stuff here..._
+
+### 🐞 Bug fixes
+- _...Add new stuff here..._
+
+## 0.3.9-pre.1
+### ✨ Features and improvements
 - **History overlays keep working when wifidb.net cannot be reached** — the age-tier and cell layers still ask WifiDB for each bucket's TileJSON, which now points them at that bucket's published PMTiles archive on data.wifidb.net. If WifiDB itself is unreachable, the app now goes to those archives directly instead of drawing nothing, using a built-in address per bucket. Each fallback address carries the bucket's `.torrent` and magnet in its fragment — unused for now, so the handles are already in place when peer-to-peer tile loading arrives. The magnets name a bucket rather than one nightly build, so they stay valid as the archives are rebuilt.
 - **New "Data URL" setting (Settings → WifiDB)** — the origin those archives are fetched from, separate from the site's Base URL because it is a different host. Defaults to `https://data.wifidb.net`; point it at a mirror to move the fallback.
 - **Export can choose where the file goes** (Export → Location) — the page offered a file name and nothing else, so every export landed in the app's own documents folder. **Browse…** now opens the platform's folder picker and the choice is remembered; **Use default folder** puts it back.
@@ -16,6 +23,8 @@
 - **GPS follow zoom setting (Settings → Map)** — controls the zoom applied when the map's GPS button enters Follow mode, like vistumbler-android's zoom-to-location. **Auto (fit GPS accuracy)** (default) picks a level where the fix's accuracy circle spans about a third of the screen — a sharp fix lands at street level, a coarse fix stays zoomed out; **Manual zoom level** always eases to a chosen level (1–22); **Keep current zoom** preserves the old behaviour. Pinch-zooming while following sticks until Follow is re-entered. Uses the map renderer's new `GpsFollowZoomMode`/`GpsFollowZoom` (MapLibreNative.Maui.Handlers 5.0.0-pre.2).
 
 ### 🐞 Bug fixes
+
+- chore(deps): update the map renderer to MapLibreNative.Maui.Handlers … ([#3](https://github.com/acalcutt/VistumblerMAUI/pull/3)) (@acalcutt)
 - **Export failed on Android with `IO_PathNotFound_Path`** — every format, every time. `MyDocuments` on Android is `/data/user/0/<package>/files/Documents`, and `Environment.GetFolderPath` hands back that path whether or not it exists; nothing had ever created it, so the write failed against a directory the app itself owns. Now created before writing. The finished file is also offered to the share sheet, because that directory is app-private internal storage — no file manager can see it and no browser can attach it, so an export that "succeeded" still left the data out of reach.
 
 ## 0.3.8
