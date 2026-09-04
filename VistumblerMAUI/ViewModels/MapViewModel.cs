@@ -23,9 +23,9 @@ public partial class MapViewModel : ObservableObject
     private readonly HashSet<string> _addedVectorLayers = new();
 
     // Lazily created the first time the user pre-caches a map area for offline use.
-    // Shares the map's cache database (MbglCache.DefaultPath), so downloaded tiles are
+    // Shares the map's cache database (MlnCache.DefaultPath), so downloaded tiles are
     // served straight to the live map — including when the network is forced offline.
-    private MbglOfflineManager? _offline;
+    private MlnOfflineManager? _offline;
 
     private const string EmptyGeoJson = "{\"type\":\"FeatureCollection\",\"features\":[]}";
 
@@ -486,11 +486,11 @@ public partial class MapViewModel : ObservableObject
 
     /// <summary>Lazily creates the shared offline manager and routes its progress/error
     /// callbacks (raised on MapLibre's database thread) to <see cref="StatusMessage"/>.</summary>
-    private MbglOfflineManager GetOfflineManager()
+    private MlnOfflineManager GetOfflineManager()
     {
         if (_offline != null) return _offline;
 
-        _offline = new MbglOfflineManager();
+        _offline = new MlnOfflineManager();
         _offline.RegionProgress += p => MainThread.BeginInvokeOnMainThread(() =>
             StatusMessage = p.Complete
                 ? $"Offline map area ready — {p.CompletedResources} tiles, {p.CompletedBytes / 1024} KB cached"
@@ -544,7 +544,7 @@ public partial class MapViewModel : ObservableObject
     private void ToggleOffline()
     {
         IsOffline = !IsOffline;
-        MbglNetwork.Online = !IsOffline;
+        MlnNetwork.Online = !IsOffline;
         StatusMessage = IsOffline
             ? "Offline mode — showing cached map tiles only"
             : "Online mode — map tiles load from the network";

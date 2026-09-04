@@ -1,3 +1,4 @@
+using CommunityToolkit.Maui.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Vistumbler.Core.Models;
@@ -32,6 +33,13 @@ public partial class ExportViewModel : ObservableObject
     [ObservableProperty] private string _statusMessage = "Ready";
     [ObservableProperty] private bool _isExporting;
 
+    /// <summary>The folder exports are written to, shown on the page.</summary>
+    [ObservableProperty] private string _exportFolder = Services.ExportLocation.Resolve().Folder;
+
+    /// <summary>Whether that folder was picked rather than the app's default, which is
+    /// what the "Use default folder" button is offered for.</summary>
+    [ObservableProperty] private bool _isCustomFolder = Services.ExportLocation.Resolve().UsedChoice;
+
     [ObservableProperty] private bool _includeOpenNetworks = true;
     [ObservableProperty] private bool _includeWepNetworks = true;
     [ObservableProperty] private bool _includeSecureNetworks = true;
@@ -49,6 +57,62 @@ public partial class ExportViewModel : ObservableObject
     /// <summary>Return to Settings without exporting.</summary>
     [RelayCommand]
     private static Task CancelAsync() => Shell.Current.GoToAsync("..");
+
+    /// <summary>
+    /// Choose the folder to export into, through the platform's own picker.
+    /// </summary>
+    /// <remarks>
+    /// The pick is checked for writability before it is kept, so a folder the app cannot
+    /// write to is refused here — with the reason on screen — rather than at the end of
+    /// the next export. That check matters most on Android, where the picker will happily
+    /// return a Storage Access Framework tree whose reported path scoped storage does not
+    /// let this app write to.
+    /// </remarks>
+    [RelayCommand]
+    private async Task BrowseFolderAsync()
+    {
+        try
+        {
+            var result = await FolderPicker.Default.PickAsync(ExportFolder, CancellationToken.None);
+
+            if (!result.IsSuccessful)
+            {
+                // Cancelling is the ordinary case and says nothing worth reporting.
+                if (result.Exception is not null and not OperationCanceledException)
+                    StatusMessage = $"Could not choose a folder: {result.Exception.Message}";
+                return;
+            }
+
+            var picked = result.Folder.Path;
+
+            if (!Services.ExportLocation.IsWritable(picked))
+            {
+                StatusMessage = $"Cannot write to {picked} — keeping {ExportFolder}";
+                return;
+            }
+
+            Services.ExportLocation.Chosen = picked;
+            ExportFolder   = picked;
+            IsCustomFolder = true;
+            StatusMessage  = $"Exports will be written to {picked}";
+        }
+        catch (Exception ex)
+        {
+            // Not every platform offers a folder picker, and a refused permission
+            // arrives here too. The chosen folder is left alone.
+            StatusMessage = $"Could not choose a folder: {ex.Message}";
+        }
+    }
+
+    /// <summary>Go back to writing exports into the app's own documents folder.</summary>
+    [RelayCommand]
+    private void UseDefaultFolder()
+    {
+        Services.ExportLocation.Reset();
+        ExportFolder   = Services.ExportLocation.DefaultFolder;
+        IsCustomFolder = false;
+        StatusMessage  = $"Exports will be written to {ExportFolder}";
+    }
 
     [RelayCommand(CanExecute = nameof(CanExport))]
     private async Task ExportAsync()
@@ -76,19 +140,16 @@ public partial class ExportViewModel : ObservableObject
 
             var extension = GetExtension(SelectedFormat);
             var name = string.IsNullOrWhiteSpace(FileName) ? $"vistumbler_{DateTime.Now:yyyyMMdd_HHmmss}" : FileName;
-            // SpecialFolderOption.Create, because on Android MyDocuments is
-            // /data/user/0/<package>/files/Documents and nothing has made it. The
-            // plain overload returns the path whether or not it exists, so every
-            // export on a fresh install failed with IO_PathNotFound_Path against a
-            // directory the app itself was supposed to own.
-            var folder = Environment.GetFolderPath(
-                Environment.SpecialFolder.MyDocuments,
-                Environment.SpecialFolderOption.Create);
-            // Belt and braces: the Create option is a no-op on the platforms where
-            // GetFolderPath consults the OS rather than composing a path, and a
-            // second Directory.CreateDirectory on an existing directory costs
-            // nothing.
-            Directory.CreateDirectory(folder);
+            // Resolve rather than trust: a folder chosen on this page may since have
+            // been removed, unmounted, or had its permission revoked, and it proves
+            // the folder writable before anything is exported into it.
+            var (folder, usedChoice) = Services.ExportLocation.Resolve();
+            var fellBack = Services.ExportLocation.Chosen.Length > 0 && !usedChoice;
+
+            // Keep the page honest about where the file actually went.
+            ExportFolder   = folder;
+            IsCustomFolder = usedChoice;
+
             var path = Path.Combine(folder, Path.GetFileNameWithoutExtension(name) + extension);
 
             switch (SelectedFormat)
@@ -131,7 +192,9 @@ public partial class ExportViewModel : ObservableObject
                     break;
             }
 
-            StatusMessage = $"Exported {aps.Count} access point(s) to {path}";
+            StatusMessage = fellBack
+                ? $"Exported {aps.Count} access point(s) to {path} — the chosen folder could not be written to"
+                : $"Exported {aps.Count} access point(s) to {path}";
 
             // Offer the file to whatever can take it off the device.
             //

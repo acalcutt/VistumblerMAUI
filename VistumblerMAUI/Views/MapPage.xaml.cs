@@ -84,7 +84,7 @@ public partial class MapPage : ContentPage
         }
 
         // Workaround: On Windows the property mapper fires UpdateStyleUrl before the
-        // native MbglMap is created, so SetStyleString returns early and no style is
+        // native MlnMap is created, so SetStyleString returns early and no style is
         // loaded. Re-applying here triggers the actual load.
         try
         {
@@ -123,6 +123,7 @@ public partial class MapPage : ContentPage
 
             _ = _vm.LoadMappableApsCommand.ExecuteAsync(null);
             RefreshLiveApLayer();   // (re)create the live AP source+layer on the fresh style
+            RefreshTerrainControl();
         }
         catch (Exception ex)
         {
@@ -156,6 +157,81 @@ public partial class MapPage : ContentPage
         }
     }
 
+    /// <summary>
+    /// Show the map's 3D terrain button only for styles that can actually drape, and
+    /// point it at the right DEM.
+    ///
+    /// The renderer's terrain control adds no sources of its own — it toggles terrain
+    /// against a raster-dem that must already be in the style — so on a style without
+    /// one the button would be a control that does nothing. Which DEM matters too: the
+    /// WifiDB relief styles carry five, and the wrong pick drapes the map over GEBCO
+    /// bathymetry instead of land. <see cref="Services.TerrainSources"/> resolves it.
+    ///
+    /// A style without one still gets the button: the app adds a DEM of its own from
+    /// <see cref="Services.TerrainSources.Fallbacks"/>. The style's own DEM is preferred
+    /// when there is one — it is the source that style's hillshade and relief layers
+    /// already draw from, so terrain matches what is drawn rather than disagreeing with
+    /// it, and nothing extra is fetched.
+    ///
+    /// Runs on every style load, since the answer changes with the basemap and a style
+    /// reload drops any source the app added. The button is hidden first and shown once
+    /// the lookup lands; the result is cached per URL, so only the first load of each
+    /// style waits on a request.
+    /// </summary>
+    private void RefreshTerrainControl()
+    {
+        var styleUrl = _vm.StyleUrl;
+        Map.ShowTerrainControl = false;
+
+        _ = Task.Run(async () =>
+        {
+            var styleDem = await Services.TerrainSources.FindAsync(styleUrl);
+
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                // A newer style load may have overtaken this lookup; leave that one's
+                // answer alone rather than applying a stale style's DEM.
+                if (_vm.StyleUrl != styleUrl) return;
+
+                try
+                {
+                    var sourceId = styleDem;
+
+                    if (sourceId is null)
+                    {
+                        var dem = Services.TerrainSources.DefaultFallback;
+                        Map.AddRasterDemSource(
+                            Services.TerrainSources.FallbackSourceId,
+                            dem.TileJsonUrl,
+                            dem.TileUrlTemplates,
+                            dem.TileSize,
+                            minZoom: 0,
+                            maxZoom: dem.MaxZoom,
+                            encoding: dem.Encoding,
+                            attribution: dem.Attribution);
+
+                        sourceId = Services.TerrainSources.FallbackSourceId;
+                        Log($"terrain: '{styleUrl}' declares no raster-dem — added '{dem.Name}'");
+                    }
+                    else
+                    {
+                        Log($"terrain: using the style's own DEM '{sourceId}'");
+                    }
+
+                    Map.TerrainControlSourceId = sourceId;
+                    Map.ShowTerrainControl     = true;
+                }
+                catch (Exception ex)
+                {
+                    // A DEM that cannot be added is not worth breaking the map over —
+                    // leave the button hidden and carry on with a flat map.
+                    Log($"terrain: setup failed, button stays hidden: {ex}");
+                    Map.ShowTerrainControl = false;
+                }
+            });
+        });
+    }
+
     protected override void OnAppearing()
     {
         base.OnAppearing();
@@ -168,6 +244,15 @@ public partial class MapPage : ContentPage
             // Watchdog: flag if events never fire after a reasonable delay.
             _ = StartWatchdogAsync();
         }
+
+        // Pick up the GPS follow-zoom setting; applies the next time Follow engages.
+        Map.GpsFollowZoomMode = Services.MapFollowSettings.Mode switch
+        {
+            Services.FollowZoom.Manual      => MapLibreNative.Maui.GpsFollowZoomMode.Fixed,
+            Services.FollowZoom.KeepCurrent => MapLibreNative.Maui.GpsFollowZoomMode.KeepCurrent,
+            _                               => MapLibreNative.Maui.GpsFollowZoomMode.Accuracy,
+        };
+        Map.GpsFollowZoom = Services.MapFollowSettings.ManualZoom;
 
         // Pick up a basemap style changed in Settings. Assigning StyleUrl reloads the
         // map style, and OnMapControllerReady (fired on StyleLoaded) re-applies the
