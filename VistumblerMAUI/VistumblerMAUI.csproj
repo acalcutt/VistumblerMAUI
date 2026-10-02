@@ -15,7 +15,7 @@
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
 
-    <ApplicationTitle>Vistumbler</ApplicationTitle>
+    <ApplicationTitle>VistumblerMAUI</ApplicationTitle>
     <ApplicationId>com.vistumbler.mauiapp</ApplicationId>
     <ApplicationDisplayVersion>0.3.9</ApplicationDisplayVersion>
     <ApplicationVersion>14</ApplicationVersion>

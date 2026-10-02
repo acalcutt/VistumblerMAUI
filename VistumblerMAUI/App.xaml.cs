@@ -31,6 +31,6 @@ public partial class App : Application
             start = _services.GetRequiredService<AppShell>();
         }
 
-        return new Window(start);
+        return new Window(start) { Title = "VistumblerMAUI" };
     }
 }

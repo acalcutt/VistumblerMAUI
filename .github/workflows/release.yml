@@ -104,13 +104,13 @@ jobs:
           $version = "${{ needs.release-check.outputs.version }}"
           Compress-Archive `
             -Path "./publish/${{ matrix.rid }}/*" `
-            -DestinationPath "./Vistumbler-v${version}-${{ matrix.rid }}.zip"
+            -DestinationPath "./VistumblerMAUI-v${version}-${{ matrix.rid }}.zip"
 
       - name: Upload build artifact (${{ matrix.rid }})
         uses: actions/upload-artifact@v4
         with:
           name: release-artifact-windows-${{ matrix.rid }}
-          path: Vistumbler-v${{ needs.release-check.outputs.version }}-${{ matrix.rid }}.zip
+          path: VistumblerMAUI-v${{ needs.release-check.outputs.version }}-${{ matrix.rid }}.zip
           retention-days: 7
 
   build-android:
@@ -182,13 +182,13 @@ jobs:
             $apk = Get-ChildItem -Path "./publish/android" -Filter "*.apk" -Recurse | Select-Object -First 1
           }
           if (-not $apk) { throw "No APK found under ./publish/android" }
-          Copy-Item $apk.FullName -Destination "./Vistumbler-v${version}-android.apk"
+          Copy-Item $apk.FullName -Destination "./VistumblerMAUI-v${version}-android.apk"
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
           name: release-artifact-android
-          path: Vistumbler-v${{ needs.release-check.outputs.version }}-android.apk
+          path: VistumblerMAUI-v${{ needs.release-check.outputs.version }}-android.apk
           retention-days: 7
 
   release:
@@ -230,9 +230,9 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           tag:        v${{ needs.release-check.outputs.version }}
-          name:       v${{ needs.release-check.outputs.version }}
+          name:       VistumblerMAUI v${{ needs.release-check.outputs.version }}
           bodyFile:   changelog_for_version.md
-          artifacts:  ./artifacts/Vistumbler-v${{ needs.release-check.outputs.version }}-win-x64.zip,./artifacts/Vistumbler-v${{ needs.release-check.outputs.version }}-win-arm64.zip,./artifacts/Vistumbler-v${{ needs.release-check.outputs.version }}-android.apk
+          artifacts:  ./artifacts/VistumblerMAUI-v${{ needs.release-check.outputs.version }}-win-x64.zip,./artifacts/VistumblerMAUI-v${{ needs.release-check.outputs.version }}-win-arm64.zip,./artifacts/VistumblerMAUI-v${{ needs.release-check.outputs.version }}-android.apk
           prerelease: ${{ steps.flags.outputs.prerelease }}
           allowUpdates: true
           draft: false

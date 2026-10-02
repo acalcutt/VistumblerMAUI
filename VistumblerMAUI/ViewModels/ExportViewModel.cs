@@ -230,7 +230,7 @@ public partial class ExportViewModel : ObservableObject
         {
             await Share.Default.RequestAsync(new ShareFileRequest
             {
-                Title = "Vistumbler export",
+                Title = "VistumblerMAUI export",
                 File = new ShareFile(path)
             });
         }

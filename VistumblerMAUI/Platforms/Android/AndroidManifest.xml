@@ -37,7 +37,7 @@
          manifest + per-density webps) copied verbatim into Platforms/Android/Resources,
          overriding the MauiIcon-generated @mipmap/appicon on Android only. -->
     <application android:allowBackup="true"
-                 android:label="Vistumbler"
+                 android:label="VistumblerMAUI"
                  android:supportsRtl="true"
                  android:icon="@mipmap/ic_launcher"
                  android:roundIcon="@mipmap/ic_launcher_round">

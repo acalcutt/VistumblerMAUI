@@ -82,11 +82,11 @@ ci-windows:
   script:
     - *publish-windows
     - $version = ([regex]::Match((Get-Content VistumblerMAUI/VistumblerMAUI.csproj -Raw), '<ApplicationDisplayVersion>([^<]+)')).Groups[1].Value
-    - Compress-Archive -Path "./publish/$env:RID/*" -DestinationPath "./Vistumbler-v$version-ci$env:CI_PIPELINE_IID-$env:CI_COMMIT_SHORT_SHA-$env:RID.zip"
+    - Compress-Archive -Path "./publish/$env:RID/*" -DestinationPath "./VistumblerMAUI-v$version-ci$env:CI_PIPELINE_IID-$env:CI_COMMIT_SHORT_SHA-$env:RID.zip"
   artifacts:
     name: ci-app-windows-$RID
     paths:
-      - Vistumbler-*.zip
+      - VistumblerMAUI-*.zip
     expire_in: 7 days
 
 ci-android:
@@ -102,11 +102,11 @@ ci-android:
     - if (-not $apk) { $apk = Get-ChildItem ./publish/android -Filter *.apk -Recurse | Select-Object -First 1 }
     - if (-not $apk) { throw 'No APK found under ./publish/android' }
     - $version = ([regex]::Match((Get-Content VistumblerMAUI/VistumblerMAUI.csproj -Raw), '<ApplicationDisplayVersion>([^<]+)')).Groups[1].Value
-    - Copy-Item $apk.FullName "./Vistumbler-v$version-ci$env:CI_PIPELINE_IID-$env:CI_COMMIT_SHORT_SHA-android-debug-signed.apk"
+    - Copy-Item $apk.FullName "./VistumblerMAUI-v$version-ci$env:CI_PIPELINE_IID-$env:CI_COMMIT_SHORT_SHA-android-debug-signed.apk"
   artifacts:
     name: ci-app-android
     paths:
-      - Vistumbler-*.apk
+      - VistumblerMAUI-*.apk
     expire_in: 7 days
 
 # ── Release ─────────────────────────────────────────────────────────────────────────────────────────
@@ -130,7 +130,7 @@ release-windows:
     - if ($env:RELEASE_PUBLISHED -eq 'true') { Write-Host "Release $env:RELEASE_TAG already exists; skipping."; exit 0 }
     - *publish-windows
     - New-Item -ItemType Directory release-files -Force | Out-Null
-    - Compress-Archive -Path "./publish/$env:RID/*" -DestinationPath "./release-files/Vistumbler-v$env:RELEASE_VERSION-$env:RID.zip"
+    - Compress-Archive -Path "./publish/$env:RID/*" -DestinationPath "./release-files/VistumblerMAUI-v$env:RELEASE_VERSION-$env:RID.zip"
   artifacts:
     paths:
       - release-files/
@@ -160,7 +160,7 @@ release-android:
     - if (-not $apk) { $apk = Get-ChildItem ./publish/android -Filter *.apk -Recurse | Select-Object -First 1 }
     - if (-not $apk) { throw 'No APK found under ./publish/android' }
     - New-Item -ItemType Directory release-files -Force | Out-Null
-    - Copy-Item $apk.FullName "./release-files/Vistumbler-v$env:RELEASE_VERSION-android.apk"
+    - Copy-Item $apk.FullName "./release-files/VistumblerMAUI-v$env:RELEASE_VERSION-android.apk"
   after_script:
     - Remove-Item (Join-Path ([IO.Path]::GetTempPath()) "vistumbler-release-$env:CI_JOB_ID.keystore") -Force -ErrorAction SilentlyContinue
   artifacts:

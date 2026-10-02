@@ -5,7 +5,7 @@
        x:Class="VistumblerMAUI.AppShell"
        Shell.FlyoutBehavior="Flyout"
        FlyoutHeaderBehavior="Fixed"
-       Title="Vistumbler">
+       Title="VistumblerMAUI">
 
     <!-- Bottom tabs (primary navigation) -->
     <TabBar>

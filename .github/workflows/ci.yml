@@ -84,13 +84,13 @@ jobs:
         run: |
           Compress-Archive `
             -Path "./publish/${{ matrix.rid }}/*" `
-            -DestinationPath "./Vistumbler-${{ needs.label.outputs.label }}-${{ matrix.rid }}.zip"
+            -DestinationPath "./VistumblerMAUI-${{ needs.label.outputs.label }}-${{ matrix.rid }}.zip"
 
       - name: Upload ${{ matrix.rid }} app
         uses: actions/upload-artifact@v4
         with:
           name: ci-app-windows-${{ matrix.rid }}
-          path: Vistumbler-${{ needs.label.outputs.label }}-${{ matrix.rid }}.zip
+          path: VistumblerMAUI-${{ needs.label.outputs.label }}-${{ matrix.rid }}.zip
           retention-days: 7
 
   build-android:
@@ -138,13 +138,13 @@ jobs:
             $apk = Get-ChildItem -Path "./publish/android" -Filter "*.apk" -Recurse | Select-Object -First 1
           }
           if (-not $apk) { throw "No APK found under ./publish/android" }
-          Copy-Item $apk.FullName -Destination "./Vistumbler-${{ needs.label.outputs.label }}-android-debug-signed.apk"
+          Copy-Item $apk.FullName -Destination "./VistumblerMAUI-${{ needs.label.outputs.label }}-android-debug-signed.apk"
 
       - name: Upload Android APK
         uses: actions/upload-artifact@v4
         with:
           name: ci-app-android
-          path: Vistumbler-${{ needs.label.outputs.label }}-android-debug-signed.apk
+          path: VistumblerMAUI-${{ needs.label.outputs.label }}-android-debug-signed.apk
           retention-days: 7
 
   build-ios:
@@ -229,11 +229,11 @@ jobs:
           fi
           echo "Packaging $APP"
           ditto -c -k --sequesterRsrc --keepParent "$APP" \
-            "Vistumbler-${{ needs.label.outputs.label }}-iossimulator-arm64.zip"
+            "VistumblerMAUI-${{ needs.label.outputs.label }}-iossimulator-arm64.zip"
 
       - name: Upload simulator app
         uses: actions/upload-artifact@v4
         with:
           name: ci-app-ios-simulator
-          path: Vistumbler-${{ needs.label.outputs.label }}-iossimulator-arm64.zip
+          path: VistumblerMAUI-${{ needs.label.outputs.label }}-iossimulator-arm64.zip
           retention-days: 7

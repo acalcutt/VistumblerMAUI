@@ -5,7 +5,7 @@
              xmlns:svc="clr-namespace:Vistumbler.Core.Services;assembly=Vistumbler.Core"
              x:DataType="vm:SessionChooserViewModel"
              x:Class="VistumblerMAUI.Views.SessionChooserPage"
-             Title="Vistumbler — Sessions">
+             Title="VistumblerMAUI — Sessions">
 
     <Grid RowDefinitions="Auto,*,Auto" Padding="16" RowSpacing="12">
 

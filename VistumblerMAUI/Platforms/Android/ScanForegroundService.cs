@@ -37,7 +37,7 @@ public class ScanForegroundService : Service
             : PendingIntent.GetActivity(this, 0, launch, PendingIntentFlags.Immutable);
 
         var notification = new Notification.Builder(this, ChannelId)
-            .SetContentTitle("Vistumbler")
+            .SetContentTitle("VistumblerMAUI")
             .SetContentText("Scanning for access points…")
             .SetSmallIcon(Resource.Mipmap.ic_launcher)
             .SetContentIntent(openIntent)
