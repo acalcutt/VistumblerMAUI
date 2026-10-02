@@ -159,7 +159,9 @@ jobs:
         env:
           KEYSTORE_PASS: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
-          KEY_PASS: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          # The key password defaults to the keystore password (PKCS12 keystores always share one);
+          # set ANDROID_KEY_PASSWORD only if they differ.
+          KEY_PASS: ${{ secrets.ANDROID_KEY_PASSWORD || secrets.ANDROID_KEYSTORE_PASSWORD }}
         run: |
           dotnet publish VistumblerMAUI/VistumblerMAUI.csproj `
             -f net10.0-android36.0 `

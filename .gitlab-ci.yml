@@ -12,9 +12,10 @@
 # CI/CD variables (Settings > CI/CD > Variables), Protected + Masked, environment scope "signing/main":
 #   CI_PUSH_TOKEN              Project access token, role Maintainer, scopes api + write_repository (bump-version only)
 #   ANDROID_KEYSTORE_BASE64    Base64 of the release keystore (the Android release job fails without it)
-#   ANDROID_KEYSTORE_PASSWORD  Keystore password
+#   ANDROID_KEYSTORE_PASSWORD  Keystore password (also used as the key password)
 #   ANDROID_KEY_ALIAS          Key alias
-#   ANDROID_KEY_PASSWORD       Key password
+#   ANDROID_KEY_PASSWORD       Optional: key password, only if it differs from the keystore password (PKCS12
+#                              keystores, the keytool default, always use the same password for both)
 
 workflow:
   rules:
@@ -147,11 +148,13 @@ release-android:
     - if ([string]::IsNullOrWhiteSpace($env:ANDROID_KEYSTORE_BASE64)) { throw 'ANDROID_KEYSTORE_BASE64 is not set - refusing to build an unsigned/debug-signed release.' }
     - $keystore = Join-Path ([IO.Path]::GetTempPath()) "vistumbler-release-$env:CI_JOB_ID.keystore"
     - '[IO.File]::WriteAllBytes($keystore, [Convert]::FromBase64String($env:ANDROID_KEYSTORE_BASE64))'
+    # The key password defaults to the keystore password; set ANDROID_KEY_PASSWORD only if they differ
+    - $keyPassword = if ($env:ANDROID_KEY_PASSWORD) { $env:ANDROID_KEY_PASSWORD } else { $env:ANDROID_KEYSTORE_PASSWORD }
     - dotnet workload restore VistumblerMAUI.sln
     - dotnet restore VistumblerMAUI.sln
     - dotnet publish VistumblerMAUI/VistumblerMAUI.csproj -f net10.0-android36.0 -c Release -p:AndroidKeyStore=true
         "-p:AndroidSigningKeyStore=$keystore" "-p:AndroidSigningStorePass=$env:ANDROID_KEYSTORE_PASSWORD"
-        "-p:AndroidSigningKeyAlias=$env:ANDROID_KEY_ALIAS" "-p:AndroidSigningKeyPass=$env:ANDROID_KEY_PASSWORD"
+        "-p:AndroidSigningKeyAlias=$env:ANDROID_KEY_ALIAS" "-p:AndroidSigningKeyPass=$keyPassword"
         --output ./publish/android
     - $apk = Get-ChildItem ./publish/android -Filter *-Signed.apk -Recurse | Select-Object -First 1
     - if (-not $apk) { $apk = Get-ChildItem ./publish/android -Filter *.apk -Recurse | Select-Object -First 1 }
