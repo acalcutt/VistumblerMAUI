@@ -4,8 +4,9 @@
 #                           debug-signed Android APK as job artifacts (7 days). Port of .github/workflows/ci.yml.
 #                           The iOS simulator build is not ported: it needs a macOS runner.
 #   release-*               Push to main: if no GitLab release exists for <ApplicationDisplayVersion>, publish the
-#                           Windows zips and the release-signed Android APK and create the release with the
-#                           CHANGELOG.md notes. Port of .github/workflows/release.yml.
+#                           Windows zips, a Windows NSIS installer per architecture (build/installer.nsi) and the
+#                           release-signed Android APK, and create the release with the CHANGELOG.md notes.
+#                           Port of .github/workflows/release.yml.
 #   bump-version            Build > Pipelines > New pipeline with BUMP_VERSION set: bump the version and changelog,
 #                           push release-v<version> and open a merge request. Port of .github/workflows/bump-version.yml.
 #
@@ -16,6 +17,8 @@
 #   ANDROID_KEY_ALIAS          Key alias
 #   ANDROID_KEY_PASSWORD       Optional: key password, only if it differs from the keystore password (PKCS12
 #                              keystores, the keytool default, always use the same password for both)
+#   SIG_PFX_B64, SIG_PFX_PASS  Optional: Windows code-signing .pfx (base64) and password; without them the Windows exe
+#                              and installers are published unsigned, with a warning
 
 workflow:
   rules:
@@ -124,13 +127,22 @@ release-windows:
   stage: build
   rules: *release-rules
   needs: [release-check]
+  environment: *signing-environment
   parallel:
     matrix: *rid-matrix
   script:
     - if ($env:RELEASE_PUBLISHED -eq 'true') { Write-Host "Release $env:RELEASE_TAG already exists; skipping."; exit 0 }
     - *publish-windows
+    # Signs only the app's own exe (the runtime's createdump/RestartAgent are already Microsoft-signed); skipped with a
+    # warning when SIG_PFX_B64 isn't set
+    - ./build/Sign-Files.ps1 -Path ./publish/$env:RID/VistumblerMAUI.exe
     - New-Item -ItemType Directory release-files -Force | Out-Null
     - Compress-Archive -Path "./publish/$env:RID/*" -DestinationPath "./release-files/VistumblerMAUI-v$env:RELEASE_VERSION-$env:RID.zip"
+    # NSIS installer (Start Menu shortcut, uninstaller) alongside the portable zip
+    - $setup = "./release-files/VistumblerMAUI-v$env:RELEASE_VERSION-$env:RID-setup.exe"
+    - ./build/Build-Installer.ps1 -SourceDir ./publish/$env:RID -AppName VistumblerMAUI -AppExe VistumblerMAUI.exe
+        -Version $env:RELEASE_VERSION -Arch ($env:RID -replace '^win-', '') -Icon ./publish/$env:RID/appicon.ico -OutFile $setup
+    - ./build/Sign-Files.ps1 -Path $setup
   artifacts:
     paths:
       - release-files/

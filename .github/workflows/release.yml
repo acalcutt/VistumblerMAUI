@@ -106,11 +106,30 @@ jobs:
             -Path "./publish/${{ matrix.rid }}/*" `
             -DestinationPath "./VistumblerMAUI-v${version}-${{ matrix.rid }}.zip"
 
+      - name: Build installer (${{ matrix.rid }})
+        # NSIS installer (Start Menu shortcut, uninstaller) alongside the portable zip; build/ is shared with GitLab.
+        # Signing is skipped with a warning when the SIG_PFX secret isn't set.
+        shell: pwsh
+        env:
+          SIG_PFX_B64: ${{ secrets.SIG_PFX }}
+          SIG_PFX_PASS: ${{ secrets.SIG_PFX_PASS }}
+        run: |
+          if (-not (Get-Command makensis.exe -ErrorAction SilentlyContinue) -and -not (Test-Path 'C:\Program Files (x86)\NSIS\makensis.exe')) {
+            choco install nsis -y --no-progress
+          }
+          $setup = "./VistumblerMAUI-v${{ needs.release-check.outputs.version }}-${{ matrix.rid }}-setup.exe"
+          ./build/Build-Installer.ps1 -SourceDir "./publish/${{ matrix.rid }}" -AppName VistumblerMAUI -AppExe VistumblerMAUI.exe `
+            -Version "${{ needs.release-check.outputs.version }}" -Arch ("${{ matrix.rid }}" -replace '^win-', '') `
+            -Icon "./publish/${{ matrix.rid }}/appicon.ico" -OutFile $setup
+          ./build/Sign-Files.ps1 -Path $setup
+
       - name: Upload build artifact (${{ matrix.rid }})
         uses: actions/upload-artifact@v4
         with:
           name: release-artifact-windows-${{ matrix.rid }}
-          path: VistumblerMAUI-v${{ needs.release-check.outputs.version }}-${{ matrix.rid }}.zip
+          path: |
+            VistumblerMAUI-v${{ needs.release-check.outputs.version }}-${{ matrix.rid }}.zip
+            VistumblerMAUI-v${{ needs.release-check.outputs.version }}-${{ matrix.rid }}-setup.exe
           retention-days: 7
 
   build-android:
@@ -232,7 +251,7 @@ jobs:
           tag:        v${{ needs.release-check.outputs.version }}
           name:       VistumblerMAUI v${{ needs.release-check.outputs.version }}
           bodyFile:   changelog_for_version.md
-          artifacts:  ./artifacts/VistumblerMAUI-v${{ needs.release-check.outputs.version }}-win-x64.zip,./artifacts/VistumblerMAUI-v${{ needs.release-check.outputs.version }}-win-arm64.zip,./artifacts/VistumblerMAUI-v${{ needs.release-check.outputs.version }}-android.apk
+          artifacts:  ./artifacts/VistumblerMAUI-v${{ needs.release-check.outputs.version }}-win-x64-setup.exe,./artifacts/VistumblerMAUI-v${{ needs.release-check.outputs.version }}-win-arm64-setup.exe,./artifacts/VistumblerMAUI-v${{ needs.release-check.outputs.version }}-win-x64.zip,./artifacts/VistumblerMAUI-v${{ needs.release-check.outputs.version }}-win-arm64.zip,./artifacts/VistumblerMAUI-v${{ needs.release-check.outputs.version }}-android.apk
           prerelease: ${{ steps.flags.outputs.prerelease }}
           allowUpdates: true
           draft: false
