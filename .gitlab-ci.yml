@@ -1,0 +1,187 @@
+# VistumblerMAUI CI on the Windows shell runner (tag "windows"). GitLab ignores the GitHub workflows in .github/.
+#
+#   ci-windows, ci-android  Merge requests and pushes to main: publish the Windows app (win-x64, win-arm64) and a
+#                           debug-signed Android APK as job artifacts (7 days). Port of .github/workflows/ci.yml.
+#                           The iOS simulator build is not ported: it needs a macOS runner.
+#   release-*               Push to main: if no GitLab release exists for <ApplicationDisplayVersion>, publish the
+#                           Windows zips and the release-signed Android APK and create the release with the
+#                           CHANGELOG.md notes. Port of .github/workflows/release.yml.
+#   bump-version            Build > Pipelines > New pipeline with BUMP_VERSION set: bump the version and changelog,
+#                           push release-v<version> and open a merge request. Port of .github/workflows/bump-version.yml.
+#
+# CI/CD variables (Settings > CI/CD > Variables), Protected + Masked, environment scope "signing/main":
+#   CI_PUSH_TOKEN              Project access token, role Maintainer, scopes api + write_repository (bump-version only)
+#   ANDROID_KEYSTORE_BASE64    Base64 of the release keystore (the Android release job fails without it)
+#   ANDROID_KEYSTORE_PASSWORD  Keystore password
+#   ANDROID_KEY_ALIAS          Key alias
+#   ANDROID_KEY_PASSWORD       Key password
+
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    # Avoid a duplicate branch pipeline while a merge request is open for the branch
+    - if: $CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS && $CI_PIPELINE_SOURCE == "push"
+      when: never
+    - if: $CI_COMMIT_BRANCH
+
+variables:
+  BUMP_VERSION:
+    value: "none"
+    options: ["none", "patch", "minor", "major", "prepatch", "preminor", "premajor", "prerelease"]
+    description: "Version bump type. Leave as 'none' to just build and release the current version."
+  BUMP_PREID:
+    value: "rc"
+    description: "Prerelease identifier for the pre* bump types (e.g. alpha, beta, rc)."
+
+default:
+  tags: [windows]
+
+stages:
+  - check
+  - build
+  - release
+
+# Jobs that sign or push run in this environment; scope the protected variables to it.
+.signing-environment: &signing-environment
+  name: signing/$CI_COMMIT_BRANCH
+  action: prepare
+
+.ci-rules: &ci-rules
+  - if: $BUMP_VERSION != "none"
+    when: never
+  - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+  - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+.release-rules: &release-rules
+  - if: $BUMP_VERSION != "none"
+    when: never
+  - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+.rid-matrix: &rid-matrix
+  - RID: [win-x64, win-arm64]
+
+# Windows publish, shared by CI and release.
+# -r with -p:UseMonoRuntime=false: this csproj also targets Android/iOS, so an explicit RID otherwise makes NuGet
+# look for a Mono runtime pack for the Windows head, which doesn't exist (NU1101). The RID is needed to
+# cross-build win-arm64 on the x64 runner. No separate restore: publish does a RID-aware restore (NETSDK1112).
+# --self-contained + WindowsAppSDKSelfContained bundle both runtimes. No PublishSingleFile: WinUI 3 doesn't support it.
+.publish-windows: &publish-windows
+  - dotnet workload restore VistumblerMAUI.sln
+  - dotnet publish VistumblerMAUI/VistumblerMAUI.csproj -f net10.0-windows10.0.19041.0 -c Release -r $env:RID
+      --self-contained true -p:WindowsPackageType=None -p:UseMonoRuntime=false -p:WindowsAppSDKSelfContained=true
+      --output ./publish/$env:RID
+
+# ── CI ──────────────────────────────────────────────────────────────────────────────────────────────
+
+ci-windows:
+  stage: build
+  rules: *ci-rules
+  parallel:
+    matrix: *rid-matrix
+  script:
+    - *publish-windows
+    - $version = ([regex]::Match((Get-Content VistumblerMAUI/VistumblerMAUI.csproj -Raw), '<ApplicationDisplayVersion>([^<]+)')).Groups[1].Value
+    - Compress-Archive -Path "./publish/$env:RID/*" -DestinationPath "./Vistumbler-v$version-ci$env:CI_PIPELINE_IID-$env:CI_COMMIT_SHORT_SHA-$env:RID.zip"
+  artifacts:
+    name: ci-app-windows-$RID
+    paths:
+      - Vistumbler-*.zip
+    expire_in: 7 days
+
+ci-android:
+  stage: build
+  rules: *ci-rules
+  script:
+    - dotnet workload restore VistumblerMAUI.sln
+    - dotnet restore VistumblerMAUI.sln
+    # Not release-signed: .NET Android falls back to a debug key that differs per run, so this APK installs on a
+    # clean device but won't upgrade a release install. No -r: one universal APK with android-arm64 + android-x64.
+    - dotnet publish VistumblerMAUI/VistumblerMAUI.csproj -f net10.0-android36.0 -c Release --output ./publish/android
+    - $apk = Get-ChildItem ./publish/android -Filter *-Signed.apk -Recurse | Select-Object -First 1
+    - if (-not $apk) { $apk = Get-ChildItem ./publish/android -Filter *.apk -Recurse | Select-Object -First 1 }
+    - if (-not $apk) { throw 'No APK found under ./publish/android' }
+    - $version = ([regex]::Match((Get-Content VistumblerMAUI/VistumblerMAUI.csproj -Raw), '<ApplicationDisplayVersion>([^<]+)')).Groups[1].Value
+    - Copy-Item $apk.FullName "./Vistumbler-v$version-ci$env:CI_PIPELINE_IID-$env:CI_COMMIT_SHORT_SHA-android-debug-signed.apk"
+  artifacts:
+    name: ci-app-android
+    paths:
+      - Vistumbler-*.apk
+    expire_in: 7 days
+
+# ── Release ─────────────────────────────────────────────────────────────────────────────────────────
+
+release-check:
+  stage: check
+  rules: *release-rules
+  script:
+    - ./.gitlab/scripts/release-check.ps1 -Project VistumblerMAUI/VistumblerMAUI.csproj -Element ApplicationDisplayVersion
+  artifacts:
+    reports:
+      dotenv: release.env
+
+release-windows:
+  stage: build
+  rules: *release-rules
+  needs: [release-check]
+  parallel:
+    matrix: *rid-matrix
+  script:
+    - if ($env:RELEASE_PUBLISHED -eq 'true') { Write-Host "Release $env:RELEASE_TAG already exists; skipping."; exit 0 }
+    - *publish-windows
+    - New-Item -ItemType Directory release-files -Force | Out-Null
+    - Compress-Archive -Path "./publish/$env:RID/*" -DestinationPath "./release-files/Vistumbler-v$env:RELEASE_VERSION-$env:RID.zip"
+  artifacts:
+    paths:
+      - release-files/
+    expire_in: 7 days
+
+release-android:
+  stage: build
+  rules: *release-rules
+  needs: [release-check]
+  environment: *signing-environment
+  script:
+    - if ($env:RELEASE_PUBLISHED -eq 'true') { Write-Host "Release $env:RELEASE_TAG already exists; skipping."; exit 0 }
+    # Releases must be signed with the fixed release keystore: without one .NET Android silently uses a random debug
+    # key, so users couldn't upgrade in place. Fail rather than ship that.
+    - if ([string]::IsNullOrWhiteSpace($env:ANDROID_KEYSTORE_BASE64)) { throw 'ANDROID_KEYSTORE_BASE64 is not set - refusing to build an unsigned/debug-signed release.' }
+    - $keystore = Join-Path ([IO.Path]::GetTempPath()) "vistumbler-release-$env:CI_JOB_ID.keystore"
+    - '[IO.File]::WriteAllBytes($keystore, [Convert]::FromBase64String($env:ANDROID_KEYSTORE_BASE64))'
+    - dotnet workload restore VistumblerMAUI.sln
+    - dotnet restore VistumblerMAUI.sln
+    - dotnet publish VistumblerMAUI/VistumblerMAUI.csproj -f net10.0-android36.0 -c Release -p:AndroidKeyStore=true
+        "-p:AndroidSigningKeyStore=$keystore" "-p:AndroidSigningStorePass=$env:ANDROID_KEYSTORE_PASSWORD"
+        "-p:AndroidSigningKeyAlias=$env:ANDROID_KEY_ALIAS" "-p:AndroidSigningKeyPass=$env:ANDROID_KEY_PASSWORD"
+        --output ./publish/android
+    - $apk = Get-ChildItem ./publish/android -Filter *-Signed.apk -Recurse | Select-Object -First 1
+    - if (-not $apk) { $apk = Get-ChildItem ./publish/android -Filter *.apk -Recurse | Select-Object -First 1 }
+    - if (-not $apk) { throw 'No APK found under ./publish/android' }
+    - New-Item -ItemType Directory release-files -Force | Out-Null
+    - Copy-Item $apk.FullName "./release-files/Vistumbler-v$env:RELEASE_VERSION-android.apk"
+  after_script:
+    - Remove-Item (Join-Path ([IO.Path]::GetTempPath()) "vistumbler-release-$env:CI_JOB_ID.keystore") -Force -ErrorAction SilentlyContinue
+  artifacts:
+    paths:
+      - release-files/
+    expire_in: 7 days
+
+release-publish:
+  stage: release
+  rules: *release-rules
+  needs: [release-check, release-windows, release-android]
+  resource_group: release
+  script:
+    - ./.gitlab/scripts/publish-release.ps1 -PackageName vistumblermaui
+
+# ── Version bump ────────────────────────────────────────────────────────────────────────────────────
+
+bump-version:
+  stage: build
+  resource_group: bump-version
+  environment: *signing-environment
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "web" && $BUMP_VERSION != "none"
+  variables:
+    GIT_DEPTH: 0   # full history: the changelog lists merge requests since the last tag
+  script:
+    - ./.gitlab/scripts/bump.ps1 -BumpType $env:BUMP_VERSION -PreId $env:BUMP_PREID
