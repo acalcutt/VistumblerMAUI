@@ -9,8 +9,7 @@
 
 ## 0.3.9
 ### ✨ Features and improvements
-
-### 🐞 Bug fixes
+- Test Release
 
 ## 0.3.9-pre.1
 ### ✨ Features and improvements
