@@ -7,6 +7,11 @@
 ### 🐞 Bug fixes
 - _...Add new stuff here..._
 
+## 0.3.9
+### ✨ Features and improvements
+
+### 🐞 Bug fixes
+
 ## 0.3.9-pre.1
 ### ✨ Features and improvements
 - **History overlays keep working when wifidb.net cannot be reached** — the age-tier and cell layers still ask WifiDB for each bucket's TileJSON, which now points them at that bucket's published PMTiles archive on data.wifidb.net. If WifiDB itself is unreachable, the app now goes to those archives directly instead of drawing nothing, using a built-in address per bucket. Each fallback address carries the bucket's `.torrent` and magnet in its fragment — unused for now, so the handles are already in place when peer-to-peer tile loading arrives. The magnets name a bucket rather than one nightly build, so they stay valid as the archives are rebuilt.
