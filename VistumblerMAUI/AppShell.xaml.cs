@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Vistumbler.Core.Services;
+using VistumblerMAUI.Services;
 using VistumblerMAUI.ViewModels;
 using VistumblerMAUI.Views;
 
@@ -19,7 +20,29 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(ExportPage), typeof(ExportPage));
         Routing.RegisterRoute(nameof(WifiDbScanPage), typeof(WifiDbScanPage));
         Routing.RegisterRoute(nameof(ApDetailsPage), typeof(ApDetailsPage));
+
+        Loaded += OnFirstLoaded;
     }
+
+    // Like the original Vistumbler: offer a newer release at startup (quietly does nothing when offline)
+    private async void OnFirstLoaded(object? sender, EventArgs e)
+    {
+        Loaded -= OnFirstLoaded;
+        await _services.GetRequiredService<AppUpdater>().CheckOnStartupAsync(ExitForUpdateAsync);
+    }
+
+    private async void OnCheckForUpdatesClicked(object? sender, EventArgs e)
+    {
+        FlyoutIsPresented = false;
+        await CheckForUpdatesAsync();
+    }
+
+    /// <summary>Checks for a newer release on request (menu, Settings → Updates).</summary>
+    public Task CheckForUpdatesAsync() =>
+        _services.GetRequiredService<AppUpdater>().CheckAsync(interactive: true, ExitForUpdateAsync);
+
+    // The Windows installer replaces the app's files: exit like "Exit (Save DB)" so the session can be resumed
+    private Task ExitForUpdateAsync() => ShutdownAsync(discard: false);
 
     private async void OnImportClicked(object? sender, EventArgs e)
     {

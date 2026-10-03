@@ -32,6 +32,11 @@
     <RuntimeIdentifiers Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">android-arm64;android-x64</RuntimeIdentifiers>
   </PropertyGroup>
 
+  <!-- The in-app updater (Services/AppUpdater.cs) compares this with the published releases -->
+  <ItemGroup>
+    <AssemblyMetadata Include="DisplayVersion" Value="$(ApplicationDisplayVersion)" />
+  </ItemGroup>
+
   <!-- ── Android: no extra NuGet needed — WifiManager is part of the MAUI Android SDK ── -->
 
   <!-- ── Windows: ManagedNativeWifi for WLAN API; System.IO.Ports for serial/NMEA GPS ── -->

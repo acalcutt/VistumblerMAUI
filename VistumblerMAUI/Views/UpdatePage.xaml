@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VistumblerMAUI.Views.UpdatePage"
+             Title="Update Available">
+
+    <Grid RowDefinitions="Auto,Auto,Auto,*,Auto,Auto,Auto" Padding="16" RowSpacing="8">
+
+        <Label x:Name="HeadingLabel" Grid.Row="0" FontSize="20" FontAttributes="Bold" />
+        <Label x:Name="VersionLabel" Grid.Row="1" />
+
+        <Label Grid.Row="2" Text="RELEASE NOTES" Style="{StaticResource SectionHeader}" Margin="0,8,0,0" />
+        <Border Grid.Row="3" Stroke="#DDDDDD" StrokeThickness="1" Padding="8">
+            <ScrollView>
+                <Label x:Name="NotesLabel" FontSize="13" />
+            </ScrollView>
+        </Border>
+
+        <Label x:Name="InfoLabel" Grid.Row="4" FontSize="13" TextColor="Gray" />
+
+        <VerticalStackLayout x:Name="ProgressPanel" Grid.Row="5" Spacing="4" IsVisible="False">
+            <Label x:Name="StatusLabel" FontSize="13" />
+            <ProgressBar x:Name="DownloadProgress" />
+        </VerticalStackLayout>
+
+        <Grid Grid.Row="6" ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8">
+            <Button x:Name="ReleasePageButton" Grid.Column="0" Text="Release Page" HorizontalOptions="Start"
+                    Clicked="OnReleasePageClicked" />
+            <Button x:Name="PrimaryButton" Grid.Column="1" Clicked="OnPrimaryClicked" />
+            <Button x:Name="LaterButton" Grid.Column="2" Text="Later" Clicked="OnLaterClicked" />
+        </Grid>
+    </Grid>
+
+</ContentPage>
