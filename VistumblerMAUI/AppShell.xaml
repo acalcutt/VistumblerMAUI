@@ -31,6 +31,7 @@
     <MenuItem Text="Import…"        Clicked="OnImportClicked" />
     <MenuItem Text="Export…"        Clicked="OnExportClicked" />
     <MenuItem Text="New Session"    Clicked="OnNewSessionClicked" />
+    <MenuItem Text="Check for Updates…" Clicked="OnCheckForUpdatesClicked" />
     <MenuItem Text="Exit (Save DB)" Clicked="OnExitSaveClicked" />
     <MenuItem Text="Exit"           Clicked="OnExitDiscardClicked" />
 

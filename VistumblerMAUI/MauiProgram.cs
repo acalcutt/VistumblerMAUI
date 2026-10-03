@@ -42,6 +42,7 @@ public static partial class MauiProgram
         services.AddSingleton<ISoundService,     MauiSoundService>();
         services.AddSingleton<IExportService,    ExportService>();
         services.AddSingleton<IImportService,    ImportService>();
+        services.AddSingleton<AppUpdater>();
 
         // Platform WiFi scanner registered in platform-specific startup
         RegisterPlatformServices(services);

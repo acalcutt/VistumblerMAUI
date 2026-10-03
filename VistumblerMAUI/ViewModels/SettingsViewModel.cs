@@ -24,6 +24,20 @@ public partial class SettingsViewModel : ObservableObject
     [ObservableProperty] private bool _keepScreenOn = Preferences.Get("keep_screen_on", false);
     partial void OnKeepScreenOnChanged(bool value) => Preferences.Set("keep_screen_on", value);
 
+    // ── Updates ──────────────────────────────────────────────────────────────────
+    [ObservableProperty] private bool _autoCheckForUpdates = AppUpdater.AutoCheck;
+    partial void OnAutoCheckForUpdatesChanged(bool value) => AppUpdater.AutoCheck = value;
+
+    [ObservableProperty] private bool _includePrereleaseUpdates = AppUpdater.IncludePrereleases;
+    partial void OnIncludePrereleaseUpdatesChanged(bool value) => AppUpdater.IncludePrereleases = value;
+
+    public string VersionText => $"{AppUpdater.ProductName} {AppUpdater.CurrentVersion}";
+    public bool UpdatesSupported => AppUpdater.IsSupported;
+
+    [RelayCommand]
+    private Task CheckForUpdatesAsync() =>
+        Shell.Current is AppShell shell ? shell.CheckForUpdatesAsync() : Task.CompletedTask;
+
     // ── Advanced ─────────────────────────────────────────────────────────────────
     // Opt-in diagnostic logging (GPS fixes, map layer refreshes) via DebugLog.
     [ObservableProperty] private bool _debugLogging = DebugLog.Enabled;
