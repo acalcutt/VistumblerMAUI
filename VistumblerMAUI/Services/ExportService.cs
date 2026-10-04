@@ -778,7 +778,9 @@ public class ExportService : IExportService
     {
         var inv = System.Globalization.CultureInfo.InvariantCulture;
         const string sep = "# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------";
-        using var writer = new StreamWriter(filePath, false, Encoding.UTF8);
+        // CRLF like Vistumbler on every platform; the default NewLine is LF on Android, which WifiDB's
+        // VS1 import couldn't read
+        using var writer = new StreamWriter(filePath, false, Encoding.UTF8) { NewLine = "\r\n" };
 
         await writer.WriteLineAsync("# Vistumbler VS1 - Detailed Export Version 4.0");
         await writer.WriteLineAsync("# Created By: VistumblerMAUI");
