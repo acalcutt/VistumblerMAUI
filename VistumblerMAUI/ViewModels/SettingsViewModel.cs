@@ -33,6 +33,8 @@ public partial class SettingsViewModel : ObservableObject
 
     public string VersionText => $"{AppUpdater.ProductName} {AppUpdater.CurrentVersion}";
     public bool UpdatesSupported => AppUpdater.IsSupported;
+    public bool UpdatesUnsupported => !AppUpdater.IsSupported;
+    public string? UpdatesUnsupportedReason => AppUpdater.UnsupportedReason;
 
     [RelayCommand]
     private Task CheckForUpdatesAsync() =>

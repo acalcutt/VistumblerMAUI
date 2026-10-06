@@ -7,7 +7,12 @@
 #                           Windows zips, a Windows NSIS installer per architecture (build/installer.nsi) and the
 #                           release-signed Android APK, and create the release with the CHANGELOG.md notes.
 #                           Port of .github/workflows/release.yml.
-#   bump-version            Build > Pipelines > New pipeline with BUMP_VERSION set: bump the version and changelog,
+#   release-android-play    Alongside the release: the Google Play build (PLAY_STORE: no in-app updater) as a
+#                           signed AAB job artifact (90 days). Not a release file.
+#   release-play-store      Uploads that AAB to Google Play and releases it on PLAY_TRACK (build/Publish-GooglePlay.ps1).
+#                           Skips when its versionCode (<ApplicationVersion>) is already in Play, and with a warning
+#                           when PLAY_SERVICE_ACCOUNT_BASE64 isn't set.
+#   bump-version           Build > Pipelines > New pipeline with BUMP_VERSION set: bump the version and changelog,
 #                           push release-v<version> and open a merge request. Port of .github/workflows/bump-version.yml.
 #
 # CI/CD variables (Settings > CI/CD > Variables), Protected + Masked, environment scope "signing/main":
@@ -19,6 +24,9 @@
 #                              keystores, the keytool default, always use the same password for both)
 #   SIG_PFX_B64, SIG_PFX_PASS  Optional: Windows code-signing .pfx (base64) and password; without them the Windows exe
 #                              and installers are published unsigned, with a warning
+#   PLAY_SERVICE_ACCOUNT_BASE64  Optional: base64 of the JSON key of a Google Cloud service account invited to the
+#                              techidiots-llc Play Console with release permissions; without it the AAB isn't uploaded
+#                              to Play, with a warning
 
 workflow:
   rules:
@@ -36,6 +44,14 @@ variables:
   BUMP_PREID:
     value: "rc"
     description: "Prerelease identifier for the pre* bump types (e.g. alpha, beta, rc)."
+  PLAY_TRACK:
+    value: "internal"
+    options: ["internal", "alpha", "beta", "production"]
+    description: "Google Play track for the release (alpha = closed testing, beta = open testing)."
+  PLAY_RELEASE_STATUS:
+    value: "completed"
+    options: ["completed", "draft"]
+    description: "Google Play release status. Use draft until the app's first release is published in Play Console."
 
 default:
   tags: [windows]
@@ -148,6 +164,24 @@ release-windows:
       - release-files/
     expire_in: 7 days
 
+# Android release signing, shared by the APK and Play jobs. Releases must be signed with the fixed release keystore:
+# without one .NET Android silently uses a random debug key, so users couldn't upgrade in place. Fail rather than ship
+# that. The Play build uses the same key, so Play installs and APK installs can update each other; that needs Play App
+# Signing set up with "use existing app signing key" for this keystore.
+.android-signing: &android-signing
+  - if ([string]::IsNullOrWhiteSpace($env:ANDROID_KEYSTORE_BASE64)) { throw 'ANDROID_KEYSTORE_BASE64 is not set - refusing to build an unsigned/debug-signed release.' }
+  - $keystore = Join-Path ([IO.Path]::GetTempPath()) "vistumbler-release-$env:CI_JOB_ID.keystore"
+  - '[IO.File]::WriteAllBytes($keystore, [Convert]::FromBase64String($env:ANDROID_KEYSTORE_BASE64))'
+  # The key password defaults to the keystore password; set ANDROID_KEY_PASSWORD only if they differ
+  - $keyPassword = if ($env:ANDROID_KEY_PASSWORD) { $env:ANDROID_KEY_PASSWORD } else { $env:ANDROID_KEYSTORE_PASSWORD }
+  - $signing = @('-p:AndroidKeyStore=true', "-p:AndroidSigningKeyStore=$keystore", "-p:AndroidSigningStorePass=$env:ANDROID_KEYSTORE_PASSWORD",
+      "-p:AndroidSigningKeyAlias=$env:ANDROID_KEY_ALIAS", "-p:AndroidSigningKeyPass=$keyPassword")
+  - dotnet workload restore VistumblerMAUI.sln
+  - dotnet restore VistumblerMAUI.sln
+
+.android-signing-cleanup: &android-signing-cleanup
+  - Remove-Item (Join-Path ([IO.Path]::GetTempPath()) "vistumbler-release-$env:CI_JOB_ID.keystore") -Force -ErrorAction SilentlyContinue
+
 release-android:
   stage: build
   rules: *release-rules
@@ -155,30 +189,52 @@ release-android:
   environment: *signing-environment
   script:
     - if ($env:RELEASE_PUBLISHED -eq 'true') { Write-Host "Release $env:RELEASE_TAG already exists; skipping."; exit 0 }
-    # Releases must be signed with the fixed release keystore: without one .NET Android silently uses a random debug
-    # key, so users couldn't upgrade in place. Fail rather than ship that.
-    - if ([string]::IsNullOrWhiteSpace($env:ANDROID_KEYSTORE_BASE64)) { throw 'ANDROID_KEYSTORE_BASE64 is not set - refusing to build an unsigned/debug-signed release.' }
-    - $keystore = Join-Path ([IO.Path]::GetTempPath()) "vistumbler-release-$env:CI_JOB_ID.keystore"
-    - '[IO.File]::WriteAllBytes($keystore, [Convert]::FromBase64String($env:ANDROID_KEYSTORE_BASE64))'
-    # The key password defaults to the keystore password; set ANDROID_KEY_PASSWORD only if they differ
-    - $keyPassword = if ($env:ANDROID_KEY_PASSWORD) { $env:ANDROID_KEY_PASSWORD } else { $env:ANDROID_KEYSTORE_PASSWORD }
-    - dotnet workload restore VistumblerMAUI.sln
-    - dotnet restore VistumblerMAUI.sln
-    - dotnet publish VistumblerMAUI/VistumblerMAUI.csproj -f net10.0-android36.0 -c Release -p:AndroidKeyStore=true
-        "-p:AndroidSigningKeyStore=$keystore" "-p:AndroidSigningStorePass=$env:ANDROID_KEYSTORE_PASSWORD"
-        "-p:AndroidSigningKeyAlias=$env:ANDROID_KEY_ALIAS" "-p:AndroidSigningKeyPass=$keyPassword"
-        --output ./publish/android
+    - *android-signing
+    - dotnet publish VistumblerMAUI/VistumblerMAUI.csproj -f net10.0-android36.0 -c Release @signing --output ./publish/android
     - $apk = Get-ChildItem ./publish/android -Filter *-Signed.apk -Recurse | Select-Object -First 1
     - if (-not $apk) { $apk = Get-ChildItem ./publish/android -Filter *.apk -Recurse | Select-Object -First 1 }
     - if (-not $apk) { throw 'No APK found under ./publish/android' }
     - New-Item -ItemType Directory release-files -Force | Out-Null
     - Copy-Item $apk.FullName "./release-files/VistumblerMAUI-v$env:RELEASE_VERSION-android.apk"
-  after_script:
-    - Remove-Item (Join-Path ([IO.Path]::GetTempPath()) "vistumbler-release-$env:CI_JOB_ID.keystore") -Force -ErrorAction SilentlyContinue
+  after_script: *android-signing-cleanup
   artifacts:
     paths:
       - release-files/
     expire_in: 7 days
+
+# release-play-store uploads this AAB to Play; it can also be uploaded by hand (Play Console > Test and release).
+# Play rejects a versionCode it has seen before, so each upload needs a higher <ApplicationVersion>.
+release-android-play:
+  stage: build
+  rules: *release-rules
+  needs: [release-check]
+  environment: *signing-environment
+  script:
+    - if ($env:RELEASE_PUBLISHED -eq 'true') { Write-Host "Release $env:RELEASE_TAG already exists; skipping."; exit 0 }
+    - *android-signing
+    - dotnet publish VistumblerMAUI/VistumblerMAUI.csproj -f net10.0-android36.0 -c Release -p:PlayStore=true @signing --output ./publish/android-play
+    - $aab = Get-ChildItem ./publish/android-play -Filter *-Signed.aab -Recurse | Select-Object -First 1
+    - if (-not $aab) { $aab = Get-ChildItem ./publish/android-play -Filter *.aab -Recurse | Select-Object -First 1 }
+    - if (-not $aab) { throw 'No AAB found under ./publish/android-play' }
+    - New-Item -ItemType Directory play-files -Force | Out-Null
+    - Copy-Item $aab.FullName "./play-files/VistumblerMAUI-v$env:RELEASE_VERSION-play.aab"
+  after_script: *android-signing-cleanup
+  artifacts:
+    paths:
+      - play-files/
+    expire_in: 90 days
+
+# The API can't create the app or its first release: upload the first AAB by hand in Play Console.
+release-play-store:
+  stage: release
+  rules: *release-rules
+  needs: [release-check, release-android-play]
+  environment: *signing-environment
+  resource_group: play-store
+  script:
+    - if ($env:RELEASE_PUBLISHED -eq 'true') { Write-Host "Release $env:RELEASE_TAG already exists; skipping."; exit 0 }
+    - ./build/Publish-GooglePlay.ps1 -Aab "./play-files/VistumblerMAUI-v$env:RELEASE_VERSION-play.aab"
+        -Track $env:PLAY_TRACK -Status $env:PLAY_RELEASE_STATUS
 
 release-publish:
   stage: release

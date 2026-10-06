@@ -7,8 +7,8 @@ namespace VistumblerMAUI.Services;
 /// <summary>
 /// Checks the release feeds (GitLab, then GitHub) for a newer VistumblerMAUI and offers it. Installed Windows copies
 /// update in place with the setup.exe; Android opens the APK download, which installs over the app and keeps its
-/// data. iOS has no published builds, so it doesn't check. Runs from the menu, from Settings → Updates, and at startup
-/// unless turned off there.
+/// data. iOS has no published builds and the Google Play build (PLAY_STORE) updates through Play, so neither checks.
+/// Runs from the menu, from Settings → Updates, and at startup unless turned off there.
 /// </summary>
 public sealed class AppUpdater
 {
@@ -43,7 +43,26 @@ public sealed class AppUpdater
         typeof(AppUpdater).Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
             .FirstOrDefault(a => a.Key == "DisplayVersion")?.Value ?? "0.0.0";
 
+#if PLAY_STORE
+    /// <summary>The Google Play build updates through Play, which doesn't allow apps to update themselves.</summary>
+    public static bool IsSupported => false;
+#else
     public static bool IsSupported => OperatingSystem.IsWindows() || OperatingSystem.IsAndroid();
+#endif
+
+    /// <summary>Why updates aren't offered here, for Settings → Updates; null when they are.</summary>
+    public static string? UnsupportedReason
+    {
+        get
+        {
+            if (IsSupported) return null;
+#if PLAY_STORE
+            return "Updates are installed through Google Play.";
+#else
+            return "Update checks aren't available on this platform.";
+#endif
+        }
+    }
 
     /// <summary>The release file this copy updates from, or null when it can only be sent to the release page.</summary>
     private static string? PlatformAsset
@@ -59,7 +78,7 @@ public sealed class AppUpdater
     /// <summary>The once-per-launch startup check; does nothing when turned off in Settings.</summary>
     public async Task CheckOnStartupAsync(Func<Task> exitForUpdate)
     {
-        if (_startupCheckDone || !AutoCheck) return;
+        if (_startupCheckDone || !AutoCheck || !IsSupported) return;
         _startupCheckDone = true;
         await CheckAsync(interactive: false, exitForUpdate);
     }

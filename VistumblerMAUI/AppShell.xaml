@@ -2,6 +2,7 @@
 <Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:views="clr-namespace:VistumblerMAUI.Views"
+       xmlns:services="clr-namespace:VistumblerMAUI.Services"
        x:Class="VistumblerMAUI.AppShell"
        Shell.FlyoutBehavior="Flyout"
        FlyoutHeaderBehavior="Fixed"
@@ -31,7 +32,9 @@
     <MenuItem Text="Import…"        Clicked="OnImportClicked" />
     <MenuItem Text="Export…"        Clicked="OnExportClicked" />
     <MenuItem Text="New Session"    Clicked="OnNewSessionClicked" />
-    <MenuItem Text="Check for Updates…" Clicked="OnCheckForUpdatesClicked" />
+    <!-- Hidden where there's nothing to check, e.g. the Google Play build, which Play updates -->
+    <MenuItem Text="Check for Updates…" Clicked="OnCheckForUpdatesClicked"
+              Shell.FlyoutItemIsVisible="{x:Static services:AppUpdater.IsSupported}" />
     <MenuItem Text="Exit (Save DB)" Clicked="OnExitSaveClicked" />
     <MenuItem Text="Exit"           Clicked="OnExitDiscardClicked" />
 

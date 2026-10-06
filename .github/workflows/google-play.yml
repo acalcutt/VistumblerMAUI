@@ -1,0 +1,73 @@
+# Google Play publishing - disabled for now; uncomment everything below to turn it on. GitLab CI does the same in its
+# release-play-store job.
+#
+# After "Build and Release" (release.yml) succeeds, uploads the AAB it built (artifact play-artifact-android) to
+# Google Play with build/Publish-GooglePlay.ps1 and releases it on the PLAY_TRACK track. Runs where release.yml
+# skipped the release (no AAB) do nothing, and so does an AAB whose versionCode (<ApplicationVersion>) is already
+# in Play, so re-running is safe. The API can't create the app or its first release: upload the first AAB by hand
+# in Play Console.
+#
+# Settings > Environments > release:
+#   Secret    PLAY_SERVICE_ACCOUNT_BASE64  base64 of the JSON key of a Google Cloud service account invited to the
+#                                          techidiots-llc Play Console with release permissions
+#   Variable  PLAY_TRACK                   Optional: internal (default), alpha, beta or production
+#   Variable  PLAY_RELEASE_STATUS          Optional: completed (default), or draft until the app's first release is
+#                                          published in Play Console (Play only accepts drafts before that)
+
+# name: Publish to Google Play
+#
+# on:
+#   workflow_run:
+#     workflows: ["Build and Release"]
+#     types: [completed]
+#
+# permissions:
+#   contents: read
+#   actions: read
+#
+# jobs:
+#   publish:
+#     name: Upload to Google Play
+#     runs-on: ubuntu-latest
+#     if: ${{ github.event.workflow_run.conclusion == 'success' }}
+#     environment: release
+#     concurrency: google-play
+#
+#     steps:
+#       - uses: actions/checkout@v4
+#         with:
+#           ref: ${{ github.event.workflow_run.head_sha }}
+#
+#       - name: Check for a Google Play build
+#         id: aab
+#         env:
+#           GH_TOKEN: ${{ github.token }}
+#         run: |
+#           COUNT=$(gh api "repos/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}/artifacts" \
+#             --jq '[.artifacts[] | select(.name == "play-artifact-android" and (.expired | not))] | length')
+#           if [ "$COUNT" = "0" ]; then
+#             echo "No play-artifact-android in the release run (release already existed); nothing to publish."
+#             echo "found=false" >> "$GITHUB_OUTPUT"
+#           else
+#             echo "found=true" >> "$GITHUB_OUTPUT"
+#           fi
+#
+#       - name: Download AAB
+#         if: ${{ steps.aab.outputs.found == 'true' }}
+#         uses: actions/download-artifact@v4
+#         with:
+#           name: play-artifact-android
+#           path: ./play-files
+#           run-id: ${{ github.event.workflow_run.id }}
+#           github-token: ${{ github.token }}
+#
+#       - name: Upload to Google Play
+#         if: ${{ steps.aab.outputs.found == 'true' }}
+#         shell: pwsh
+#         env:
+#           PLAY_SERVICE_ACCOUNT_BASE64: ${{ secrets.PLAY_SERVICE_ACCOUNT_BASE64 }}
+#         run: |
+#           $aab = Get-ChildItem ./play-files -Filter *.aab | Select-Object -First 1
+#           if (-not $aab) { throw 'No AAB in play-artifact-android' }
+#           ./build/Publish-GooglePlay.ps1 -Aab $aab.FullName `
+#             -Track "${{ vars.PLAY_TRACK || 'internal' }}" -Status "${{ vars.PLAY_RELEASE_STATUS || 'completed' }}"

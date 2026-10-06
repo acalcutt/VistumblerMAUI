@@ -210,6 +210,42 @@ jobs:
           path: VistumblerMAUI-v${{ needs.release-check.outputs.version }}-android.apk
           retention-days: 7
 
+      - name: Publish Android AAB for Google Play
+        # PlayStore=true turns off the in-app updater (Play doesn't allow apps it installs to update
+        # themselves) and builds an AAB, the only format Play accepts. Same keystore as the APK, so
+        # Play and APK installs can update each other once Play App Signing is set up with
+        # "use existing app signing key" for it.
+        env:
+          KEYSTORE_PASS: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          KEY_PASS: ${{ secrets.ANDROID_KEY_PASSWORD || secrets.ANDROID_KEYSTORE_PASSWORD }}
+        run: |
+          dotnet publish VistumblerMAUI/VistumblerMAUI.csproj `
+            -f net10.0-android36.0 `
+            -c Release `
+            -p:PlayStore=true `
+            -p:AndroidKeyStore=true `
+            -p:AndroidSigningKeyStore="$env:ANDROID_KEYSTORE_PATH" `
+            -p:AndroidSigningStorePass="$env:KEYSTORE_PASS" `
+            -p:AndroidSigningKeyAlias="$env:KEY_ALIAS" `
+            -p:AndroidSigningKeyPass="$env:KEY_PASS" `
+            --output ./publish/android-play
+          $aab = Get-ChildItem -Path "./publish/android-play" -Filter "*-Signed.aab" -Recurse | Select-Object -First 1
+          if (-not $aab) {
+            $aab = Get-ChildItem -Path "./publish/android-play" -Filter "*.aab" -Recurse | Select-Object -First 1
+          }
+          if (-not $aab) { throw "No AAB found under ./publish/android-play" }
+          Copy-Item $aab.FullName -Destination "./VistumblerMAUI-v${{ needs.release-check.outputs.version }}-play.aab"
+
+      - name: Upload Google Play artifact
+        # Not named release-artifact-*, so it isn't attached to the GitHub release: upload it to the
+        # Play Console by hand.
+        uses: actions/upload-artifact@v4
+        with:
+          name: play-artifact-android
+          path: VistumblerMAUI-v${{ needs.release-check.outputs.version }}-play.aab
+          retention-days: 90
+
   release:
     name: Publish GitHub Release
     runs-on: ubuntu-latest
