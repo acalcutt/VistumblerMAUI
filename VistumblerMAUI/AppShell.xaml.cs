@@ -29,6 +29,8 @@ public partial class AppShell : Shell
     private async void OnFirstLoaded(object? sender, EventArgs e)
     {
         Loaded -= OnFirstLoaded;
+        // Retry WifiDB uploads left over from earlier saves, now and whenever the connection comes back
+        _services.GetRequiredService<WifiDbUploadQueue>().Start();
         await _services.GetRequiredService<AppUpdater>().CheckOnStartupAsync(ExitForUpdateAsync);
     }
 
@@ -64,7 +66,7 @@ public partial class AppShell : Shell
         FlyoutIsPresented = false;
         var (folder, _) = SaveAndClearSettings.Resolve();
         bool ok = await DisplayAlert("Save & Clear",
-            $"Save the access points to a file in {folder}, then clear the list? Scanning carries on.",
+            $"Save the access points to a file in {SaveFolder.Describe(folder)}, then clear the list? Scanning carries on.",
             "Save & Clear", "Cancel");
         if (!ok) return;
 
@@ -79,10 +81,12 @@ public partial class AppShell : Shell
         {
             try
             {
+                // Sharing needs a real file; one in a folder picked on Android is copied to the cache for it
+                var (local, _) = await SaveFolder.GetLocalFileAsync(result.Path);
                 await Share.Default.RequestAsync(new ShareFileRequest
                 {
                     Title = "VistumblerMAUI save",
-                    File  = new ShareFile(result.Path),
+                    File  = new ShareFile(local),
                 });
             }
             catch { /* the file is saved either way */ }

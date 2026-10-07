@@ -60,7 +60,7 @@ public static class ExportLocation
     public static (string Folder, bool UsedChoice) Resolve()
     {
         var chosen = Chosen;
-        if (!string.IsNullOrWhiteSpace(chosen) && IsWritable(chosen))
+        if (!string.IsNullOrWhiteSpace(chosen) && SaveFolder.IsUsable(chosen))
             return (chosen, true);
 
         return (DefaultFolder, false);

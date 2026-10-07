@@ -21,6 +21,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
     private readonly ISoundService       _sound;
     private readonly Services.IKeepAliveService _keepAlive;
     private readonly IExportService      _export;
+    private readonly Services.WifiDbUploadQueue _uploadQueue;
 
     // Serializes a scan cycle's database write with clearing the session (Clear All, Save & Clear), so a
     // clear never lands in the middle of a write. Each clear bumps _clearGeneration (on the UI thread); a
@@ -102,7 +103,8 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         IDatabaseService    db,
         ISoundService       sound,
         Services.IKeepAliveService keepAlive,
-        IExportService      export)
+        IExportService      export,
+        Services.WifiDbUploadQueue uploadQueue)
     {
         _wifi      = wifi;
         _gps       = gps;
@@ -110,6 +112,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         _sound     = sound;
         _keepAlive = keepAlive;
         _export    = export;
+        _uploadQueue = uploadQueue;
 
         // Restore the persisted sort choice (set the fields directly so the change
         // handlers don't fire before construction finishes).
@@ -204,28 +207,30 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
     /// folder (Settings → Save &amp; Clear), then clear the AP list, which keeps scanning. Nothing is cleared
     /// unless the file was written. Uploads the file to WifiDB afterwards when that is turned on.
     /// </summary>
-    public async Task<SaveAndClearResult> SaveAndClearAsync()
+    public async Task<SaveAndClearResult> SaveAndClearAsync(bool waitForUpload = true)
     {
         if (_saveAndClearRunning) return new(null, 0, "Save & Clear is already running");
         _saveAndClearRunning = true;
         try
         {
+            // The saved file's location: a path, or a content:// URI in a folder picked on Android
             string path;
-            int count;
+            int count = 0;
+            var fileName = Services.SaveAndClearSettings.BuildFileName(DateTime.Now);
             await _persistLock.WaitAsync();
             try
             {
                 var (folder, _) = Services.SaveAndClearSettings.Resolve();
-                path = Path.Combine(folder, Services.SaveAndClearSettings.BuildFileName(DateTime.Now));
-                count = await Services.SessionFileExporter.ExportAsync(_db, _export, path,
-                    Services.SaveAndClearSettings.Format);
-                if (count == 0)
+                var saved = await Services.SaveFolder.SaveAsync(folder, fileName, async p =>
+                    count = await Services.SessionFileExporter.ExportAsync(_db, _export, p, Services.SaveAndClearSettings.Format));
+                if (saved is null || count == 0)
                     return new(null, 0, "No access points to save");
+                path = saved;
 
                 await _db.ClearAllAccessPointsAsync();
                 _lastSaveAndClear = DateTime.UtcNow;
                 await MainThread.InvokeOnMainThreadAsync(() =>
-                    ClearInMemory($"Saved {count} APs to {Path.GetFileName(path)} and cleared"));
+                    ClearInMemory($"Saved {count} APs to {fileName} and cleared"));
             }
             catch (Exception ex)
             {
@@ -239,24 +244,16 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
                 _persistLock.Release();
             }
 
-            var message = $"Saved {count} APs to {path}";
-            if (Services.SaveAndClearSettings.UploadToWifiDb && string.IsNullOrWhiteSpace(Services.WifiDbSettings.User))
+            var message = $"Saved {count} APs to {Services.SaveFolder.Describe(path)}";
+            if (Services.SaveAndClearSettings.UploadToWifiDb)
             {
-                const string skipped = "WifiDB upload skipped: set up your account in Settings → WifiDB";
-                message += $"\n{skipped}";
-                await MainThread.InvokeOnMainThreadAsync(() => StatusMessage = skipped);
-            }
-            else if (Services.SaveAndClearSettings.UploadToWifiDb)
-            {
-                await MainThread.InvokeOnMainThreadAsync(() => StatusMessage = "Uploading the saved file to WifiDB…");
-                var upload = await Services.WifiDbUploader.UploadAsync(path, Services.WifiDbSettings.User,
-                    Services.WifiDbSettings.ApiKey, otherUsers: "", title: Path.GetFileNameWithoutExtension(path),
-                    notes: "Saved by VistumblerMAUI Save & Clear");
-                var uploaded = upload.Success
-                    ? $"Uploaded to WifiDB (import #{upload.ImportId})"
-                    : $"WifiDB upload failed: {upload.Message}";
-                message += $"\n{uploaded}";
-                await MainThread.InvokeOnMainThreadAsync(() => StatusMessage = uploaded);
+                // Queued, so a file that can't go now (offline, WifiDB down, no account yet) is retried later
+                _uploadQueue.Enqueue(path, Path.GetFileNameWithoutExtension(fileName), "Saved by VistumblerMAUI Save & Clear");
+                var upload = UploadQueuedAsync(path);
+                if (waitForUpload)
+                    message += $"\n{await upload}";
+                else
+                    _ = upload;   // an automatic save doesn't wait; the status line reports the outcome
             }
             return new(path, count, message);
         }
@@ -264,6 +261,18 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         {
             _saveAndClearRunning = false;
         }
+    }
+
+    /// <summary>Works through the WifiDB upload queue and describes what happened to <paramref name="path"/>.</summary>
+    private async Task<string> UploadQueuedAsync(string path)
+    {
+        await MainThread.InvokeOnMainThreadAsync(() => StatusMessage = "Uploading to WifiDB…");
+        await _uploadQueue.ProcessAsync(waitForRunning: true);
+        var outcome = _uploadQueue.Contains(path)
+            ? $"Not uploaded to WifiDB yet ({_uploadQueue.ErrorFor(path) ?? "queued"}); it will be retried"
+            : "Uploaded to WifiDB";
+        await MainThread.InvokeOnMainThreadAsync(() => StatusMessage = outcome);
+        return outcome;
     }
 
     /// <summary>Runs Save &amp; Clear when Auto Save And Clear is on and its AP count or time is reached.</summary>
@@ -275,7 +284,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
             ? TotalCount >= Services.SaveAndClearSettings.ApCount
             : DateTime.UtcNow - _lastSaveAndClear >= TimeSpan.FromMinutes(Services.SaveAndClearSettings.Minutes);
         if (due)
-            await SaveAndClearAsync();
+            await SaveAndClearAsync(waitForUpload: false);
     }
 
     // AP scanning and GPS are toggled independently (as in the original Vistumbler's

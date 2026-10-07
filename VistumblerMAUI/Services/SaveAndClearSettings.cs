@@ -19,6 +19,7 @@ public static class SaveAndClearSettings
     private const string ApCountKey        = "SaveClear_ApCount";
     private const string MinutesKey        = "SaveClear_Minutes";
     private const string UploadKey         = "SaveClear_UploadToWifiDb";
+    private const string DeleteAfterUploadKey = "SaveClear_DeleteAfterUpload";
 
     public const string DefaultFileName = "AutoSave";
 
@@ -38,7 +39,7 @@ public static class SaveAndClearSettings
     public static (string Folder, bool UsedChoice) Resolve()
     {
         var chosen = Folder;
-        if (!string.IsNullOrWhiteSpace(chosen) && ExportLocation.IsWritable(chosen))
+        if (!string.IsNullOrWhiteSpace(chosen) && SaveFolder.IsUsable(chosen))
             return (chosen, true);
         return (ExportLocation.DefaultFolder, false);
     }
@@ -69,10 +70,10 @@ public static class SaveAndClearSettings
         set => Preferences.Set(TriggerKey, (int)value);
     }
 
-    /// <summary>Auto save once the list holds this many APs (the original's default is 1000).</summary>
+    /// <summary>Auto save once the list holds this many APs. The original defaulted to 1000 because its list slowed down; this one copes with far more.</summary>
     public static int ApCount
     {
-        get => Preferences.Get(ApCountKey, 1000);
+        get => Preferences.Get(ApCountKey, 5000);
         set => Preferences.Set(ApCountKey, Math.Max(10, value));
     }
 
@@ -88,6 +89,16 @@ public static class SaveAndClearSettings
     {
         get => Preferences.Get(UploadKey, false);
         set => Preferences.Set(UploadKey, value);
+    }
+
+    /// <summary>
+    /// Delete a saved file once WifiDB has it (accepted the upload, or already had the same file). Only applies
+    /// to files Save &amp; Clear uploads, and only with <see cref="UploadToWifiDb"/> on.
+    /// </summary>
+    public static bool DeleteAfterUpload
+    {
+        get => Preferences.Get(DeleteAfterUploadKey, false);
+        set => Preferences.Set(DeleteAfterUploadKey, value);
     }
 
     public static string Extension(SaveFileFormat format) => format == SaveFileFormat.Vsz ? ".VSZ" : ".VS1";

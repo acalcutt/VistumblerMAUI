@@ -34,7 +34,7 @@ public partial class ExportViewModel : ObservableObject
     [ObservableProperty] private bool _isExporting;
 
     /// <summary>The folder exports are written to, shown on the page.</summary>
-    [ObservableProperty] private string _exportFolder = Services.ExportLocation.Resolve().Folder;
+    [ObservableProperty] private string _exportFolder = Services.SaveFolder.Describe(Services.ExportLocation.Resolve().Folder);
 
     /// <summary>Whether that folder was picked rather than the app's default, which is
     /// what the "Use default folder" button is offered for.</summary>
@@ -62,46 +62,26 @@ public partial class ExportViewModel : ObservableObject
     /// Choose the folder to export into, through the platform's own picker.
     /// </summary>
     /// <remarks>
-    /// The pick is checked for writability before it is kept, so a folder the app cannot
-    /// write to is refused here — with the reason on screen — rather than at the end of
-    /// the next export. That check matters most on Android, where the picker will happily
-    /// return a Storage Access Framework tree whose reported path scoped storage does not
-    /// let this app write to.
+    /// On Android this is the system folder picker, and the export is written through the access it grants
+    /// (SaveFolder): scoped storage doesn't let the app write to most shared folders by path, which is why a
+    /// folder picked here used to be refused as not writable. Elsewhere the pick is checked for writability
+    /// before it is kept, so a bad folder is refused here rather than at the end of the next export.
     /// </remarks>
     [RelayCommand]
     private async Task BrowseFolderAsync()
     {
-        try
+        var (picked, error) = await Services.SaveFolder.PickAsync(Services.ExportLocation.Resolve().Folder);
+        if (error is not null)
         {
-            var result = await FolderPicker.Default.PickAsync(ExportFolder, CancellationToken.None);
-
-            if (!result.IsSuccessful)
-            {
-                // Cancelling is the ordinary case and says nothing worth reporting.
-                if (result.Exception is not null and not OperationCanceledException)
-                    StatusMessage = $"Could not choose a folder: {result.Exception.Message}";
-                return;
-            }
-
-            var picked = result.Folder.Path;
-
-            if (!Services.ExportLocation.IsWritable(picked))
-            {
-                StatusMessage = $"Cannot write to {picked} — keeping {ExportFolder}";
-                return;
-            }
-
-            Services.ExportLocation.Chosen = picked;
-            ExportFolder   = picked;
-            IsCustomFolder = true;
-            StatusMessage  = $"Exports will be written to {picked}";
+            StatusMessage = $"{error} Keeping {ExportFolder}.";
+            return;
         }
-        catch (Exception ex)
-        {
-            // Not every platform offers a folder picker, and a refused permission
-            // arrives here too. The chosen folder is left alone.
-            StatusMessage = $"Could not choose a folder: {ex.Message}";
-        }
+        if (picked is null) return;   // cancelled
+
+        Services.ExportLocation.Chosen = picked;
+        ExportFolder   = Services.SaveFolder.Describe(picked);
+        IsCustomFolder = true;
+        StatusMessage  = $"Exports will be written to {ExportFolder}";
     }
 
     /// <summary>Go back to writing exports into the app's own documents folder.</summary>
@@ -147,64 +127,73 @@ public partial class ExportViewModel : ObservableObject
             var fellBack = Services.ExportLocation.Chosen.Length > 0 && !usedChoice;
 
             // Keep the page honest about where the file actually went.
-            ExportFolder   = folder;
+            ExportFolder   = Services.SaveFolder.Describe(folder);
             IsCustomFolder = usedChoice;
 
-            var path = Path.Combine(folder, Path.GetFileNameWithoutExtension(name) + extension);
+            var fileName = Path.GetFileNameWithoutExtension(name) + extension;
 
-            switch (SelectedFormat)
-            {
-                case ExportFormat.Kml:
-                    var options = new ExportOptions
-                    {
-                        IncludeOpenNetworks = IncludeOpenNetworks,
-                        IncludeWepNetworks = IncludeWepNetworks,
-                        IncludeSecureNetworks = IncludeSecureNetworks,
-                        UseSignalColors = UseSignalColors,
-                        ShowTrack = IncludeGpsTrack
-                    };
-                    await _exportService.ExportToKmlAsync(path, aps, options, gpsFixes);
-                    break;
-                case ExportFormat.Gpx:
-                    await _exportService.ExportToGpxAsync(path, aps,
-                        IncludeGpsTrack ? gpsFixes : new List<GpsData>());
-                    break;
-                case ExportFormat.Ns1:
-                    await _exportService.ExportToNs1Async(path, aps);
-                    break;
-                case ExportFormat.KismetDb:
-                    await _exportService.ExportToKismetDbAsync(path, aps);
-                    break;
-                case ExportFormat.NetXml:
-                    await _exportService.ExportToNetXmlAsync(path, aps);
-                    break;
-                case ExportFormat.Csv:
-                    await _exportService.ExportToCsvAsync(path, aps, gpsFixes);
-                    break;
-                case ExportFormat.WigleCsv:
-                    await _exportService.ExportToWigleCsvAsync(path, aps);
-                    break;
-                case ExportFormat.Vs1:
-                    await _exportService.ExportToVs1Async(path, aps, gpsFixes);
-                    break;
-                case ExportFormat.Vsz:
-                    await _exportService.ExportToVszAsync(path, aps, gpsFixes);
-                    break;
-            }
+            // Saved through SaveFolder, since on Android a picked folder is written via its content URI
+            var saved = await Services.SaveFolder.SaveAsync(folder, fileName, Write)
+                        ?? throw new IOException("Nothing was written.");
+            var where = Services.SaveFolder.Describe(saved);
 
             StatusMessage = fellBack
-                ? $"Exported {aps.Count} access point(s) to {path} — the chosen folder could not be written to"
-                : $"Exported {aps.Count} access point(s) to {path}";
+                ? $"Exported {aps.Count} access point(s) to {where} — the chosen folder could not be written to"
+                : $"Exported {aps.Count} access point(s) to {where}";
 
             // Offer the file to whatever can take it off the device.
             //
-            // On Android the directory above is app-private internal storage: no
+            // On Android the default directory is app-private internal storage: no
             // file manager can see it and no browser can attach it, so an export
             // that "succeeded" left the data somewhere the person who asked for it
             // could not reach — which is the whole point of exporting. The share
             // sheet is the platform's answer, and it is also what makes uploading a
             // scan to WifiDB possible from the phone that recorded it.
-            await ShareAsync(path);
+            var (local, _) = await Services.SaveFolder.GetLocalFileAsync(saved);
+            await ShareAsync(local);
+
+            async Task Write(string path)
+            {
+                switch (SelectedFormat)
+                {
+                    case ExportFormat.Kml:
+                        var options = new ExportOptions
+                        {
+                            IncludeOpenNetworks = IncludeOpenNetworks,
+                            IncludeWepNetworks = IncludeWepNetworks,
+                            IncludeSecureNetworks = IncludeSecureNetworks,
+                            UseSignalColors = UseSignalColors,
+                            ShowTrack = IncludeGpsTrack
+                        };
+                        await _exportService.ExportToKmlAsync(path, aps, options, gpsFixes);
+                        break;
+                    case ExportFormat.Gpx:
+                        await _exportService.ExportToGpxAsync(path, aps,
+                            IncludeGpsTrack ? gpsFixes : new List<GpsData>());
+                        break;
+                    case ExportFormat.Ns1:
+                        await _exportService.ExportToNs1Async(path, aps);
+                        break;
+                    case ExportFormat.KismetDb:
+                        await _exportService.ExportToKismetDbAsync(path, aps);
+                        break;
+                    case ExportFormat.NetXml:
+                        await _exportService.ExportToNetXmlAsync(path, aps);
+                        break;
+                    case ExportFormat.Csv:
+                        await _exportService.ExportToCsvAsync(path, aps, gpsFixes);
+                        break;
+                    case ExportFormat.WigleCsv:
+                        await _exportService.ExportToWigleCsvAsync(path, aps);
+                        break;
+                    case ExportFormat.Vs1:
+                        await _exportService.ExportToVs1Async(path, aps, gpsFixes);
+                        break;
+                    case ExportFormat.Vsz:
+                        await _exportService.ExportToVszAsync(path, aps, gpsFixes);
+                        break;
+                }
+            }
         }
         catch (Exception ex)
         {

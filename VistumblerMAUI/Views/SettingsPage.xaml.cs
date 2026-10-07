@@ -19,6 +19,13 @@ public partial class SettingsPage : ContentPage
     {
         base.OnAppearing();
         _vm.Reload();
+        _vm.WatchUploadQueue(true);
+    }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        _vm.WatchUploadQueue(false);
     }
 }
 

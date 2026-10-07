@@ -7,7 +7,14 @@ namespace VistumblerMAUI.Services;
 /// <param name="Message">WifiDB's message, or the error.</param>
 /// <param name="ImportId">WifiDB's number for the queued import.</param>
 /// <param name="FileHash">MD5 of the file, for <see cref="WifiDbUploader.CheckStatusAsync"/>.</param>
-public record WifiDbUploadResult(bool Success, string Message, string? ImportId = null, string? FileHash = null);
+/// <param name="ConnectionFailed">WifiDB couldn't be reached or didn't answer in time, rather than refusing the file.</param>
+public record WifiDbUploadResult(bool Success, string Message, string? ImportId = null, string? FileHash = null,
+    bool ConnectionFailed = false)
+{
+    /// <summary>WifiDB already has this file, imported or waiting: an earlier upload got through.</summary>
+    public bool AlreadyKnown => !Success && (Message.Contains("already exists", StringComparison.OrdinalIgnoreCase) ||
+                                             Message.Contains("already waiting", StringComparison.OrdinalIgnoreCase));
+}
 
 /// <summary>
 /// Uploads Vistumbler files to WifiDB's import API (api/v2/import.php under the site URL in Settings → WifiDB),
@@ -45,7 +52,8 @@ public static class WifiDbUploader
             using var response = await Http.PostAsync(ImportUrl, content, ct);
             var body = await response.Content.ReadAsStringAsync(ct);
             if (!response.IsSuccessStatusCode)
-                return new(false, $"WifiDB returned HTTP {(int)response.StatusCode}: {Trim(body)}");
+                return new(false, $"WifiDB returned HTTP {(int)response.StatusCode}: {Trim(body)}",
+                    ConnectionFailed: (int)response.StatusCode >= 500);   // the server is down, not refusing the file
 
             // {"import":{"title","user","message","importnum","filehash"}} or {"error":"..."}
             using var json = JsonDocument.Parse(body);
@@ -70,7 +78,16 @@ public static class WifiDbUploader
         {
             return new(false, "WifiDB's response could not be read.");
         }
-        catch (Exception ex) when (ex is not OperationCanceledException || !ct.IsCancellationRequested)
+        catch (OperationCanceledException)
+        {
+            // HttpClient's own timeout, or the caller's (WifiDbUploadQueue gives each file a time limit)
+            return new(false, "Upload timed out", ConnectionFailed: true);
+        }
+        catch (Exception ex) when (ex is HttpRequestException or IOException)
+        {
+            return new(false, $"Upload failed: {ex.Message}", ConnectionFailed: true);
+        }
+        catch (Exception ex)
         {
             return new(false, $"Upload failed: {ex.Message}");
         }

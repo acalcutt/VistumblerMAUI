@@ -2,10 +2,12 @@
 
 ## master
 ### ✨ Features and improvements
-- _...Add new stuff here..._
+- **Saves that couldn't be uploaded to WifiDB are retried** — with Save & Clear's "Upload each save to WifiDB" on, a file that can't be uploaded (no internet, WifiDB unreachable, or no account set up yet) now waits in a queue instead of being forgotten. The queue is kept across restarts and retried when the connection comes back, when the app starts, after each save, and on **Retry now** in Settings → Save & Clear, which shows how many files are waiting and why. A file WifiDB already has (an earlier attempt got through) leaves the queue rather than being sent again. Automatic saves no longer wait for the upload, and an upload gives up after 2 minutes on a bad connection instead of 10 and stays queued.
+- **Delete saved files once WifiDB has them (Settings → Save & Clear)** — an option, off by default, to remove each saved file after WifiDB has accepted it, so the save folder doesn't fill up when everything goes to WifiDB anyway. WifiDB keeps its own copy of every upload.
+- **Auto Save And Clear now defaults to 5000 APs** — the original Vistumbler's 1000 was set by how slow its list became; this app copes with far more. A number you already set is kept.
 
 ### 🐞 Bug fixes
-- _...Add new stuff here..._
+- **Choosing a folder on the phone for Save & Clear or Export works** — Android asked for access and then the app said it couldn't write there, because it wrote by file path, which Android's scoped storage doesn't allow for most of shared storage. The app now writes through the access Android grants for the chosen folder, which it keeps across restarts, and shows the folder by name (e.g. "Phone storage/Documents/Vistumbler").
 
 ## 0.4.0
 ### ✨ Features and improvements

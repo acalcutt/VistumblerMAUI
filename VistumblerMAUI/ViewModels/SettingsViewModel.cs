@@ -189,7 +189,7 @@ public partial class SettingsViewModel : ObservableObject
     public IReadOnlyList<string> SaveFormatOptions { get; } = new[] { "VS1", "VSZ (zipped)" };
     public IReadOnlyList<string> AutoSaveTriggerOptions { get; } = new[] { "After a number of APs", "After a time" };
 
-    [ObservableProperty] private string _saveFolder         = SaveAndClearSettings.Resolve().Folder;
+    [ObservableProperty] private string _saveFolder         = Services.SaveFolder.Describe(SaveAndClearSettings.Resolve().Folder);
     [ObservableProperty] private bool   _isCustomSaveFolder = SaveAndClearSettings.Resolve().UsedChoice;
     [ObservableProperty] private string _saveFileName       = SaveAndClearSettings.FileName;
     [ObservableProperty] private string _selectedSaveFormat =
@@ -237,35 +237,80 @@ public partial class SettingsViewModel : ObservableObject
 
     partial void OnUploadSavesToWifiDbChanged(bool value) => SaveAndClearSettings.UploadToWifiDb = value;
 
+    [ObservableProperty] private bool _deleteSavesAfterUpload = SaveAndClearSettings.DeleteAfterUpload;
+    partial void OnDeleteSavesAfterUploadChanged(bool value) => SaveAndClearSettings.DeleteAfterUpload = value;
+
+    // Saved files still waiting to go to WifiDB (WifiDbUploadQueue)
+    [ObservableProperty] private bool   _hasPendingUploads;
+    [ObservableProperty] private string _pendingUploadsText = string.Empty;
+    [ObservableProperty] private bool   _isRetryingUploads;
+
+    private static WifiDbUploadQueue? UploadQueue =>
+        IPlatformApplication.Current?.Services.GetService<WifiDbUploadQueue>();
+
+    private void RefreshPendingUploads()
+    {
+        var queue = UploadQueue;
+        int count = queue?.Count ?? 0;
+        HasPendingUploads = count > 0;
+        PendingUploadsText = count == 0 ? string.Empty
+            : $"{count} saved file{(count == 1 ? "" : "s")} waiting to upload to WifiDB" +
+              (queue!.LastError is { } error ? $": {error}" : "");
+    }
+
+    private void OnUploadQueueChanged(object? sender, EventArgs e) =>
+        MainThread.BeginInvokeOnMainThread(RefreshPendingUploads);
+
+    /// <summary>Follow the upload queue while Settings is on screen.</summary>
+    public void WatchUploadQueue(bool watch)
+    {
+        if (UploadQueue is not { } queue) return;
+        queue.Changed -= OnUploadQueueChanged;
+        if (watch) queue.Changed += OnUploadQueueChanged;
+        RefreshPendingUploads();
+    }
+
+    [RelayCommand]
+    private async Task RetryUploadsAsync()
+    {
+        if (UploadQueue is not { } queue) return;
+        IsRetryingUploads = true;
+        try { await queue.ProcessAsync(waitForRunning: true); }
+        finally
+        {
+            IsRetryingUploads = false;
+            RefreshPendingUploads();
+        }
+    }
+
+    [RelayCommand]
+    private async Task ClearUploadsAsync()
+    {
+        if (UploadQueue is not { } queue) return;
+        bool ok = await Shell.Current.DisplayAlertAsync("Waiting uploads",
+            "Stop trying to upload these files to WifiDB? The files themselves stay in the Save & Clear folder.",
+            "Stop uploading", "Cancel");
+        if (!ok) return;
+        queue.Clear();
+        RefreshPendingUploads();
+    }
+
     /// <summary>Choose the Save &amp; Clear folder; refused, with the reason, when the app can't write to it.</summary>
     [RelayCommand]
     private async Task BrowseSaveFolderAsync()
     {
-        try
+        // On Android this is the system folder picker, written to through the access it grants (SaveFolder)
+        var (picked, error) = await Services.SaveFolder.PickAsync(SaveAndClearSettings.Resolve().Folder);
+        if (error is not null)
         {
-            var result = await FolderPicker.Default.PickAsync(SaveFolder, CancellationToken.None);
-            if (!result.IsSuccessful)
-            {
-                if (result.Exception is not null and not OperationCanceledException)
-                    SaveFolderStatus = $"Could not choose a folder: {result.Exception.Message}";
-                return;
-            }
-
-            var picked = result.Folder.Path;
-            if (!ExportLocation.IsWritable(picked))
-            {
-                SaveFolderStatus = $"Cannot write to {picked} — keeping {SaveFolder}";
-                return;
-            }
-            SaveAndClearSettings.Folder = picked;
-            SaveFolder         = picked;
-            IsCustomSaveFolder = true;
-            SaveFolderStatus   = string.Empty;
+            SaveFolderStatus = $"{error} Keeping {SaveFolder}.";
+            return;
         }
-        catch (Exception ex)
-        {
-            SaveFolderStatus = $"Could not choose a folder: {ex.Message}";
-        }
+        if (picked is null) return;   // cancelled
+        SaveAndClearSettings.Folder = picked;
+        SaveFolder         = Services.SaveFolder.Describe(picked);
+        IsCustomSaveFolder = true;
+        SaveFolderStatus   = string.Empty;
     }
 
     [RelayCommand]

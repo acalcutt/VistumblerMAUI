@@ -105,8 +105,24 @@
                 <Label Grid.Column="0" Text="Upload each save to WifiDB" VerticalOptions="Center" />
                 <Switch Grid.Column="1" IsToggled="{Binding UploadSavesToWifiDb}" />
             </Grid>
-            <Label Text="Uses the WifiDB account below. The file is kept either way."
+            <Grid ColumnDefinitions="*,Auto" Padding="16,4" IsVisible="{Binding UploadSavesToWifiDb}">
+                <Label Grid.Column="0" Text="Delete the saved file once WifiDB has it" VerticalOptions="Center" />
+                <Switch Grid.Column="1" IsToggled="{Binding DeleteSavesAfterUpload}" />
+            </Grid>
+            <Label Text="Uses the WifiDB account below. The file is kept unless you choose to delete it after the upload. A file that can't be uploaded (no connection, WifiDB unreachable, no account yet) waits and is retried when the connection comes back, when the app starts and after the next save."
                    FontSize="11" TextColor="Gray" Margin="16,0,16,8" />
+            <VerticalStackLayout IsVisible="{Binding HasPendingUploads}" Padding="16,0,16,8" Spacing="4">
+                <Label Text="{Binding PendingUploadsText}" FontSize="12" />
+                <HorizontalStackLayout Spacing="8">
+                    <Button Text="Retry now" Command="{Binding RetryUploadsCommand}"
+                            Padding="12,0" HeightRequest="32" />
+                    <Button Text="Stop uploading" Command="{Binding ClearUploadsCommand}"
+                            Padding="12,0" HeightRequest="32"
+                            BackgroundColor="Transparent" TextColor="Gray" />
+                    <ActivityIndicator IsRunning="{Binding IsRetryingUploads}" IsVisible="{Binding IsRetryingUploads}"
+                                       HeightRequest="24" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
             <BoxView HeightRequest="1" Color="#EEEEEE" Margin="16,0" />
 
             <!-- Map AP colors -->
