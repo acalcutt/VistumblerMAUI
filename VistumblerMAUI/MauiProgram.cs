@@ -53,6 +53,7 @@ public static partial class MauiProgram
         services.AddTransient<SettingsViewModel>();
         services.AddTransient<ImportViewModel>();
         services.AddTransient<ExportViewModel>();
+        services.AddTransient<WifiDbUploadViewModel>();
         services.AddTransient<ApDetailsViewModel>();
         services.AddTransient<SessionChooserViewModel>();
         services.AddTransient<ChannelGraphViewModel>();
@@ -67,6 +68,7 @@ public static partial class MauiProgram
         services.AddTransient<ImportPage>();
         services.AddTransient<ExportPage>();
         services.AddTransient<WifiDbScanPage>();
+        services.AddTransient<WifiDbUploadPage>();
         services.AddTransient<ApDetailsPage>();
 
         Debug.WriteLine("[MauiProgram] CreateMauiApp EXIT (build)");

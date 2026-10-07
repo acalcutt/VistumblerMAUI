@@ -261,11 +261,12 @@ public partial class MapPage : ContentPage
         if (styleChanged)
             _vm.StyleUrl = Services.MapStyles.StyleUrl;
 
-        // Pick up AP colors changed in Settings. Rebuild the live-layer paint + bucket
-        // styles, then force a style reload (unless the basemap change above already
+        // Pick up AP colors or point size changed in Settings. Rebuild the live-layer paint +
+        // bucket styles, then force a style reload (unless the basemap change above already
         // triggered one) so the history layers and declarative live layer re-apply with
-        // the new colors — circle paint is fixed when a layer is committed to the style.
-        if (_vm.AppliedColorRevision != Services.MapColors.Revision)
+        // the new paint — circle paint is fixed when a layer is committed to the style.
+        if (_vm.AppliedColorRevision != Services.MapColors.Revision ||
+            _vm.AppliedPointScale != Services.MapPointSize.Scale)
         {
             _vm.RefreshMapColors();
             if (!styleChanged)

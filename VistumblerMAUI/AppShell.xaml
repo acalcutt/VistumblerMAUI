@@ -31,6 +31,8 @@
     <!-- Hamburger menu actions (data + session) -->
     <MenuItem Text="Import…"        Clicked="OnImportClicked" />
     <MenuItem Text="Export…"        Clicked="OnExportClicked" />
+    <MenuItem Text="Save &amp; Clear" Clicked="OnSaveAndClearClicked" />
+    <MenuItem Text="Upload to WifiDB…" Clicked="OnUploadToWifiDbClicked" />
     <MenuItem Text="New Session"    Clicked="OnNewSessionClicked" />
     <!-- Hidden where there's nothing to check, e.g. the Google Play build, which Play updates -->
     <MenuItem Text="Check for Updates…" Clicked="OnCheckForUpdatesClicked"

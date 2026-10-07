@@ -20,6 +20,16 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
     private readonly IDatabaseService    _db;
     private readonly ISoundService       _sound;
     private readonly Services.IKeepAliveService _keepAlive;
+    private readonly IExportService      _export;
+
+    // Serializes a scan cycle's database write with clearing the session (Clear All, Save & Clear), so a
+    // clear never lands in the middle of a write. Each clear bumps _clearGeneration (on the UI thread); a
+    // cycle merged into memory before the clear finds it changed and drops its write instead of putting
+    // the cleared APs back into the database.
+    private readonly SemaphoreSlim _persistLock = new(1, 1);
+    private int _clearGeneration;
+    private bool _saveAndClearRunning;
+    private DateTime _lastSaveAndClear = DateTime.UtcNow;
 
     private CancellationTokenSource? _scanCts;
     private CancellationTokenSource? _gpsCts;
@@ -91,13 +101,15 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         IGpsService         gps,
         IDatabaseService    db,
         ISoundService       sound,
-        Services.IKeepAliveService keepAlive)
+        Services.IKeepAliveService keepAlive,
+        IExportService      export)
     {
         _wifi      = wifi;
         _gps       = gps;
         _db        = db;
         _sound     = sound;
         _keepAlive = keepAlive;
+        _export    = export;
 
         // Restore the persisted sort choice (set the fields directly so the change
         // handlers don't fire before construction finishes).
@@ -160,12 +172,104 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
     [RelayCommand]
     private async Task ClearAllAsync()
     {
-        await _db.ClearAllAccessPointsAsync();
+        await _persistLock.WaitAsync();
+        try
+        {
+            await _db.ClearAllAccessPointsAsync();
+            await MainThread.InvokeOnMainThreadAsync(() => ClearInMemory("Cleared"));
+        }
+        finally
+        {
+            _persistLock.Release();
+        }
+    }
+
+    /// <summary>Empties the in-memory AP list after the database has been cleared. UI thread only.</summary>
+    private void ClearInMemory(string status)
+    {
+        _clearGeneration++;
         _apMap.Clear();
         TotalCount    = 0;
         ActiveCount   = 0;
         RebuildDisplayedList();
-        StatusMessage = "Cleared";
+        StatusMessage = status;
+    }
+
+    /// <param name="Path">The file written, or null when nothing was saved.</param>
+    /// <param name="Message">What happened, for the status line or an alert.</param>
+    public record SaveAndClearResult(string? Path, int Count, string Message);
+
+    /// <summary>
+    /// The original Vistumbler's Save &amp; Clear: write the session to a VS1/VSZ file in the Save &amp; Clear
+    /// folder (Settings → Save &amp; Clear), then clear the AP list, which keeps scanning. Nothing is cleared
+    /// unless the file was written. Uploads the file to WifiDB afterwards when that is turned on.
+    /// </summary>
+    public async Task<SaveAndClearResult> SaveAndClearAsync()
+    {
+        if (_saveAndClearRunning) return new(null, 0, "Save & Clear is already running");
+        _saveAndClearRunning = true;
+        try
+        {
+            string path;
+            int count;
+            await _persistLock.WaitAsync();
+            try
+            {
+                var (folder, _) = Services.SaveAndClearSettings.Resolve();
+                path = Path.Combine(folder, Services.SaveAndClearSettings.BuildFileName(DateTime.Now));
+                count = await Services.SessionFileExporter.ExportAsync(_db, _export, path,
+                    Services.SaveAndClearSettings.Format);
+                if (count == 0)
+                    return new(null, 0, "No access points to save");
+
+                await _db.ClearAllAccessPointsAsync();
+                _lastSaveAndClear = DateTime.UtcNow;
+                await MainThread.InvokeOnMainThreadAsync(() =>
+                    ClearInMemory($"Saved {count} APs to {Path.GetFileName(path)} and cleared"));
+            }
+            catch (Exception ex)
+            {
+                // The list is only cleared after the file is written, so a failure keeps everything
+                var failed = $"Save failed, list not cleared: {ex.Message}";
+                await MainThread.InvokeOnMainThreadAsync(() => StatusMessage = failed);
+                return new(null, 0, failed);
+            }
+            finally
+            {
+                _persistLock.Release();
+            }
+
+            var message = $"Saved {count} APs to {path}";
+            if (Services.SaveAndClearSettings.UploadToWifiDb)
+            {
+                await MainThread.InvokeOnMainThreadAsync(() => StatusMessage = "Uploading the saved file to WifiDB…");
+                var upload = await Services.WifiDbUploader.UploadAsync(path, Services.WifiDbSettings.User,
+                    Services.WifiDbSettings.ApiKey, otherUsers: "", title: Path.GetFileNameWithoutExtension(path),
+                    notes: "Saved by VistumblerMAUI Save & Clear");
+                var uploaded = upload.Success
+                    ? $"Uploaded to WifiDB (import #{upload.ImportId})"
+                    : $"WifiDB upload failed: {upload.Message}";
+                message += $"\n{uploaded}";
+                await MainThread.InvokeOnMainThreadAsync(() => StatusMessage = uploaded);
+            }
+            return new(path, count, message);
+        }
+        finally
+        {
+            _saveAndClearRunning = false;
+        }
+    }
+
+    /// <summary>Runs Save &amp; Clear when Auto Save And Clear is on and its AP count or time is reached.</summary>
+    private async Task AutoSaveAndClearIfDueAsync()
+    {
+        if (!IsScanning || _saveAndClearRunning || TotalCount == 0 || !Services.SaveAndClearSettings.AutoEnabled)
+            return;
+        bool due = Services.SaveAndClearSettings.Trigger == Services.AutoSaveTrigger.ApCount
+            ? TotalCount >= Services.SaveAndClearSettings.ApCount
+            : DateTime.UtcNow - _lastSaveAndClear >= TimeSpan.FromMinutes(Services.SaveAndClearSettings.Minutes);
+        if (due)
+            await SaveAndClearAsync();
     }
 
     // AP scanning and GPS are toggled independently (as in the original Vistumbler's
@@ -212,6 +316,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         _wifi.ScanIntervalMs = Preferences.Get(ScanIntervalKey, 1000);   // honour the setting
         IsScanning    = true;
         StatusMessage = "Scanning…";
+        _lastSaveAndClear = DateTime.UtcNow;   // Auto Save And Clear's timer counts scanning time
         _ = _wifi.StartScanningAsync(_scanCts.Token);
         UpdateKeepAlive();
     }
@@ -280,6 +385,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         // AP would write its default (0) FirstSeen/LastSeen over the real values — which is why
         // First Active came up blank.
         var toPersist = new List<AccessPoint>(detected.Count);
+        int generation = 0;
 
         // Apply the model updates on the UI thread. AccessPoint now raises PropertyChanged,
         // and MAUI only refreshes bindings when those events fire on the UI thread — the
@@ -287,6 +393,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         // here (rather than in the old full-collection rebuild) must be marshalled over.
         await MainThread.InvokeOnMainThreadAsync(() =>
         {
+            generation = _clearGeneration;
             foreach (var ap in detected)
             {
                 AccessPoint target;
@@ -358,8 +465,12 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         // must instead drop this cycle's persist — the in-memory state is already
         // updated and the next cycle re-persists everything current. Closing the
         // connection makes the next cycle's InitializeAsync reopen a fresh one.
+        await _persistLock.WaitAsync();
         try
         {
+            // Cleared (Clear All / Save & Clear) after this cycle was merged: its APs are gone from the
+            // list, so writing them would put them back in the database only.
+            if (generation != _clearGeneration) return;
             await _db.SaveScanCycleAsync(toPersist, gps, scanTime);
         }
         catch (Exception ex)
@@ -369,9 +480,15 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
             try { await _db.CloseAsync(); } catch { /* reopened on next cycle */ }
             return;
         }
+        finally
+        {
+            _persistLock.Release();
+        }
 
         if (newCount > 0 && _sound.SoundEnabled)
             await _sound.PlayNewNetworkAsync();
+
+        await AutoSaveAndClearIfDueAsync();
     }
 
     private bool MatchesSearch(AccessPoint a, string q) =>

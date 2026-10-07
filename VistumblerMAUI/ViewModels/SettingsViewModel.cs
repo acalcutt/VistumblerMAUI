@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using CommunityToolkit.Maui.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using VistumblerMAUI.Services;
@@ -97,6 +98,109 @@ public partial class SettingsViewModel : ObservableObject
     [ObservableProperty] private string _selectedFollowZoom = string.Empty;
     [ObservableProperty] private string _manualFollowZoom = string.Empty;
     [ObservableProperty] private bool   _isManualFollowZoom;
+
+    // ── Map point size ────────────────────────────────────────────────────────
+    [ObservableProperty] private double _mapPointScale = MapPointSize.Scale;
+    public string MapPointScaleText => $"{MapPointScale * 100:0}%";
+    partial void OnMapPointScaleChanged(double value)
+    {
+        MapPointSize.Scale = value;
+        OnPropertyChanged(nameof(MapPointScaleText));
+    }
+
+    // ── Save & Clear ──────────────────────────────────────────────────────────
+    // Folder, file name and format for Save & Clear (hamburger menu), and when Auto Save And Clear runs.
+    // Persisted through SaveAndClearSettings and read when a save runs.
+    public IReadOnlyList<string> SaveFormatOptions { get; } = new[] { "VS1", "VSZ (zipped)" };
+    public IReadOnlyList<string> AutoSaveTriggerOptions { get; } = new[] { "After a number of APs", "After a time" };
+
+    [ObservableProperty] private string _saveFolder         = SaveAndClearSettings.Resolve().Folder;
+    [ObservableProperty] private bool   _isCustomSaveFolder = SaveAndClearSettings.Resolve().UsedChoice;
+    [ObservableProperty] private string _saveFileName       = SaveAndClearSettings.FileName;
+    [ObservableProperty] private string _selectedSaveFormat =
+        SaveAndClearSettings.Format == SaveFileFormat.Vsz ? "VSZ (zipped)" : "VS1";
+    [ObservableProperty] private bool   _autoSaveAndClear   = SaveAndClearSettings.AutoEnabled;
+    [ObservableProperty] private string _selectedAutoSaveTrigger =
+        SaveAndClearSettings.Trigger == AutoSaveTrigger.Time ? "After a time" : "After a number of APs";
+    [ObservableProperty] private bool   _isAutoSaveByTime   = SaveAndClearSettings.Trigger == AutoSaveTrigger.Time;
+    [ObservableProperty] private string _autoSaveApCount    = SaveAndClearSettings.ApCount.ToString();
+    [ObservableProperty] private string _autoSaveMinutes    = SaveAndClearSettings.Minutes.ToString();
+    [ObservableProperty] private bool   _uploadSavesToWifiDb = SaveAndClearSettings.UploadToWifiDb;
+    [ObservableProperty] private string _saveFolderStatus   = string.Empty;
+
+    public string SaveFileNameExample => SaveAndClearSettings.BuildFileName(DateTime.Now);
+
+    partial void OnSaveFileNameChanged(string value)
+    {
+        SaveAndClearSettings.FileName = value;
+        OnPropertyChanged(nameof(SaveFileNameExample));
+    }
+
+    partial void OnSelectedSaveFormatChanged(string value)
+    {
+        SaveAndClearSettings.Format = value.StartsWith("VSZ") ? SaveFileFormat.Vsz : SaveFileFormat.Vs1;
+        OnPropertyChanged(nameof(SaveFileNameExample));
+    }
+
+    partial void OnAutoSaveAndClearChanged(bool value) => SaveAndClearSettings.AutoEnabled = value;
+
+    partial void OnSelectedAutoSaveTriggerChanged(string value)
+    {
+        IsAutoSaveByTime = value == "After a time";
+        SaveAndClearSettings.Trigger = IsAutoSaveByTime ? AutoSaveTrigger.Time : AutoSaveTrigger.ApCount;
+    }
+
+    partial void OnAutoSaveApCountChanged(string value)
+    {
+        if (int.TryParse(value, out var n) && n > 0) SaveAndClearSettings.ApCount = n;
+    }
+
+    partial void OnAutoSaveMinutesChanged(string value)
+    {
+        if (int.TryParse(value, out var n) && n > 0) SaveAndClearSettings.Minutes = n;
+    }
+
+    partial void OnUploadSavesToWifiDbChanged(bool value) => SaveAndClearSettings.UploadToWifiDb = value;
+
+    /// <summary>Choose the Save &amp; Clear folder; refused, with the reason, when the app can't write to it.</summary>
+    [RelayCommand]
+    private async Task BrowseSaveFolderAsync()
+    {
+        try
+        {
+            var result = await FolderPicker.Default.PickAsync(SaveFolder, CancellationToken.None);
+            if (!result.IsSuccessful)
+            {
+                if (result.Exception is not null and not OperationCanceledException)
+                    SaveFolderStatus = $"Could not choose a folder: {result.Exception.Message}";
+                return;
+            }
+
+            var picked = result.Folder.Path;
+            if (!ExportLocation.IsWritable(picked))
+            {
+                SaveFolderStatus = $"Cannot write to {picked} — keeping {SaveFolder}";
+                return;
+            }
+            SaveAndClearSettings.Folder = picked;
+            SaveFolder         = picked;
+            IsCustomSaveFolder = true;
+            SaveFolderStatus   = string.Empty;
+        }
+        catch (Exception ex)
+        {
+            SaveFolderStatus = $"Could not choose a folder: {ex.Message}";
+        }
+    }
+
+    [RelayCommand]
+    private void UseDefaultSaveFolder()
+    {
+        SaveAndClearSettings.ResetFolder();
+        SaveFolder         = ExportLocation.DefaultFolder;
+        IsCustomSaveFolder = false;
+        SaveFolderStatus   = string.Empty;
+    }
 
     // ── Map AP colors ─────────────────────────────────────────────────────────
     // One row per bucket (live active/dead + WifiDB history tiers), each with Open/WEP/

@@ -2,7 +2,10 @@
 
 ## master
 ### ✨ Features and improvements
-- _...Add new stuff here..._
+- **Save & Clear (menu)** — as in Vistumbler and VistumblerCS: saves the access points to a VS1 (or zipped VSZ) file, then clears the list while scanning carries on. Nothing is cleared unless the file was written. Afterwards the file can be shared, since the default folder on Android is private to the app.
+- **Auto Save And Clear (Settings → Save & Clear)** — runs Save & Clear by itself once the list holds a set number of APs (1000 by default) or after a set number of minutes of scanning (60 by default), like the original's Auto Save And Clear. The same section sets the folder, the file name (saved as `2026-10-07 14-30-05_AutoSave.VS1`, as the original names them) and the file type.
+- **Upload to WifiDB (menu)** — sends the current session to WifiDB's import API with a title, notes and other users, as the original Vistumbler and VistumblerCS do, using the account in Settings → WifiDB. WifiDB queues the file; **Check import status** follows it until it is imported. Save & Clear can also upload each file it saves (Settings → Save & Clear → Upload each save to WifiDB).
+- **AP point size on the map (Settings → Map)** — scales the access point dots, live scan and WifiDB history, from 50% to 300%.
 
 ### 🐞 Bug fixes
 - **No more crash the first time Use GPS or Scan APs is pressed on Android** — the background scanning service started while the location permission prompt was still open, and Android 14+ closes an app that starts a location service without that permission. The app now asks for location permission first and starts the service only once it is granted. Scan APs asks for it too (Android returns no Wi-Fi results without it) and says so if it is refused, instead of scanning with nothing to show.

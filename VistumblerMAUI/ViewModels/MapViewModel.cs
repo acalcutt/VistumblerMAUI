@@ -56,17 +56,19 @@ public partial class MapViewModel : ObservableObject
     {
         var (aOpen, aWep, aSec) = MapColors.Hashed("live_active");
         var (dOpen, dWep, dSec) = MapColors.Hashed("live_dead");
+        double s = MapPointSize.Scale;
         ApLayerProperties = new Dictionary<string, object?>
         {
             // Zoom-interpolated like the history buckets' RadiusExpr — a fixed 4px dot is
             // near-invisible on a high-DPI phone at street zoom. Holds the base size
             // through z12, then grows to ~22px by z20 so dots stay easy to see and tap.
-            // Active APs stay a step larger than dead ones at every zoom.
+            // Active APs stay a step larger than dead ones at every zoom. Scaled by the
+            // Settings → Map point size.
             ["circle-radius"] = new object[] {
                 "interpolate", new object[] { "exponential", 1.5 }, new object[] { "zoom" },
-                1.0,  new object[] { "case", new object[] { "==", new object[] { "get", "isActive" }, true }, 4.0, 3.0 },
-                12.0, new object[] { "case", new object[] { "==", new object[] { "get", "isActive" }, true }, 4.0, 3.0 },
-                20.0, new object[] { "case", new object[] { "==", new object[] { "get", "isActive" }, true }, 22.0, 18.0 },
+                1.0,  new object[] { "case", new object[] { "==", new object[] { "get", "isActive" }, true }, 4.0 * s, 3.0 * s },
+                12.0, new object[] { "case", new object[] { "==", new object[] { "get", "isActive" }, true }, 4.0 * s, 3.0 * s },
+                20.0, new object[] { "case", new object[] { "==", new object[] { "get", "isActive" }, true }, 22.0 * s, 18.0 * s },
             },
             ["circle-color"] = new Dictionary<string, object?> {
                 ["property"] = "styidx",
@@ -193,12 +195,16 @@ public partial class MapViewModel : ObservableObject
     // map when the user has changed colors in Settings.
     public int AppliedColorRevision { get; private set; }
 
-    /// <summary>Rebuild the live-layer paint and per-bucket styles from the current MapColors.</summary>
+    /// <summary>The MapPointSize.Scale the circle layers currently reflect, compared the same way.</summary>
+    public double AppliedPointScale { get; private set; }
+
+    /// <summary>Rebuild the live-layer paint and per-bucket styles from the current MapColors and point size.</summary>
     public void RefreshMapColors()
     {
         LoadBucketStyles();
         BuildApLayerProperties();
         AppliedColorRevision = MapColors.Revision;
+        AppliedPointScale    = MapPointSize.Scale;
     }
 
     /// <summary>Clear the plotted APs when switching to a new session (the live timer will
@@ -371,9 +377,9 @@ public partial class MapViewModel : ObservableObject
     {
         ["base"]  = 1.5,
         ["stops"] = new object[] {
-            new object[] { 1,  baseRadius },
-            new object[] { 12, baseRadius },
-            new object[] { 20, 20.0 },
+            new object[] { 1,  baseRadius * MapPointSize.Scale },
+            new object[] { 12, baseRadius * MapPointSize.Scale },
+            new object[] { 20, 20.0 * MapPointSize.Scale },
         },
     };
 

@@ -19,6 +19,7 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(ImportPage), typeof(ImportPage));
         Routing.RegisterRoute(nameof(ExportPage), typeof(ExportPage));
         Routing.RegisterRoute(nameof(WifiDbScanPage), typeof(WifiDbScanPage));
+        Routing.RegisterRoute(nameof(WifiDbUploadPage), typeof(WifiDbUploadPage));
         Routing.RegisterRoute(nameof(ApDetailsPage), typeof(ApDetailsPage));
 
         Loaded += OnFirstLoaded;
@@ -54,6 +55,44 @@ public partial class AppShell : Shell
     {
         FlyoutIsPresented = false;
         await GoToAsync(nameof(ExportPage));
+    }
+
+    // Like the original Vistumbler's Save & Clear button: keep the scan in a file, then start the list
+    // over without stopping the scan
+    private async void OnSaveAndClearClicked(object? sender, EventArgs e)
+    {
+        FlyoutIsPresented = false;
+        var (folder, _) = SaveAndClearSettings.Resolve();
+        bool ok = await DisplayAlert("Save & Clear",
+            $"Save the access points to a file in {folder}, then clear the list? Scanning carries on.",
+            "Save & Clear", "Cancel");
+        if (!ok) return;
+
+        var result = await _services.GetRequiredService<ScanViewModel>().SaveAndClearAsync();
+        if (result.Path is null)
+        {
+            await DisplayAlert("Save & Clear", result.Message, "OK");
+            return;
+        }
+        // App-private folders (the Android default) can't be reached from a file manager, so offer to share
+        if (await DisplayAlert("Save & Clear", result.Message, "Share", "OK"))
+        {
+            try
+            {
+                await Share.Default.RequestAsync(new ShareFileRequest
+                {
+                    Title = "VistumblerMAUI save",
+                    File  = new ShareFile(result.Path),
+                });
+            }
+            catch { /* the file is saved either way */ }
+        }
+    }
+
+    private async void OnUploadToWifiDbClicked(object? sender, EventArgs e)
+    {
+        FlyoutIsPresented = false;
+        await GoToAsync(nameof(WifiDbUploadPage));
     }
 
     private async void OnNewSessionClicked(object? sender, EventArgs e)
