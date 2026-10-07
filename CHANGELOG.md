@@ -9,6 +9,11 @@
 ### 🐞 Bug fixes
 - **Choosing a folder on the phone for Save & Clear or Export works** — Android asked for access and then the app said it couldn't write there, because it wrote by file path, which Android's scoped storage doesn't allow for most of shared storage. The app now writes through the access Android grants for the chosen folder, which it keeps across restarts, and shows the folder by name (e.g. "Phone storage/Documents/Vistumbler").
 
+## 0.5.0
+### ✨ Features and improvements
+
+### 🐞 Bug fixes
+
 ## 0.4.0
 ### ✨ Features and improvements
 - **Save & Clear (menu)** — as in Vistumbler and VistumblerCS: saves the access points to a VS1 (or zipped VSZ) file, then clears the list while scanning carries on. Nothing is cleared unless the file was written. Afterwards the file can be shared, since the default folder on Android is private to the app.
