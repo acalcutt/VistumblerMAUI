@@ -2,6 +2,13 @@
 
 ## master
 ### ✨ Features and improvements
+- _...Add new stuff here..._
+
+### 🐞 Bug fixes
+- _...Add new stuff here..._
+
+## 0.4.0
+### ✨ Features and improvements
 - **Save & Clear (menu)** — as in Vistumbler and VistumblerCS: saves the access points to a VS1 (or zipped VSZ) file, then clears the list while scanning carries on. Nothing is cleared unless the file was written. Afterwards the file can be shared, since the default folder on Android is private to the app.
 - **Auto Save And Clear (Settings → Save & Clear)** — runs Save & Clear by itself once the list holds a set number of APs (1000 by default) or after a set number of minutes of scanning (60 by default), like the original's Auto Save And Clear. The same section sets the folder, the file name (saved as `2026-10-07 14-30-05_AutoSave.VS1`, as the original names them) and the file type.
 - **Upload to WifiDB (menu)** — sends the current session to WifiDB's import API with a title, notes and other users, as the original Vistumbler and VistumblerCS do, using the account in Settings → WifiDB. WifiDB queues the file; **Check import status** follows it until it is imported. Save & Clear can also upload each file it saves (Settings → Save & Clear → Upload each save to WifiDB).
