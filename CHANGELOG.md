@@ -7,6 +7,11 @@
 ### 🐞 Bug fixes
 - _...Add new stuff here..._
 
+## 0.5.0
+### ✨ Features and improvements
+
+### 🐞 Bug fixes
+
 ## 0.4.0
 ### ✨ Features and improvements
 - **Save & Clear (menu)** — as in Vistumbler and VistumblerCS: saves the access points to a VS1 (or zipped VSZ) file, then clears the list while scanning carries on. Nothing is cleared unless the file was written. Afterwards the file can be shared, since the default folder on Android is private to the app.
