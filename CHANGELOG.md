@@ -5,7 +5,8 @@
 - _...Add new stuff here..._
 
 ### 🐞 Bug fixes
-- _...Add new stuff here..._
+- **No more crash the first time Use GPS or Scan APs is pressed on Android** — the background scanning service started while the location permission prompt was still open, and Android 14+ closes an app that starts a location service without that permission. The app now asks for location permission first and starts the service only once it is granted. Scan APs asks for it too (Android returns no Wi-Fi results without it) and says so if it is refused, instead of scanning with nothing to show.
+- **The map's 3D terrain button has its icon again on Android** — the button was there but blank. The map renderer never drew its icon on Android; MapLibreNative.Maui.Handlers 5.0.0-pre.3 fixes that, and the app now uses it (from 5.0.0-pre.2). Windows was not affected.
 
 ## 0.3.12
 ### ✨ Features and improvements

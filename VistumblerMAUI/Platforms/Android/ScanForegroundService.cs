@@ -75,6 +75,16 @@ public class AndroidKeepAliveService : IKeepAliveService
 {
     public void Start()
     {
+        // Android 14+ throws (and kills the app) when a location-type foreground service starts without
+        // location permission, so never start it without one. Callers ask for the permission first.
+        var ctx = AndroidApp.Context;
+        if (ctx.CheckSelfPermission(global::Android.Manifest.Permission.AccessFineLocation) != Permission.Granted &&
+            ctx.CheckSelfPermission(global::Android.Manifest.Permission.AccessCoarseLocation) != Permission.Granted)
+        {
+            DebugLog.Write("[KeepAlive] location permission not granted; not starting the foreground service");
+            return;
+        }
+
         // Best-effort notification permission (Android 13+). The service runs either
         // way — without it the notification is just hidden from the shade.
         _ = MainThread.InvokeOnMainThreadAsync(async () =>
@@ -83,7 +93,6 @@ public class AndroidKeepAliveService : IKeepAliveService
             catch { /* not critical */ }
         });
 
-        var ctx = AndroidApp.Context;
         var intent = new Intent(ctx, typeof(ScanForegroundService));
         if (OperatingSystem.IsAndroidVersionAtLeast(26)) ctx.StartForegroundService(intent);
         else ctx.StartService(intent);

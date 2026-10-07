@@ -4,15 +4,29 @@
 # After "Build and Release" (release.yml) succeeds, uploads the AAB it built (artifact play-artifact-android) to
 # Google Play with build/Publish-GooglePlay.ps1 and releases it on the PLAY_TRACK track. Runs where release.yml
 # skipped the release (no AAB) do nothing, and so does an AAB whose versionCode (<ApplicationVersion>) is already
-# in Play, so re-running is safe. The API can't create the app or its first release: upload the first AAB by hand
-# in Play Console.
+# in Play, so re-running is safe.
 #
-# Settings > Environments > release:
-#   Secret    PLAY_SERVICE_ACCOUNT_BASE64  base64 of the JSON key of a Google Cloud service account invited to the
-#                                          techidiots-llc Play Console with release permissions
-#   Variable  PLAY_TRACK                   Optional: internal (default), alpha, beta or production
-#   Variable  PLAY_RELEASE_STATUS          Optional: completed (default), or draft until the app's first release is
-#                                          published in Play Console (Play only accepts drafts before that)
+# Setup (one time):
+#   1. Play Console (techidiots-llc developer account): create the app and upload the first AAB by hand to Test and
+#      release > Testing > Internal testing; the API can't create an app or its first release. Get the AAB from the
+#      play-artifact-android artifact of a release run, and choose "use existing app signing key" for the release
+#      keystore so Play and APK installs can update each other. (Done for 0.3.11 from GitLab, versionCode 16.)
+#   2. Google Cloud Console: in a project, enable the Google Play Android Developer API (APIs & Services > Library),
+#      create a service account with no roles (IAM & Admin > Service accounts) and add a JSON key (Keys > Add key).
+#      The GitLab pipeline's service account and key can be reused.
+#   3. Play Console > Users and permissions > Invite new users: the service account's email, with app permissions for
+#      Vistumbler: "Release apps to testing tracks" and "Manage testing tracks and edit tester lists", plus "Release
+#      to production, exclude devices, and use Play App Signing" for PLAY_TRACK=production. The API can take a while
+#      to accept a newly invited account.
+#   4. Settings > Environments > release (the environment release.yml already uses):
+#        Secret    PLAY_SERVICE_ACCOUNT_BASE64  base64 of the JSON key:
+#                                               [Convert]::ToBase64String([IO.File]::ReadAllBytes('key.json'))
+#        Variable  PLAY_TRACK                   Optional: internal (default), alpha, beta or production
+#        Variable  PLAY_RELEASE_STATUS          Optional: completed (default), or draft while Play answers "Only
+#                                               releases with status draft may be created on draft app" (no
+#                                               production release yet); then roll out in Play Console
+#   5. Uncomment everything below. GitLab and GitHub publish the same versionCodes, so if both run, whichever is
+#      second finds its versionCode already in Play and does nothing.
 
 # name: Publish to Google Play
 #

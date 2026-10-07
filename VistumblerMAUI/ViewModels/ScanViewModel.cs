@@ -180,14 +180,33 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
     }
 
     [RelayCommand]
-    private void ToggleGps()
+    private async Task ToggleGpsAsync()
     {
         if (IsGpsEnabled) StopGps();
-        else              StartGps();
+        else              await StartGpsAsync();
+    }
+
+    /// <summary>
+    /// Android needs location permission both for Wi-Fi scan results and for the location-type
+    /// foreground service that UpdateKeepAlive starts. Ask before starting either: starting that
+    /// service while the permission dialog is still open throws a SecurityException and kills the app.
+    /// </summary>
+    private static async Task<bool> EnsureLocationPermissionAsync()
+    {
+        if (!OperatingSystem.IsAndroid()) return true;
+        var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
+        if (status != PermissionStatus.Granted)
+            status = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
+        return status == PermissionStatus.Granted;
     }
 
     private async Task StartScanAsync()
     {
+        if (!await EnsureLocationPermissionAsync())
+        {
+            StatusMessage = "Location permission is needed to scan for Wi-Fi";
+            return;
+        }
         await _db.InitializeAsync();
         _scanCts = new CancellationTokenSource();
         _wifi.ScanIntervalMs = Preferences.Get(ScanIntervalKey, 1000);   // honour the setting
@@ -206,8 +225,13 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         UpdateKeepAlive();
     }
 
-    private void StartGps()
+    private async Task StartGpsAsync()
     {
+        if (!await EnsureLocationPermissionAsync())
+        {
+            GpsStatus = "GPS: location permission denied";
+            return;
+        }
         _gpsCts = new CancellationTokenSource();
         IsGpsEnabled = true;
         GpsStatus    = "GPS starting…";
