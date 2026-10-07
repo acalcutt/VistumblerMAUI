@@ -178,7 +178,54 @@
                             ItemsSource="{Binding BaudRateOptions}"
                             SelectedItem="{Binding SelectedBaudRate}" />
                 </Grid>
-                <Label Text="Serial NMEA is Windows-only. Choose the COM port your GPS receiver uses."
+                <Label Text="Choose the COM port your GPS receiver uses. A Bluetooth receiver paired with Windows appears as a COM port too."
+                       FontSize="11" TextColor="Gray" />
+            </VerticalStackLayout>
+            <!-- Options for external NMEA receivers (COM port, Bluetooth, USB), from the original Vistumbler -->
+            <VerticalStackLayout IsVisible="{Binding IsExternalGps}" Padding="0,0,0,4">
+                <Grid ColumnDefinitions="*,Auto" Padding="16,4">
+                    <Label Grid.Column="0" Text="Reconnect the receiver when no data is received for 10 seconds" VerticalOptions="Center" />
+                    <Switch Grid.Column="1" IsToggled="{Binding ReconnectGpsWhenNoData}" />
+                </Grid>
+                <Grid ColumnDefinitions="*,Auto" Padding="16,4">
+                    <Label Grid.Column="0" Text="Reset GPS position when no fix is received for 30 seconds" VerticalOptions="Center" />
+                    <Switch Grid.Column="1" IsToggled="{Binding ResetGpsPositionWhenNoFix}" />
+                </Grid>
+                <Label Text="Turn off the reconnect for a receiver that pauses its output. Resetting the position stops APs being placed at the receiver's last position after it loses its fix."
+                       FontSize="11" TextColor="Gray" Margin="16,0,16,4" />
+            </VerticalStackLayout>
+            <!-- USB (NMEA) receiver, Android -->
+            <VerticalStackLayout IsVisible="{Binding IsUsbGps}" Padding="16,0,16,8" Spacing="8">
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                    <Label Grid.Column="0" Text="Baud rate" VerticalOptions="Center" />
+                    <Picker Grid.Column="1"
+                            ItemsSource="{Binding BaudRateOptions}"
+                            SelectedItem="{Binding SelectedUsbBaudRate}" />
+                </Grid>
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                    <Label Grid.Column="0" Text="{Binding UsbDevicesText}" FontSize="12" VerticalOptions="Center" />
+                    <Button Grid.Column="1" Text="Refresh"
+                            Command="{Binding RefreshUsbDevicesCommand}"
+                            Padding="10,4" FontSize="12" />
+                </Grid>
+                <Label Text="Plug the receiver in with a USB OTG adapter; Android asks to let the app use it. Works with Prolific PL2303 (GlobalSat), Silicon Labs CP210x, FTDI, CH340 and u-blox receivers. GlobalSat receivers usually run at 4800 baud, u-blox at 9600."
+                       FontSize="11" TextColor="Gray" />
+            </VerticalStackLayout>
+            <!-- Bluetooth (NMEA) receiver, Android -->
+            <VerticalStackLayout IsVisible="{Binding IsBluetoothGps}" Padding="16,0,16,8" Spacing="8">
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
+                    <Label Grid.Column="0" Text="Receiver" VerticalOptions="Center" />
+                    <Picker Grid.Column="1"
+                            ItemsSource="{Binding BluetoothDevices}"
+                            SelectedItem="{Binding SelectedBluetoothDevice}" />
+                    <Button Grid.Column="2" Text="Refresh"
+                            Command="{Binding RefreshBluetoothDevicesCommand}"
+                            Padding="10,4" FontSize="12" />
+                </Grid>
+                <Label Text="{Binding BluetoothStatus}"
+                       IsVisible="{Binding BluetoothStatus, Converter={StaticResource IsNotNullOrEmpty}}"
+                       FontSize="12" TextColor="Gray" />
+                <Label Text="Pair the receiver in Android's Bluetooth settings first, then choose it here. It must send NMEA over the serial port profile (SPP), as most Bluetooth GPS receivers do."
                        FontSize="11" TextColor="Gray" />
             </VerticalStackLayout>
             <BoxView HeightRequest="1" Color="#EEEEEE" Margin="16,0" />

@@ -2,6 +2,7 @@ using System.Collections.ObjectModel;
 using CommunityToolkit.Maui.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.DependencyInjection;
 using VistumblerMAUI.Services;
 using VistumblerMAUI.Views;
 
@@ -46,15 +47,24 @@ public partial class SettingsViewModel : ObservableObject
     [ObservableProperty] private bool _debugLogging = DebugLog.Enabled;
     partial void OnDebugLoggingChanged(bool value) => DebugLog.Enabled = value;
 
-    // ── GPS source (Windows Location API vs serial NMEA receiver) ───────────────
-    public const string GpsSourceWindows = "Windows Location";
-    public const string GpsSourceSerial  = "Serial NMEA (COM port)";
-    public IReadOnlyList<string> GpsSourceOptions { get; } = new[] { GpsSourceWindows, GpsSourceSerial };
+    // ── GPS source (the OS location service or an external NMEA receiver) ───────
+    // The options depend on the platform (GpsSettings.AvailableSources): Windows Location or a serial COM port
+    // on Windows, the phone's GPS or a paired Bluetooth receiver on Android.
+    public IReadOnlyList<string> GpsSourceOptions { get; } = GpsSettings.AvailableSources.Select(s => s.Name).ToList();
+    public bool HasGpsSourceChoice => GpsSourceOptions.Count > 1;
     public IReadOnlyList<int>    BaudRateOptions  { get; } = GpsSettings.BaudRates;
 
     [ObservableProperty] private string _selectedGpsSource =
-        GpsSettings.Source == GpsSource.SerialNmea ? GpsSourceSerial : GpsSourceWindows;
-    [ObservableProperty] private bool _isSerialGps = GpsSettings.Source == GpsSource.SerialNmea;
+        GpsSettings.AvailableSources.First(s => s.Source == GpsSettings.Source).Name;
+    [ObservableProperty] private bool _isSerialGps    = GpsSettings.Source == GpsSource.SerialNmea;
+    [ObservableProperty] private bool _isBluetoothGps = GpsSettings.Source == GpsSource.BluetoothNmea;
+    [ObservableProperty] private bool _isUsbGps       = GpsSettings.Source == GpsSource.UsbNmea;
+    [ObservableProperty] private bool _isExternalGps  = GpsSettings.IsExternalReceiver;
+    [ObservableProperty] private bool _reconnectGpsWhenNoData    = GpsSettings.ReconnectWhenNoData;
+    [ObservableProperty] private bool _resetGpsPositionWhenNoFix = GpsSettings.ResetPositionWhenNoFix;
+
+    partial void OnReconnectGpsWhenNoDataChanged(bool value)    => GpsSettings.ReconnectWhenNoData    = value;
+    partial void OnResetGpsPositionWhenNoFixChanged(bool value) => GpsSettings.ResetPositionWhenNoFix = value;
     [ObservableProperty] private string _selectedComPort = GpsSettings.ComPort;
     [ObservableProperty] private int    _selectedBaudRate = GpsSettings.BaudRate;
 
@@ -62,9 +72,74 @@ public partial class SettingsViewModel : ObservableObject
 
     partial void OnSelectedGpsSourceChanged(string value)
     {
-        IsSerialGps = value == GpsSourceSerial;
-        GpsSettings.Source = IsSerialGps ? GpsSource.SerialNmea : GpsSource.WindowsLocation;
+        var source = GpsSettings.AvailableSources.FirstOrDefault(s => s.Name == value).Source;
+        GpsSettings.Source = source;
+        IsSerialGps    = source == GpsSource.SerialNmea;
+        IsBluetoothGps = source == GpsSource.BluetoothNmea;
+        IsUsbGps       = source == GpsSource.UsbNmea;
+        IsExternalGps  = GpsSettings.IsExternalReceiver;
         if (IsSerialGps) RefreshComPorts();
+        if (IsUsbGps) RefreshUsbDevices();
+        if (IsBluetoothGps && BluetoothDevices.Count <= 1) _ = RefreshBluetoothDevicesAsync();
+    }
+
+    // ── USB GPS receiver (Android) ──────────────────────────────────────────────
+    [ObservableProperty] private int    _selectedUsbBaudRate = GpsSettings.UsbBaudRate;
+    [ObservableProperty] private string _usbDevicesText = string.Empty;
+
+    partial void OnSelectedUsbBaudRateChanged(int value) => GpsSettings.UsbBaudRate = value;
+
+    /// <summary>Shows which supported USB receivers are plugged in now; GPS uses the first one.</summary>
+    [RelayCommand]
+    private void RefreshUsbDevices()
+    {
+        var usb = IPlatformApplication.Current?.Services.GetService<IUsbGpsService>();
+        if (usb is null) return;
+        try
+        {
+            var devices = usb.GetAttachedDevices();
+            UsbDevicesText = devices.Count == 0
+                ? "No supported USB GPS receiver is plugged in."
+                : "Plugged in: " + string.Join(", ", devices);
+        }
+        catch (Exception ex)
+        {
+            UsbDevicesText = $"Could not list USB devices: {ex.Message}";
+        }
+    }
+
+    // ── Bluetooth GPS receiver (Android) ────────────────────────────────────────
+    public ObservableCollection<BluetoothGpsDevice> BluetoothDevices { get; } = new();
+    [ObservableProperty] private BluetoothGpsDevice? _selectedBluetoothDevice;
+    [ObservableProperty] private string _bluetoothStatus = string.Empty;
+
+    partial void OnSelectedBluetoothDeviceChanged(BluetoothGpsDevice? value)
+    {
+        if (value is null) return;
+        GpsSettings.BluetoothAddress = value.Address;
+        GpsSettings.BluetoothName    = value.Name;
+    }
+
+    /// <summary>Lists the paired devices to pick the GPS receiver from; pair it in Android's Bluetooth settings first.</summary>
+    [RelayCommand]
+    private async Task RefreshBluetoothDevicesAsync()
+    {
+        var bluetooth = IPlatformApplication.Current?.Services.GetService<IBluetoothGpsService>();
+        if (bluetooth is null) return;
+        try
+        {
+            var devices = await bluetooth.GetPairedDevicesAsync();
+            BluetoothDevices.Clear();
+            foreach (var d in devices) BluetoothDevices.Add(d);
+            SelectedBluetoothDevice = devices.FirstOrDefault(d => d.Address == GpsSettings.BluetoothAddress);
+            BluetoothStatus = devices.Count == 0
+                ? "No paired devices. Pair the GPS receiver in Android's Bluetooth settings, then refresh."
+                : string.Empty;
+        }
+        catch (Exception ex)
+        {
+            BluetoothStatus = ex.Message;
+        }
     }
 
     partial void OnSelectedComPortChanged(string value)  => GpsSettings.ComPort  = value ?? string.Empty;
@@ -234,6 +309,17 @@ public partial class SettingsViewModel : ObservableObject
         _manualFollowZoom   = MapFollowSettings.ManualZoom.ToString("0.#");
 
         RefreshComPorts();
+
+        // Show the chosen receiver without asking for the Bluetooth permission just to open Settings;
+        // Refresh lists the rest
+        if (!string.IsNullOrEmpty(GpsSettings.BluetoothAddress))
+        {
+            var saved = new BluetoothGpsDevice(
+                string.IsNullOrEmpty(GpsSettings.BluetoothName) ? GpsSettings.BluetoothAddress : GpsSettings.BluetoothName,
+                GpsSettings.BluetoothAddress);
+            BluetoothDevices.Add(saved);
+            _selectedBluetoothDevice = saved;
+        }
     }
 
     partial void OnSelectedFollowZoomChanged(string value)

@@ -12,6 +12,8 @@ public static partial class MauiProgram
     {
         services.AddSingleton<IWiFiScannerService,  AndroidWiFiScannerService>();
         services.AddSingleton<ILocationGpsService,  AndroidGpsService>();
+        services.AddSingleton<IBluetoothGpsService, BluetoothNmeaGpsService>();
+        services.AddSingleton<IUsbGpsService,       UsbNmeaGpsService>();
         services.AddSingleton<IKeepAliveService,    AndroidKeepAliveService>();
     }
 }

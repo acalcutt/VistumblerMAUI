@@ -19,11 +19,20 @@
     <!-- Internet for OUI lookup / tile downloads -->
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!-- External Bluetooth GPS receiver (Settings → GPS). Android 12+ asks for BLUETOOTH_CONNECT ("Nearby
+         devices") when one is chosen; older versions use the install-time BLUETOOTH permissions. -->
+    <uses-permission android:name="android.permission.BLUETOOTH"       android:maxSdkVersion="30" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:maxSdkVersion="30" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+
     <!-- Camera for scanning the WifiDB registration QR code (BarcodeScanning.Native.Maui) -->
     <uses-permission android:name="android.permission.CAMERA" />
 
     <uses-feature android:name="android.hardware.wifi"                  android:required="false" />
     <uses-feature android:name="android.hardware.camera"               android:required="false" />
+    <uses-feature android:name="android.hardware.bluetooth"            android:required="false" />
+    <!-- USB GPS receivers through an OTG adapter (Settings → GPS) -->
+    <uses-feature android:name="android.hardware.usb.host"             android:required="false" />
     <uses-feature android:name="android.hardware.location.gps"          android:required="false" />
     <uses-feature android:name="android.hardware.location.network"      android:required="false" />
 

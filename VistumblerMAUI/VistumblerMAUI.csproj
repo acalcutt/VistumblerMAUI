@@ -45,7 +45,11 @@
     <AssemblyMetadata Include="DisplayVersion" Value="$(ApplicationDisplayVersion)" />
   </ItemGroup>
 
-  <!-- ── Android: no extra NuGet needed — WifiManager is part of the MAUI Android SDK ── -->
+  <!-- ── Android: WifiManager is part of the MAUI Android SDK. UsbSerialForAndroid (MIT, a C# port of
+       usb-serial-for-android) drives USB GPS receivers' serial chips: PL2303, CP210x, FTDI, CH34x, CDC-ACM ── -->
+  <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
+    <PackageReference Include="UsbSerialForAndroid" Version="2.0.1" />
+  </ItemGroup>
 
   <!-- ── Windows: ManagedNativeWifi for WLAN API; System.IO.Ports for serial/NMEA GPS ── -->
   <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
@@ -70,7 +74,10 @@
 
   <ItemGroup>
     <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#3B52CC" />
-    <MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#3B52CC" BaseSize="128,128" />
+    <!-- The Vistumbler logo (RIEI-Logos/Vistumbler/VistumblerIcon.png) at 62% of a transparent canvas: Android 12+
+         shows the splash icon through a circle two-thirds of its size, which would otherwise clip the logo's edge.
+         White background so the blue logo stands out. -->
+    <MauiSplashScreen Include="Resources\Splash\splash.png" Color="#FFFFFF" BaseSize="160,160" />
     <MauiImage Include="Resources\Images\*" Exclude="Resources\Images\.gitkeep" />
     <MauiFont Include="Resources\Fonts\*" Exclude="Resources\Fonts\.gitkeep" />
     <MauiAsset Include="Resources\Raw\**" Exclude="Resources\Raw\**\.gitkeep" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />

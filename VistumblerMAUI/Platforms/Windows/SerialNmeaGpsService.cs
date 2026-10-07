@@ -1,5 +1,4 @@
 #if WINDOWS
-using System.Globalization;
 using System.IO.Ports;
 using Vistumbler.Core.Models;
 using Vistumbler.Core.Services;
@@ -16,14 +15,17 @@ public class SerialNmeaGpsService : ISerialGpsService
 {
     private SerialPort? _port;
     private bool _connected;
-    private GpsData? _current;
+    private readonly NmeaParser _parser = new();
     private DateTime _lastUpdate = DateTime.MinValue;
     private CancellationTokenSource? _cts;
+    private Timer? _watchdog;
+    private DateTime _lastData = DateTime.UtcNow;
+    private readonly object _reopenLock = new();
 
     public event EventHandler<GpsDataReceivedEventArgs>? GpsDataReceived;
     public event EventHandler<GpsErrorEventArgs>?        GpsError;
 
-    public GpsData? CurrentGpsData => _current;
+    public GpsData? CurrentGpsData => _parser.Current;
     public bool     IsActive       => _connected;
     public double   SecondsSinceLastUpdate =>
         _lastUpdate == DateTime.MinValue ? double.MaxValue : (DateTime.UtcNow - _lastUpdate).TotalSeconds;
@@ -37,14 +39,34 @@ public class SerialNmeaGpsService : ISerialGpsService
     {
         if (_connected) return Task.CompletedTask;
 
-        var portName = GpsSettings.ComPort;
-        if (string.IsNullOrWhiteSpace(portName))
+        if (string.IsNullOrWhiteSpace(GpsSettings.ComPort))
         {
-            GpsError?.Invoke(this, new GpsErrorEventArgs { ErrorMessage = "no COM port selected" });
+            Error("no COM port selected");
             return Task.CompletedTask;
         }
 
         _cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+        _connected = OpenPort();
+
+        // The original's "Disconnect GPS when no data is received in over 10 seconds", except that the port is
+        // reopened rather than GPS turned off; a port that failed to open is retried the same way
+        _lastData = DateTime.UtcNow;
+        _watchdog = new Timer(_ => CheckPort(), null, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
+        return Task.CompletedTask;
+    }
+
+    public void Stop()
+    {
+        _cts?.Cancel();
+        _watchdog?.Dispose();
+        _watchdog = null;
+        _connected = false;
+        ClosePort();
+    }
+
+    private bool OpenPort()
+    {
+        var portName = GpsSettings.ComPort;
         try
         {
             _port = new SerialPort
@@ -60,29 +82,44 @@ public class SerialNmeaGpsService : ISerialGpsService
             };
             _port.DataReceived += OnDataReceived;
             _port.Open();
-            _connected = true;
+            return true;
         }
         catch (Exception ex)
         {
-            GpsError?.Invoke(this, new GpsErrorEventArgs
-            {
-                ErrorMessage = $"could not open {portName} ({ex.Message})",
-                Exception    = ex
-            });
+            ClosePort();
+            Error($"could not open {portName} ({ex.Message})", ex);
+            return false;
         }
-        return Task.CompletedTask;
     }
 
-    public void Stop()
+    private void ClosePort()
     {
-        _cts?.Cancel();
-        _connected = false;
-        if (_port is not null)
+        var port = _port;
+        _port = null;
+        if (port is null) return;
+        port.DataReceived -= OnDataReceived;
+        try { if (port.IsOpen) port.Close(); } catch { }
+        port.Dispose();
+    }
+
+    private void CheckPort()
+    {
+        if (_cts is null || _cts.IsCancellationRequested) return;
+        // Acts every NoDataTimeout at most: on a silent port when the option is on, and on a port that didn't open
+        if (DateTime.UtcNow - _lastData <= GpsSettings.NoDataTimeout) return;
+        if (_port is not null && !GpsSettings.ReconnectWhenNoData) return;
+        if (!Monitor.TryEnter(_reopenLock)) return;
+        try
         {
-            _port.DataReceived -= OnDataReceived;
-            try { if (_port.IsOpen) _port.Close(); } catch { }
-            _port.Dispose();
-            _port = null;
+            if (_port is not null)
+                Error($"no data from {GpsSettings.ComPort} for {GpsSettings.NoDataTimeout.TotalSeconds:0} seconds; reopening it");
+            ClosePort();
+            _lastData = DateTime.UtcNow;   // give the reopened port a full timeout
+            _connected = OpenPort();
+        }
+        finally
+        {
+            Monitor.Exit(_reopenLock);
         }
     }
 
@@ -90,88 +127,28 @@ public class SerialNmeaGpsService : ISerialGpsService
     {
         try
         {
-            if (_port is null || !_port.IsOpen) return;
-            ProcessSentence(_port.ReadLine().Trim());
+            // Read every complete line that has arrived; one per event would let the buffer fall behind
+            while (_port is { IsOpen: true } port && port.BytesToRead > 0)
+            {
+                _lastData = DateTime.UtcNow;
+                ProcessSentence(port.ReadLine().Trim());
+            }
         }
-        catch (TimeoutException) { /* ignore */ }
+        catch (TimeoutException) { /* the rest of a line hasn't arrived yet; it stays buffered */ }
         catch (Exception ex)
         {
-            GpsError?.Invoke(this, new GpsErrorEventArgs { ErrorMessage = "read error", Exception = ex });
+            Error("read error", ex);
         }
     }
 
     private void ProcessSentence(string sentence)
     {
-        if (string.IsNullOrWhiteSpace(sentence) || !sentence.StartsWith("$")) return;
-        var p = sentence.Split(',');
-        if (p.Length < 1) return;
-
-        try
-        {
-            if (p[0] is "$GPGGA" or "$GNGGA") ParseGga(p);
-            else if (p[0] is "$GPRMC" or "$GNRMC") ParseRmc(p);
-        }
-        catch { /* skip malformed sentence */ }
-    }
-
-    private void ParseGga(string[] p)
-    {
-        // $..GGA,time,lat,N/S,lon,E/W,quality,sats,hdop,alt,M,...
-        if (p.Length < 15) return;
-        _current ??= new GpsData();
-
-        if (!string.IsNullOrEmpty(p[2]) && !string.IsNullOrEmpty(p[3]))
-            _current.Latitude = ToDecimalDegrees(p[2], p[3]);
-        if (!string.IsNullOrEmpty(p[4]) && !string.IsNullOrEmpty(p[5]))
-            _current.Longitude = ToDecimalDegrees(p[4], p[5]);
-        if (int.TryParse(p[6], out int q)) _current.Quality = (GpsQuality)q;
-        if (int.TryParse(p[7], out int sats)) _current.NumberOfSatellites = sats;
-        if (double.TryParse(p[8], NumberStyles.Float, CultureInfo.InvariantCulture, out double hdop)) _current.HorizontalDilution = hdop;
-        if (double.TryParse(p[9], NumberStyles.Float, CultureInfo.InvariantCulture, out double alt)) _current.Altitude = alt;
-
-        Publish();
-    }
-
-    private void ParseRmc(string[] p)
-    {
-        // $..RMC,time,status,lat,N/S,lon,E/W,speed,track,date,...
-        if (p.Length < 12) return;
-        if (p[2] != "A") return;               // A = valid fix
-        _current ??= new GpsData();
-
-        if (!string.IsNullOrEmpty(p[3]) && !string.IsNullOrEmpty(p[4]))
-            _current.Latitude = ToDecimalDegrees(p[3], p[4]);
-        if (!string.IsNullOrEmpty(p[5]) && !string.IsNullOrEmpty(p[6]))
-            _current.Longitude = ToDecimalDegrees(p[5], p[6]);
-        if (double.TryParse(p[7], NumberStyles.Float, CultureInfo.InvariantCulture, out double kn)) _current.SpeedKnots = kn;
-        if (double.TryParse(p[8], NumberStyles.Float, CultureInfo.InvariantCulture, out double trk)) _current.TrackAngle = trk;
-        if (_current.Quality == GpsQuality.Invalid) _current.Quality = GpsQuality.GpsFix;
-
-        Publish();
-    }
-
-    // ddmm.mmmm / dddmm.mmmm + hemisphere → signed decimal degrees.
-    private static double ToDecimalDegrees(string coordinate, string direction)
-    {
-        int dot = coordinate.IndexOf('.');
-        if (dot < 3) return 0;
-        int degLen = dot - 2;
-        if (!double.TryParse(coordinate[..degLen], NumberStyles.Float, CultureInfo.InvariantCulture, out double deg) ||
-            !double.TryParse(coordinate[degLen..], NumberStyles.Float, CultureInfo.InvariantCulture, out double min))
-            return 0;
-
-        double dd = deg + min / 60.0;
-        if (direction is "S" or "W") dd = -dd;
-        return dd;
-    }
-
-    private void Publish()
-    {
-        if (_current is null) return;
-        if (_current.Quality == GpsQuality.Invalid) return;  // don't emit until there's a fix
+        if (_parser.Process(sentence) is not { } fix) return;
         _lastUpdate = DateTime.UtcNow;
-        _current.Timestamp = DateTime.UtcNow;
-        GpsDataReceived?.Invoke(this, new GpsDataReceivedEventArgs { GpsData = _current });
+        GpsDataReceived?.Invoke(this, new GpsDataReceivedEventArgs { GpsData = fix });
     }
+
+    private void Error(string message, Exception? ex = null) =>
+        GpsError?.Invoke(this, new GpsErrorEventArgs { ErrorMessage = message, Exception = ex });
 }
 #endif

@@ -17,8 +17,6 @@ public partial class WifiDbUploadViewModel : ObservableObject
 
     public IReadOnlyList<string> Formats { get; } = new[] { "VS1", "VSZ (zipped)" };
 
-    [ObservableProperty] private string _user       = WifiDbSettings.User;
-    [ObservableProperty] private string _apiKey     = WifiDbSettings.ApiKey;
     [ObservableProperty] private string _otherUsers = string.Empty;
     [ObservableProperty] private string _title      = $"VistumblerMAUI {DateTime.Now:yyyy-MM-dd HH:mm}";
     [ObservableProperty] private string _notes      = string.Empty;
@@ -27,8 +25,28 @@ public partial class WifiDbUploadViewModel : ObservableObject
     [ObservableProperty] private bool   _isBusy;
     [ObservableProperty] private string? _fileHash;
 
-    public string Destination => WifiDbUploader.ImportUrl;
     public bool CanCheckStatus => !string.IsNullOrEmpty(FileHash) && !IsBusy;
+
+    // The account comes from Settings → WifiDB. WifiDB needs a username to import (with the API key when the
+    // account requires one), so without one the page points to Settings instead of offering the upload.
+    public bool HasAccount => !string.IsNullOrWhiteSpace(WifiDbSettings.User);
+    public bool NeedsAccount => !HasAccount;
+    public string AccountText => HasAccount
+        ? $"Uploading as {WifiDbSettings.User} to {WifiDbSettings.Url}" +
+          (string.IsNullOrWhiteSpace(WifiDbSettings.ApiKey) ? " (no API key set)" : "")
+        : "Set up your WifiDB account in Settings → WifiDB before uploading.";
+
+    /// <summary>Re-reads the account, e.g. on returning from Settings.</summary>
+    public void Refresh()
+    {
+        OnPropertyChanged(nameof(HasAccount));
+        OnPropertyChanged(nameof(NeedsAccount));
+        OnPropertyChanged(nameof(AccountText));
+        UploadCommand.NotifyCanExecuteChanged();
+    }
+
+    [RelayCommand]
+    private static Task OpenWifiDbSettingsAsync() => Shell.Current.GoToAsync("//SettingsPage");
 
     public WifiDbUploadViewModel(IDatabaseService db, IExportService export)
     {
@@ -49,9 +67,6 @@ public partial class WifiDbUploadViewModel : ObservableObject
     {
         IsBusy = true;
         FileHash = null;
-        // Keep edited credentials, as VistumblerCS does
-        WifiDbSettings.User   = User;
-        WifiDbSettings.ApiKey = ApiKey;
 
         var format = SelectedFormat.StartsWith("VSZ") ? SaveFileFormat.Vsz : SaveFileFormat.Vs1;
         var path = Path.Combine(FileSystem.CacheDirectory,
@@ -67,7 +82,8 @@ public partial class WifiDbUploadViewModel : ObservableObject
             }
 
             StatusMessage = $"Uploading {count} access points to WifiDB…";
-            var result = await WifiDbUploader.UploadAsync(path, User, ApiKey, OtherUsers, Title, Notes);
+            var result = await WifiDbUploader.UploadAsync(path, WifiDbSettings.User, WifiDbSettings.ApiKey,
+                OtherUsers, Title, Notes);
             if (result.Success)
             {
                 FileHash = result.FileHash;
@@ -89,7 +105,7 @@ public partial class WifiDbUploadViewModel : ObservableObject
         }
     }
 
-    private bool CanUpload() => !IsBusy;
+    private bool CanUpload() => !IsBusy && HasAccount;
 
     [RelayCommand]
     private async Task CheckStatusAsync()

@@ -240,7 +240,13 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
             }
 
             var message = $"Saved {count} APs to {path}";
-            if (Services.SaveAndClearSettings.UploadToWifiDb)
+            if (Services.SaveAndClearSettings.UploadToWifiDb && string.IsNullOrWhiteSpace(Services.WifiDbSettings.User))
+            {
+                const string skipped = "WifiDB upload skipped: set up your account in Settings → WifiDB";
+                message += $"\n{skipped}";
+                await MainThread.InvokeOnMainThreadAsync(() => StatusMessage = skipped);
+            }
+            else if (Services.SaveAndClearSettings.UploadToWifiDb)
             {
                 await MainThread.InvokeOnMainThreadAsync(() => StatusMessage = "Uploading the saved file to WifiDB…");
                 var upload = await Services.WifiDbUploader.UploadAsync(path, Services.WifiDbSettings.User,
@@ -342,10 +348,19 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         GpsStatus    = "GPS starting…";
         _ = _gps.StartAsync(_gpsCts.Token);
         UpdateKeepAlive();
+
+        if (_gpsWatchdog is null && Application.Current?.Dispatcher is { } dispatcher)
+        {
+            _gpsWatchdog = dispatcher.CreateTimer();
+            _gpsWatchdog.Interval = TimeSpan.FromSeconds(1);
+            _gpsWatchdog.Tick += (_, _) => CheckGpsFixAge();
+        }
+        _gpsWatchdog?.Start();
     }
 
     private void StopGps()
     {
+        _gpsWatchdog?.Stop();
         _gpsCts?.Cancel();
         _gps.Stop();
         IsGpsEnabled = false;
@@ -578,12 +593,31 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         }
     }
 
+    // When the last fix arrived, for Settings → GPS "Reset position when the receiver has no fix"
+    private DateTime _lastFixUtc;
+    private IDispatcherTimer? _gpsWatchdog;
+
+    /// <summary>
+    /// Clears the position once an external receiver has sent no fix for GpsSettings.NoFixTimeout, like the
+    /// original's "Reset GPS position when no GPGGA data is received", so APs stop getting its last position.
+    /// Not applied to the phone's own GPS, which can go quiet while standing still.
+    /// </summary>
+    private void CheckGpsFixAge()
+    {
+        if (_currentGps is null || !Services.GpsSettings.ResetPositionWhenNoFix || !Services.GpsSettings.IsExternalReceiver)
+            return;
+        if (DateTime.UtcNow - _lastFixUtc <= Services.GpsSettings.NoFixTimeout) return;
+        _currentGps = null;
+        GpsStatus = $"GPS: no fix for {Services.GpsSettings.NoFixTimeout.TotalSeconds:0} s, position cleared";
+    }
+
     private void OnGpsData(object? sender, GpsDataReceivedEventArgs e)
     {
         // Just track the latest fix. GPS rows are written once per scan cycle in
         // OnAccessPointsDetected and linked to that cycle's HIST samples (rather than
         // logging every raw fix here, which produced GPS rows nothing referenced).
         _currentGps = e.GpsData;
+        _lastFixUtc = DateTime.UtcNow;
         var text = $"GPS {e.GpsData.Latitude:F5}, {e.GpsData.Longitude:F5}";
         // The GPS callback runs on a background thread; the status label only refreshes
         // when the bound property changes on the UI thread.

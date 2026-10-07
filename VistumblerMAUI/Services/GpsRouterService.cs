@@ -5,31 +5,35 @@ using Vistumbler.Core.Services;
 namespace VistumblerMAUI.Services;
 
 /// <summary>
-/// The single <see cref="IGpsService"/> registered in DI. Routes to either the Windows/OS
-/// location service or a serial NMEA receiver based on <see cref="GpsSettings.Source"/>
-/// (mirrors VistumblerCS's GpsServiceRouter). The serial back-end is optional and only
-/// present on platforms that register <see cref="ISerialGpsService"/> (Windows).
+/// The single <see cref="IGpsService"/> registered in DI. Routes to the OS location service or an external
+/// NMEA receiver based on <see cref="GpsSettings.Source"/> (mirrors VistumblerCS's GpsServiceRouter). The
+/// external receivers are optional and only present where a platform registers them: a serial COM port
+/// (<see cref="ISerialGpsService"/>, Windows), or a Bluetooth (<see cref="IBluetoothGpsService"/>) or USB
+/// (<see cref="IUsbGpsService"/>) receiver on Android.
 /// </summary>
 public class GpsRouterService : IGpsService
 {
-    private readonly ILocationGpsService _location;
-    private readonly ISerialGpsService?  _serial;
-    private IGpsService?                  _active;
+    private readonly ILocationGpsService   _location;
+    private readonly ISerialGpsService?    _serial;
+    private readonly IBluetoothGpsService? _bluetooth;
+    private readonly IUsbGpsService?       _usb;
+    private IGpsService?                   _active;
 
     public event EventHandler<GpsDataReceivedEventArgs>? GpsDataReceived;
     public event EventHandler<GpsErrorEventArgs>?        GpsError;
 
     public GpsRouterService(ILocationGpsService location, IServiceProvider services)
     {
-        _location = location;
-        _serial   = services.GetService<ISerialGpsService>();   // null off Windows
+        _location  = location;
+        _serial    = services.GetService<ISerialGpsService>();      // Windows only
+        _bluetooth = services.GetService<IBluetoothGpsService>();   // Android only
+        _usb       = services.GetService<IUsbGpsService>();         // Android only
 
-        _location.GpsDataReceived += (_, e) => GpsDataReceived?.Invoke(this, e);
-        _location.GpsError        += (_, e) => GpsError?.Invoke(this, e);
-        if (_serial is not null)
+        foreach (var source in new IGpsService?[] { _location, _serial, _bluetooth, _usb })
         {
-            _serial.GpsDataReceived += (_, e) => GpsDataReceived?.Invoke(this, e);
-            _serial.GpsError        += (_, e) => GpsError?.Invoke(this, e);
+            if (source is null) continue;
+            source.GpsDataReceived += (_, e) => GpsDataReceived?.Invoke(this, e);
+            source.GpsError        += (_, e) => GpsError?.Invoke(this, e);
         }
     }
 
@@ -41,25 +45,15 @@ public class GpsRouterService : IGpsService
     {
         Stop();
 
-        if (GpsSettings.Source == GpsSource.SerialNmea)
+        // GpsSettings.Source only returns sources this platform offers, so a missing back-end is unexpected;
+        // fall back to the device so the user still gets a position
+        _active = GpsSettings.Source switch
         {
-            if (_serial is null)
-            {
-                GpsError?.Invoke(this, new GpsErrorEventArgs
-                {
-                    ErrorMessage = "serial GPS is only available on Windows"
-                });
-                _active = _location;   // fall back so the user still gets a position
-            }
-            else
-            {
-                _active = _serial;
-            }
-        }
-        else
-        {
-            _active = _location;
-        }
+            GpsSource.SerialNmea    => (IGpsService?)_serial,
+            GpsSource.BluetoothNmea => _bluetooth,
+            GpsSource.UsbNmea       => _usb,
+            _                       => _location,
+        } ?? _location;
 
         await _active.StartAsync(cancellationToken);
     }
