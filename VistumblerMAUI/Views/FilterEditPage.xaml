@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:VistumblerMAUI.ViewModels"
+             x:DataType="vm:FilterEditViewModel"
+             x:Class="VistumblerMAUI.Views.FilterEditPage"
+             Title="{Binding Title}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="0,8" Spacing="0">
+
+            <Grid ColumnDefinitions="Auto,*" Padding="16,8" ColumnSpacing="12">
+                <Label Grid.Column="0" Text="Name" VerticalOptions="Center" />
+                <Entry Grid.Column="1" Text="{Binding Filter.Name}" />
+            </Grid>
+            <BoxView HeightRequest="1" Color="#EEEEEE" Margin="16,4" />
+
+            <Label Text="SHOW APS THAT" Style="{StaticResource SectionHeader}" />
+            <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto" Padding="16,8" ColumnSpacing="12" RowSpacing="8">
+                <Label Grid.Row="0" Grid.Column="0" Text="SSID contains" VerticalOptions="Center" />
+                <Entry Grid.Row="0" Grid.Column="1" Text="{Binding Filter.SsidContains}" Placeholder="any" />
+                <Label Grid.Row="1" Grid.Column="0" Text="BSSID starts with" VerticalOptions="Center" />
+                <Entry Grid.Row="1" Grid.Column="1" Text="{Binding Filter.BssidStartsWith}" Placeholder="any, e.g. 00:11:22" />
+                <Label Grid.Row="2" Grid.Column="0" Text="Channels" VerticalOptions="Center" />
+                <Entry Grid.Row="2" Grid.Column="1" Text="{Binding Filter.Channels}" Placeholder="any, e.g. 1,6,11 or 36-64" />
+                <Label Grid.Row="3" Grid.Column="0" Text="Signal at least (%)" VerticalOptions="Center" />
+                <Entry Grid.Row="3" Grid.Column="1" Text="{Binding MinSignalText}" Placeholder="any" Keyboard="Numeric" />
+            </Grid>
+
+            <Label Text="Security" Margin="16,8,16,0" />
+            <HorizontalStackLayout Padding="12,0" Spacing="4">
+                <CheckBox IsChecked="{Binding Filter.Open}" /><Label Text="Open" VerticalOptions="Center" Margin="0,0,12,0" />
+                <CheckBox IsChecked="{Binding Filter.Wep}" /><Label Text="WEP" VerticalOptions="Center" Margin="0,0,12,0" />
+                <CheckBox IsChecked="{Binding Filter.Secure}" /><Label Text="Secure (WPA and up)" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+            <Label Text="Band" Margin="16,8,16,0" />
+            <HorizontalStackLayout Padding="12,0" Spacing="4">
+                <CheckBox IsChecked="{Binding Filter.Band24}" /><Label Text="2.4 GHz" VerticalOptions="Center" Margin="0,0,12,0" />
+                <CheckBox IsChecked="{Binding Filter.Band5}" /><Label Text="5 GHz" VerticalOptions="Center" Margin="0,0,12,0" />
+                <CheckBox IsChecked="{Binding Filter.Band6}" /><Label Text="6 GHz" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+            <Picker Margin="16,8" ItemsSource="{Binding StatusChoices}" SelectedItem="{Binding SelectedStatus}" />
+            <BoxView HeightRequest="1" Color="#EEEEEE" Margin="16,4" />
+
+            <!-- Advanced: the original Vistumbler's per-field filter expressions -->
+            <Grid ColumnDefinitions="*,Auto" Padding="16,8">
+                <Label Grid.Column="0" Text="Advanced rules" FontAttributes="Bold" VerticalOptions="Center" />
+                <Switch Grid.Column="1" IsToggled="{Binding ShowAdvanced}" />
+            </Grid>
+            <VerticalStackLayout IsVisible="{Binding ShowAdvanced}" Padding="16,0,16,8" Spacing="8">
+                <Label FontSize="11" TextColor="Gray"
+                       Text="The original Vistumbler's filter syntax, per field. * or empty = any · 6 = equal · 1,6,11 = any of · 1-6 or -80--60 = between · &lt;&gt; in front = not (&lt;&gt;6, &lt;&gt;1-6, &lt;&gt;6,&lt;&gt;11) · % = any text (Linksys%, %guest%) · \, \- \% = a literal comma, dash or percent. Text fields ignore case." />
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12" RowSpacing="6"
+                      RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+                    <Label Grid.Row="0" Grid.Column="0" Text="SSID" VerticalOptions="Center" />
+                    <Entry Grid.Row="0" Grid.Column="1" Text="{Binding Filter.AdvSsid}" />
+                    <Label Grid.Row="1" Grid.Column="0" Text="BSSID" VerticalOptions="Center" />
+                    <Entry Grid.Row="1" Grid.Column="1" Text="{Binding Filter.AdvBssid}" />
+                    <Label Grid.Row="2" Grid.Column="0" Text="Channel" VerticalOptions="Center" />
+                    <Entry Grid.Row="2" Grid.Column="1" Text="{Binding Filter.AdvChannel}" />
+                    <Label Grid.Row="3" Grid.Column="0" Text="Authentication" VerticalOptions="Center" />
+                    <Entry Grid.Row="3" Grid.Column="1" Text="{Binding Filter.AdvAuth}" Placeholder="e.g. WPA2-Personal,WPA3-Personal" />
+                    <Label Grid.Row="4" Grid.Column="0" Text="Encryption" VerticalOptions="Center" />
+                    <Entry Grid.Row="4" Grid.Column="1" Text="{Binding Filter.AdvEncr}" Placeholder="e.g. CCMP" />
+                    <Label Grid.Row="5" Grid.Column="0" Text="Radio type" VerticalOptions="Center" />
+                    <Entry Grid.Row="5" Grid.Column="1" Text="{Binding Filter.AdvRadio}" Placeholder="e.g. %5 GHz" />
+                    <Label Grid.Row="6" Grid.Column="0" Text="Network type" VerticalOptions="Center" />
+                    <Entry Grid.Row="6" Grid.Column="1" Text="{Binding Filter.AdvNetType}" Placeholder="Infrastructure or Ad Hoc" />
+                    <Label Grid.Row="7" Grid.Column="0" Text="Signal (%)" VerticalOptions="Center" />
+                    <Entry Grid.Row="7" Grid.Column="1" Text="{Binding Filter.AdvSignal}" />
+                    <Label Grid.Row="8" Grid.Column="0" Text="High signal (%)" VerticalOptions="Center" />
+                    <Entry Grid.Row="8" Grid.Column="1" Text="{Binding Filter.AdvHighSignal}" />
+                    <Label Grid.Row="9" Grid.Column="0" Text="RSSI (dBm)" VerticalOptions="Center" />
+                    <Entry Grid.Row="9" Grid.Column="1" Text="{Binding Filter.AdvRssi}" Placeholder="e.g. -70-0" />
+                    <Label Grid.Row="10" Grid.Column="0" Text="High RSSI (dBm)" VerticalOptions="Center" />
+                    <Entry Grid.Row="10" Grid.Column="1" Text="{Binding Filter.AdvHighRssi}" />
+                    <Label Grid.Row="11" Grid.Column="0" Text="Active (1 or 0)" VerticalOptions="Center" />
+                    <Entry Grid.Row="11" Grid.Column="1" Text="{Binding Filter.AdvActive}" />
+                </Grid>
+            </VerticalStackLayout>
+            <BoxView HeightRequest="1" Color="#EEEEEE" Margin="16,4" />
+
+            <Button Text="Save and use" Command="{Binding SaveAndUseCommand}" Margin="16,8,16,4" HorizontalOptions="Fill" />
+            <Button Text="Save" Command="{Binding SaveCommand}" Margin="16,4" HorizontalOptions="Fill"
+                    BackgroundColor="Transparent" TextColor="#1565C0" />
+            <Button Text="Cancel" Command="{Binding CancelCommand}" Margin="16,0,16,8" HorizontalOptions="Fill"
+                    BackgroundColor="Transparent" TextColor="Gray" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

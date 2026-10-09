@@ -48,10 +48,18 @@ public partial class ExportViewModel : ObservableObject
 
     public List<ExportFormat> Formats { get; } = Enum.GetValues<ExportFormat>().ToList();
 
-    public ExportViewModel(IExportService exportService, IDatabaseService databaseService)
+    private readonly ScanViewModel _scan;
+
+    /// <summary>The original's "Filtered APs" exports: only the APs the filter in use (Filters page) shows.</summary>
+    [ObservableProperty] private bool _filteredOnly;
+    public bool HasActiveFilter => Services.ApFilterStore.Active is not null;
+    public string FilteredOnlyText => $"Only APs the filter \"{Services.ApFilterStore.Active?.Name}\" shows";
+
+    public ExportViewModel(IExportService exportService, IDatabaseService databaseService, ScanViewModel scan)
     {
         _exportService = exportService;
         _databaseService = databaseService;
+        _scan = scan;
     }
 
     /// <summary>Return to Settings without exporting.</summary>
@@ -111,6 +119,18 @@ public partial class ExportViewModel : ObservableObject
                 return;
             }
             Services.ManufacturerDatabase.Current?.FillMissing(aps);   // APs saved before the lookup existed have none
+            if (FilteredOnly && Services.ApFilterStore.Active is { } filter)
+            {
+                // Judged on the live list, so "active only" and signal rules mean what the list shows now
+                await _scan.LoadCommand.ExecuteAsync(null);
+                var shown = _scan.AllKnownAps.Where(filter.Matches).Select(a => a.Bssid).ToHashSet(StringComparer.OrdinalIgnoreCase);
+                aps = aps.Where(a => shown.Contains(a.Bssid)).ToList();
+                if (aps.Count == 0)
+                {
+                    StatusMessage = $"No access points match the filter \"{filter.Name}\"";
+                    return;
+                }
+            }
 
             // Load each AP's full signal/GPS history + the GPS fixes. Every format that
             // records per-observation data (NS1, KismetDB, WiGLE, VS1/VSZ, GPS tracks in

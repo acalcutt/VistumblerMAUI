@@ -32,13 +32,16 @@
                     VerticalOptions="Center"
                     BackgroundColor="Transparent"
                     TextColor="{AppThemeBinding Light=#1565C0, Dark=#90CAF9}" />
+            <!-- Filters (the list of saved filters); Clear moved to the menu, where it offers to save first -->
             <Button Grid.Column="3"
-                    Text="Clear"
-                    Command="{Binding ClearAllCommand}"
+                    Text="{Binding FilterLabel, StringFormat='⏷ {0}'}"
+                    Command="{Binding OpenFiltersCommand}"
+                    MaximumWidthRequest="130"
+                    LineBreakMode="TailTruncation"
                     Padding="8,0"
                     VerticalOptions="Center"
                     BackgroundColor="Transparent"
-                    TextColor="#B00020" FontSize="13" />
+                    TextColor="{AppThemeBinding Light=#1565C0, Dark=#90CAF9}" FontSize="13" />
         </Grid>
 
         <!-- AP list -->

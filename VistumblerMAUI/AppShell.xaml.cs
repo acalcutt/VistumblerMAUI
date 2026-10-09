@@ -21,6 +21,8 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(WifiDbScanPage), typeof(WifiDbScanPage));
         Routing.RegisterRoute(nameof(WifiDbUploadPage), typeof(WifiDbUploadPage));
         Routing.RegisterRoute(nameof(GpsDetailsPage), typeof(GpsDetailsPage));
+        Routing.RegisterRoute(nameof(FiltersPage), typeof(FiltersPage));
+        Routing.RegisterRoute(nameof(FilterEditPage), typeof(FilterEditPage));
         Routing.RegisterRoute(nameof(MapColorsPage), typeof(MapColorsPage));
         Routing.RegisterRoute(nameof(ApDetailsPage), typeof(ApDetailsPage));
 

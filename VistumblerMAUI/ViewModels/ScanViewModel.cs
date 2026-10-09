@@ -55,6 +55,12 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
     [ObservableProperty] private double _loopTimeMs;
     [ObservableProperty] private string _searchText = string.Empty;
 
+    /// <summary>The filter in use (Filters page), shown on the Scan page's Filter button.</summary>
+    [ObservableProperty] private string _filterLabel = Services.ApFilterStore.Active?.Name ?? "No filter";
+
+    [RelayCommand]
+    private static Task OpenFiltersAsync() => Shell.Current.GoToAsync(nameof(Views.FiltersPage));
+
     partial void OnSearchTextChanged(string value) => RebuildDisplayedList();
 
     // APs not re-seen within this many seconds are marked dead (dimmed, still listed).
@@ -117,6 +123,11 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         _uploadQueue = uploadQueue;
         _manufacturers = manufacturers;
         _manufacturers.Changed += (_, _) => MainThread.BeginInvokeOnMainThread(RefreshManufacturers);
+        Services.ApFilterStore.Changed += (_, _) => MainThread.BeginInvokeOnMainThread(() =>
+        {
+            FilterLabel = Services.ApFilterStore.Active?.Name ?? "No filter";
+            RebuildDisplayedList();
+        });
 
         // Restore the persisted sort choice (set the fields directly so the change
         // handlers don't fire before construction finishes).
@@ -590,6 +601,8 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         IEnumerable<AccessPoint> source = _apMap.Values;
         if (!string.IsNullOrEmpty(q))
             source = source.Where(a => MatchesSearch(a, q));
+        if (Services.ApFilterStore.Active is { } filter)
+            source = source.Where(filter.Matches);
 
         var desired = source.ToList();
         desired.Sort(CurrentComparison());
@@ -626,11 +639,19 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         var q = SearchText?.Trim() ?? string.Empty;
         var shown = new HashSet<AccessPoint>(AccessPoints);
         var cmp = CurrentComparison();
+        var filter = Services.ApFilterStore.Active;
+
+        // Like the original's _FilterRemoveNonMatchingInList: drop rows that stopped matching (e.g. went dead
+        // under an "active only" filter); the loop below adds ones that started to
+        if (filter is not null)
+            for (int i = AccessPoints.Count - 1; i >= 0; i--)
+                if (!filter.Matches(AccessPoints[i])) { shown.Remove(AccessPoints[i]); AccessPoints.RemoveAt(i); }
 
         foreach (var ap in _apMap.Values)
         {
             if (shown.Contains(ap)) continue;
             if (!string.IsNullOrEmpty(q) && !MatchesSearch(ap, q)) continue;
+            if (filter is not null && !filter.Matches(ap)) continue;
 
             int idx = 0;
             while (idx < AccessPoints.Count && cmp(AccessPoints[idx], ap) <= 0) idx++;
