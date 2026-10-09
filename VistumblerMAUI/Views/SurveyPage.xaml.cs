@@ -27,7 +27,7 @@ public partial class SurveyPage : ContentPage
         {
             if (e.GetPosition(Canvas) is not { } p) return;
             var (x, y) = _vm.Drawable.ToPlan(p.X, p.Y);
-            _vm.MarkAt(x, y);
+            _ = _vm.TapAsync(x, y);
         };
         Canvas.GestureRecognizers.Add(tap);
 

@@ -106,10 +106,57 @@ public partial class SurveyViewModel : ObservableObject
 
     // ── Marking ───────────────────────────────────────────────────────────────
 
-    /// <summary>A tap on the plan, in plan units: wait for the next scan and keep its readings there.</summary>
-    public void MarkAt(double x, double y)
+    /// <summary>
+    /// A tap on the plan, in plan units. On a spot already measured, shows it and offers to delete or re-measure
+    /// it; elsewhere, waits for the next scan and keeps its readings there.
+    /// </summary>
+    public async Task TapAsync(double x, double y)
     {
         if (x < 0 || y < 0 || x > _survey.PlanWidth || y > _survey.PlanHeight) return;
+
+        int hit = SpotNear(x, y);
+        if (hit >= 0)
+        {
+            var mark = _survey.Marks[hit];
+            var choice = await Shell.Current.DisplayActionSheetAsync(Describe(hit), "Cancel", "Delete spot", "Measure again here");
+            if (choice is not ("Delete spot" or "Measure again here")) return;
+            _survey.Marks.Remove(mark);
+            Save();
+            RebuildNetworks();
+            Refresh(refit: false);
+            if (choice == "Delete spot") return;
+            (x, y) = (mark.X, mark.Y);
+        }
+        MarkAt(x, y);
+    }
+
+    // The measured spot within a fingertip of a point, or -1
+    private int SpotNear(double x, double y)
+    {
+        double reach = 20 / Drawable.Scale;
+        int hit = -1;
+        double best = reach * reach;
+        for (int i = 0; i < _survey.Marks.Count; i++)
+        {
+            var m = _survey.Marks[i];
+            double d2 = (m.X - x) * (m.X - x) + (m.Y - y) * (m.Y - y);
+            if (d2 <= best) { best = d2; hit = i; }
+        }
+        return hit;
+    }
+
+    private string Describe(int index)
+    {
+        var mark = _survey.Marks[index];
+        var lines = new List<string> { $"Spot {index + 1}: {mark.Readings.Count} AP(s) at {mark.Time.ToLocalTime():t}" };
+        lines.Add(ValueAt(mark) is { } v ? $"{SelectedNetwork?.Label}: {v:0} dBm" : $"{SelectedNetwork?.Label}: not heard");
+        if (mark.Readings.OrderByDescending(r => r.Rssi).FirstOrDefault() is { } top)
+            lines.Add($"Strongest: {(string.IsNullOrEmpty(top.Ssid) ? top.Bssid : top.Ssid)} {top.Rssi} dBm");
+        return string.Join(Environment.NewLine, lines);
+    }
+
+    private void MarkAt(double x, double y)
+    {
         Drawable.Pending = (x, y);
         IsWaiting = true;
         UpdateStatus();
@@ -226,7 +273,7 @@ public partial class SurveyViewModel : ObservableObject
         else
             Status = _survey.Marks.Count == 0
                 ? "Tap where you're standing to measure there."
-                : $"{_survey.Marks.Count} spot(s) measured. Tap where you're standing to add one.";
+                : $"{_survey.Marks.Count} spot(s) measured. Tap where you're standing to add one, or on a spot to see or delete it.";
     }
 
     private void Save()
