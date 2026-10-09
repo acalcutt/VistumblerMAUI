@@ -1,3 +1,5 @@
+| GeoJSON (APs, and a signal map of every reading, with WifiDB's property names) | n/a | n/a / ➕ |
+| KML signal map (every reading, coloured by RSSI) | n/a | n/a / ➕ also per AP, from its live map |
 | Indoor site survey on a floor plan (tap-to-mark, heatmap) | n/a | ➕ Site survey in the menu; PNG and CSV export |
 | WiGLE Magic 8 Ball (.m8b) | n/a | ➕ / ➕ imported on the GPS details page, for offline position |
 | Offline position from the APs in range (Magic 8 Ball, m8b files) | n/a | ➕ on the GPS details page, from imported m8b files and the open session |
