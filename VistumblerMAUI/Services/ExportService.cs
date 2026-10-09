@@ -37,7 +37,7 @@ public class ExportService : IExportService
                 writer.Write(ssidBytes);
 
                 // BSSID
-                var bssidParts = (ap.Bssid ?? "00:00:00:00:00:00").Split(':', '-');
+                var bssidParts = (ap.Bssid ?? "00:00:00:00:00:00").Split(':                await writer.WriteLineAsync(string.Join('|', '-');
                 if (bssidParts.Length == 6)
                 {
                     foreach (var part in bssidParts)
@@ -64,7 +64,12 @@ public class ExportService : IExportService
 
                 // Flags
                 uint flags = 0;
-                if (ap.NetworkType == NetworkType.Infrastructure) flags |= 0x0001;
+                if (ap.Network        // 4.1: cell towers and Bluetooth devices (WiGLE's fields), 10 fields a line. VS1 readers tell lines apart by
+        // their field count (6 or 12 GPS, 13 or 15 AP), so older ones skip these as lines they don't know.
+        if (hasRadios)
+        {
+            await writer.WriteLineAsync("# ---------------------------------------------------------------------------------------------------------------------------------------------------------");
+            await writer.WriteLineAsync("# Type|Key|Name|Capabilities|Channel|Frequency|MfgrId|Manufacturer|High RSSI|GID,RSSI"); == NetworkType.Infrastructure) flags |= 0x0001;
                 else if (ap.NetworkType == NetworkType.Adhoc) flags |= 0x0002;
 
                 if (ap.Encryption != EncryptionType.None)
@@ -818,7 +823,9 @@ public class ExportService : IExportService
         // VS1 import couldn't read
         using var writer = new StreamWriter(filePath, false, Encoding.UTF8) { NewLine = "\r\n" };
 
-        await writer.WriteLineAsync("# Vistumbler VS1 - Detailed Export Version 4.0");
+        // 4.1 adds the cell tower and Bluetooth section; a file without one stays exactly the original's 4.0
+        bool hasRadios = radios is { Count: > 0 };
+        await writer.WriteLineAsync(hasRadios ? "# Vistumbler VS1 - Detailed Export Version 4.1" : "# Vistumbler VS1 - Detailed Export Version 4.0");
         await writer.WriteLineAsync("# Created By: VistumblerMAUI");
         await writer.WriteLineAsync(sep);
         await writer.WriteLineAsync("# GpsID|Latitude|Longitude|NumOfSatalites|HorizontalDilutionOfPrecision|Altitude(m)|HeightOfGeoidAboveWGS84Ellipsoid(m)|Speed(km/h)|Speed(MPH)|TrackAngle(Deg)|Date(UTC y-m-d)|Time(UTC h:m:s.ms)");
@@ -878,19 +885,17 @@ public class ExportService : IExportService
                 history));
         }
 
-        // Cell towers and Bluetooth devices, as comment lines: the original Vistumbler and WifiDB skip lines starting
-        // with '#' (WifiDB reads one as an AP only when its second field is a MAC, which these never have), so files
-        // stay readable everywhere while this app, and WifiDB in time, can read them back.
-        if (radios is { Count: > 0 })
+        // 4.1: cell towers and Bluetooth devices (WiGLE's fields), 10 fields a line. VS1 readers tell lines apart by
+        // their field count (6 or 12 GPS, 13 or 15 AP), so older ones skip these as lines they don't know.
+        if (hasRadios)
         {
             await writer.WriteLineAsync("# ---------------------------------------------------------------------------------------------------------------------------------------------------------");
-            await writer.WriteLineAsync("# Cell towers and Bluetooth devices (WiGLE CSV fields), readings pointing at the GPS lines above:");
-            await writer.WriteLineAsync("# #RADIO|Type|Key|Name|Capabilities|Channel|Frequency|MfgrId|Manufacturer|GID,RSSI");
+            await writer.WriteLineAsync("# Type|Key|Name|Capabilities|Channel|Frequency|MfgrId|Manufacturer|High RSSI|GID,RSSI");
             await writer.WriteLineAsync("# ---------------------------------------------------------------------------------------------------------------------------------------------------------");
-            foreach (var n in radios)
+            foreach (var n in radios!)
             {
                 var readings = string.Join('\\', n.History.Where(r => r.GpsId > 0).Select(r => $"{r.GpsId},{r.Rssi.ToString(inv)}"));
-                await writer.WriteLineAsync(ImportService.Vs1RadioPrefix + string.Join('|',
+                await writer.WriteLineAsync(string.Join('|',
                     n.Type,
                     Vs1Field(n.Key),
                     Vs1Field(n.Name),
@@ -899,6 +904,7 @@ public class ExportService : IExportService
                     n.Frequency.ToString(inv),
                     n.MfgrId?.ToString(inv) ?? "",
                     Vs1Field(n.Manufacturer),
+                    n.HighestRssi == int.MinValue ? n.Rssi : n.HighestRssi,
                     readings));
             }
         }
