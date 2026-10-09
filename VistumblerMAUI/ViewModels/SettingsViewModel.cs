@@ -64,6 +64,9 @@ public partial class SettingsViewModel : ObservableObject
     partial void OnScanOnLaunchChanged(bool value) => ScanSettings.ScanOnLaunch = value;
     partial void OnGpsOnLaunchChanged(bool value)  => ScanSettings.GpsOnLaunch  = value;
 
+    [ObservableProperty] private bool _saveGpsWithoutAps = ScanSettings.SaveGpsWithoutAps;
+    partial void OnSaveGpsWithoutApsChanged(bool value) => ScanSettings.SaveGpsWithoutAps = value;
+
     /// <summary>Only Windows lets the app choose an adapter; phones have one.</summary>
     public bool HasAdapterChoice => OperatingSystem.IsWindows();
     public ObservableCollection<Vistumbler.Core.Models.WiFiAdapter> Adapters { get; } = new();

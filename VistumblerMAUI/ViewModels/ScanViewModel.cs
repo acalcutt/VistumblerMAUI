@@ -528,7 +528,10 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
             // Cleared (Clear All / Save & Clear) after this cycle was merged: its APs are gone from the
             // list, so writing them would put them back in the database only.
             if (generation != _clearGeneration) return;
-            await _db.SaveScanCycleAsync(toPersist, gps, scanTime);
+            if (toPersist.Count > 0)
+                await _db.SaveScanCycleAsync(toPersist, gps, scanTime);
+            else if (gps is not null && Services.ScanSettings.SaveGpsWithoutAps)
+                await AddGpsPointAsync(gps, scanTime);   // the original's "Save all GPS data": no APs this scan
         }
         catch (Exception ex)
         {
@@ -635,6 +638,31 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         }
     }
 
+    private DateTime _lastGpsPointSaved = DateTime.MinValue;
+
+    /// <summary>Records one GPS point on its own (no APs), under the same lock as scan cycles and clears.</summary>
+    private async Task SaveGpsPointAsync(GpsData gps)
+    {
+        await _persistLock.WaitAsync();
+        try { await AddGpsPointAsync(gps, DateTime.UtcNow); }
+        catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"[ScanVM] GPS point not saved: {ex.Message}"); }
+        finally { _persistLock.Release(); }
+    }
+
+    // Stamped with the time it was recorded, as scan cycles are: a stationary phone repeats one fix timestamp,
+    // which would make every point the same. Callers hold _persistLock.
+    private async Task AddGpsPointAsync(GpsData gps, DateTime when)
+    {
+        await _db.InitializeAsync();
+        await _db.AddGpsDataAsync(new GpsData
+        {
+            Latitude = gps.Latitude, Longitude = gps.Longitude, Altitude = gps.Altitude,
+            NumberOfSatellites = gps.NumberOfSatellites, HorizontalDilution = gps.HorizontalDilution,
+            Accuracy = gps.Accuracy, SpeedKnots = gps.SpeedKnots, TrackAngle = gps.TrackAngle,
+            Quality = gps.Quality, Timestamp = when,
+        });
+    }
+
     // When the last fix arrived, for Settings → GPS "Reset position when the receiver has no fix"
     private DateTime _lastFixUtc;
     private IDispatcherTimer? _gpsWatchdog;
@@ -660,6 +688,15 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         // logging every raw fix here, which produced GPS rows nothing referenced).
         _currentGps = e.GpsData;
         _lastFixUtc = DateTime.UtcNow;
+
+        // The original's "Save all GPS data": with GPS on but no scan running, keep recording the track,
+        // at the scan interval (scans record GPS themselves when they run)
+        if (!IsScanning && IsGpsEnabled && Services.ScanSettings.SaveGpsWithoutAps &&
+            DateTime.UtcNow - _lastGpsPointSaved >= TimeSpan.FromMilliseconds(Math.Max(1000, Preferences.Get(ScanIntervalKey, 1000))))
+        {
+            _lastGpsPointSaved = DateTime.UtcNow;
+            _ = SaveGpsPointAsync(e.GpsData);
+        }
         var text = $"GPS {GpsFormatter.ToText(e.GpsData.Latitude, e.GpsData.Longitude)}";
         // The GPS callback runs on a background thread; the status label only refreshes
         // when the bound property changes on the UI thread.

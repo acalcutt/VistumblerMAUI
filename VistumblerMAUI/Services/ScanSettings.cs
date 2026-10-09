@@ -12,6 +12,7 @@ public static class ScanSettings
     private const string GpsOnLaunchKey  = "Gps_OnLaunch";
     private const string AdapterKey      = "Scan_AdapterId";
     private const string GpsFormatKey    = "Gps_DisplayFormat";
+    private const string SaveGpsKey      = "Gps_SaveWithoutAps";
 
     /// <summary>Start scanning for APs as soon as the app opens (after a session is chosen).</summary>
     public static bool ScanOnLaunch
@@ -32,6 +33,16 @@ public static class ScanSettings
     {
         get => Preferences.Get(AdapterKey, string.Empty);
         set => Preferences.Set(AdapterKey, value ?? string.Empty);
+    }
+
+    /// <summary>
+    /// The original's "Save all GPS data" (on by default there too): record GPS points even when a scan finds
+    /// no APs, and while GPS is on without scanning, so exported tracks have no gaps.
+    /// </summary>
+    public static bool SaveGpsWithoutAps
+    {
+        get => Preferences.Get(SaveGpsKey, true);
+        set => Preferences.Set(SaveGpsKey, value);
     }
 
     public static GpsDisplayFormat GpsFormat
