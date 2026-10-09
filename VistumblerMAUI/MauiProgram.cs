@@ -73,6 +73,7 @@ public static partial class MauiProgram
         services.AddTransient<WifiDbScanPage>();
         services.AddTransient<WifiDbUploadPage>();
         services.AddTransient<GpsDetailsPage>();
+        services.AddTransient<MapColorsPage>();
         services.AddTransient<ApDetailsPage>();
 
         Debug.WriteLine("[MauiProgram] CreateMauiApp EXIT (build)");

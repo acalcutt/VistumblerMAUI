@@ -575,6 +575,9 @@ public partial class SettingsViewModel : ObservableObject
     }
 
     [RelayCommand]
+    private static Task OpenMapColorsAsync() => Shell.Current.GoToAsync(nameof(MapColorsPage));
+
+    [RelayCommand]
     private async Task GoToImportAsync() => await Shell.Current.GoToAsync(nameof(ImportPage));
 
     [RelayCommand]
