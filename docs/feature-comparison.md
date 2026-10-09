@@ -107,7 +107,7 @@ Legend: ✅ has it · 🟡 partly, or done differently · ❌ missing · ➕ new
 | Feature | VistumblerMDB | VistumblerMAUI |
 |---|---|---|
 | Check for updates | ✓ | ✅ plus in-place install on Windows; off in the Google Play build |
-| Language files | ✓ | ❌ English only |
+| Language files | ✓ | ✅ 17 languages (Settings → Language), seeded from the original's files, the rest machine-translated drafts awaiting review |
 | Help, forum, wiki and donate links | ✓ | ✅ Links menu (donate and store left out of the Google Play build) |
 | Portable mode, download images, minimal GUI, batch list insert | ✓ experimental | ❌ |
 | Native Wi-Fi vs netsh, search words, column widths | ✓ | n/a these were Windows-UI or netsh specific |
