@@ -983,7 +983,7 @@ public class ExportService : IExportService
     /// Text safe for an XML document: drops characters XML can't hold (XmlWriter throws on them), such as the
     /// runs of \0 hidden networks often broadcast as their SSID. Without this one such AP failed the whole export.
     /// </summary>
-    private static string XmlText(string? text)
+    internal static string XmlText(string? text)
     {
         if (string.IsNullOrEmpty(text)) return string.Empty;
         var sb = new StringBuilder(text.Length);

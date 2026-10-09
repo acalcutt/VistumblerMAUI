@@ -17,7 +17,10 @@ public enum ExportFormat
     WigleCsv,
     Vs1,
     Vsz,
-    M8b
+    M8b,
+    GeoJson,
+    GeoJsonSignalMap,
+    KmlSignalMap
 }
 
 /// <summary>
@@ -214,6 +217,16 @@ public partial class ExportViewModel : ObservableObject
                     case ExportFormat.Vsz:
                         await _exportService.ExportToVszAsync(path, aps, gpsFixes);
                         break;
+                    case ExportFormat.GeoJson:
+                        await Services.SignalMapExport.WriteGeoJsonAsync(path, aps, signalMap: false);
+                        break;
+                    case ExportFormat.GeoJsonSignalMap:
+                        // Every reading, as WifiDB's signal map and WiGLE's site survey export
+                        await Services.SignalMapExport.WriteGeoJsonAsync(path, aps, signalMap: true);
+                        break;
+                    case ExportFormat.KmlSignalMap:
+                        await Services.SignalMapExport.WriteKmlSignalMapAsync(path, aps, Path.GetFileNameWithoutExtension(path));
+                        break;
                     case ExportFormat.M8b:
                         // WiGLE's Magic 8 Ball: each AP's best-signal position, for offline "where am I"
                         await Task.Run(() =>
@@ -276,6 +289,9 @@ public partial class ExportViewModel : ObservableObject
         ExportFormat.Vs1 => ".vs1",
         ExportFormat.Vsz => ".vsz",
         ExportFormat.M8b => ".m8b",
+        ExportFormat.GeoJson => ".geojson",
+        ExportFormat.GeoJsonSignalMap => ".geojson",
+        ExportFormat.KmlSignalMap => ".kml",
         _ => ".txt"
     };
 }
