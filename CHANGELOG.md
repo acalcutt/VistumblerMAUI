@@ -2,6 +2,13 @@
 
 ## master
 ### ✨ Features and improvements
+- _...Add new stuff here..._
+
+### 🐞 Bug fixes
+- _...Add new stuff here..._
+
+## 0.7.0
+### ✨ Features and improvements
 - **Start scanning and GPS when the app opens (Settings → Scanning)** — the original's "Auto Scan APs on launch", plus the same for GPS. Both off by default.
 - **Choose the Wi-Fi adapter on Windows (Settings → Scanning)** — the original's Interface menu: scan with one adapter, or all of them (the default).
 - **Coordinate format (Settings → GPS)** — coordinates can be shown as decimal degrees (the default), or in the original's three styles: `dd.dddd` (N 48.1173000), `ddmm.mmmm` (N 4807.0380) and `dd mm ss` (N 48° 7' 2.28").
@@ -15,7 +22,6 @@
 - **GPS details (menu)** — the original's GPS Details and GPS Compass windows on one page: position, altitude, satellites, accuracy, speed, heading, fix quality and time, and a compass pointing along your direction of travel.
 
 ### 🐞 Bug fixes
-- _...Add new stuff here..._
 
 ## 0.6.0
 ### ✨ Features and improvements
