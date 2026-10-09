@@ -6,7 +6,7 @@
   Text with {0} keeps its placeholders. Look up with {loc:T Key} in XAML or Loc.T("Key") in code.
 -->
 <root>
-  <!-- Dutch text for VistumblerMAUI. Strings not here show in English (AppResources.resx). Seeded from the original Vistumbler's user-contributed language files by build/tools/ImportVistumblerLanguages.cs. -->
+  <!-- Polish text for VistumblerMAUI. Strings not here show in English (AppResources.resx). Seeded from the original Vistumbler's user-contributed language files by build/tools/ImportVistumblerLanguages.cs. -->
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -19,312 +19,188 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Settings_Language" xml:space="preserve">
-    <value>Taal</value>
-    <comment>Vistumbler Dutch.ini Language</comment>
-  </data>
-  <data name="Tab_Settings" xml:space="preserve">
-    <value>Instellingen</value>
-    <comment>Vistumbler Dutch.ini Settings</comment>
-  </data>
-  <data name="Menu_NewSession" xml:space="preserve">
-    <value>Nieuwe Sessie</value>
-    <comment>Vistumbler Dutch.ini NewSession</comment>
-  </data>
-  <data name="Menu_Import" xml:space="preserve">
-    <value>Importeren…</value>
-    <comment>Vistumbler Dutch.ini Import</comment>
-  </data>
-  <data name="Menu_Export" xml:space="preserve">
-    <value>Exporteren…</value>
-    <comment>Vistumbler Dutch.ini Export</comment>
-  </data>
-  <data name="Menu_CheckForUpdates" xml:space="preserve">
-    <value>Controleren op Updates…</value>
-    <comment>Vistumbler Dutch.ini CheckForUpdates</comment>
-  </data>
-  <data name="Menu_ExitSaveDb" xml:space="preserve">
-    <value>Afsluiten (Database opslaan)</value>
-    <comment>Vistumbler Dutch.ini ExitSaveDb</comment>
-  </data>
-  <data name="Menu_Exit" xml:space="preserve">
-    <value>Afsluiten</value>
-    <comment>Vistumbler Dutch.ini Exit</comment>
-  </data>
-  <data name="Bar_ScanAps" xml:space="preserve">
-    <value>Scan AP's</value>
-    <comment>Vistumbler Dutch.ini ScanAPs</comment>
-  </data>
-  <data name="Bar_Stop" xml:space="preserve">
-    <value>Stop Scan</value>
-    <comment>Vistumbler Dutch.ini StopScanAps</comment>
-  </data>
-  <data name="Bar_UseGps" xml:space="preserve">
-    <value>GPS</value>
-    <comment>Vistumbler Dutch.ini UseGPS</comment>
-  </data>
-  <data name="Bar_StopGps" xml:space="preserve">
-    <value>StopGPS</value>
-    <comment>Vistumbler Dutch.ini StopGPS</comment>
-  </data>
-  <data name="Opt_Channel" xml:space="preserve">
-    <value>Kanaal</value>
-    <comment>Vistumbler Dutch.ini Column_Channel</comment>
-  </data>
-  <data name="Opt_Authentication" xml:space="preserve">
-    <value>Authenticatie</value>
-    <comment>Vistumbler Dutch.ini Column_Authentication</comment>
-  </data>
-  <data name="Opt_Encryption" xml:space="preserve">
-    <value>Encryptie</value>
-    <comment>Vistumbler Dutch.ini Column_Encryption</comment>
-  </data>
-  <data name="Opt_Networktype" xml:space="preserve">
-    <value>Netwerktype</value>
-    <comment>Vistumbler Dutch.ini Column_NetworkType</comment>
-  </data>
-  <data name="Opt_Manufacturer" xml:space="preserve">
-    <value>Fabrikant</value>
-    <comment>Vistumbler Dutch.ini Column_Manufacturer</comment>
-  </data>
-  <data name="Opt_Signal" xml:space="preserve">
-    <value>Signaal</value>
-    <comment>Vistumbler Dutch.ini Column_Signal</comment>
-  </data>
-  <data name="Status_Ready" xml:space="preserve">
-    <value>Klaar</value>
-    <comment>Vistumbler Dutch.ini Ready</comment>
-  </data>
-  <data name="Common_Cancel" xml:space="preserve">
-    <value>Afbreken</value>
-    <comment>Vistumbler Dutch.ini Cancel</comment>
-  </data>
-  <data name="Map_NewSession" xml:space="preserve">
-    <value>Nieuwe Sessie</value>
-    <comment>Vistumbler Dutch.ini NewSession</comment>
-  </data>
-  <data name="NewSession_Title" xml:space="preserve">
-    <value>Nieuwe Sessie</value>
-    <comment>Vistumbler Dutch.ini NewSession</comment>
-  </data>
-  <data name="Common_Close" xml:space="preserve">
-    <value>Sluiten</value>
-    <comment>Vistumbler Dutch.ini Close</comment>
-  </data>
-  <data name="Common_Delete" xml:space="preserve">
-    <value>Verwijderen</value>
-    <comment>Vistumbler Dutch.ini Delete</comment>
-  </data>
-  <data name="Filter_DeleteTitle" xml:space="preserve">
-    <value>Filter wissen</value>
-    <comment>Vistumbler Dutch.ini DeleteFilter</comment>
-  </data>
-  <data name="Settings_Browse" xml:space="preserve">
-    <value>Bladeren…</value>
-    <comment>Vistumbler Dutch.ini Browse</comment>
-  </data>
-  <data name="Settings_FileType" xml:space="preserve">
-    <value>Bestandstype</value>
-    <comment>Vistumbler Dutch.ini FileType</comment>
-  </data>
-  <data name="Settings_SOUND" xml:space="preserve">
-    <value>Geluid</value>
-    <comment>Vistumbler Dutch.ini Sound</comment>
-  </data>
-  <data name="Settings_UpdateManufacturers" xml:space="preserve">
-    <value>Update Fabrikanten</value>
-    <comment>Vistumbler Dutch.ini UpdateManufacturers</comment>
-  </data>
-  <data name="Settings_CheckForUpdates" xml:space="preserve">
-    <value>Controleren op Updates</value>
-    <comment>Vistumbler Dutch.ini CheckForUpdates</comment>
-  </data>
-  <data name="ApDetails_Copy" xml:space="preserve">
-    <value>Kopieren</value>
-    <comment>Vistumbler Dutch.ini Copy</comment>
-  </data>
-  <data name="ApDetails_SIGNALHISTORY" xml:space="preserve">
-    <value>Signaal Historie</value>
-    <comment>Vistumbler Dutch.ini SignalHistory</comment>
-  </data>
-  <data name="ApDetails_FirstActive" xml:space="preserve">
-    <value>Eerst actief</value>
-    <comment>Vistumbler Dutch.ini Column_FirstActive</comment>
-  </data>
   <data name="ApDetails_LastActive" xml:space="preserve">
-    <value>Laatst actief</value>
-    <comment>Vistumbler Dutch.ini Column_LastActive</comment>
-  </data>
-  <data name="Export_Export" xml:space="preserve">
-    <value>Exporteren</value>
-    <comment>Vistumbler Dutch.ini Export</comment>
-  </data>
-  <data name="Import_Import" xml:space="preserve">
-    <value>Importeren</value>
-    <comment>Vistumbler Dutch.ini Import</comment>
-  </data>
-  <data name="Import_FILE" xml:space="preserve">
-    <value>Bestand</value>
-    <comment>Vistumbler Dutch.ini File</comment>
-  </data>
-  <data name="GpsDetails_Altitude" xml:space="preserve">
-    <value>Hoogte</value>
-    <comment>Vistumbler Dutch.ini Altitude</comment>
-  </data>
-  <data name="Filters_Edit" xml:space="preserve">
-    <value>Bewerken</value>
-    <comment>Vistumbler Dutch.ini Edit</comment>
-  </data>
-  <data name="Filters_Delete" xml:space="preserve">
-    <value>Verwijderen</value>
-    <comment>Vistumbler Dutch.ini Delete</comment>
-  </data>
-  <data name="FilterEdit_RadioType" xml:space="preserve">
-    <value>Radiotype</value>
-    <comment>Vistumbler Dutch.ini Column_RadioType</comment>
+    <value>Last Updated</value>
+    <comment>Vistumbler Polish.ini Column_LastActive</comment>
   </data>
   <data name="FilterEdit_Save" xml:space="preserve">
-    <value>Opslaan ?</value>
-    <comment>Vistumbler Dutch.ini Save</comment>
-  </data>
-  <data name="WifiDbUpload_Title" xml:space="preserve">
-    <value>Titel</value>
-    <comment>Vistumbler Dutch.ini Title</comment>
-  </data>
-  <data name="WifiDbUpload_Notes" xml:space="preserve">
-    <value>Opmerkingen</value>
-    <comment>Vistumbler Dutch.ini Notes</comment>
-  </data>
-  <data name="WifiDbUpload_OtherUsers" xml:space="preserve">
-    <value>Andere gebruikers</value>
-    <comment>Vistumbler Dutch.ini OtherUsers</comment>
-  </data>
-  <data name="WifiDbUpload_Close" xml:space="preserve">
-    <value>Sluiten</value>
-    <comment>Vistumbler Dutch.ini Close</comment>
+    <value>Save?</value>
+    <comment>Vistumbler Polish.ini Save</comment>
   </data>
   <data name="Language_System" xml:space="preserve">
-    <value>Apparaattaal</value>
+    <value>Język urządzenia</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Language" xml:space="preserve">
+    <value>Język</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Tab_Scan" xml:space="preserve">
-    <value>Scannen</value>
+    <value>Skanowanie</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Tab_Map" xml:space="preserve">
-    <value>Kaart</value>
+    <value>Mapa</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Tab_Channels" xml:space="preserve">
-    <value>Kanalen</value>
+    <value>Kanały</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Tab_Settings" xml:space="preserve">
+    <value>Ustawienia</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Menu_NewSession" xml:space="preserve">
+    <value>Nowa sesja</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Menu_Import" xml:space="preserve">
+    <value>Importuj…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Menu_Export" xml:space="preserve">
+    <value>Eksportuj…</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Menu_Clear" xml:space="preserve">
-    <value>Wissen…</value>
+    <value>Wyczyść…</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Menu_UploadWifiDb" xml:space="preserve">
-    <value>Uploaden naar WifiDB…</value>
+    <value>Wyślij do WifiDB…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Menu_CheckForUpdates" xml:space="preserve">
+    <value>Sprawdź aktualizacje…</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Menu_GpsDetails" xml:space="preserve">
-    <value>GPS-details</value>
+    <value>Szczegóły GPS</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Menu_SiteSurvey" xml:space="preserve">
-    <value>Locatiemeting</value>
+    <value>Pomiar miejsca</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Menu_Links" xml:space="preserve">
-    <value>Links…</value>
+    <value>Linki…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Menu_ExitSaveDb" xml:space="preserve">
+    <value>Zakończ (zapisz bazę)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Menu_Exit" xml:space="preserve">
+    <value>Zakończ</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Bar_ScanAps" xml:space="preserve">
+    <value>Skanuj AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Bar_Stop" xml:space="preserve">
+    <value>Zatrzymaj</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Bar_UseGps" xml:space="preserve">
+    <value>Użyj GPS</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Bar_StopGps" xml:space="preserve">
+    <value>Zatrzymaj GPS</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Bar_Total" xml:space="preserve">
-    <value>Totaal: {0}</value>
+    <value>Razem: {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Bar_Active" xml:space="preserve">
-    <value>Actief: {0}</value>
+    <value>Aktywne: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_Ready" xml:space="preserve">
+    <value>Gotowe</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Status_TotalAps" xml:space="preserve">
-    <value>{0} AP's in totaal</value>
+    <value>Razem AP: {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Status_Cleared" xml:space="preserve">
-    <value>Gewist</value>
+    <value>Wyczyszczono</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Status_SavedAndCleared" xml:space="preserve">
-    <value>{0} AP's opgeslagen in {1} en lijst gewist</value>
+    <value>Zapisano {0} AP w {1} i wyczyszczono listę</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Status_SaveFailed" xml:space="preserve">
-    <value>Opslaan mislukt, lijst niet gewist: {0}</value>
+    <value>Zapis nie powiódł się, lista nie została wyczyszczona: {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Status_SavedAps" xml:space="preserve">
-    <value>{0} AP's opgeslagen in {1}</value>
+    <value>Zapisano {0} AP w {1}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Status_UploadingWifiDb" xml:space="preserve">
-    <value>Uploaden naar WifiDB…</value>
+    <value>Wysyłanie do WifiDB…</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Status_WifiDbNotYet" xml:space="preserve">
-    <value>Nog niet geüpload naar WifiDB ({0}); wordt opnieuw geprobeerd</value>
+    <value>Jeszcze nie wysłano do WifiDB ({0}); nastąpi ponowna próba</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Status_UploadedWifiDb" xml:space="preserve">
-    <value>Geüpload naar WifiDB</value>
+    <value>Wysłano do WifiDB</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Status_WigleNotYet" xml:space="preserve">
-    <value>Nog niet geüpload naar WiGLE ({0}); wordt opnieuw geprobeerd</value>
+    <value>Jeszcze nie wysłano do WiGLE ({0}); nastąpi ponowna próba</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Status_UploadedWigle" xml:space="preserve">
-    <value>Geüpload naar WiGLE</value>
+    <value>Wysłano do WiGLE</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Status_Queued" xml:space="preserve">
-    <value>in de wachtrij</value>
+    <value>w kolejce</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Status_NeedLocation" xml:space="preserve">
-    <value>Locatietoestemming is nodig om naar wifi te scannen</value>
+    <value>Do skanowania Wi-Fi potrzebne jest uprawnienie do lokalizacji</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Status_Scanning" xml:space="preserve">
-    <value>Scannen…</value>
+    <value>Skanowanie…</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Status_Stopped" xml:space="preserve">
-    <value>Gestopt — {0} AP's in totaal</value>
+    <value>Zatrzymano — razem AP: {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Status_ActiveTotal" xml:space="preserve">
-    <value>{0} actief / {1} totaal</value>
+    <value>Aktywne: {0} / razem: {1}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Status_DbWriteFailed" xml:space="preserve">
-    <value>Schrijven naar DB mislukt — volgende cyclus opnieuw</value>
+    <value>Zapis do bazy nie powiódł się — ponowna próba w następnym cyklu</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Status_Error" xml:space="preserve">
-    <value>Fout: {0}</value>
+    <value>Błąd: {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Gps_Off" xml:space="preserve">
-    <value>GPS uit</value>
+    <value>GPS wyłączony</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Gps_PermissionDenied" xml:space="preserve">
-    <value>GPS: locatietoestemming geweigerd</value>
+    <value>GPS: odmówiono uprawnienia do lokalizacji</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Gps_NoFix" xml:space="preserve">
-    <value>GPS: al {0} s geen fix, positie gewist</value>
+    <value>GPS: brak pozycji od {0} s, pozycja wyczyszczona</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Gps_Error" xml:space="preserve">
@@ -332,55 +208,55 @@
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Filter_None" xml:space="preserve">
-    <value>Geen filter</value>
+    <value>Brak filtra</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Group_Channel" xml:space="preserve">
-    <value>Kanaal {0}</value>
+    <value>Kanał {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Group_Open" xml:space="preserve">
-    <value>Open</value>
+    <value>Otwarta</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Group_Secure" xml:space="preserve">
-    <value>Beveiligd</value>
+    <value>Zabezpieczona</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Group_AdHoc" xml:space="preserve">
-    <value>Ad-hoc</value>
+    <value>Ad hoc</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Group_Infrastructure" xml:space="preserve">
-    <value>Infrastructuur</value>
+    <value>Infrastruktura</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Group_Hidden" xml:space="preserve">
-    <value>(verborgen)</value>
+    <value>(ukryta)</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Group_Unknown" xml:space="preserve">
-    <value>(onbekend)</value>
+    <value>(nieznane)</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Scan_SearchPlaceholder" xml:space="preserve">
-    <value>Zoek SSID, BSSID, fabrikant…</value>
+    <value>Szukaj SSID, BSSID, producenta…</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Scan_Sort" xml:space="preserve">
-    <value>Sorteren</value>
+    <value>Sortuj</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Scan_GroupBy" xml:space="preserve">
-    <value>Groeperen op</value>
+    <value>Grupuj według</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Scan_FirstSeen" xml:space="preserve">
-    <value>Eerst: {0}</value>
+    <value>Pierwszy: {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Scan_LastSeen" xml:space="preserve">
-    <value>Laatst: {0}</value>
+    <value>Ostatni: {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Scan_Channel" xml:space="preserve">
@@ -388,15 +264,19 @@
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Scan_RadioShown" xml:space="preserve">
-    <value>{0} getoond · sterkste eerst</value>
+    <value>Pokazano: {0} · najsilniejsze najpierw</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Scan_RadioEmpty" xml:space="preserve">
-    <value>Nog niets vastgelegd. Zet het aan onder Instellingen → Scannen en scan daarna.</value>
+    <value>Nic jeszcze nie zarejestrowano. Włącz to w Ustawienia → Skanowanie, a potem skanuj.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Scan_TapToBegin" xml:space="preserve">
-    <value>Tik op „AP's scannen” om te beginnen</value>
+    <value>Dotknij „Skanuj AP”, aby zacząć</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>Anuluj</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Common_Ok" xml:space="preserve">
@@ -404,415 +284,431 @@
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Common_Share" xml:space="preserve">
-    <value>Delen</value>
+    <value>Udostępnij</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Common_Close" xml:space="preserve">
+    <value>Zamknij</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Common_Delete" xml:space="preserve">
+    <value>Usuń</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Common_Saved" xml:space="preserve">
-    <value>{0} opgeslagen</value>
+    <value>Zapisano {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Common_ExportFailed" xml:space="preserve">
-    <value>Exporteren mislukt: {0}</value>
+    <value>Eksport nie powiódł się: {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Clear_SaveThenClear" xml:space="preserve">
-    <value>Opslaan in een bestand, dan wissen</value>
+    <value>Zapisz do pliku, potem wyczyść</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Clear_WithoutSaving" xml:space="preserve">
-    <value>Wissen zonder opslaan</value>
+    <value>Wyczyść bez zapisywania</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Clear_Question" xml:space="preserve">
-    <value>De AP-lijst wissen? Het scannen gaat door. Opgeslagen bestanden gaan naar {0}.</value>
+    <value>Wyczyścić listę AP? Skanowanie trwa dalej. Zapisane pliki trafiają do {0}.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Clear_SaveAndClear" xml:space="preserve">
-    <value>Opslaan &amp; wissen</value>
+    <value>Zapisz i wyczyść</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Links_Title" xml:space="preserve">
-    <value>Links</value>
+    <value>Linki</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Links_CouldNotOpen" xml:space="preserve">
-    <value>Kon {0} niet openen: {1}</value>
+    <value>Nie można otworzyć {0}: {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="NewSession_Title" xml:space="preserve">
+    <value>Nowa sesja</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="NewSession_Question" xml:space="preserve">
-    <value>Een nieuwe sessie starten? De huidige sessie blijft opgeslagen en kan later weer worden geopend.</value>
+    <value>Rozpocząć nową sesję? Bieżąca sesja pozostaje zapisana i można ją później otworzyć.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Exit_DiscardTitle" xml:space="preserve">
-    <value>Afsluiten zonder opslaan</value>
+    <value>Zakończ bez zapisywania</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Exit_DiscardQuestion" xml:space="preserve">
-    <value>De vastgelegde gegevens van deze sessie weggooien en afsluiten?</value>
+    <value>Odrzucić dane zebrane w tej sesji i zakończyć?</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Exit_Discard" xml:space="preserve">
-    <value>Weggooien &amp; afsluiten</value>
+    <value>Odrzuć i zakończ</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Map_ApMapHelp" xml:space="preserve">
-    <value>Stippen: waar hij is ontvangen, van rood (zwak) tot groen (sterk), nieuwe komen erbij tijdens het scannen. Oranje: signaalcirkel. Blauw: verst ontvangen. ⇪ exporteert als GeoJSON of KML.</value>
+    <value>Kropki: gdzie był odbierany, od czerwonego (słaby) do zielonego (silny), nowe dochodzą podczas skanowania. Pomarańczowy: okrąg sygnału. Niebieski: najdalszy odbiór. ⇪ eksportuje jako GeoJSON lub KML.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Map_WifiSquaresHelp" xml:space="preserve">
-    <value>Paars: vakken van 1 km waar de AP's binnen bereik zijn gezien, donkerder waar meer overeenkomen.</value>
+    <value>Fioletowe: kwadraty 1 km, w których widziano AP w zasięgu, ciemniejsze tam, gdzie więcej się zgadza.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Map_Manufacturer" xml:space="preserve">
-    <value>Fabrikant: {0}</value>
+    <value>Producent: {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Map_ViewInList" xml:space="preserve">
-    <value>Tonen in AP-lijst</value>
+    <value>Pokaż na liście AP</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Map_ClearTrack" xml:space="preserve">
-    <value>Spoor wissen</value>
+    <value>Wyczyść ślad</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Map_EnableTrack" xml:space="preserve">
-    <value>Spoor aan</value>
+    <value>Włącz ślad</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Map_DisableTrack" xml:space="preserve">
-    <value>Spoor uit</value>
+    <value>Wyłącz ślad</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Map_SaveOffline" xml:space="preserve">
-    <value>Kaart offline opslaan</value>
+    <value>Zapisz mapę offline</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Map_SavedMapsOnly" xml:space="preserve">
-    <value>Alleen opgeslagen kaarten</value>
+    <value>Tylko zapisane mapy</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Map_SavedMapsOnlyOn" xml:space="preserve">
-    <value>Alleen opgeslagen kaarten ✓</value>
+    <value>Tylko zapisane mapy ✓</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Map_SaveOfflineTitle" xml:space="preserve">
-    <value>Kaart opslaan voor offline gebruik</value>
+    <value>Zapisz mapę do użytku offline</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Map_SaveOfflineQuestion" xml:space="preserve">
-    <value>De kaart die je ziet, plus twee dichterbij gelegen zoomniveaus, downloaden zodat hij ook zonder internetverbinding werkt? Zet daarna „Alleen opgeslagen kaarten” aan om alleen de opgeslagen kaarten te gebruiken. Een groot gebied kan even duren en veel data gebruiken.</value>
+    <value>Pobrać widoczną mapę oraz dwa bliższe poziomy powiększenia, aby była widoczna bez połączenia z internetem? Potem włącz „Tylko zapisane mapy”, aby używać tylko zapisanych map. Duży obszar może zająć trochę czasu i zużyć dużo danych.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Map_Download" xml:space="preserve">
-    <value>Downloaden</value>
+    <value>Pobierz</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Map_TrackCleared" xml:space="preserve">
-    <value>Spoor gewist (exports behouden de volledige geschiedenis)</value>
+    <value>Ślad wyczyszczony (eksporty zachowują pełną historię)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_NewSession" xml:space="preserve">
+    <value>Nowa sesja</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Map_NotReady" xml:space="preserve">
-    <value>Kaart niet gereed — wacht tot de stijl is geladen</value>
+    <value>Mapa nie jest gotowa — poczekaj na załadowanie stylu</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Map_NotReadyPan" xml:space="preserve">
-    <value>Kaart niet gereed — verschuif/zoom de kaart en probeer opnieuw</value>
+    <value>Mapa nie jest gotowa — przesuń/powiększ mapę i spróbuj ponownie</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Map_Caching" xml:space="preserve">
-    <value>Kaartgebied opslaan (z{0}–{1})…</value>
+    <value>Zapisywanie obszaru mapy (z{0}–{1})…</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Map_OfflineFailed" xml:space="preserve">
-    <value>Offline downloaden mislukt: {0}</value>
+    <value>Pobieranie offline nie powiodło się: {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Map_OfflineError" xml:space="preserve">
-    <value>Fout bij offline downloaden: {0}</value>
+    <value>Błąd pobierania offline: {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Map_ApsWithGps" xml:space="preserve">
-    <value>{0} AP's met GPS</value>
+    <value>AP z GPS: {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Map_LayerOn" xml:space="preserve">
-    <value>Laag {0} aan</value>
+    <value>Warstwa {0} włączona</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Map_LayerOff" xml:space="preserve">
-    <value>Laag {0} uit</value>
+    <value>Warstwa {0} wyłączona</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Map_LiveScan" xml:space="preserve">
-    <value>Live scan</value>
+    <value>Skanowanie na żywo</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Map_NotInSession" xml:space="preserve">
-    <value>{0} zit niet in deze sessie</value>
+    <value>{0} nie ma w tej sesji</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Map_NoPositions" xml:space="preserve">
-    <value>{0} heeft geen GPS-posities om te tonen</value>
+    <value>{0} nie ma pozycji GPS do pokazania</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Map_ApMapTitle" xml:space="preserve">
-    <value>{0}: {1} posities, bereik {2} m</value>
+    <value>{0}: pozycje: {1}, zasięg {2} m</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Map_ExportSignalMap" xml:space="preserve">
-    <value>Signaalkaart exporteren</value>
+    <value>Eksportuj mapę sygnału</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Map_WifiSquareOne" xml:space="preserve">
-    <value>Wifi-positie: vak {0}, {1} AP-stem(men)</value>
+    <value>Pozycja Wi-Fi: kwadrat {0}, głosy AP: {1}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Map_WifiSquareMany" xml:space="preserve">
-    <value>Wifi-positie: beste vak {0} ({1} stemmen), nog {2} gearceerd naar stemmen</value>
+    <value>Pozycja Wi-Fi: najlepszy kwadrat {0} (głosy: {1}), {2} kolejnych cieniowanych według głosów</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Layer_Daily" xml:space="preserve">
-    <value>Dagelijks</value>
+    <value>Dziennie</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Layer_Weekly" xml:space="preserve">
-    <value>Wekelijks</value>
+    <value>Tygodniowo</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Layer_Monthly" xml:space="preserve">
-    <value>Maandelijks</value>
+    <value>Miesięcznie</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Layer_0to1Year" xml:space="preserve">
-    <value>0–1 jaar</value>
+    <value>0–1 rok</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Layer_1to2Year" xml:space="preserve">
-    <value>1–2 jaar</value>
+    <value>1–2 lata</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Layer_2to3Year" xml:space="preserve">
-    <value>2–3 jaar</value>
+    <value>2–3 lata</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Layer_3to5Year" xml:space="preserve">
-    <value>3–5 jaar</value>
+    <value>3–5 lat</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Layer_5to10Year" xml:space="preserve">
-    <value>5–10 jaar</value>
+    <value>5–10 lat</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Layer_10PlusYear" xml:space="preserve">
-    <value>10+ jaar</value>
+    <value>Ponad 10 lat</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Layer_CellNetworks" xml:space="preserve">
-    <value>Mobiele netwerken</value>
+    <value>Sieci komórkowe</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Channels_Band" xml:space="preserve">
-    <value>Band</value>
+    <value>Pasmo</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Channels_Status" xml:space="preserve">
-    <value>{0} actieve AP's op {1}</value>
+    <value>Aktywne AP: {0} w paśmie {1}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Graph_NoHistory" xml:space="preserve">
-    <value>Nog geen signaalgeschiedenis</value>
+    <value>Brak jeszcze historii sygnału</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_AllAdapters" xml:space="preserve">
-    <value>Alle adapters</value>
+    <value>Wszystkie karty</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_AdapterNotFound" xml:space="preserve">
-    <value>Gekozen adapter (niet gevonden)</value>
+    <value>Wybrana karta (nie znaleziono)</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_NoUsbGps" xml:space="preserve">
-    <value>Er is geen ondersteunde USB-GPS-ontvanger aangesloten.</value>
+    <value>Nie podłączono obsługiwanego odbiornika GPS USB.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_PluggedIn" xml:space="preserve">
-    <value>Aangesloten: {0}</value>
+    <value>Podłączono: {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_UsbListFailed" xml:space="preserve">
-    <value>Kon USB-apparaten niet weergeven: {0}</value>
+    <value>Nie można wyświetlić urządzeń USB: {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_NoPairedDevices" xml:space="preserve">
-    <value>Geen gekoppelde apparaten. Koppel de GPS-ontvanger in de Bluetooth-instellingen van Android en vernieuw daarna.</value>
+    <value>Brak sparowanych urządzeń. Sparuj odbiornik GPS w ustawieniach Bluetooth Androida, a potem odśwież.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_PendingWifiDb" xml:space="preserve">
-    <value>Opgeslagen bestanden die wachten op upload naar WifiDB: {0}</value>
+    <value>Zapisane pliki czekające na wysłanie do WifiDB: {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_WaitingUploads" xml:space="preserve">
-    <value>Wachtende uploads</value>
+    <value>Oczekujące wysyłki</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_StopWifiDbQuestion" xml:space="preserve">
-    <value>Stoppen met proberen deze bestanden naar WifiDB te uploaden? De bestanden zelf blijven in de map van Opslaan &amp; wissen.</value>
+    <value>Przestać próbować wysyłać te pliki do WifiDB? Same pliki zostają w folderze Zapisz i wyczyść.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_StopUploading" xml:space="preserve">
-    <value>Uploaden stoppen</value>
+    <value>Przestań wysyłać</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_ManufacturersUpdated" xml:space="preserve">
-    <value>bijgewerkt op {0}</value>
+    <value>zaktualizowana {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_ManufacturersBuiltIn" xml:space="preserve">
-    <value>de lijst die bij de app hoort</value>
+    <value>lista dołączona do aplikacji</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_ManufacturersLoading" xml:space="preserve">
-    <value>Fabrikantenlijst laden…</value>
+    <value>Wczytywanie listy producentów…</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_ManufacturersCount" xml:space="preserve">
-    <value>{0} fabrikanten ({1})</value>
+    <value>Producenci: {0} ({1})</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_ManufacturersDownloading" xml:space="preserve">
-    <value>Fabrikantenlijst van IEEE downloaden…</value>
+    <value>Pobieranie listy producentów IEEE…</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_UpdateFailed" xml:space="preserve">
-    <value>Bijwerken mislukt: {0}</value>
+    <value>Aktualizacja nie powiodła się: {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_WifiDbRegistration" xml:space="preserve">
-    <value>WifiDB-registratie</value>
+    <value>Rejestracja w WifiDB</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_PasteRegistrationLink" xml:space="preserve">
-    <value>Plak je WifiDB-registratielink (…/redeem_link.php?token=…):</value>
+    <value>Wklej swój link rejestracyjny WifiDB (…/redeem_link.php?token=…):</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_Redeem" xml:space="preserve">
-    <value>Inwisselen</value>
+    <value>Zrealizuj</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_NotRegistrationLink" xml:space="preserve">
-    <value>Dat lijkt geen WifiDB-registratielink.</value>
+    <value>To nie wygląda na link rejestracyjny WifiDB.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_Redeeming" xml:space="preserve">
-    <value>Inwisselen…</value>
+    <value>Realizowanie…</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_Registered" xml:space="preserve">
-    <value>Geregistreerd bij WifiDB.</value>
+    <value>Zarejestrowano w WifiDB.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_RegisteredAs" xml:space="preserve">
-    <value>Geregistreerd bij WifiDB als {0}.</value>
+    <value>Zarejestrowano w WifiDB jako {0}.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_RegistrationFailed" xml:space="preserve">
-    <value>Registratie mislukt: {0}</value>
+    <value>Rejestracja nie powiodła się: {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Wigle_Terms" xml:space="preserve">
-    <value>WiGLE (wigle.net) is een aparte dienst met eigen regels. Uploaden stuurt de wifi-, zendmast- en Bluetooth-gegevens van deze app naar WiGLE onder de gebruiksvoorwaarden van WiGLE, die bepalen hoe ze worden opgeslagen, getoond en gedeeld; lees ze voordat je dit aanzet. Uploads naar WifiDB veranderen niet.</value>
+    <value>WiGLE (wigle.net) to osobna usługa z własnymi zasadami. Wysyłanie przekazuje dane Wi-Fi, masztów komórkowych i Bluetooth z tej aplikacji do WiGLE na warunkach korzystania z WiGLE, które określają, jak są przechowywane, pokazywane i udostępniane; przeczytaj je przed włączeniem. Wysyłki do WifiDB pozostają bez zmian.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Wigle_Pending" xml:space="preserve">
-    <value>Opslagen die wachten op upload naar WiGLE: {0}</value>
+    <value>Zapisy czekające na wysłanie do WiGLE: {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Wigle_WaitingUploads" xml:space="preserve">
-    <value>Wachtende WiGLE-uploads</value>
+    <value>Oczekujące wysyłki do WiGLE</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Wigle_StopQuestion" xml:space="preserve">
-    <value>Stoppen met proberen deze opslagen naar WiGLE te uploaden? De VS1-bestanden in de map van Opslaan &amp; wissen blijven bewaard.</value>
+    <value>Przestać próbować wysyłać te zapisy do WiGLE? Pliki VS1 w folderze Zapisz i wyczyść zostają zachowane.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="ApDetails_Title" xml:space="preserve">
-    <value>AP-details</value>
+    <value>Szczegóły AP</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="ApDetails_NotFound" xml:space="preserve">
-    <value>AP niet gevonden.</value>
+    <value>Nie znaleziono AP.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="ApDetails_NoHistory" xml:space="preserve">
-    <value>Nog geen signaalgeschiedenis.</value>
+    <value>Brak jeszcze historii sygnału.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="ApDetails_Samples" xml:space="preserve">
-    <value>{0} signaalmetingen</value>
+    <value>Pomiary sygnału: {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="ApDetails_AllDetails" xml:space="preserve">
-    <value>Alle details</value>
+    <value>Wszystkie szczegóły</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="ApDetails_GpsPosition" xml:space="preserve">
-    <value>GPS-positie</value>
+    <value>Pozycja GPS</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="ApDetails_Copied" xml:space="preserve">
-    <value>Gekopieerd: {0}</value>
+    <value>Skopiowano: {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="ApDetails_SearchingWifiDb" xml:space="preserve">
-    <value>Zoeken in WifiDB…</value>
+    <value>Wyszukiwanie w WifiDB…</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="ApDetails_SearchFailed" xml:space="preserve">
-    <value>Kon niet zoeken in WifiDB: {0}</value>
+    <value>Nie można przeszukać WifiDB: {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="ApDetails_NotInWifiDb" xml:space="preserve">
-    <value>WifiDB heeft {0} nog niet.</value>
+    <value>WifiDB nie ma jeszcze {0}.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="ApDetails_Security" xml:space="preserve">
-    <value>Beveiliging: {0}</value>
+    <value>Zabezpieczenia: {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="ApDetails_Channel" xml:space="preserve">
-    <value>Kanaal: {0}</value>
+    <value>Kanał: {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="ApDetails_ChannelMhz" xml:space="preserve">
-    <value>Kanaal: {0} ({1} MHz)</value>
+    <value>Kanał: {0} ({1} MHz)</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="ApDetails_FirstSeen" xml:space="preserve">
-    <value>Eerst gezien: {0}</value>
+    <value>Pierwszy raz widziany: {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="ApDetails_LastSeen" xml:space="preserve">
-    <value>Laatst gezien: {0}</value>
+    <value>Ostatnio widziany: {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="ApDetails_FirstActiveLine" xml:space="preserve">
-    <value>Eerst actief: {0}</value>
+    <value>Pierwsza aktywność: {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="ApDetails_LastActiveLine" xml:space="preserve">
-    <value>Laatst actief: {0}</value>
+    <value>Ostatnia aktywność: {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="ApDetails_BestSignal" xml:space="preserve">
-    <value>Beste signaal: {0}%</value>
+    <value>Najlepszy sygnał: {0}%</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="ApDetails_Signal" xml:space="preserve">
-    <value>Signaal: {0}%</value>
+    <value>Sygnał: {0}%</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="ApDetails_Position" xml:space="preserve">
-    <value>Positie: {0}</value>
+    <value>Pozycja: {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="ApDetails_RadioLine" xml:space="preserve">
@@ -820,203 +716,231 @@
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="ApDetails_OpenInWifiDb" xml:space="preserve">
-    <value>Openen in WifiDB</value>
+    <value>Otwórz w WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Copy" xml:space="preserve">
+    <value>Kopiuj</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="ApDetails_Back" xml:space="preserve">
-    <value>Terug</value>
+    <value>Wstecz</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="ApDetails_BackToScanList" xml:space="preserve">
-    <value>‹ Terug naar scanlijst</value>
+    <value>‹ Wróć do listy skanowania</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="ApDetails_SpeakSignalWhileScanning" xml:space="preserve">
-    <value>Signaal uitspreken tijdens scannen</value>
+    <value>Odczytuj sygnał podczas skanowania</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_SIGNALHISTORY" xml:space="preserve">
+    <value>HISTORIA SYGNAŁU</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="ApDetails_DETAILS" xml:space="preserve">
-    <value>DETAILS</value>
+    <value>SZCZEGÓŁY</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="ApDetails_Radio" xml:space="preserve">
     <value>Radio</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
+  <data name="ApDetails_FirstActive" xml:space="preserve">
+    <value>Pierwsza aktywność</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
   <data name="Export_FilteredOnly" xml:space="preserve">
-    <value>Alleen AP's die het filter „{0}” toont</value>
+    <value>Tylko AP pokazywane przez filtr „{0}”</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Export_KeepingFolder" xml:space="preserve">
-    <value>{0} {1} blijft behouden.</value>
+    <value>{0} Pozostaje {1}.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Export_WillWriteTo" xml:space="preserve">
-    <value>Exports worden geschreven naar {0}</value>
+    <value>Eksporty będą zapisywane w {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Export_Exporting" xml:space="preserve">
-    <value>Exporteren…</value>
+    <value>Eksportowanie…</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Export_NoAps" xml:space="preserve">
-    <value>Geen access points om te exporteren</value>
+    <value>Brak punktów dostępu do eksportu</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Export_NoneMatch" xml:space="preserve">
-    <value>Geen access points voldoen aan het filter „{0}”</value>
+    <value>Żaden punkt dostępu nie pasuje do filtra „{0}”</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Export_Done" xml:space="preserve">
-    <value>{0} access point(s) geëxporteerd naar {1}</value>
+    <value>Wyeksportowano punkty dostępu ({0}) do {1}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Export_DoneFellBack" xml:space="preserve">
-    <value>{0} access point(s) geëxporteerd naar {1} — er kon niet in de gekozen map worden geschreven</value>
+    <value>Wyeksportowano punkty dostępu ({0}) do {1} — nie można zapisać w wybranym folderze</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_Export" xml:space="preserve">
+    <value>Eksportuj</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Export_FORMAT" xml:space="preserve">
-    <value>FORMAAT</value>
+    <value>FORMAT</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Export_FILENAME" xml:space="preserve">
-    <value>BESTANDSNAAM</value>
+    <value>NAZWA PLIKU</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Export_LOCATION" xml:space="preserve">
-    <value>LOCATIE</value>
+    <value>LOKALIZACJA</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Export_TheFileIsOfferedTo" xml:space="preserve">
-    <value>Na elke export wordt het bestand aangeboden om te delen, zodat je het kunt doorsturen, waar het ook is opgeslagen.</value>
+    <value>Po każdym eksporcie plik jest proponowany do udostępnienia, aby można go było przesłać dalej, gdziekolwiek został zapisany.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Export_KMLOPTIONS" xml:space="preserve">
-    <value>KML-OPTIES</value>
+    <value>OPCJE KML</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Export_IncludeOpenNetworks" xml:space="preserve">
-    <value>Open netwerken opnemen</value>
+    <value>Uwzględnij sieci otwarte</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Export_IncludeWEPNetworks" xml:space="preserve">
-    <value>WEP-netwerken opnemen</value>
+    <value>Uwzględnij sieci WEP</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Export_IncludeSecureNetworks" xml:space="preserve">
-    <value>Beveiligde netwerken opnemen</value>
+    <value>Uwzględnij sieci zabezpieczone</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Export_ColourPinsBySignal" xml:space="preserve">
-    <value>Markeringen kleuren naar signaal</value>
+    <value>Koloruj znaczniki według sygnału</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Export_IncludeGPSTrack" xml:space="preserve">
-    <value>GPS-spoor opnemen</value>
+    <value>Uwzględnij ślad GPS</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Import_PickFile" xml:space="preserve">
-    <value>Kies een bestand om te importeren</value>
+    <value>Wybierz plik do zaimportowania</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Import_SelectFile" xml:space="preserve">
-    <value>Selecteer een bestand om te importeren</value>
+    <value>Wybierz plik do importu</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Import_Ready" xml:space="preserve">
-    <value>Klaar om te importeren</value>
+    <value>Gotowe do importu</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Import_SelectValid" xml:space="preserve">
-    <value>Selecteer een geldig bestand.</value>
+    <value>Wybierz prawidłowy plik.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Import_Parsing" xml:space="preserve">
-    <value>Bestand lezen…</value>
+    <value>Odczytywanie pliku…</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Import_Saving" xml:space="preserve">
-    <value>{0} access points opslaan…</value>
+    <value>Zapisywanie punktów dostępu: {0}…</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Import_Done" xml:space="preserve">
-    <value>Klaar — {0} access point(s) geïmporteerd</value>
+    <value>Gotowe — zaimportowano punkty dostępu: {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Import_AndRadios" xml:space="preserve">
-    <value>en {0} zendmast(en) en Bluetooth-apparaat/-apparaten</value>
+    <value>oraz maszty komórkowe i urządzenia Bluetooth: {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Import_NoneFound" xml:space="preserve">
-    <value>Geen access points gevonden in het bestand</value>
+    <value>W pliku nie znaleziono punktów dostępu</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Import_FolderFailed" xml:space="preserve">
-    <value>Kon de map niet lezen: {0}</value>
+    <value>Nie można odczytać folderu: {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Import_NoFiles" xml:space="preserve">
-    <value>Geen {0}-bestanden in {1}</value>
+    <value>Brak plików {0} w {1}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Import_Progress" xml:space="preserve">
-    <value>{0} van {1} importeren: {2}</value>
+    <value>Importowanie {0} z {1}: {2}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Import_FolderDone" xml:space="preserve">
-    <value>Klaar — {0} bestand(en), {1} access point(s)</value>
+    <value>Gotowe — pliki: {0}, punkty dostępu: {1}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Import_FolderFailedFiles" xml:space="preserve">
-    <value>; {0} bestand(en) konden niet worden gelezen</value>
+    <value>; nie udało się odczytać plików: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_Import" xml:space="preserve">
+    <value>Importuj</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_FILE" xml:space="preserve">
+    <value>PLIK</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Import_ImportAFolder" xml:space="preserve">
-    <value>Een map importeren…</value>
+    <value>Importuj folder…</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Import_ImportsEveryFileOfThe" xml:space="preserve">
-    <value>Importeert elk bestand van het gekozen type in een map (niet in submappen).</value>
+    <value>Importuje każdy plik wybranego typu w folderze (bez podfolderów).</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="GpsDetails_Waiting" xml:space="preserve">
-    <value>Wachten op GPS-fix…</value>
+    <value>Oczekiwanie na pozycję GPS…</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="GpsDetails_Off" xml:space="preserve">
-    <value>GPS staat uit. Tik op „GPS gebruiken” om te starten.</value>
+    <value>GPS jest wyłączony. Dotknij „Użyj GPS”, aby go uruchomić.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="GpsDetails_LastFix" xml:space="preserve">
-    <value>Laatste fix {0} s geleden</value>
+    <value>Ostatnia pozycja {0} s temu</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="GpsDetails_Position" xml:space="preserve">
-    <value>Positie</value>
+    <value>Pozycja</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Altitude" xml:space="preserve">
+    <value>Wysokość</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="GpsDetails_Satellites" xml:space="preserve">
-    <value>Satellieten</value>
+    <value>Satelity</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="GpsDetails_Accuracy" xml:space="preserve">
-    <value>Nauwkeurigheid</value>
+    <value>Dokładność</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="GpsDetails_Speed" xml:space="preserve">
-    <value>Snelheid</value>
+    <value>Prędkość</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="GpsDetails_Heading" xml:space="preserve">
-    <value>Koers</value>
+    <value>Kurs</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="GpsDetails_FixQuality" xml:space="preserve">
-    <value>Fixkwaliteit</value>
+    <value>Jakość pozycji</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="GpsDetails_FixTime" xml:space="preserve">
-    <value>Fixtijd</value>
+    <value>Czas pozycji</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="GpsDetails_COMPASS" xml:space="preserve">
@@ -1024,375 +948,391 @@
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="GpsDetails_PointsAlongYourDirectionOf" xml:space="preserve">
-    <value>Wijst in je bewegingsrichting, zoals de GPS die meldt terwijl je beweegt.</value>
+    <value>Wskazuje kierunek ruchu, tak jak podaje go GPS, gdy się poruszasz.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="GpsDetails_WIFIPOSITIONOFFLINE" xml:space="preserve">
-    <value>WIFI-POSITIE (OFFLINE)</value>
+    <value>POZYCJA WI-FI (OFFLINE)</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="GpsDetails_ShowOnMap" xml:space="preserve">
-    <value>Tonen op kaart</value>
+    <value>Pokaż na mapie</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="GpsDetails_AlsoSearchThisSessionS" xml:space="preserve">
-    <value>Ook de AP's van deze sessie doorzoeken</value>
+    <value>Przeszukuj też AP z tej sesji</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="GpsDetails_Magic8BallM8bFiles" xml:space="preserve">
-    <value>Magic 8 Ball-bestanden (m8b)</value>
+    <value>Pliki Magic 8 Ball (m8b)</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="GpsDetails_NoneImportedExportOneFrom" xml:space="preserve">
-    <value>Geen geïmporteerd. Exporteer er een uit een sessie (Exporteren → M8b) of gebruik er een van WiGLE WiFi Wardriving.</value>
+    <value>Brak zaimportowanych. Wyeksportuj plik z sesji (Eksportuj → M8b) lub użyj pliku z WiGLE WiFi Wardriving.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="GpsDetails_Remove" xml:space="preserve">
-    <value>Verwijderen</value>
+    <value>Usuń</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="GpsDetails_ImportM8bFile" xml:space="preserve">
-    <value>m8b-bestand importeren…</value>
+    <value>Importuj plik m8b…</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="GpsDetails_EachAPInRangeVotes" xml:space="preserve">
-    <value>Elke AP binnen bereik stemt op de vakken van 1 km waar hij is gezien; het vak waar de meeste het over eens zijn is de schatting. Werkt zonder GPS of netwerk, bijvoorbeeld binnen. Het m8b-formaat komt van WiGLE WiFi Wardriving.</value>
+    <value>Każdy AP w zasięgu głosuje na kwadraty 1 km, w których był widziany; kwadrat z największą liczbą głosów to szacowana pozycja. Działa bez GPS i sieci, np. w budynkach. Format m8b pochodzi z WiGLE WiFi Wardriving.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="WifiPos_NoSources" xml:space="preserve">
-    <value>Nog niets om in te zoeken: importeer een m8b-bestand of scan eerst met GPS.</value>
+    <value>Nie ma jeszcze w czym szukać: zaimportuj plik m8b lub najpierw skanuj z GPS.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="WifiPos_NoneInRange" xml:space="preserve">
-    <value>Geen AP's binnen bereik. Begin met scannen om een positie te schatten.</value>
+    <value>Brak AP w zasięgu. Rozpocznij skanowanie, aby oszacować pozycję.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="WifiPos_LookupFailed" xml:space="preserve">
-    <value>Zoeken mislukt: {0}</value>
+    <value>Wyszukiwanie nie powiodło się: {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="WifiPos_NoneKnown" xml:space="preserve">
-    <value>Geen van de {0} AP's binnen bereik is bekend.</value>
+    <value>Żaden z AP w zasięgu ({0}) nie jest znany.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="WifiPos_Agree" xml:space="preserve">
-    <value>{0} van de {1} AP's binnen bereik zijn het eens over vak van 1 km {2}</value>
+    <value>{0} z {1} AP w zasięgu zgadza się co do kwadratu 1 km {2}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="WifiPos_Tie" xml:space="preserve">
-    <value>({0} ander(e) vak(ken) gelijk)</value>
+    <value>(remis z innymi kwadratami: {0})</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="WifiPos_GpsDistance" xml:space="preserve">
-    <value>De GPS-fix ligt {0} m van het midden</value>
+    <value>Pozycja GPS jest {0} m od jego środka</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="WifiPos_Accuracy" xml:space="preserve">
-    <value>(± vak van 1 km)</value>
+    <value>(± kwadrat 1 km)</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="WifiPos_ChooseFile" xml:space="preserve">
-    <value>Kies een m8b-bestand</value>
+    <value>Wybierz plik m8b</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="WifiPos_Importing" xml:space="preserve">
-    <value>Importeren…</value>
+    <value>Importowanie…</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="WifiPos_Imported" xml:space="preserve">
-    <value>{0} geïmporteerd: {1} records</value>
+    <value>Zaimportowano {0}: rekordy: {1}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="WifiPos_NotM8b" xml:space="preserve">
-    <value>Dat is geen m8b-bestand dat deze app kan lezen ({0})</value>
+    <value>To nie jest plik m8b, który ta aplikacja może odczytać ({0})</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="WifiPos_ImportFailed" xml:space="preserve">
-    <value>Importeren mislukt: {0}</value>
+    <value>Import nie powiódł się: {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="WifiPos_RemoveTitle" xml:space="preserve">
-    <value>m8b-bestand verwijderen</value>
+    <value>Usuń plik m8b</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="WifiPos_RemoveQuestion" xml:space="preserve">
-    <value>{0} uit de app verwijderen?</value>
+    <value>Usunąć {0} z aplikacji?</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="WifiPos_Remove" xml:space="preserve">
-    <value>Verwijderen</value>
+    <value>Usuń</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="WifiPos_Removed" xml:space="preserve">
-    <value>{0} verwijderd</value>
+    <value>Usunięto {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_New" xml:space="preserve">
-    <value>Nieuwe meting</value>
+    <value>Nowy pomiar</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_Open" xml:space="preserve">
-    <value>Meting openen…</value>
+    <value>Otwórz pomiar…</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_FloorPlan" xml:space="preserve">
-    <value>Afbeelding plattegrond…</value>
+    <value>Obraz planu piętra…</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_UseGrid" xml:space="preserve">
-    <value>Een raster gebruiken</value>
+    <value>Użyj siatki</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_Rename" xml:space="preserve">
-    <value>Hernoemen…</value>
+    <value>Zmień nazwę…</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_ExportCsv" xml:space="preserve">
-    <value>Metingen exporteren (CSV)</value>
+    <value>Eksportuj odczyty (CSV)</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_Delete" xml:space="preserve">
-    <value>Deze meting verwijderen</value>
+    <value>Usuń ten pomiar</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_DeleteSpot" xml:space="preserve">
-    <value>Punt verwijderen</value>
+    <value>Usuń punkt</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_MeasureAgain" xml:space="preserve">
-    <value>Hier opnieuw meten</value>
+    <value>Zmierz tu ponownie</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_Strongest" xml:space="preserve">
-    <value>Sterkste netwerk op elk punt</value>
+    <value>Najsilniejsza sieć w każdym punkcie</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_PlanLoadFailed" xml:space="preserve">
-    <value>Kon de plattegrond niet laden: {0}</value>
+    <value>Nie można wczytać obrazu planu: {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_SpotInfo" xml:space="preserve">
-    <value>Punt {0}: {1} AP('s) om {2}</value>
+    <value>Punkt {0}: AP: {1}, godz. {2}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_NotHeard" xml:space="preserve">
-    <value>{0}: niet ontvangen</value>
+    <value>{0}: brak odbioru</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_StrongestAp" xml:space="preserve">
-    <value>Sterkste: {0} {1} dBm</value>
+    <value>Najsilniejszy: {0} {1} dBm</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_SsidAps" xml:space="preserve">
-    <value>{0} ({1} AP's)</value>
+    <value>{0} (AP: {1})</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_Measuring" xml:space="preserve">
-    <value>Meten… blijf stilstaan tot de volgende scan klaar is.</value>
+    <value>Pomiar… stój w miejscu, aż zakończy się następne skanowanie.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_StartToMeasure" xml:space="preserve">
-    <value>Begin met scannen om hier te meten.</value>
+    <value>Rozpocznij skanowanie, aby zmierzyć tutaj.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_StartThenTap" xml:space="preserve">
-    <value>Begin met scannen en tik dan op waar je staat.</value>
+    <value>Rozpocznij skanowanie, a potem dotknij miejsca, w którym stoisz.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_TapToMeasure" xml:space="preserve">
-    <value>Tik op waar je staat om daar te meten.</value>
+    <value>Dotknij miejsca, w którym stoisz, aby tam zmierzyć.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_SpotsMeasured" xml:space="preserve">
-    <value>{0} punt(en) gemeten. Tik op waar je staat om er een toe te voegen, of op een punt om het te bekijken of te verwijderen.</value>
+    <value>Zmierzono punkty: {0}. Dotknij miejsca, w którym stoisz, aby dodać kolejny, lub punktu, aby go zobaczyć albo usunąć.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_SaveFailed" xml:space="preserve">
-    <value>Kon de meting niet opslaan: {0}</value>
+    <value>Nie można zapisać pomiaru: {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_NoneSaved" xml:space="preserve">
-    <value>Nog geen opgeslagen metingen.</value>
+    <value>Brak jeszcze zapisanych pomiarów.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_NameSpots" xml:space="preserve">
-    <value>{0} ({1} punten)</value>
+    <value>{0} (punkty: {1})</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_FloorPlanTitle" xml:space="preserve">
-    <value>Plattegrond</value>
+    <value>Plan piętra</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_ChangePlanQuestion" xml:space="preserve">
-    <value>Deze meting heeft al gemeten punten, die niet meeschuiven met een nieuwe plattegrond. Toch wijzigen?</value>
+    <value>Ten pomiar ma już zmierzone punkty, które nie przesuną się z nowym planem. Zmienić mimo to?</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_Change" xml:space="preserve">
-    <value>Wijzigen</value>
+    <value>Zmień</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_ChoosePlan" xml:space="preserve">
-    <value>Kies een plattegrondafbeelding</value>
+    <value>Wybierz obraz planu piętra</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_ImageFailed" xml:space="preserve">
-    <value>Kan die afbeelding niet gebruiken: {0}</value>
+    <value>Nie można użyć tego obrazu: {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_RenameTitle" xml:space="preserve">
-    <value>Meting hernoemen</value>
+    <value>Zmień nazwę pomiaru</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_Name" xml:space="preserve">
-    <value>Naam</value>
+    <value>Nazwa</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_DeleteTitle" xml:space="preserve">
-    <value>Meting verwijderen</value>
+    <value>Usuń pomiar</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_DeleteQuestion" xml:space="preserve">
-    <value>{0} en de {1} punt(en) verwijderen?</value>
+    <value>Usunąć {0} i jego punkty ({1})?</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_NothingMeasured" xml:space="preserve">
-    <value>Nog niets gemeten.</value>
+    <value>Nic jeszcze nie zmierzono.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_ImageSaveFailed" xml:space="preserve">
-    <value>Kon de afbeelding niet opslaan: {0}</value>
+    <value>Nie można zapisać obrazu: {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_Survey" xml:space="preserve">
-    <value>Meting ▾</value>
+    <value>Pomiar ▾</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_Network" xml:space="preserve">
-    <value>Netwerk</value>
+    <value>Sieć</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_Heatmap" xml:space="preserve">
-    <value>Heatmap</value>
+    <value>Mapa cieplna</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_StartScanning" xml:space="preserve">
-    <value>Beginnen met scannen</value>
+    <value>Rozpocznij skanowanie</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_UndoLast" xml:space="preserve">
-    <value>Laatste ongedaan maken</value>
+    <value>Cofnij ostatni</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Survey_SaveImage" xml:space="preserve">
-    <value>Afbeelding opslaan</value>
+    <value>Zapisz obraz</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Filter_NewTitle" xml:space="preserve">
-    <value>Nieuw filter</value>
+    <value>Nowy filtr</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Filter_DefaultName" xml:space="preserve">
-    <value>Filter {0}</value>
+    <value>Filtr {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Filter_EditTitle" xml:space="preserve">
-    <value>{0} bewerken</value>
+    <value>Edytuj {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filter_DeleteTitle" xml:space="preserve">
+    <value>Usuń filtr</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Filter_DeleteQuestion" xml:space="preserve">
-    <value>„{0}” verwijderen?</value>
+    <value>Usunąć „{0}”?</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Filters_Filters" xml:space="preserve">
-    <value>Filters</value>
+    <value>Filtry</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Filters_Add" xml:space="preserve">
-    <value>Toevoegen</value>
+    <value>Dodaj</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Filters_TapAFilterToUse" xml:space="preserve">
-    <value>Tik op een filter om het te gebruiken. Het actieve filter beperkt de AP-lijst, en de pagina Exporteren kan alleen de AP's exporteren die het toont.</value>
+    <value>Dotknij filtra, aby go użyć. Używany filtr zawęża listę AP, a strona Eksportuj może eksportować tylko pokazywane przez niego AP.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Filters_NoFilterShowAllAPs" xml:space="preserve">
-    <value>Geen filter (alle AP's tonen)</value>
+    <value>Brak filtra (pokaż wszystkie AP)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filters_Edit" xml:space="preserve">
+    <value>Edytuj</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filters_Delete" xml:space="preserve">
+    <value>Usuń</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Filters_NoSavedFiltersYetTap" xml:space="preserve">
-    <value>Nog geen opgeslagen filters. Tik op Toevoegen om er een te maken.</value>
+    <value>Brak zapisanych filtrów. Dotknij Dodaj, aby utworzyć filtr.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Filters_AddAFilter" xml:space="preserve">
-    <value>Een filter toevoegen</value>
+    <value>Dodaj filtr</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="FilterEdit_Name" xml:space="preserve">
-    <value>Naam</value>
+    <value>Nazwa</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="FilterEdit_SHOWAPSTHAT" xml:space="preserve">
-    <value>AP'S TONEN DIE</value>
+    <value>POKAŻ AP, KTÓRE</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="FilterEdit_SSIDContains" xml:space="preserve">
-    <value>SSID bevat</value>
+    <value>SSID zawiera</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="FilterEdit_Any" xml:space="preserve">
-    <value>alles</value>
+    <value>dowolne</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="FilterEdit_BSSIDStartsWith" xml:space="preserve">
-    <value>BSSID begint met</value>
+    <value>BSSID zaczyna się od</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="FilterEdit_AnyEG0011" xml:space="preserve">
-    <value>alles, bijv. 00:11:22</value>
+    <value>dowolne, np. 00:11:22</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="FilterEdit_AnyEG16" xml:space="preserve">
-    <value>alles, bijv. 1,6,11 of 36-64</value>
+    <value>dowolne, np. 1,6,11 lub 36-64</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="FilterEdit_SignalAtLeast" xml:space="preserve">
-    <value>Signaal minstens (%)</value>
+    <value>Sygnał co najmniej (%)</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="FilterEdit_SecureWPAAndUp" xml:space="preserve">
-    <value>Beveiligd (WPA en hoger)</value>
+    <value>Zabezpieczone (WPA i nowsze)</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="FilterEdit_AdvancedRules" xml:space="preserve">
-    <value>Geavanceerde regels</value>
+    <value>Reguły zaawansowane</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="FilterEdit_TheOriginalVistumblerSFilter" xml:space="preserve">
-    <value>De filtersyntaxis van de oorspronkelijke Vistumbler, per veld. * of leeg = alles · 6 = gelijk · 1,6,11 = een van · 1-6 of -80--60 = tussen · &lt;&gt; ervoor = niet (&lt;&gt;6, &lt;&gt;1-6, &lt;&gt;6,&lt;&gt;11) · % = willekeurige tekst (Linksys%, %guest%) · \, \- \% = een letterlijke komma, streep of procent. Tekstvelden negeren hoofdletters.</value>
+    <value>Składnia filtrów oryginalnego Vistumblera, dla każdego pola. * lub puste = dowolne · 6 = równe · 1,6,11 = jedno z · 1-6 lub -80--60 = pomiędzy · &lt;&gt; z przodu = nie (&lt;&gt;6, &lt;&gt;1-6, &lt;&gt;6,&lt;&gt;11) · % = dowolny tekst (Linksys%, %guest%) · \, \- \% = dosłowny przecinek, myślnik lub procent. Pola tekstowe ignorują wielkość liter.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="FilterEdit_EGWPA2PersonalWPA3" xml:space="preserve">
-    <value>bijv. WPA2-Personal,WPA3-Personal</value>
+    <value>np. WPA2-Personal,WPA3-Personal</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="FilterEdit_EGCCMP" xml:space="preserve">
-    <value>bijv. CCMP</value>
+    <value>np. CCMP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_RadioType" xml:space="preserve">
+    <value>Typ radia</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="FilterEdit_EG5GHz" xml:space="preserve">
-    <value>bijv. %5 GHz</value>
+    <value>np. %5 GHz</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="FilterEdit_InfrastructureOrAdHoc" xml:space="preserve">
-    <value>Infrastructuur of Ad-hoc</value>
+    <value>Infrastruktura lub Ad hoc</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="FilterEdit_Signal" xml:space="preserve">
-    <value>Signaal (%)</value>
+    <value>Sygnał (%)</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="FilterEdit_HighSignal" xml:space="preserve">
-    <value>Hoogste signaal (%)</value>
+    <value>Najwyższy sygnał (%)</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="FilterEdit_RSSIDBm" xml:space="preserve">
@@ -1400,663 +1340,723 @@
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="FilterEdit_EG700" xml:space="preserve">
-    <value>bijv. -70-0</value>
+    <value>np. -70-0</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="FilterEdit_HighRSSIDBm" xml:space="preserve">
-    <value>Hoogste RSSI (dBm)</value>
+    <value>Najwyższe RSSI (dBm)</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="FilterEdit_Active1Or0" xml:space="preserve">
-    <value>Actief (1 of 0)</value>
+    <value>Aktywny (1 lub 0)</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="FilterEdit_SaveAndUse" xml:space="preserve">
-    <value>Opslaan en gebruiken</value>
+    <value>Zapisz i użyj</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Upload_AlsoWigle" xml:space="preserve">
-    <value>Ook uploaden naar WiGLE (wifi, zendmasten en Bluetooth)</value>
+    <value>Wyślij też do WiGLE (Wi-Fi, maszty komórkowe i Bluetooth)</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Upload_AlsoWigleNoAccount" xml:space="preserve">
-    <value>Ook uploaden naar WiGLE: stel eerst API-naam en token in onder Instellingen → WiGLE</value>
+    <value>Wyślij też do WiGLE: najpierw ustaw nazwę i token API w Ustawienia → WiGLE</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Upload_As" xml:space="preserve">
-    <value>Uploaden als {0} naar {1}</value>
+    <value>Wysyłanie jako {0} do {1}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Upload_NoApiKey" xml:space="preserve">
-    <value>(geen API-sleutel ingesteld)</value>
+    <value>(nie ustawiono klucza API)</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Upload_NeedAccount" xml:space="preserve">
-    <value>Stel je WifiDB-account in onder Instellingen → WifiDB voordat je uploadt.</value>
+    <value>Przed wysłaniem skonfiguruj konto WifiDB w Ustawienia → WifiDB.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Upload_Preparing" xml:space="preserve">
-    <value>Bestand voorbereiden…</value>
+    <value>Przygotowywanie pliku…</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Upload_NoAps" xml:space="preserve">
-    <value>Er zijn geen access points om te uploaden.</value>
+    <value>Brak punktów dostępu do wysłania.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Upload_Uploading" xml:space="preserve">
-    <value>{0} access points uploaden naar WifiDB…</value>
+    <value>Wysyłanie punktów dostępu ({0}) do WifiDB…</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Upload_ImportNumber" xml:space="preserve">
-    <value>Import nr. {0} — {1} access points.</value>
+    <value>Import nr {0} — punkty dostępu: {1}.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Upload_Failed" xml:space="preserve">
-    <value>Uploaden mislukt: {0}</value>
+    <value>Wysyłanie nie powiodło się: {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Upload_UploadingWigle" xml:space="preserve">
-    <value>Uploaden naar WiGLE…</value>
+    <value>Wysyłanie do WiGLE…</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Upload_NothingForWigle" xml:space="preserve">
-    <value>Niets om naar WiGLE te uploaden.</value>
+    <value>Nic do wysłania do WiGLE.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Session_DeleteTitle" xml:space="preserve">
-    <value>Sessie verwijderen</value>
+    <value>Usuń sesję</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Session_DeleteQuestion" xml:space="preserve">
-    <value>Sessie „{0}” verwijderen? Dit kan niet ongedaan worden gemaakt.</value>
+    <value>Usunąć sesję „{0}”? Tej operacji nie można cofnąć.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="WifiDbScan_NeedCamera" xml:space="preserve">
-    <value>Cameratoestemming is nodig om te scannen. Gebruik in plaats daarvan „Registreren met link…”.</value>
+    <value>Do skanowania potrzebne jest uprawnienie do aparatu. Zamiast tego użyj „Zarejestruj przez link…”.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="WifiDbScan_ScanWifiDBQR" xml:space="preserve">
-    <value>WifiDB-QR scannen</value>
+    <value>Skanuj kod QR WifiDB</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="WifiDbScan_PointTheCameraAtYour" xml:space="preserve">
-    <value>Richt de camera op je WifiDB-registratie-QR-code.</value>
+    <value>Skieruj aparat na kod QR rejestracji w WifiDB.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Opt_ActiveanddeadAPs" xml:space="preserve">
-    <value>Actieve en inactieve AP's</value>
+    <value>Aktywne i nieaktywne AP</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Opt_ActiveAPsonly" xml:space="preserve">
-    <value>Alleen actieve AP's</value>
+    <value>Tylko aktywne AP</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Opt_DeadAPsonly" xml:space="preserve">
-    <value>Alleen inactieve AP's</value>
+    <value>Tylko nieaktywne AP</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Update_Available" xml:space="preserve">
-    <value>{0} {1} is beschikbaar</value>
+    <value>Dostępna jest wersja {0} {1}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Update_YouHave" xml:space="preserve">
-    <value>Je hebt versie {0}.</value>
+    <value>Masz wersję {0}.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Update_Prerelease" xml:space="preserve">
-    <value>Deze update is een voorlopige versie.</value>
+    <value>Ta aktualizacja jest wersją przedpremierową.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Update_NoNotes" xml:space="preserve">
-    <value>Voor deze versie zijn geen release-opmerkingen gepubliceerd.</value>
+    <value>Dla tej wersji nie opublikowano informacji o wydaniu.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Update_InstallRestart" xml:space="preserve">
-    <value>Installeren en herstarten</value>
+    <value>Zainstaluj i uruchom ponownie</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Update_InstallInfo" xml:space="preserve">
-    <value>{0} sluit tijdens de installatie van de update en start daarna opnieuw. Je huidige sessie blijft behouden, zodat je verder kunt gaan.</value>
+    <value>{0} zamknie się na czas instalacji aktualizacji, a potem uruchomi ponownie. Bieżąca sesja zostanie zachowana, więc możesz ją wznowić.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Update_Download" xml:space="preserve">
-    <value>Update downloaden</value>
+    <value>Pobierz aktualizację</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Update_DownloadInfo" xml:space="preserve">
-    <value>De update wordt in je browser gedownload. Open hem om over deze versie te installeren; je sessies en instellingen blijven behouden.</value>
+    <value>Aktualizacja pobiera się w przeglądarce. Otwórz ją, aby zainstalować na tej wersji; sesje i ustawienia zostaną zachowane.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Update_OpenPage" xml:space="preserve">
-    <value>Downloadpagina openen</value>
+    <value>Otwórz stronę pobierania</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Update_NotInstalled" xml:space="preserve">
-    <value>Deze kopie is niet met het installatieprogramma geïnstalleerd; download de nieuwe versie van de releasepagina.</value>
+    <value>Ta kopia nie została zainstalowana instalatorem, więc pobierz nową wersję ze strony wydania.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Update_NoDownload" xml:space="preserve">
-    <value>Deze release heeft nog geen download voor jouw apparaat. Zie de releasepagina.</value>
+    <value>To wydanie nie ma jeszcze pliku do pobrania dla Twojego urządzenia. Zobacz stronę wydania.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Update_Downloading" xml:space="preserve">
-    <value>{0} downloaden…</value>
+    <value>Pobieranie {0}…</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Update_Checking" xml:space="preserve">
-    <value>Handtekening van het installatieprogramma controleren…</value>
+    <value>Sprawdzanie podpisu instalatora…</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Update_Starting" xml:space="preserve">
-    <value>Installatieprogramma starten…</value>
+    <value>Uruchamianie instalatora…</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Update_Cancelled" xml:space="preserve">
-    <value>De update is geannuleerd.</value>
+    <value>Aktualizacja została anulowana.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Update_Failed" xml:space="preserve">
-    <value>De update is mislukt: {0}</value>
+    <value>Aktualizacja nie powiodła się: {0}</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Update_UpdateAvailable" xml:space="preserve">
-    <value>Update beschikbaar</value>
+    <value>Dostępna aktualizacja</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Update_RELEASENOTES" xml:space="preserve">
-    <value>RELEASE-OPMERKINGEN</value>
+    <value>INFORMACJE O WYDANIU</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Update_ReleasePage" xml:space="preserve">
-    <value>Releasepagina</value>
+    <value>Strona wydania</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Update_Later" xml:space="preserve">
-    <value>Later</value>
+    <value>Później</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Opt_OnceforeachscanthatfindsnewAPs" xml:space="preserve">
-    <value>Eén keer per scan die nieuwe AP's vindt</value>
+    <value>Raz na każde skanowanie, które znajdzie nowe AP</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Opt_OnceforeachnewAP" xml:space="preserve">
-    <value>Eén keer per nieuwe AP</value>
+    <value>Raz na każdy nowy AP</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Opt_OnceforeachnewAPlouderforastrongersignal" xml:space="preserve">
-    <value>Eén keer per nieuwe AP, harder bij een sterker signaal</value>
+    <value>Raz na każdy nowy AP, głośniej przy silniejszym sygnale</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Opt_Thedevicesvoice" xml:space="preserve">
-    <value>De stem van het apparaat</value>
+    <value>Głos urządzenia</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Opt_Vistumblersrecordedwords" xml:space="preserve">
-    <value>De opgenomen woorden van Vistumbler</value>
+    <value>Nagrane słowa Vistumblera</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Opt_Atonehigherforastrongersignal" xml:space="preserve">
-    <value>Een toon, hoger bij een sterker signaal</value>
+    <value>Dźwięk, wyższy przy silniejszym sygnale</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Opt_SignalPct" xml:space="preserve">
-    <value>Signaal (%)</value>
+    <value>Sygnał (%)</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Opt_AutofitGPSaccuracy" xml:space="preserve">
-    <value>Automatisch (passend bij GPS-nauwkeurigheid)</value>
+    <value>Automatycznie (według dokładności GPS)</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Opt_Manualzoomlevel" xml:space="preserve">
-    <value>Handmatig zoomniveau</value>
+    <value>Ręczny poziom powiększenia</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Opt_Keepcurrentzoom" xml:space="preserve">
-    <value>Huidige zoom behouden</value>
+    <value>Zachowaj bieżące powiększenie</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Opt_AfteranumberofAPs" xml:space="preserve">
-    <value>Na een aantal AP's</value>
+    <value>Po określonej liczbie AP</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Opt_Afteratime" xml:space="preserve">
-    <value>Na een tijd</value>
+    <value>Po określonym czasie</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Opt_VSZzipped" xml:space="preserve">
-    <value>VSZ (gezipt)</value>
+    <value>VSZ (spakowany)</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Opt_WindowsLocation" xml:space="preserve">
-    <value>Windows-locatie</value>
+    <value>Lokalizacja Windows</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Opt_SerialNMEACOMport" xml:space="preserve">
-    <value>Serieel NMEA (COM-poort)</value>
+    <value>NMEA szeregowe (port COM)</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Opt_PhoneGPS" xml:space="preserve">
-    <value>GPS van de telefoon</value>
+    <value>GPS telefonu</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Opt_BluetoothGPSreceiverNMEA" xml:space="preserve">
-    <value>Bluetooth-GPS-ontvanger (NMEA)</value>
+    <value>Odbiornik GPS Bluetooth (NMEA)</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Opt_USBGPSreceiverNMEA" xml:space="preserve">
-    <value>USB-GPS-ontvanger (NMEA)</value>
+    <value>Odbiornik GPS USB (NMEA)</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Opt_Devicelocation" xml:space="preserve">
-    <value>Apparaatlocatie</value>
+    <value>Lokalizacja urządzenia</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Opt_Nogrouping" xml:space="preserve">
-    <value>Niet groeperen</value>
+    <value>Bez grupowania</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Channel" xml:space="preserve">
+    <value>Kanał</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Opt_Band" xml:space="preserve">
-    <value>Band</value>
+    <value>Pasmo</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Opt_Securitytype" xml:space="preserve">
-    <value>Beveiligingstype</value>
+    <value>Typ zabezpieczeń</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Authentication" xml:space="preserve">
+    <value>Uwierzytelnianie</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Encryption" xml:space="preserve">
+    <value>Szyfrowanie</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Networktype" xml:space="preserve">
+    <value>Typ sieci</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Manufacturer" xml:space="preserve">
+    <value>Producent</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Signal" xml:space="preserve">
+    <value>Sygnał</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Opt_Security" xml:space="preserve">
-    <value>Beveiliging</value>
+    <value>Zabezpieczenia</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Opt_LastSeen" xml:space="preserve">
-    <value>Laatst gezien</value>
+    <value>Ostatnio widziany</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Opt_FirstSeen" xml:space="preserve">
-    <value>Eerst gezien</value>
-    <comment>Draft (machine translation), please review</comment>
-  </data>
-  <data name="Opt_WiFi" xml:space="preserve">
-    <value>Wifi</value>
+    <value>Pierwszy raz widziany</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Opt_Celltowers" xml:space="preserve">
-    <value>Zendmasten</value>
+    <value>Maszty komórkowe</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_SCANNING" xml:space="preserve">
-    <value>SCANNEN</value>
+    <value>SKANOWANIE</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_ScanIntervalMs" xml:space="preserve">
-    <value>Scaninterval (ms)</value>
+    <value>Odstęp skanowania (ms)</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_StartScanningWhenTheApp" xml:space="preserve">
-    <value>Beginnen met scannen als de app opent</value>
+    <value>Rozpocznij skanowanie po otwarciu aplikacji</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_TurnOnGPSWhenThe" xml:space="preserve">
-    <value>GPS aanzetten als de app opent</value>
+    <value>Włącz GPS po otwarciu aplikacji</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_AlsoRecordCellTowers" xml:space="preserve">
-    <value>Ook zendmasten vastleggen</value>
+    <value>Rejestruj też maszty komórkowe</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_AlsoRecordBluetoothDevices" xml:space="preserve">
-    <value>Ook Bluetooth-apparaten vastleggen</value>
+    <value>Rejestruj też urządzenia Bluetooth</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_WiFiAdapter" xml:space="preserve">
-    <value>Wifi-adapter</value>
+    <value>Karta Wi-Fi</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_Refresh" xml:space="preserve">
-    <value>Vernieuwen</value>
+    <value>Odśwież</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_MAP" xml:space="preserve">
-    <value>KAART</value>
+    <value>MAPA</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_BasemapStyle" xml:space="preserve">
-    <value>Stijl van de basiskaart</value>
+    <value>Styl mapy bazowej</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_GPSFollowZoom" xml:space="preserve">
-    <value>Zoom bij GPS-volgen</value>
+    <value>Powiększenie przy śledzeniu GPS</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_ZoomLevel122" xml:space="preserve">
-    <value>Zoomniveau (1–22)</value>
+    <value>Poziom powiększenia (1–22)</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_ZoomAppliedWhenTheMap" xml:space="preserve">
-    <value>Zoom die wordt toegepast als de GPS-knop van de kaart de volgmodus inschakelt. Automatisch kiest een niveau waarop de nauwkeurigheidscirkel van de fix zichtbaar is; later knijpzoomen blijft staan tot volgen opnieuw wordt ingeschakeld.</value>
+    <value>Powiększenie stosowane, gdy przycisk GPS mapy przechodzi w tryb śledzenia. Automatycznie wybiera poziom, na którym widać okrąg dokładności pozycji; późniejsze powiększenie palcami pozostaje do ponownego włączenia śledzenia.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_APPointSize" xml:space="preserve">
-    <value>Grootte van AP-stippen</value>
+    <value>Rozmiar kropek AP</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_SizeOfTheAccessPoint" xml:space="preserve">
-    <value>Grootte van de access-point-stippen op de kaart, voor de live scan en de WifiDB-geschiedenis.</value>
+    <value>Rozmiar kropek punktów dostępu na mapie, zarówno dla skanowania na żywo, jak i historii WifiDB.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_MapAPColors" xml:space="preserve">
-    <value>AP-kleuren op de kaart…</value>
+    <value>Kolory AP na mapie…</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_GPSSource" xml:space="preserve">
-    <value>GPS-bron</value>
+    <value>Źródło GPS</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_RecordTheGPSTrackEven" xml:space="preserve">
-    <value>GPS-spoor ook vastleggen als er geen AP's worden gevonden</value>
+    <value>Rejestruj ślad GPS, nawet gdy nie znaleziono AP</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_CoordinateFormat" xml:space="preserve">
-    <value>Coördinatenformaat</value>
+    <value>Format współrzędnych</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_COMPort" xml:space="preserve">
-    <value>COM-poort</value>
+    <value>Port COM</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_BaudRate" xml:space="preserve">
-    <value>Baudrate</value>
+    <value>Szybkość transmisji (baud)</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_ChooseTheCOMPortYour" xml:space="preserve">
-    <value>Kies de COM-poort van je GPS-ontvanger. Een met Windows gekoppelde Bluetooth-ontvanger verschijnt ook als COM-poort.</value>
+    <value>Wybierz port COM używany przez odbiornik GPS. Odbiornik Bluetooth sparowany z Windows też pojawia się jako port COM.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_ReconnectTheReceiverWhenNo" xml:space="preserve">
-    <value>Ontvanger opnieuw verbinden als er 10 seconden geen gegevens komen</value>
+    <value>Połącz ponownie z odbiornikiem, gdy przez 10 sekund nie ma danych</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_ResetGPSPositionWhenNo" xml:space="preserve">
-    <value>GPS-positie wissen als er 30 seconden geen fix komt</value>
+    <value>Wyzeruj pozycję GPS, gdy przez 30 sekund nie ma pozycji</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_TurnOffTheReconnectFor" xml:space="preserve">
-    <value>Zet het opnieuw verbinden uit voor een ontvanger die zijn uitvoer pauzeert. Het wissen van de positie voorkomt dat AP's op de laatste positie van de ontvanger worden geplaatst nadat die zijn fix kwijt is.</value>
+    <value>Wyłącz ponowne łączenie dla odbiornika, który wstrzymuje wysyłanie danych. Zerowanie pozycji zapobiega umieszczaniu AP w ostatniej pozycji odbiornika po utracie przez niego pozycji.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_PlugTheReceiverInWith" xml:space="preserve">
-    <value>Sluit de ontvanger aan met een USB-OTG-adapter; Android vraagt of de app hem mag gebruiken. Werkt met Prolific PL2303 (GlobalSat), Silicon Labs CP210x, FTDI, CH340 en u-blox. GlobalSat-ontvangers werken meestal op 4800 baud, u-blox op 9600.</value>
+    <value>Podłącz odbiornik przez adapter USB OTG; Android zapyta, czy aplikacja może go używać. Działa z Prolific PL2303 (GlobalSat), Silicon Labs CP210x, FTDI, CH340 i u-blox. Odbiorniki GlobalSat zwykle działają z prędkością 4800 baud, u-blox 9600.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_Receiver" xml:space="preserve">
-    <value>Ontvanger</value>
+    <value>Odbiornik</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_PairTheReceiverInAndroid" xml:space="preserve">
-    <value>Koppel de ontvanger eerst in de Bluetooth-instellingen van Android en kies hem dan hier. Hij moet NMEA sturen via het seriële-poortprofiel (SPP), zoals de meeste Bluetooth-GPS-ontvangers.</value>
+    <value>Najpierw sparuj odbiornik w ustawieniach Bluetooth Androida, a potem wybierz go tutaj. Musi wysyłać NMEA przez profil portu szeregowego (SPP), jak większość odbiorników GPS Bluetooth.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_BaseURL" xml:space="preserve">
-    <value>Basis-URL</value>
+    <value>Bazowy URL</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_Username" xml:space="preserve">
-    <value>Gebruikersnaam</value>
+    <value>Nazwa użytkownika</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_Username2" xml:space="preserve">
-    <value>gebruikersnaam</value>
+    <value>nazwa użytkownika</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_APIKey" xml:space="preserve">
-    <value>API-sleutel</value>
+    <value>Klucz API</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_DataURL" xml:space="preserve">
-    <value>Data-URL</value>
+    <value>URL danych</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_DataURLServesTheMap" xml:space="preserve">
-    <value>De data-URL levert de archieven met kaartgeschiedenis en de feed die ze opsomt — een andere host dan de site hierboven.</value>
+    <value>URL danych udostępnia archiwa historii mapy i kanał je wymieniający — to inny serwer niż strona powyżej.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_RegisterWithQRCode" xml:space="preserve">
-    <value>Registreren met QR-code</value>
+    <value>Zarejestruj kodem QR</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_RegisterWithLink" xml:space="preserve">
-    <value>Registreren met link…</value>
+    <value>Zarejestruj przez link…</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_WIGLEOPTIONAL" xml:space="preserve">
-    <value>WIGLE (OPTIONEEL)</value>
+    <value>WIGLE (OPCJONALNIE)</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_AlsoUploadToWiGLE" xml:space="preserve">
-    <value>Ook uploaden naar WiGLE</value>
+    <value>Wysyłaj też do WiGLE</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_OptionalAlongsideWifiDBSendsWi" xml:space="preserve">
-    <value>Optioneel, naast WifiDB. Stuurt wifi, zendmasten en Bluetooth als WiGLE-CSV.</value>
+    <value>Opcjonalnie, obok WifiDB. Wysyła Wi-Fi, maszty komórkowe i Bluetooth jako CSV WiGLE.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_ReadWiGLESTermsOf" xml:space="preserve">
-    <value>Gebruiksvoorwaarden van WiGLE lezen</value>
+    <value>Przeczytaj warunki korzystania z WiGLE</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_APIName" xml:space="preserve">
-    <value>API-naam</value>
+    <value>Nazwa API</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_APIToken" xml:space="preserve">
-    <value>API-token</value>
+    <value>Token API</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_GetMyAPINameAnd" xml:space="preserve">
-    <value>Mijn API-naam en token ophalen (wigle.net)</value>
+    <value>Pobierz moją nazwę i token API (wigle.net)</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_UploadEachSaveClearTo" xml:space="preserve">
-    <value>Elke Opslaan &amp; wissen naar WiGLE uploaden</value>
+    <value>Wysyłaj każde Zapisz i wyczyść do WiGLE</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_DonateForCommercialUse" xml:space="preserve">
-    <value>Doneren voor commercieel gebruik</value>
+    <value>Przekaż do użytku komercyjnego</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_LetsWiGLEAlsoLicenseYour" xml:space="preserve">
-    <value>Laat WiGLE je uploads ook commercieel in licentie geven („donate” van WiGLE).</value>
+    <value>Pozwala WiGLE licencjonować Twoje wysyłki także do użytku komercyjnego („donate” w WiGLE).</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_RetryNow" xml:space="preserve">
-    <value>Nu opnieuw proberen</value>
+    <value>Spróbuj teraz</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_SAVECLEAR" xml:space="preserve">
-    <value>OPSLAAN &amp; WISSEN</value>
+    <value>ZAPISZ I WYCZYŚĆ</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_SaveClearMenuSavesThe" xml:space="preserve">
-    <value>Opslaan &amp; wissen (menu) slaat de access points hier op in een bestand en wist dan de lijst terwijl het scannen doorgaat. Automatisch opslaan en wissen doet dat voor je.</value>
+    <value>Zapisz i wyczyść (menu) zapisuje tutaj punkty dostępu do pliku, a potem czyści listę, podczas gdy skanowanie trwa. Automatyczne zapisywanie i czyszczenie robi to za Ciebie.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Browse" xml:space="preserve">
+    <value>Przeglądaj…</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_UseDefaultFolder" xml:space="preserve">
-    <value>Standaardmap gebruiken</value>
+    <value>Użyj folderu domyślnego</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_FileName" xml:space="preserve">
-    <value>Bestandsnaam</value>
+    <value>Nazwa pliku</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_AutoSave" xml:space="preserve">
     <value>AutoSave</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
+  <data name="Settings_FileType" xml:space="preserve">
+    <value>Typ pliku</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
   <data name="Settings_AutoSaveAndClear" xml:space="preserve">
-    <value>Automatisch opslaan en wissen</value>
+    <value>Automatyczne zapisywanie i czyszczenie</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_SaveOnceTheListHas" xml:space="preserve">
-    <value>Opslaan zodra de lijst zoveel AP's heeft</value>
+    <value>Zapisz, gdy lista ma tyle AP</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_SaveEveryThisManyMinutes" xml:space="preserve">
-    <value>Opslaan na zoveel minuten scannen</value>
+    <value>Zapisuj co tyle minut skanowania</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_UploadEachSaveToWifiDB" xml:space="preserve">
-    <value>Elke opslag naar WifiDB uploaden</value>
+    <value>Wysyłaj każdy zapis do WifiDB</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_DeleteTheSavedFileOnce" xml:space="preserve">
-    <value>Opgeslagen bestand verwijderen zodra WifiDB het heeft</value>
+    <value>Usuń zapisany plik, gdy WifiDB go otrzyma</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_UsesTheWifiDBAccountBelow" xml:space="preserve">
-    <value>Gebruikt het WifiDB-account hieronder. Het bestand blijft bewaard tenzij je kiest het na de upload te verwijderen. Een bestand dat niet kan worden geüpload (geen verbinding, WifiDB onbereikbaar, nog geen account) wacht en wordt opnieuw geprobeerd als de verbinding terugkomt, als de app start en na de volgende opslag.</value>
+    <value>Używa konta WifiDB poniżej. Plik zostaje zachowany, chyba że zdecydujesz się usunąć go po wysłaniu. Plik, którego nie da się wysłać (brak połączenia, WifiDB nieosiągalne, brak konta), czeka i jest ponownie wysyłany po powrocie połączenia, przy uruchomieniu aplikacji i po następnym zapisie.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_ForExample0" xml:space="preserve">
-    <value>Bijvoorbeeld: {0}</value>
+    <value>Na przykład: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SOUND" xml:space="preserve">
+    <value>DŹWIĘK</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_PlayASoundWhenNew" xml:space="preserve">
-    <value>Geluid afspelen als er nieuwe AP's worden gevonden</value>
+    <value>Odtwarzaj dźwięk po znalezieniu nowych AP</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_PlayASoundWhenThe" xml:space="preserve">
-    <value>Geluid afspelen als de GPS-ontvanger een probleem heeft</value>
+    <value>Odtwarzaj dźwięk, gdy odbiornik GPS ma problem</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_SpeakingAnAPSSignal" xml:space="preserve">
-    <value>Het signaal van een AP uitspreken: zet het aan op de detailpagina van de AP.</value>
+    <value>Odczytywanie sygnału AP: włącz je na stronie szczegółów AP.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_Voice" xml:space="preserve">
-    <value>Stem</value>
+    <value>Głos</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_Say" xml:space="preserve">
-    <value>Uitspreken</value>
+    <value>Odczytuj</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_SpeakEverySeconds" xml:space="preserve">
-    <value>Uitspreken elke (seconden)</value>
+    <value>Odczytuj co (sekundy)</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_SayTheUnitPercentOr" xml:space="preserve">
-    <value>De eenheid („procent” of „dBm”) na het getal uitspreken</value>
+    <value>Wymawiaj jednostkę („procent” lub „dBm”) po liczbie</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_TheTonePlaysTheSignal" xml:space="preserve">
-    <value>De toon speelt het signaal als toonhoogte, zoals de MIDI-geluiden van het origineel. De opgenomen woorden kunnen geen „min” zeggen, dus zeggen ze de RSSI als gewoon getal.</value>
+    <value>Dźwięk odtwarza sygnał jako wysokość tonu, jak dźwięki MIDI w oryginale. Nagrane słowa nie potrafią powiedzieć „minus”, więc odczytują RSSI jako zwykłą liczbę.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_DATA" xml:space="preserve">
-    <value>GEGEVENS</value>
+    <value>DANE</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_UpdateManufacturers" xml:space="preserve">
+    <value>Aktualizuj producentów</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_UPDATES" xml:space="preserve">
-    <value>UPDATES</value>
+    <value>AKTUALIZACJE</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_CheckForUpdatesAtStartup" xml:space="preserve">
-    <value>Bij het starten zoeken naar updates</value>
+    <value>Sprawdzaj aktualizacje przy uruchomieniu</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_IncludePreReleases" xml:space="preserve">
-    <value>Voorlopige versies meenemen</value>
+    <value>Uwzględniaj wersje przedpremierowe</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_PreReleasesEG0" xml:space="preserve">
-    <value>Voorlopige versies (bijv. 0.5.0-rc.1) krijgen nieuwe functies eerst, maar kunnen minder stabiel zijn.</value>
+    <value>Wersje przedpremierowe (np. 0.5.0-rc.1) dostają nowe funkcje pierwsze, ale mogą być mniej stabilne.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_CheckForUpdates" xml:space="preserve">
+    <value>Sprawdź aktualizacje</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_ADVANCED" xml:space="preserve">
-    <value>GEAVANCEERD</value>
+    <value>ZAAWANSOWANE</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_KeepScreenOnWhileScanning" xml:space="preserve">
-    <value>Scherm aan houden tijdens scannen</value>
+    <value>Nie wygaszaj ekranu podczas skanowania</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_DebugLogging" xml:space="preserve">
-    <value>Foutopsporingslogboek</value>
+    <value>Dziennik debugowania</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_WritesGPSFixesAndMap" xml:space="preserve">
-    <value>Schrijft GPS-fixes en verversingen van kaartlagen naar het foutopsporingslogboek (adb logcat) voor probleemoplossing.</value>
+    <value>Zapisuje pozycje GPS i odświeżenia warstw mapy w dzienniku debugowania (adb logcat) do rozwiązywania problemów.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="MapColors_MapAPColors" xml:space="preserve">
-    <value>AP-kleuren op de kaart</value>
+    <value>Kolory AP na mapie</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="MapColors_CircleColorsPerAgeBucket" xml:space="preserve">
-    <value>Cirkelkleuren per leeftijdsgroep, per beveiligingstype (hex RRGGBB). De actieve AP's van de live scan zijn het helderst; inactieve en oudere groepen worden donkerder met de leeftijd.</value>
+    <value>Kolory okręgów według grupy wiekowej, według typu zabezpieczeń (hex RRGGBB). Aktywne AP ze skanowania na żywo są najjaśniejsze; nieaktywne i starsze grupy ciemnieją z wiekiem.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="MapColors_Bucket" xml:space="preserve">
-    <value>Groep</value>
+    <value>Grupa</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="SessionChooser_VistumblerMAUISessions" xml:space="preserve">
-    <value>VistumblerMAUI — Sessies</value>
+    <value>VistumblerMAUI — Sesje</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="SessionChooser_RecoverAPreviousSessionOr" xml:space="preserve">
-    <value>Een eerdere sessie herstellen of een nieuwe beginnen.</value>
+    <value>Przywróć poprzednią sesję lub rozpocznij nową.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="SessionChooser_NoSavedSessions" xml:space="preserve">
-    <value>Geen opgeslagen sessies.</value>
+    <value>Brak zapisanych sesji.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="SessionChooser_Resume" xml:space="preserve">
-    <value>Hervatten</value>
+    <value>Wznów</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="SessionChooser_StartNewSession" xml:space="preserve">
-    <value>Nieuwe sessie starten</value>
+    <value>Rozpocznij nową sesję</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="WifiDbUpload_UploadToWifiDB" xml:space="preserve">
-    <value>Uploaden naar WifiDB</value>
+    <value>Wyślij do WifiDB</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="WifiDbUpload_UploadsTheCurrentSessionS" xml:space="preserve">
-    <value>Uploadt de access points van de huidige sessie naar WifiDB. WifiDB zet het bestand in de wachtrij en importeert het kort daarna.</value>
+    <value>Wysyła punkty dostępu z bieżącej sesji do WifiDB. WifiDB umieszcza plik w kolejce i importuje go wkrótce potem.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="WifiDbUpload_ACCOUNT" xml:space="preserve">
-    <value>ACCOUNT</value>
+    <value>KONTO</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="WifiDbUpload_SetUpWifiDBAccount" xml:space="preserve">
-    <value>WifiDB-account instellen</value>
+    <value>Skonfiguruj konto WifiDB</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="WifiDbUpload_ChangeAccountInSettings" xml:space="preserve">
-    <value>Account wijzigen in Instellingen</value>
+    <value>Zmień konto w Ustawieniach</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="WifiDbUpload_UPLOAD" xml:space="preserve">
-    <value>UPLOADEN</value>
+    <value>WYSYŁANIE</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_Title" xml:space="preserve">
+    <value>Tytuł</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_Notes" xml:space="preserve">
+    <value>Notatki</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="WifiDbUpload_Optional" xml:space="preserve">
-    <value>optioneel</value>
+    <value>opcjonalnie</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_OtherUsers" xml:space="preserve">
+    <value>Inni użytkownicy</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="WifiDbUpload_OptionalCommaSeparated" xml:space="preserve">
-    <value>optioneel, gescheiden door komma's</value>
+    <value>opcjonalnie, oddzielone przecinkami</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="WifiDbUpload_Upload" xml:space="preserve">
-    <value>Uploaden</value>
+    <value>Wyślij</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="WifiDbUpload_CheckImportStatus" xml:space="preserve">
-    <value>Importstatus controleren</value>
+    <value>Sprawdź stan importu</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_Close" xml:space="preserve">
+    <value>Zamknij</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_WiFi" xml:space="preserve">
+    <value>Wi-Fi</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
 </root>

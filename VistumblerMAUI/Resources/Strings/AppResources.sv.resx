@@ -103,4 +103,1960 @@
     <value>Ny session</value>
     <comment>Vistumbler Swedish.ini NewSession</comment>
   </data>
+  <data name="NewSession_Title" xml:space="preserve">
+    <value>Ny session</value>
+    <comment>Vistumbler Swedish.ini NewSession</comment>
+  </data>
+  <data name="Common_Close" xml:space="preserve">
+    <value>Stäng</value>
+    <comment>Vistumbler Swedish.ini Close</comment>
+  </data>
+  <data name="Common_Delete" xml:space="preserve">
+    <value>Radera</value>
+    <comment>Vistumbler Swedish.ini Delete</comment>
+  </data>
+  <data name="Filter_DeleteTitle" xml:space="preserve">
+    <value>Ta bort filter</value>
+    <comment>Vistumbler Swedish.ini DeleteFilter</comment>
+  </data>
+  <data name="Settings_Browse" xml:space="preserve">
+    <value>Bläddra…</value>
+    <comment>Vistumbler Swedish.ini Browse</comment>
+  </data>
+  <data name="Settings_FileType" xml:space="preserve">
+    <value>Filtyp</value>
+    <comment>Vistumbler Swedish.ini FileType</comment>
+  </data>
+  <data name="Settings_SOUND" xml:space="preserve">
+    <value>Ljud</value>
+    <comment>Vistumbler Swedish.ini Sound</comment>
+  </data>
+  <data name="Settings_UpdateManufacturers" xml:space="preserve">
+    <value>Uppdatera tillverkare</value>
+    <comment>Vistumbler Swedish.ini UpdateManufacturers</comment>
+  </data>
+  <data name="Settings_CheckForUpdates" xml:space="preserve">
+    <value>Sök efter uppdateringar</value>
+    <comment>Vistumbler Swedish.ini CheckForUpdates</comment>
+  </data>
+  <data name="ApDetails_Copy" xml:space="preserve">
+    <value>Kopiera</value>
+    <comment>Vistumbler Swedish.ini Copy</comment>
+  </data>
+  <data name="ApDetails_SIGNALHISTORY" xml:space="preserve">
+    <value>Signalhistorik</value>
+    <comment>Vistumbler Swedish.ini SignalHistory</comment>
+  </data>
+  <data name="ApDetails_FirstActive" xml:space="preserve">
+    <value>Först upptäckt</value>
+    <comment>Vistumbler Swedish.ini Column_FirstActive</comment>
+  </data>
+  <data name="ApDetails_LastActive" xml:space="preserve">
+    <value>Senast uppdaterad</value>
+    <comment>Vistumbler Swedish.ini Column_LastActive</comment>
+  </data>
+  <data name="Export_Export" xml:space="preserve">
+    <value>Exportera</value>
+    <comment>Vistumbler Swedish.ini Export</comment>
+  </data>
+  <data name="Import_Import" xml:space="preserve">
+    <value>Importera</value>
+    <comment>Vistumbler Swedish.ini Import</comment>
+  </data>
+  <data name="Import_FILE" xml:space="preserve">
+    <value>Arkiv</value>
+    <comment>Vistumbler Swedish.ini File</comment>
+  </data>
+  <data name="GpsDetails_Altitude" xml:space="preserve">
+    <value>Höjd</value>
+    <comment>Vistumbler Swedish.ini Altitude</comment>
+  </data>
+  <data name="GpsDetails_Heading" xml:space="preserve">
+    <value>Riktning</value>
+    <comment>Vistumbler Swedish.ini Heading</comment>
+  </data>
+  <data name="Filters_Filters" xml:space="preserve">
+    <value>Filter</value>
+    <comment>Vistumbler Swedish.ini Filters</comment>
+  </data>
+  <data name="Filters_Edit" xml:space="preserve">
+    <value>Redigera</value>
+    <comment>Vistumbler Swedish.ini Edit</comment>
+  </data>
+  <data name="Filters_Delete" xml:space="preserve">
+    <value>Radera</value>
+    <comment>Vistumbler Swedish.ini Delete</comment>
+  </data>
+  <data name="FilterEdit_RadioType" xml:space="preserve">
+    <value>Radiotyp</value>
+    <comment>Vistumbler Swedish.ini Column_RadioType</comment>
+  </data>
+  <data name="FilterEdit_Save" xml:space="preserve">
+    <value>Spara?</value>
+    <comment>Vistumbler Swedish.ini Save</comment>
+  </data>
+  <data name="WifiDbUpload_Title" xml:space="preserve">
+    <value>Titel</value>
+    <comment>Vistumbler Swedish.ini Title</comment>
+  </data>
+  <data name="WifiDbUpload_Notes" xml:space="preserve">
+    <value>Anteckningar</value>
+    <comment>Vistumbler Swedish.ini Notes</comment>
+  </data>
+  <data name="WifiDbUpload_OtherUsers" xml:space="preserve">
+    <value>Andra användare</value>
+    <comment>Vistumbler Swedish.ini OtherUsers</comment>
+  </data>
+  <data name="WifiDbUpload_Close" xml:space="preserve">
+    <value>Stäng</value>
+    <comment>Vistumbler Swedish.ini Close</comment>
+  </data>
+  <data name="Language_System" xml:space="preserve">
+    <value>Enhetens språk</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Tab_Scan" xml:space="preserve">
+    <value>Skanna</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Tab_Map" xml:space="preserve">
+    <value>Karta</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Tab_Channels" xml:space="preserve">
+    <value>Kanaler</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Menu_Clear" xml:space="preserve">
+    <value>Rensa…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Menu_UploadWifiDb" xml:space="preserve">
+    <value>Ladda upp till WifiDB…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Menu_SiteSurvey" xml:space="preserve">
+    <value>Platsmätning</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Menu_Links" xml:space="preserve">
+    <value>Länkar…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Bar_Total" xml:space="preserve">
+    <value>Totalt: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Bar_Active" xml:space="preserve">
+    <value>Aktiva: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_TotalAps" xml:space="preserve">
+    <value>{0} AP totalt</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_Cleared" xml:space="preserve">
+    <value>Rensad</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_SavedAndCleared" xml:space="preserve">
+    <value>Sparade {0} AP i {1} och rensade listan</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_SaveFailed" xml:space="preserve">
+    <value>Det gick inte att spara, listan rensades inte: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_SavedAps" xml:space="preserve">
+    <value>Sparade {0} AP i {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_UploadingWifiDb" xml:space="preserve">
+    <value>Laddar upp till WifiDB…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_WifiDbNotYet" xml:space="preserve">
+    <value>Inte uppladdat till WifiDB än ({0}); försöker igen senare</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_UploadedWifiDb" xml:space="preserve">
+    <value>Uppladdat till WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_WigleNotYet" xml:space="preserve">
+    <value>Inte uppladdat till WiGLE än ({0}); försöker igen senare</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_UploadedWigle" xml:space="preserve">
+    <value>Uppladdat till WiGLE</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_Queued" xml:space="preserve">
+    <value>i kö</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_NeedLocation" xml:space="preserve">
+    <value>Platsbehörighet krävs för att skanna efter Wi-Fi</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_Scanning" xml:space="preserve">
+    <value>Skannar…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_Stopped" xml:space="preserve">
+    <value>Stoppad — {0} AP totalt</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_ActiveTotal" xml:space="preserve">
+    <value>{0} aktiva / {1} totalt</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_DbWriteFailed" xml:space="preserve">
+    <value>Det gick inte att skriva till DB — försöker igen nästa cykel</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_Error" xml:space="preserve">
+    <value>Fel: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Gps_Off" xml:space="preserve">
+    <value>GPS av</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Gps_PermissionDenied" xml:space="preserve">
+    <value>GPS: platsbehörighet nekad</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Gps_NoFix" xml:space="preserve">
+    <value>GPS: ingen position på {0} s, positionen rensad</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Gps_Error" xml:space="preserve">
+    <value>GPS: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filter_None" xml:space="preserve">
+    <value>Inget filter</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Group_Channel" xml:space="preserve">
+    <value>Kanal {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Group_Open" xml:space="preserve">
+    <value>Öppen</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Group_Secure" xml:space="preserve">
+    <value>Skyddad</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Group_AdHoc" xml:space="preserve">
+    <value>Ad hoc</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Group_Infrastructure" xml:space="preserve">
+    <value>Infrastruktur</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Group_Hidden" xml:space="preserve">
+    <value>(dold)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Group_Unknown" xml:space="preserve">
+    <value>(okänd)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_SearchPlaceholder" xml:space="preserve">
+    <value>Sök SSID, BSSID, tillverkare…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_Sort" xml:space="preserve">
+    <value>Sortera</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_GroupBy" xml:space="preserve">
+    <value>Gruppera efter</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_FirstSeen" xml:space="preserve">
+    <value>Först: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_LastSeen" xml:space="preserve">
+    <value>Senast: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_Channel" xml:space="preserve">
+    <value>K {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_RadioShown" xml:space="preserve">
+    <value>{0} visade · starkast först</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_RadioEmpty" xml:space="preserve">
+    <value>Inget registrerat än. Slå på det under Inställningar → Skanna och skanna sedan.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_TapToBegin" xml:space="preserve">
+    <value>Tryck på ”Skanna AP” för att börja</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Common_Ok" xml:space="preserve">
+    <value>OK</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Common_Share" xml:space="preserve">
+    <value>Dela</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Common_Saved" xml:space="preserve">
+    <value>Sparade {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Common_ExportFailed" xml:space="preserve">
+    <value>Exporten misslyckades: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Clear_SaveThenClear" xml:space="preserve">
+    <value>Spara till en fil och rensa sedan</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Clear_WithoutSaving" xml:space="preserve">
+    <value>Rensa utan att spara</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Clear_Question" xml:space="preserve">
+    <value>Rensa AP-listan? Skanningen fortsätter. Sparade filer hamnar i {0}.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Clear_SaveAndClear" xml:space="preserve">
+    <value>Spara och rensa</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Links_Title" xml:space="preserve">
+    <value>Länkar</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Links_CouldNotOpen" xml:space="preserve">
+    <value>Det gick inte att öppna {0}: {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="NewSession_Question" xml:space="preserve">
+    <value>Starta en ny session? Den nuvarande sessionen förblir sparad och kan öppnas igen senare.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Exit_DiscardTitle" xml:space="preserve">
+    <value>Avsluta utan att spara</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Exit_DiscardQuestion" xml:space="preserve">
+    <value>Kasta den här sessionens insamlade data och avsluta?</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Exit_Discard" xml:space="preserve">
+    <value>Kasta och avsluta</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_ApMapHelp" xml:space="preserve">
+    <value>Punkter: där den hördes, från rött (svagt) till grönt (starkt), nya läggs till under skanning. Orange: signalcirkel. Blått: längst bort hörd. ⇪ exporterar som GeoJSON eller KML.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_WifiSquaresHelp" xml:space="preserve">
+    <value>Lila: rutor på 1 km där AP inom räckhåll har setts, mörkare där fler är överens.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_Manufacturer" xml:space="preserve">
+    <value>Tillverkare: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_ViewInList" xml:space="preserve">
+    <value>Visa i AP-listan</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_ClearTrack" xml:space="preserve">
+    <value>Rensa spår</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_EnableTrack" xml:space="preserve">
+    <value>Slå på spår</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_DisableTrack" xml:space="preserve">
+    <value>Slå av spår</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_SaveOffline" xml:space="preserve">
+    <value>Spara karta offline</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_SavedMapsOnly" xml:space="preserve">
+    <value>Endast sparade kartor</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_SavedMapsOnlyOn" xml:space="preserve">
+    <value>Endast sparade kartor ✓</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_SaveOfflineTitle" xml:space="preserve">
+    <value>Spara kartan för offlineanvändning</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_SaveOfflineQuestion" xml:space="preserve">
+    <value>Ladda ner kartan du tittar på, plus två närmare zoomnivåer, så att den visas utan internetanslutning? Slå sedan på ”Endast sparade kartor” för att bara använda de sparade kartorna. Ett stort område kan ta tid och använda mycket data.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_Download" xml:space="preserve">
+    <value>Ladda ner</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_TrackCleared" xml:space="preserve">
+    <value>Spåret rensat (exporter behåller hela historiken)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_NotReady" xml:space="preserve">
+    <value>Kartan är inte redo — vänta tills stilen har laddats</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_NotReadyPan" xml:space="preserve">
+    <value>Kartan är inte redo — panorera/zooma kartan och försök igen</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_Caching" xml:space="preserve">
+    <value>Cachar kartområde (z{0}–{1})…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_OfflineFailed" xml:space="preserve">
+    <value>Offlinenedladdningen misslyckades: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_OfflineError" xml:space="preserve">
+    <value>Fel vid offlinenedladdning: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_ApsWithGps" xml:space="preserve">
+    <value>{0} AP med GPS</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_LayerOn" xml:space="preserve">
+    <value>Lagret {0} på</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_LayerOff" xml:space="preserve">
+    <value>Lagret {0} av</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_LiveScan" xml:space="preserve">
+    <value>Liveskanning</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_NotInSession" xml:space="preserve">
+    <value>{0} finns inte i den här sessionen</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_NoPositions" xml:space="preserve">
+    <value>{0} har inga GPS-positioner att visa</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_ApMapTitle" xml:space="preserve">
+    <value>{0}: {1} positioner, räckvidd {2} m</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_ExportSignalMap" xml:space="preserve">
+    <value>Exportera signalkarta</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_WifiSquareOne" xml:space="preserve">
+    <value>Wi-Fi-position: ruta {0}, {1} AP-röst(er)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_WifiSquareMany" xml:space="preserve">
+    <value>Wi-Fi-position: bästa ruta {0} ({1} röster), {2} till skuggade efter röster</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_Daily" xml:space="preserve">
+    <value>Dagligen</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_Weekly" xml:space="preserve">
+    <value>Varje vecka</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_Monthly" xml:space="preserve">
+    <value>Varje månad</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_0to1Year" xml:space="preserve">
+    <value>0–1 år</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_1to2Year" xml:space="preserve">
+    <value>1–2 år</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_2to3Year" xml:space="preserve">
+    <value>2–3 år</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_3to5Year" xml:space="preserve">
+    <value>3–5 år</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_5to10Year" xml:space="preserve">
+    <value>5–10 år</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_10PlusYear" xml:space="preserve">
+    <value>10+ år</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_CellNetworks" xml:space="preserve">
+    <value>Mobilnät</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Channels_Band" xml:space="preserve">
+    <value>Band</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Channels_Status" xml:space="preserve">
+    <value>{0} aktiva AP på {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Graph_NoHistory" xml:space="preserve">
+    <value>Ingen signalhistorik än</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_AllAdapters" xml:space="preserve">
+    <value>Alla adaptrar</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_AdapterNotFound" xml:space="preserve">
+    <value>Vald adapter (hittades inte)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_NoUsbGps" xml:space="preserve">
+    <value>Ingen USB-GPS-mottagare som stöds är ansluten.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PluggedIn" xml:space="preserve">
+    <value>Ansluten: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_UsbListFailed" xml:space="preserve">
+    <value>Det gick inte att lista USB-enheter: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_NoPairedDevices" xml:space="preserve">
+    <value>Inga parkopplade enheter. Parkoppla GPS-mottagaren i Androids Bluetooth-inställningar och uppdatera sedan.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PendingWifiDb" xml:space="preserve">
+    <value>Sparade filer som väntar på uppladdning till WifiDB: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_WaitingUploads" xml:space="preserve">
+    <value>Väntande uppladdningar</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_StopWifiDbQuestion" xml:space="preserve">
+    <value>Sluta försöka ladda upp de här filerna till WifiDB? Själva filerna ligger kvar i mappen för Spara och rensa.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_StopUploading" xml:space="preserve">
+    <value>Sluta ladda upp</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ManufacturersUpdated" xml:space="preserve">
+    <value>uppdaterad {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ManufacturersBuiltIn" xml:space="preserve">
+    <value>listan som följde med appen</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ManufacturersLoading" xml:space="preserve">
+    <value>Laddar tillverkarlistan…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ManufacturersCount" xml:space="preserve">
+    <value>{0} tillverkare ({1})</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ManufacturersDownloading" xml:space="preserve">
+    <value>Laddar ner IEEE:s tillverkarlista…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_UpdateFailed" xml:space="preserve">
+    <value>Uppdateringen misslyckades: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_WifiDbRegistration" xml:space="preserve">
+    <value>WifiDB-registrering</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PasteRegistrationLink" xml:space="preserve">
+    <value>Klistra in din WifiDB-registreringslänk (…/redeem_link.php?token=…):</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Redeem" xml:space="preserve">
+    <value>Lös in</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_NotRegistrationLink" xml:space="preserve">
+    <value>Det ser inte ut som en WifiDB-registreringslänk.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Redeeming" xml:space="preserve">
+    <value>Löser in…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Registered" xml:space="preserve">
+    <value>Registrerad hos WifiDB.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_RegisteredAs" xml:space="preserve">
+    <value>Registrerad hos WifiDB som {0}.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_RegistrationFailed" xml:space="preserve">
+    <value>Registreringen misslyckades: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Wigle_Terms" xml:space="preserve">
+    <value>WiGLE (wigle.net) är en separat tjänst med egna regler. Uppladdning skickar appens Wi-Fi-, mobilmast- och Bluetooth-data till WiGLE enligt WiGLE:s användarvillkor, som styr hur de lagras, visas och delas; läs dem innan du slår på detta. Uppladdningar till WifiDB påverkas inte.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Wigle_Pending" xml:space="preserve">
+    <value>Sparningar som väntar på uppladdning till WiGLE: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Wigle_WaitingUploads" xml:space="preserve">
+    <value>Väntande WiGLE-uppladdningar</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Wigle_StopQuestion" xml:space="preserve">
+    <value>Sluta försöka ladda upp de här sparningarna till WiGLE? VS1-filerna i mappen för Spara och rensa behålls.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Title" xml:space="preserve">
+    <value>AP-detaljer</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_NotFound" xml:space="preserve">
+    <value>AP hittades inte.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_NoHistory" xml:space="preserve">
+    <value>Ingen signalhistorik än.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Samples" xml:space="preserve">
+    <value>{0} signalmätningar</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_AllDetails" xml:space="preserve">
+    <value>Alla detaljer</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_GpsPosition" xml:space="preserve">
+    <value>GPS-position</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Copied" xml:space="preserve">
+    <value>Kopierat: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_SearchingWifiDb" xml:space="preserve">
+    <value>Söker i WifiDB…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_SearchFailed" xml:space="preserve">
+    <value>Det gick inte att söka i WifiDB: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_NotInWifiDb" xml:space="preserve">
+    <value>WifiDB har inte {0} än.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Security" xml:space="preserve">
+    <value>Säkerhet: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Channel" xml:space="preserve">
+    <value>Kanal: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_ChannelMhz" xml:space="preserve">
+    <value>Kanal: {0} ({1} MHz)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_FirstSeen" xml:space="preserve">
+    <value>Först sedd: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_LastSeen" xml:space="preserve">
+    <value>Senast sedd: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_FirstActiveLine" xml:space="preserve">
+    <value>Först aktiv: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_LastActiveLine" xml:space="preserve">
+    <value>Senast aktiv: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_BestSignal" xml:space="preserve">
+    <value>Bästa signal: {0} %</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Signal" xml:space="preserve">
+    <value>Signal: {0} %</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Position" xml:space="preserve">
+    <value>Position: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_RadioLine" xml:space="preserve">
+    <value>Radio: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_OpenInWifiDb" xml:space="preserve">
+    <value>Öppna i WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Back" xml:space="preserve">
+    <value>Tillbaka</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_BackToScanList" xml:space="preserve">
+    <value>‹ Tillbaka till skanningslistan</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_SpeakSignalWhileScanning" xml:space="preserve">
+    <value>Läs upp signalen under skanning</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_DETAILS" xml:space="preserve">
+    <value>DETALJER</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Radio" xml:space="preserve">
+    <value>Radio</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_FilteredOnly" xml:space="preserve">
+    <value>Bara AP som filtret ”{0}” visar</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_KeepingFolder" xml:space="preserve">
+    <value>{0} Behåller {1}.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_WillWriteTo" xml:space="preserve">
+    <value>Exporter skrivs till {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_Exporting" xml:space="preserve">
+    <value>Exporterar…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_NoAps" xml:space="preserve">
+    <value>Inga åtkomstpunkter att exportera</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_NoneMatch" xml:space="preserve">
+    <value>Inga åtkomstpunkter matchar filtret ”{0}”</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_Done" xml:space="preserve">
+    <value>Exporterade {0} åtkomstpunkt(er) till {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_DoneFellBack" xml:space="preserve">
+    <value>Exporterade {0} åtkomstpunkt(er) till {1} — det gick inte att skriva till den valda mappen</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_FORMAT" xml:space="preserve">
+    <value>FORMAT</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_FILENAME" xml:space="preserve">
+    <value>FILNAMN</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_LOCATION" xml:space="preserve">
+    <value>PLATS</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_TheFileIsOfferedTo" xml:space="preserve">
+    <value>Filen erbjuds för delning efter varje export, så att den kan skickas vidare var den än skrevs.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_KMLOPTIONS" xml:space="preserve">
+    <value>KML-ALTERNATIV</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_IncludeOpenNetworks" xml:space="preserve">
+    <value>Ta med öppna nätverk</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_IncludeWEPNetworks" xml:space="preserve">
+    <value>Ta med WEP-nätverk</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_IncludeSecureNetworks" xml:space="preserve">
+    <value>Ta med skyddade nätverk</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_ColourPinsBySignal" xml:space="preserve">
+    <value>Färglägg markörer efter signal</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_IncludeGPSTrack" xml:space="preserve">
+    <value>Ta med GPS-spår</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_PickFile" xml:space="preserve">
+    <value>Välj en fil att importera</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_SelectFile" xml:space="preserve">
+    <value>Välj en fil att importera</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_Ready" xml:space="preserve">
+    <value>Redo att importera</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_SelectValid" xml:space="preserve">
+    <value>Välj en giltig fil.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_Parsing" xml:space="preserve">
+    <value>Läser filen…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_Saving" xml:space="preserve">
+    <value>Sparar {0} åtkomstpunkter…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_Done" xml:space="preserve">
+    <value>Klart — importerade {0} åtkomstpunkt(er)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_AndRadios" xml:space="preserve">
+    <value>och {0} mobilmast(er) och Bluetooth-enhet(er)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_NoneFound" xml:space="preserve">
+    <value>Inga åtkomstpunkter hittades i filen</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_FolderFailed" xml:space="preserve">
+    <value>Det gick inte att läsa mappen: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_NoFiles" xml:space="preserve">
+    <value>Inga {0}-filer i {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_Progress" xml:space="preserve">
+    <value>Importerar {0} av {1}: {2}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_FolderDone" xml:space="preserve">
+    <value>Klart — {0} fil(er), {1} åtkomstpunkt(er)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_FolderFailedFiles" xml:space="preserve">
+    <value>; {0} fil(er) kunde inte läsas</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_ImportAFolder" xml:space="preserve">
+    <value>Importera en mapp…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_ImportsEveryFileOfThe" xml:space="preserve">
+    <value>Importerar varje fil av vald typ i en mapp (inte dess undermappar).</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Waiting" xml:space="preserve">
+    <value>Väntar på GPS-position…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Off" xml:space="preserve">
+    <value>GPS är av. Tryck på ”Använd GPS” för att starta.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_LastFix" xml:space="preserve">
+    <value>Senaste position för {0} s sedan</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Position" xml:space="preserve">
+    <value>Position</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Satellites" xml:space="preserve">
+    <value>Satelliter</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Accuracy" xml:space="preserve">
+    <value>Noggrannhet</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Speed" xml:space="preserve">
+    <value>Hastighet</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_FixQuality" xml:space="preserve">
+    <value>Positionskvalitet</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_FixTime" xml:space="preserve">
+    <value>Positionstid</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_COMPASS" xml:space="preserve">
+    <value>KOMPASS</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_PointsAlongYourDirectionOf" xml:space="preserve">
+    <value>Pekar i din färdriktning, som GPS:en rapporterar den när du rör dig.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_WIFIPOSITIONOFFLINE" xml:space="preserve">
+    <value>WI-FI-POSITION (OFFLINE)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_ShowOnMap" xml:space="preserve">
+    <value>Visa på kartan</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_AlsoSearchThisSessionS" xml:space="preserve">
+    <value>Sök även i den här sessionens AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Magic8BallM8bFiles" xml:space="preserve">
+    <value>Magic 8 Ball-filer (m8b)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_NoneImportedExportOneFrom" xml:space="preserve">
+    <value>Inga importerade. Exportera en från en session (Exportera → M8b) eller använd en från WiGLE WiFi Wardriving.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Remove" xml:space="preserve">
+    <value>Ta bort</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_ImportM8bFile" xml:space="preserve">
+    <value>Importera m8b-fil…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_EachAPInRangeVotes" xml:space="preserve">
+    <value>Varje AP inom räckhåll röstar på de rutor på 1 km där den har setts; rutan flest är överens om är uppskattningen. Fungerar utan GPS eller nätverk, t.ex. inomhus. m8b-formatet kommer från WiGLE WiFi Wardriving.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_NoSources" xml:space="preserve">
+    <value>Inget att söka i än: importera en m8b-fil eller skanna med GPS först.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_NoneInRange" xml:space="preserve">
+    <value>Inga AP inom räckhåll. Börja skanna för att uppskatta en position.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_LookupFailed" xml:space="preserve">
+    <value>Sökningen misslyckades: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_NoneKnown" xml:space="preserve">
+    <value>Ingen av de {0} AP inom räckhåll är kända.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_Agree" xml:space="preserve">
+    <value>{0} av {1} AP inom räckhåll är överens om rutan på 1 km {2}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_Tie" xml:space="preserve">
+    <value>({0} annan/andra ruta/rutor lika)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_GpsDistance" xml:space="preserve">
+    <value>GPS-positionen ligger {0} m från mitten</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_Accuracy" xml:space="preserve">
+    <value>(± ruta på 1 km)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_ChooseFile" xml:space="preserve">
+    <value>Välj en m8b-fil</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_Importing" xml:space="preserve">
+    <value>Importerar…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_Imported" xml:space="preserve">
+    <value>Importerade {0}: {1} poster</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_NotM8b" xml:space="preserve">
+    <value>Det är inte en m8b-fil som appen kan läsa ({0})</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_ImportFailed" xml:space="preserve">
+    <value>Importen misslyckades: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_RemoveTitle" xml:space="preserve">
+    <value>Ta bort m8b-fil</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_RemoveQuestion" xml:space="preserve">
+    <value>Ta bort {0} från appen?</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_Remove" xml:space="preserve">
+    <value>Ta bort</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_Removed" xml:space="preserve">
+    <value>Tog bort {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_New" xml:space="preserve">
+    <value>Ny mätning</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Open" xml:space="preserve">
+    <value>Öppna mätning…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_FloorPlan" xml:space="preserve">
+    <value>Planritningsbild…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_UseGrid" xml:space="preserve">
+    <value>Använd ett rutnät</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Rename" xml:space="preserve">
+    <value>Byt namn…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_ExportCsv" xml:space="preserve">
+    <value>Exportera mätningar (CSV)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Delete" xml:space="preserve">
+    <value>Ta bort den här mätningen</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_DeleteSpot" xml:space="preserve">
+    <value>Ta bort punkt</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_MeasureAgain" xml:space="preserve">
+    <value>Mät här igen</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Strongest" xml:space="preserve">
+    <value>Starkaste nätet vid varje punkt</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_PlanLoadFailed" xml:space="preserve">
+    <value>Det gick inte att ladda planritningen: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_SpotInfo" xml:space="preserve">
+    <value>Punkt {0}: {1} AP kl. {2}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_NotHeard" xml:space="preserve">
+    <value>{0}: inte hörd</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_StrongestAp" xml:space="preserve">
+    <value>Starkast: {0} {1} dBm</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_SsidAps" xml:space="preserve">
+    <value>{0} ({1} AP)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Measuring" xml:space="preserve">
+    <value>Mäter… stå still tills nästa skanning är klar.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_StartToMeasure" xml:space="preserve">
+    <value>Börja skanna för att mäta här.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_StartThenTap" xml:space="preserve">
+    <value>Börja skanna och tryck sedan där du står.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_TapToMeasure" xml:space="preserve">
+    <value>Tryck där du står för att mäta där.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_SpotsMeasured" xml:space="preserve">
+    <value>{0} punkt(er) uppmätta. Tryck där du står för att lägga till en, eller på en punkt för att se eller ta bort den.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_SaveFailed" xml:space="preserve">
+    <value>Det gick inte att spara mätningen: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_NoneSaved" xml:space="preserve">
+    <value>Inga sparade mätningar än.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_NameSpots" xml:space="preserve">
+    <value>{0} ({1} punkter)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_FloorPlanTitle" xml:space="preserve">
+    <value>Planritning</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_ChangePlanQuestion" xml:space="preserve">
+    <value>Den här mätningen har redan uppmätta punkter, som inte flyttas med en ny planritning. Byta ändå?</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Change" xml:space="preserve">
+    <value>Byt</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_ChoosePlan" xml:space="preserve">
+    <value>Välj en planritningsbild</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_ImageFailed" xml:space="preserve">
+    <value>Det gick inte att använda bilden: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_RenameTitle" xml:space="preserve">
+    <value>Byt namn på mätningen</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Name" xml:space="preserve">
+    <value>Namn</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_DeleteTitle" xml:space="preserve">
+    <value>Ta bort mätning</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_DeleteQuestion" xml:space="preserve">
+    <value>Ta bort {0} och dess {1} punkt(er)?</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_NothingMeasured" xml:space="preserve">
+    <value>Inget uppmätt än.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_ImageSaveFailed" xml:space="preserve">
+    <value>Det gick inte att spara bilden: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Survey" xml:space="preserve">
+    <value>Mätning ▾</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Network" xml:space="preserve">
+    <value>Nätverk</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Heatmap" xml:space="preserve">
+    <value>Värmekarta</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_StartScanning" xml:space="preserve">
+    <value>Börja skanna</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_UndoLast" xml:space="preserve">
+    <value>Ångra senaste</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_SaveImage" xml:space="preserve">
+    <value>Spara bild</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filter_NewTitle" xml:space="preserve">
+    <value>Nytt filter</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filter_DefaultName" xml:space="preserve">
+    <value>Filter {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filter_EditTitle" xml:space="preserve">
+    <value>Redigera {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filter_DeleteQuestion" xml:space="preserve">
+    <value>Ta bort ”{0}”?</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filters_Add" xml:space="preserve">
+    <value>Lägg till</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filters_TapAFilterToUse" xml:space="preserve">
+    <value>Tryck på ett filter för att använda det. Filtret som används begränsar AP-listan, och sidan Exportera kan exportera bara de AP som det visar.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filters_NoFilterShowAllAPs" xml:space="preserve">
+    <value>Inget filter (visa alla AP)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filters_NoSavedFiltersYetTap" xml:space="preserve">
+    <value>Inga sparade filter än. Tryck på Lägg till för att skapa ett.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filters_AddAFilter" xml:space="preserve">
+    <value>Lägg till ett filter</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_Name" xml:space="preserve">
+    <value>Namn</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_SHOWAPSTHAT" xml:space="preserve">
+    <value>VISA AP SOM</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_SSIDContains" xml:space="preserve">
+    <value>SSID innehåller</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_Any" xml:space="preserve">
+    <value>valfri</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_BSSIDStartsWith" xml:space="preserve">
+    <value>BSSID börjar med</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_AnyEG0011" xml:space="preserve">
+    <value>valfri, t.ex. 00:11:22</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_AnyEG16" xml:space="preserve">
+    <value>valfri, t.ex. 1,6,11 eller 36-64</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_SignalAtLeast" xml:space="preserve">
+    <value>Signal minst (%)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_SecureWPAAndUp" xml:space="preserve">
+    <value>Skyddad (WPA och uppåt)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_AdvancedRules" xml:space="preserve">
+    <value>Avancerade regler</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_TheOriginalVistumblerSFilter" xml:space="preserve">
+    <value>Filtersyntaxen från ursprungliga Vistumbler, per fält. * eller tomt = valfri · 6 = lika med · 1,6,11 = någon av · 1-6 eller -80--60 = mellan · &lt;&gt; framför = inte (&lt;&gt;6, &lt;&gt;1-6, &lt;&gt;6,&lt;&gt;11) · % = valfri text (Linksys%, %guest%) · \, \- \% = ett bokstavligt kommatecken, bindestreck eller procent. Textfält skiljer inte på versaler och gemener.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_EGWPA2PersonalWPA3" xml:space="preserve">
+    <value>t.ex. WPA2-Personal,WPA3-Personal</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_EGCCMP" xml:space="preserve">
+    <value>t.ex. CCMP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_EG5GHz" xml:space="preserve">
+    <value>t.ex. %5 GHz</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_InfrastructureOrAdHoc" xml:space="preserve">
+    <value>Infrastruktur eller Ad hoc</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_Signal" xml:space="preserve">
+    <value>Signal (%)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_HighSignal" xml:space="preserve">
+    <value>Högsta signal (%)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_RSSIDBm" xml:space="preserve">
+    <value>RSSI (dBm)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_EG700" xml:space="preserve">
+    <value>t.ex. -70-0</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_HighRSSIDBm" xml:space="preserve">
+    <value>Högsta RSSI (dBm)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_Active1Or0" xml:space="preserve">
+    <value>Aktiv (1 eller 0)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_SaveAndUse" xml:space="preserve">
+    <value>Spara och använd</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_AlsoWigle" xml:space="preserve">
+    <value>Ladda även upp till WiGLE (Wi-Fi, mobilmaster och Bluetooth)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_AlsoWigleNoAccount" xml:space="preserve">
+    <value>Ladda även upp till WiGLE: ange först API-namn och token under Inställningar → WiGLE</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_As" xml:space="preserve">
+    <value>Laddar upp som {0} till {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_NoApiKey" xml:space="preserve">
+    <value>(ingen API-nyckel angiven)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_NeedAccount" xml:space="preserve">
+    <value>Ställ in ditt WifiDB-konto under Inställningar → WifiDB innan du laddar upp.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_Preparing" xml:space="preserve">
+    <value>Förbereder filen…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_NoAps" xml:space="preserve">
+    <value>Det finns inga åtkomstpunkter att ladda upp.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_Uploading" xml:space="preserve">
+    <value>Laddar upp {0} åtkomstpunkter till WifiDB…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_ImportNumber" xml:space="preserve">
+    <value>Import nr {0} — {1} åtkomstpunkter.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_Failed" xml:space="preserve">
+    <value>Uppladdningen misslyckades: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_UploadingWigle" xml:space="preserve">
+    <value>Laddar upp till WiGLE…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_NothingForWigle" xml:space="preserve">
+    <value>Inget att ladda upp till WiGLE.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Session_DeleteTitle" xml:space="preserve">
+    <value>Ta bort session</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Session_DeleteQuestion" xml:space="preserve">
+    <value>Ta bort sessionen ”{0}”? Det går inte att ångra.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbScan_NeedCamera" xml:space="preserve">
+    <value>Kamerabehörighet krävs för att skanna. Använd ”Registrera med länk…” i stället.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbScan_ScanWifiDBQR" xml:space="preserve">
+    <value>Skanna WifiDB-QR</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbScan_PointTheCameraAtYour" xml:space="preserve">
+    <value>Rikta kameran mot din QR-kod för WifiDB-registrering.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_ActiveanddeadAPs" xml:space="preserve">
+    <value>Aktiva och inaktiva AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_ActiveAPsonly" xml:space="preserve">
+    <value>Endast aktiva AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_DeadAPsonly" xml:space="preserve">
+    <value>Endast inaktiva AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Available" xml:space="preserve">
+    <value>{0} {1} finns tillgänglig</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_YouHave" xml:space="preserve">
+    <value>Du har version {0}.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Prerelease" xml:space="preserve">
+    <value>Den här uppdateringen är en förhandsversion.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_NoNotes" xml:space="preserve">
+    <value>Inga versionsanteckningar har publicerats för den här versionen.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_InstallRestart" xml:space="preserve">
+    <value>Installera och starta om</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_InstallInfo" xml:space="preserve">
+    <value>{0} stängs medan uppdateringen installeras och startar sedan igen. Din nuvarande session behålls så att du kan fortsätta.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Download" xml:space="preserve">
+    <value>Ladda ner uppdatering</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_DownloadInfo" xml:space="preserve">
+    <value>Uppdateringen laddas ner i webbläsaren. Öppna den för att installera över den här versionen; dina sessioner och inställningar behålls.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_OpenPage" xml:space="preserve">
+    <value>Öppna nedladdningssidan</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_NotInstalled" xml:space="preserve">
+    <value>Den här kopian installerades inte med installationsprogrammet; ladda ner den nya versionen från versionssidan.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_NoDownload" xml:space="preserve">
+    <value>Den här versionen har ännu ingen nedladdning för din enhet. Se versionssidan.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Downloading" xml:space="preserve">
+    <value>Laddar ner {0}…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Checking" xml:space="preserve">
+    <value>Kontrollerar installationsprogrammets signatur…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Starting" xml:space="preserve">
+    <value>Startar installationsprogrammet…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Cancelled" xml:space="preserve">
+    <value>Uppdateringen avbröts.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Failed" xml:space="preserve">
+    <value>Uppdateringen misslyckades: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_UpdateAvailable" xml:space="preserve">
+    <value>Uppdatering tillgänglig</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_RELEASENOTES" xml:space="preserve">
+    <value>VERSIONSANTECKNINGAR</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_ReleasePage" xml:space="preserve">
+    <value>Versionssida</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Later" xml:space="preserve">
+    <value>Senare</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_OnceforeachscanthatfindsnewAPs" xml:space="preserve">
+    <value>En gång per skanning som hittar nya AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_OnceforeachnewAP" xml:space="preserve">
+    <value>En gång per ny AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_OnceforeachnewAPlouderforastrongersignal" xml:space="preserve">
+    <value>En gång per ny AP, högre vid starkare signal</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Thedevicesvoice" xml:space="preserve">
+    <value>Enhetens röst</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Vistumblersrecordedwords" xml:space="preserve">
+    <value>Vistumblers inspelade ord</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Atonehigherforastrongersignal" xml:space="preserve">
+    <value>En ton, ljusare vid starkare signal</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_SignalPct" xml:space="preserve">
+    <value>Signal (%)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_AutofitGPSaccuracy" xml:space="preserve">
+    <value>Automatisk (efter GPS-noggrannhet)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Manualzoomlevel" xml:space="preserve">
+    <value>Manuell zoomnivå</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Keepcurrentzoom" xml:space="preserve">
+    <value>Behåll nuvarande zoom</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_AfteranumberofAPs" xml:space="preserve">
+    <value>Efter ett antal AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Afteratime" xml:space="preserve">
+    <value>Efter en tid</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_VSZzipped" xml:space="preserve">
+    <value>VSZ (zippad)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_WindowsLocation" xml:space="preserve">
+    <value>Windows-plats</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_SerialNMEACOMport" xml:space="preserve">
+    <value>Seriell NMEA (COM-port)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_PhoneGPS" xml:space="preserve">
+    <value>Telefonens GPS</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_BluetoothGPSreceiverNMEA" xml:space="preserve">
+    <value>Bluetooth-GPS-mottagare (NMEA)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_USBGPSreceiverNMEA" xml:space="preserve">
+    <value>USB-GPS-mottagare (NMEA)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Devicelocation" xml:space="preserve">
+    <value>Enhetens plats</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Nogrouping" xml:space="preserve">
+    <value>Ingen gruppering</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Band" xml:space="preserve">
+    <value>Band</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Securitytype" xml:space="preserve">
+    <value>Säkerhetstyp</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Signal" xml:space="preserve">
+    <value>Signal</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Security" xml:space="preserve">
+    <value>Säkerhet</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_LastSeen" xml:space="preserve">
+    <value>Senast sedd</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_FirstSeen" xml:space="preserve">
+    <value>Först sedd</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Celltowers" xml:space="preserve">
+    <value>Mobilmaster</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SCANNING" xml:space="preserve">
+    <value>SKANNING</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ScanIntervalMs" xml:space="preserve">
+    <value>Skanningsintervall (ms)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_StartScanningWhenTheApp" xml:space="preserve">
+    <value>Börja skanna när appen öppnas</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_TurnOnGPSWhenThe" xml:space="preserve">
+    <value>Slå på GPS när appen öppnas</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_AlsoRecordCellTowers" xml:space="preserve">
+    <value>Registrera även mobilmaster</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_AlsoRecordBluetoothDevices" xml:space="preserve">
+    <value>Registrera även Bluetooth-enheter</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_WiFiAdapter" xml:space="preserve">
+    <value>Wi-Fi-adapter</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Refresh" xml:space="preserve">
+    <value>Uppdatera</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_MAP" xml:space="preserve">
+    <value>KARTA</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_BasemapStyle" xml:space="preserve">
+    <value>Baskartans stil</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_GPSFollowZoom" xml:space="preserve">
+    <value>Zoom vid GPS-följning</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ZoomLevel122" xml:space="preserve">
+    <value>Zoomnivå (1–22)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ZoomAppliedWhenTheMap" xml:space="preserve">
+    <value>Zoom som används när kartans GPS-knapp går in i följläget. Automatisk väljer en nivå där positionens noggrannhetscirkel syns; nypzoomning efteråt gäller tills följläget slås på igen.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_APPointSize" xml:space="preserve">
+    <value>Storlek på AP-punkter</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SizeOfTheAccessPoint" xml:space="preserve">
+    <value>Storlek på åtkomstpunkternas punkter på kartan, för både liveskanning och WifiDB-historik.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_MapAPColors" xml:space="preserve">
+    <value>AP-färger på kartan…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_GPSSource" xml:space="preserve">
+    <value>GPS-källa</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_RecordTheGPSTrackEven" xml:space="preserve">
+    <value>Registrera GPS-spåret även när inga AP hittas</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_CoordinateFormat" xml:space="preserve">
+    <value>Koordinatformat</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_COMPort" xml:space="preserve">
+    <value>COM-port</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_BaudRate" xml:space="preserve">
+    <value>Baudhastighet</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ChooseTheCOMPortYour" xml:space="preserve">
+    <value>Välj den COM-port som GPS-mottagaren använder. En Bluetooth-mottagare parkopplad med Windows visas också som COM-port.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ReconnectTheReceiverWhenNo" xml:space="preserve">
+    <value>Återanslut mottagaren när ingen data tas emot på 10 sekunder</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ResetGPSPositionWhenNo" xml:space="preserve">
+    <value>Återställ GPS-positionen när ingen position tas emot på 30 sekunder</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_TurnOffTheReconnectFor" xml:space="preserve">
+    <value>Slå av återanslutningen för en mottagare som pausar sin utdata. Att återställa positionen hindrar att AP placeras på mottagarens senaste position efter att den tappat positionen.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PlugTheReceiverInWith" xml:space="preserve">
+    <value>Anslut mottagaren med en USB OTG-adapter; Android frågar om appen får använda den. Fungerar med Prolific PL2303 (GlobalSat), Silicon Labs CP210x, FTDI, CH340 och u-blox. GlobalSat-mottagare kör oftast 4800 baud, u-blox 9600.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Receiver" xml:space="preserve">
+    <value>Mottagare</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PairTheReceiverInAndroid" xml:space="preserve">
+    <value>Parkoppla först mottagaren i Androids Bluetooth-inställningar och välj den sedan här. Den måste skicka NMEA via serieportsprofilen (SPP), som de flesta Bluetooth-GPS-mottagare gör.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_BaseURL" xml:space="preserve">
+    <value>Bas-URL</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Username" xml:space="preserve">
+    <value>Användarnamn</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Username2" xml:space="preserve">
+    <value>användarnamn</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_APIKey" xml:space="preserve">
+    <value>API-nyckel</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_DataURL" xml:space="preserve">
+    <value>Data-URL</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_DataURLServesTheMap" xml:space="preserve">
+    <value>Data-URL:en levererar kartans historikarkiv och flödet som listar dem — en annan värd än webbplatsen ovan.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_RegisterWithQRCode" xml:space="preserve">
+    <value>Registrera med QR-kod</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_RegisterWithLink" xml:space="preserve">
+    <value>Registrera med länk…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_WIGLEOPTIONAL" xml:space="preserve">
+    <value>WIGLE (VALFRITT)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_AlsoUploadToWiGLE" xml:space="preserve">
+    <value>Ladda även upp till WiGLE</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_OptionalAlongsideWifiDBSendsWi" xml:space="preserve">
+    <value>Valfritt, utöver WifiDB. Skickar Wi-Fi, mobilmaster och Bluetooth som WiGLE-CSV.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ReadWiGLESTermsOf" xml:space="preserve">
+    <value>Läs WiGLE:s användarvillkor</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_APIName" xml:space="preserve">
+    <value>API-namn</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_APIToken" xml:space="preserve">
+    <value>API-token</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_GetMyAPINameAnd" xml:space="preserve">
+    <value>Hämta mitt API-namn och token (wigle.net)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_UploadEachSaveClearTo" xml:space="preserve">
+    <value>Ladda upp varje Spara och rensa till WiGLE</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_DonateForCommercialUse" xml:space="preserve">
+    <value>Donera för kommersiellt bruk</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_LetsWiGLEAlsoLicenseYour" xml:space="preserve">
+    <value>Låter WiGLE även licensiera dina uppladdningar kommersiellt (WiGLE:s ”donate”).</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_RetryNow" xml:space="preserve">
+    <value>Försök igen nu</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SAVECLEAR" xml:space="preserve">
+    <value>SPARA OCH RENSA</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SaveClearMenuSavesThe" xml:space="preserve">
+    <value>Spara och rensa (menyn) sparar åtkomstpunkterna i en fil här och rensar sedan listan medan skanningen fortsätter. Automatisk spara och rensa gör det åt dig.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_UseDefaultFolder" xml:space="preserve">
+    <value>Använd standardmappen</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_FileName" xml:space="preserve">
+    <value>Filnamn</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_AutoSave" xml:space="preserve">
+    <value>AutoSave</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_AutoSaveAndClear" xml:space="preserve">
+    <value>Automatisk spara och rensa</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SaveOnceTheListHas" xml:space="preserve">
+    <value>Spara när listan har så här många AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SaveEveryThisManyMinutes" xml:space="preserve">
+    <value>Spara efter så här många minuters skanning</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_UploadEachSaveToWifiDB" xml:space="preserve">
+    <value>Ladda upp varje sparning till WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_DeleteTheSavedFileOnce" xml:space="preserve">
+    <value>Ta bort den sparade filen när WifiDB har den</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_UsesTheWifiDBAccountBelow" xml:space="preserve">
+    <value>Använder WifiDB-kontot nedan. Filen behålls om du inte väljer att ta bort den efter uppladdningen. En fil som inte kan laddas upp (ingen anslutning, WifiDB onåbart, inget konto än) väntar och försöks igen när anslutningen kommer tillbaka, när appen startar och efter nästa sparning.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ForExample0" xml:space="preserve">
+    <value>Till exempel: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PlayASoundWhenNew" xml:space="preserve">
+    <value>Spela ett ljud när nya AP hittas</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PlayASoundWhenThe" xml:space="preserve">
+    <value>Spela ett ljud när GPS-mottagaren har problem</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SpeakingAnAPSSignal" xml:space="preserve">
+    <value>Uppläsning av en AP:s signal: slå på den från AP:ns detaljsida.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Voice" xml:space="preserve">
+    <value>Röst</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Say" xml:space="preserve">
+    <value>Läs upp</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SpeakEverySeconds" xml:space="preserve">
+    <value>Läs upp var (sekund)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SayTheUnitPercentOr" xml:space="preserve">
+    <value>Säg enheten (”procent” eller ”dBm”) efter talet</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_TheTonePlaysTheSignal" xml:space="preserve">
+    <value>Tonen spelar signalen som tonhöjd, som originalets MIDI-ljud. De inspelade orden kan inte säga ”minus”, så de läser RSSI som ett vanligt tal.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_DATA" xml:space="preserve">
+    <value>DATA</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_UPDATES" xml:space="preserve">
+    <value>UPPDATERINGAR</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_CheckForUpdatesAtStartup" xml:space="preserve">
+    <value>Sök efter uppdateringar vid start</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_IncludePreReleases" xml:space="preserve">
+    <value>Ta med förhandsversioner</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PreReleasesEG0" xml:space="preserve">
+    <value>Förhandsversioner (t.ex. 0.5.0-rc.1) får nya funktioner först men kan vara mindre stabila.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ADVANCED" xml:space="preserve">
+    <value>AVANCERAT</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_KeepScreenOnWhileScanning" xml:space="preserve">
+    <value>Håll skärmen på under skanning</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_DebugLogging" xml:space="preserve">
+    <value>Felsökningslogg</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_WritesGPSFixesAndMap" xml:space="preserve">
+    <value>Skriver GPS-positioner och uppdateringar av kartlager till felsökningsloggen (adb logcat) för felsökning.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="MapColors_MapAPColors" xml:space="preserve">
+    <value>AP-färger på kartan</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="MapColors_CircleColorsPerAgeBucket" xml:space="preserve">
+    <value>Cirkelfärger per åldersgrupp, efter säkerhetstyp (hex RRGGBB). Liveskanningens aktiva AP är ljusast; inaktiva och äldre grupper mörknar med åldern.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="MapColors_Bucket" xml:space="preserve">
+    <value>Grupp</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="SessionChooser_VistumblerMAUISessions" xml:space="preserve">
+    <value>VistumblerMAUI — Sessioner</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="SessionChooser_RecoverAPreviousSessionOr" xml:space="preserve">
+    <value>Återställ en tidigare session eller starta en ny.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="SessionChooser_NoSavedSessions" xml:space="preserve">
+    <value>Inga sparade sessioner.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="SessionChooser_Resume" xml:space="preserve">
+    <value>Fortsätt</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="SessionChooser_StartNewSession" xml:space="preserve">
+    <value>Starta ny session</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_UploadToWifiDB" xml:space="preserve">
+    <value>Ladda upp till WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_UploadsTheCurrentSessionS" xml:space="preserve">
+    <value>Laddar upp den nuvarande sessionens åtkomstpunkter till WifiDB. WifiDB köar filen och importerar den strax efter.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_ACCOUNT" xml:space="preserve">
+    <value>KONTO</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_SetUpWifiDBAccount" xml:space="preserve">
+    <value>Ställ in WifiDB-konto</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_ChangeAccountInSettings" xml:space="preserve">
+    <value>Byt konto i Inställningar</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_UPLOAD" xml:space="preserve">
+    <value>UPPLADDNING</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_Optional" xml:space="preserve">
+    <value>valfritt</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_OptionalCommaSeparated" xml:space="preserve">
+    <value>valfritt, kommaseparerat</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_Upload" xml:space="preserve">
+    <value>Ladda upp</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_CheckImportStatus" xml:space="preserve">
+    <value>Kontrollera importstatus</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_WiFi" xml:space="preserve">
+    <value>Wi-Fi</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
 </root>

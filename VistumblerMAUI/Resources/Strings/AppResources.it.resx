@@ -99,4 +99,1964 @@
     <value>Nuova Sessione</value>
     <comment>Vistumbler Italiano.ini NewSession</comment>
   </data>
+  <data name="NewSession_Title" xml:space="preserve">
+    <value>Nuova Sessione</value>
+    <comment>Vistumbler Italiano.ini NewSession</comment>
+  </data>
+  <data name="Common_Close" xml:space="preserve">
+    <value>Chiudi</value>
+    <comment>Vistumbler Italiano.ini Close</comment>
+  </data>
+  <data name="Common_Delete" xml:space="preserve">
+    <value>Elimina</value>
+    <comment>Vistumbler Italiano.ini Delete</comment>
+  </data>
+  <data name="Filter_DeleteTitle" xml:space="preserve">
+    <value>Elimina Filtro</value>
+    <comment>Vistumbler Italiano.ini DeleteFilter</comment>
+  </data>
+  <data name="Settings_Browse" xml:space="preserve">
+    <value>Sfoglia…</value>
+    <comment>Vistumbler Italiano.ini Browse</comment>
+  </data>
+  <data name="Settings_FileType" xml:space="preserve">
+    <value>Tipo di File</value>
+    <comment>Vistumbler Italiano.ini FileType</comment>
+  </data>
+  <data name="Settings_SOUND" xml:space="preserve">
+    <value>Suoni</value>
+    <comment>Vistumbler Italiano.ini Sound</comment>
+  </data>
+  <data name="Settings_UpdateManufacturers" xml:space="preserve">
+    <value>Aggiorna Produttori</value>
+    <comment>Vistumbler Italiano.ini UpdateManufacturers</comment>
+  </data>
+  <data name="Settings_CheckForUpdates" xml:space="preserve">
+    <value>Cerca Aggiornamenti</value>
+    <comment>Vistumbler Italiano.ini CheckForUpdates</comment>
+  </data>
+  <data name="ApDetails_Copy" xml:space="preserve">
+    <value>Copia</value>
+    <comment>Vistumbler Italiano.ini Copy</comment>
+  </data>
+  <data name="ApDetails_SIGNALHISTORY" xml:space="preserve">
+    <value>Storia Segnale</value>
+    <comment>Vistumbler Italiano.ini SignalHistory</comment>
+  </data>
+  <data name="ApDetails_FirstActive" xml:space="preserve">
+    <value>Primo Rilevamento</value>
+    <comment>Vistumbler Italiano.ini Column_FirstActive</comment>
+  </data>
+  <data name="ApDetails_LastActive" xml:space="preserve">
+    <value>Ultimo Rilevamento</value>
+    <comment>Vistumbler Italiano.ini Column_LastActive</comment>
+  </data>
+  <data name="Export_Export" xml:space="preserve">
+    <value>Esporta</value>
+    <comment>Vistumbler Italiano.ini Export</comment>
+  </data>
+  <data name="Import_Import" xml:space="preserve">
+    <value>Importa</value>
+    <comment>Vistumbler Italiano.ini Import</comment>
+  </data>
+  <data name="GpsDetails_Altitude" xml:space="preserve">
+    <value>Altitudine</value>
+    <comment>Vistumbler Italiano.ini Altitude</comment>
+  </data>
+  <data name="GpsDetails_Heading" xml:space="preserve">
+    <value>Direzione</value>
+    <comment>Vistumbler Italiano.ini Heading</comment>
+  </data>
+  <data name="Filters_Filters" xml:space="preserve">
+    <value>Filtri</value>
+    <comment>Vistumbler Italiano.ini Filters</comment>
+  </data>
+  <data name="Filters_Edit" xml:space="preserve">
+    <value>Modifica</value>
+    <comment>Vistumbler Italiano.ini Edit</comment>
+  </data>
+  <data name="Filters_Delete" xml:space="preserve">
+    <value>Elimina</value>
+    <comment>Vistumbler Italiano.ini Delete</comment>
+  </data>
+  <data name="FilterEdit_RadioType" xml:space="preserve">
+    <value>IEEE 802.11</value>
+    <comment>Vistumbler Italiano.ini Column_RadioType</comment>
+  </data>
+  <data name="FilterEdit_Save" xml:space="preserve">
+    <value>Salva Elenco</value>
+    <comment>Vistumbler Italiano.ini Save</comment>
+  </data>
+  <data name="WifiDbUpload_Title" xml:space="preserve">
+    <value>Titolo</value>
+    <comment>Vistumbler Italiano.ini Title</comment>
+  </data>
+  <data name="WifiDbUpload_Notes" xml:space="preserve">
+    <value>Note</value>
+    <comment>Vistumbler Italiano.ini Notes</comment>
+  </data>
+  <data name="WifiDbUpload_OtherUsers" xml:space="preserve">
+    <value>Altri Utenti</value>
+    <comment>Vistumbler Italiano.ini OtherUsers</comment>
+  </data>
+  <data name="WifiDbUpload_Close" xml:space="preserve">
+    <value>Chiudi</value>
+    <comment>Vistumbler Italiano.ini Close</comment>
+  </data>
+  <data name="Language_System" xml:space="preserve">
+    <value>Lingua del dispositivo</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Tab_Scan" xml:space="preserve">
+    <value>Scansione</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Tab_Map" xml:space="preserve">
+    <value>Mappa</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Tab_Channels" xml:space="preserve">
+    <value>Canali</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Menu_Clear" xml:space="preserve">
+    <value>Svuota…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Menu_UploadWifiDb" xml:space="preserve">
+    <value>Carica su WifiDB…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Menu_SiteSurvey" xml:space="preserve">
+    <value>Rilievo del sito</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Menu_Links" xml:space="preserve">
+    <value>Collegamenti…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Bar_Stop" xml:space="preserve">
+    <value>Ferma</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Bar_StopGps" xml:space="preserve">
+    <value>Ferma GPS</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Bar_Total" xml:space="preserve">
+    <value>Totale: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Bar_Active" xml:space="preserve">
+    <value>Attivi: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_TotalAps" xml:space="preserve">
+    <value>{0} AP in totale</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_Cleared" xml:space="preserve">
+    <value>Svuotato</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_SavedAndCleared" xml:space="preserve">
+    <value>{0} AP salvati in {1} e lista svuotata</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_SaveFailed" xml:space="preserve">
+    <value>Salvataggio non riuscito, lista non svuotata: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_SavedAps" xml:space="preserve">
+    <value>{0} AP salvati in {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_UploadingWifiDb" xml:space="preserve">
+    <value>Caricamento su WifiDB…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_WifiDbNotYet" xml:space="preserve">
+    <value>Non ancora caricato su WifiDB ({0}); verrà ritentato</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_UploadedWifiDb" xml:space="preserve">
+    <value>Caricato su WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_WigleNotYet" xml:space="preserve">
+    <value>Non ancora caricato su WiGLE ({0}); verrà ritentato</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_UploadedWigle" xml:space="preserve">
+    <value>Caricato su WiGLE</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_Queued" xml:space="preserve">
+    <value>in coda</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_NeedLocation" xml:space="preserve">
+    <value>Serve l'autorizzazione alla posizione per scansionare il Wi-Fi</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_Scanning" xml:space="preserve">
+    <value>Scansione…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_Stopped" xml:space="preserve">
+    <value>Fermato — {0} AP in totale</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_ActiveTotal" xml:space="preserve">
+    <value>{0} attivi / {1} in totale</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_DbWriteFailed" xml:space="preserve">
+    <value>Scrittura nel DB non riuscita — nuovo tentativo al prossimo ciclo</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_Error" xml:space="preserve">
+    <value>Errore: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Gps_Off" xml:space="preserve">
+    <value>GPS spento</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Gps_PermissionDenied" xml:space="preserve">
+    <value>GPS: autorizzazione alla posizione negata</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Gps_NoFix" xml:space="preserve">
+    <value>GPS: nessun fix da {0} s, posizione azzerata</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Gps_Error" xml:space="preserve">
+    <value>GPS: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filter_None" xml:space="preserve">
+    <value>Nessun filtro</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Group_Channel" xml:space="preserve">
+    <value>Canale {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Group_Open" xml:space="preserve">
+    <value>Aperta</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Group_Secure" xml:space="preserve">
+    <value>Protetta</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Group_AdHoc" xml:space="preserve">
+    <value>Ad hoc</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Group_Infrastructure" xml:space="preserve">
+    <value>Infrastruttura</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Group_Hidden" xml:space="preserve">
+    <value>(nascosta)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Group_Unknown" xml:space="preserve">
+    <value>(sconosciuto)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_SearchPlaceholder" xml:space="preserve">
+    <value>Cerca SSID, BSSID, produttore…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_Sort" xml:space="preserve">
+    <value>Ordina</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_GroupBy" xml:space="preserve">
+    <value>Raggruppa per</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_FirstSeen" xml:space="preserve">
+    <value>Primo: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_LastSeen" xml:space="preserve">
+    <value>Ultimo: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_Channel" xml:space="preserve">
+    <value>Can. {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_RadioShown" xml:space="preserve">
+    <value>{0} mostrati · prima i più forti</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_RadioEmpty" xml:space="preserve">
+    <value>Ancora nulla di registrato. Attivalo in Impostazioni → Scansione, poi avvia la scansione.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_TapToBegin" xml:space="preserve">
+    <value>Tocca «Scansiona AP» per iniziare</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Common_Ok" xml:space="preserve">
+    <value>OK</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Common_Share" xml:space="preserve">
+    <value>Condividi</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Common_Saved" xml:space="preserve">
+    <value>Salvato {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Common_ExportFailed" xml:space="preserve">
+    <value>Esportazione non riuscita: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Clear_SaveThenClear" xml:space="preserve">
+    <value>Salva in un file, poi svuota</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Clear_WithoutSaving" xml:space="preserve">
+    <value>Svuota senza salvare</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Clear_Question" xml:space="preserve">
+    <value>Svuotare la lista degli AP? La scansione continua. I file salvati vanno in {0}.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Clear_SaveAndClear" xml:space="preserve">
+    <value>Salva e svuota</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Links_Title" xml:space="preserve">
+    <value>Collegamenti</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Links_CouldNotOpen" xml:space="preserve">
+    <value>Impossibile aprire {0}: {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="NewSession_Question" xml:space="preserve">
+    <value>Avviare una nuova sessione? La sessione attuale resta salvata e può essere riaperta in seguito.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Exit_DiscardTitle" xml:space="preserve">
+    <value>Esci senza salvare</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Exit_DiscardQuestion" xml:space="preserve">
+    <value>Scartare i dati acquisiti in questa sessione e uscire?</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Exit_Discard" xml:space="preserve">
+    <value>Scarta ed esci</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_ApMapHelp" xml:space="preserve">
+    <value>Punti: dove è stato ricevuto, dal rosso (debole) al verde (forte), con nuovi punti durante la scansione. Arancione: cerchio del segnale. Blu: ricezione più lontana. ⇪ lo esporta come GeoJSON o KML.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_WifiSquaresHelp" xml:space="preserve">
+    <value>Viola: quadrati di 1 km in cui sono stati visti gli AP nel raggio, più scuri dove concordano di più.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_Manufacturer" xml:space="preserve">
+    <value>Produttore: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_ViewInList" xml:space="preserve">
+    <value>Mostra nella lista AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_ClearTrack" xml:space="preserve">
+    <value>Cancella traccia</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_EnableTrack" xml:space="preserve">
+    <value>Attiva traccia</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_DisableTrack" xml:space="preserve">
+    <value>Disattiva traccia</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_SaveOffline" xml:space="preserve">
+    <value>Salva mappa offline</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_SavedMapsOnly" xml:space="preserve">
+    <value>Solo mappe salvate</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_SavedMapsOnlyOn" xml:space="preserve">
+    <value>Solo mappe salvate ✓</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_SaveOfflineTitle" xml:space="preserve">
+    <value>Salva la mappa per l'uso offline</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_SaveOfflineQuestion" xml:space="preserve">
+    <value>Scaricare la mappa che stai guardando, più due livelli di zoom più vicini, così si vede anche senza connessione Internet? Poi attiva «Solo mappe salvate» per usare solo le mappe salvate. Un'area grande può richiedere tempo e molti dati.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_Download" xml:space="preserve">
+    <value>Scarica</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_TrackCleared" xml:space="preserve">
+    <value>Traccia cancellata (le esportazioni conservano tutta la cronologia)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_NotReady" xml:space="preserve">
+    <value>Mappa non pronta — attendi il caricamento dello stile</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_NotReadyPan" xml:space="preserve">
+    <value>Mappa non pronta — sposta o ingrandisci la mappa, poi riprova</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_Caching" xml:space="preserve">
+    <value>Salvataggio dell'area della mappa (z{0}–{1})…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_OfflineFailed" xml:space="preserve">
+    <value>Download offline non riuscito: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_OfflineError" xml:space="preserve">
+    <value>Errore nel download offline: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_ApsWithGps" xml:space="preserve">
+    <value>{0} AP con GPS</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_LayerOn" xml:space="preserve">
+    <value>Livello {0} attivo</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_LayerOff" xml:space="preserve">
+    <value>Livello {0} disattivo</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_LiveScan" xml:space="preserve">
+    <value>Scansione in tempo reale</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_NotInSession" xml:space="preserve">
+    <value>{0} non è in questa sessione</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_NoPositions" xml:space="preserve">
+    <value>{0} non ha posizioni GPS da mostrare</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_ApMapTitle" xml:space="preserve">
+    <value>{0}: {1} posizioni, portata {2} m</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_ExportSignalMap" xml:space="preserve">
+    <value>Esporta mappa del segnale</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_WifiSquareOne" xml:space="preserve">
+    <value>Posizione Wi-Fi: quadrato {0}, {1} voto/i degli AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_WifiSquareMany" xml:space="preserve">
+    <value>Posizione Wi-Fi: miglior quadrato {0} ({1} voti), altri {2} ombreggiati in base ai voti</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_Daily" xml:space="preserve">
+    <value>Giornaliero</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_Weekly" xml:space="preserve">
+    <value>Settimanale</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_Monthly" xml:space="preserve">
+    <value>Mensile</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_0to1Year" xml:space="preserve">
+    <value>0–1 anno</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_1to2Year" xml:space="preserve">
+    <value>1–2 anni</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_2to3Year" xml:space="preserve">
+    <value>2–3 anni</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_3to5Year" xml:space="preserve">
+    <value>3–5 anni</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_5to10Year" xml:space="preserve">
+    <value>5–10 anni</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_10PlusYear" xml:space="preserve">
+    <value>Oltre 10 anni</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_CellNetworks" xml:space="preserve">
+    <value>Reti cellulari</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Channels_Band" xml:space="preserve">
+    <value>Banda</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Channels_Status" xml:space="preserve">
+    <value>{0} AP attivi su {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Graph_NoHistory" xml:space="preserve">
+    <value>Ancora nessuna cronologia del segnale</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_AllAdapters" xml:space="preserve">
+    <value>Tutti gli adattatori</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_AdapterNotFound" xml:space="preserve">
+    <value>Adattatore scelto (non trovato)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_NoUsbGps" xml:space="preserve">
+    <value>Nessun ricevitore GPS USB supportato è collegato.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PluggedIn" xml:space="preserve">
+    <value>Collegato: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_UsbListFailed" xml:space="preserve">
+    <value>Impossibile elencare i dispositivi USB: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_NoPairedDevices" xml:space="preserve">
+    <value>Nessun dispositivo associato. Associa il ricevitore GPS nelle impostazioni Bluetooth di Android, poi aggiorna.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PendingWifiDb" xml:space="preserve">
+    <value>File salvati in attesa di caricamento su WifiDB: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_WaitingUploads" xml:space="preserve">
+    <value>Caricamenti in attesa</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_StopWifiDbQuestion" xml:space="preserve">
+    <value>Smettere di provare a caricare questi file su WifiDB? I file restano nella cartella di Salva e svuota.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_StopUploading" xml:space="preserve">
+    <value>Interrompi caricamento</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ManufacturersUpdated" xml:space="preserve">
+    <value>aggiornata il {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ManufacturersBuiltIn" xml:space="preserve">
+    <value>la lista fornita con l'app</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ManufacturersLoading" xml:space="preserve">
+    <value>Caricamento della lista dei produttori…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ManufacturersCount" xml:space="preserve">
+    <value>{0} produttori ({1})</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ManufacturersDownloading" xml:space="preserve">
+    <value>Download della lista dei produttori IEEE…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_UpdateFailed" xml:space="preserve">
+    <value>Aggiornamento non riuscito: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_WifiDbRegistration" xml:space="preserve">
+    <value>Registrazione WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PasteRegistrationLink" xml:space="preserve">
+    <value>Incolla il tuo link di registrazione WifiDB (…/redeem_link.php?token=…):</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Redeem" xml:space="preserve">
+    <value>Riscatta</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_NotRegistrationLink" xml:space="preserve">
+    <value>Non sembra un link di registrazione WifiDB.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Redeeming" xml:space="preserve">
+    <value>Riscatto in corso…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Registered" xml:space="preserve">
+    <value>Registrato su WifiDB.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_RegisteredAs" xml:space="preserve">
+    <value>Registrato su WifiDB come {0}.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_RegistrationFailed" xml:space="preserve">
+    <value>Registrazione non riuscita: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Wigle_Terms" xml:space="preserve">
+    <value>WiGLE (wigle.net) è un servizio separato con regole proprie. Il caricamento invia a WiGLE i dati Wi-Fi, delle antenne cellulari e Bluetooth di questa app secondo i termini d'uso di WiGLE, che stabiliscono come vengono conservati, mostrati e condivisi; leggili prima di attivare questa opzione. I caricamenti su WifiDB non cambiano.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Wigle_Pending" xml:space="preserve">
+    <value>Salvataggi in attesa di caricamento su WiGLE: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Wigle_WaitingUploads" xml:space="preserve">
+    <value>Caricamenti WiGLE in attesa</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Wigle_StopQuestion" xml:space="preserve">
+    <value>Smettere di provare a caricare questi salvataggi su WiGLE? I file VS1 nella cartella di Salva e svuota vengono conservati.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Title" xml:space="preserve">
+    <value>Dettagli AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_NotFound" xml:space="preserve">
+    <value>AP non trovato.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_NoHistory" xml:space="preserve">
+    <value>Ancora nessuna cronologia del segnale.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Samples" xml:space="preserve">
+    <value>{0} campioni di segnale</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_AllDetails" xml:space="preserve">
+    <value>Tutti i dettagli</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_GpsPosition" xml:space="preserve">
+    <value>Posizione GPS</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Copied" xml:space="preserve">
+    <value>Copiato: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_SearchingWifiDb" xml:space="preserve">
+    <value>Ricerca in WifiDB…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_SearchFailed" xml:space="preserve">
+    <value>Impossibile cercare in WifiDB: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_NotInWifiDb" xml:space="preserve">
+    <value>WifiDB non ha ancora {0}.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Security" xml:space="preserve">
+    <value>Sicurezza: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Channel" xml:space="preserve">
+    <value>Canale: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_ChannelMhz" xml:space="preserve">
+    <value>Canale: {0} ({1} MHz)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_FirstSeen" xml:space="preserve">
+    <value>Visto la prima volta: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_LastSeen" xml:space="preserve">
+    <value>Visto l'ultima volta: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_FirstActiveLine" xml:space="preserve">
+    <value>Primo attivo: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_LastActiveLine" xml:space="preserve">
+    <value>Ultimo attivo: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_BestSignal" xml:space="preserve">
+    <value>Segnale migliore: {0}%</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Signal" xml:space="preserve">
+    <value>Segnale: {0}%</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Position" xml:space="preserve">
+    <value>Posizione: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_RadioLine" xml:space="preserve">
+    <value>Radio: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_OpenInWifiDb" xml:space="preserve">
+    <value>Apri in WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Back" xml:space="preserve">
+    <value>Indietro</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_BackToScanList" xml:space="preserve">
+    <value>‹ Torna alla lista di scansione</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_SpeakSignalWhileScanning" xml:space="preserve">
+    <value>Pronuncia il segnale durante la scansione</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_DETAILS" xml:space="preserve">
+    <value>DETTAGLI</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Radio" xml:space="preserve">
+    <value>Radio</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_FilteredOnly" xml:space="preserve">
+    <value>Solo gli AP mostrati dal filtro «{0}»</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_KeepingFolder" xml:space="preserve">
+    <value>{0} Si mantiene {1}.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_WillWriteTo" xml:space="preserve">
+    <value>Le esportazioni verranno scritte in {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_Exporting" xml:space="preserve">
+    <value>Esportazione…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_NoAps" xml:space="preserve">
+    <value>Nessun access point da esportare</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_NoneMatch" xml:space="preserve">
+    <value>Nessun access point corrisponde al filtro «{0}»</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_Done" xml:space="preserve">
+    <value>{0} access point esportati in {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_DoneFellBack" xml:space="preserve">
+    <value>{0} access point esportati in {1} — impossibile scrivere nella cartella scelta</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_FORMAT" xml:space="preserve">
+    <value>FORMATO</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_FILENAME" xml:space="preserve">
+    <value>NOME FILE</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_LOCATION" xml:space="preserve">
+    <value>POSIZIONE</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_TheFileIsOfferedTo" xml:space="preserve">
+    <value>Dopo ogni esportazione il file viene proposto per la condivisione, così puoi inviarlo ovunque sia stato scritto.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_KMLOPTIONS" xml:space="preserve">
+    <value>OPZIONI KML</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_IncludeOpenNetworks" xml:space="preserve">
+    <value>Includi reti aperte</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_IncludeWEPNetworks" xml:space="preserve">
+    <value>Includi reti WEP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_IncludeSecureNetworks" xml:space="preserve">
+    <value>Includi reti protette</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_ColourPinsBySignal" xml:space="preserve">
+    <value>Colora i segnaposto in base al segnale</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_IncludeGPSTrack" xml:space="preserve">
+    <value>Includi traccia GPS</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_PickFile" xml:space="preserve">
+    <value>Scegli un file da importare</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_SelectFile" xml:space="preserve">
+    <value>Seleziona un file da importare</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_Ready" xml:space="preserve">
+    <value>Pronto per l'importazione</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_SelectValid" xml:space="preserve">
+    <value>Seleziona un file valido.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_Parsing" xml:space="preserve">
+    <value>Lettura del file…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_Saving" xml:space="preserve">
+    <value>Salvataggio di {0} access point…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_Done" xml:space="preserve">
+    <value>Fatto — {0} access point importati</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_AndRadios" xml:space="preserve">
+    <value>e {0} antenne cellulari e dispositivi Bluetooth</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_NoneFound" xml:space="preserve">
+    <value>Nessun access point trovato nel file</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_FolderFailed" xml:space="preserve">
+    <value>Impossibile leggere la cartella: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_NoFiles" xml:space="preserve">
+    <value>Nessun file {0} in {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_Progress" xml:space="preserve">
+    <value>Importazione {0} di {1}: {2}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_FolderDone" xml:space="preserve">
+    <value>Fatto — {0} file, {1} access point</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_FolderFailedFiles" xml:space="preserve">
+    <value>; {0} file non leggibili</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_FILE" xml:space="preserve">
+    <value>FILE</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_ImportAFolder" xml:space="preserve">
+    <value>Importa una cartella…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_ImportsEveryFileOfThe" xml:space="preserve">
+    <value>Importa ogni file del tipo scelto in una cartella (non nelle sottocartelle).</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Waiting" xml:space="preserve">
+    <value>In attesa del fix GPS…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Off" xml:space="preserve">
+    <value>Il GPS è spento. Tocca «Usa GPS» per avviarlo.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_LastFix" xml:space="preserve">
+    <value>Ultimo fix {0} s fa</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Position" xml:space="preserve">
+    <value>Posizione</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Satellites" xml:space="preserve">
+    <value>Satelliti</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Accuracy" xml:space="preserve">
+    <value>Precisione</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Speed" xml:space="preserve">
+    <value>Velocità</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_FixQuality" xml:space="preserve">
+    <value>Qualità del fix</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_FixTime" xml:space="preserve">
+    <value>Ora del fix</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_COMPASS" xml:space="preserve">
+    <value>BUSSOLA</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_PointsAlongYourDirectionOf" xml:space="preserve">
+    <value>Indica la tua direzione di marcia, come la riporta il GPS mentre ti muovi.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_WIFIPOSITIONOFFLINE" xml:space="preserve">
+    <value>POSIZIONE WI-FI (OFFLINE)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_ShowOnMap" xml:space="preserve">
+    <value>Mostra sulla mappa</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_AlsoSearchThisSessionS" xml:space="preserve">
+    <value>Cerca anche tra gli AP di questa sessione</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Magic8BallM8bFiles" xml:space="preserve">
+    <value>File Magic 8 Ball (m8b)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_NoneImportedExportOneFrom" xml:space="preserve">
+    <value>Nessuno importato. Esportane uno da una sessione (Esporta → M8b) o usane uno di WiGLE WiFi Wardriving.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Remove" xml:space="preserve">
+    <value>Rimuovi</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_ImportM8bFile" xml:space="preserve">
+    <value>Importa file m8b…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_EachAPInRangeVotes" xml:space="preserve">
+    <value>Ogni AP nel raggio vota per i quadrati di 1 km in cui è stato visto; il quadrato con più voti è la stima. Funziona senza GPS né rete, per esempio al chiuso. Il formato m8b viene da WiGLE WiFi Wardriving.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_NoSources" xml:space="preserve">
+    <value>Ancora nulla in cui cercare: importa un file m8b o prima scansiona con il GPS.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_NoneInRange" xml:space="preserve">
+    <value>Nessun AP nel raggio. Avvia la scansione per stimare una posizione.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_LookupFailed" xml:space="preserve">
+    <value>Ricerca non riuscita: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_NoneKnown" xml:space="preserve">
+    <value>Nessuno dei {0} AP nel raggio è conosciuto.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_Agree" xml:space="preserve">
+    <value>{0} AP su {1} nel raggio concordano sul quadrato di 1 km {2}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_Tie" xml:space="preserve">
+    <value>(altri {0} quadrati alla pari)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_GpsDistance" xml:space="preserve">
+    <value>Il fix GPS è a {0} m dal suo centro</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_Accuracy" xml:space="preserve">
+    <value>(± quadrato di 1 km)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_ChooseFile" xml:space="preserve">
+    <value>Scegli un file m8b</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_Importing" xml:space="preserve">
+    <value>Importazione…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_Imported" xml:space="preserve">
+    <value>{0} importato: {1} record</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_NotM8b" xml:space="preserve">
+    <value>Non è un file m8b leggibile da questa app ({0})</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_ImportFailed" xml:space="preserve">
+    <value>Importazione non riuscita: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_RemoveTitle" xml:space="preserve">
+    <value>Rimuovi file m8b</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_RemoveQuestion" xml:space="preserve">
+    <value>Rimuovere {0} dall'app?</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_Remove" xml:space="preserve">
+    <value>Rimuovi</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_Removed" xml:space="preserve">
+    <value>{0} rimosso</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_New" xml:space="preserve">
+    <value>Nuovo rilievo</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Open" xml:space="preserve">
+    <value>Apri rilievo…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_FloorPlan" xml:space="preserve">
+    <value>Immagine della planimetria…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_UseGrid" xml:space="preserve">
+    <value>Usa una griglia</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Rename" xml:space="preserve">
+    <value>Rinomina…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_ExportCsv" xml:space="preserve">
+    <value>Esporta misure (CSV)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Delete" xml:space="preserve">
+    <value>Elimina questo rilievo</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_DeleteSpot" xml:space="preserve">
+    <value>Elimina punto</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_MeasureAgain" xml:space="preserve">
+    <value>Misura di nuovo qui</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Strongest" xml:space="preserve">
+    <value>Rete più forte in ogni punto</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_PlanLoadFailed" xml:space="preserve">
+    <value>Impossibile caricare l'immagine della planimetria: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_SpotInfo" xml:space="preserve">
+    <value>Punto {0}: {1} AP alle {2}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_NotHeard" xml:space="preserve">
+    <value>{0}: non ricevuto</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_StrongestAp" xml:space="preserve">
+    <value>Più forte: {0} {1} dBm</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_SsidAps" xml:space="preserve">
+    <value>{0} ({1} AP)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Measuring" xml:space="preserve">
+    <value>Misurazione… resta fermo finché non termina la prossima scansione.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_StartToMeasure" xml:space="preserve">
+    <value>Avvia la scansione per misurare qui.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_StartThenTap" xml:space="preserve">
+    <value>Avvia la scansione, poi tocca dove ti trovi.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_TapToMeasure" xml:space="preserve">
+    <value>Tocca dove ti trovi per misurare lì.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_SpotsMeasured" xml:space="preserve">
+    <value>{0} punti misurati. Tocca dove ti trovi per aggiungerne uno, o un punto per vederlo o eliminarlo.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_SaveFailed" xml:space="preserve">
+    <value>Impossibile salvare il rilievo: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_NoneSaved" xml:space="preserve">
+    <value>Ancora nessun rilievo salvato.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_NameSpots" xml:space="preserve">
+    <value>{0} ({1} punti)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_FloorPlanTitle" xml:space="preserve">
+    <value>Planimetria</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_ChangePlanQuestion" xml:space="preserve">
+    <value>Questo rilievo ha già punti misurati, che non si sposteranno con una nuova planimetria. Cambiarla comunque?</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Change" xml:space="preserve">
+    <value>Cambia</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_ChoosePlan" xml:space="preserve">
+    <value>Scegli un'immagine della planimetria</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_ImageFailed" xml:space="preserve">
+    <value>Impossibile usare quell'immagine: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_RenameTitle" xml:space="preserve">
+    <value>Rinomina rilievo</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Name" xml:space="preserve">
+    <value>Nome</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_DeleteTitle" xml:space="preserve">
+    <value>Elimina rilievo</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_DeleteQuestion" xml:space="preserve">
+    <value>Eliminare {0} e i suoi {1} punti?</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_NothingMeasured" xml:space="preserve">
+    <value>Ancora nulla di misurato.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_ImageSaveFailed" xml:space="preserve">
+    <value>Impossibile salvare l'immagine: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Survey" xml:space="preserve">
+    <value>Rilievo ▾</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Network" xml:space="preserve">
+    <value>Rete</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Heatmap" xml:space="preserve">
+    <value>Mappa di calore</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_StartScanning" xml:space="preserve">
+    <value>Avvia scansione</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_UndoLast" xml:space="preserve">
+    <value>Annulla l'ultimo</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_SaveImage" xml:space="preserve">
+    <value>Salva immagine</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filter_NewTitle" xml:space="preserve">
+    <value>Nuovo filtro</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filter_DefaultName" xml:space="preserve">
+    <value>Filtro {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filter_EditTitle" xml:space="preserve">
+    <value>Modifica {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filter_DeleteQuestion" xml:space="preserve">
+    <value>Eliminare «{0}»?</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filters_Add" xml:space="preserve">
+    <value>Aggiungi</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filters_TapAFilterToUse" xml:space="preserve">
+    <value>Tocca un filtro per usarlo. Il filtro in uso restringe la lista degli AP, e la pagina Esporta può esportare solo gli AP che mostra.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filters_NoFilterShowAllAPs" xml:space="preserve">
+    <value>Nessun filtro (mostra tutti gli AP)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filters_NoSavedFiltersYetTap" xml:space="preserve">
+    <value>Ancora nessun filtro salvato. Tocca Aggiungi per crearne uno.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filters_AddAFilter" xml:space="preserve">
+    <value>Aggiungi un filtro</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_Name" xml:space="preserve">
+    <value>Nome</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_SHOWAPSTHAT" xml:space="preserve">
+    <value>MOSTRA GLI AP CHE</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_SSIDContains" xml:space="preserve">
+    <value>L'SSID contiene</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_Any" xml:space="preserve">
+    <value>qualsiasi</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_BSSIDStartsWith" xml:space="preserve">
+    <value>Il BSSID inizia con</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_AnyEG0011" xml:space="preserve">
+    <value>qualsiasi, es. 00:11:22</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_AnyEG16" xml:space="preserve">
+    <value>qualsiasi, es. 1,6,11 o 36-64</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_SignalAtLeast" xml:space="preserve">
+    <value>Segnale almeno (%)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_SecureWPAAndUp" xml:space="preserve">
+    <value>Protetta (WPA e superiori)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_AdvancedRules" xml:space="preserve">
+    <value>Regole avanzate</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_TheOriginalVistumblerSFilter" xml:space="preserve">
+    <value>La sintassi dei filtri del Vistumbler originale, per campo. * o vuoto = qualsiasi · 6 = uguale · 1,6,11 = uno tra · 1-6 o -80--60 = tra · &lt;&gt; davanti = non (&lt;&gt;6, &lt;&gt;1-6, &lt;&gt;6,&lt;&gt;11) · % = qualsiasi testo (Linksys%, %guest%) · \, \- \% = una virgola, un trattino o una percentuale letterale. I campi di testo ignorano maiuscole e minuscole.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_EGWPA2PersonalWPA3" xml:space="preserve">
+    <value>es. WPA2-Personal,WPA3-Personal</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_EGCCMP" xml:space="preserve">
+    <value>es. CCMP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_EG5GHz" xml:space="preserve">
+    <value>es. %5 GHz</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_InfrastructureOrAdHoc" xml:space="preserve">
+    <value>Infrastruttura o Ad hoc</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_Signal" xml:space="preserve">
+    <value>Segnale (%)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_HighSignal" xml:space="preserve">
+    <value>Segnale massimo (%)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_RSSIDBm" xml:space="preserve">
+    <value>RSSI (dBm)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_EG700" xml:space="preserve">
+    <value>es. -70-0</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_HighRSSIDBm" xml:space="preserve">
+    <value>RSSI massimo (dBm)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_Active1Or0" xml:space="preserve">
+    <value>Attivo (1 o 0)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_SaveAndUse" xml:space="preserve">
+    <value>Salva e usa</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_AlsoWigle" xml:space="preserve">
+    <value>Carica anche su WiGLE (Wi-Fi, antenne cellulari e Bluetooth)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_AlsoWigleNoAccount" xml:space="preserve">
+    <value>Carica anche su WiGLE: prima imposta nome e token API in Impostazioni → WiGLE</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_As" xml:space="preserve">
+    <value>Caricamento come {0} su {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_NoApiKey" xml:space="preserve">
+    <value>(nessuna chiave API impostata)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_NeedAccount" xml:space="preserve">
+    <value>Configura il tuo account WifiDB in Impostazioni → WifiDB prima di caricare.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_Preparing" xml:space="preserve">
+    <value>Preparazione del file…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_NoAps" xml:space="preserve">
+    <value>Non ci sono access point da caricare.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_Uploading" xml:space="preserve">
+    <value>Caricamento di {0} access point su WifiDB…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_ImportNumber" xml:space="preserve">
+    <value>Importazione n. {0} — {1} access point.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_Failed" xml:space="preserve">
+    <value>Caricamento non riuscito: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_UploadingWigle" xml:space="preserve">
+    <value>Caricamento su WiGLE…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_NothingForWigle" xml:space="preserve">
+    <value>Niente da caricare su WiGLE.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Session_DeleteTitle" xml:space="preserve">
+    <value>Elimina sessione</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Session_DeleteQuestion" xml:space="preserve">
+    <value>Eliminare la sessione «{0}»? L'operazione non si può annullare.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbScan_NeedCamera" xml:space="preserve">
+    <value>Per scansionare serve l'autorizzazione alla fotocamera. Usa invece «Registrati con link…».</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbScan_ScanWifiDBQR" xml:space="preserve">
+    <value>Scansiona QR WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbScan_PointTheCameraAtYour" xml:space="preserve">
+    <value>Inquadra con la fotocamera il codice QR di registrazione WifiDB.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_ActiveanddeadAPs" xml:space="preserve">
+    <value>AP attivi e inattivi</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_ActiveAPsonly" xml:space="preserve">
+    <value>Solo AP attivi</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_DeadAPsonly" xml:space="preserve">
+    <value>Solo AP inattivi</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Available" xml:space="preserve">
+    <value>È disponibile {0} {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_YouHave" xml:space="preserve">
+    <value>Hai la versione {0}.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Prerelease" xml:space="preserve">
+    <value>Questo aggiornamento è una versione preliminare.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_NoNotes" xml:space="preserve">
+    <value>Per questa versione non sono state pubblicate note di rilascio.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_InstallRestart" xml:space="preserve">
+    <value>Installa e riavvia</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_InstallInfo" xml:space="preserve">
+    <value>{0} si chiuderà durante l'installazione dell'aggiornamento e poi si riavvierà. La sessione attuale viene conservata, così potrai riprenderla.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Download" xml:space="preserve">
+    <value>Scarica aggiornamento</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_DownloadInfo" xml:space="preserve">
+    <value>L'aggiornamento si scarica nel browser. Aprilo per installarlo su questa versione; sessioni e impostazioni vengono conservate.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_OpenPage" xml:space="preserve">
+    <value>Apri pagina di download</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_NotInstalled" xml:space="preserve">
+    <value>Questa copia non è stata installata con il programma di installazione; scarica la nuova versione dalla pagina della release.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_NoDownload" xml:space="preserve">
+    <value>Questa release non ha ancora un download per il tuo dispositivo. Vedi la pagina della release.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Downloading" xml:space="preserve">
+    <value>Download di {0}…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Checking" xml:space="preserve">
+    <value>Verifica della firma del programma di installazione…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Starting" xml:space="preserve">
+    <value>Avvio del programma di installazione…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Cancelled" xml:space="preserve">
+    <value>L'aggiornamento è stato annullato.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Failed" xml:space="preserve">
+    <value>L'aggiornamento non è riuscito: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_UpdateAvailable" xml:space="preserve">
+    <value>Aggiornamento disponibile</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_RELEASENOTES" xml:space="preserve">
+    <value>NOTE DI RILASCIO</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_ReleasePage" xml:space="preserve">
+    <value>Pagina della release</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Later" xml:space="preserve">
+    <value>Più tardi</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_OnceforeachscanthatfindsnewAPs" xml:space="preserve">
+    <value>Una volta per ogni scansione che trova nuovi AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_OnceforeachnewAP" xml:space="preserve">
+    <value>Una volta per ogni nuovo AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_OnceforeachnewAPlouderforastrongersignal" xml:space="preserve">
+    <value>Una volta per ogni nuovo AP, più forte se il segnale è più forte</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Thedevicesvoice" xml:space="preserve">
+    <value>La voce del dispositivo</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Vistumblersrecordedwords" xml:space="preserve">
+    <value>Le parole registrate di Vistumbler</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Atonehigherforastrongersignal" xml:space="preserve">
+    <value>Un tono, più acuto se il segnale è più forte</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_SignalPct" xml:space="preserve">
+    <value>Segnale (%)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_AutofitGPSaccuracy" xml:space="preserve">
+    <value>Automatico (in base alla precisione GPS)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Manualzoomlevel" xml:space="preserve">
+    <value>Livello di zoom manuale</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Keepcurrentzoom" xml:space="preserve">
+    <value>Mantieni lo zoom attuale</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_AfteranumberofAPs" xml:space="preserve">
+    <value>Dopo un numero di AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Afteratime" xml:space="preserve">
+    <value>Dopo un tempo</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_VSZzipped" xml:space="preserve">
+    <value>VSZ (compresso)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_WindowsLocation" xml:space="preserve">
+    <value>Posizione di Windows</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_SerialNMEACOMport" xml:space="preserve">
+    <value>NMEA seriale (porta COM)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_PhoneGPS" xml:space="preserve">
+    <value>GPS del telefono</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_BluetoothGPSreceiverNMEA" xml:space="preserve">
+    <value>Ricevitore GPS Bluetooth (NMEA)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_USBGPSreceiverNMEA" xml:space="preserve">
+    <value>Ricevitore GPS USB (NMEA)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Devicelocation" xml:space="preserve">
+    <value>Posizione del dispositivo</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Nogrouping" xml:space="preserve">
+    <value>Nessun raggruppamento</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Band" xml:space="preserve">
+    <value>Banda</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Securitytype" xml:space="preserve">
+    <value>Tipo di sicurezza</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Security" xml:space="preserve">
+    <value>Sicurezza</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_LastSeen" xml:space="preserve">
+    <value>Visto per ultimo</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_FirstSeen" xml:space="preserve">
+    <value>Visto per primo</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Celltowers" xml:space="preserve">
+    <value>Antenne cellulari</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SCANNING" xml:space="preserve">
+    <value>SCANSIONE</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ScanIntervalMs" xml:space="preserve">
+    <value>Intervallo di scansione (ms)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_StartScanningWhenTheApp" xml:space="preserve">
+    <value>Avvia la scansione all'apertura dell'app</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_TurnOnGPSWhenThe" xml:space="preserve">
+    <value>Attiva il GPS all'apertura dell'app</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_AlsoRecordCellTowers" xml:space="preserve">
+    <value>Registra anche le antenne cellulari</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_AlsoRecordBluetoothDevices" xml:space="preserve">
+    <value>Registra anche i dispositivi Bluetooth</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_WiFiAdapter" xml:space="preserve">
+    <value>Adattatore Wi-Fi</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Refresh" xml:space="preserve">
+    <value>Aggiorna</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_MAP" xml:space="preserve">
+    <value>MAPPA</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_BasemapStyle" xml:space="preserve">
+    <value>Stile della mappa di base</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_GPSFollowZoom" xml:space="preserve">
+    <value>Zoom in modalità segui GPS</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ZoomLevel122" xml:space="preserve">
+    <value>Livello di zoom (1–22)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ZoomAppliedWhenTheMap" xml:space="preserve">
+    <value>Zoom applicato quando il pulsante GPS della mappa entra in modalità Segui. Automatico sceglie un livello in cui il cerchio di precisione del fix è visibile; lo zoom con le dita fatto dopo resta finché non riattivi Segui.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_APPointSize" xml:space="preserve">
+    <value>Dimensione dei punti AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SizeOfTheAccessPoint" xml:space="preserve">
+    <value>Dimensione dei punti degli access point sulla mappa, sia per la scansione in tempo reale sia per la cronologia WifiDB.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_MapAPColors" xml:space="preserve">
+    <value>Colori degli AP sulla mappa…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_GPSSource" xml:space="preserve">
+    <value>Sorgente GPS</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_RecordTheGPSTrackEven" xml:space="preserve">
+    <value>Registra la traccia GPS anche quando non si trovano AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_CoordinateFormat" xml:space="preserve">
+    <value>Formato delle coordinate</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_COMPort" xml:space="preserve">
+    <value>Porta COM</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_BaudRate" xml:space="preserve">
+    <value>Velocità (baud)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ChooseTheCOMPortYour" xml:space="preserve">
+    <value>Scegli la porta COM usata dal ricevitore GPS. Anche un ricevitore Bluetooth associato a Windows appare come porta COM.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ReconnectTheReceiverWhenNo" xml:space="preserve">
+    <value>Riconnetti il ricevitore se non arrivano dati per 10 secondi</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ResetGPSPositionWhenNo" xml:space="preserve">
+    <value>Azzera la posizione GPS se non arriva un fix per 30 secondi</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_TurnOffTheReconnectFor" xml:space="preserve">
+    <value>Disattiva la riconnessione per un ricevitore che mette in pausa l'uscita. L'azzeramento della posizione evita di collocare gli AP nell'ultima posizione del ricevitore dopo che ha perso il fix.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PlugTheReceiverInWith" xml:space="preserve">
+    <value>Collega il ricevitore con un adattatore USB OTG; Android chiede di consentirne l'uso all'app. Funziona con Prolific PL2303 (GlobalSat), Silicon Labs CP210x, FTDI, CH340 e u-blox. I ricevitori GlobalSat di solito vanno a 4800 baud, u-blox a 9600.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Receiver" xml:space="preserve">
+    <value>Ricevitore</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PairTheReceiverInAndroid" xml:space="preserve">
+    <value>Associa prima il ricevitore nelle impostazioni Bluetooth di Android, poi sceglilo qui. Deve inviare NMEA tramite il profilo porta seriale (SPP), come la maggior parte dei ricevitori GPS Bluetooth.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_BaseURL" xml:space="preserve">
+    <value>URL di base</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Username" xml:space="preserve">
+    <value>Nome utente</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Username2" xml:space="preserve">
+    <value>nome utente</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_APIKey" xml:space="preserve">
+    <value>Chiave API</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_DataURL" xml:space="preserve">
+    <value>URL dei dati</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_DataURLServesTheMap" xml:space="preserve">
+    <value>L'URL dei dati fornisce gli archivi della cronologia della mappa e il feed che li elenca — un host diverso dal sito qui sopra.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_RegisterWithQRCode" xml:space="preserve">
+    <value>Registrati con codice QR</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_RegisterWithLink" xml:space="preserve">
+    <value>Registrati con link…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_WIGLEOPTIONAL" xml:space="preserve">
+    <value>WIGLE (FACOLTATIVO)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_AlsoUploadToWiGLE" xml:space="preserve">
+    <value>Carica anche su WiGLE</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_OptionalAlongsideWifiDBSendsWi" xml:space="preserve">
+    <value>Facoltativo, insieme a WifiDB. Invia Wi-Fi, antenne cellulari e Bluetooth come CSV di WiGLE.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ReadWiGLESTermsOf" xml:space="preserve">
+    <value>Leggi i termini d'uso di WiGLE</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_APIName" xml:space="preserve">
+    <value>Nome API</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_APIToken" xml:space="preserve">
+    <value>Token API</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_GetMyAPINameAnd" xml:space="preserve">
+    <value>Ottieni il mio nome e token API (wigle.net)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_UploadEachSaveClearTo" xml:space="preserve">
+    <value>Carica ogni Salva e svuota su WiGLE</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_DonateForCommercialUse" xml:space="preserve">
+    <value>Dona per uso commerciale</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_LetsWiGLEAlsoLicenseYour" xml:space="preserve">
+    <value>Consente a WiGLE di concedere in licenza anche per uso commerciale i tuoi caricamenti («donate» di WiGLE).</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_RetryNow" xml:space="preserve">
+    <value>Riprova ora</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SAVECLEAR" xml:space="preserve">
+    <value>SALVA E SVUOTA</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SaveClearMenuSavesThe" xml:space="preserve">
+    <value>Salva e svuota (menu) salva qui gli access point in un file, poi svuota la lista mentre la scansione continua. Salva e svuota automatico lo fa per te.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_UseDefaultFolder" xml:space="preserve">
+    <value>Usa la cartella predefinita</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_FileName" xml:space="preserve">
+    <value>Nome file</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_AutoSave" xml:space="preserve">
+    <value>AutoSave</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_AutoSaveAndClear" xml:space="preserve">
+    <value>Salva e svuota automatico</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SaveOnceTheListHas" xml:space="preserve">
+    <value>Salva quando la lista ha questo numero di AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SaveEveryThisManyMinutes" xml:space="preserve">
+    <value>Salva ogni tanti minuti di scansione</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_UploadEachSaveToWifiDB" xml:space="preserve">
+    <value>Carica ogni salvataggio su WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_DeleteTheSavedFileOnce" xml:space="preserve">
+    <value>Elimina il file salvato quando WifiDB lo ha ricevuto</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_UsesTheWifiDBAccountBelow" xml:space="preserve">
+    <value>Usa l'account WifiDB qui sotto. Il file viene conservato a meno che tu non scelga di eliminarlo dopo il caricamento. Un file che non può essere caricato (nessuna connessione, WifiDB irraggiungibile, nessun account ancora) resta in attesa e viene ritentato al ritorno della connessione, all'avvio dell'app e dopo il salvataggio successivo.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ForExample0" xml:space="preserve">
+    <value>Per esempio: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PlayASoundWhenNew" xml:space="preserve">
+    <value>Riproduci un suono quando si trovano nuovi AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PlayASoundWhenThe" xml:space="preserve">
+    <value>Riproduci un suono quando il ricevitore GPS ha un problema</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SpeakingAnAPSSignal" xml:space="preserve">
+    <value>Pronuncia del segnale di un AP: attivala dalla pagina dei dettagli dell'AP.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Voice" xml:space="preserve">
+    <value>Voce</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Say" xml:space="preserve">
+    <value>Pronuncia</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SpeakEverySeconds" xml:space="preserve">
+    <value>Pronuncia ogni (secondi)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SayTheUnitPercentOr" xml:space="preserve">
+    <value>Pronuncia l'unità («percento» o «dBm») dopo il numero</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_TheTonePlaysTheSignal" xml:space="preserve">
+    <value>Il tono riproduce il segnale come altezza, come i suoni MIDI dell'originale. Le parole registrate non possono dire «meno», quindi pronunciano l'RSSI come numero semplice.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_DATA" xml:space="preserve">
+    <value>DATI</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_UPDATES" xml:space="preserve">
+    <value>AGGIORNAMENTI</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_CheckForUpdatesAtStartup" xml:space="preserve">
+    <value>Cerca aggiornamenti all'avvio</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_IncludePreReleases" xml:space="preserve">
+    <value>Includi versioni preliminari</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PreReleasesEG0" xml:space="preserve">
+    <value>Le versioni preliminari (es. 0.5.0-rc.1) ricevono prima le novità ma possono essere meno stabili.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ADVANCED" xml:space="preserve">
+    <value>AVANZATE</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_KeepScreenOnWhileScanning" xml:space="preserve">
+    <value>Mantieni lo schermo acceso durante la scansione</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_DebugLogging" xml:space="preserve">
+    <value>Registro di debug</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_WritesGPSFixesAndMap" xml:space="preserve">
+    <value>Scrive i fix GPS e gli aggiornamenti dei livelli della mappa nel registro di debug (adb logcat) per la risoluzione dei problemi.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="MapColors_MapAPColors" xml:space="preserve">
+    <value>Colori degli AP sulla mappa</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="MapColors_CircleColorsPerAgeBucket" xml:space="preserve">
+    <value>Colori dei cerchi per fascia di età, in base al tipo di sicurezza (hex RRGGBB). Gli AP attivi della scansione in tempo reale sono i più luminosi; quelli inattivi e le fasce più vecchie si scuriscono con l'età.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="MapColors_Bucket" xml:space="preserve">
+    <value>Fascia</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="SessionChooser_VistumblerMAUISessions" xml:space="preserve">
+    <value>VistumblerMAUI — Sessioni</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="SessionChooser_RecoverAPreviousSessionOr" xml:space="preserve">
+    <value>Recupera una sessione precedente o iniziane una nuova.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="SessionChooser_NoSavedSessions" xml:space="preserve">
+    <value>Nessuna sessione salvata.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="SessionChooser_Resume" xml:space="preserve">
+    <value>Riprendi</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="SessionChooser_StartNewSession" xml:space="preserve">
+    <value>Inizia nuova sessione</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_UploadToWifiDB" xml:space="preserve">
+    <value>Carica su WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_UploadsTheCurrentSessionS" xml:space="preserve">
+    <value>Carica su WifiDB gli access point della sessione attuale. WifiDB mette il file in coda e lo importa poco dopo.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_ACCOUNT" xml:space="preserve">
+    <value>ACCOUNT</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_SetUpWifiDBAccount" xml:space="preserve">
+    <value>Configura account WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_ChangeAccountInSettings" xml:space="preserve">
+    <value>Cambia account nelle Impostazioni</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_UPLOAD" xml:space="preserve">
+    <value>CARICAMENTO</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_Optional" xml:space="preserve">
+    <value>facoltativo</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_OptionalCommaSeparated" xml:space="preserve">
+    <value>facoltativo, separati da virgole</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_Upload" xml:space="preserve">
+    <value>Carica</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_CheckImportStatus" xml:space="preserve">
+    <value>Controlla stato importazione</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_WiFi" xml:space="preserve">
+    <value>Wi-Fi</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
 </root>

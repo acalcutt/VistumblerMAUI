@@ -95,4 +95,1968 @@
     <value>İ%ptal</value>
     <comment>Vistumbler Turkish.ini Cancel</comment>
   </data>
+  <data name="Common_Ok" xml:space="preserve">
+    <value>Tamam</value>
+    <comment>Vistumbler Turkish.ini Ok</comment>
+  </data>
+  <data name="Common_Close" xml:space="preserve">
+    <value>Kapat</value>
+    <comment>Vistumbler Turkish.ini Close</comment>
+  </data>
+  <data name="Common_Delete" xml:space="preserve">
+    <value>Sil</value>
+    <comment>Vistumbler Turkish.ini Delete</comment>
+  </data>
+  <data name="Settings_Browse" xml:space="preserve">
+    <value>Gözat…</value>
+    <comment>Vistumbler Turkish.ini Browse</comment>
+  </data>
+  <data name="Settings_CheckForUpdates" xml:space="preserve">
+    <value>Güncelleme için kontrol et...</value>
+    <comment>Vistumbler Turkish.ini CheckForUpdates</comment>
+  </data>
+  <data name="ApDetails_Copy" xml:space="preserve">
+    <value>Kopyala</value>
+    <comment>Vistumbler Turkish.ini Copy</comment>
+  </data>
+  <data name="ApDetails_SIGNALHISTORY" xml:space="preserve">
+    <value>Signal kaydı</value>
+    <comment>Vistumbler Turkish.ini SignalHistory</comment>
+  </data>
+  <data name="ApDetails_FirstActive" xml:space="preserve">
+    <value>İlk Aktif</value>
+    <comment>Vistumbler Turkish.ini Column_FirstActive</comment>
+  </data>
+  <data name="ApDetails_LastActive" xml:space="preserve">
+    <value>Son güncelleme</value>
+    <comment>Vistumbler Turkish.ini Column_LastActive</comment>
+  </data>
+  <data name="Export_Export" xml:space="preserve">
+    <value>Dışa aktar...</value>
+    <comment>Vistumbler Turkish.ini Export</comment>
+  </data>
+  <data name="Import_FILE" xml:space="preserve">
+    <value>Dosya</value>
+    <comment>Vistumbler Turkish.ini File</comment>
+  </data>
+  <data name="GpsDetails_Altitude" xml:space="preserve">
+    <value>Yükseklik</value>
+    <comment>Vistumbler Turkish.ini Altitude</comment>
+  </data>
+  <data name="GpsDetails_Heading" xml:space="preserve">
+    <value>Başlık</value>
+    <comment>Vistumbler Turkish.ini Heading</comment>
+  </data>
+  <data name="Filters_Edit" xml:space="preserve">
+    <value>Düzenle</value>
+    <comment>Vistumbler Turkish.ini Edit</comment>
+  </data>
+  <data name="Filters_Delete" xml:space="preserve">
+    <value>Sil</value>
+    <comment>Vistumbler Turkish.ini Delete</comment>
+  </data>
+  <data name="FilterEdit_RadioType" xml:space="preserve">
+    <value>Radyo tipi</value>
+    <comment>Vistumbler Turkish.ini Column_RadioType</comment>
+  </data>
+  <data name="FilterEdit_Save" xml:space="preserve">
+    <value>Kaydet?</value>
+    <comment>Vistumbler Turkish.ini Save</comment>
+  </data>
+  <data name="WifiDbUpload_Close" xml:space="preserve">
+    <value>Kapat</value>
+    <comment>Vistumbler Turkish.ini Close</comment>
+  </data>
+  <data name="Language_System" xml:space="preserve">
+    <value>Cihaz dili</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Tab_Scan" xml:space="preserve">
+    <value>Tarama</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Tab_Map" xml:space="preserve">
+    <value>Harita</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Tab_Channels" xml:space="preserve">
+    <value>Kanallar</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Menu_NewSession" xml:space="preserve">
+    <value>Yeni oturum</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Menu_Import" xml:space="preserve">
+    <value>İçe aktar…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Menu_Clear" xml:space="preserve">
+    <value>Temizle…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Menu_UploadWifiDb" xml:space="preserve">
+    <value>WifiDB'ye yükle…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Menu_SiteSurvey" xml:space="preserve">
+    <value>Alan keşfi</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Menu_Links" xml:space="preserve">
+    <value>Bağlantılar…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Bar_Total" xml:space="preserve">
+    <value>Toplam: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Bar_Active" xml:space="preserve">
+    <value>Etkin: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_TotalAps" xml:space="preserve">
+    <value>Toplam AP: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_Cleared" xml:space="preserve">
+    <value>Temizlendi</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_SavedAndCleared" xml:space="preserve">
+    <value>{0} AP {1} dosyasına kaydedildi, liste temizlendi</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_SaveFailed" xml:space="preserve">
+    <value>Kaydetme başarısız, liste temizlenmedi: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_SavedAps" xml:space="preserve">
+    <value>{0} AP {1} dosyasına kaydedildi</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_UploadingWifiDb" xml:space="preserve">
+    <value>WifiDB'ye yükleniyor…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_WifiDbNotYet" xml:space="preserve">
+    <value>Henüz WifiDB'ye yüklenmedi ({0}); yeniden denenecek</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_UploadedWifiDb" xml:space="preserve">
+    <value>WifiDB'ye yüklendi</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_WigleNotYet" xml:space="preserve">
+    <value>Henüz WiGLE'a yüklenmedi ({0}); yeniden denenecek</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_UploadedWigle" xml:space="preserve">
+    <value>WiGLE'a yüklendi</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_Queued" xml:space="preserve">
+    <value>sırada</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_NeedLocation" xml:space="preserve">
+    <value>Wi-Fi taraması için konum izni gerekli</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_Scanning" xml:space="preserve">
+    <value>Taranıyor…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_Stopped" xml:space="preserve">
+    <value>Durduruldu — toplam {0} AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_ActiveTotal" xml:space="preserve">
+    <value>Etkin: {0} / toplam: {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_DbWriteFailed" xml:space="preserve">
+    <value>VT yazımı başarısız — sonraki döngüde yeniden denenecek</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_Error" xml:space="preserve">
+    <value>Hata: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Gps_Off" xml:space="preserve">
+    <value>GPS kapalı</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Gps_PermissionDenied" xml:space="preserve">
+    <value>GPS: konum izni reddedildi</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Gps_NoFix" xml:space="preserve">
+    <value>GPS: {0} sn konum yok, konum sıfırlandı</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Gps_Error" xml:space="preserve">
+    <value>GPS: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filter_None" xml:space="preserve">
+    <value>Filtre yok</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Group_Channel" xml:space="preserve">
+    <value>Kanal {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Group_Open" xml:space="preserve">
+    <value>Açık</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Group_Secure" xml:space="preserve">
+    <value>Güvenli</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Group_AdHoc" xml:space="preserve">
+    <value>Ad hoc</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Group_Infrastructure" xml:space="preserve">
+    <value>Altyapı</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Group_Hidden" xml:space="preserve">
+    <value>(gizli)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Group_Unknown" xml:space="preserve">
+    <value>(bilinmiyor)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_SearchPlaceholder" xml:space="preserve">
+    <value>SSID, BSSID, üretici ara…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_Sort" xml:space="preserve">
+    <value>Sırala</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_GroupBy" xml:space="preserve">
+    <value>Grupla</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_FirstSeen" xml:space="preserve">
+    <value>İlk: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_LastSeen" xml:space="preserve">
+    <value>Son: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_Channel" xml:space="preserve">
+    <value>K {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_RadioShown" xml:space="preserve">
+    <value>{0} gösteriliyor · en güçlüler önce</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_RadioEmpty" xml:space="preserve">
+    <value>Henüz bir şey kaydedilmedi. Ayarlar → Tarama'dan açın, ardından taramayı başlatın.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_TapToBegin" xml:space="preserve">
+    <value>Başlamak için “AP tara”ya dokunun</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Common_Share" xml:space="preserve">
+    <value>Paylaş</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Common_Saved" xml:space="preserve">
+    <value>Kaydedildi: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Common_ExportFailed" xml:space="preserve">
+    <value>Dışa aktarma başarısız: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Clear_SaveThenClear" xml:space="preserve">
+    <value>Dosyaya kaydet, sonra temizle</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Clear_WithoutSaving" xml:space="preserve">
+    <value>Kaydetmeden temizle</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Clear_Question" xml:space="preserve">
+    <value>AP listesi temizlensin mi? Tarama devam eder. Kaydedilen dosyalar {0} konumuna gider.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Clear_SaveAndClear" xml:space="preserve">
+    <value>Kaydet ve temizle</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Links_Title" xml:space="preserve">
+    <value>Bağlantılar</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Links_CouldNotOpen" xml:space="preserve">
+    <value>{0} açılamadı: {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="NewSession_Title" xml:space="preserve">
+    <value>Yeni oturum</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="NewSession_Question" xml:space="preserve">
+    <value>Yeni bir oturum başlatılsın mı? Geçerli oturum kayıtlı kalır ve daha sonra açılabilir.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Exit_DiscardTitle" xml:space="preserve">
+    <value>Kaydetmeden çık</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Exit_DiscardQuestion" xml:space="preserve">
+    <value>Bu oturumda toplanan veriler atılıp çıkılsın mı?</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Exit_Discard" xml:space="preserve">
+    <value>At ve çık</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_ApMapHelp" xml:space="preserve">
+    <value>Noktalar: sinyalin alındığı yerler, kırmızıdan (zayıf) yeşile (güçlü); tarama sırasında yenileri eklenir. Turuncu: sinyal çemberi. Mavi: en uzak alım noktası. ⇪ GeoJSON veya KML olarak dışa aktarır.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_WifiSquaresHelp" xml:space="preserve">
+    <value>Mor: menzildeki AP'lerin görüldüğü 1 km kareler; ne kadar çok eşleşme, o kadar koyu.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_Manufacturer" xml:space="preserve">
+    <value>Üretici: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_ViewInList" xml:space="preserve">
+    <value>AP listesinde göster</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_ClearTrack" xml:space="preserve">
+    <value>İzi temizle</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_EnableTrack" xml:space="preserve">
+    <value>İzi etkinleştir</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_DisableTrack" xml:space="preserve">
+    <value>İzi devre dışı bırak</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_SaveOffline" xml:space="preserve">
+    <value>Haritayı çevrimdışı için kaydet</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_SavedMapsOnly" xml:space="preserve">
+    <value>Yalnızca kayıtlı haritalar</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_SavedMapsOnlyOn" xml:space="preserve">
+    <value>Yalnızca kayıtlı haritalar ✓</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_SaveOfflineTitle" xml:space="preserve">
+    <value>Haritayı çevrimdışı için kaydet</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_SaveOfflineQuestion" xml:space="preserve">
+    <value>Görünen harita ve iki yakın yakınlaştırma düzeyi, internetsiz gösterilmesi için indirilsin mi? Ardından yalnızca kayıtlı haritaları kullanmak için “Yalnızca kayıtlı haritalar”ı açın. Geniş bir alan uzun sürebilir ve çok veri kullanabilir.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_Download" xml:space="preserve">
+    <value>İndir</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_TrackCleared" xml:space="preserve">
+    <value>İz temizlendi (dışa aktarma tüm geçmişi korur)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_NewSession" xml:space="preserve">
+    <value>Yeni oturum</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_NotReady" xml:space="preserve">
+    <value>Harita hazır değil — stilin yüklenmesini bekleyin</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_NotReadyPan" xml:space="preserve">
+    <value>Harita hazır değil — kaydırın veya yakınlaştırın ve yeniden deneyin</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_Caching" xml:space="preserve">
+    <value>Harita alanı kaydediliyor (z{0}–{1})…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_OfflineFailed" xml:space="preserve">
+    <value>Çevrimdışı indirme başarısız: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_OfflineError" xml:space="preserve">
+    <value>Çevrimdışı indirme hatası: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_ApsWithGps" xml:space="preserve">
+    <value>GPS'li AP: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_LayerOn" xml:space="preserve">
+    <value>“{0}” katmanı açık</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_LayerOff" xml:space="preserve">
+    <value>“{0}” katmanı kapalı</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_LiveScan" xml:space="preserve">
+    <value>Canlı tarama</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_NotInSession" xml:space="preserve">
+    <value>{0} bu oturumda değil</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_NoPositions" xml:space="preserve">
+    <value>{0} için haritalanacak GPS konumu yok</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_ApMapTitle" xml:space="preserve">
+    <value>{0}: {1} konum, {2} m menzil</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_ExportSignalMap" xml:space="preserve">
+    <value>Sinyal haritasını dışa aktar</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_WifiSquareOne" xml:space="preserve">
+    <value>Wi-Fi konumu: kare {0}, {1} AP oyu</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_WifiSquareMany" xml:space="preserve">
+    <value>Wi-Fi konumu: en iyi kare {0} ({1} oy), {2} kare daha oylara göre renklendi</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_Daily" xml:space="preserve">
+    <value>Günlük</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_Weekly" xml:space="preserve">
+    <value>Haftalık</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_Monthly" xml:space="preserve">
+    <value>Aylık</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_0to1Year" xml:space="preserve">
+    <value>0–1 yıl</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_1to2Year" xml:space="preserve">
+    <value>1–2 yıl</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_2to3Year" xml:space="preserve">
+    <value>2–3 yıl</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_3to5Year" xml:space="preserve">
+    <value>3–5 yıl</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_5to10Year" xml:space="preserve">
+    <value>5–10 yıl</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_10PlusYear" xml:space="preserve">
+    <value>10 yıldan fazla</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_CellNetworks" xml:space="preserve">
+    <value>Hücresel ağlar</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Channels_Band" xml:space="preserve">
+    <value>Bant</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Channels_Status" xml:space="preserve">
+    <value>{1} bandında {0} etkin AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Graph_NoHistory" xml:space="preserve">
+    <value>Henüz sinyal geçmişi yok</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_AllAdapters" xml:space="preserve">
+    <value>Tüm bağdaştırıcılar</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_AdapterNotFound" xml:space="preserve">
+    <value>Seçili bağdaştırıcı (bulunamadı)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_NoUsbGps" xml:space="preserve">
+    <value>Desteklenen bir USB GPS alıcısı takılı değil.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PluggedIn" xml:space="preserve">
+    <value>Takılı: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_UsbListFailed" xml:space="preserve">
+    <value>USB aygıtları listelenemedi: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_NoPairedDevices" xml:space="preserve">
+    <value>Eşleştirilmiş aygıt yok. GPS alıcısını Android Bluetooth ayarlarında eşleştirin, sonra yenileyin.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PendingWifiDb" xml:space="preserve">
+    <value>WifiDB'ye yüklenmeyi bekleyen kayıtlı dosyalar: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_WaitingUploads" xml:space="preserve">
+    <value>Bekleyen yüklemeler</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_StopWifiDbQuestion" xml:space="preserve">
+    <value>Bu dosyaları WifiDB'ye yükleme denemeleri durdurulsun mu? Dosyalar “Kaydet ve temizle” klasöründe kalır.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_StopUploading" xml:space="preserve">
+    <value>Yüklemeyi durdur</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ManufacturersUpdated" xml:space="preserve">
+    <value>{0} güncellendi</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ManufacturersBuiltIn" xml:space="preserve">
+    <value>uygulamayla gelen liste</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ManufacturersLoading" xml:space="preserve">
+    <value>Üretici listesi yükleniyor…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ManufacturersCount" xml:space="preserve">
+    <value>{0} üretici ({1})</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ManufacturersDownloading" xml:space="preserve">
+    <value>IEEE üretici listesi indiriliyor…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_UpdateFailed" xml:space="preserve">
+    <value>Güncelleme başarısız: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_WifiDbRegistration" xml:space="preserve">
+    <value>WifiDB kaydı</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PasteRegistrationLink" xml:space="preserve">
+    <value>WifiDB kayıt bağlantısını yapıştırın (…/redeem_link.php?token=…):</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Redeem" xml:space="preserve">
+    <value>Kullan</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_NotRegistrationLink" xml:space="preserve">
+    <value>Bu bir WifiDB kayıt bağlantısına benzemiyor.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Redeeming" xml:space="preserve">
+    <value>Kullanılıyor…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Registered" xml:space="preserve">
+    <value>WifiDB'ye kaydedildi.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_RegisteredAs" xml:space="preserve">
+    <value>WifiDB'ye {0} olarak kaydedildi.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_RegistrationFailed" xml:space="preserve">
+    <value>Kayıt başarısız: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Wigle_Terms" xml:space="preserve">
+    <value>WiGLE (wigle.net) kendi kuralları olan ayrı bir hizmettir. Yükleme, bu uygulamanın Wi-Fi, hücresel ve Bluetooth verilerini WiGLE'ın kullanım koşulları altında WiGLE'a gönderir; bu koşullar verilerin nasıl saklanacağını, gösterileceğini ve paylaşılacağını belirler, açmadan önce okuyun. WifiDB yüklemeleri değişmez.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Wigle_Pending" xml:space="preserve">
+    <value>WiGLE'a yüklenmeyi bekleyen kayıtlar: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Wigle_WaitingUploads" xml:space="preserve">
+    <value>Bekleyen WiGLE yüklemeleri</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Wigle_StopQuestion" xml:space="preserve">
+    <value>Bu kayıtları WiGLE'a yükleme denemeleri durdurulsun mu? “Kaydet ve temizle” klasöründeki VS1 dosyaları kalır.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Title" xml:space="preserve">
+    <value>AP ayrıntıları</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_NotFound" xml:space="preserve">
+    <value>AP bulunamadı.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_NoHistory" xml:space="preserve">
+    <value>Henüz sinyal geçmişi yok.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Samples" xml:space="preserve">
+    <value>{0} sinyal ölçümü</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_AllDetails" xml:space="preserve">
+    <value>Tüm ayrıntılar</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_GpsPosition" xml:space="preserve">
+    <value>GPS konumu</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Copied" xml:space="preserve">
+    <value>Kopyalandı: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_SearchingWifiDb" xml:space="preserve">
+    <value>WifiDB'de aranıyor…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_SearchFailed" xml:space="preserve">
+    <value>WifiDB araması başarısız: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_NotInWifiDb" xml:space="preserve">
+    <value>{0} henüz WifiDB'de yok.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Security" xml:space="preserve">
+    <value>Güvenlik: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Channel" xml:space="preserve">
+    <value>Kanal: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_ChannelMhz" xml:space="preserve">
+    <value>Kanal: {0} ({1} MHz)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_FirstSeen" xml:space="preserve">
+    <value>İlk görülme: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_LastSeen" xml:space="preserve">
+    <value>Son görülme: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_FirstActiveLine" xml:space="preserve">
+    <value>İlk etkin: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_LastActiveLine" xml:space="preserve">
+    <value>Son etkin: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_BestSignal" xml:space="preserve">
+    <value>En iyi sinyal: %{0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Signal" xml:space="preserve">
+    <value>Sinyal: %{0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Position" xml:space="preserve">
+    <value>Konum: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_RadioLine" xml:space="preserve">
+    <value>Radyo: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_OpenInWifiDb" xml:space="preserve">
+    <value>WifiDB'de aç</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Back" xml:space="preserve">
+    <value>Geri</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_BackToScanList" xml:space="preserve">
+    <value>‹ Tarama listesine dön</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_SpeakSignalWhileScanning" xml:space="preserve">
+    <value>Tarama sırasında sinyali seslendir</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_DETAILS" xml:space="preserve">
+    <value>AYRINTILAR</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Radio" xml:space="preserve">
+    <value>Radyo</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_FilteredOnly" xml:space="preserve">
+    <value>Yalnızca “{0}” filtresinin gösterdiği AP'ler</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_KeepingFolder" xml:space="preserve">
+    <value>{0} {1} korunuyor.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_WillWriteTo" xml:space="preserve">
+    <value>Dışa aktarmalar {0} konumuna yazılacak</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_Exporting" xml:space="preserve">
+    <value>Dışa aktarılıyor…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_NoAps" xml:space="preserve">
+    <value>Dışa aktarılacak erişim noktası yok</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_NoneMatch" xml:space="preserve">
+    <value>“{0}” filtresiyle eşleşen erişim noktası yok</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_Done" xml:space="preserve">
+    <value>{0} erişim noktası {1} dosyasına aktarıldı</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_DoneFellBack" xml:space="preserve">
+    <value>{0} erişim noktası {1} dosyasına aktarıldı — seçilen klasöre yazılamadı</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_FORMAT" xml:space="preserve">
+    <value>BİÇİM</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_FILENAME" xml:space="preserve">
+    <value>DOSYA ADI</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_LOCATION" xml:space="preserve">
+    <value>KONUM</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_TheFileIsOfferedTo" xml:space="preserve">
+    <value>Her dışa aktarmadan sonra dosya paylaşım için sunulur; nereye yazılmış olursa olsun gönderebilirsiniz.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_KMLOPTIONS" xml:space="preserve">
+    <value>KML SEÇENEKLERİ</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_IncludeOpenNetworks" xml:space="preserve">
+    <value>Açık ağları dahil et</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_IncludeWEPNetworks" xml:space="preserve">
+    <value>WEP ağlarını dahil et</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_IncludeSecureNetworks" xml:space="preserve">
+    <value>Güvenli ağları dahil et</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_ColourPinsBySignal" xml:space="preserve">
+    <value>İşaretleri sinyale göre renklendir</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_IncludeGPSTrack" xml:space="preserve">
+    <value>GPS izini dahil et</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_PickFile" xml:space="preserve">
+    <value>İçe aktarılacak dosyayı seçin</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_SelectFile" xml:space="preserve">
+    <value>İçe aktarılacak dosyayı seç</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_Ready" xml:space="preserve">
+    <value>İçe aktarmaya hazır</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_SelectValid" xml:space="preserve">
+    <value>Geçerli bir dosya seçin.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_Parsing" xml:space="preserve">
+    <value>Dosya ayrıştırılıyor…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_Saving" xml:space="preserve">
+    <value>{0} erişim noktası kaydediliyor…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_Done" xml:space="preserve">
+    <value>Tamamlandı — {0} erişim noktası içe aktarıldı</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_AndRadios" xml:space="preserve">
+    <value>ve {0} baz istasyonu ile Bluetooth aygıtı</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_NoneFound" xml:space="preserve">
+    <value>Dosyada erişim noktası bulunamadı</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_FolderFailed" xml:space="preserve">
+    <value>Klasör okunamadı: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_NoFiles" xml:space="preserve">
+    <value>{1} içinde {0} dosyası yok</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_Progress" xml:space="preserve">
+    <value>{0}/{1} içe aktarılıyor: {2}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_FolderDone" xml:space="preserve">
+    <value>Tamamlandı — {0} dosya, {1} erişim noktası</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_FolderFailedFiles" xml:space="preserve">
+    <value>; {0} dosya okunamadı</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_Import" xml:space="preserve">
+    <value>İçe aktar</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_ImportAFolder" xml:space="preserve">
+    <value>Bir klasörü içe aktar…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_ImportsEveryFileOfThe" xml:space="preserve">
+    <value>Bir klasördeki seçili türdeki tüm dosyaları içe aktarır (alt klasörler hariç).</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Waiting" xml:space="preserve">
+    <value>GPS konumu bekleniyor…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Off" xml:space="preserve">
+    <value>GPS kapalı. Başlatmak için “GPS kullan”a dokunun.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_LastFix" xml:space="preserve">
+    <value>Son konum {0} sn önce</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Position" xml:space="preserve">
+    <value>Konum</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Satellites" xml:space="preserve">
+    <value>Uydular</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Accuracy" xml:space="preserve">
+    <value>Doğruluk</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Speed" xml:space="preserve">
+    <value>Hız</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_FixQuality" xml:space="preserve">
+    <value>Konum kalitesi</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_FixTime" xml:space="preserve">
+    <value>Konum zamanı</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_COMPASS" xml:space="preserve">
+    <value>PUSULA</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_PointsAlongYourDirectionOf" xml:space="preserve">
+    <value>Hareket ederken GPS'in bildirdiği hareket yönünüzü gösterir.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_WIFIPOSITIONOFFLINE" xml:space="preserve">
+    <value>WI-FI KONUMU (ÇEVRİMDIŞI)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_ShowOnMap" xml:space="preserve">
+    <value>Haritada göster</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_AlsoSearchThisSessionS" xml:space="preserve">
+    <value>Bu oturumun AP'lerinde de ara</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Magic8BallM8bFiles" xml:space="preserve">
+    <value>Magic 8 Ball (m8b) dosyaları</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_NoneImportedExportOneFrom" xml:space="preserve">
+    <value>İçe aktarılmış dosya yok. Bir oturumdan dışa aktarın (Dışa aktar → M8b) veya WiGLE WiFi Wardriving'den bir dosya kullanın.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Remove" xml:space="preserve">
+    <value>Kaldır</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_ImportM8bFile" xml:space="preserve">
+    <value>m8b dosyası içe aktar…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_EachAPInRangeVotes" xml:space="preserve">
+    <value>Menzildeki her AP görüldüğü 1 km karelere oy verir; en çok oy alan kare tahmindir. GPS ve ağ olmadan çalışır, örneğin kapalı alanda. m8b biçimi WiGLE WiFi Wardriving'den gelir.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_NoSources" xml:space="preserve">
+    <value>Henüz aranacak bir şey yok: bir m8b dosyası içe aktarın veya önce GPS ile tarayın.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_NoneInRange" xml:space="preserve">
+    <value>Menzilde AP yok. Konum tahmini için taramayı başlatın.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_LookupFailed" xml:space="preserve">
+    <value>Arama başarısız: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_NoneKnown" xml:space="preserve">
+    <value>Menzildeki {0} AP'nin hiçbiri bilinmiyor.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_Agree" xml:space="preserve">
+    <value>Menzildeki {1} AP'den {0} tanesi 1 km kare {2} üzerinde uzlaşıyor</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_Tie" xml:space="preserve">
+    <value>({0} başka kareyle eşit)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_GpsDistance" xml:space="preserve">
+    <value>GPS konumu merkezinden {0} m uzakta</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_Accuracy" xml:space="preserve">
+    <value>(± bir 1 km kare)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_ChooseFile" xml:space="preserve">
+    <value>Bir m8b dosyası seçin</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_Importing" xml:space="preserve">
+    <value>İçe aktarılıyor…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_Imported" xml:space="preserve">
+    <value>{0} içe aktarıldı: {1} giriş</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_NotM8b" xml:space="preserve">
+    <value>Bu, uygulamanın okuyabileceği bir m8b dosyası değil ({0})</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_ImportFailed" xml:space="preserve">
+    <value>İçe aktarma başarısız: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_RemoveTitle" xml:space="preserve">
+    <value>m8b dosyasını kaldır</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_RemoveQuestion" xml:space="preserve">
+    <value>{0} uygulamadan kaldırılsın mı?</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_Remove" xml:space="preserve">
+    <value>Kaldır</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_Removed" xml:space="preserve">
+    <value>Kaldırıldı: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_New" xml:space="preserve">
+    <value>Yeni keşif</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Open" xml:space="preserve">
+    <value>Keşif aç…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_FloorPlan" xml:space="preserve">
+    <value>Kat planı görüntüsü…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_UseGrid" xml:space="preserve">
+    <value>Izgara kullan</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Rename" xml:space="preserve">
+    <value>Yeniden adlandır…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_ExportCsv" xml:space="preserve">
+    <value>Ölçümleri dışa aktar (CSV)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Delete" xml:space="preserve">
+    <value>Bu keşfi sil</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_DeleteSpot" xml:space="preserve">
+    <value>Noktayı sil</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_MeasureAgain" xml:space="preserve">
+    <value>Burada yeniden ölç</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Strongest" xml:space="preserve">
+    <value>Her noktadaki en güçlü ağ</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_PlanLoadFailed" xml:space="preserve">
+    <value>Kat planı görüntüsü yüklenemedi: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_SpotInfo" xml:space="preserve">
+    <value>Nokta {0}: {2} zamanında {1} AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_NotHeard" xml:space="preserve">
+    <value>{0}: alınmıyor</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_StrongestAp" xml:space="preserve">
+    <value>En güçlü: {0} {1} dBm</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_SsidAps" xml:space="preserve">
+    <value>{0} ({1} AP)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Measuring" xml:space="preserve">
+    <value>Ölçülüyor… sonraki tarama bitene kadar yerinizde durun.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_StartToMeasure" xml:space="preserve">
+    <value>Burada ölçmek için taramayı başlatın.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_StartThenTap" xml:space="preserve">
+    <value>Taramayı başlatın, sonra durduğunuz yere dokunun.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_TapToMeasure" xml:space="preserve">
+    <value>Orada ölçmek için durduğunuz yere dokunun.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_SpotsMeasured" xml:space="preserve">
+    <value>{0} nokta ölçüldü. Eklemek için durduğunuz yere, görmek veya silmek için bir noktaya dokunun.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_SaveFailed" xml:space="preserve">
+    <value>Keşif kaydedilemedi: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_NoneSaved" xml:space="preserve">
+    <value>Henüz kayıtlı keşif yok.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_NameSpots" xml:space="preserve">
+    <value>{0} ({1} nokta)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_FloorPlanTitle" xml:space="preserve">
+    <value>Kat planı</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_ChangePlanQuestion" xml:space="preserve">
+    <value>Bu keşifte, plan değiştirildiğinde yer değiştirmeyecek ölçülmüş noktalar var. Yine de değiştirilsin mi?</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Change" xml:space="preserve">
+    <value>Değiştir</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_ChoosePlan" xml:space="preserve">
+    <value>Kat planı görüntüsü seçin</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_ImageFailed" xml:space="preserve">
+    <value>Bu görüntü kullanılamadı: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_RenameTitle" xml:space="preserve">
+    <value>Keşfi yeniden adlandır</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Name" xml:space="preserve">
+    <value>Ad</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_DeleteTitle" xml:space="preserve">
+    <value>Keşfi sil</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_DeleteQuestion" xml:space="preserve">
+    <value>{0} ve {1} noktası silinsin mi?</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_NothingMeasured" xml:space="preserve">
+    <value>Henüz bir şey ölçülmedi.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_ImageSaveFailed" xml:space="preserve">
+    <value>Görüntü kaydedilemedi: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Survey" xml:space="preserve">
+    <value>Keşif ▾</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Network" xml:space="preserve">
+    <value>Ağ</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Heatmap" xml:space="preserve">
+    <value>Isı haritası</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_StartScanning" xml:space="preserve">
+    <value>Taramayı başlat</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_UndoLast" xml:space="preserve">
+    <value>Sonuncuyu geri al</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_SaveImage" xml:space="preserve">
+    <value>Görüntüyü kaydet</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filter_NewTitle" xml:space="preserve">
+    <value>Yeni filtre</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filter_DefaultName" xml:space="preserve">
+    <value>Filtre {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filter_EditTitle" xml:space="preserve">
+    <value>{0} düzenle</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filter_DeleteTitle" xml:space="preserve">
+    <value>Filtreyi sil</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filter_DeleteQuestion" xml:space="preserve">
+    <value>“{0}” silinsin mi?</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filters_Filters" xml:space="preserve">
+    <value>Filtreler</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filters_Add" xml:space="preserve">
+    <value>Ekle</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filters_TapAFilterToUse" xml:space="preserve">
+    <value>Kullanmak için bir filtreye dokunun. Etkin filtre AP listesini daraltır; Dışa aktar sayfası yalnızca gösterdiği AP'leri dışa aktarabilir.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filters_NoFilterShowAllAPs" xml:space="preserve">
+    <value>Filtre yok (tüm AP'leri göster)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filters_NoSavedFiltersYetTap" xml:space="preserve">
+    <value>Henüz kayıtlı filtre yok. Oluşturmak için Ekle'ye dokunun.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filters_AddAFilter" xml:space="preserve">
+    <value>Filtre ekle</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_Name" xml:space="preserve">
+    <value>Ad</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_SHOWAPSTHAT" xml:space="preserve">
+    <value>ŞU AP'LERİ GÖSTER</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_SSIDContains" xml:space="preserve">
+    <value>SSID şunu içerir</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_Any" xml:space="preserve">
+    <value>herhangi</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_BSSIDStartsWith" xml:space="preserve">
+    <value>BSSID şununla başlar</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_AnyEG0011" xml:space="preserve">
+    <value>herhangi, örn. 00:11:22</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_AnyEG16" xml:space="preserve">
+    <value>herhangi, örn. 1,6,11 veya 36-64</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_SignalAtLeast" xml:space="preserve">
+    <value>En az sinyal (%)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_SecureWPAAndUp" xml:space="preserve">
+    <value>Güvenli (WPA ve üstü)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_AdvancedRules" xml:space="preserve">
+    <value>Gelişmiş kurallar</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_TheOriginalVistumblerSFilter" xml:space="preserve">
+    <value>Orijinal Vistumbler'ın filtre sözdizimi, alan başına. * veya boş = herhangi · 6 = eşittir · 1,6,11 = bunlardan biri · 1-6 veya -80--60 = arasında · başta &lt;&gt; = değil (&lt;&gt;6, &lt;&gt;1-6, &lt;&gt;6,&lt;&gt;11) · % = herhangi bir metin (Linksys%, %guest%) · \, \- \% = düz virgül, tire veya yüzde. Metin alanları büyük/küçük harf duyarsızdır.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_EGWPA2PersonalWPA3" xml:space="preserve">
+    <value>örn. WPA2-Personal,WPA3-Personal</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_EGCCMP" xml:space="preserve">
+    <value>örn. CCMP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_EG5GHz" xml:space="preserve">
+    <value>örn. %5 GHz</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_InfrastructureOrAdHoc" xml:space="preserve">
+    <value>Altyapı veya Ad hoc</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_Signal" xml:space="preserve">
+    <value>Sinyal (%)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_HighSignal" xml:space="preserve">
+    <value>En yüksek sinyal (%)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_RSSIDBm" xml:space="preserve">
+    <value>RSSI (dBm)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_EG700" xml:space="preserve">
+    <value>örn. -70-0</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_HighRSSIDBm" xml:space="preserve">
+    <value>En yüksek RSSI (dBm)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_Active1Or0" xml:space="preserve">
+    <value>Etkin (1 veya 0)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_SaveAndUse" xml:space="preserve">
+    <value>Kaydet ve kullan</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_AlsoWigle" xml:space="preserve">
+    <value>WiGLE'a da yükle (Wi-Fi, baz istasyonları ve Bluetooth)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_AlsoWigleNoAccount" xml:space="preserve">
+    <value>WiGLE'a da yükle: önce Ayarlar → WiGLE'da API adı ve belirteci girin</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_As" xml:space="preserve">
+    <value>{0} olarak {1} adresine yükleniyor</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_NoApiKey" xml:space="preserve">
+    <value>(API anahtarı yok)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_NeedAccount" xml:space="preserve">
+    <value>Yüklemeden önce Ayarlar → WifiDB'de bir WifiDB hesabı ayarlayın.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_Preparing" xml:space="preserve">
+    <value>Dosya hazırlanıyor…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_NoAps" xml:space="preserve">
+    <value>Yüklenecek erişim noktası yok.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_Uploading" xml:space="preserve">
+    <value>{0} erişim noktası WifiDB'ye yükleniyor…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_ImportNumber" xml:space="preserve">
+    <value>İçe aktarma #{0} — {1} erişim noktası.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_Failed" xml:space="preserve">
+    <value>Yükleme başarısız: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_UploadingWigle" xml:space="preserve">
+    <value>WiGLE'a yükleniyor…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_NothingForWigle" xml:space="preserve">
+    <value>WiGLE'a yüklenecek bir şey yok.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Session_DeleteTitle" xml:space="preserve">
+    <value>Oturumu sil</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Session_DeleteQuestion" xml:space="preserve">
+    <value>“{0}” oturumu silinsin mi? Bu geri alınamaz.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbScan_NeedCamera" xml:space="preserve">
+    <value>Tarama için kamera izni gerekli. Bunun yerine “Bağlantıyla kaydol…” kullanın.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbScan_ScanWifiDBQR" xml:space="preserve">
+    <value>WifiDB QR tara</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbScan_PointTheCameraAtYour" xml:space="preserve">
+    <value>Kamerayı WifiDB kayıt QR koduna doğrultun.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_ActiveanddeadAPs" xml:space="preserve">
+    <value>Etkin ve ölü AP'ler</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_ActiveAPsonly" xml:space="preserve">
+    <value>Yalnızca etkin AP'ler</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_DeadAPsonly" xml:space="preserve">
+    <value>Yalnızca ölü AP'ler</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Available" xml:space="preserve">
+    <value>{0} {1} kullanılabilir</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_YouHave" xml:space="preserve">
+    <value>Sizdeki sürüm {0}.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Prerelease" xml:space="preserve">
+    <value>Bu güncelleme bir ön sürümdür.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_NoNotes" xml:space="preserve">
+    <value>Bu sürüm için sürüm notu yayımlanmadı.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_InstallRestart" xml:space="preserve">
+    <value>Yükle ve yeniden başlat</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_InstallInfo" xml:space="preserve">
+    <value>{0} güncelleme yüklenirken kapanır, ardından yeniden başlar. Geçerli oturum korunur, böylece devam edebilirsiniz.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Download" xml:space="preserve">
+    <value>Güncellemeyi indir</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_DownloadInfo" xml:space="preserve">
+    <value>Güncelleme tarayıcınızda indirilir. Bu sürümün üzerine yüklemek için açın; oturumlar ve ayarlar korunur.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_OpenPage" xml:space="preserve">
+    <value>İndirme sayfasını aç</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_NotInstalled" xml:space="preserve">
+    <value>Bu kopya yükleyiciyle kurulmadı; yeni sürümü sürüm sayfasından indirin.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_NoDownload" xml:space="preserve">
+    <value>Bu sürümde henüz cihazınız için bir indirme yok. Sürüm sayfasına bakın.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Downloading" xml:space="preserve">
+    <value>{0} indiriliyor…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Checking" xml:space="preserve">
+    <value>Yükleyici imzası denetleniyor…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Starting" xml:space="preserve">
+    <value>Yükleyici başlatılıyor…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Cancelled" xml:space="preserve">
+    <value>Güncelleme iptal edildi.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Failed" xml:space="preserve">
+    <value>Güncelleme başarısız: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_UpdateAvailable" xml:space="preserve">
+    <value>Güncelleme var</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_RELEASENOTES" xml:space="preserve">
+    <value>SÜRÜM NOTLARI</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_ReleasePage" xml:space="preserve">
+    <value>Sürüm sayfası</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Later" xml:space="preserve">
+    <value>Daha sonra</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_OnceforeachscanthatfindsnewAPs" xml:space="preserve">
+    <value>Yeni AP bulan her taramada bir kez</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_OnceforeachnewAP" xml:space="preserve">
+    <value>Her yeni AP için bir kez</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_OnceforeachnewAPlouderforastrongersignal" xml:space="preserve">
+    <value>Her yeni AP için bir kez, güçlü sinyalde daha yüksek</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Thedevicesvoice" xml:space="preserve">
+    <value>Cihazın sesi</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Vistumblersrecordedwords" xml:space="preserve">
+    <value>Vistumbler'ın kayıtlı sözcükleri</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Atonehigherforastrongersignal" xml:space="preserve">
+    <value>Ton, güçlü sinyalde daha tiz</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_SignalPct" xml:space="preserve">
+    <value>Sinyal (%)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_AutofitGPSaccuracy" xml:space="preserve">
+    <value>Otomatik (GPS doğruluğuna sığdır)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Manualzoomlevel" xml:space="preserve">
+    <value>Elle yakınlaştırma düzeyi</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Keepcurrentzoom" xml:space="preserve">
+    <value>Geçerli yakınlaştırmayı koru</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_AfteranumberofAPs" xml:space="preserve">
+    <value>Belirli sayıda AP'den sonra</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Afteratime" xml:space="preserve">
+    <value>Belirli bir süreden sonra</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_VSZzipped" xml:space="preserve">
+    <value>VSZ (sıkıştırılmış)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_WindowsLocation" xml:space="preserve">
+    <value>Windows konumu</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_SerialNMEACOMport" xml:space="preserve">
+    <value>Seri NMEA (COM bağlantı noktası)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_PhoneGPS" xml:space="preserve">
+    <value>Telefon GPS'i</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_BluetoothGPSreceiverNMEA" xml:space="preserve">
+    <value>Bluetooth GPS alıcısı (NMEA)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_USBGPSreceiverNMEA" xml:space="preserve">
+    <value>USB GPS alıcısı (NMEA)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Devicelocation" xml:space="preserve">
+    <value>Cihaz konumu</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Nogrouping" xml:space="preserve">
+    <value>Gruplama yok</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Band" xml:space="preserve">
+    <value>Bant</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Securitytype" xml:space="preserve">
+    <value>Güvenlik türü</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Security" xml:space="preserve">
+    <value>Güvenlik</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_LastSeen" xml:space="preserve">
+    <value>Son görülme</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_FirstSeen" xml:space="preserve">
+    <value>İlk görülme</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Celltowers" xml:space="preserve">
+    <value>Baz istasyonları</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_WiFi" xml:space="preserve">
+    <value>Wi-Fi</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SCANNING" xml:space="preserve">
+    <value>TARAMA</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ScanIntervalMs" xml:space="preserve">
+    <value>Tarama aralığı (ms)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_StartScanningWhenTheApp" xml:space="preserve">
+    <value>Uygulama açılınca taramayı başlat</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_TurnOnGPSWhenThe" xml:space="preserve">
+    <value>Uygulama açılınca GPS'i aç</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_AlsoRecordCellTowers" xml:space="preserve">
+    <value>Baz istasyonlarını da kaydet</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_AlsoRecordBluetoothDevices" xml:space="preserve">
+    <value>Bluetooth aygıtlarını da kaydet</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_WiFiAdapter" xml:space="preserve">
+    <value>Wi-Fi bağdaştırıcısı</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Refresh" xml:space="preserve">
+    <value>Yenile</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_MAP" xml:space="preserve">
+    <value>HARİTA</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_BasemapStyle" xml:space="preserve">
+    <value>Altlık harita stili</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_GPSFollowZoom" xml:space="preserve">
+    <value>GPS takip yakınlaştırması</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ZoomLevel122" xml:space="preserve">
+    <value>Yakınlaştırma düzeyi (1–22)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ZoomAppliedWhenTheMap" xml:space="preserve">
+    <value>Haritanın GPS düğmesi takip moduna geçtiğinde uygulanan yakınlaştırma. Otomatik, doğruluk çemberini gösteren bir düzey seçer; sonrasında hareketle değiştirilen yakınlaştırma, takip yeniden açılana kadar korunur.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_APPointSize" xml:space="preserve">
+    <value>AP nokta boyutu</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SizeOfTheAccessPoint" xml:space="preserve">
+    <value>Haritadaki erişim noktası noktalarının boyutu — hem canlı tarama hem WifiDB geçmişi için.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_MapAPColors" xml:space="preserve">
+    <value>Harita AP renkleri…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_GPSSource" xml:space="preserve">
+    <value>GPS kaynağı</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_RecordTheGPSTrackEven" xml:space="preserve">
+    <value>AP bulunmasa da GPS izini kaydet</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_CoordinateFormat" xml:space="preserve">
+    <value>Koordinat biçimi</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_COMPort" xml:space="preserve">
+    <value>COM bağlantı noktası</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_BaudRate" xml:space="preserve">
+    <value>Baud hızı</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ChooseTheCOMPortYour" xml:space="preserve">
+    <value>GPS alıcınızın COM bağlantı noktasını seçin. Windows ile eşleştirilmiş Bluetooth alıcı da COM bağlantı noktası olarak görünür.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ReconnectTheReceiverWhenNo" xml:space="preserve">
+    <value>10 saniye veri gelmezse alıcıya yeniden bağlan</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ResetGPSPositionWhenNo" xml:space="preserve">
+    <value>30 saniye konum yoksa GPS konumunu sıfırla</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_TurnOffTheReconnectFor" xml:space="preserve">
+    <value>Çıkışını duraklatan bir alıcı için yeniden bağlanmayı kapatın. Sıfırlama, konum kaybından sonra AP'lerin alıcının son konumuna yerleştirilmesini önler.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PlugTheReceiverInWith" xml:space="preserve">
+    <value>Alıcıyı bir USB OTG bağdaştırıcısıyla takın; Android uygulama için izin ister. Prolific PL2303 (GlobalSat), Silicon Labs CP210x, FTDI, CH340 ve u-blox ile çalışır. GlobalSat alıcılar genellikle 4800 baud, u-blox 9600 baud kullanır.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Receiver" xml:space="preserve">
+    <value>Alıcı</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PairTheReceiverInAndroid" xml:space="preserve">
+    <value>Önce alıcıyı Android Bluetooth ayarlarında eşleştirin, sonra burada seçin. Çoğu Bluetooth GPS alıcısı gibi seri bağlantı noktası profili (SPP) üzerinden NMEA göndermelidir.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_BaseURL" xml:space="preserve">
+    <value>Temel URL</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Username" xml:space="preserve">
+    <value>Kullanıcı adı</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Username2" xml:space="preserve">
+    <value>kullanıcı adı</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_APIKey" xml:space="preserve">
+    <value>API anahtarı</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_DataURL" xml:space="preserve">
+    <value>Veri URL'si</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_DataURLServesTheMap" xml:space="preserve">
+    <value>Veri URL'si harita geçmişi arşivlerini ve bunları listeleyen akışı sunar — yukarıdaki siteden farklı bir sunucudur.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_RegisterWithQRCode" xml:space="preserve">
+    <value>QR koduyla kaydol</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_RegisterWithLink" xml:space="preserve">
+    <value>Bağlantıyla kaydol…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_WIGLEOPTIONAL" xml:space="preserve">
+    <value>WIGLE (İSTEĞE BAĞLI)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_AlsoUploadToWiGLE" xml:space="preserve">
+    <value>WiGLE'a da yükle</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_OptionalAlongsideWifiDBSendsWi" xml:space="preserve">
+    <value>İsteğe bağlı, WifiDB'nin yanında. Wi-Fi, baz istasyonları ve Bluetooth'u WiGLE CSV olarak gönderir.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ReadWiGLESTermsOf" xml:space="preserve">
+    <value>WiGLE kullanım koşullarını okuyun</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_APIName" xml:space="preserve">
+    <value>API adı</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_APIToken" xml:space="preserve">
+    <value>API belirteci</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_GetMyAPINameAnd" xml:space="preserve">
+    <value>API adımı ve belirtecimi al (wigle.net)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_UploadEachSaveClearTo" xml:space="preserve">
+    <value>Her “Kaydet ve temizle”yi WiGLE'a yükle</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_DonateForCommercialUse" xml:space="preserve">
+    <value>Ticari kullanım için bağışla</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_LetsWiGLEAlsoLicenseYour" xml:space="preserve">
+    <value>WiGLE'ın yüklemelerinizi ticari kullanım için de lisanslamasına izin verir (WiGLE'da “donate”).</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_RetryNow" xml:space="preserve">
+    <value>Şimdi yeniden dene</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SAVECLEAR" xml:space="preserve">
+    <value>KAYDET VE TEMİZLE</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SaveClearMenuSavesThe" xml:space="preserve">
+    <value>“Kaydet ve temizle” (menü) erişim noktalarını buradaki bir dosyaya kaydeder, ardından tarama sürerken listeyi temizler. Otomatik kaydet ve temizle bunu sizin için yapar.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_UseDefaultFolder" xml:space="preserve">
+    <value>Varsayılan klasörü kullan</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_FileName" xml:space="preserve">
+    <value>Dosya adı</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_AutoSave" xml:space="preserve">
+    <value>AutoSave</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_FileType" xml:space="preserve">
+    <value>Dosya türü</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_AutoSaveAndClear" xml:space="preserve">
+    <value>Otomatik kaydet ve temizle</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SaveOnceTheListHas" xml:space="preserve">
+    <value>Liste bu kadar AP'ye ulaşınca kaydet</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SaveEveryThisManyMinutes" xml:space="preserve">
+    <value>Her bu kadar dakikalık taramada bir kaydet</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_UploadEachSaveToWifiDB" xml:space="preserve">
+    <value>Her kaydı WifiDB'ye yükle</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_DeleteTheSavedFileOnce" xml:space="preserve">
+    <value>Kaydedilen dosyayı WifiDB'ye ulaşınca sil</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_UsesTheWifiDBAccountBelow" xml:space="preserve">
+    <value>Aşağıdaki WifiDB hesabını kullanır. Yüklemeden sonra silmeyi seçmedikçe dosya saklanır. Yüklenemeyen dosya (bağlantı yok, WifiDB kapalı, henüz hesap yok) bekler ve bağlantı geri gelince, uygulama açılınca ve sonraki kayıttan sonra yeniden yüklenir.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ForExample0" xml:space="preserve">
+    <value>Örneğin: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SOUND" xml:space="preserve">
+    <value>SES</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PlayASoundWhenNew" xml:space="preserve">
+    <value>Yeni AP bulununca ses çal</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PlayASoundWhenThe" xml:space="preserve">
+    <value>GPS alıcısında sorun olunca ses çal</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SpeakingAnAPSSignal" xml:space="preserve">
+    <value>Bir AP'nin sinyalini seslendirme: AP ayrıntıları sayfasından açın.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Voice" xml:space="preserve">
+    <value>Ses</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Say" xml:space="preserve">
+    <value>Söyle</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SpeakEverySeconds" xml:space="preserve">
+    <value>Şu aralıkla söyle (saniye)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SayTheUnitPercentOr" xml:space="preserve">
+    <value>Sayıdan sonra birimi (“yüzde” veya “dBm”) söyle</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_TheTonePlaysTheSignal" xml:space="preserve">
+    <value>Ton, orijinaldeki MIDI sesleri gibi sinyali perde olarak çalar. Kayıtlı sözcükler “eksi” diyemediğinden RSSI düz bir sayı olarak söylenir.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_DATA" xml:space="preserve">
+    <value>VERİ</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_UpdateManufacturers" xml:space="preserve">
+    <value>Üreticileri güncelle</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_UPDATES" xml:space="preserve">
+    <value>GÜNCELLEMELER</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_CheckForUpdatesAtStartup" xml:space="preserve">
+    <value>Başlangıçta güncellemeleri denetle</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_IncludePreReleases" xml:space="preserve">
+    <value>Ön sürümleri dahil et</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PreReleasesEG0" xml:space="preserve">
+    <value>Ön sürümler (örn. 0.5.0-rc.1) yeni özellikleri önce alır ancak daha az kararlı olabilir.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ADVANCED" xml:space="preserve">
+    <value>GELİŞMİŞ</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_KeepScreenOnWhileScanning" xml:space="preserve">
+    <value>Tarama sırasında ekranı açık tut</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_DebugLogging" xml:space="preserve">
+    <value>Hata ayıklama günlüğü</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_WritesGPSFixesAndMap" xml:space="preserve">
+    <value>Sorun giderme için GPS konumlarını ve harita katmanı güncellemelerini hata ayıklama günlüğüne (adb logcat) yazar.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="MapColors_MapAPColors" xml:space="preserve">
+    <value>Harita AP renkleri</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="MapColors_CircleColorsPerAgeBucket" xml:space="preserve">
+    <value>Yaş grubu ve güvenlik türüne göre çember renkleri (hex RRGGBB). Canlı taramanın etkin AP'leri en parlaktır; ölü ve eski gruplar yaşla koyulaşır.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="MapColors_Bucket" xml:space="preserve">
+    <value>Grup</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="SessionChooser_VistumblerMAUISessions" xml:space="preserve">
+    <value>VistumblerMAUI — Oturumlar</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="SessionChooser_RecoverAPreviousSessionOr" xml:space="preserve">
+    <value>Önceki bir oturumu kurtarın veya yenisini başlatın.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="SessionChooser_NoSavedSessions" xml:space="preserve">
+    <value>Kayıtlı oturum yok.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="SessionChooser_Resume" xml:space="preserve">
+    <value>Sürdür</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="SessionChooser_StartNewSession" xml:space="preserve">
+    <value>Yeni oturum başlat</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_UploadToWifiDB" xml:space="preserve">
+    <value>WifiDB'ye yükle</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_UploadsTheCurrentSessionS" xml:space="preserve">
+    <value>Geçerli oturumun erişim noktalarını WifiDB'ye yükler. WifiDB dosyayı sıraya alır ve kısa süre içinde içe aktarır.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_ACCOUNT" xml:space="preserve">
+    <value>HESAP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_SetUpWifiDBAccount" xml:space="preserve">
+    <value>WifiDB hesabı ayarla</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_ChangeAccountInSettings" xml:space="preserve">
+    <value>Hesabı Ayarlar'da değiştir</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_UPLOAD" xml:space="preserve">
+    <value>YÜKLE</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_Title" xml:space="preserve">
+    <value>Başlık</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_Notes" xml:space="preserve">
+    <value>Notlar</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_Optional" xml:space="preserve">
+    <value>isteğe bağlı</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_OtherUsers" xml:space="preserve">
+    <value>Diğer kullanıcılar</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_OptionalCommaSeparated" xml:space="preserve">
+    <value>isteğe bağlı, virgülle ayrılmış</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_Upload" xml:space="preserve">
+    <value>Yükle</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_CheckImportStatus" xml:space="preserve">
+    <value>İçe aktarma durumunu denetle</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
 </root>

@@ -91,4 +91,1972 @@
     <value>Nová relace</value>
     <comment>Vistumbler Czech.ini NewSession</comment>
   </data>
+  <data name="NewSession_Title" xml:space="preserve">
+    <value>Nová relace</value>
+    <comment>Vistumbler Czech.ini NewSession</comment>
+  </data>
+  <data name="Common_Close" xml:space="preserve">
+    <value>zavřít</value>
+    <comment>Vistumbler Czech.ini Close</comment>
+  </data>
+  <data name="Common_Delete" xml:space="preserve">
+    <value>Smazat</value>
+    <comment>Vistumbler Czech.ini Delete</comment>
+  </data>
+  <data name="Settings_Browse" xml:space="preserve">
+    <value>Procházet…</value>
+    <comment>Vistumbler Czech.ini Browse</comment>
+  </data>
+  <data name="Settings_CheckForUpdates" xml:space="preserve">
+    <value>Zkontrolovat aktualizace</value>
+    <comment>Vistumbler Czech.ini CheckForUpdates</comment>
+  </data>
+  <data name="ApDetails_Copy" xml:space="preserve">
+    <value>Kopírovat</value>
+    <comment>Vistumbler Czech.ini Copy</comment>
+  </data>
+  <data name="ApDetails_SIGNALHISTORY" xml:space="preserve">
+    <value>Historie Signálu</value>
+    <comment>Vistumbler Czech.ini SignalHistory</comment>
+  </data>
+  <data name="ApDetails_FirstActive" xml:space="preserve">
+    <value>První aktivita</value>
+    <comment>Vistumbler Czech.ini Column_FirstActive</comment>
+  </data>
+  <data name="ApDetails_LastActive" xml:space="preserve">
+    <value>Poslední aktivita</value>
+    <comment>Vistumbler Czech.ini Column_LastActive</comment>
+  </data>
+  <data name="Import_FILE" xml:space="preserve">
+    <value>Soubor</value>
+    <comment>Vistumbler Czech.ini File</comment>
+  </data>
+  <data name="GpsDetails_Altitude" xml:space="preserve">
+    <value>Nadmořská výška</value>
+    <comment>Vistumbler Czech.ini Altitude</comment>
+  </data>
+  <data name="GpsDetails_Heading" xml:space="preserve">
+    <value>Směrová výška</value>
+    <comment>Vistumbler Czech.ini Heading</comment>
+  </data>
+  <data name="Filters_Filters" xml:space="preserve">
+    <value>Filtry</value>
+    <comment>Vistumbler Czech.ini Filters</comment>
+  </data>
+  <data name="Filters_Edit" xml:space="preserve">
+    <value>Editovat</value>
+    <comment>Vistumbler Czech.ini Edit</comment>
+  </data>
+  <data name="Filters_Delete" xml:space="preserve">
+    <value>Smazat</value>
+    <comment>Vistumbler Czech.ini Delete</comment>
+  </data>
+  <data name="FilterEdit_RadioType" xml:space="preserve">
+    <value>Typ Zařízení</value>
+    <comment>Vistumbler Czech.ini Column_RadioType</comment>
+  </data>
+  <data name="FilterEdit_Save" xml:space="preserve">
+    <value>Uložit?</value>
+    <comment>Vistumbler Czech.ini Save</comment>
+  </data>
+  <data name="WifiDbUpload_Close" xml:space="preserve">
+    <value>zavřít</value>
+    <comment>Vistumbler Czech.ini Close</comment>
+  </data>
+  <data name="Language_System" xml:space="preserve">
+    <value>Jazyk zařízení</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Tab_Scan" xml:space="preserve">
+    <value>Skenování</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Tab_Map" xml:space="preserve">
+    <value>Mapa</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Tab_Channels" xml:space="preserve">
+    <value>Kanály</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Menu_Import" xml:space="preserve">
+    <value>Importovat…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Menu_Export" xml:space="preserve">
+    <value>Exportovat…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Menu_Clear" xml:space="preserve">
+    <value>Vymazat…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Menu_UploadWifiDb" xml:space="preserve">
+    <value>Nahrát do WifiDB…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Menu_SiteSurvey" xml:space="preserve">
+    <value>Průzkum místa</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Menu_Links" xml:space="preserve">
+    <value>Odkazy…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Bar_Stop" xml:space="preserve">
+    <value>Zastavit</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Bar_StopGps" xml:space="preserve">
+    <value>Zastavit GPS</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Bar_Total" xml:space="preserve">
+    <value>Celkem: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Bar_Active" xml:space="preserve">
+    <value>Aktivní: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_TotalAps" xml:space="preserve">
+    <value>AP celkem: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_Cleared" xml:space="preserve">
+    <value>Vymazáno</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_SavedAndCleared" xml:space="preserve">
+    <value>Uloženo {0} AP do {1} a seznam vymazán</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_SaveFailed" xml:space="preserve">
+    <value>Uložení se nezdařilo, seznam nebyl vymazán: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_SavedAps" xml:space="preserve">
+    <value>Uloženo {0} AP do {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_UploadingWifiDb" xml:space="preserve">
+    <value>Nahrávání do WifiDB…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_WifiDbNotYet" xml:space="preserve">
+    <value>Zatím nenahráno do WifiDB ({0}); bude zkoušeno znovu</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_UploadedWifiDb" xml:space="preserve">
+    <value>Nahráno do WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_WigleNotYet" xml:space="preserve">
+    <value>Zatím nenahráno do WiGLE ({0}); bude zkoušeno znovu</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_UploadedWigle" xml:space="preserve">
+    <value>Nahráno do WiGLE</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_Queued" xml:space="preserve">
+    <value>ve frontě</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_NeedLocation" xml:space="preserve">
+    <value>Ke skenování Wi-Fi je potřeba oprávnění k poloze</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_Scanning" xml:space="preserve">
+    <value>Skenování…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_Stopped" xml:space="preserve">
+    <value>Zastaveno — AP celkem: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_ActiveTotal" xml:space="preserve">
+    <value>Aktivní: {0} / celkem: {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_DbWriteFailed" xml:space="preserve">
+    <value>Zápis do DB se nezdařil — další pokus v příštím cyklu</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_Error" xml:space="preserve">
+    <value>Chyba: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Gps_Off" xml:space="preserve">
+    <value>GPS vypnuto</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Gps_PermissionDenied" xml:space="preserve">
+    <value>GPS: oprávnění k poloze zamítnuto</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Gps_NoFix" xml:space="preserve">
+    <value>GPS: {0} s bez polohy, poloha vymazána</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Gps_Error" xml:space="preserve">
+    <value>GPS: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filter_None" xml:space="preserve">
+    <value>Bez filtru</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Group_Channel" xml:space="preserve">
+    <value>Kanál {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Group_Open" xml:space="preserve">
+    <value>Otevřená</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Group_Secure" xml:space="preserve">
+    <value>Zabezpečená</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Group_AdHoc" xml:space="preserve">
+    <value>Ad hoc</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Group_Infrastructure" xml:space="preserve">
+    <value>Infrastruktura</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Group_Hidden" xml:space="preserve">
+    <value>(skrytá)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Group_Unknown" xml:space="preserve">
+    <value>(neznámé)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_SearchPlaceholder" xml:space="preserve">
+    <value>Hledat SSID, BSSID, výrobce…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_Sort" xml:space="preserve">
+    <value>Řadit</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_GroupBy" xml:space="preserve">
+    <value>Seskupit podle</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_FirstSeen" xml:space="preserve">
+    <value>Poprvé: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_LastSeen" xml:space="preserve">
+    <value>Naposledy: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_Channel" xml:space="preserve">
+    <value>K {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_RadioShown" xml:space="preserve">
+    <value>Zobrazeno: {0} · nejsilnější první</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_RadioEmpty" xml:space="preserve">
+    <value>Zatím nic nezaznamenáno. Zapněte to v Nastavení → Skenování a pak skenujte.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_TapToBegin" xml:space="preserve">
+    <value>Začněte klepnutím na „Skenovat AP“</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Common_Ok" xml:space="preserve">
+    <value>OK</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Common_Share" xml:space="preserve">
+    <value>Sdílet</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Common_Saved" xml:space="preserve">
+    <value>Uloženo {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Common_ExportFailed" xml:space="preserve">
+    <value>Export se nezdařil: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Clear_SaveThenClear" xml:space="preserve">
+    <value>Uložit do souboru, pak vymazat</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Clear_WithoutSaving" xml:space="preserve">
+    <value>Vymazat bez uložení</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Clear_Question" xml:space="preserve">
+    <value>Vymazat seznam AP? Skenování pokračuje. Uložené soubory jdou do {0}.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Clear_SaveAndClear" xml:space="preserve">
+    <value>Uložit a vymazat</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Links_Title" xml:space="preserve">
+    <value>Odkazy</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Links_CouldNotOpen" xml:space="preserve">
+    <value>Nelze otevřít {0}: {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="NewSession_Question" xml:space="preserve">
+    <value>Začít novou relaci? Aktuální relace zůstane uložena a lze ji později znovu otevřít.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Exit_DiscardTitle" xml:space="preserve">
+    <value>Ukončit bez uložení</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Exit_DiscardQuestion" xml:space="preserve">
+    <value>Zahodit data zachycená v této relaci a ukončit?</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Exit_Discard" xml:space="preserve">
+    <value>Zahodit a ukončit</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_ApMapHelp" xml:space="preserve">
+    <value>Body: kde byl zachycen, od červené (slabý) po zelenou (silný), nové přibývají během skenování. Oranžová: kruh signálu. Modrá: nejdále zachycen. ⇪ exportuje jako GeoJSON nebo KML.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_WifiSquaresHelp" xml:space="preserve">
+    <value>Fialová: čtverce 1 km, kde byly AP v dosahu viděny, tmavší tam, kde se jich víc shoduje.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_Manufacturer" xml:space="preserve">
+    <value>Výrobce: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_ViewInList" xml:space="preserve">
+    <value>Zobrazit v seznamu AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_ClearTrack" xml:space="preserve">
+    <value>Vymazat trasu</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_EnableTrack" xml:space="preserve">
+    <value>Zapnout trasu</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_DisableTrack" xml:space="preserve">
+    <value>Vypnout trasu</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_SaveOffline" xml:space="preserve">
+    <value>Uložit mapu offline</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_SavedMapsOnly" xml:space="preserve">
+    <value>Jen uložené mapy</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_SavedMapsOnlyOn" xml:space="preserve">
+    <value>Jen uložené mapy ✓</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_SaveOfflineTitle" xml:space="preserve">
+    <value>Uložit mapu pro použití offline</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_SaveOfflineQuestion" xml:space="preserve">
+    <value>Stáhnout mapu, na kterou se díváte, a dvě bližší úrovně přiblížení, aby se zobrazila i bez připojení k internetu? Potom zapněte „Jen uložené mapy“, aby se používaly jen uložené mapy. Velká oblast může chvíli trvat a spotřebovat hodně dat.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_Download" xml:space="preserve">
+    <value>Stáhnout</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_TrackCleared" xml:space="preserve">
+    <value>Trasa vymazána (exporty zachovávají celou historii)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_NotReady" xml:space="preserve">
+    <value>Mapa není připravena — počkejte na načtení stylu</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_NotReadyPan" xml:space="preserve">
+    <value>Mapa není připravena — posuňte/přibližte mapu a zkuste to znovu</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_Caching" xml:space="preserve">
+    <value>Ukládání oblasti mapy (z{0}–{1})…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_OfflineFailed" xml:space="preserve">
+    <value>Stažení offline se nezdařilo: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_OfflineError" xml:space="preserve">
+    <value>Chyba stahování offline: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_ApsWithGps" xml:space="preserve">
+    <value>AP s GPS: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_LayerOn" xml:space="preserve">
+    <value>Vrstva {0} zapnuta</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_LayerOff" xml:space="preserve">
+    <value>Vrstva {0} vypnuta</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_LiveScan" xml:space="preserve">
+    <value>Živé skenování</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_NotInSession" xml:space="preserve">
+    <value>{0} není v této relaci</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_NoPositions" xml:space="preserve">
+    <value>{0} nemá žádné polohy GPS k zobrazení</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_ApMapTitle" xml:space="preserve">
+    <value>{0}: polohy: {1}, dosah {2} m</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_ExportSignalMap" xml:space="preserve">
+    <value>Exportovat mapu signálu</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_WifiSquareOne" xml:space="preserve">
+    <value>Poloha Wi-Fi: čtverec {0}, hlasy AP: {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_WifiSquareMany" xml:space="preserve">
+    <value>Poloha Wi-Fi: nejlepší čtverec {0} (hlasy: {1}), dalších {2} vystínováno podle hlasů</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_Daily" xml:space="preserve">
+    <value>Denně</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_Weekly" xml:space="preserve">
+    <value>Týdně</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_Monthly" xml:space="preserve">
+    <value>Měsíčně</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_0to1Year" xml:space="preserve">
+    <value>0–1 rok</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_1to2Year" xml:space="preserve">
+    <value>1–2 roky</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_2to3Year" xml:space="preserve">
+    <value>2–3 roky</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_3to5Year" xml:space="preserve">
+    <value>3–5 let</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_5to10Year" xml:space="preserve">
+    <value>5–10 let</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_10PlusYear" xml:space="preserve">
+    <value>Přes 10 let</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_CellNetworks" xml:space="preserve">
+    <value>Mobilní sítě</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Channels_Band" xml:space="preserve">
+    <value>Pásmo</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Channels_Status" xml:space="preserve">
+    <value>Aktivní AP v pásmu {1}: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Graph_NoHistory" xml:space="preserve">
+    <value>Zatím žádná historie signálu</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_AllAdapters" xml:space="preserve">
+    <value>Všechny adaptéry</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_AdapterNotFound" xml:space="preserve">
+    <value>Zvolený adaptér (nenalezen)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_NoUsbGps" xml:space="preserve">
+    <value>Není připojen žádný podporovaný přijímač GPS přes USB.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PluggedIn" xml:space="preserve">
+    <value>Připojeno: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_UsbListFailed" xml:space="preserve">
+    <value>Nelze vypsat zařízení USB: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_NoPairedDevices" xml:space="preserve">
+    <value>Žádná spárovaná zařízení. Spárujte přijímač GPS v nastavení Bluetooth Androidu a pak obnovte.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PendingWifiDb" xml:space="preserve">
+    <value>Uložené soubory čekající na nahrání do WifiDB: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_WaitingUploads" xml:space="preserve">
+    <value>Čekající nahrávání</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_StopWifiDbQuestion" xml:space="preserve">
+    <value>Přestat se pokoušet nahrát tyto soubory do WifiDB? Samotné soubory zůstanou ve složce Uložit a vymazat.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_StopUploading" xml:space="preserve">
+    <value>Zastavit nahrávání</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ManufacturersUpdated" xml:space="preserve">
+    <value>aktualizováno {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ManufacturersBuiltIn" xml:space="preserve">
+    <value>seznam dodaný s aplikací</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ManufacturersLoading" xml:space="preserve">
+    <value>Načítání seznamu výrobců…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ManufacturersCount" xml:space="preserve">
+    <value>Výrobců: {0} ({1})</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ManufacturersDownloading" xml:space="preserve">
+    <value>Stahování seznamu výrobců IEEE…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_UpdateFailed" xml:space="preserve">
+    <value>Aktualizace se nezdařila: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_WifiDbRegistration" xml:space="preserve">
+    <value>Registrace do WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PasteRegistrationLink" xml:space="preserve">
+    <value>Vložte svůj registrační odkaz WifiDB (…/redeem_link.php?token=…):</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Redeem" xml:space="preserve">
+    <value>Uplatnit</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_NotRegistrationLink" xml:space="preserve">
+    <value>Nevypadá to jako registrační odkaz WifiDB.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Redeeming" xml:space="preserve">
+    <value>Uplatňování…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Registered" xml:space="preserve">
+    <value>Registrováno do WifiDB.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_RegisteredAs" xml:space="preserve">
+    <value>Registrováno do WifiDB jako {0}.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_RegistrationFailed" xml:space="preserve">
+    <value>Registrace se nezdařila: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Wigle_Terms" xml:space="preserve">
+    <value>WiGLE (wigle.net) je samostatná služba s vlastními pravidly. Nahrávání posílá záznamy Wi-Fi, mobilních vysílačů a Bluetooth z této aplikace do WiGLE podle podmínek používání WiGLE, které určují, jak jsou ukládány, zobrazovány a sdíleny; přečtěte si je, než to zapnete. Nahrávání do WifiDB se to netýká.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Wigle_Pending" xml:space="preserve">
+    <value>Uložení čekající na nahrání do WiGLE: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Wigle_WaitingUploads" xml:space="preserve">
+    <value>Čekající nahrávání do WiGLE</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Wigle_StopQuestion" xml:space="preserve">
+    <value>Přestat se pokoušet nahrát tato uložení do WiGLE? Soubory VS1 ve složce Uložit a vymazat zůstanou zachovány.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Title" xml:space="preserve">
+    <value>Podrobnosti AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_NotFound" xml:space="preserve">
+    <value>AP nenalezen.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_NoHistory" xml:space="preserve">
+    <value>Zatím žádná historie signálu.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Samples" xml:space="preserve">
+    <value>Měření signálu: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_AllDetails" xml:space="preserve">
+    <value>Všechny podrobnosti</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_GpsPosition" xml:space="preserve">
+    <value>Poloha GPS</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Copied" xml:space="preserve">
+    <value>Zkopírováno: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_SearchingWifiDb" xml:space="preserve">
+    <value>Hledání ve WifiDB…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_SearchFailed" xml:space="preserve">
+    <value>Ve WifiDB nelze hledat: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_NotInWifiDb" xml:space="preserve">
+    <value>WifiDB zatím nemá {0}.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Security" xml:space="preserve">
+    <value>Zabezpečení: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Channel" xml:space="preserve">
+    <value>Kanál: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_ChannelMhz" xml:space="preserve">
+    <value>Kanál: {0} ({1} MHz)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_FirstSeen" xml:space="preserve">
+    <value>Poprvé viděn: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_LastSeen" xml:space="preserve">
+    <value>Naposledy viděn: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_FirstActiveLine" xml:space="preserve">
+    <value>Poprvé aktivní: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_LastActiveLine" xml:space="preserve">
+    <value>Naposledy aktivní: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_BestSignal" xml:space="preserve">
+    <value>Nejlepší signál: {0} %</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Signal" xml:space="preserve">
+    <value>Signál: {0} %</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Position" xml:space="preserve">
+    <value>Poloha: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_RadioLine" xml:space="preserve">
+    <value>Rádio: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_OpenInWifiDb" xml:space="preserve">
+    <value>Otevřít ve WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Back" xml:space="preserve">
+    <value>Zpět</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_BackToScanList" xml:space="preserve">
+    <value>‹ Zpět na seznam skenování</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_SpeakSignalWhileScanning" xml:space="preserve">
+    <value>Hlásit signál během skenování</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_DETAILS" xml:space="preserve">
+    <value>PODROBNOSTI</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Radio" xml:space="preserve">
+    <value>Rádio</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_FilteredOnly" xml:space="preserve">
+    <value>Jen AP, které zobrazuje filtr „{0}“</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_KeepingFolder" xml:space="preserve">
+    <value>{0} Ponechává se {1}.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_WillWriteTo" xml:space="preserve">
+    <value>Exporty se budou zapisovat do {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_Exporting" xml:space="preserve">
+    <value>Exportování…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_NoAps" xml:space="preserve">
+    <value>Žádné přístupové body k exportu</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_NoneMatch" xml:space="preserve">
+    <value>Filtru „{0}“ neodpovídá žádný přístupový bod</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_Done" xml:space="preserve">
+    <value>Exportováno přístupových bodů: {0} do {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_DoneFellBack" xml:space="preserve">
+    <value>Exportováno přístupových bodů: {0} do {1} — do zvolené složky nelze zapisovat</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_Export" xml:space="preserve">
+    <value>Exportovat</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_FORMAT" xml:space="preserve">
+    <value>FORMÁT</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_FILENAME" xml:space="preserve">
+    <value>NÁZEV SOUBORU</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_LOCATION" xml:space="preserve">
+    <value>UMÍSTĚNÍ</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_TheFileIsOfferedTo" xml:space="preserve">
+    <value>Po každém exportu se soubor nabídne ke sdílení, aby ho šlo poslat dál, ať byl zapsán kamkoli.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_KMLOPTIONS" xml:space="preserve">
+    <value>MOŽNOSTI KML</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_IncludeOpenNetworks" xml:space="preserve">
+    <value>Zahrnout otevřené sítě</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_IncludeWEPNetworks" xml:space="preserve">
+    <value>Zahrnout sítě WEP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_IncludeSecureNetworks" xml:space="preserve">
+    <value>Zahrnout zabezpečené sítě</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_ColourPinsBySignal" xml:space="preserve">
+    <value>Barvit značky podle signálu</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_IncludeGPSTrack" xml:space="preserve">
+    <value>Zahrnout trasu GPS</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_PickFile" xml:space="preserve">
+    <value>Vyberte soubor k importu</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_SelectFile" xml:space="preserve">
+    <value>Vybrat soubor k importu</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_Ready" xml:space="preserve">
+    <value>Připraveno k importu</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_SelectValid" xml:space="preserve">
+    <value>Vyberte platný soubor.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_Parsing" xml:space="preserve">
+    <value>Čtení souboru…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_Saving" xml:space="preserve">
+    <value>Ukládání přístupových bodů: {0}…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_Done" xml:space="preserve">
+    <value>Hotovo — importováno přístupových bodů: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_AndRadios" xml:space="preserve">
+    <value>a mobilních vysílačů a zařízení Bluetooth: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_NoneFound" xml:space="preserve">
+    <value>V souboru nebyly nalezeny žádné přístupové body</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_FolderFailed" xml:space="preserve">
+    <value>Složku nelze přečíst: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_NoFiles" xml:space="preserve">
+    <value>V {1} nejsou žádné soubory {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_Progress" xml:space="preserve">
+    <value>Importování {0} z {1}: {2}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_FolderDone" xml:space="preserve">
+    <value>Hotovo — souborů: {0}, přístupových bodů: {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_FolderFailedFiles" xml:space="preserve">
+    <value>; souborů nelze přečíst: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_Import" xml:space="preserve">
+    <value>Importovat</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_ImportAFolder" xml:space="preserve">
+    <value>Importovat složku…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_ImportsEveryFileOfThe" xml:space="preserve">
+    <value>Importuje všechny soubory zvoleného typu ve složce (bez podsložek).</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Waiting" xml:space="preserve">
+    <value>Čekání na polohu GPS…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Off" xml:space="preserve">
+    <value>GPS je vypnuto. Spusťte ho klepnutím na „Použít GPS“.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_LastFix" xml:space="preserve">
+    <value>Poslední poloha před {0} s</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Position" xml:space="preserve">
+    <value>Poloha</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Satellites" xml:space="preserve">
+    <value>Satelity</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Accuracy" xml:space="preserve">
+    <value>Přesnost</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Speed" xml:space="preserve">
+    <value>Rychlost</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_FixQuality" xml:space="preserve">
+    <value>Kvalita polohy</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_FixTime" xml:space="preserve">
+    <value>Čas polohy</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_COMPASS" xml:space="preserve">
+    <value>KOMPAS</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_PointsAlongYourDirectionOf" xml:space="preserve">
+    <value>Ukazuje směr vašeho pohybu, jak ho GPS hlásí, když se pohybujete.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_WIFIPOSITIONOFFLINE" xml:space="preserve">
+    <value>POLOHA WI-FI (OFFLINE)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_ShowOnMap" xml:space="preserve">
+    <value>Zobrazit na mapě</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_AlsoSearchThisSessionS" xml:space="preserve">
+    <value>Prohledat také AP z této relace</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Magic8BallM8bFiles" xml:space="preserve">
+    <value>Soubory Magic 8 Ball (m8b)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_NoneImportedExportOneFrom" xml:space="preserve">
+    <value>Žádný importován. Exportujte jeden z relace (Exportovat → M8b) nebo použijte soubor z WiGLE WiFi Wardriving.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Remove" xml:space="preserve">
+    <value>Odebrat</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_ImportM8bFile" xml:space="preserve">
+    <value>Importovat soubor m8b…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_EachAPInRangeVotes" xml:space="preserve">
+    <value>Každý AP v dosahu hlasuje pro čtverce 1 km, ve kterých byl viděn; čtverec s nejvíce hlasy je odhad. Funguje bez GPS i sítě, např. v budovách. Formát m8b pochází z WiGLE WiFi Wardriving.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_NoSources" xml:space="preserve">
+    <value>Zatím není kde hledat: importujte soubor m8b nebo nejprve skenujte s GPS.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_NoneInRange" xml:space="preserve">
+    <value>Žádné AP v dosahu. Spusťte skenování pro odhad polohy.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_LookupFailed" xml:space="preserve">
+    <value>Hledání se nezdařilo: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_NoneKnown" xml:space="preserve">
+    <value>Žádný z AP v dosahu ({0}) není znám.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_Agree" xml:space="preserve">
+    <value>{0} z {1} AP v dosahu se shoduje na čtverci 1 km {2}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_Tie" xml:space="preserve">
+    <value>(shoda s dalšími čtverci: {0})</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_GpsDistance" xml:space="preserve">
+    <value>Poloha GPS je {0} m od jeho středu</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_Accuracy" xml:space="preserve">
+    <value>(± čtverec 1 km)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_ChooseFile" xml:space="preserve">
+    <value>Vyberte soubor m8b</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_Importing" xml:space="preserve">
+    <value>Importování…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_Imported" xml:space="preserve">
+    <value>Importováno {0}: záznamů: {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_NotM8b" xml:space="preserve">
+    <value>Není to soubor m8b, který tato aplikace dokáže přečíst ({0})</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_ImportFailed" xml:space="preserve">
+    <value>Import se nezdařil: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_RemoveTitle" xml:space="preserve">
+    <value>Odebrat soubor m8b</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_RemoveQuestion" xml:space="preserve">
+    <value>Odebrat {0} z aplikace?</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_Remove" xml:space="preserve">
+    <value>Odebrat</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_Removed" xml:space="preserve">
+    <value>Odebráno {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_New" xml:space="preserve">
+    <value>Nový průzkum</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Open" xml:space="preserve">
+    <value>Otevřít průzkum…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_FloorPlan" xml:space="preserve">
+    <value>Obrázek půdorysu…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_UseGrid" xml:space="preserve">
+    <value>Použít mřížku</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Rename" xml:space="preserve">
+    <value>Přejmenovat…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_ExportCsv" xml:space="preserve">
+    <value>Exportovat měření (CSV)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Delete" xml:space="preserve">
+    <value>Smazat tento průzkum</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_DeleteSpot" xml:space="preserve">
+    <value>Smazat bod</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_MeasureAgain" xml:space="preserve">
+    <value>Změřit tady znovu</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Strongest" xml:space="preserve">
+    <value>Nejsilnější síť v každém bodě</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_PlanLoadFailed" xml:space="preserve">
+    <value>Nelze načíst obrázek půdorysu: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_SpotInfo" xml:space="preserve">
+    <value>Bod {0}: AP: {1} v {2}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_NotHeard" xml:space="preserve">
+    <value>{0}: nezachyceno</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_StrongestAp" xml:space="preserve">
+    <value>Nejsilnější: {0} {1} dBm</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_SsidAps" xml:space="preserve">
+    <value>{0} (AP: {1})</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Measuring" xml:space="preserve">
+    <value>Měření… stůjte na místě, dokud neskončí další skenování.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_StartToMeasure" xml:space="preserve">
+    <value>Spusťte skenování, abyste zde změřili.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_StartThenTap" xml:space="preserve">
+    <value>Spusťte skenování a pak klepněte na místo, kde stojíte.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_TapToMeasure" xml:space="preserve">
+    <value>Klepněte na místo, kde stojíte, a změřte tam.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_SpotsMeasured" xml:space="preserve">
+    <value>Změřeno bodů: {0}. Klepnutím na místo, kde stojíte, přidáte další, klepnutím na bod ho zobrazíte nebo smažete.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_SaveFailed" xml:space="preserve">
+    <value>Průzkum nelze uložit: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_NoneSaved" xml:space="preserve">
+    <value>Zatím žádné uložené průzkumy.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_NameSpots" xml:space="preserve">
+    <value>{0} (bodů: {1})</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_FloorPlanTitle" xml:space="preserve">
+    <value>Půdorys</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_ChangePlanQuestion" xml:space="preserve">
+    <value>Tento průzkum už má změřené body, které se s novým půdorysem neposunou. Přesto změnit?</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Change" xml:space="preserve">
+    <value>Změnit</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_ChoosePlan" xml:space="preserve">
+    <value>Vyberte obrázek půdorysu</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_ImageFailed" xml:space="preserve">
+    <value>Tento obrázek nelze použít: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_RenameTitle" xml:space="preserve">
+    <value>Přejmenovat průzkum</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Name" xml:space="preserve">
+    <value>Název</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_DeleteTitle" xml:space="preserve">
+    <value>Smazat průzkum</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_DeleteQuestion" xml:space="preserve">
+    <value>Smazat {0} a jeho body ({1})?</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_NothingMeasured" xml:space="preserve">
+    <value>Zatím nic nezměřeno.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_ImageSaveFailed" xml:space="preserve">
+    <value>Obrázek nelze uložit: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Survey" xml:space="preserve">
+    <value>Průzkum ▾</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Network" xml:space="preserve">
+    <value>Síť</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Heatmap" xml:space="preserve">
+    <value>Teplotní mapa</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_StartScanning" xml:space="preserve">
+    <value>Spustit skenování</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_UndoLast" xml:space="preserve">
+    <value>Vrátit poslední</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_SaveImage" xml:space="preserve">
+    <value>Uložit obrázek</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filter_NewTitle" xml:space="preserve">
+    <value>Nový filtr</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filter_DefaultName" xml:space="preserve">
+    <value>Filtr {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filter_EditTitle" xml:space="preserve">
+    <value>Upravit {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filter_DeleteTitle" xml:space="preserve">
+    <value>Smazat filtr</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filter_DeleteQuestion" xml:space="preserve">
+    <value>Smazat „{0}“?</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filters_Add" xml:space="preserve">
+    <value>Přidat</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filters_TapAFilterToUse" xml:space="preserve">
+    <value>Klepnutím na filtr ho použijete. Použitý filtr zúží seznam AP a stránka Exportovat může exportovat jen AP, které zobrazuje.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filters_NoFilterShowAllAPs" xml:space="preserve">
+    <value>Bez filtru (zobrazit všechny AP)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filters_NoSavedFiltersYetTap" xml:space="preserve">
+    <value>Zatím žádné uložené filtry. Klepnutím na Přidat vytvoříte filtr.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filters_AddAFilter" xml:space="preserve">
+    <value>Přidat filtr</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_Name" xml:space="preserve">
+    <value>Název</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_SHOWAPSTHAT" xml:space="preserve">
+    <value>ZOBRAZIT AP, KTERÉ</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_SSIDContains" xml:space="preserve">
+    <value>SSID obsahuje</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_Any" xml:space="preserve">
+    <value>libovolné</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_BSSIDStartsWith" xml:space="preserve">
+    <value>BSSID začíná na</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_AnyEG0011" xml:space="preserve">
+    <value>libovolné, např. 00:11:22</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_AnyEG16" xml:space="preserve">
+    <value>libovolné, např. 1,6,11 nebo 36-64</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_SignalAtLeast" xml:space="preserve">
+    <value>Signál alespoň (%)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_SecureWPAAndUp" xml:space="preserve">
+    <value>Zabezpečené (WPA a vyšší)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_AdvancedRules" xml:space="preserve">
+    <value>Pokročilá pravidla</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_TheOriginalVistumblerSFilter" xml:space="preserve">
+    <value>Syntaxe filtrů původního Vistumbleru, pro každé pole. * nebo prázdné = libovolné · 6 = rovno · 1,6,11 = jedno z · 1-6 nebo -80--60 = mezi · &lt;&gt; na začátku = ne (&lt;&gt;6, &lt;&gt;1-6, &lt;&gt;6,&lt;&gt;11) · % = libovolný text (Linksys%, %guest%) · \, \- \% = doslovná čárka, pomlčka nebo procento. Textová pole nerozlišují velká a malá písmena.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_EGWPA2PersonalWPA3" xml:space="preserve">
+    <value>např. WPA2-Personal,WPA3-Personal</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_EGCCMP" xml:space="preserve">
+    <value>např. CCMP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_EG5GHz" xml:space="preserve">
+    <value>např. %5 GHz</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_InfrastructureOrAdHoc" xml:space="preserve">
+    <value>Infrastruktura nebo Ad hoc</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_Signal" xml:space="preserve">
+    <value>Signál (%)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_HighSignal" xml:space="preserve">
+    <value>Nejvyšší signál (%)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_RSSIDBm" xml:space="preserve">
+    <value>RSSI (dBm)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_EG700" xml:space="preserve">
+    <value>např. -70-0</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_HighRSSIDBm" xml:space="preserve">
+    <value>Nejvyšší RSSI (dBm)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_Active1Or0" xml:space="preserve">
+    <value>Aktivní (1 nebo 0)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_SaveAndUse" xml:space="preserve">
+    <value>Uložit a použít</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_AlsoWigle" xml:space="preserve">
+    <value>Nahrát také do WiGLE (Wi-Fi, mobilní vysílače a Bluetooth)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_AlsoWigleNoAccount" xml:space="preserve">
+    <value>Nahrát také do WiGLE: nejprve nastavte název a token API v Nastavení → WiGLE</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_As" xml:space="preserve">
+    <value>Nahrávání jako {0} do {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_NoApiKey" xml:space="preserve">
+    <value>(není nastaven klíč API)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_NeedAccount" xml:space="preserve">
+    <value>Před nahráním nastavte účet WifiDB v Nastavení → WifiDB.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_Preparing" xml:space="preserve">
+    <value>Příprava souboru…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_NoAps" xml:space="preserve">
+    <value>Nejsou žádné přístupové body k nahrání.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_Uploading" xml:space="preserve">
+    <value>Nahrávání přístupových bodů ({0}) do WifiDB…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_ImportNumber" xml:space="preserve">
+    <value>Import č. {0} — přístupových bodů: {1}.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_Failed" xml:space="preserve">
+    <value>Nahrávání se nezdařilo: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_UploadingWigle" xml:space="preserve">
+    <value>Nahrávání do WiGLE…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_NothingForWigle" xml:space="preserve">
+    <value>Do WiGLE není co nahrát.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Session_DeleteTitle" xml:space="preserve">
+    <value>Smazat relaci</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Session_DeleteQuestion" xml:space="preserve">
+    <value>Smazat relaci „{0}“? Tuto akci nelze vrátit.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbScan_NeedCamera" xml:space="preserve">
+    <value>Ke skenování je potřeba oprávnění k fotoaparátu. Použijte místo toho „Registrovat odkazem…“.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbScan_ScanWifiDBQR" xml:space="preserve">
+    <value>Naskenovat QR WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbScan_PointTheCameraAtYour" xml:space="preserve">
+    <value>Namiřte fotoaparát na registrační QR kód WifiDB.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_ActiveanddeadAPs" xml:space="preserve">
+    <value>Aktivní i neaktivní AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_ActiveAPsonly" xml:space="preserve">
+    <value>Jen aktivní AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_DeadAPsonly" xml:space="preserve">
+    <value>Jen neaktivní AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Available" xml:space="preserve">
+    <value>Je k dispozici {0} {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_YouHave" xml:space="preserve">
+    <value>Máte verzi {0}.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Prerelease" xml:space="preserve">
+    <value>Tato aktualizace je předběžná verze.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_NoNotes" xml:space="preserve">
+    <value>Pro tuto verzi nebyly zveřejněny poznámky k vydání.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_InstallRestart" xml:space="preserve">
+    <value>Nainstalovat a restartovat</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_InstallInfo" xml:space="preserve">
+    <value>{0} se během instalace aktualizace zavře a pak znovu spustí. Aktuální relace zůstane zachována, takže v ní můžete pokračovat.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Download" xml:space="preserve">
+    <value>Stáhnout aktualizaci</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_DownloadInfo" xml:space="preserve">
+    <value>Aktualizace se stáhne v prohlížeči. Otevřete ji a nainstalujte přes tuto verzi; relace a nastavení zůstanou zachovány.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_OpenPage" xml:space="preserve">
+    <value>Otevřít stránku ke stažení</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_NotInstalled" xml:space="preserve">
+    <value>Tato kopie nebyla nainstalována instalačním programem, proto stáhněte novou verzi ze stránky vydání.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_NoDownload" xml:space="preserve">
+    <value>Toto vydání zatím nemá soubor ke stažení pro vaše zařízení. Viz stránka vydání.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Downloading" xml:space="preserve">
+    <value>Stahování {0}…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Checking" xml:space="preserve">
+    <value>Kontrola podpisu instalačního programu…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Starting" xml:space="preserve">
+    <value>Spouštění instalačního programu…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Cancelled" xml:space="preserve">
+    <value>Aktualizace byla zrušena.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Failed" xml:space="preserve">
+    <value>Aktualizace se nezdařila: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_UpdateAvailable" xml:space="preserve">
+    <value>K dispozici je aktualizace</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_RELEASENOTES" xml:space="preserve">
+    <value>POZNÁMKY K VYDÁNÍ</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_ReleasePage" xml:space="preserve">
+    <value>Stránka vydání</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Later" xml:space="preserve">
+    <value>Později</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_OnceforeachscanthatfindsnewAPs" xml:space="preserve">
+    <value>Jednou za každé skenování, které najde nové AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_OnceforeachnewAP" xml:space="preserve">
+    <value>Jednou za každý nový AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_OnceforeachnewAPlouderforastrongersignal" xml:space="preserve">
+    <value>Jednou za každý nový AP, hlasitěji při silnějším signálu</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Thedevicesvoice" xml:space="preserve">
+    <value>Hlas zařízení</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Vistumblersrecordedwords" xml:space="preserve">
+    <value>Nahraná slova Vistumbleru</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Atonehigherforastrongersignal" xml:space="preserve">
+    <value>Tón, vyšší při silnějším signálu</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_SignalPct" xml:space="preserve">
+    <value>Signál (%)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_AutofitGPSaccuracy" xml:space="preserve">
+    <value>Automaticky (podle přesnosti GPS)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Manualzoomlevel" xml:space="preserve">
+    <value>Ruční úroveň přiblížení</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Keepcurrentzoom" xml:space="preserve">
+    <value>Ponechat aktuální přiblížení</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_AfteranumberofAPs" xml:space="preserve">
+    <value>Po určitém počtu AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Afteratime" xml:space="preserve">
+    <value>Po určité době</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_VSZzipped" xml:space="preserve">
+    <value>VSZ (zabalené)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_WindowsLocation" xml:space="preserve">
+    <value>Poloha Windows</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_SerialNMEACOMport" xml:space="preserve">
+    <value>Sériové NMEA (port COM)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_PhoneGPS" xml:space="preserve">
+    <value>GPS telefonu</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_BluetoothGPSreceiverNMEA" xml:space="preserve">
+    <value>Přijímač GPS Bluetooth (NMEA)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_USBGPSreceiverNMEA" xml:space="preserve">
+    <value>Přijímač GPS USB (NMEA)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Devicelocation" xml:space="preserve">
+    <value>Poloha zařízení</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Nogrouping" xml:space="preserve">
+    <value>Neseskupovat</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Band" xml:space="preserve">
+    <value>Pásmo</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Securitytype" xml:space="preserve">
+    <value>Typ zabezpečení</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Security" xml:space="preserve">
+    <value>Zabezpečení</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_LastSeen" xml:space="preserve">
+    <value>Naposledy viděn</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_FirstSeen" xml:space="preserve">
+    <value>Poprvé viděn</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Celltowers" xml:space="preserve">
+    <value>Mobilní vysílače</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SCANNING" xml:space="preserve">
+    <value>SKENOVÁNÍ</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ScanIntervalMs" xml:space="preserve">
+    <value>Interval skenování (ms)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_StartScanningWhenTheApp" xml:space="preserve">
+    <value>Spustit skenování při otevření aplikace</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_TurnOnGPSWhenThe" xml:space="preserve">
+    <value>Zapnout GPS při otevření aplikace</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_AlsoRecordCellTowers" xml:space="preserve">
+    <value>Zaznamenávat také mobilní vysílače</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_AlsoRecordBluetoothDevices" xml:space="preserve">
+    <value>Zaznamenávat také zařízení Bluetooth</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_WiFiAdapter" xml:space="preserve">
+    <value>Adaptér Wi-Fi</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Refresh" xml:space="preserve">
+    <value>Obnovit</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_MAP" xml:space="preserve">
+    <value>MAPA</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_BasemapStyle" xml:space="preserve">
+    <value>Styl podkladové mapy</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_GPSFollowZoom" xml:space="preserve">
+    <value>Přiblížení při sledování GPS</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ZoomLevel122" xml:space="preserve">
+    <value>Úroveň přiblížení (1–22)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ZoomAppliedWhenTheMap" xml:space="preserve">
+    <value>Přiblížení použité, když tlačítko GPS na mapě přejde do režimu sledování. Automaticky zvolí úroveň, kde je vidět kruh přesnosti polohy; pozdější přiblížení prsty zůstane, dokud se sledování znovu nezapne.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_APPointSize" xml:space="preserve">
+    <value>Velikost bodů AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SizeOfTheAccessPoint" xml:space="preserve">
+    <value>Velikost bodů přístupových bodů na mapě, pro živé skenování i historii WifiDB.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_MapAPColors" xml:space="preserve">
+    <value>Barvy AP na mapě…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_GPSSource" xml:space="preserve">
+    <value>Zdroj GPS</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_RecordTheGPSTrackEven" xml:space="preserve">
+    <value>Zaznamenávat trasu GPS, i když nejsou nalezeny žádné AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_CoordinateFormat" xml:space="preserve">
+    <value>Formát souřadnic</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_COMPort" xml:space="preserve">
+    <value>Port COM</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_BaudRate" xml:space="preserve">
+    <value>Přenosová rychlost (baud)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ChooseTheCOMPortYour" xml:space="preserve">
+    <value>Vyberte port COM, který používá přijímač GPS. Přijímač Bluetooth spárovaný s Windows se také zobrazí jako port COM.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ReconnectTheReceiverWhenNo" xml:space="preserve">
+    <value>Znovu připojit přijímač, když 10 sekund nepřicházejí žádná data</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ResetGPSPositionWhenNo" xml:space="preserve">
+    <value>Vynulovat polohu GPS, když 30 sekund nepřichází poloha</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_TurnOffTheReconnectFor" xml:space="preserve">
+    <value>Vypněte opětovné připojení u přijímače, který pozastavuje výstup. Vynulování polohy zabrání umisťování AP na poslední polohu přijímače poté, co polohu ztratí.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PlugTheReceiverInWith" xml:space="preserve">
+    <value>Připojte přijímač adaptérem USB OTG; Android se zeptá, zda ho aplikace smí používat. Funguje s Prolific PL2303 (GlobalSat), Silicon Labs CP210x, FTDI, CH340 a u-blox. Přijímače GlobalSat obvykle běží na 4800 baud, u-blox na 9600.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Receiver" xml:space="preserve">
+    <value>Přijímač</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PairTheReceiverInAndroid" xml:space="preserve">
+    <value>Nejprve spárujte přijímač v nastavení Bluetooth Androidu a pak ho vyberte zde. Musí posílat NMEA přes profil sériového portu (SPP), jako většina přijímačů GPS Bluetooth.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_BaseURL" xml:space="preserve">
+    <value>Základní URL</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Username" xml:space="preserve">
+    <value>Uživatelské jméno</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Username2" xml:space="preserve">
+    <value>uživatelské jméno</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_APIKey" xml:space="preserve">
+    <value>Klíč API</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_DataURL" xml:space="preserve">
+    <value>URL dat</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_DataURLServesTheMap" xml:space="preserve">
+    <value>URL dat poskytuje archivy historie mapy a kanál, který je vypisuje — jiný hostitel než web výše.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_RegisterWithQRCode" xml:space="preserve">
+    <value>Registrovat QR kódem</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_RegisterWithLink" xml:space="preserve">
+    <value>Registrovat odkazem…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_WIGLEOPTIONAL" xml:space="preserve">
+    <value>WIGLE (VOLITELNÉ)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_AlsoUploadToWiGLE" xml:space="preserve">
+    <value>Nahrávat také do WiGLE</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_OptionalAlongsideWifiDBSendsWi" xml:space="preserve">
+    <value>Volitelné, vedle WifiDB. Posílá Wi-Fi, mobilní vysílače a Bluetooth jako CSV WiGLE.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ReadWiGLESTermsOf" xml:space="preserve">
+    <value>Přečíst podmínky používání WiGLE</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_APIName" xml:space="preserve">
+    <value>Název API</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_APIToken" xml:space="preserve">
+    <value>Token API</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_GetMyAPINameAnd" xml:space="preserve">
+    <value>Získat můj název a token API (wigle.net)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_UploadEachSaveClearTo" xml:space="preserve">
+    <value>Nahrávat každé Uložit a vymazat do WiGLE</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_DonateForCommercialUse" xml:space="preserve">
+    <value>Darovat pro komerční použití</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_LetsWiGLEAlsoLicenseYour" xml:space="preserve">
+    <value>Umožní WiGLE licencovat vaše nahrávky i pro komerční použití („donate“ ve WiGLE).</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_RetryNow" xml:space="preserve">
+    <value>Zkusit nyní</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SAVECLEAR" xml:space="preserve">
+    <value>ULOŽIT A VYMAZAT</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SaveClearMenuSavesThe" xml:space="preserve">
+    <value>Uložit a vymazat (menu) uloží přístupové body do souboru sem a pak vymaže seznam, zatímco skenování pokračuje. Automatické uložení a vymazání to udělá za vás.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_UseDefaultFolder" xml:space="preserve">
+    <value>Použít výchozí složku</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_FileName" xml:space="preserve">
+    <value>Název souboru</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_AutoSave" xml:space="preserve">
+    <value>AutoSave</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_FileType" xml:space="preserve">
+    <value>Typ souboru</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_AutoSaveAndClear" xml:space="preserve">
+    <value>Automatické uložení a vymazání</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SaveOnceTheListHas" xml:space="preserve">
+    <value>Uložit, jakmile má seznam tolik AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SaveEveryThisManyMinutes" xml:space="preserve">
+    <value>Uložit vždy po tolika minutách skenování</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_UploadEachSaveToWifiDB" xml:space="preserve">
+    <value>Nahrávat každé uložení do WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_DeleteTheSavedFileOnce" xml:space="preserve">
+    <value>Smazat uložený soubor, jakmile ho WifiDB má</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_UsesTheWifiDBAccountBelow" xml:space="preserve">
+    <value>Používá účet WifiDB níže. Soubor zůstane zachován, pokud se nerozhodnete ho po nahrání smazat. Soubor, který nelze nahrát (bez připojení, WifiDB nedostupná, zatím bez účtu), čeká a zkouší se znovu po obnovení připojení, při spuštění aplikace a po dalším uložení.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ForExample0" xml:space="preserve">
+    <value>Například: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SOUND" xml:space="preserve">
+    <value>ZVUK</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PlayASoundWhenNew" xml:space="preserve">
+    <value>Přehrát zvuk při nalezení nových AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PlayASoundWhenThe" xml:space="preserve">
+    <value>Přehrát zvuk, když má přijímač GPS problém</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SpeakingAnAPSSignal" xml:space="preserve">
+    <value>Hlášení signálu AP: zapněte ho na stránce podrobností AP.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Voice" xml:space="preserve">
+    <value>Hlas</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Say" xml:space="preserve">
+    <value>Hlásit</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SpeakEverySeconds" xml:space="preserve">
+    <value>Hlásit každých (sekund)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SayTheUnitPercentOr" xml:space="preserve">
+    <value>Vyslovit jednotku („procent“ nebo „dBm“) za číslem</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_TheTonePlaysTheSignal" xml:space="preserve">
+    <value>Tón přehrává signál jako výšku, jako MIDI zvuky originálu. Nahraná slova neumí říct „mínus“, proto hlásí RSSI jako prosté číslo.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_DATA" xml:space="preserve">
+    <value>DATA</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_UpdateManufacturers" xml:space="preserve">
+    <value>Aktualizovat výrobce</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_UPDATES" xml:space="preserve">
+    <value>AKTUALIZACE</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_CheckForUpdatesAtStartup" xml:space="preserve">
+    <value>Kontrolovat aktualizace při spuštění</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_IncludePreReleases" xml:space="preserve">
+    <value>Zahrnout předběžné verze</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PreReleasesEG0" xml:space="preserve">
+    <value>Předběžné verze (např. 0.5.0-rc.1) dostávají novinky jako první, ale mohou být méně stabilní.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ADVANCED" xml:space="preserve">
+    <value>POKROČILÉ</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_KeepScreenOnWhileScanning" xml:space="preserve">
+    <value>Nechat obrazovku zapnutou během skenování</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_DebugLogging" xml:space="preserve">
+    <value>Ladicí protokol</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_WritesGPSFixesAndMap" xml:space="preserve">
+    <value>Zapisuje polohy GPS a obnovení vrstev mapy do ladicího protokolu (adb logcat) pro řešení problémů.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="MapColors_MapAPColors" xml:space="preserve">
+    <value>Barvy AP na mapě</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="MapColors_CircleColorsPerAgeBucket" xml:space="preserve">
+    <value>Barvy kruhů podle věkové skupiny, podle typu zabezpečení (hex RRGGBB). Aktivní AP živého skenování jsou nejjasnější; neaktivní a starší skupiny s věkem tmavnou.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="MapColors_Bucket" xml:space="preserve">
+    <value>Skupina</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="SessionChooser_VistumblerMAUISessions" xml:space="preserve">
+    <value>VistumblerMAUI — Relace</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="SessionChooser_RecoverAPreviousSessionOr" xml:space="preserve">
+    <value>Obnovte předchozí relaci nebo začněte novou.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="SessionChooser_NoSavedSessions" xml:space="preserve">
+    <value>Žádné uložené relace.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="SessionChooser_Resume" xml:space="preserve">
+    <value>Pokračovat</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="SessionChooser_StartNewSession" xml:space="preserve">
+    <value>Začít novou relaci</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_UploadToWifiDB" xml:space="preserve">
+    <value>Nahrát do WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_UploadsTheCurrentSessionS" xml:space="preserve">
+    <value>Nahraje přístupové body aktuální relace do WifiDB. WifiDB soubor zařadí do fronty a brzy ho naimportuje.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_ACCOUNT" xml:space="preserve">
+    <value>ÚČET</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_SetUpWifiDBAccount" xml:space="preserve">
+    <value>Nastavit účet WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_ChangeAccountInSettings" xml:space="preserve">
+    <value>Změnit účet v Nastavení</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_UPLOAD" xml:space="preserve">
+    <value>NAHRÁVÁNÍ</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_Title" xml:space="preserve">
+    <value>Název</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_Notes" xml:space="preserve">
+    <value>Poznámky</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_Optional" xml:space="preserve">
+    <value>volitelné</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_OtherUsers" xml:space="preserve">
+    <value>Další uživatelé</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_OptionalCommaSeparated" xml:space="preserve">
+    <value>volitelné, oddělené čárkami</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_Upload" xml:space="preserve">
+    <value>Nahrát</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_CheckImportStatus" xml:space="preserve">
+    <value>Zkontrolovat stav importu</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_WiFi" xml:space="preserve">
+    <value>Wi-Fi</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
 </root>

@@ -107,4 +107,1956 @@
     <value>Νέο αρχείο</value>
     <comment>Vistumbler Greek.ini NewSession</comment>
   </data>
+  <data name="NewSession_Title" xml:space="preserve">
+    <value>Νέο αρχείο</value>
+    <comment>Vistumbler Greek.ini NewSession</comment>
+  </data>
+  <data name="Common_Close" xml:space="preserve">
+    <value>Κλείσιμο</value>
+    <comment>Vistumbler Greek.ini Close</comment>
+  </data>
+  <data name="Common_Delete" xml:space="preserve">
+    <value>Διαγραφή</value>
+    <comment>Vistumbler Greek.ini Delete</comment>
+  </data>
+  <data name="Filter_DeleteTitle" xml:space="preserve">
+    <value>Διαγραφή φίλτρου</value>
+    <comment>Vistumbler Greek.ini DeleteFilter</comment>
+  </data>
+  <data name="Settings_Browse" xml:space="preserve">
+    <value>Εξερεύνηση…</value>
+    <comment>Vistumbler Greek.ini Browse</comment>
+  </data>
+  <data name="Settings_SOUND" xml:space="preserve">
+    <value>Ήχος</value>
+    <comment>Vistumbler Greek.ini Sound</comment>
+  </data>
+  <data name="Settings_UpdateManufacturers" xml:space="preserve">
+    <value>Ενημέρωση Κατασκευαστών</value>
+    <comment>Vistumbler Greek.ini UpdateManufacturers</comment>
+  </data>
+  <data name="Settings_CheckForUpdates" xml:space="preserve">
+    <value>Έλεγχος για ενημερώσεις</value>
+    <comment>Vistumbler Greek.ini CheckForUpdates</comment>
+  </data>
+  <data name="ApDetails_Copy" xml:space="preserve">
+    <value>Αντιγραφή</value>
+    <comment>Vistumbler Greek.ini Copy</comment>
+  </data>
+  <data name="ApDetails_SIGNALHISTORY" xml:space="preserve">
+    <value>Ιστορικό σήματος</value>
+    <comment>Vistumbler Greek.ini SignalHistory</comment>
+  </data>
+  <data name="ApDetails_FirstActive" xml:space="preserve">
+    <value>Πρώτη εμφάνιση</value>
+    <comment>Vistumbler Greek.ini Column_FirstActive</comment>
+  </data>
+  <data name="ApDetails_LastActive" xml:space="preserve">
+    <value>Τελευταία ενημέρωση</value>
+    <comment>Vistumbler Greek.ini Column_LastActive</comment>
+  </data>
+  <data name="Export_Export" xml:space="preserve">
+    <value>Εξαγωγή</value>
+    <comment>Vistumbler Greek.ini Export</comment>
+  </data>
+  <data name="Import_Import" xml:space="preserve">
+    <value>Εισαγωγή</value>
+    <comment>Vistumbler Greek.ini Import</comment>
+  </data>
+  <data name="Import_FILE" xml:space="preserve">
+    <value>Αρχείο</value>
+    <comment>Vistumbler Greek.ini File</comment>
+  </data>
+  <data name="GpsDetails_Altitude" xml:space="preserve">
+    <value>Υψόμετρο</value>
+    <comment>Vistumbler Greek.ini Altitude</comment>
+  </data>
+  <data name="GpsDetails_Heading" xml:space="preserve">
+    <value>Μοίρες</value>
+    <comment>Vistumbler Greek.ini Heading</comment>
+  </data>
+  <data name="Filters_Filters" xml:space="preserve">
+    <value>Φίλτρα</value>
+    <comment>Vistumbler Greek.ini Filters</comment>
+  </data>
+  <data name="Filters_Edit" xml:space="preserve">
+    <value>Eπεξεργασία</value>
+    <comment>Vistumbler Greek.ini Edit</comment>
+  </data>
+  <data name="Filters_Delete" xml:space="preserve">
+    <value>Διαγραφή</value>
+    <comment>Vistumbler Greek.ini Delete</comment>
+  </data>
+  <data name="FilterEdit_RadioType" xml:space="preserve">
+    <value>Τύπος σήματος</value>
+    <comment>Vistumbler Greek.ini Column_RadioType</comment>
+  </data>
+  <data name="FilterEdit_Save" xml:space="preserve">
+    <value>Αποθήκευση;</value>
+    <comment>Vistumbler Greek.ini Save</comment>
+  </data>
+  <data name="WifiDbUpload_Close" xml:space="preserve">
+    <value>Κλείσιμο</value>
+    <comment>Vistumbler Greek.ini Close</comment>
+  </data>
+  <data name="Language_System" xml:space="preserve">
+    <value>Γλώσσα συσκευής</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Tab_Scan" xml:space="preserve">
+    <value>Σάρωση</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Tab_Map" xml:space="preserve">
+    <value>Χάρτης</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Tab_Channels" xml:space="preserve">
+    <value>Κανάλια</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Menu_Clear" xml:space="preserve">
+    <value>Εκκαθάριση…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Menu_UploadWifiDb" xml:space="preserve">
+    <value>Αποστολή στο WifiDB…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Menu_SiteSurvey" xml:space="preserve">
+    <value>Επιθεώρηση χώρου</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Menu_Links" xml:space="preserve">
+    <value>Σύνδεσμοι…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Bar_Total" xml:space="preserve">
+    <value>Σύνολο: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Bar_Active" xml:space="preserve">
+    <value>Ενεργά: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_TotalAps" xml:space="preserve">
+    <value>Σύνολο AP: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_Cleared" xml:space="preserve">
+    <value>Εκκαθαρίστηκε</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_SavedAndCleared" xml:space="preserve">
+    <value>Αποθηκεύτηκαν {0} AP στο {1}, η λίστα εκκαθαρίστηκε</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_SaveFailed" xml:space="preserve">
+    <value>Η αποθήκευση απέτυχε, η λίστα δεν εκκαθαρίστηκε: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_SavedAps" xml:space="preserve">
+    <value>Αποθηκεύτηκαν {0} AP στο {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_UploadingWifiDb" xml:space="preserve">
+    <value>Αποστολή στο WifiDB…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_WifiDbNotYet" xml:space="preserve">
+    <value>Δεν στάλθηκε ακόμη στο WifiDB ({0}); θα γίνει νέα προσπάθεια</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_UploadedWifiDb" xml:space="preserve">
+    <value>Στάλθηκε στο WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_WigleNotYet" xml:space="preserve">
+    <value>Δεν στάλθηκε ακόμη στο WiGLE ({0}); θα γίνει νέα προσπάθεια</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_UploadedWigle" xml:space="preserve">
+    <value>Στάλθηκε στο WiGLE</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_Queued" xml:space="preserve">
+    <value>σε αναμονή</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_NeedLocation" xml:space="preserve">
+    <value>Η σάρωση Wi-Fi χρειάζεται άδεια τοποθεσίας</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_Scanning" xml:space="preserve">
+    <value>Σάρωση…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_Stopped" xml:space="preserve">
+    <value>Διακόπηκε — σύνολο {0} AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_ActiveTotal" xml:space="preserve">
+    <value>Ενεργά: {0} / σύνολο: {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_DbWriteFailed" xml:space="preserve">
+    <value>Η εγγραφή στη ΒΔ απέτυχε — νέα προσπάθεια στον επόμενο κύκλο</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Status_Error" xml:space="preserve">
+    <value>Σφάλμα: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Gps_Off" xml:space="preserve">
+    <value>Το GPS είναι ανενεργό</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Gps_PermissionDenied" xml:space="preserve">
+    <value>GPS: η άδεια τοποθεσίας απορρίφθηκε</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Gps_NoFix" xml:space="preserve">
+    <value>GPS: χωρίς θέση για {0} δ, η θέση μηδενίστηκε</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Gps_Error" xml:space="preserve">
+    <value>GPS: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filter_None" xml:space="preserve">
+    <value>Χωρίς φίλτρο</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Group_Channel" xml:space="preserve">
+    <value>Κανάλι {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Group_Open" xml:space="preserve">
+    <value>Ανοιχτό</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Group_Secure" xml:space="preserve">
+    <value>Ασφαλές</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Group_AdHoc" xml:space="preserve">
+    <value>Ad hoc</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Group_Infrastructure" xml:space="preserve">
+    <value>Υποδομή</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Group_Hidden" xml:space="preserve">
+    <value>(κρυφό)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Group_Unknown" xml:space="preserve">
+    <value>(άγνωστο)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_SearchPlaceholder" xml:space="preserve">
+    <value>Αναζήτηση SSID, BSSID, κατασκευαστή…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_Sort" xml:space="preserve">
+    <value>Ταξινόμηση</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_GroupBy" xml:space="preserve">
+    <value>Ομαδοποίηση κατά</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_FirstSeen" xml:space="preserve">
+    <value>Πρώτη: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_LastSeen" xml:space="preserve">
+    <value>Τελευταία: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_Channel" xml:space="preserve">
+    <value>Κ {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_RadioShown" xml:space="preserve">
+    <value>Εμφανίζονται {0} · τα ισχυρότερα πρώτα</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_RadioEmpty" xml:space="preserve">
+    <value>Τίποτα δεν έχει καταγραφεί ακόμη. Ενεργοποιήστε το στις Ρυθμίσεις → Σάρωση και ξεκινήστε σάρωση.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_TapToBegin" xml:space="preserve">
+    <value>Πατήστε «Σάρωση AP» για να ξεκινήσετε</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Common_Ok" xml:space="preserve">
+    <value>OK</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Common_Share" xml:space="preserve">
+    <value>Κοινοποίηση</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Common_Saved" xml:space="preserve">
+    <value>Αποθηκεύτηκε: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Common_ExportFailed" xml:space="preserve">
+    <value>Η εξαγωγή απέτυχε: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Clear_SaveThenClear" xml:space="preserve">
+    <value>Αποθήκευση σε αρχείο και μετά εκκαθάριση</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Clear_WithoutSaving" xml:space="preserve">
+    <value>Εκκαθάριση χωρίς αποθήκευση</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Clear_Question" xml:space="preserve">
+    <value>Εκκαθάριση της λίστας AP; Η σάρωση συνεχίζεται. Τα αποθηκευμένα αρχεία πηγαίνουν στο {0}.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Clear_SaveAndClear" xml:space="preserve">
+    <value>Αποθήκευση και εκκαθάριση</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Links_Title" xml:space="preserve">
+    <value>Σύνδεσμοι</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Links_CouldNotOpen" xml:space="preserve">
+    <value>Δεν ήταν δυνατό να ανοίξει το {0}: {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="NewSession_Question" xml:space="preserve">
+    <value>Έναρξη νέας συνεδρίας; Η τρέχουσα συνεδρία παραμένει αποθηκευμένη και μπορεί να ανοίξει αργότερα.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Exit_DiscardTitle" xml:space="preserve">
+    <value>Έξοδος χωρίς αποθήκευση</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Exit_DiscardQuestion" xml:space="preserve">
+    <value>Απόρριψη των δεδομένων αυτής της συνεδρίας και έξοδος;</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Exit_Discard" xml:space="preserve">
+    <value>Απόρριψη και έξοδος</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_ApMapHelp" xml:space="preserve">
+    <value>Κουκκίδες: όπου λήφθηκε το σήμα, από κόκκινο (ασθενές) έως πράσινο (ισχυρό), νέες προστίθενται κατά τη σάρωση. Πορτοκαλί: κύκλος σήματος. Μπλε: το πιο απομακρυσμένο σημείο λήψης. Το ⇪ εξάγει ως GeoJSON ή KML.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_WifiSquaresHelp" xml:space="preserve">
+    <value>Μωβ: τετράγωνα 1 km όπου εμφανίστηκαν AP εντός εμβέλειας· περισσότερες συμφωνίες, πιο σκούρο.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_Manufacturer" xml:space="preserve">
+    <value>Κατασκευαστής: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_ViewInList" xml:space="preserve">
+    <value>Προβολή στη λίστα AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_ClearTrack" xml:space="preserve">
+    <value>Εκκαθάριση διαδρομής</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_EnableTrack" xml:space="preserve">
+    <value>Ενεργοποίηση διαδρομής</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_DisableTrack" xml:space="preserve">
+    <value>Απενεργοποίηση διαδρομής</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_SaveOffline" xml:space="preserve">
+    <value>Αποθήκευση χάρτη για εκτός σύνδεσης</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_SavedMapsOnly" xml:space="preserve">
+    <value>Μόνο αποθηκευμένοι χάρτες</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_SavedMapsOnlyOn" xml:space="preserve">
+    <value>Μόνο αποθηκευμένοι χάρτες ✓</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_SaveOfflineTitle" xml:space="preserve">
+    <value>Αποθήκευση χάρτη για εκτός σύνδεσης</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_SaveOfflineQuestion" xml:space="preserve">
+    <value>Λήψη του ορατού χάρτη και δύο ακόμη επιπέδων μεγέθυνσης ώστε να εμφανίζεται χωρίς διαδίκτυο; Μετά ενεργοποιήστε «Μόνο αποθηκευμένοι χάρτες» για να περιοριστείτε σε αυτούς. Μια μεγάλη περιοχή μπορεί να αργήσει και να χρησιμοποιήσει πολλά δεδομένα.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_Download" xml:space="preserve">
+    <value>Λήψη</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_TrackCleared" xml:space="preserve">
+    <value>Η διαδρομή εκκαθαρίστηκε (η εξαγωγή κρατά όλο το ιστορικό)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_NotReady" xml:space="preserve">
+    <value>Ο χάρτης δεν είναι έτοιμος — περιμένετε να φορτώσει το στυλ</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_NotReadyPan" xml:space="preserve">
+    <value>Ο χάρτης δεν είναι έτοιμος — μετακινήστε ή μεγεθύνετε και δοκιμάστε ξανά</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_Caching" xml:space="preserve">
+    <value>Αποθήκευση περιοχής χάρτη (z{0}–{1})…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_OfflineFailed" xml:space="preserve">
+    <value>Η λήψη για εκτός σύνδεσης απέτυχε: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_OfflineError" xml:space="preserve">
+    <value>Σφάλμα λήψης για εκτός σύνδεσης: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_ApsWithGps" xml:space="preserve">
+    <value>AP με GPS: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_LayerOn" xml:space="preserve">
+    <value>Επίπεδο «{0}» ενεργό</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_LayerOff" xml:space="preserve">
+    <value>Επίπεδο «{0}» ανενεργό</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_LiveScan" xml:space="preserve">
+    <value>Τρέχουσα σάρωση</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_NotInSession" xml:space="preserve">
+    <value>Το {0} δεν είναι σε αυτή τη συνεδρία</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_NoPositions" xml:space="preserve">
+    <value>Το {0} δεν έχει θέσεις GPS για χαρτογράφηση</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_ApMapTitle" xml:space="preserve">
+    <value>{0}: {1} θέσεις, εμβέλεια {2} m</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_ExportSignalMap" xml:space="preserve">
+    <value>Εξαγωγή χάρτη σήματος</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_WifiSquareOne" xml:space="preserve">
+    <value>Θέση Wi-Fi: τετράγωνο {0}, {1} ψήφοι AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_WifiSquareMany" xml:space="preserve">
+    <value>Θέση Wi-Fi: καλύτερο τετράγωνο {0} ({1} ψήφοι), {2} ακόμη χρωματισμένα κατά ψήφους</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_Daily" xml:space="preserve">
+    <value>Ημερήσια</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_Weekly" xml:space="preserve">
+    <value>Εβδομαδιαία</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_Monthly" xml:space="preserve">
+    <value>Μηνιαία</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_0to1Year" xml:space="preserve">
+    <value>0–1 έτος</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_1to2Year" xml:space="preserve">
+    <value>1–2 έτη</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_2to3Year" xml:space="preserve">
+    <value>2–3 έτη</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_3to5Year" xml:space="preserve">
+    <value>3–5 έτη</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_5to10Year" xml:space="preserve">
+    <value>5–10 έτη</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_10PlusYear" xml:space="preserve">
+    <value>Πάνω από 10 έτη</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_CellNetworks" xml:space="preserve">
+    <value>Δίκτυα κινητής</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Channels_Band" xml:space="preserve">
+    <value>Ζώνη</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Channels_Status" xml:space="preserve">
+    <value>{0} ενεργά AP στα {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Graph_NoHistory" xml:space="preserve">
+    <value>Δεν υπάρχει ακόμη ιστορικό σήματος</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_AllAdapters" xml:space="preserve">
+    <value>Όλοι οι προσαρμογείς</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_AdapterNotFound" xml:space="preserve">
+    <value>Επιλεγμένος προσαρμογέας (δεν βρέθηκε)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_NoUsbGps" xml:space="preserve">
+    <value>Δεν είναι συνδεδεμένος υποστηριζόμενος δέκτης GPS USB.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PluggedIn" xml:space="preserve">
+    <value>Συνδεδεμένο: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_UsbListFailed" xml:space="preserve">
+    <value>Δεν ήταν δυνατή η απαρίθμηση συσκευών USB: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_NoPairedDevices" xml:space="preserve">
+    <value>Δεν υπάρχουν συζευγμένες συσκευές. Κάντε σύζευξη του δέκτη GPS στις ρυθμίσεις Bluetooth του Android και ανανεώστε.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PendingWifiDb" xml:space="preserve">
+    <value>Αποθηκευμένα αρχεία που περιμένουν αποστολή στο WifiDB: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_WaitingUploads" xml:space="preserve">
+    <value>Αποστολές σε αναμονή</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_StopWifiDbQuestion" xml:space="preserve">
+    <value>Διακοπή προσπαθειών αποστολής αυτών των αρχείων στο WifiDB; Τα αρχεία παραμένουν στον φάκελο «Αποθήκευση και εκκαθάριση».</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_StopUploading" xml:space="preserve">
+    <value>Διακοπή αποστολής</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ManufacturersUpdated" xml:space="preserve">
+    <value>ενημερώθηκε {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ManufacturersBuiltIn" xml:space="preserve">
+    <value>η λίστα που συνοδεύει την εφαρμογή</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ManufacturersLoading" xml:space="preserve">
+    <value>Φόρτωση λίστας κατασκευαστών…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ManufacturersCount" xml:space="preserve">
+    <value>{0} κατασκευαστές ({1})</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ManufacturersDownloading" xml:space="preserve">
+    <value>Λήψη λίστας κατασκευαστών IEEE…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_UpdateFailed" xml:space="preserve">
+    <value>Η ενημέρωση απέτυχε: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_WifiDbRegistration" xml:space="preserve">
+    <value>Εγγραφή στο WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PasteRegistrationLink" xml:space="preserve">
+    <value>Επικολλήστε τον σύνδεσμο εγγραφής WifiDB (…/redeem_link.php?token=…):</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Redeem" xml:space="preserve">
+    <value>Εξαργύρωση</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_NotRegistrationLink" xml:space="preserve">
+    <value>Αυτό δεν μοιάζει με σύνδεσμο εγγραφής WifiDB.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Redeeming" xml:space="preserve">
+    <value>Εξαργύρωση…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Registered" xml:space="preserve">
+    <value>Εγγράφηκε στο WifiDB.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_RegisteredAs" xml:space="preserve">
+    <value>Εγγράφηκε στο WifiDB ως {0}.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_RegistrationFailed" xml:space="preserve">
+    <value>Η εγγραφή απέτυχε: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Wigle_Terms" xml:space="preserve">
+    <value>Το WiGLE (wigle.net) είναι ξεχωριστή υπηρεσία με δικούς της κανόνες. Η αποστολή στέλνει τα δεδομένα Wi-Fi, κινητής και Bluetooth αυτής της εφαρμογής στο WiGLE υπό τους όρους χρήσης του, που ορίζουν πώς αποθηκεύονται, εμφανίζονται και διαμοιράζονται· διαβάστε τους πριν την ενεργοποίηση. Οι αποστολές στο WifiDB δεν αλλάζουν.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Wigle_Pending" xml:space="preserve">
+    <value>Αποθηκεύσεις που περιμένουν αποστολή στο WiGLE: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Wigle_WaitingUploads" xml:space="preserve">
+    <value>Αποστολές WiGLE σε αναμονή</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Wigle_StopQuestion" xml:space="preserve">
+    <value>Διακοπή προσπαθειών αποστολής αυτών των αποθηκεύσεων στο WiGLE; Τα αρχεία VS1 στον φάκελο «Αποθήκευση και εκκαθάριση» παραμένουν.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Title" xml:space="preserve">
+    <value>Λεπτομέρειες AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_NotFound" xml:space="preserve">
+    <value>Το AP δεν βρέθηκε.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_NoHistory" xml:space="preserve">
+    <value>Δεν υπάρχει ακόμη ιστορικό σήματος.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Samples" xml:space="preserve">
+    <value>{0} μετρήσεις σήματος</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_AllDetails" xml:space="preserve">
+    <value>Όλες οι λεπτομέρειες</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_GpsPosition" xml:space="preserve">
+    <value>Θέση GPS</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Copied" xml:space="preserve">
+    <value>Αντιγράφηκε: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_SearchingWifiDb" xml:space="preserve">
+    <value>Αναζήτηση στο WifiDB…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_SearchFailed" xml:space="preserve">
+    <value>Η αναζήτηση στο WifiDB απέτυχε: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_NotInWifiDb" xml:space="preserve">
+    <value>Το {0} δεν είναι ακόμη στο WifiDB.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Security" xml:space="preserve">
+    <value>Ασφάλεια: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Channel" xml:space="preserve">
+    <value>Κανάλι: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_ChannelMhz" xml:space="preserve">
+    <value>Κανάλι: {0} ({1} MHz)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_FirstSeen" xml:space="preserve">
+    <value>Πρώτη εμφάνιση: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_LastSeen" xml:space="preserve">
+    <value>Τελευταία εμφάνιση: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_FirstActiveLine" xml:space="preserve">
+    <value>Πρώτη ενεργή: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_LastActiveLine" xml:space="preserve">
+    <value>Τελευταία ενεργή: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_BestSignal" xml:space="preserve">
+    <value>Καλύτερο σήμα: {0}%</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Signal" xml:space="preserve">
+    <value>Σήμα: {0}%</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Position" xml:space="preserve">
+    <value>Θέση: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_RadioLine" xml:space="preserve">
+    <value>Ραδιόφωνο: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_OpenInWifiDb" xml:space="preserve">
+    <value>Άνοιγμα στο WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Back" xml:space="preserve">
+    <value>Πίσω</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_BackToScanList" xml:space="preserve">
+    <value>‹ Πίσω στη λίστα σάρωσης</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_SpeakSignalWhileScanning" xml:space="preserve">
+    <value>Εκφώνηση σήματος κατά τη σάρωση</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_DETAILS" xml:space="preserve">
+    <value>ΛΕΠΤΟΜΕΡΕΙΕΣ</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ApDetails_Radio" xml:space="preserve">
+    <value>Ραδιόφωνο</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_FilteredOnly" xml:space="preserve">
+    <value>Μόνο τα AP που δείχνει το φίλτρο «{0}»</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_KeepingFolder" xml:space="preserve">
+    <value>{0} Διατηρείται το {1}.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_WillWriteTo" xml:space="preserve">
+    <value>Οι εξαγωγές θα γράφονται στο {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_Exporting" xml:space="preserve">
+    <value>Εξαγωγή…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_NoAps" xml:space="preserve">
+    <value>Δεν υπάρχουν σημεία πρόσβασης για εξαγωγή</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_NoneMatch" xml:space="preserve">
+    <value>Κανένα σημείο πρόσβασης δεν ταιριάζει στο φίλτρο «{0}»</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_Done" xml:space="preserve">
+    <value>Εξήχθησαν {0} σημεία πρόσβασης στο {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_DoneFellBack" xml:space="preserve">
+    <value>Εξήχθησαν {0} σημεία πρόσβασης στο {1} — ο επιλεγμένος φάκελος δεν ήταν εγγράψιμος</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_FORMAT" xml:space="preserve">
+    <value>ΜΟΡΦΗ</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_FILENAME" xml:space="preserve">
+    <value>ΟΝΟΜΑ ΑΡΧΕΙΟΥ</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_LOCATION" xml:space="preserve">
+    <value>ΤΟΠΟΘΕΣΙΑ</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_TheFileIsOfferedTo" xml:space="preserve">
+    <value>Μετά από κάθε εξαγωγή το αρχείο προσφέρεται για κοινοποίηση, ώστε να το στείλετε όπου κι αν γράφτηκε.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_KMLOPTIONS" xml:space="preserve">
+    <value>ΕΠΙΛΟΓΕΣ KML</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_IncludeOpenNetworks" xml:space="preserve">
+    <value>Συμπερίληψη ανοιχτών δικτύων</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_IncludeWEPNetworks" xml:space="preserve">
+    <value>Συμπερίληψη δικτύων WEP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_IncludeSecureNetworks" xml:space="preserve">
+    <value>Συμπερίληψη ασφαλών δικτύων</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_ColourPinsBySignal" xml:space="preserve">
+    <value>Χρωματισμός σημάνσεων κατά σήμα</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Export_IncludeGPSTrack" xml:space="preserve">
+    <value>Συμπερίληψη διαδρομής GPS</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_PickFile" xml:space="preserve">
+    <value>Επιλέξτε αρχείο για εισαγωγή</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_SelectFile" xml:space="preserve">
+    <value>Επιλογή αρχείου για εισαγωγή</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_Ready" xml:space="preserve">
+    <value>Έτοιμο για εισαγωγή</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_SelectValid" xml:space="preserve">
+    <value>Επιλέξτε έγκυρο αρχείο.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_Parsing" xml:space="preserve">
+    <value>Ανάλυση αρχείου…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_Saving" xml:space="preserve">
+    <value>Αποθήκευση {0} σημείων πρόσβασης…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_Done" xml:space="preserve">
+    <value>Ολοκληρώθηκε — εισήχθησαν {0} σημεία πρόσβασης</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_AndRadios" xml:space="preserve">
+    <value>και {0} κεραίες κινητής και συσκευές Bluetooth</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_NoneFound" xml:space="preserve">
+    <value>Δεν βρέθηκαν σημεία πρόσβασης στο αρχείο</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_FolderFailed" xml:space="preserve">
+    <value>Δεν ήταν δυνατή η ανάγνωση του φακέλου: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_NoFiles" xml:space="preserve">
+    <value>Δεν υπάρχουν αρχεία {0} στο {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_Progress" xml:space="preserve">
+    <value>Εισαγωγή {0} από {1}: {2}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_FolderDone" xml:space="preserve">
+    <value>Ολοκληρώθηκε — {0} αρχεία, {1} σημεία πρόσβασης</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_FolderFailedFiles" xml:space="preserve">
+    <value>; {0} αρχεία δεν διαβάστηκαν</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_ImportAFolder" xml:space="preserve">
+    <value>Εισαγωγή φακέλου…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Import_ImportsEveryFileOfThe" xml:space="preserve">
+    <value>Εισάγει κάθε αρχείο του επιλεγμένου τύπου σε έναν φάκελο (χωρίς υποφακέλους).</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Waiting" xml:space="preserve">
+    <value>Αναμονή για θέση GPS…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Off" xml:space="preserve">
+    <value>Το GPS είναι ανενεργό. Πατήστε «Χρήση GPS» για εκκίνηση.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_LastFix" xml:space="preserve">
+    <value>Τελευταία θέση πριν από {0} δ</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Position" xml:space="preserve">
+    <value>Θέση</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Satellites" xml:space="preserve">
+    <value>Δορυφόροι</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Accuracy" xml:space="preserve">
+    <value>Ακρίβεια</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Speed" xml:space="preserve">
+    <value>Ταχύτητα</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_FixQuality" xml:space="preserve">
+    <value>Ποιότητα θέσης</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_FixTime" xml:space="preserve">
+    <value>Ώρα θέσης</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_COMPASS" xml:space="preserve">
+    <value>ΠΥΞΙΔΑ</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_PointsAlongYourDirectionOf" xml:space="preserve">
+    <value>Δείχνει την κατεύθυνση κίνησής σας, όπως την αναφέρει το GPS ενώ κινείστε.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_WIFIPOSITIONOFFLINE" xml:space="preserve">
+    <value>ΘΕΣΗ WI-FI (ΕΚΤΟΣ ΣΥΝΔΕΣΗΣ)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_ShowOnMap" xml:space="preserve">
+    <value>Εμφάνιση στον χάρτη</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_AlsoSearchThisSessionS" xml:space="preserve">
+    <value>Αναζήτηση και στα AP αυτής της συνεδρίας</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Magic8BallM8bFiles" xml:space="preserve">
+    <value>Αρχεία Magic 8 Ball (m8b)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_NoneImportedExportOneFrom" xml:space="preserve">
+    <value>Κανένα δεν έχει εισαχθεί. Εξαγάγετε ένα από μια συνεδρία (Εξαγωγή → M8b) ή χρησιμοποιήστε αρχείο από το WiGLE WiFi Wardriving.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_Remove" xml:space="preserve">
+    <value>Αφαίρεση</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_ImportM8bFile" xml:space="preserve">
+    <value>Εισαγωγή αρχείου m8b…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="GpsDetails_EachAPInRangeVotes" xml:space="preserve">
+    <value>Κάθε AP εντός εμβέλειας ψηφίζει τα τετράγωνα 1 km όπου εμφανίστηκε· το τετράγωνο με τις περισσότερες ψήφους είναι η εκτίμηση. Λειτουργεί χωρίς GPS και δίκτυο, π.χ. σε εσωτερικό χώρο. Η μορφή m8b προέρχεται από το WiGLE WiFi Wardriving.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_NoSources" xml:space="preserve">
+    <value>Δεν υπάρχει ακόμη πού να γίνει αναζήτηση: εισαγάγετε αρχείο m8b ή σαρώστε πρώτα με GPS.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_NoneInRange" xml:space="preserve">
+    <value>Κανένα AP εντός εμβέλειας. Ξεκινήστε σάρωση για εκτίμηση θέσης.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_LookupFailed" xml:space="preserve">
+    <value>Η αναζήτηση απέτυχε: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_NoneKnown" xml:space="preserve">
+    <value>Κανένα από τα {0} AP εντός εμβέλειας δεν είναι γνωστό.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_Agree" xml:space="preserve">
+    <value>{0} από {1} AP εντός εμβέλειας συμφωνούν στο τετράγωνο 1 km {2}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_Tie" xml:space="preserve">
+    <value>(ισοψηφία με {0} άλλα τετράγωνα)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_GpsDistance" xml:space="preserve">
+    <value>Η θέση GPS απέχει {0} m από το κέντρο του</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_Accuracy" xml:space="preserve">
+    <value>(± ένα τετράγωνο 1 km)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_ChooseFile" xml:space="preserve">
+    <value>Επιλέξτε αρχείο m8b</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_Importing" xml:space="preserve">
+    <value>Εισαγωγή…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_Imported" xml:space="preserve">
+    <value>Εισήχθη το {0}: {1} εγγραφές</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_NotM8b" xml:space="preserve">
+    <value>Αυτό δεν είναι αρχείο m8b που μπορεί να διαβάσει η εφαρμογή ({0})</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_ImportFailed" xml:space="preserve">
+    <value>Η εισαγωγή απέτυχε: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_RemoveTitle" xml:space="preserve">
+    <value>Αφαίρεση αρχείου m8b</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_RemoveQuestion" xml:space="preserve">
+    <value>Αφαίρεση του {0} από την εφαρμογή;</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_Remove" xml:space="preserve">
+    <value>Αφαίρεση</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiPos_Removed" xml:space="preserve">
+    <value>Αφαιρέθηκε: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_New" xml:space="preserve">
+    <value>Νέα επιθεώρηση</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Open" xml:space="preserve">
+    <value>Άνοιγμα επιθεώρησης…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_FloorPlan" xml:space="preserve">
+    <value>Εικόνα κάτοψης…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_UseGrid" xml:space="preserve">
+    <value>Χρήση πλέγματος</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Rename" xml:space="preserve">
+    <value>Μετονομασία…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_ExportCsv" xml:space="preserve">
+    <value>Εξαγωγή μετρήσεων (CSV)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Delete" xml:space="preserve">
+    <value>Διαγραφή αυτής της επιθεώρησης</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_DeleteSpot" xml:space="preserve">
+    <value>Διαγραφή σημείου</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_MeasureAgain" xml:space="preserve">
+    <value>Νέα μέτρηση εδώ</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Strongest" xml:space="preserve">
+    <value>Ισχυρότερο δίκτυο σε κάθε σημείο</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_PlanLoadFailed" xml:space="preserve">
+    <value>Δεν ήταν δυνατή η φόρτωση της κάτοψης: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_SpotInfo" xml:space="preserve">
+    <value>Σημείο {0}: {1} AP στις {2}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_NotHeard" xml:space="preserve">
+    <value>{0}: δεν λαμβάνεται</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_StrongestAp" xml:space="preserve">
+    <value>Ισχυρότερο: {0} {1} dBm</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_SsidAps" xml:space="preserve">
+    <value>{0} ({1} AP)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Measuring" xml:space="preserve">
+    <value>Μέτρηση… μείνετε ακίνητοι μέχρι να ολοκληρωθεί η επόμενη σάρωση.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_StartToMeasure" xml:space="preserve">
+    <value>Ξεκινήστε σάρωση για μέτρηση εδώ.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_StartThenTap" xml:space="preserve">
+    <value>Ξεκινήστε σάρωση και πατήστε το σημείο όπου βρίσκεστε.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_TapToMeasure" xml:space="preserve">
+    <value>Πατήστε το σημείο όπου βρίσκεστε για μέτρηση εκεί.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_SpotsMeasured" xml:space="preserve">
+    <value>{0} σημεία μετρήθηκαν. Πατήστε όπου βρίσκεστε για προσθήκη ή ένα σημείο για προβολή ή διαγραφή.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_SaveFailed" xml:space="preserve">
+    <value>Δεν ήταν δυνατή η αποθήκευση της επιθεώρησης: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_NoneSaved" xml:space="preserve">
+    <value>Δεν υπάρχουν ακόμη αποθηκευμένες επιθεωρήσεις.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_NameSpots" xml:space="preserve">
+    <value>{0} ({1} σημεία)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_FloorPlanTitle" xml:space="preserve">
+    <value>Κάτοψη</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_ChangePlanQuestion" xml:space="preserve">
+    <value>Αυτή η επιθεώρηση έχει ήδη μετρημένα σημεία που δεν θα μετακινηθούν με την αλλαγή κάτοψης. Αλλαγή παρ' όλα αυτά;</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Change" xml:space="preserve">
+    <value>Αλλαγή</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_ChoosePlan" xml:space="preserve">
+    <value>Επιλέξτε εικόνα κάτοψης</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_ImageFailed" xml:space="preserve">
+    <value>Δεν ήταν δυνατή η χρήση αυτής της εικόνας: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_RenameTitle" xml:space="preserve">
+    <value>Μετονομασία επιθεώρησης</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Name" xml:space="preserve">
+    <value>Όνομα</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_DeleteTitle" xml:space="preserve">
+    <value>Διαγραφή επιθεώρησης</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_DeleteQuestion" xml:space="preserve">
+    <value>Διαγραφή του {0} και των {1} σημείων του;</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_NothingMeasured" xml:space="preserve">
+    <value>Τίποτα δεν έχει μετρηθεί ακόμη.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_ImageSaveFailed" xml:space="preserve">
+    <value>Δεν ήταν δυνατή η αποθήκευση της εικόνας: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Survey" xml:space="preserve">
+    <value>Επιθεώρηση ▾</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Network" xml:space="preserve">
+    <value>Δίκτυο</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_Heatmap" xml:space="preserve">
+    <value>Θερμικός χάρτης</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_StartScanning" xml:space="preserve">
+    <value>Έναρξη σάρωσης</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_UndoLast" xml:space="preserve">
+    <value>Αναίρεση τελευταίου</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Survey_SaveImage" xml:space="preserve">
+    <value>Αποθήκευση εικόνας</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filter_NewTitle" xml:space="preserve">
+    <value>Νέο φίλτρο</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filter_DefaultName" xml:space="preserve">
+    <value>Φίλτρο {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filter_EditTitle" xml:space="preserve">
+    <value>Επεξεργασία {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filter_DeleteQuestion" xml:space="preserve">
+    <value>Διαγραφή του «{0}»;</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filters_Add" xml:space="preserve">
+    <value>Προσθήκη</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filters_TapAFilterToUse" xml:space="preserve">
+    <value>Πατήστε ένα φίλτρο για χρήση. Το ενεργό φίλτρο περιορίζει τη λίστα AP και η σελίδα «Εξαγωγή» μπορεί να εξαγάγει μόνο τα AP που δείχνει.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filters_NoFilterShowAllAPs" xml:space="preserve">
+    <value>Χωρίς φίλτρο (εμφάνιση όλων των AP)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filters_NoSavedFiltersYetTap" xml:space="preserve">
+    <value>Δεν υπάρχουν ακόμη αποθηκευμένα φίλτρα. Πατήστε «Προσθήκη» για να δημιουργήσετε.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Filters_AddAFilter" xml:space="preserve">
+    <value>Προσθήκη φίλτρου</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_Name" xml:space="preserve">
+    <value>Όνομα</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_SHOWAPSTHAT" xml:space="preserve">
+    <value>ΕΜΦΑΝΙΣΗ AP ΠΟΥ</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_SSIDContains" xml:space="preserve">
+    <value>Το SSID περιέχει</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_Any" xml:space="preserve">
+    <value>οποιοδήποτε</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_BSSIDStartsWith" xml:space="preserve">
+    <value>Το BSSID αρχίζει με</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_AnyEG0011" xml:space="preserve">
+    <value>οποιοδήποτε, π.χ. 00:11:22</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_AnyEG16" xml:space="preserve">
+    <value>οποιοδήποτε, π.χ. 1,6,11 ή 36-64</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_SignalAtLeast" xml:space="preserve">
+    <value>Σήμα τουλάχιστον (%)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_SecureWPAAndUp" xml:space="preserve">
+    <value>Ασφαλή (WPA και άνω)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_AdvancedRules" xml:space="preserve">
+    <value>Προχωρημένοι κανόνες</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_TheOriginalVistumblerSFilter" xml:space="preserve">
+    <value>Η σύνταξη φίλτρων του αρχικού Vistumbler, ανά πεδίο. * ή κενό = οποιοδήποτε · 6 = ίσο · 1,6,11 = ένα από · 1-6 ή -80--60 = μεταξύ · &lt;&gt; μπροστά = όχι (&lt;&gt;6, &lt;&gt;1-6, &lt;&gt;6,&lt;&gt;11) · % = οποιοδήποτε κείμενο (Linksys%, %guest%) · \, \- \% = κυριολεκτικό κόμμα, παύλα ή ποσοστό. Τα πεδία κειμένου δεν κάνουν διάκριση πεζών-κεφαλαίων.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_EGWPA2PersonalWPA3" xml:space="preserve">
+    <value>π.χ. WPA2-Personal,WPA3-Personal</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_EGCCMP" xml:space="preserve">
+    <value>π.χ. CCMP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_EG5GHz" xml:space="preserve">
+    <value>π.χ. %5 GHz</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_InfrastructureOrAdHoc" xml:space="preserve">
+    <value>Υποδομή ή Ad hoc</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_Signal" xml:space="preserve">
+    <value>Σήμα (%)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_HighSignal" xml:space="preserve">
+    <value>Μέγιστο σήμα (%)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_RSSIDBm" xml:space="preserve">
+    <value>RSSI (dBm)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_EG700" xml:space="preserve">
+    <value>π.χ. -70-0</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_HighRSSIDBm" xml:space="preserve">
+    <value>Μέγιστο RSSI (dBm)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_Active1Or0" xml:space="preserve">
+    <value>Ενεργό (1 ή 0)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="FilterEdit_SaveAndUse" xml:space="preserve">
+    <value>Αποθήκευση και χρήση</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_AlsoWigle" xml:space="preserve">
+    <value>Αποστολή και στο WiGLE (Wi-Fi, κεραίες κινητής και Bluetooth)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_AlsoWigleNoAccount" xml:space="preserve">
+    <value>Αποστολή και στο WiGLE: ορίστε πρώτα όνομα και token API στις Ρυθμίσεις → WiGLE</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_As" xml:space="preserve">
+    <value>Αποστολή ως {0} στο {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_NoApiKey" xml:space="preserve">
+    <value>(χωρίς κλειδί API)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_NeedAccount" xml:space="preserve">
+    <value>Ρυθμίστε λογαριασμό WifiDB στις Ρυθμίσεις → WifiDB πριν την αποστολή.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_Preparing" xml:space="preserve">
+    <value>Προετοιμασία αρχείου…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_NoAps" xml:space="preserve">
+    <value>Δεν υπάρχουν σημεία πρόσβασης για αποστολή.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_Uploading" xml:space="preserve">
+    <value>Αποστολή {0} σημείων πρόσβασης στο WifiDB…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_ImportNumber" xml:space="preserve">
+    <value>Εισαγωγή #{0} — {1} σημεία πρόσβασης.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_Failed" xml:space="preserve">
+    <value>Η αποστολή απέτυχε: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_UploadingWigle" xml:space="preserve">
+    <value>Αποστολή στο WiGLE…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Upload_NothingForWigle" xml:space="preserve">
+    <value>Τίποτα για αποστολή στο WiGLE.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Session_DeleteTitle" xml:space="preserve">
+    <value>Διαγραφή συνεδρίας</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Session_DeleteQuestion" xml:space="preserve">
+    <value>Διαγραφή της συνεδρίας «{0}»; Δεν αναιρείται.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbScan_NeedCamera" xml:space="preserve">
+    <value>Η σάρωση χρειάζεται άδεια κάμερας. Χρησιμοποιήστε αντί αυτού «Εγγραφή με σύνδεσμο…».</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbScan_ScanWifiDBQR" xml:space="preserve">
+    <value>Σάρωση QR WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbScan_PointTheCameraAtYour" xml:space="preserve">
+    <value>Στρέψτε την κάμερα στον κωδικό QR εγγραφής WifiDB.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_ActiveanddeadAPs" xml:space="preserve">
+    <value>Ενεργά και ανενεργά AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_ActiveAPsonly" xml:space="preserve">
+    <value>Μόνο ενεργά AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_DeadAPsonly" xml:space="preserve">
+    <value>Μόνο ανενεργά AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Available" xml:space="preserve">
+    <value>Διαθέσιμο το {0} {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_YouHave" xml:space="preserve">
+    <value>Έχετε το {0}.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Prerelease" xml:space="preserve">
+    <value>Αυτή η ενημέρωση είναι προδημοσίευση.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_NoNotes" xml:space="preserve">
+    <value>Δεν δημοσιεύτηκαν σημειώσεις έκδοσης για αυτή την έκδοση.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_InstallRestart" xml:space="preserve">
+    <value>Εγκατάσταση και επανεκκίνηση</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_InstallInfo" xml:space="preserve">
+    <value>Το {0} θα κλείσει όσο εγκαθίσταται η ενημέρωση και μετά θα ξεκινήσει ξανά. Η τρέχουσα συνεδρία διατηρείται ώστε να συνεχίσετε.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Download" xml:space="preserve">
+    <value>Λήψη ενημέρωσης</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_DownloadInfo" xml:space="preserve">
+    <value>Η ενημέρωση λαμβάνεται στο πρόγραμμα περιήγησης. Ανοίξτε την για εγκατάσταση πάνω από αυτή την έκδοση· οι συνεδρίες και οι ρυθμίσεις διατηρούνται.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_OpenPage" xml:space="preserve">
+    <value>Άνοιγμα σελίδας λήψης</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_NotInstalled" xml:space="preserve">
+    <value>Αυτό το αντίγραφο δεν εγκαταστάθηκε από το πρόγραμμα εγκατάστασης, οπότε κατεβάστε τη νέα έκδοση από τη σελίδα έκδοσης.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_NoDownload" xml:space="preserve">
+    <value>Αυτή η έκδοση δεν έχει ακόμη λήψη για τη συσκευή σας. Δείτε τη σελίδα έκδοσης.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Downloading" xml:space="preserve">
+    <value>Λήψη {0}…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Checking" xml:space="preserve">
+    <value>Έλεγχος υπογραφής του προγράμματος εγκατάστασης…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Starting" xml:space="preserve">
+    <value>Εκκίνηση του προγράμματος εγκατάστασης…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Cancelled" xml:space="preserve">
+    <value>Η ενημέρωση ακυρώθηκε.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Failed" xml:space="preserve">
+    <value>Η ενημέρωση απέτυχε: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_UpdateAvailable" xml:space="preserve">
+    <value>Διαθέσιμη ενημέρωση</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_RELEASENOTES" xml:space="preserve">
+    <value>ΣΗΜΕΙΩΣΕΙΣ ΕΚΔΟΣΗΣ</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_ReleasePage" xml:space="preserve">
+    <value>Σελίδα έκδοσης</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Update_Later" xml:space="preserve">
+    <value>Αργότερα</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_OnceforeachscanthatfindsnewAPs" xml:space="preserve">
+    <value>Μία φορά για κάθε σάρωση με νέα AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_OnceforeachnewAP" xml:space="preserve">
+    <value>Μία φορά για κάθε νέο AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_OnceforeachnewAPlouderforastrongersignal" xml:space="preserve">
+    <value>Μία φορά για κάθε νέο AP, δυνατότερα για ισχυρότερο σήμα</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Thedevicesvoice" xml:space="preserve">
+    <value>Η φωνή της συσκευής</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Vistumblersrecordedwords" xml:space="preserve">
+    <value>Οι ηχογραφημένες λέξεις του Vistumbler</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Atonehigherforastrongersignal" xml:space="preserve">
+    <value>Τόνος, υψηλότερος για ισχυρότερο σήμα</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_SignalPct" xml:space="preserve">
+    <value>Σήμα (%)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_AutofitGPSaccuracy" xml:space="preserve">
+    <value>Αυτόματο (προσαρμογή στην ακρίβεια GPS)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Manualzoomlevel" xml:space="preserve">
+    <value>Χειροκίνητο επίπεδο μεγέθυνσης</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Keepcurrentzoom" xml:space="preserve">
+    <value>Διατήρηση τρέχουσας μεγέθυνσης</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_AfteranumberofAPs" xml:space="preserve">
+    <value>Μετά από έναν αριθμό AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Afteratime" xml:space="preserve">
+    <value>Μετά από ένα χρονικό διάστημα</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_VSZzipped" xml:space="preserve">
+    <value>VSZ (συμπιεσμένο)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_WindowsLocation" xml:space="preserve">
+    <value>Τοποθεσία Windows</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_SerialNMEACOMport" xml:space="preserve">
+    <value>Σειριακό NMEA (θύρα COM)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_PhoneGPS" xml:space="preserve">
+    <value>GPS τηλεφώνου</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_BluetoothGPSreceiverNMEA" xml:space="preserve">
+    <value>Δέκτης GPS Bluetooth (NMEA)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_USBGPSreceiverNMEA" xml:space="preserve">
+    <value>Δέκτης GPS USB (NMEA)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Devicelocation" xml:space="preserve">
+    <value>Τοποθεσία συσκευής</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Nogrouping" xml:space="preserve">
+    <value>Χωρίς ομαδοποίηση</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Band" xml:space="preserve">
+    <value>Ζώνη</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Securitytype" xml:space="preserve">
+    <value>Τύπος ασφάλειας</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Security" xml:space="preserve">
+    <value>Ασφάλεια</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_LastSeen" xml:space="preserve">
+    <value>Τελευταία εμφάνιση</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_FirstSeen" xml:space="preserve">
+    <value>Πρώτη εμφάνιση</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_Celltowers" xml:space="preserve">
+    <value>Κεραίες κινητής</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Opt_WiFi" xml:space="preserve">
+    <value>Wi-Fi</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SCANNING" xml:space="preserve">
+    <value>ΣΑΡΩΣΗ</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ScanIntervalMs" xml:space="preserve">
+    <value>Διάστημα σάρωσης (ms)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_StartScanningWhenTheApp" xml:space="preserve">
+    <value>Έναρξη σάρωσης με το άνοιγμα της εφαρμογής</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_TurnOnGPSWhenThe" xml:space="preserve">
+    <value>Ενεργοποίηση GPS με το άνοιγμα της εφαρμογής</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_AlsoRecordCellTowers" xml:space="preserve">
+    <value>Καταγραφή και κεραιών κινητής</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_AlsoRecordBluetoothDevices" xml:space="preserve">
+    <value>Καταγραφή και συσκευών Bluetooth</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_WiFiAdapter" xml:space="preserve">
+    <value>Προσαρμογέας Wi-Fi</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Refresh" xml:space="preserve">
+    <value>Ανανέωση</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_MAP" xml:space="preserve">
+    <value>ΧΑΡΤΗΣ</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_BasemapStyle" xml:space="preserve">
+    <value>Στυλ βασικού χάρτη</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_GPSFollowZoom" xml:space="preserve">
+    <value>Μεγέθυνση παρακολούθησης GPS</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ZoomLevel122" xml:space="preserve">
+    <value>Επίπεδο μεγέθυνσης (1–22)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ZoomAppliedWhenTheMap" xml:space="preserve">
+    <value>Η μεγέθυνση που εφαρμόζεται όταν το κουμπί GPS του χάρτη μπαίνει σε παρακολούθηση. Το «Αυτόματο» επιλέγει επίπεδο που δείχνει τον κύκλο ακρίβειας· μεγέθυνση με χειρονομία μετά διατηρείται ως την επόμενη ενεργοποίηση.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_APPointSize" xml:space="preserve">
+    <value>Μέγεθος σημείων AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SizeOfTheAccessPoint" xml:space="preserve">
+    <value>Μέγεθος των κουκκίδων σημείων πρόσβασης στον χάρτη — για την τρέχουσα σάρωση και το ιστορικό WifiDB.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_MapAPColors" xml:space="preserve">
+    <value>Χρώματα AP στον χάρτη…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_GPSSource" xml:space="preserve">
+    <value>Πηγή GPS</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_RecordTheGPSTrackEven" xml:space="preserve">
+    <value>Καταγραφή διαδρομής GPS ακόμη κι αν δεν βρεθούν AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_CoordinateFormat" xml:space="preserve">
+    <value>Μορφή συντεταγμένων</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_COMPort" xml:space="preserve">
+    <value>Θύρα COM</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_BaudRate" xml:space="preserve">
+    <value>Ρυθμός baud</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ChooseTheCOMPortYour" xml:space="preserve">
+    <value>Επιλέξτε τη θύρα COM του δέκτη GPS. Ένας δέκτης Bluetooth συζευγμένος με τα Windows εμφανίζεται επίσης ως θύρα COM.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ReconnectTheReceiverWhenNo" xml:space="preserve">
+    <value>Επανασύνδεση δέκτη όταν δεν φτάνουν δεδομένα για 10 δευτερόλεπτα</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ResetGPSPositionWhenNo" xml:space="preserve">
+    <value>Μηδενισμός θέσης GPS όταν δεν υπάρχει θέση για 30 δευτερόλεπτα</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_TurnOffTheReconnectFor" xml:space="preserve">
+    <value>Απενεργοποιήστε την επανασύνδεση για δέκτη που σταματά την έξοδό του. Ο μηδενισμός αποτρέπει την τοποθέτηση AP στην τελευταία θέση του δέκτη μετά την απώλεια σήματος.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PlugTheReceiverInWith" xml:space="preserve">
+    <value>Συνδέστε τον δέκτη με προσαρμογέα USB OTG· το Android θα ζητήσει άδεια για την εφαρμογή. Λειτουργεί με Prolific PL2303 (GlobalSat), Silicon Labs CP210x, FTDI, CH340 και u-blox. Οι δέκτες GlobalSat συνήθως λειτουργούν στα 4800 baud, οι u-blox στα 9600.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Receiver" xml:space="preserve">
+    <value>Δέκτης</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PairTheReceiverInAndroid" xml:space="preserve">
+    <value>Κάντε πρώτα σύζευξη του δέκτη στις ρυθμίσεις Bluetooth του Android και επιλέξτε τον εδώ. Πρέπει να στέλνει NMEA μέσω προφίλ σειριακής θύρας (SPP), όπως οι περισσότεροι δέκτες GPS Bluetooth.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_BaseURL" xml:space="preserve">
+    <value>Βασικό URL</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Username" xml:space="preserve">
+    <value>Όνομα χρήστη</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Username2" xml:space="preserve">
+    <value>όνομα χρήστη</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_APIKey" xml:space="preserve">
+    <value>Κλειδί API</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_DataURL" xml:space="preserve">
+    <value>URL δεδομένων</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_DataURLServesTheMap" xml:space="preserve">
+    <value>Το URL δεδομένων παρέχει τα αρχεία ιστορικού χάρτη και τη ροή που τα απαριθμεί — διαφορετικός κεντρικός υπολογιστής από τον παραπάνω ιστότοπο.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_RegisterWithQRCode" xml:space="preserve">
+    <value>Εγγραφή με κωδικό QR</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_RegisterWithLink" xml:space="preserve">
+    <value>Εγγραφή με σύνδεσμο…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_WIGLEOPTIONAL" xml:space="preserve">
+    <value>WIGLE (ΠΡΟΑΙΡΕΤΙΚΟ)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_AlsoUploadToWiGLE" xml:space="preserve">
+    <value>Αποστολή και στο WiGLE</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_OptionalAlongsideWifiDBSendsWi" xml:space="preserve">
+    <value>Προαιρετικό, μαζί με το WifiDB. Στέλνει Wi-Fi, κεραίες κινητής και Bluetooth ως WiGLE CSV.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ReadWiGLESTermsOf" xml:space="preserve">
+    <value>Διαβάστε τους όρους χρήσης του WiGLE</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_APIName" xml:space="preserve">
+    <value>Όνομα API</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_APIToken" xml:space="preserve">
+    <value>Token API</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_GetMyAPINameAnd" xml:space="preserve">
+    <value>Λήψη του ονόματος και token API μου (wigle.net)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_UploadEachSaveClearTo" xml:space="preserve">
+    <value>Αποστολή κάθε «Αποθήκευση και εκκαθάριση» στο WiGLE</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_DonateForCommercialUse" xml:space="preserve">
+    <value>Δωρεά για εμπορική χρήση</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_LetsWiGLEAlsoLicenseYour" xml:space="preserve">
+    <value>Επιτρέπει στο WiGLE να αδειοδοτεί τις αποστολές σας και για εμπορική χρήση («donate» στο WiGLE).</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_RetryNow" xml:space="preserve">
+    <value>Νέα προσπάθεια τώρα</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SAVECLEAR" xml:space="preserve">
+    <value>ΑΠΟΘΗΚΕΥΣΗ ΚΑΙ ΕΚΚΑΘΑΡΙΣΗ</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SaveClearMenuSavesThe" xml:space="preserve">
+    <value>Η «Αποθήκευση και εκκαθάριση» (μενού) αποθηκεύει τα σημεία πρόσβασης σε αρχείο εδώ και εκκαθαρίζει τη λίστα ενώ η σάρωση συνεχίζεται. Η αυτόματη αποθήκευση και εκκαθάριση το κάνει για εσάς.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_UseDefaultFolder" xml:space="preserve">
+    <value>Χρήση προεπιλεγμένου φακέλου</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_FileName" xml:space="preserve">
+    <value>Όνομα αρχείου</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_AutoSave" xml:space="preserve">
+    <value>AutoSave</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_FileType" xml:space="preserve">
+    <value>Τύπος αρχείου</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_AutoSaveAndClear" xml:space="preserve">
+    <value>Αυτόματη αποθήκευση και εκκαθάριση</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SaveOnceTheListHas" xml:space="preserve">
+    <value>Αποθήκευση όταν η λίστα έχει τόσα AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SaveEveryThisManyMinutes" xml:space="preserve">
+    <value>Αποθήκευση κάθε τόσα λεπτά σάρωσης</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_UploadEachSaveToWifiDB" xml:space="preserve">
+    <value>Αποστολή κάθε αποθήκευσης στο WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_DeleteTheSavedFileOnce" xml:space="preserve">
+    <value>Διαγραφή του αποθηκευμένου αρχείου μόλις είναι στο WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_UsesTheWifiDBAccountBelow" xml:space="preserve">
+    <value>Χρησιμοποιεί τον λογαριασμό WifiDB παρακάτω. Το αρχείο διατηρείται εκτός αν επιλέξετε διαγραφή μετά την αποστολή. Αρχείο που δεν μπορεί να σταλεί (χωρίς σύνδεση, WifiDB μη διαθέσιμο, χωρίς λογαριασμό ακόμη) περιμένει και στέλνεται ξανά όταν επανέλθει η σύνδεση, στην εκκίνηση της εφαρμογής και μετά την επόμενη αποθήκευση.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ForExample0" xml:space="preserve">
+    <value>Για παράδειγμα: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PlayASoundWhenNew" xml:space="preserve">
+    <value>Ήχος όταν βρίσκονται νέα AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PlayASoundWhenThe" xml:space="preserve">
+    <value>Ήχος όταν ο δέκτης GPS έχει πρόβλημα</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SpeakingAnAPSSignal" xml:space="preserve">
+    <value>Εκφώνηση σήματος AP: ενεργοποιήστε την στη σελίδα λεπτομερειών του AP.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Voice" xml:space="preserve">
+    <value>Φωνή</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_Say" xml:space="preserve">
+    <value>Εκφώνηση</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SpeakEverySeconds" xml:space="preserve">
+    <value>Εκφώνηση κάθε (δευτερόλεπτα)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_SayTheUnitPercentOr" xml:space="preserve">
+    <value>Εκφώνηση μονάδας («τοις εκατό» ή «dBm») μετά τον αριθμό</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_TheTonePlaysTheSignal" xml:space="preserve">
+    <value>Ο τόνος αποδίδει το σήμα ως τονικό ύψος, όπως οι ήχοι MIDI του αρχικού. Οι ηχογραφημένες λέξεις δεν μπορούν να πουν «μείον», οπότε το RSSI εκφωνείται ως απλός αριθμός.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_DATA" xml:space="preserve">
+    <value>ΔΕΔΟΜΕΝΑ</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_UPDATES" xml:space="preserve">
+    <value>ΕΝΗΜΕΡΩΣΕΙΣ</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_CheckForUpdatesAtStartup" xml:space="preserve">
+    <value>Έλεγχος για ενημερώσεις κατά την εκκίνηση</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_IncludePreReleases" xml:space="preserve">
+    <value>Συμπερίληψη προδημοσιεύσεων</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_PreReleasesEG0" xml:space="preserve">
+    <value>Οι προδημοσιεύσεις (π.χ. 0.5.0-rc.1) παίρνουν πρώτες τις νέες λειτουργίες, αλλά ίσως είναι λιγότερο σταθερές.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ADVANCED" xml:space="preserve">
+    <value>ΠΡΟΧΩΡΗΜΕΝΑ</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_KeepScreenOnWhileScanning" xml:space="preserve">
+    <value>Οθόνη αναμμένη κατά τη σάρωση</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_DebugLogging" xml:space="preserve">
+    <value>Καταγραφή εντοπισμού σφαλμάτων</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_WritesGPSFixesAndMap" xml:space="preserve">
+    <value>Γράφει τις θέσεις GPS και τις ενημερώσεις επιπέδων χάρτη στο αρχείο καταγραφής (adb logcat) για αντιμετώπιση προβλημάτων.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="MapColors_MapAPColors" xml:space="preserve">
+    <value>Χρώματα AP στον χάρτη</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="MapColors_CircleColorsPerAgeBucket" xml:space="preserve">
+    <value>Χρώματα κύκλων ανά ηλικιακή ομάδα και τύπο ασφάλειας (hex RRGGBB). Τα ενεργά AP της τρέχουσας σάρωσης είναι τα φωτεινότερα· τα ανενεργά και οι παλαιότερες ομάδες σκουραίνουν με την ηλικία.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="MapColors_Bucket" xml:space="preserve">
+    <value>Ομάδα</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="SessionChooser_VistumblerMAUISessions" xml:space="preserve">
+    <value>VistumblerMAUI — Συνεδρίες</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="SessionChooser_RecoverAPreviousSessionOr" xml:space="preserve">
+    <value>Ανακτήστε μια προηγούμενη συνεδρία ή ξεκινήστε νέα.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="SessionChooser_NoSavedSessions" xml:space="preserve">
+    <value>Δεν υπάρχουν αποθηκευμένες συνεδρίες.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="SessionChooser_Resume" xml:space="preserve">
+    <value>Συνέχεια</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="SessionChooser_StartNewSession" xml:space="preserve">
+    <value>Έναρξη νέας συνεδρίας</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_UploadToWifiDB" xml:space="preserve">
+    <value>Αποστολή στο WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_UploadsTheCurrentSessionS" xml:space="preserve">
+    <value>Στέλνει τα σημεία πρόσβασης της τρέχουσας συνεδρίας στο WifiDB. Το WifiDB βάζει το αρχείο σε ουρά και το εισάγει σύντομα.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_ACCOUNT" xml:space="preserve">
+    <value>ΛΟΓΑΡΙΑΣΜΟΣ</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_SetUpWifiDBAccount" xml:space="preserve">
+    <value>Ρύθμιση λογαριασμού WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_ChangeAccountInSettings" xml:space="preserve">
+    <value>Αλλαγή λογαριασμού στις Ρυθμίσεις</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_UPLOAD" xml:space="preserve">
+    <value>ΑΠΟΣΤΟΛΗ</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_Title" xml:space="preserve">
+    <value>Τίτλος</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_Notes" xml:space="preserve">
+    <value>Σημειώσεις</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_Optional" xml:space="preserve">
+    <value>προαιρετικό</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_OtherUsers" xml:space="preserve">
+    <value>Άλλοι χρήστες</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_OptionalCommaSeparated" xml:space="preserve">
+    <value>προαιρετικό, χωρισμένα με κόμμα</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_Upload" xml:space="preserve">
+    <value>Αποστολή</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WifiDbUpload_CheckImportStatus" xml:space="preserve">
+    <value>Έλεγχος κατάστασης εισαγωγής</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
 </root>
