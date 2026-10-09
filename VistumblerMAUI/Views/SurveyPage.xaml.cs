@@ -1,3 +1,4 @@
+using VistumblerMAUI.Localization;
 using VistumblerMAUI.ViewModels;
 
 namespace VistumblerMAUI.Views;
@@ -115,7 +116,7 @@ public partial class SurveyPage : ContentPage
         }
         catch (Exception ex)
         {
-            await DisplayAlertAsync("Save image", $"Couldn't save the image: {ex.Message}", "OK");
+            await DisplayAlertAsync(Loc.T("Survey_SaveImage"), Loc.T("Survey_ImageSaveFailed", ex.Message), Loc.T("Common_Ok"));
         }
     }
 }

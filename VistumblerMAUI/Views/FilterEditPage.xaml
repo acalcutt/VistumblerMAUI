@@ -42,7 +42,7 @@
                 <CheckBox IsChecked="{Binding Filter.Band6}" /><Label Text="{loc:T FilterEdit_6GHz}" VerticalOptions="Center" />
             </HorizontalStackLayout>
 
-            <Picker Margin="16,8" ItemsSource="{Binding StatusChoices}" SelectedItem="{Binding SelectedStatus}" />
+            <Picker Margin="16,8" ItemsSource="{Binding StatusChoices}" ItemDisplayBinding="{Binding ., Converter={StaticResource LocValue}, x:DataType=x:String}" SelectedItem="{Binding SelectedStatus}" />
             <BoxView HeightRequest="1" Color="#EEEEEE" Margin="16,4" />
 
             <!-- Advanced: the original Vistumbler's per-field filter expressions -->

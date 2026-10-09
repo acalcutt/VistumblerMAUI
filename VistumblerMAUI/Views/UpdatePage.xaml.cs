@@ -1,3 +1,4 @@
+using VistumblerMAUI.Localization;
 using Vistumbler.Core.Services;
 using VistumblerMAUI.Services;
 
@@ -26,32 +27,30 @@ public partial class UpdatePage : ContentPage
         _http = http;
         _asset = assetSuffix is null ? null : _release.FindAsset(assetSuffix);
 
-        HeadingLabel.Text = $"{AppUpdater.ProductName} {_release.Version} is available";
-        VersionLabel.Text = $"You have version {result.CurrentVersion}." +
-                            (_release.Version.IsPrerelease ? " This update is a pre-release." : "");
+        HeadingLabel.Text = Loc.T("Update_Available", AppUpdater.ProductName, _release.Version);
+        VersionLabel.Text = Loc.T("Update_YouHave", result.CurrentVersion) +
+                            (_release.Version.IsPrerelease ? " " + Loc.T("Update_Prerelease") : "");
         NotesLabel.Text = string.IsNullOrWhiteSpace(_release.Notes)
-            ? "No release notes were published for this version."
+            ? Loc.T("Update_NoNotes")
             : _release.Notes.Trim();
 
         if (_asset is not null && OperatingSystem.IsWindows())
         {
-            PrimaryButton.Text = "Install and Restart";
-            InfoLabel.Text = $"{AppUpdater.ProductName} will close while the update installs, then start again. " +
-                             "Your current session is kept, so you can resume it.";
+            PrimaryButton.Text = Loc.T("Update_InstallRestart");
+            InfoLabel.Text = Loc.T("Update_InstallInfo", AppUpdater.ProductName);
         }
         else if (_asset is not null && OperatingSystem.IsAndroid())
         {
-            PrimaryButton.Text = "Download Update";
-            InfoLabel.Text = "The update downloads in your browser. Open it to install over this version; " +
-                             "your sessions and settings are kept.";
+            PrimaryButton.Text = Loc.T("Update_Download");
+            InfoLabel.Text = Loc.T("Update_DownloadInfo");
         }
         else
         {
-            PrimaryButton.Text = "Open Download Page";
+            PrimaryButton.Text = Loc.T("Update_OpenPage");
             ReleasePageButton.IsVisible = false;
             InfoLabel.Text = OperatingSystem.IsWindows() && !WindowsUpdateInstaller.IsInstalledCopy
-                ? "This copy wasn't installed with the setup program, so download the new version from the release page."
-                : "This release has no download for your device yet. See the release page.";
+                ? Loc.T("Update_NotInstalled")
+                : Loc.T("Update_NoDownload");
         }
     }
 
@@ -72,20 +71,20 @@ public partial class UpdatePage : ContentPage
         PrimaryButton.IsEnabled = false;
         ReleasePageButton.IsEnabled = false;
         ProgressPanel.IsVisible = true;
-        StatusLabel.Text = $"Downloading {installer.Name}...";
+        StatusLabel.Text = Loc.T("Update_Downloading", installer.Name);
         _download = new CancellationTokenSource();
         try
         {
             var progress = new Progress<double>(p => DownloadProgress.Progress = p);
             var path = await WindowsUpdateInstaller.DownloadAsync(_http, installer, AppUpdater.ProductName, progress, _download.Token);
 
-            StatusLabel.Text = "Checking the installer's signature...";
+            StatusLabel.Text = Loc.T("Update_Checking");
             WindowsUpdateInstaller.VerifyPublisher(path);
 
-            StatusLabel.Text = "Starting the installer...";
+            StatusLabel.Text = Loc.T("Update_Starting");
             if (!WindowsUpdateInstaller.Launch(path))
             {
-                StatusLabel.Text = "The update was cancelled.";
+                StatusLabel.Text = Loc.T("Update_Cancelled");
                 PrimaryButton.IsEnabled = true;
                 ReleasePageButton.IsEnabled = true;
                 return;
@@ -98,7 +97,7 @@ public partial class UpdatePage : ContentPage
         }
         catch (Exception ex)
         {
-            StatusLabel.Text = $"The update failed: {ex.Message}";
+            StatusLabel.Text = Loc.T("Update_Failed", ex.Message);
             PrimaryButton.IsEnabled = true;
             ReleasePageButton.IsEnabled = true;
         }

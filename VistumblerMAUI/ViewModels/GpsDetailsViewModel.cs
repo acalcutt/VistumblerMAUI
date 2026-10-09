@@ -1,3 +1,4 @@
+using VistumblerMAUI.Localization;
 using System.Globalization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Vistumbler.Core.Models;
@@ -21,7 +22,7 @@ public partial class GpsDetailsViewModel : ObservableObject
     public event Action? CompassUpdated;
 
     [ObservableProperty] private string _source = string.Empty;
-    [ObservableProperty] private string _status = "Waiting for a GPS fix…";
+    [ObservableProperty] private string _status = Loc.T("GpsDetails_Waiting");
     [ObservableProperty] private string _position = "—";
     [ObservableProperty] private string _altitude = "—";
     [ObservableProperty] private string _satellites = "—";
@@ -40,7 +41,7 @@ public partial class GpsDetailsViewModel : ObservableObject
     /// <summary>Starts following the GPS while the page is open.</summary>
     public void Start()
     {
-        Source = GpsSettings.AvailableSources.FirstOrDefault(s => s.Source == GpsSettings.Source).Name ?? "";
+        Source = Loc.Opt(GpsSettings.AvailableSources.FirstOrDefault(s => s.Source == GpsSettings.Source).Name ?? "");
         _gps.GpsDataReceived += OnGpsData;
         if (_gps.CurrentGpsData is { } current) Show(current);
         // Ages the "seconds since the last fix" line between fixes
@@ -70,11 +71,11 @@ public partial class GpsDetailsViewModel : ObservableObject
         WifiPositionTick();
         if (!_gps.IsActive && _gps.CurrentGpsData is null)
         {
-            Status = "GPS is off. Tap Use GPS to start it.";
+            Status = Loc.T("GpsDetails_Off");
             return;
         }
         double age = _gps.SecondsSinceLastUpdate;
-        Status = age == double.MaxValue ? "Waiting for a GPS fix…" : $"Last fix {age:0} s ago";
+        Status = age == double.MaxValue ? Loc.T("GpsDetails_Waiting") : Loc.T("GpsDetails_LastFix", age.ToString("0"));
     }
 
     private void Show(GpsData d)

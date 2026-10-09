@@ -90,6 +90,21 @@
 
   <!-- Shared -->
   <data name="Common_Cancel" xml:space="preserve"><value>Cancel</value></data>
+  <data name="Common_Ok" xml:space="preserve"><value>OK</value></data>
+  <data name="Common_Share" xml:space="preserve"><value>Share</value></data>
+
+  <!-- Menu dialogs (AppShell) -->
+  <data name="Clear_SaveThenClear" xml:space="preserve"><value>Save to a file, then clear</value></data>
+  <data name="Clear_WithoutSaving" xml:space="preserve"><value>Clear without saving</value></data>
+  <data name="Clear_Question" xml:space="preserve"><value>Clear the AP list? Scanning carries on. Saved files go to {0}.</value></data>
+  <data name="Clear_SaveAndClear" xml:space="preserve"><value>Save &amp; Clear</value></data>
+  <data name="Links_Title" xml:space="preserve"><value>Links</value></data>
+  <data name="Links_CouldNotOpen" xml:space="preserve"><value>Couldn't open {0}: {1}</value></data>
+  <data name="NewSession_Title" xml:space="preserve"><value>New session</value></data>
+  <data name="NewSession_Question" xml:space="preserve"><value>Start a new session? The current session stays saved and can be reopened later.</value></data>
+  <data name="Exit_DiscardTitle" xml:space="preserve"><value>Exit without saving</value></data>
+  <data name="Exit_DiscardQuestion" xml:space="preserve"><value>Discard this session's captured data and exit?</value></data>
+  <data name="Exit_Discard" xml:space="preserve"><value>Discard &amp; Exit</value></data>
   <data name="Common_Saved" xml:space="preserve"><value>Saved {0}</value></data>
   <data name="Common_ExportFailed" xml:space="preserve"><value>Export failed: {0}</value></data>
 
@@ -140,6 +155,212 @@
   <data name="Channels_Rssi" xml:space="preserve"><value>RSSI</value></data>
   <data name="Channels_Status" xml:space="preserve"><value>{0} active APs on {1}</value></data>
   <data name="Graph_NoHistory" xml:space="preserve"><value>No signal history yet</value></data>
+
+  <!-- Settings (view model) -->
+  <data name="Settings_AllAdapters" xml:space="preserve"><value>All adapters</value></data>
+  <data name="Settings_AdapterNotFound" xml:space="preserve"><value>Chosen adapter (not found)</value></data>
+  <data name="Settings_NoUsbGps" xml:space="preserve"><value>No supported USB GPS receiver is plugged in.</value></data>
+  <data name="Settings_PluggedIn" xml:space="preserve"><value>Plugged in: {0}</value></data>
+  <data name="Settings_UsbListFailed" xml:space="preserve"><value>Could not list USB devices: {0}</value></data>
+  <data name="Settings_NoPairedDevices" xml:space="preserve"><value>No paired devices. Pair the GPS receiver in Android's Bluetooth settings, then refresh.</value></data>
+  <data name="Settings_PendingWifiDb" xml:space="preserve"><value>Saved files waiting to upload to WifiDB: {0}</value></data>
+  <data name="Settings_WaitingUploads" xml:space="preserve"><value>Waiting uploads</value></data>
+  <data name="Settings_StopWifiDbQuestion" xml:space="preserve"><value>Stop trying to upload these files to WifiDB? The files themselves stay in the Save &amp; Clear folder.</value></data>
+  <data name="Settings_ManufacturersUpdated" xml:space="preserve"><value>updated {0}</value></data>
+  <data name="Settings_ManufacturersBuiltIn" xml:space="preserve"><value>the list that came with the app</value></data>
+  <data name="Settings_ManufacturersLoading" xml:space="preserve"><value>Loading the manufacturer list…</value></data>
+  <data name="Settings_ManufacturersCount" xml:space="preserve"><value>{0} manufacturers ({1})</value></data>
+  <data name="Settings_ManufacturersDownloading" xml:space="preserve"><value>Downloading IEEE's manufacturer list…</value></data>
+  <data name="Settings_UpdateFailed" xml:space="preserve"><value>Update failed: {0}</value></data>
+  <data name="Settings_WifiDbRegistration" xml:space="preserve"><value>WifiDB registration</value></data>
+  <data name="Settings_PasteRegistrationLink" xml:space="preserve"><value>Paste your WifiDB registration link (…/redeem_link.php?token=…):</value></data>
+  <data name="Settings_Redeem" xml:space="preserve"><value>Redeem</value></data>
+  <data name="Settings_NotRegistrationLink" xml:space="preserve"><value>That doesn't look like a WifiDB registration link.</value></data>
+  <data name="Settings_Redeeming" xml:space="preserve"><value>Redeeming…</value></data>
+  <data name="Settings_Registered" xml:space="preserve"><value>Registered with WifiDB.</value></data>
+  <data name="Settings_RegisteredAs" xml:space="preserve"><value>Registered with WifiDB as {0}.</value></data>
+  <data name="Settings_RegistrationFailed" xml:space="preserve"><value>Registration failed: {0}</value></data>
+  <data name="Wigle_Terms" xml:space="preserve"><value>WiGLE (wigle.net) is a separate service with its own rules. Uploading sends this app's Wi-Fi, cell tower and Bluetooth records to WiGLE under WiGLE's terms of use, which govern how they're stored, shown and shared; read them before turning this on. WifiDB uploads are unaffected.</value></data>
+  <data name="Wigle_Pending" xml:space="preserve"><value>Saves waiting to upload to WiGLE: {0}</value></data>
+  <data name="Wigle_WaitingUploads" xml:space="preserve"><value>Waiting WiGLE uploads</value></data>
+  <data name="Wigle_StopQuestion" xml:space="preserve"><value>Stop trying to upload these saves to WiGLE? The VS1 files in the Save &amp; Clear folder are kept.</value></data>
+
+  <data name="Common_Close" xml:space="preserve"><value>Close</value></data>
+
+  <!-- AP details (view model) -->
+  <data name="ApDetails_Title" xml:space="preserve"><value>AP Details</value></data>
+  <data name="ApDetails_NotFound" xml:space="preserve"><value>AP not found.</value></data>
+  <data name="ApDetails_NoHistory" xml:space="preserve"><value>No signal history yet.</value></data>
+  <data name="ApDetails_Samples" xml:space="preserve"><value>{0} signal samples</value></data>
+  <data name="ApDetails_AllDetails" xml:space="preserve"><value>All details</value></data>
+  <data name="ApDetails_GpsPosition" xml:space="preserve"><value>GPS position</value></data>
+  <data name="ApDetails_Copied" xml:space="preserve"><value>Copied: {0}</value></data>
+  <data name="ApDetails_SearchingWifiDb" xml:space="preserve"><value>Searching WifiDB…</value></data>
+  <data name="ApDetails_SearchFailed" xml:space="preserve"><value>Couldn't search WifiDB: {0}</value></data>
+  <data name="ApDetails_NotInWifiDb" xml:space="preserve"><value>WifiDB doesn't have {0} yet.</value></data>
+  <data name="ApDetails_Security" xml:space="preserve"><value>Security: {0}</value></data>
+  <data name="ApDetails_Channel" xml:space="preserve"><value>Channel: {0}</value></data>
+  <data name="ApDetails_ChannelMhz" xml:space="preserve"><value>Channel: {0} ({1} MHz)</value></data>
+  <data name="ApDetails_FirstSeen" xml:space="preserve"><value>First seen: {0}</value></data>
+  <data name="ApDetails_LastSeen" xml:space="preserve"><value>Last seen: {0}</value></data>
+  <data name="ApDetails_FirstActiveLine" xml:space="preserve"><value>First active: {0}</value></data>
+  <data name="ApDetails_LastActiveLine" xml:space="preserve"><value>Last active: {0}</value></data>
+  <data name="ApDetails_BestSignal" xml:space="preserve"><value>Best signal: {0}%</value></data>
+  <data name="ApDetails_Signal" xml:space="preserve"><value>Signal: {0}%</value></data>
+  <data name="ApDetails_Position" xml:space="preserve"><value>Position: {0}</value></data>
+  <data name="ApDetails_RadioLine" xml:space="preserve"><value>Radio: {0}</value></data>
+  <data name="ApDetails_OpenInWifiDb" xml:space="preserve"><value>Open in WifiDB</value></data>
+
+  <!-- Export (view model) -->
+  <data name="Export_FilteredOnly" xml:space="preserve"><value>Only APs the filter "{0}" shows</value></data>
+  <data name="Export_KeepingFolder" xml:space="preserve"><value>{0} Keeping {1}.</value></data>
+  <data name="Export_WillWriteTo" xml:space="preserve"><value>Exports will be written to {0}</value></data>
+  <data name="Export_Exporting" xml:space="preserve"><value>Exporting…</value></data>
+  <data name="Export_NoAps" xml:space="preserve"><value>No access points to export</value></data>
+  <data name="Export_NoneMatch" xml:space="preserve"><value>No access points match the filter "{0}"</value></data>
+  <data name="Export_Done" xml:space="preserve"><value>Exported {0} access point(s) to {1}</value></data>
+  <data name="Export_DoneFellBack" xml:space="preserve"><value>Exported {0} access point(s) to {1} — the chosen folder could not be written to</value></data>
+
+  <!-- Import (view model) -->
+  <data name="Import_PickFile" xml:space="preserve"><value>Pick a file to import</value></data>
+  <data name="Import_SelectFile" xml:space="preserve"><value>Select a file to import</value></data>
+  <data name="Import_Ready" xml:space="preserve"><value>Ready to import</value></data>
+  <data name="Import_SelectValid" xml:space="preserve"><value>Please select a valid file.</value></data>
+  <data name="Import_Parsing" xml:space="preserve"><value>Parsing file…</value></data>
+  <data name="Import_Saving" xml:space="preserve"><value>Saving {0} access points…</value></data>
+  <data name="Import_Done" xml:space="preserve"><value>Done — imported {0} access point(s)</value></data>
+  <data name="Import_AndRadios" xml:space="preserve"><value> and {0} cell tower(s) and Bluetooth device(s)</value></data>
+  <data name="Import_NoneFound" xml:space="preserve"><value>No access points found in file</value></data>
+  <data name="Import_FolderFailed" xml:space="preserve"><value>Couldn't read the folder: {0}</value></data>
+  <data name="Import_NoFiles" xml:space="preserve"><value>No {0} files in {1}</value></data>
+  <data name="Import_Progress" xml:space="preserve"><value>Importing {0} of {1}: {2}</value></data>
+  <data name="Import_FolderDone" xml:space="preserve"><value>Done — {0} file(s), {1} access point(s)</value></data>
+  <data name="Import_FolderFailedFiles" xml:space="preserve"><value>; {0} file(s) couldn't be read</value></data>
+
+  <!-- GPS details and Wi-Fi position (view models) -->
+  <data name="GpsDetails_Waiting" xml:space="preserve"><value>Waiting for a GPS fix…</value></data>
+  <data name="GpsDetails_Off" xml:space="preserve"><value>GPS is off. Tap Use GPS to start it.</value></data>
+  <data name="GpsDetails_LastFix" xml:space="preserve"><value>Last fix {0} s ago</value></data>
+  <data name="WifiPos_NoSources" xml:space="preserve"><value>Nothing to look up in yet: import an m8b file, or scan with GPS first.</value></data>
+  <data name="WifiPos_NoneInRange" xml:space="preserve"><value>No APs in range. Start scanning to estimate a position.</value></data>
+  <data name="WifiPos_LookupFailed" xml:space="preserve"><value>Lookup failed: {0}</value></data>
+  <data name="WifiPos_NoneKnown" xml:space="preserve"><value>None of the {0} APs in range are known.</value></data>
+  <data name="WifiPos_Agree" xml:space="preserve"><value>{0} of {1} APs in range agree on 1 km square {2}</value></data>
+  <data name="WifiPos_Tie" xml:space="preserve"><value>({0} other square(s) tie)</value></data>
+  <data name="WifiPos_GpsDistance" xml:space="preserve"><value>GPS fix is {0} m from its centre</value></data>
+  <data name="WifiPos_Accuracy" xml:space="preserve"><value>(± 1 km square)</value></data>
+  <data name="WifiPos_ChooseFile" xml:space="preserve"><value>Choose an m8b file</value></data>
+  <data name="WifiPos_Importing" xml:space="preserve"><value>Importing…</value></data>
+  <data name="WifiPos_Imported" xml:space="preserve"><value>Imported {0}: {1} records</value></data>
+  <data name="WifiPos_NotM8b" xml:space="preserve"><value>That isn't an m8b file this app can read ({0})</value></data>
+  <data name="WifiPos_ImportFailed" xml:space="preserve"><value>Import failed: {0}</value></data>
+  <data name="WifiPos_RemoveTitle" xml:space="preserve"><value>Remove m8b file</value></data>
+  <data name="WifiPos_RemoveQuestion" xml:space="preserve"><value>Remove {0} from the app?</value></data>
+  <data name="WifiPos_Remove" xml:space="preserve"><value>Remove</value></data>
+  <data name="WifiPos_Removed" xml:space="preserve"><value>Removed {0}</value></data>
+
+  <data name="Common_Delete" xml:space="preserve"><value>Delete</value></data>
+
+  <!-- Site survey (view model) -->
+  <data name="Survey_New" xml:space="preserve"><value>New survey</value></data>
+  <data name="Survey_Open" xml:space="preserve"><value>Open survey…</value></data>
+  <data name="Survey_FloorPlan" xml:space="preserve"><value>Floor plan image…</value></data>
+  <data name="Survey_UseGrid" xml:space="preserve"><value>Use a grid</value></data>
+  <data name="Survey_Rename" xml:space="preserve"><value>Rename…</value></data>
+  <data name="Survey_ExportCsv" xml:space="preserve"><value>Export readings (CSV)</value></data>
+  <data name="Survey_Delete" xml:space="preserve"><value>Delete this survey</value></data>
+  <data name="Survey_DeleteSpot" xml:space="preserve"><value>Delete spot</value></data>
+  <data name="Survey_MeasureAgain" xml:space="preserve"><value>Measure again here</value></data>
+  <data name="Survey_Strongest" xml:space="preserve"><value>Strongest network at each spot</value></data>
+  <data name="Survey_PlanLoadFailed" xml:space="preserve"><value>Couldn't load the plan image: {0}</value></data>
+  <data name="Survey_SpotInfo" xml:space="preserve"><value>Spot {0}: {1} AP(s) at {2}</value></data>
+  <data name="Survey_NotHeard" xml:space="preserve"><value>{0}: not heard</value></data>
+  <data name="Survey_StrongestAp" xml:space="preserve"><value>Strongest: {0} {1} dBm</value></data>
+  <data name="Survey_SsidAps" xml:space="preserve"><value>{0} ({1} APs)</value></data>
+  <data name="Survey_Measuring" xml:space="preserve"><value>Measuring… stand still until the next scan finishes.</value></data>
+  <data name="Survey_StartToMeasure" xml:space="preserve"><value>Start scanning to measure here.</value></data>
+  <data name="Survey_StartThenTap" xml:space="preserve"><value>Start scanning, then tap where you're standing.</value></data>
+  <data name="Survey_TapToMeasure" xml:space="preserve"><value>Tap where you're standing to measure there.</value></data>
+  <data name="Survey_SpotsMeasured" xml:space="preserve"><value>{0} spot(s) measured. Tap where you're standing to add one, or on a spot to see or delete it.</value></data>
+  <data name="Survey_SaveFailed" xml:space="preserve"><value>Couldn't save the survey: {0}</value></data>
+  <data name="Survey_NoneSaved" xml:space="preserve"><value>No saved surveys yet.</value></data>
+  <data name="Survey_NameSpots" xml:space="preserve"><value>{0} ({1} spots)</value></data>
+  <data name="Survey_FloorPlanTitle" xml:space="preserve"><value>Floor plan</value></data>
+  <data name="Survey_ChangePlanQuestion" xml:space="preserve"><value>This survey already has measured spots, which won't move with a new plan. Change it anyway?</value></data>
+  <data name="Survey_Change" xml:space="preserve"><value>Change</value></data>
+  <data name="Survey_ChoosePlan" xml:space="preserve"><value>Choose a floor plan image</value></data>
+  <data name="Survey_ImageFailed" xml:space="preserve"><value>Couldn't use that image: {0}</value></data>
+  <data name="Survey_RenameTitle" xml:space="preserve"><value>Rename survey</value></data>
+  <data name="Survey_Name" xml:space="preserve"><value>Name</value></data>
+  <data name="Survey_DeleteTitle" xml:space="preserve"><value>Delete survey</value></data>
+  <data name="Survey_DeleteQuestion" xml:space="preserve"><value>Delete {0} and its {1} spot(s)?</value></data>
+  <data name="Survey_NothingMeasured" xml:space="preserve"><value>Nothing measured yet.</value></data>
+  <data name="Survey_ImageSaveFailed" xml:space="preserve"><value>Couldn't save the image: {0}</value></data>
+
+  <!-- Filters, upload, sessions, WifiDB registration (view models) -->
+  <data name="Filter_NewTitle" xml:space="preserve"><value>New filter</value></data>
+  <data name="Filter_DefaultName" xml:space="preserve"><value>Filter {0}</value></data>
+  <data name="Filter_EditTitle" xml:space="preserve"><value>Edit {0}</value></data>
+  <data name="Filter_DeleteTitle" xml:space="preserve"><value>Delete filter</value></data>
+  <data name="Filter_DeleteQuestion" xml:space="preserve"><value>Delete "{0}"?</value></data>
+  <data name="Upload_AlsoWigle" xml:space="preserve"><value>Also upload to WiGLE (Wi-Fi, cell towers and Bluetooth)</value></data>
+  <data name="Upload_AlsoWigleNoAccount" xml:space="preserve"><value>Also upload to WiGLE: set its API name and token in Settings → WiGLE first</value></data>
+  <data name="Upload_As" xml:space="preserve"><value>Uploading as {0} to {1}</value></data>
+  <data name="Upload_NoApiKey" xml:space="preserve"><value>(no API key set)</value></data>
+  <data name="Upload_NeedAccount" xml:space="preserve"><value>Set up your WifiDB account in Settings → WifiDB before uploading.</value></data>
+  <data name="Upload_Preparing" xml:space="preserve"><value>Preparing the file…</value></data>
+  <data name="Upload_NoAps" xml:space="preserve"><value>There are no access points to upload.</value></data>
+  <data name="Upload_Uploading" xml:space="preserve"><value>Uploading {0} access points to WifiDB…</value></data>
+  <data name="Upload_ImportNumber" xml:space="preserve"><value>Import #{0} — {1} access points.</value></data>
+  <data name="Upload_Failed" xml:space="preserve"><value>Upload failed: {0}</value></data>
+  <data name="Upload_UploadingWigle" xml:space="preserve"><value>Uploading to WiGLE…</value></data>
+  <data name="Upload_NothingForWigle" xml:space="preserve"><value>Nothing to upload to WiGLE.</value></data>
+  <data name="Session_DeleteTitle" xml:space="preserve"><value>Delete session</value></data>
+  <data name="Session_DeleteQuestion" xml:space="preserve"><value>Delete session '{0}'? This cannot be undone.</value></data>
+  <data name="WifiDbScan_NeedCamera" xml:space="preserve"><value>Camera permission is required to scan. Use "Register with link…" instead.</value></data>
+  <data name="Opt_ActiveanddeadAPs" xml:space="preserve"><value>Active and dead APs</value></data>
+  <data name="Opt_ActiveAPsonly" xml:space="preserve"><value>Active APs only</value></data>
+  <data name="Opt_DeadAPsonly" xml:space="preserve"><value>Dead APs only</value></data>
+
+  <!-- Update page -->
+  <data name="Update_Available" xml:space="preserve"><value>{0} {1} is available</value></data>
+  <data name="Update_YouHave" xml:space="preserve"><value>You have version {0}.</value></data>
+  <data name="Update_Prerelease" xml:space="preserve"><value>This update is a pre-release.</value></data>
+  <data name="Update_NoNotes" xml:space="preserve"><value>No release notes were published for this version.</value></data>
+  <data name="Update_InstallRestart" xml:space="preserve"><value>Install and Restart</value></data>
+  <data name="Update_InstallInfo" xml:space="preserve"><value>{0} will close while the update installs, then start again. Your current session is kept, so you can resume it.</value></data>
+  <data name="Update_Download" xml:space="preserve"><value>Download Update</value></data>
+  <data name="Update_DownloadInfo" xml:space="preserve"><value>The update downloads in your browser. Open it to install over this version; your sessions and settings are kept.</value></data>
+  <data name="Update_OpenPage" xml:space="preserve"><value>Open Download Page</value></data>
+  <data name="Update_NotInstalled" xml:space="preserve"><value>This copy wasn't installed with the setup program, so download the new version from the release page.</value></data>
+  <data name="Update_NoDownload" xml:space="preserve"><value>This release has no download for your device yet. See the release page.</value></data>
+  <data name="Update_Downloading" xml:space="preserve"><value>Downloading {0}…</value></data>
+  <data name="Update_Checking" xml:space="preserve"><value>Checking the installer's signature…</value></data>
+  <data name="Update_Starting" xml:space="preserve"><value>Starting the installer…</value></data>
+  <data name="Update_Cancelled" xml:space="preserve"><value>The update was cancelled.</value></data>
+  <data name="Update_Failed" xml:space="preserve"><value>The update failed: {0}</value></data>
+
+  <!-- Settings picker choices (see Loc.Opt) -->
+  <data name="Opt_OnceforeachscanthatfindsnewAPs" xml:space="preserve"><value>Once for each scan that finds new APs</value></data>
+  <data name="Opt_OnceforeachnewAP" xml:space="preserve"><value>Once for each new AP</value></data>
+  <data name="Opt_OnceforeachnewAPlouderforastrongersignal" xml:space="preserve"><value>Once for each new AP, louder for a stronger signal</value></data>
+  <data name="Opt_Thedevicesvoice" xml:space="preserve"><value>The device's voice</value></data>
+  <data name="Opt_Vistumblersrecordedwords" xml:space="preserve"><value>Vistumbler's recorded words</value></data>
+  <data name="Opt_Atonehigherforastrongersignal" xml:space="preserve"><value>A tone, higher for a stronger signal</value></data>
+  <data name="Opt_SignalPct" xml:space="preserve"><value>Signal (%)</value></data>
+  <data name="Opt_RSSIdBm" xml:space="preserve"><value>RSSI (dBm)</value></data>
+  <data name="Opt_AutofitGPSaccuracy" xml:space="preserve"><value>Auto (fit GPS accuracy)</value></data>
+  <data name="Opt_Manualzoomlevel" xml:space="preserve"><value>Manual zoom level</value></data>
+  <data name="Opt_Keepcurrentzoom" xml:space="preserve"><value>Keep current zoom</value></data>
+  <data name="Opt_AfteranumberofAPs" xml:space="preserve"><value>After a number of APs</value></data>
+  <data name="Opt_Afteratime" xml:space="preserve"><value>After a time</value></data>
+  <data name="Opt_VSZzipped" xml:space="preserve"><value>VSZ (zipped)</value></data>
+  <data name="Opt_WindowsLocation" xml:space="preserve"><value>Windows Location</value></data>
+  <data name="Opt_SerialNMEACOMport" xml:space="preserve"><value>Serial NMEA (COM port)</value></data>
+  <data name="Opt_PhoneGPS" xml:space="preserve"><value>Phone GPS</value></data>
+  <data name="Opt_BluetoothGPSreceiverNMEA" xml:space="preserve"><value>Bluetooth GPS receiver (NMEA)</value></data>
+  <data name="Opt_USBGPSreceiverNMEA" xml:space="preserve"><value>USB GPS receiver (NMEA)</value></data>
+  <data name="Opt_Devicelocation" xml:space="preserve"><value>Device location</value></data>
 
   <!-- Picker choices, keyed by the value they stand for (spaces and punctuation removed); see LocValueConverter -->
   <data name="Opt_Nogrouping" xml:space="preserve"><value>No grouping</value></data>

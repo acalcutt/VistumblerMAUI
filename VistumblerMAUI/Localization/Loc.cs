@@ -26,6 +26,18 @@ public static class Loc
     public static string T(string key, params object?[] args) =>
         string.Format(CultureInfo.CurrentCulture, T(key), args);
 
+    /// <summary>
+    /// A choice's text in the chosen language, while the code keeps the English value ("No grouping", "Signal (%)"):
+    /// the key is "Opt_" + the value's letters and digits, with % as "Pct". Falls back to the value itself.
+    /// </summary>
+    public static string Opt(string value)
+    {
+        if (string.IsNullOrEmpty(value)) return value;
+        var key = "Opt_" + string.Concat(value.Select(c => c == '%' ? "Pct" : char.IsLetterOrDigit(c) ? c.ToString() : ""));
+        var text = T(key);
+        return text == key ? value : text;
+    }
+
     /// <summary>Whether the app has text of its own in <paramref name="culture"/> (not just the English fallback).</summary>
     public static bool Has(CultureInfo culture)
     {

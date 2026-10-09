@@ -38,7 +38,7 @@
                 <Entry Grid.Row="2" Grid.Column="1" Text="{Binding OtherUsers}" Placeholder="{loc:T WifiDbUpload_OptionalCommaSeparated}" />
 
                 <Label Grid.Row="3" Grid.Column="0" Text="{loc:T Settings_FileType}" VerticalOptions="Center" />
-                <Picker Grid.Row="3" Grid.Column="1" ItemsSource="{Binding Formats}" SelectedItem="{Binding SelectedFormat}" />
+                <Picker Grid.Row="3" Grid.Column="1" ItemsSource="{Binding Formats}" ItemDisplayBinding="{Binding ., Converter={StaticResource LocValue}, x:DataType=x:String}" SelectedItem="{Binding SelectedFormat}" />
             </Grid>
 
             <!-- WiGLE, optional: only when turned on in Settings → WiGLE -->

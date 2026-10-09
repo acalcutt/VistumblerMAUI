@@ -1,3 +1,4 @@
+using VistumblerMAUI.Localization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Vistumbler.Core.Models;
@@ -51,7 +52,7 @@ public partial class ApDetailsViewModel : ObservableObject, IQueryAttributable
     }
 
     [ObservableProperty] private AccessPoint? _ap;
-    [ObservableProperty] private string _title = "AP Details";
+    [ObservableProperty] private string _title = Loc.T("ApDetails_Title");
     [ObservableProperty] private string _historyStatus = string.Empty;
 
     /// <summary>Drawable for the signal graph; the page binds it to a GraphicsView.</summary>
@@ -109,7 +110,7 @@ public partial class ApDetailsViewModel : ObservableObject, IQueryAttributable
         if (ap is null)
         {
             Title = bssid;
-            HistoryStatus = "AP not found.";
+            HistoryStatus = Loc.T("ApDetails_NotFound");
             return;
         }
 
@@ -122,8 +123,8 @@ public partial class ApDetailsViewModel : ObservableObject, IQueryAttributable
 
         Graph.SetPoints(history.Select(h => h.Signal).ToList());
         HistoryStatus = history.Count == 0
-            ? "No signal history yet."
-            : $"{history.Count} signal samples";
+            ? Loc.T("ApDetails_NoHistory")
+            : Loc.T("ApDetails_Samples", history.Count);
         GraphUpdated?.Invoke();
     }
 
@@ -137,18 +138,18 @@ public partial class ApDetailsViewModel : ObservableObject, IQueryAttributable
         if (Ap is not { } ap) return;
         var choices = new List<(string Title, string Text)>
         {
-            ("All details", DetailsText(ap)),
+            (Loc.T("ApDetails_AllDetails"), DetailsText(ap)),
             ("BSSID", ap.Bssid),
         };
         if (!string.IsNullOrEmpty(ap.Ssid)) choices.Add(("SSID", ap.Ssid));
-        if (ap.HasGps) choices.Add(("GPS position", ap.GpsText));
+        if (ap.HasGps) choices.Add((Loc.T("ApDetails_GpsPosition"), ap.GpsText));
 
         var choice = await Shell.Current.DisplayActionSheetAsync("Copy", "Cancel", null,
             choices.Select(c => c.Title).ToArray());
         var text = choices.FirstOrDefault(c => c.Title == choice).Text;
         if (text is null) return;
         await Clipboard.Default.SetTextAsync(text);
-        HistoryStatus = $"Copied {choice!.ToLowerInvariant()}";
+        HistoryStatus = Loc.T("ApDetails_Copied", choice!);
     }
 
     /// <summary>The original's KML "Selected AP" maps (signal map, signal circle, range circle), on the Map tab.</summary>
@@ -161,7 +162,7 @@ public partial class ApDetailsViewModel : ObservableObject, IQueryAttributable
     private async Task LocateInWifiDbAsync()
     {
         if (Ap is not { } ap) return;
-        HistoryStatus = "Searching WifiDB…";
+        HistoryStatus = Loc.T("ApDetails_SearchingWifiDb");
         IReadOnlyList<Services.WifiDbAp> found;
         try
         {
@@ -170,7 +171,7 @@ public partial class ApDetailsViewModel : ObservableObject, IQueryAttributable
         catch (Exception ex)
         {
             HistoryStatus = string.Empty;
-            await Shell.Current.DisplayAlertAsync("WifiDB", $"Couldn't search WifiDB: {ex.Message}", "OK");
+            await Shell.Current.DisplayAlertAsync("WifiDB", Loc.T("ApDetails_SearchFailed", ex.Message), Loc.T("Common_Ok"));
             return;
         }
         HistoryStatus = string.Empty;
@@ -179,27 +180,27 @@ public partial class ApDetailsViewModel : ObservableObject, IQueryAttributable
         var match = found.FirstOrDefault(a => string.Equals(a.Mac, ap.Bssid, StringComparison.OrdinalIgnoreCase));
         if (match is null)
         {
-            await Shell.Current.DisplayAlertAsync("WifiDB", $"WifiDB doesn't have {ap.Bssid} yet.", "OK");
+            await Shell.Current.DisplayAlertAsync("WifiDB", Loc.T("ApDetails_NotInWifiDb", ap.Bssid), Loc.T("Common_Ok"));
             return;
         }
 
         var lines = new List<string>
         {
             $"SSID: {match.Ssid}",
-            $"Security: {match.Security}",
-            $"Channel: {match.Channel}",
-            $"First seen: {match.FirstSeen}",
-            $"Last seen: {match.LastSeen}",
+            Loc.T("ApDetails_Security", match.Security),
+            Loc.T("ApDetails_Channel", match.Channel),
+            Loc.T("ApDetails_FirstSeen", match.FirstSeen),
+            Loc.T("ApDetails_LastSeen", match.LastSeen),
         };
-        if (match.HighSignal is not null) lines.Add($"Best signal: {match.HighSignal}%");
+        if (match.HighSignal is not null) lines.Add(Loc.T("ApDetails_BestSignal", match.HighSignal));
         if (match.Latitude is not null && match.Longitude is not null &&
             double.TryParse(match.Latitude, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out var lat) &&
             double.TryParse(match.Longitude, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out var lon) &&
             (lat != 0 || lon != 0))
-            lines.Add($"Position: {GpsFormatter.ToText(lat, lon)}");
+            lines.Add(Loc.T("ApDetails_Position", GpsFormatter.ToText(lat, lon)));
 
         if (await Shell.Current.DisplayAlertAsync($"WifiDB: {match.Mac}", string.Join(Environment.NewLine, lines),
-                "Open in WifiDB", "Close"))
+                Loc.T("ApDetails_OpenInWifiDb"), Loc.T("Common_Close")))
         {
             try { await Launcher.Default.OpenAsync(new Uri(match.PageUrl)); }
             catch { /* no browser */ }
@@ -212,13 +213,13 @@ public partial class ApDetailsViewModel : ObservableObject, IQueryAttributable
         {
             $"SSID: {ap.Ssid}",
             $"BSSID: {ap.Bssid}",
-            $"Manufacturer: {ap.Manufacturer}",
-            $"Signal: {ap.Signal}%" + (ap.Rssi.HasValue ? $" ({ap.Rssi} dBm)" : ""),
-            $"Channel: {ap.Channel} ({ap.FrequencyMhz} MHz)",
-            $"Radio: {ap.RadioType}",
-            $"Security: {ap.AuthText} / {ap.EncryptionText}",
-            $"First active: {ap.FirstSeenText}",
-            $"Last active: {ap.LastSeenText}",
+            Loc.T("Map_Manufacturer", ap.Manufacturer),
+            Loc.T("ApDetails_Signal", ap.Signal) + (ap.Rssi.HasValue ? $" ({ap.Rssi} dBm)" : ""),
+            Loc.T("ApDetails_ChannelMhz", ap.Channel, ap.FrequencyMhz),
+            Loc.T("ApDetails_RadioLine", ap.RadioType),
+            Loc.T("ApDetails_Security", ap.AuthText + " / " + ap.EncryptionText),
+            Loc.T("ApDetails_FirstActiveLine", ap.FirstSeenText),
+            Loc.T("ApDetails_LastActiveLine", ap.LastSeenText),
         };
         if (ap.HasGps) lines.Add($"GPS: {ap.GpsText}");
         return string.Join(Environment.NewLine, lines);

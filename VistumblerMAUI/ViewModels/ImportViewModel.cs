@@ -1,3 +1,4 @@
+using VistumblerMAUI.Localization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Vistumbler.Core.Models;
@@ -30,7 +31,7 @@ public partial class ImportViewModel : ObservableObject
 
     [ObservableProperty] private ImportType _selectedImportType = ImportType.VistumblerFile;
 
-    [ObservableProperty] private string _statusMessage = "Pick a file to import";
+    [ObservableProperty] private string _statusMessage = Loc.T("Import_PickFile");
     [ObservableProperty] private double _progressValue;
     [ObservableProperty] private bool _isImporting;
 
@@ -52,7 +53,7 @@ public partial class ImportViewModel : ObservableObject
         var fileTypes = GetFileTypesForType(SelectedImportType);
         var result = await FilePicker.Default.PickAsync(new PickOptions
         {
-            PickerTitle = "Select a file to import",
+            PickerTitle = Loc.T("Import_SelectFile"),
             FileTypes = fileTypes
         });
 
@@ -60,7 +61,7 @@ public partial class ImportViewModel : ObservableObject
         {
             _filePath = result.FullPath;
             FileName = result.FileName;
-            StatusMessage = "Ready to import";
+            StatusMessage = Loc.T("Import_Ready");
         }
     }
 
@@ -69,13 +70,13 @@ public partial class ImportViewModel : ObservableObject
     {
         if (string.IsNullOrWhiteSpace(_filePath) || !File.Exists(_filePath))
         {
-            StatusMessage = "Please select a valid file.";
+            StatusMessage = Loc.T("Import_SelectValid");
             return;
         }
 
         IsImporting = true;
         ProgressValue = 0;
-        StatusMessage = "Parsing file…";
+        StatusMessage = Loc.T("Import_Parsing");
 
         try
         {
@@ -84,23 +85,23 @@ public partial class ImportViewModel : ObservableObject
 
             if (importedAps.Count > 0 || radios.Count > 0)
             {
-                StatusMessage = $"Saving {importedAps.Count} access points…";
+                StatusMessage = Loc.T("Import_Saving", importedAps.Count);
                 ProgressValue = 0.5;
                 await SaveAsync(importedAps, radios);
 
                 ProgressValue = 1;
-                StatusMessage = $"Done — imported {importedAps.Count} access point(s)"
-                                + (radios.Count > 0 ? $" and {radios.Count} cell tower(s) and Bluetooth device(s)" : "");
+                StatusMessage = Loc.T("Import_Done", importedAps.Count)
+                                + (radios.Count > 0 ? Loc.T("Import_AndRadios", radios.Count) : "");
             }
             else
             {
                 ProgressValue = 0;
-                StatusMessage = "No access points found in file";
+                StatusMessage = Loc.T("Import_NoneFound");
             }
         }
         catch (Exception ex)
         {
-            StatusMessage = $"Error: {ex.Message}";
+            StatusMessage = Loc.T("Status_Error", ex.Message);
         }
         finally
         {
@@ -130,12 +131,12 @@ public partial class ImportViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            StatusMessage = $"Couldn't read the folder: {ex.Message}";
+            StatusMessage = Loc.T("Import_FolderFailed", ex.Message);
             return;
         }
         if (files.Count == 0)
         {
-            StatusMessage = $"No {string.Join(" / ", extensions)} files in {Services.SaveFolder.Describe(folder)}";
+            StatusMessage = Loc.T("Import_NoFiles", string.Join(" / ", extensions), Services.SaveFolder.Describe(folder));
             return;
         }
 
@@ -146,7 +147,7 @@ public partial class ImportViewModel : ObservableObject
             for (int i = 0; i < files.Count; i++)
             {
                 var (name, location) = files[i];
-                StatusMessage = $"Importing {i + 1} of {files.Count}: {name}";
+                StatusMessage = Loc.T("Import_Progress", i + 1, files.Count, name);
                 ProgressValue = (double)i / files.Count;
                 string? copy = null;
                 try
@@ -170,8 +171,8 @@ public partial class ImportViewModel : ObservableObject
                 }
             }
             ProgressValue = 1;
-            StatusMessage = $"Done — {files.Count} file(s), {totalAps} access point(s)" +
-                            (failed > 0 ? $"; {failed} file(s) couldn't be read" : "");
+            StatusMessage = Loc.T("Import_FolderDone", files.Count, totalAps) +
+                            (failed > 0 ? Loc.T("Import_FolderFailedFiles", failed) : "");
         }
         finally
         {

@@ -1,3 +1,4 @@
+using VistumblerMAUI.Localization;
 using BarcodeScanning;
 using VistumblerMAUI.Services;
 
@@ -31,7 +32,7 @@ public partial class WifiDbScanPage : ContentPage
         }
         else
         {
-            StatusLabel.Text = "Camera permission is required to scan. Use \"Register with link…\" instead.";
+            StatusLabel.Text = Loc.T("WifiDbScan_NeedCamera");
         }
     }
 
@@ -65,7 +66,7 @@ public partial class WifiDbScanPage : ContentPage
 
     private async Task RedeemAndReturnAsync(string link)
     {
-        StatusLabel.Text = "Redeeming…";
+        StatusLabel.Text = Loc.T("Settings_Redeeming");
         try
         {
             var cred = await WifiDbRegistration.RedeemAsync(link, _http);
@@ -75,15 +76,15 @@ public partial class WifiDbScanPage : ContentPage
 
             await DisplayAlert("WifiDB",
                 string.IsNullOrWhiteSpace(cred.Username)
-                    ? "Registered with WifiDB."
-                    : $"Registered with WifiDB as {cred.Username}.",
+                    ? Loc.T("Settings_Registered")
+                    : Loc.T("Settings_RegisteredAs", cred.Username),
                 "OK");
             await Shell.Current.GoToAsync("..");
         }
         catch (Exception ex)
         {
             _handled = false;                 // allow another attempt
-            StatusLabel.Text = $"Registration failed: {ex.Message}";
+            StatusLabel.Text = Loc.T("Settings_RegistrationFailed", ex.Message);
             Camera.CameraEnabled = true;
         }
     }

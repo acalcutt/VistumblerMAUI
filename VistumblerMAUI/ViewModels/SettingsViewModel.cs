@@ -3,6 +3,7 @@ using CommunityToolkit.Maui.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
+using VistumblerMAUI.Localization;
 using VistumblerMAUI.Services;
 using VistumblerMAUI.Views;
 
@@ -115,12 +116,12 @@ public partial class SettingsViewModel : ObservableObject
         try
         {
             Adapters.Clear();
-            Adapters.Add(new Vistumbler.Core.Models.WiFiAdapter { Id = string.Empty, Name = "All adapters" });
+            Adapters.Add(new Vistumbler.Core.Models.WiFiAdapter { Id = string.Empty, Name = Loc.T("Settings_AllAdapters") });
             foreach (var a in await wifi.GetAvailableAdaptersAsync()) Adapters.Add(a);
             // Keep a chosen adapter that isn't plugged in right now, so the choice isn't lost
             var chosen = Adapters.FirstOrDefault(a => a.Id == ScanSettings.AdapterId);
             if (chosen is null && ScanSettings.AdapterId.Length > 0)
-                Adapters.Add(chosen = new Vistumbler.Core.Models.WiFiAdapter { Id = ScanSettings.AdapterId, Name = "Chosen adapter (not found)" });
+                Adapters.Add(chosen = new Vistumbler.Core.Models.WiFiAdapter { Id = ScanSettings.AdapterId, Name = Loc.T("Settings_AdapterNotFound") });
             SelectedAdapter = chosen ?? Adapters[0];
         }
         catch { /* leave the list as it is */ }
@@ -217,12 +218,12 @@ public partial class SettingsViewModel : ObservableObject
         {
             var devices = usb.GetAttachedDevices();
             UsbDevicesText = devices.Count == 0
-                ? "No supported USB GPS receiver is plugged in."
-                : "Plugged in: " + string.Join(", ", devices);
+                ? Loc.T("Settings_NoUsbGps")
+                : Loc.T("Settings_PluggedIn", string.Join(", ", devices));
         }
         catch (Exception ex)
         {
-            UsbDevicesText = $"Could not list USB devices: {ex.Message}";
+            UsbDevicesText = Loc.T("Settings_UsbListFailed", ex.Message);
         }
     }
 
@@ -251,7 +252,7 @@ public partial class SettingsViewModel : ObservableObject
             foreach (var d in devices) BluetoothDevices.Add(d);
             SelectedBluetoothDevice = devices.FirstOrDefault(d => d.Address == GpsSettings.BluetoothAddress);
             BluetoothStatus = devices.Count == 0
-                ? "No paired devices. Pair the GPS receiver in Android's Bluetooth settings, then refresh."
+                ? Loc.T("Settings_NoPairedDevices")
                 : string.Empty;
         }
         catch (Exception ex)
@@ -372,7 +373,7 @@ public partial class SettingsViewModel : ObservableObject
         int count = queue?.Count ?? 0;
         HasPendingUploads = count > 0;
         PendingUploadsText = count == 0 ? string.Empty
-            : $"{count} saved file{(count == 1 ? "" : "s")} waiting to upload to WifiDB" +
+            : Loc.T("Settings_PendingWifiDb", count) +
               (queue!.LastError is { } error ? $": {error}" : "");
     }
 
@@ -405,9 +406,9 @@ public partial class SettingsViewModel : ObservableObject
     private async Task ClearUploadsAsync()
     {
         if (UploadQueue is not { } queue) return;
-        bool ok = await Shell.Current.DisplayAlertAsync("Waiting uploads",
-            "Stop trying to upload these files to WifiDB? The files themselves stay in the Save & Clear folder.",
-            "Stop uploading", "Cancel");
+        bool ok = await Shell.Current.DisplayAlertAsync(Loc.T("Settings_WaitingUploads"),
+            Loc.T("Settings_StopWifiDbQuestion"),
+            Loc.T("Settings_StopUploading"), Loc.T("Common_Cancel"));
         if (!ok) return;
         queue.Clear();
         RefreshPendingUploads();
@@ -564,8 +565,8 @@ public partial class SettingsViewModel : ObservableObject
     private void RefreshManufacturersText()
     {
         if (Manufacturers is not { } db) return;
-        var source = db.UpdatedOn is { } on ? $"updated {on:yyyy-MM-dd}" : "the list that came with the app";
-        ManufacturersText = db.Count == 0 ? "Loading the manufacturer list…" : $"{db.Count:N0} manufacturers ({source})";
+        var source = db.UpdatedOn is { } on ? Loc.T("Settings_ManufacturersUpdated", on.ToString("yyyy-MM-dd")) : Loc.T("Settings_ManufacturersBuiltIn");
+        ManufacturersText = db.Count == 0 ? Loc.T("Settings_ManufacturersLoading") : Loc.T("Settings_ManufacturersCount", db.Count.ToString("N0"), source);
     }
 
     /// <summary>The original's Extra → Update Manufacturers: download IEEE's current list.</summary>
@@ -574,7 +575,7 @@ public partial class SettingsViewModel : ObservableObject
     {
         if (Manufacturers is not { } db) return;
         IsUpdatingManufacturers = true;
-        ManufacturersText = "Downloading IEEE's manufacturer list…";
+        ManufacturersText = Loc.T("Settings_ManufacturersDownloading");
         try
         {
             using var http = new HttpClient { Timeout = TimeSpan.FromMinutes(3) };
@@ -584,7 +585,7 @@ public partial class SettingsViewModel : ObservableObject
         catch (Exception ex)
         {
             RefreshManufacturersText();
-            ManufacturersText += $"\nUpdate failed: {ex.Message}";
+            ManufacturersText += "\n" + Loc.T("Settings_UpdateFailed", ex.Message);
         }
         finally
         {
@@ -610,9 +611,9 @@ public partial class SettingsViewModel : ObservableObject
     private async Task RedeemWifiDbLinkAsync()
     {
         var link = await Shell.Current.DisplayPromptAsync(
-            "WifiDB registration",
-            "Paste your WifiDB registration link (…/redeem_link.php?token=…):",
-            accept: "Redeem", cancel: "Cancel", keyboard: Keyboard.Url);
+            Loc.T("Settings_WifiDbRegistration"),
+            Loc.T("Settings_PasteRegistrationLink"),
+            accept: Loc.T("Settings_Redeem"), cancel: Loc.T("Common_Cancel"), keyboard: Keyboard.Url);
 
         if (!string.IsNullOrWhiteSpace(link))
             await RedeemAsync(link);
@@ -627,11 +628,11 @@ public partial class SettingsViewModel : ObservableObject
     {
         if (!WifiDbRegistration.IsRedeemLink(redeemUrl))
         {
-            WifiDbStatus = "That doesn't look like a WifiDB registration link.";
+            WifiDbStatus = Loc.T("Settings_NotRegistrationLink");
             return;
         }
 
-        WifiDbStatus = "Redeeming…";
+        WifiDbStatus = Loc.T("Settings_Redeeming");
         try
         {
             var cred = await WifiDbRegistration.RedeemAsync(redeemUrl, _http);
@@ -639,12 +640,12 @@ public partial class SettingsViewModel : ObservableObject
             if (!string.IsNullOrWhiteSpace(cred.Username)) WifiDbUser = cred.Username;
             WifiDbApiKey = cred.ApiKey;
             WifiDbStatus = string.IsNullOrWhiteSpace(cred.Username)
-                ? "Registered with WifiDB."
-                : $"Registered with WifiDB as {cred.Username}.";
+                ? Loc.T("Settings_Registered")
+                : Loc.T("Settings_RegisteredAs", cred.Username);
         }
         catch (Exception ex)
         {
-            WifiDbStatus = $"Registration failed: {ex.Message}";
+            WifiDbStatus = Loc.T("Settings_RegistrationFailed", ex.Message);
         }
     }
 }

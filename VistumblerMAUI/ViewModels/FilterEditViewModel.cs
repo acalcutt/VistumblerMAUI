@@ -1,3 +1,4 @@
+using VistumblerMAUI.Localization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using VistumblerMAUI.Services;
@@ -11,7 +12,7 @@ namespace VistumblerMAUI.ViewModels;
 public partial class FilterEditViewModel : ObservableObject, IQueryAttributable
 {
     [ObservableProperty] private ApFilter _filter = new();
-    [ObservableProperty] private string _title = "New filter";
+    [ObservableProperty] private string _title = Loc.T("Filter_NewTitle");
     [ObservableProperty] private bool _showAdvanced;
     [ObservableProperty] private string _minSignalText = string.Empty;
     [ObservableProperty] private string _selectedStatus = StatusOptions[0];
@@ -23,8 +24,8 @@ public partial class FilterEditViewModel : ObservableObject, IQueryAttributable
     {
         var id = query.TryGetValue("id", out var raw) ? Uri.UnescapeDataString(raw as string ?? "") : "new";
         var saved = ApFilterStore.All.FirstOrDefault(f => f.Id == id);
-        Filter = saved?.Clone() ?? new ApFilter { Name = $"Filter {ApFilterStore.All.Count + 1}" };
-        Title = saved is null ? "New filter" : $"Edit {saved.Name}";
+        Filter = saved?.Clone() ?? new ApFilter { Name = Loc.T("Filter_DefaultName", ApFilterStore.All.Count + 1) };
+        Title = saved is null ? Loc.T("Filter_NewTitle") : Loc.T("Filter_EditTitle", saved.Name);
         MinSignalText = Filter.MinSignal > 0 ? Filter.MinSignal.ToString() : string.Empty;
         SelectedStatus = StatusOptions[(int)Filter.Status];
         ShowAdvanced = Filter.HasAdvanced;

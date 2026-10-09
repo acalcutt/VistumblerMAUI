@@ -1,3 +1,4 @@
+using VistumblerMAUI.Localization;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -47,8 +48,8 @@ public partial class SessionChooserViewModel : ObservableObject
     private async Task Delete(SessionInfo session)
     {
         if (session is null) return;
-        bool ok = await AppShellDisplayAlert("Delete session",
-            $"Delete session '{session.Name}'? This cannot be undone.", "Delete", "Cancel");
+        bool ok = await AppShellDisplayAlert(Loc.T("Session_DeleteTitle"),
+            Loc.T("Session_DeleteQuestion", session.Name), Loc.T("Common_Delete"), Loc.T("Common_Cancel"));
         if (!ok) return;
         _session.DeleteSession(session.Path);
         Reload();

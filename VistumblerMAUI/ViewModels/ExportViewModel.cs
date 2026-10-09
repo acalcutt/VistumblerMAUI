@@ -1,3 +1,4 @@
+using VistumblerMAUI.Localization;
 using CommunityToolkit.Maui.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -57,7 +58,7 @@ public partial class ExportViewModel : ObservableObject
     /// <summary>The original's "Filtered APs" exports: only the APs the filter in use (Filters page) shows.</summary>
     [ObservableProperty] private bool _filteredOnly;
     public bool HasActiveFilter => Services.ApFilterStore.Active is not null;
-    public string FilteredOnlyText => $"Only APs the filter \"{Services.ApFilterStore.Active?.Name}\" shows";
+    public string FilteredOnlyText => Loc.T("Export_FilteredOnly", Services.ApFilterStore.Active?.Name);
 
     public ExportViewModel(IExportService exportService, IDatabaseService databaseService, ScanViewModel scan)
     {
@@ -85,7 +86,7 @@ public partial class ExportViewModel : ObservableObject
         var (picked, error) = await Services.SaveFolder.PickAsync(Services.ExportLocation.Resolve().Folder);
         if (error is not null)
         {
-            StatusMessage = $"{error} Keeping {ExportFolder}.";
+            StatusMessage = Loc.T("Export_KeepingFolder", error, ExportFolder);
             return;
         }
         if (picked is null) return;   // cancelled
@@ -93,7 +94,7 @@ public partial class ExportViewModel : ObservableObject
         Services.ExportLocation.Chosen = picked;
         ExportFolder   = Services.SaveFolder.Describe(picked);
         IsCustomFolder = true;
-        StatusMessage  = $"Exports will be written to {ExportFolder}";
+        StatusMessage  = Loc.T("Export_WillWriteTo", ExportFolder);
     }
 
     /// <summary>Go back to writing exports into the app's own documents folder.</summary>
@@ -103,14 +104,14 @@ public partial class ExportViewModel : ObservableObject
         Services.ExportLocation.Reset();
         ExportFolder   = Services.ExportLocation.DefaultFolder;
         IsCustomFolder = false;
-        StatusMessage  = $"Exports will be written to {ExportFolder}";
+        StatusMessage  = Loc.T("Export_WillWriteTo", ExportFolder);
     }
 
     [RelayCommand(CanExecute = nameof(CanExport))]
     private async Task ExportAsync()
     {
         IsExporting = true;
-        StatusMessage = "Exporting…";
+        StatusMessage = Loc.T("Export_Exporting");
 
         try
         {
@@ -119,7 +120,7 @@ public partial class ExportViewModel : ObservableObject
 
             if (aps.Count == 0)
             {
-                StatusMessage = "No access points to export";
+                StatusMessage = Loc.T("Export_NoAps");
                 return;
             }
             Services.ManufacturerDatabase.Current?.FillMissing(aps);   // APs saved before the lookup existed have none
@@ -131,7 +132,7 @@ public partial class ExportViewModel : ObservableObject
                 aps = aps.Where(a => shown.Contains(a.Bssid)).ToList();
                 if (aps.Count == 0)
                 {
-                    StatusMessage = $"No access points match the filter \"{filter.Name}\"";
+                    StatusMessage = Loc.T("Export_NoneMatch", filter.Name);
                     return;
                 }
             }
@@ -163,8 +164,8 @@ public partial class ExportViewModel : ObservableObject
             var where = Services.SaveFolder.Describe(saved);
 
             StatusMessage = fellBack
-                ? $"Exported {aps.Count} access point(s) to {where} — the chosen folder could not be written to"
-                : $"Exported {aps.Count} access point(s) to {where}";
+                ? Loc.T("Export_DoneFellBack", aps.Count, where)
+                : Loc.T("Export_Done", aps.Count, where);
 
             // Offer the file to whatever can take it off the device.
             //
@@ -242,7 +243,7 @@ public partial class ExportViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            StatusMessage = $"Export failed: {ex.Message}";
+            StatusMessage = Loc.T("Common_ExportFailed", ex.Message);
         }
         finally
         {

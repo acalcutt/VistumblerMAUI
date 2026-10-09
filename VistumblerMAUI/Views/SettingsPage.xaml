@@ -69,7 +69,7 @@
             <Grid ColumnDefinitions="Auto,*" Padding="16,12" ColumnSpacing="12">
                 <Label Grid.Column="0" Text="{loc:T Settings_GPSFollowZoom}" VerticalOptions="Center" />
                 <Picker Grid.Column="1"
-                        ItemsSource="{Binding FollowZoomOptions}"
+                        ItemsSource="{Binding FollowZoomOptions}" ItemDisplayBinding="{Binding ., Converter={StaticResource LocValue}, x:DataType=x:String}"
                         SelectedItem="{Binding SelectedFollowZoom}" />
             </Grid>
             <Grid ColumnDefinitions="Auto,*" Padding="16,0,16,8" ColumnSpacing="12"
@@ -100,7 +100,7 @@
             <Grid ColumnDefinitions="Auto,*" Padding="16,8" ColumnSpacing="12">
                 <Label Grid.Column="0" Text="{loc:T Settings_GPSSource}" VerticalOptions="Center" />
                 <Picker Grid.Column="1"
-                        ItemsSource="{Binding GpsSourceOptions}"
+                        ItemsSource="{Binding GpsSourceOptions}" ItemDisplayBinding="{Binding ., Converter={StaticResource LocValue}, x:DataType=x:String}"
                         SelectedItem="{Binding SelectedGpsSource}" />
             </Grid>
             <Grid ColumnDefinitions="*,Auto" Padding="16,4">
@@ -283,7 +283,7 @@
                 <Label Grid.Row="0" Grid.Column="0" Text="{loc:T Settings_FileName}" VerticalOptions="Center" />
                 <Entry Grid.Row="0" Grid.Column="1" Text="{Binding SaveFileName}" Placeholder="{loc:T Settings_AutoSave}" />
                 <Label Grid.Row="1" Grid.Column="0" Text="{loc:T Settings_FileType}" VerticalOptions="Center" />
-                <Picker Grid.Row="1" Grid.Column="1" ItemsSource="{Binding SaveFormatOptions}"
+                <Picker Grid.Row="1" Grid.Column="1" ItemsSource="{Binding SaveFormatOptions}" ItemDisplayBinding="{Binding ., Converter={StaticResource LocValue}, x:DataType=x:String}"
                         SelectedItem="{Binding SelectedSaveFormat}" />
             </Grid>
             <Label Text="{Binding SaveFileNameExample, StringFormat={loc:T Settings_ForExample0}}"
@@ -293,7 +293,7 @@
                 <Switch Grid.Column="1" IsToggled="{Binding AutoSaveAndClear}" />
             </Grid>
             <VerticalStackLayout IsVisible="{Binding AutoSaveAndClear}" Padding="16,0,16,8" Spacing="8">
-                <Picker ItemsSource="{Binding AutoSaveTriggerOptions}" SelectedItem="{Binding SelectedAutoSaveTrigger}" />
+                <Picker ItemsSource="{Binding AutoSaveTriggerOptions}" ItemDisplayBinding="{Binding ., Converter={StaticResource LocValue}, x:DataType=x:String}" SelectedItem="{Binding SelectedAutoSaveTrigger}" />
                 <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12" IsVisible="{Binding IsAutoSaveByTime, Converter={StaticResource InvertBool}}">
                     <Label Grid.Column="0" Text="{loc:T Settings_SaveOnceTheListHas}" VerticalOptions="Center" />
                     <Entry Grid.Column="1" Text="{Binding AutoSaveApCount}" Keyboard="Numeric" WidthRequest="80" />
@@ -334,7 +334,7 @@
                 <Switch Grid.Column="1" IsToggled="{Binding SoundEnabled}" />
             </Grid>
             <Picker Margin="16,0,16,4" IsVisible="{Binding SoundEnabled}"
-                    ItemsSource="{Binding NewApSoundOptions}" SelectedItem="{Binding SelectedNewApSound}" />
+                    ItemsSource="{Binding NewApSoundOptions}" ItemDisplayBinding="{Binding ., Converter={StaticResource LocValue}, x:DataType=x:String}" SelectedItem="{Binding SelectedNewApSound}" />
             <Grid ColumnDefinitions="*,Auto" Padding="16,8">
                 <Label Grid.Column="0" Text="{loc:T Settings_PlayASoundWhenThe}" VerticalOptions="Center" />
                 <Switch Grid.Column="1" IsToggled="{Binding ErrorSound}" />
@@ -343,9 +343,9 @@
                    FontSize="12" Margin="16,8,16,0" />
             <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto" Padding="16,8" ColumnSpacing="12" RowSpacing="8">
                 <Label Grid.Row="0" Grid.Column="0" Text="{loc:T Settings_Voice}" VerticalOptions="Center" />
-                <Picker Grid.Row="0" Grid.Column="1" ItemsSource="{Binding SpeakVoiceOptions}" SelectedItem="{Binding SelectedSpeakVoice}" />
+                <Picker Grid.Row="0" Grid.Column="1" ItemsSource="{Binding SpeakVoiceOptions}" ItemDisplayBinding="{Binding ., Converter={StaticResource LocValue}, x:DataType=x:String}" SelectedItem="{Binding SelectedSpeakVoice}" />
                 <Label Grid.Row="1" Grid.Column="0" Text="{loc:T Settings_Say}" VerticalOptions="Center" />
-                <Picker Grid.Row="1" Grid.Column="1" ItemsSource="{Binding SpeakValueOptions}" SelectedItem="{Binding SelectedSpeakValue}" />
+                <Picker Grid.Row="1" Grid.Column="1" ItemsSource="{Binding SpeakValueOptions}" ItemDisplayBinding="{Binding ., Converter={StaticResource LocValue}, x:DataType=x:String}" SelectedItem="{Binding SelectedSpeakValue}" />
                 <Label Grid.Row="2" Grid.Column="0" Text="{loc:T Settings_SpeakEverySeconds}" VerticalOptions="Center" />
                 <Entry Grid.Row="2" Grid.Column="1" Text="{Binding SpeakIntervalSeconds}" Keyboard="Numeric"
                        WidthRequest="80" HorizontalOptions="Start" />

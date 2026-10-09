@@ -1,3 +1,4 @@
+using VistumblerMAUI.Localization;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -59,12 +60,12 @@ public partial class GpsDetailsViewModel
         var visible = known.Where(a => a.IsActive).Select(a => a.Bssid).ToList();
         if (!M8bLocator.HasSources(known))
         {
-            ShowMatches(Array.Empty<M8bMatch>(), "Nothing to look up in yet: import an m8b file, or scan with GPS first.");
+            ShowMatches(Array.Empty<M8bMatch>(), Loc.T("WifiPos_NoSources"));
             return;
         }
         if (visible.Count == 0)
         {
-            ShowMatches(Array.Empty<M8bMatch>(), "No APs in range. Start scanning to estimate a position.");
+            ShowMatches(Array.Empty<M8bMatch>(), Loc.T("WifiPos_NoneInRange"));
             return;
         }
 
@@ -72,21 +73,21 @@ public partial class GpsDetailsViewModel
         try { matches = M8bLocator.Locate(visible, known); }
         catch (Exception ex)
         {
-            ShowMatches(Array.Empty<M8bMatch>(), $"Lookup failed: {ex.Message}");
+            ShowMatches(Array.Empty<M8bMatch>(), Loc.T("WifiPos_LookupFailed", ex.Message));
             return;
         }
         if (matches.Count == 0)
         {
-            ShowMatches(matches, $"None of the {visible.Count} APs in range are known.");
+            ShowMatches(matches, Loc.T("WifiPos_NoneKnown", visible.Count));
             return;
         }
 
         var best = matches[0];
         int tied = matches.Count(m => m.Count == best.Count);
-        var detail = $"{best.Count} of {visible.Count} APs in range agree on 1 km square {best.Square}";
-        if (tied > 1) detail += $" ({tied - 1} other square(s) tie)";
+        var detail = Loc.T("WifiPos_Agree", best.Count, visible.Count, best.Square);
+        if (tied > 1) detail += " " + Loc.T("WifiPos_Tie", tied - 1);
         if (_gps.CurrentGpsData is { } fix && (fix.Latitude != 0 || fix.Longitude != 0))
-            detail += $"\nGPS fix is {Distance(fix.Latitude, fix.Longitude, best.Latitude, best.Longitude):N0} m from its centre";
+            detail += "\n" + Loc.T("WifiPos_GpsDistance", Distance(fix.Latitude, fix.Longitude, best.Latitude, best.Longitude).ToString("N0"));
         ShowMatches(matches, detail);
     }
 
@@ -94,7 +95,7 @@ public partial class GpsDetailsViewModel
     {
         _matches = matches;
         HasWifiPosition = matches.Count > 0;
-        WifiPosition = matches.Count > 0 ? GpsFormatter.ToText(matches[0].Latitude, matches[0].Longitude) + " (± 1 km square)" : "—";
+        WifiPosition = matches.Count > 0 ? GpsFormatter.ToText(matches[0].Latitude, matches[0].Longitude) + " " + Loc.T("WifiPos_Accuracy") : "—";
         WifiPositionDetail = detail;
     }
 
@@ -103,26 +104,26 @@ public partial class GpsDetailsViewModel
     {
         try
         {
-            var picked = await FilePicker.Default.PickAsync(new PickOptions { PickerTitle = "Choose an m8b file" });
+            var picked = await FilePicker.Default.PickAsync(new PickOptions { PickerTitle = Loc.T("WifiPos_ChooseFile") });
             if (picked is null) return;
-            M8bStatus = "Importing…";
+            M8bStatus = Loc.T("WifiPos_Importing");
             await using var stream = await picked.OpenReadAsync();
             int records = await M8bLocator.ImportAsync(stream, picked.FileName);
-            M8bStatus = $"Imported {picked.FileName}: {records:N0} records";
+            M8bStatus = Loc.T("WifiPos_Imported", picked.FileName, records.ToString("N0"));
             RefreshM8bFiles();
             UpdateWifiPosition();
         }
-        catch (InvalidDataException ex) { M8bStatus = $"That isn't an m8b file this app can read ({ex.Message})"; }
-        catch (Exception ex) { M8bStatus = $"Import failed: {ex.Message}"; }
+        catch (InvalidDataException ex) { M8bStatus = Loc.T("WifiPos_NotM8b", ex.Message); }
+        catch (Exception ex) { M8bStatus = Loc.T("WifiPos_ImportFailed", ex.Message); }
     }
 
     [RelayCommand]
     private async Task RemoveM8bAsync(M8bFileItem item)
     {
-        if (!await Shell.Current.DisplayAlertAsync("Remove m8b file", $"Remove {item.Name} from the app?", "Remove", "Cancel"))
+        if (!await Shell.Current.DisplayAlertAsync(Loc.T("WifiPos_RemoveTitle"), Loc.T("WifiPos_RemoveQuestion", item.Name), Loc.T("WifiPos_Remove"), Loc.T("Common_Cancel")))
             return;
         M8bLocator.Remove(item.Name);
-        M8bStatus = $"Removed {item.Name}";
+        M8bStatus = Loc.T("WifiPos_Removed", item.Name);
         RefreshM8bFiles();
         UpdateWifiPosition();
     }

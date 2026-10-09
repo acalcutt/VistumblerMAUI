@@ -1,3 +1,4 @@
+using VistumblerMAUI.Localization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Vistumbler.Core.Services;
@@ -31,17 +32,17 @@ public partial class WifiDbUploadViewModel : ObservableObject
     public bool ShowWigle => WigleSettings.Enabled;
     [ObservableProperty] private bool _alsoWigle = WigleSettings.Ready;
     public string WigleText => WigleSettings.HasAccount
-        ? "Also upload to WiGLE (Wi-Fi, cell towers and Bluetooth)"
-        : "Also upload to WiGLE: set its API name and token in Settings → WiGLE first";
+        ? Loc.T("Upload_AlsoWigle")
+        : Loc.T("Upload_AlsoWigleNoAccount");
 
     // The account comes from Settings → WifiDB. WifiDB needs a username to import (with the API key when the
     // account requires one), so without one the page points to Settings instead of offering the upload.
     public bool HasAccount => !string.IsNullOrWhiteSpace(WifiDbSettings.User);
     public bool NeedsAccount => !HasAccount;
     public string AccountText => HasAccount
-        ? $"Uploading as {WifiDbSettings.User} to {WifiDbSettings.Url}" +
-          (string.IsNullOrWhiteSpace(WifiDbSettings.ApiKey) ? " (no API key set)" : "")
-        : "Set up your WifiDB account in Settings → WifiDB before uploading.";
+        ? Loc.T("Upload_As", WifiDbSettings.User, WifiDbSettings.Url) +
+          (string.IsNullOrWhiteSpace(WifiDbSettings.ApiKey) ? " " + Loc.T("Upload_NoApiKey") : "")
+        : Loc.T("Upload_NeedAccount");
 
     /// <summary>Re-reads the account, e.g. on returning from Settings.</summary>
     public void Refresh()
@@ -82,21 +83,21 @@ public partial class WifiDbUploadViewModel : ObservableObject
             $"{DateTime.Now:yyyy-MM-dd HH-mm-ss}_WifiDB{SaveAndClearSettings.Extension(format)}");
         try
         {
-            StatusMessage = "Preparing the file…";
+            StatusMessage = Loc.T("Upload_Preparing");
             int count = await SessionFileExporter.ExportAsync(_db, _export, path, format);
             if (count == 0)
             {
-                StatusMessage = "There are no access points to upload.";
+                StatusMessage = Loc.T("Upload_NoAps");
                 return;
             }
 
-            StatusMessage = $"Uploading {count} access points to WifiDB…";
+            StatusMessage = Loc.T("Upload_Uploading", count);
             var result = await WifiDbUploader.UploadAsync(path, WifiDbSettings.User, WifiDbSettings.ApiKey,
                 OtherUsers, Title, Notes);
             if (result.Success)
             {
                 FileHash = result.FileHash;
-                StatusMessage = $"{result.Message}\nImport #{result.ImportId} — {count} access points.";
+                StatusMessage = result.Message + "\n" + Loc.T("Upload_ImportNumber", result.ImportId, count);
             }
             else
             {
@@ -108,7 +109,7 @@ public partial class WifiDbUploadViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            StatusMessage = $"Upload failed: {ex.Message}";
+            StatusMessage = Loc.T("Upload_Failed", ex.Message);
         }
         finally
         {
@@ -123,10 +124,10 @@ public partial class WifiDbUploadViewModel : ObservableObject
         var gz = Path.Combine(FileSystem.CacheDirectory, $"WigleWifi_{DateTime.Now:yyyyMMddHHmmss}.csv.gz");
         try
         {
-            StatusMessage += "\nUploading to WiGLE…";
-            if (await WigleUploader.WriteSessionAsync(_db, _export, gz) == 0) return "Nothing to upload to WiGLE.";
+            StatusMessage += "\n" + Loc.T("Upload_UploadingWigle");
+            if (await WigleUploader.WriteSessionAsync(_db, _export, gz) == 0) return Loc.T("Upload_NothingForWigle");
             var result = await WigleUploader.UploadAsync(gz);
-            StatusMessage = StatusMessage.Replace("\nUploading to WiGLE…", "");
+            StatusMessage = StatusMessage.Replace("\n" + Loc.T("Upload_UploadingWigle"), "");
             return result.Message;
         }
         finally

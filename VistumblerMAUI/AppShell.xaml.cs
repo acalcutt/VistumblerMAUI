@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Vistumbler.Core.Services;
+using VistumblerMAUI.Localization;
 using VistumblerMAUI.Services;
 using VistumblerMAUI.ViewModels;
 using VistumblerMAUI.Views;
@@ -80,11 +81,11 @@ public partial class AppShell : Shell
     private async void OnClearClicked(object? sender, EventArgs e)
     {
         FlyoutIsPresented = false;
-        const string save = "Save to a file, then clear", discard = "Clear without saving";
+        string save = Loc.T("Clear_SaveThenClear"), discard = Loc.T("Clear_WithoutSaving");
         var (folder, _) = SaveAndClearSettings.Resolve();
         var choice = await DisplayActionSheet(
-            $"Clear the AP list? Scanning carries on. Saved files go to {SaveFolder.Describe(folder)}.",
-            "Cancel", discard, save);
+            Loc.T("Clear_Question", SaveFolder.Describe(folder)),
+            Loc.T("Common_Cancel"), discard, save);
         if (choice == save)
             await SaveAndClearAsync();
         else if (choice == discard)
@@ -97,11 +98,11 @@ public partial class AppShell : Shell
         var result = await _services.GetRequiredService<ScanViewModel>().SaveAndClearAsync();
         if (result.Path is null)
         {
-            await DisplayAlert("Save & Clear", result.Message, "OK");
+            await DisplayAlert(Loc.T("Clear_SaveAndClear"), result.Message, Loc.T("Common_Ok"));
             return;
         }
         // App-private folders (the Android default) can't be reached from a file manager, so offer to share
-        if (await DisplayAlert("Save & Clear", result.Message, "Share", "OK"))
+        if (await DisplayAlert(Loc.T("Clear_SaveAndClear"), result.Message, Loc.T("Common_Share"), Loc.T("Common_Ok")))
         {
             try
             {
@@ -135,11 +136,11 @@ public partial class AppShell : Shell
     {
         FlyoutIsPresented = false;
         var links = AppLinks.All;
-        var choice = await DisplayActionSheet("Links", "Cancel", null, links.Select(l => l.Title).ToArray());
+        var choice = await DisplayActionSheet(Loc.T("Links_Title"), Loc.T("Common_Cancel"), null, links.Select(l => l.Title).ToArray());
         var url = links.FirstOrDefault(l => l.Title == choice).Url;
         if (url is null) return;
         try { await Launcher.Default.OpenAsync(new Uri(url)); }
-        catch (Exception ex) { await DisplayAlert("Links", $"Couldn't open {url}: {ex.Message}", "OK"); }
+        catch (Exception ex) { await DisplayAlert(Loc.T("Links_Title"), Loc.T("Links_CouldNotOpen", url, ex.Message), Loc.T("Common_Ok")); }
     }
 
     private async void OnUploadToWifiDbClicked(object? sender, EventArgs e)
@@ -151,9 +152,9 @@ public partial class AppShell : Shell
     private async void OnNewSessionClicked(object? sender, EventArgs e)
     {
         FlyoutIsPresented = false;
-        bool ok = await DisplayAlert("New session",
-            "Start a new session? The current session stays saved and can be reopened later.",
-            "New Session", "Cancel");
+        bool ok = await DisplayAlert(Loc.T("NewSession_Title"),
+            Loc.T("NewSession_Question"),
+            Loc.T("Menu_NewSession"), Loc.T("Common_Cancel"));
         if (!ok) return;
 
         var scan    = _services.GetRequiredService<ScanViewModel>();
@@ -176,8 +177,8 @@ public partial class AppShell : Shell
     private async void OnExitDiscardClicked(object? sender, EventArgs e)
     {
         FlyoutIsPresented = false;
-        bool ok = await DisplayAlert("Exit without saving",
-            "Discard this session's captured data and exit?", "Discard & Exit", "Cancel");
+        bool ok = await DisplayAlert(Loc.T("Exit_DiscardTitle"),
+            Loc.T("Exit_DiscardQuestion"), Loc.T("Exit_Discard"), Loc.T("Common_Cancel"));
         if (!ok) return;
         await ShutdownAsync(discard: true);
     }

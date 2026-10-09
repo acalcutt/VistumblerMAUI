@@ -1,5 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using VistumblerMAUI.Localization;
 using VistumblerMAUI.Services;
 
 namespace VistumblerMAUI.ViewModels;
@@ -19,10 +20,7 @@ public partial class SettingsViewModel
     [ObservableProperty] private string _pendingWigleText    = string.Empty;
     [ObservableProperty] private bool   _isRetryingWigle;
 
-    public string WigleTerms =>
-        "WiGLE (wigle.net) is a separate service with its own rules. Uploading sends this app's Wi-Fi, cell tower and " +
-        "Bluetooth records to WiGLE under WiGLE's terms of use, which govern how they're stored, shown and shared; " +
-        "read them before turning this on. WifiDB uploads are unaffected.";
+    public string WigleTerms => Loc.T("Wigle_Terms");
 
     partial void OnWigleEnabledChanged(bool value)
     {
@@ -43,7 +41,7 @@ public partial class SettingsViewModel
         int count = queue?.Count ?? 0;
         HasPendingWigle = count > 0;
         PendingWigleText = count == 0 ? string.Empty
-            : $"{count} save{(count == 1 ? "" : "s")} waiting to upload to WiGLE" +
+            : Loc.T("Wigle_Pending", count) +
               (queue!.LastError is { } error ? $": {error}" : "");
     }
 
@@ -76,9 +74,9 @@ public partial class SettingsViewModel
     private async Task ClearWigleAsync()
     {
         if (WigleQueue is not { } queue) return;
-        if (!await Shell.Current.DisplayAlertAsync("Waiting WiGLE uploads",
-                "Stop trying to upload these saves to WiGLE? The VS1 files in the Save & Clear folder are kept.",
-                "Stop uploading", "Cancel"))
+        if (!await Shell.Current.DisplayAlertAsync(Loc.T("Wigle_WaitingUploads"),
+                Loc.T("Wigle_StopQuestion"),
+                Loc.T("Settings_StopUploading"), Loc.T("Common_Cancel")))
             return;
         queue.Clear();
         RefreshPendingWigle();

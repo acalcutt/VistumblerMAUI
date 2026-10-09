@@ -1,3 +1,4 @@
+using VistumblerMAUI.Localization;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -56,7 +57,7 @@ public partial class FiltersViewModel : ObservableObject
     [RelayCommand]
     private async Task DeleteAsync(FilterRow row)
     {
-        if (!await Shell.Current.DisplayAlertAsync("Delete filter", $"Delete \"{row.Name}\"?", "Delete", "Cancel")) return;
+        if (!await Shell.Current.DisplayAlertAsync(Loc.T("Filter_DeleteTitle"), Loc.T("Filter_DeleteQuestion", row.Name), Loc.T("Common_Delete"), Loc.T("Common_Cancel"))) return;
         ApFilterStore.Delete(row.Filter);
         Refresh();
     }

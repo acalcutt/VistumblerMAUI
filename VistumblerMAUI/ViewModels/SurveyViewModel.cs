@@ -1,3 +1,4 @@
+using VistumblerMAUI.Localization;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Text;
@@ -31,7 +32,7 @@ public partial class SurveyViewModel : ObservableObject
     /// <summary>Raised when the drawing needs repainting; <c>true</c> when the plan changed and should be refitted.</summary>
     public event Action<bool>? Redraw;
 
-    [ObservableProperty] private string _title = "Site survey";
+    [ObservableProperty] private string _title = Loc.T("Menu_SiteSurvey");
     [ObservableProperty] private string _status = string.Empty;
     [ObservableProperty] private bool _showHeatmap = true;
     [ObservableProperty] private SurveyNetwork? _selectedNetwork;
@@ -40,7 +41,7 @@ public partial class SurveyViewModel : ObservableObject
 
     public ObservableCollection<SurveyNetwork> Networks { get; } = new();
 
-    private static readonly SurveyNetwork Strongest = new("Strongest network at each spot", null, null);
+    private static readonly SurveyNetwork Strongest = new(Loc.T("Survey_Strongest"), null, null);
 
     public SurveyViewModel(ScanViewModel scan) => _scan = scan;
 
@@ -100,7 +101,7 @@ public partial class SurveyViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            Status = $"Couldn't load the plan image: {ex.Message}";
+            Status = Loc.T("Survey_PlanLoadFailed", ex.Message);
         }
     }
 
@@ -118,13 +119,14 @@ public partial class SurveyViewModel : ObservableObject
         if (hit >= 0)
         {
             var mark = _survey.Marks[hit];
-            var choice = await Shell.Current.DisplayActionSheetAsync(Describe(hit), "Cancel", "Delete spot", "Measure again here");
-            if (choice is not ("Delete spot" or "Measure again here")) return;
+            string delete = Loc.T("Survey_DeleteSpot"), again = Loc.T("Survey_MeasureAgain");
+            var choice = await Shell.Current.DisplayActionSheetAsync(Describe(hit), Loc.T("Common_Cancel"), delete, again);
+            if (choice != delete && choice != again) return;
             _survey.Marks.Remove(mark);
             Save();
             RebuildNetworks();
             Refresh(refit: false);
-            if (choice == "Delete spot") return;
+            if (choice == delete) return;
             (x, y) = (mark.X, mark.Y);
         }
         MarkAt(x, y);
@@ -148,10 +150,10 @@ public partial class SurveyViewModel : ObservableObject
     private string Describe(int index)
     {
         var mark = _survey.Marks[index];
-        var lines = new List<string> { $"Spot {index + 1}: {mark.Readings.Count} AP(s) at {mark.Time.ToLocalTime():t}" };
-        lines.Add(ValueAt(mark) is { } v ? $"{SelectedNetwork?.Label}: {v:0} dBm" : $"{SelectedNetwork?.Label}: not heard");
+        var lines = new List<string> { Loc.T("Survey_SpotInfo", index + 1, mark.Readings.Count, mark.Time.ToLocalTime().ToString("t")) };
+        lines.Add(ValueAt(mark) is { } v ? $"{SelectedNetwork?.Label}: {v:0} dBm" : Loc.T("Survey_NotHeard", SelectedNetwork?.Label));
         if (mark.Readings.OrderByDescending(r => r.Rssi).FirstOrDefault() is { } top)
-            lines.Add($"Strongest: {(string.IsNullOrEmpty(top.Ssid) ? top.Bssid : top.Ssid)} {top.Rssi} dBm");
+            lines.Add(Loc.T("Survey_StrongestAp", string.IsNullOrEmpty(top.Ssid) ? top.Bssid : top.Ssid, top.Rssi));
         return string.Join(Environment.NewLine, lines);
     }
 
@@ -235,11 +237,11 @@ public partial class SurveyViewModel : ObservableObject
             .GroupBy(r => r.Ssid)
             .Select(g => (g.Key, Aps: g.Select(r => r.Bssid).Distinct(StringComparer.OrdinalIgnoreCase).Count(), Marks: g.Count()))
             .OrderByDescending(g => g.Marks).ThenBy(g => g.Key, StringComparer.CurrentCultureIgnoreCase)
-            .Select(g => new SurveyNetwork($"{g.Key} ({g.Aps} AP{(g.Aps == 1 ? "" : "s")})", g.Key, null)));
+            .Select(g => new SurveyNetwork(Loc.T("Survey_SsidAps", g.Key, g.Aps), g.Key, null)));
         options.AddRange(readings
             .GroupBy(r => r.Bssid, StringComparer.OrdinalIgnoreCase)
             .OrderByDescending(g => g.Count())
-            .Select(g => new SurveyNetwork($"{g.Key} {(string.IsNullOrEmpty(g.First().Ssid) ? "(hidden)" : g.First().Ssid)}", null, g.Key)));
+            .Select(g => new SurveyNetwork($"{g.Key} {(string.IsNullOrEmpty(g.First().Ssid) ? Loc.T("Group_Hidden") : g.First().Ssid)}", null, g.Key)));
 
         Networks.Clear();
         foreach (var o in options) Networks.Add(o);
@@ -267,19 +269,19 @@ public partial class SurveyViewModel : ObservableObject
     private void UpdateStatus()
     {
         if (IsWaiting)
-            Status = _scan.IsScanning ? "Measuring… stand still until the next scan finishes." : "Start scanning to measure here.";
+            Status = _scan.IsScanning ? Loc.T("Survey_Measuring") : Loc.T("Survey_StartToMeasure");
         else if (!_scan.IsScanning)
-            Status = "Start scanning, then tap where you're standing.";
+            Status = Loc.T("Survey_StartThenTap");
         else
             Status = _survey.Marks.Count == 0
-                ? "Tap where you're standing to measure there."
-                : $"{_survey.Marks.Count} spot(s) measured. Tap where you're standing to add one, or on a spot to see or delete it.";
+                ? Loc.T("Survey_TapToMeasure")
+                : Loc.T("Survey_SpotsMeasured", _survey.Marks.Count);
     }
 
     private void Save()
     {
         try { SurveyStore.Save(_survey); }
-        catch (Exception ex) { Status = $"Couldn't save the survey: {ex.Message}"; }
+        catch (Exception ex) { Status = Loc.T("Survey_SaveFailed", ex.Message); }
     }
 
     // ── Surveys and plans ─────────────────────────────────────────────────────
@@ -287,26 +289,27 @@ public partial class SurveyViewModel : ObservableObject
     [RelayCommand]
     private async Task SurveyMenuAsync()
     {
-        var choice = await Shell.Current.DisplayActionSheetAsync(_survey.Name, "Cancel", null,
-            "New survey", "Open survey…", "Floor plan image…", "Use a grid", "Rename…", "Export readings (CSV)", "Delete this survey");
-        switch (choice)
+        var actions = new (string Label, Func<Task> Run)[]
         {
-            case "New survey": Open(NewSurveyObject()); break;
-            case "Open survey…": await OpenSurveyAsync(); break;
-            case "Floor plan image…": await PickPlanAsync(); break;
-            case "Use a grid": UseGrid(); break;
-            case "Rename…": await RenameAsync(); break;
-            case "Export readings (CSV)": await ExportCsvAsync(); break;
-            case "Delete this survey": await DeleteAsync(); break;
-        }
+            (Loc.T("Survey_New"),        () => { Open(NewSurveyObject()); return Task.CompletedTask; }),
+            (Loc.T("Survey_Open"),       OpenSurveyAsync),
+            (Loc.T("Survey_FloorPlan"),  PickPlanAsync),
+            (Loc.T("Survey_UseGrid"),    () => { UseGrid(); return Task.CompletedTask; }),
+            (Loc.T("Survey_Rename"),     RenameAsync),
+            (Loc.T("Survey_ExportCsv"),  ExportCsvAsync),
+            (Loc.T("Survey_Delete"),     DeleteAsync),
+        };
+        var choice = await Shell.Current.DisplayActionSheetAsync(_survey.Name, Loc.T("Common_Cancel"), null,
+            actions.Select(a => a.Label).ToArray());
+        if (actions.FirstOrDefault(a => a.Label == choice).Run is { } run) await run();
     }
 
     private async Task OpenSurveyAsync()
     {
         var surveys = SurveyStore.List();
-        if (surveys.Count == 0) { Status = "No saved surveys yet."; return; }
-        var labels = surveys.Select(s => $"{s.Name} ({s.Marks.Count} spots)").ToArray();
-        var pick = await Shell.Current.DisplayActionSheetAsync("Open survey", "Cancel", null, labels);
+        if (surveys.Count == 0) { Status = Loc.T("Survey_NoneSaved"); return; }
+        var labels = surveys.Select(s => Loc.T("Survey_NameSpots", s.Name, s.Marks.Count)).ToArray();
+        var pick = await Shell.Current.DisplayActionSheetAsync(Loc.T("Survey_Open"), Loc.T("Common_Cancel"), null, labels);
         int i = Array.IndexOf(labels, pick);
         if (i >= 0) Open(surveys[i]);
     }
@@ -314,12 +317,12 @@ public partial class SurveyViewModel : ObservableObject
     private async Task PickPlanAsync()
     {
         if (_survey.Marks.Count > 0 &&
-            !await Shell.Current.DisplayAlertAsync("Floor plan",
-                "This survey already has measured spots, which won't move with a new plan. Change it anyway?", "Change", "Cancel"))
+            !await Shell.Current.DisplayAlertAsync(Loc.T("Survey_FloorPlanTitle"),
+                Loc.T("Survey_ChangePlanQuestion"), Loc.T("Survey_Change"), Loc.T("Common_Cancel")))
             return;
         try
         {
-            var picked = await FilePicker.Default.PickAsync(new PickOptions { PickerTitle = "Choose a floor plan image", FileTypes = FilePickerFileType.Images });
+            var picked = await FilePicker.Default.PickAsync(new PickOptions { PickerTitle = Loc.T("Survey_ChoosePlan"), FileTypes = FilePickerFileType.Images });
             if (picked is null) return;
             await using (var stream = await picked.OpenReadAsync())
                 await SurveyStore.SetPlanImageAsync(_survey, stream, picked.FileName);
@@ -337,7 +340,7 @@ public partial class SurveyViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            Status = $"Couldn't use that image: {ex.Message}";
+            Status = Loc.T("Survey_ImageFailed", ex.Message);
         }
     }
 
@@ -353,7 +356,7 @@ public partial class SurveyViewModel : ObservableObject
 
     private async Task RenameAsync()
     {
-        var name = await Shell.Current.DisplayPromptAsync("Rename survey", "Name", initialValue: _survey.Name);
+        var name = await Shell.Current.DisplayPromptAsync(Loc.T("Survey_RenameTitle"), Loc.T("Survey_Name"), Loc.T("Common_Ok"), Loc.T("Common_Cancel"), initialValue: _survey.Name);
         if (string.IsNullOrWhiteSpace(name)) return;
         _survey.Name = Title = name.Trim();
         Save();
@@ -361,7 +364,7 @@ public partial class SurveyViewModel : ObservableObject
 
     private async Task DeleteAsync()
     {
-        if (!await Shell.Current.DisplayAlertAsync("Delete survey", $"Delete {_survey.Name} and its {_survey.Marks.Count} spot(s)?", "Delete", "Cancel"))
+        if (!await Shell.Current.DisplayAlertAsync(Loc.T("Survey_DeleteTitle"), Loc.T("Survey_DeleteQuestion", _survey.Name, _survey.Marks.Count), Loc.T("Common_Delete"), Loc.T("Common_Cancel")))
             return;
         SurveyStore.Delete(_survey);
         Open(SurveyStore.List().FirstOrDefault() ?? NewSurveyObject());
@@ -372,7 +375,7 @@ public partial class SurveyViewModel : ObservableObject
     /// <summary>Every reading at every spot, one row each, with the spot's plan position.</summary>
     private async Task ExportCsvAsync()
     {
-        if (_survey.Marks.Count == 0) { Status = "Nothing measured yet."; return; }
+        if (_survey.Marks.Count == 0) { Status = Loc.T("Survey_NothingMeasured"); return; }
         var inv = CultureInfo.InvariantCulture;
         var sb = new StringBuilder("Spot,X,Y,Time (UTC),BSSID,SSID,RSSI,Signal,Channel,Frequency,Authentication,Encryption\n");
         for (int i = 0; i < _survey.Marks.Count; i++)
@@ -403,14 +406,14 @@ public partial class SurveyViewModel : ObservableObject
         {
             var (folder, _) = Services.ExportLocation.Resolve();
             var saved = await Services.SaveFolder.SaveAsync(folder, fileName, write) ?? throw new IOException("Nothing was written.");
-            Status = $"Saved {Services.SaveFolder.Describe(saved)}";
+            Status = Loc.T("Common_Saved", Services.SaveFolder.Describe(saved));
             var (local, _) = await Services.SaveFolder.GetLocalFileAsync(saved);
             try { await Share.Default.RequestAsync(new ShareFileRequest { Title = _survey.Name, File = new ShareFile(local) }); }
             catch { /* saved either way */ }
         }
         catch (Exception ex)
         {
-            Status = $"Export failed: {ex.Message}";
+            Status = Loc.T("Common_ExportFailed", ex.Message);
         }
     }
 }
