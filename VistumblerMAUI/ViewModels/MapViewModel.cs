@@ -490,6 +490,7 @@ public partial class MapViewModel : ObservableObject
 
         // An AP map opened from the AP details page (MapViewModel.ApMap.cs), on top of the history layers
         DrawApMap();
+        DrawWifiSquares();   // MapViewModel.WifiPosition.cs
     }
 
     // ── Offline map caching ───────────────────────────────────────────────────

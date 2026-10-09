@@ -31,25 +31,36 @@
             ShowAttributionControl="True"
             MyLocationEnabled="True" />
 
-        <!-- ── AP map bar: shown while one AP's signal/range maps are drawn (MapViewModel.ApMap.cs) -->
-        <Border Grid.Row="0"
-                VerticalOptions="Start"
-                Margin="10,10,60,0"
-                Padding="12,8"
-                BackgroundColor="White"
-                StrokeShape="RoundRectangle 10"
-                Stroke="#DDDDDD"
-                IsVisible="{Binding HasApMap}">
-            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
-                <VerticalStackLayout Grid.Column="0" Spacing="2">
-                    <Label Text="{Binding ApMapTitle}" FontAttributes="Bold" FontSize="13" TextColor="Black" />
-                    <Label FontSize="11" TextColor="Gray"
-                           Text="Dots: where it was heard, red (weak) to green (strong). Orange: signal circle. Blue: farthest heard." />
-                </VerticalStackLayout>
-                <Button Grid.Column="1" Text="✕" Command="{Binding ClearApMapCommand}"
-                        BackgroundColor="Transparent" TextColor="Gray" Padding="8,0" VerticalOptions="Start" />
-            </Grid>
-        </Border>
+        <!-- Overlay bars along the top of the map -->
+        <VerticalStackLayout Grid.Row="0" VerticalOptions="Start" Margin="10,10,60,0" Spacing="6">
+            <!-- ── AP map bar: shown while one AP's signal/range maps are drawn (MapViewModel.ApMap.cs) -->
+            <Border Padding="12,8" BackgroundColor="White" StrokeShape="RoundRectangle 10" Stroke="#DDDDDD"
+                    IsVisible="{Binding HasApMap}">
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                    <VerticalStackLayout Grid.Column="0" Spacing="2">
+                        <Label Text="{Binding ApMapTitle}" FontAttributes="Bold" FontSize="13" TextColor="Black" />
+                        <Label FontSize="11" TextColor="Gray"
+                               Text="Dots: where it was heard, red (weak) to green (strong). Orange: signal circle. Blue: farthest heard." />
+                    </VerticalStackLayout>
+                    <Button Grid.Column="1" Text="✕" Command="{Binding ClearApMapCommand}"
+                            BackgroundColor="Transparent" TextColor="Gray" Padding="8,0" VerticalOptions="Start" />
+                </Grid>
+            </Border>
+
+            <!-- ── Wi-Fi position bar: the m8b squares from the GPS details page (MapViewModel.WifiPosition.cs) -->
+            <Border Padding="12,8" BackgroundColor="White" StrokeShape="RoundRectangle 10" Stroke="#DDDDDD"
+                    IsVisible="{Binding HasWifiSquares}">
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                    <VerticalStackLayout Grid.Column="0" Spacing="2">
+                        <Label Text="{Binding WifiSquaresTitle}" FontAttributes="Bold" FontSize="13" TextColor="Black" />
+                        <Label FontSize="11" TextColor="Gray"
+                               Text="Purple: 1 km squares the APs in range were seen in, darker where more agree." />
+                    </VerticalStackLayout>
+                    <Button Grid.Column="1" Text="✕" Command="{Binding ClearWifiSquaresCommand}"
+                            BackgroundColor="Transparent" TextColor="Gray" Padding="8,0" VerticalOptions="Start" />
+                </Grid>
+            </Border>
+        </VerticalStackLayout>
 
         <!-- ── Tap-to-inspect popup ────────────────────────────────────────
              Shown over the bottom of the map when OnMapTappedAsync finds a

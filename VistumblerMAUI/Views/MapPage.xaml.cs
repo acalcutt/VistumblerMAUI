@@ -16,6 +16,9 @@ public partial class MapPage : ContentPage, IQueryAttributable
     {
         if (query.TryGetValue("apmap", out var raw) && raw is string bssid && !string.IsNullOrWhiteSpace(bssid))
             _ = _vm.ShowApMapAsync(Uri.UnescapeDataString(bssid));
+        // "//MapPage?m8b=<square:votes,…>" from the GPS details page: the Wi-Fi position's squares
+        if (query.TryGetValue("m8b", out var squares) && squares is string list && !string.IsNullOrWhiteSpace(list))
+            _vm.ShowWifiSquares(Uri.UnescapeDataString(list));
         query.Clear();   // so returning to the tab later doesn't draw it again
     }
     private IDispatcherTimer? _liveTimer;   // periodic reload while the map is visible

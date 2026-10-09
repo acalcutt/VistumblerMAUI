@@ -14,6 +14,7 @@ namespace VistumblerMAUI.ViewModels;
 public partial class GpsDetailsViewModel : ObservableObject
 {
     private readonly IGpsService _gps;
+    private readonly ScanViewModel _scan;
     private IDispatcherTimer? _timer;
 
     public CompassDrawable Compass { get; } = new();
@@ -30,7 +31,11 @@ public partial class GpsDetailsViewModel : ObservableObject
     [ObservableProperty] private string _quality = "—";
     [ObservableProperty] private string _fixTime = "—";
 
-    public GpsDetailsViewModel(IGpsService gps) => _gps = gps;
+    public GpsDetailsViewModel(IGpsService gps, ScanViewModel scan)
+    {
+        _gps = gps;
+        _scan = scan;
+    }
 
     /// <summary>Starts following the GPS while the page is open.</summary>
     public void Start()
@@ -48,6 +53,7 @@ public partial class GpsDetailsViewModel : ObservableObject
             _timer.Start();
         }
         OnTick(null, EventArgs.Empty);
+        StartWifiPosition();
     }
 
     public void Stop()
@@ -61,6 +67,7 @@ public partial class GpsDetailsViewModel : ObservableObject
 
     private void OnTick(object? sender, EventArgs e)
     {
+        WifiPositionTick();
         if (!_gps.IsActive && _gps.CurrentGpsData is null)
         {
             Status = "GPS is off. Tap Use GPS to start it.";
