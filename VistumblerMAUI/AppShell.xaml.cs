@@ -21,6 +21,7 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(WifiDbScanPage), typeof(WifiDbScanPage));
         Routing.RegisterRoute(nameof(WifiDbUploadPage), typeof(WifiDbUploadPage));
         Routing.RegisterRoute(nameof(GpsDetailsPage), typeof(GpsDetailsPage));
+        Routing.RegisterRoute(nameof(SurveyPage), typeof(SurveyPage));
         Routing.RegisterRoute(nameof(FiltersPage), typeof(FiltersPage));
         Routing.RegisterRoute(nameof(FilterEditPage), typeof(FilterEditPage));
         Routing.RegisterRoute(nameof(MapColorsPage), typeof(MapColorsPage));
@@ -114,6 +115,13 @@ public partial class AppShell : Shell
     {
         FlyoutIsPresented = false;
         await GoToAsync(nameof(GpsDetailsPage));
+    }
+
+    // Site survey (tap-to-mark) on a floor plan, for indoors
+    private async void OnSurveyClicked(object? sender, EventArgs e)
+    {
+        FlyoutIsPresented = false;
+        await GoToAsync(nameof(SurveyPage));
     }
 
     // The original's Help, WifiDB and Support Vistumbler web pages, in one list

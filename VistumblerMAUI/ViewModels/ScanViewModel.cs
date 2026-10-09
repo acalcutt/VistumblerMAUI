@@ -45,6 +45,12 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
     /// the search box — used by the map to plot the current scan's active/dead APs.</summary>
     public IReadOnlyCollection<AccessPoint> AllKnownAps => _apMap.Values;
 
+    /// <summary>
+    /// Raised on the UI thread after each scan cycle is merged, with the APs that scan heard (their merged rows,
+    /// carrying this scan's signal). The site survey takes its readings from it.
+    /// </summary>
+    public event EventHandler<IReadOnlyList<AccessPoint>>? ScanCycleMerged;
+
     [ObservableProperty] private ObservableCollection<AccessPoint> _accessPoints = new();
     [ObservableProperty] private bool   _isScanning;
     [ObservableProperty] private bool   _isGpsEnabled;
@@ -523,6 +529,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
             ActiveCount   = _apMap.Values.Count(a => a.IsActive);
             StatusMessage = $"{ActiveCount} active / {TotalCount} total";
             MergeScanResults();
+            ScanCycleMerged?.Invoke(this, toPersist);
         });
 
         // Persist the whole cycle in one transaction (GPS + AP upserts + HIST samples +

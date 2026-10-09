@@ -57,6 +57,7 @@ public static partial class MauiProgram
         services.AddTransient<ExportViewModel>();
         services.AddTransient<WifiDbUploadViewModel>();
         services.AddTransient<GpsDetailsViewModel>();
+        services.AddTransient<SurveyViewModel>();
         services.AddTransient<FiltersViewModel>();
         services.AddTransient<FilterEditViewModel>();
         services.AddTransient<ApDetailsViewModel>();
@@ -75,6 +76,7 @@ public static partial class MauiProgram
         services.AddTransient<WifiDbScanPage>();
         services.AddTransient<WifiDbUploadPage>();
         services.AddTransient<GpsDetailsPage>();
+        services.AddTransient<SurveyPage>();
         services.AddTransient<FiltersPage>();
         services.AddTransient<FilterEditPage>();
         services.AddTransient<MapColorsPage>();
