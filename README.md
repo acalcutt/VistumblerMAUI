@@ -86,5 +86,6 @@ The Android release must always be signed with the same keystore (CI variables `
 
 * [Vistumbler](https://gitlab.techidiots.net/techidiots-llc/Vistumbler): the original, stable AutoIt version for Windows
 * [Vistumbler CS](https://gitlab.techidiots.net/techidiots-llc/VistumblerCS): an experimental C# rewrite for Windows
+* [WiGLE WiFi Wardriving](https://github.com/wiglenet/wigle-wifi-wardriving): the Magic 8 Ball (m8b) offline-location format comes from it; see [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)
 
 Created by Andrew Calcutt, [TechIdiots LLC](https://www.techidiots.net).
