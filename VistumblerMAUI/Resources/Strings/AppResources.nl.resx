@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The app's text in English, the default language and the fallback for every other. Each language is a copy of this
+  file named AppResources.<code>.resx (AppResources.de.resx…) with the values translated; a string missing there shows
+  in English. Keys are grouped by screen: Tab_, Menu_, Scan_, Opt_ (picker choices)…
+  Text with {0} keeps its placeholders. Look up with {loc:T Key} in XAML or Loc.T("Key") in code.
+-->
+<root>
+  <!-- Dutch text for VistumblerMAUI. Strings not here show in English (AppResources.resx). Seeded from the original Vistumbler's user-contributed language files by build/tools/ImportVistumblerLanguages.cs. -->
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Settings_Language" xml:space="preserve">
+    <value>Taal</value>
+    <comment>Vistumbler Dutch.ini Language</comment>
+  </data>
+  <data name="Tab_Settings" xml:space="preserve">
+    <value>Instellingen</value>
+    <comment>Vistumbler Dutch.ini Settings</comment>
+  </data>
+  <data name="Menu_NewSession" xml:space="preserve">
+    <value>Nieuwe Sessie</value>
+    <comment>Vistumbler Dutch.ini NewSession</comment>
+  </data>
+  <data name="Menu_Import" xml:space="preserve">
+    <value>Importeren…</value>
+    <comment>Vistumbler Dutch.ini Import</comment>
+  </data>
+  <data name="Menu_Export" xml:space="preserve">
+    <value>Exporteren…</value>
+    <comment>Vistumbler Dutch.ini Export</comment>
+  </data>
+  <data name="Menu_CheckForUpdates" xml:space="preserve">
+    <value>Controleren op Updates…</value>
+    <comment>Vistumbler Dutch.ini CheckForUpdates</comment>
+  </data>
+  <data name="Menu_ExitSaveDb" xml:space="preserve">
+    <value>Afsluiten (Database opslaan)</value>
+    <comment>Vistumbler Dutch.ini ExitSaveDb</comment>
+  </data>
+  <data name="Menu_Exit" xml:space="preserve">
+    <value>Afsluiten</value>
+    <comment>Vistumbler Dutch.ini Exit</comment>
+  </data>
+  <data name="Bar_ScanAps" xml:space="preserve">
+    <value>Scan AP's</value>
+    <comment>Vistumbler Dutch.ini ScanAPs</comment>
+  </data>
+  <data name="Bar_Stop" xml:space="preserve">
+    <value>Stop Scan</value>
+    <comment>Vistumbler Dutch.ini StopScanAps</comment>
+  </data>
+  <data name="Bar_UseGps" xml:space="preserve">
+    <value>GPS</value>
+    <comment>Vistumbler Dutch.ini UseGPS</comment>
+  </data>
+  <data name="Bar_StopGps" xml:space="preserve">
+    <value>StopGPS</value>
+    <comment>Vistumbler Dutch.ini StopGPS</comment>
+  </data>
+  <data name="Opt_Channel" xml:space="preserve">
+    <value>Kanaal</value>
+    <comment>Vistumbler Dutch.ini Column_Channel</comment>
+  </data>
+  <data name="Opt_Authentication" xml:space="preserve">
+    <value>Authenticatie</value>
+    <comment>Vistumbler Dutch.ini Column_Authentication</comment>
+  </data>
+  <data name="Opt_Encryption" xml:space="preserve">
+    <value>Encryptie</value>
+    <comment>Vistumbler Dutch.ini Column_Encryption</comment>
+  </data>
+  <data name="Opt_Networktype" xml:space="preserve">
+    <value>Netwerktype</value>
+    <comment>Vistumbler Dutch.ini Column_NetworkType</comment>
+  </data>
+  <data name="Opt_Manufacturer" xml:space="preserve">
+    <value>Fabrikant</value>
+    <comment>Vistumbler Dutch.ini Column_Manufacturer</comment>
+  </data>
+  <data name="Opt_Signal" xml:space="preserve">
+    <value>Signaal</value>
+    <comment>Vistumbler Dutch.ini Column_Signal</comment>
+  </data>
+</root>

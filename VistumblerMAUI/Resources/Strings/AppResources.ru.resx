@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The app's text in English, the default language and the fallback for every other. Each language is a copy of this
+  file named AppResources.<code>.resx (AppResources.de.resx…) with the values translated; a string missing there shows
+  in English. Keys are grouped by screen: Tab_, Menu_, Scan_, Opt_ (picker choices)…
+  Text with {0} keeps its placeholders. Look up with {loc:T Key} in XAML or Loc.T("Key") in code.
+-->
+<root>
+  <!-- Russian text for VistumblerMAUI. Strings not here show in English (AppResources.resx). Seeded from the original Vistumbler's user-contributed language files by build/tools/ImportVistumblerLanguages.cs. -->
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Settings_Language" xml:space="preserve">
+    <value>Язык</value>
+    <comment>Vistumbler Russian.ini Language</comment>
+  </data>
+  <data name="Tab_Settings" xml:space="preserve">
+    <value>Настройки</value>
+    <comment>Vistumbler Russian.ini Settings</comment>
+  </data>
+  <data name="Menu_Export" xml:space="preserve">
+    <value>Экспорт…</value>
+    <comment>Vistumbler Russian.ini Export</comment>
+  </data>
+  <data name="Menu_GpsDetails" xml:space="preserve">
+    <value>Детали GPS</value>
+    <comment>Vistumbler Russian.ini GpsDetails</comment>
+  </data>
+  <data name="Menu_Exit" xml:space="preserve">
+    <value>Выход</value>
+    <comment>Vistumbler Russian.ini Exit</comment>
+  </data>
+  <data name="Bar_ScanAps" xml:space="preserve">
+    <value>Скан. ТД</value>
+    <comment>Vistumbler Russian.ini ScanAPs</comment>
+  </data>
+  <data name="Bar_Stop" xml:space="preserve">
+    <value>Стоп</value>
+    <comment>Vistumbler Russian.ini StopScanAps</comment>
+  </data>
+  <data name="Bar_UseGps" xml:space="preserve">
+    <value>Исп. GPS</value>
+    <comment>Vistumbler Russian.ini UseGPS</comment>
+  </data>
+  <data name="Bar_StopGps" xml:space="preserve">
+    <value>Стоп GPS</value>
+    <comment>Vistumbler Russian.ini StopGPS</comment>
+  </data>
+  <data name="Opt_Channel" xml:space="preserve">
+    <value>Канал</value>
+    <comment>Vistumbler Russian.ini Column_Channel</comment>
+  </data>
+  <data name="Opt_Authentication" xml:space="preserve">
+    <value>Аутентификация</value>
+    <comment>Vistumbler Russian.ini Column_Authentication</comment>
+  </data>
+  <data name="Opt_Encryption" xml:space="preserve">
+    <value>Шифрование</value>
+    <comment>Vistumbler Russian.ini Column_Encryption</comment>
+  </data>
+  <data name="Opt_Networktype" xml:space="preserve">
+    <value>Тип сети</value>
+    <comment>Vistumbler Russian.ini Column_NetworkType</comment>
+  </data>
+  <data name="Opt_Manufacturer" xml:space="preserve">
+    <value>Производитель</value>
+    <comment>Vistumbler Russian.ini Column_Manufacturer</comment>
+  </data>
+  <data name="Opt_Signal" xml:space="preserve">
+    <value>Сила сигнала</value>
+    <comment>Vistumbler Russian.ini Column_Signal</comment>
+  </data>
+</root>

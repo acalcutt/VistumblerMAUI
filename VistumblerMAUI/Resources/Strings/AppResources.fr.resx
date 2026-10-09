@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The app's text in English, the default language and the fallback for every other. Each language is a copy of this
+  file named AppResources.<code>.resx (AppResources.de.resx…) with the values translated; a string missing there shows
+  in English. Keys are grouped by screen: Tab_, Menu_, Scan_, Opt_ (picker choices)…
+  Text with {0} keeps its placeholders. Look up with {loc:T Key} in XAML or Loc.T("Key") in code.
+-->
+<root>
+  <!-- French text for VistumblerMAUI. Strings not here show in English (AppResources.resx). Seeded from the original Vistumbler's user-contributed language files by build/tools/ImportVistumblerLanguages.cs. -->
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Settings_Language" xml:space="preserve">
+    <value>Langage</value>
+    <comment>Vistumbler French.ini Language</comment>
+  </data>
+  <data name="Tab_Settings" xml:space="preserve">
+    <value>Paramètres</value>
+    <comment>Vistumbler French.ini Settings</comment>
+  </data>
+  <data name="Menu_NewSession" xml:space="preserve">
+    <value>Nouvelle Session</value>
+    <comment>Vistumbler French.ini NewSession</comment>
+  </data>
+  <data name="Menu_Import" xml:space="preserve">
+    <value>Importer…</value>
+    <comment>Vistumbler French.ini Import</comment>
+  </data>
+  <data name="Menu_Export" xml:space="preserve">
+    <value>Exporter…</value>
+    <comment>Vistumbler French.ini Export</comment>
+  </data>
+  <data name="Menu_CheckForUpdates" xml:space="preserve">
+    <value>Rechercher des mises à jour…</value>
+    <comment>Vistumbler French.ini CheckForUpdates</comment>
+  </data>
+  <data name="Menu_GpsDetails" xml:space="preserve">
+    <value>Détails GPS</value>
+    <comment>Vistumbler French.ini GpsDetails</comment>
+  </data>
+  <data name="Menu_ExitSaveDb" xml:space="preserve">
+    <value>Quitter (Enregistrer Base de Données)</value>
+    <comment>Vistumbler French.ini ExitSaveDb</comment>
+  </data>
+  <data name="Menu_Exit" xml:space="preserve">
+    <value>Quitter</value>
+    <comment>Vistumbler French.ini Exit</comment>
+  </data>
+  <data name="Bar_ScanAps" xml:space="preserve">
+    <value>Lancer Scan</value>
+    <comment>Vistumbler French.ini ScanAPs</comment>
+  </data>
+  <data name="Bar_Stop" xml:space="preserve">
+    <value>Arrêter Scan</value>
+    <comment>Vistumbler French.ini StopScanAps</comment>
+  </data>
+  <data name="Bar_UseGps" xml:space="preserve">
+    <value>Utiliser GPS</value>
+    <comment>Vistumbler French.ini UseGPS</comment>
+  </data>
+  <data name="Bar_StopGps" xml:space="preserve">
+    <value>Arrêter GPS</value>
+    <comment>Vistumbler French.ini StopGPS</comment>
+  </data>
+  <data name="Opt_Channel" xml:space="preserve">
+    <value>Canal</value>
+    <comment>Vistumbler French.ini Column_Channel</comment>
+  </data>
+  <data name="Opt_Authentication" xml:space="preserve">
+    <value>Authentification</value>
+    <comment>Vistumbler French.ini Column_Authentication</comment>
+  </data>
+  <data name="Opt_Encryption" xml:space="preserve">
+    <value>Chiffrement</value>
+    <comment>Vistumbler French.ini Column_Encryption</comment>
+  </data>
+  <data name="Opt_Networktype" xml:space="preserve">
+    <value>Type de réseau</value>
+    <comment>Vistumbler French.ini Column_NetworkType</comment>
+  </data>
+  <data name="Opt_Manufacturer" xml:space="preserve">
+    <value>Fabricant</value>
+    <comment>Vistumbler French.ini Column_Manufacturer</comment>
+  </data>
+</root>
