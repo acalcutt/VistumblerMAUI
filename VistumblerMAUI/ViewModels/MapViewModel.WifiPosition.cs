@@ -54,8 +54,8 @@ public partial class MapViewModel
         _wifiSquaresGeoJson = sb.ToString();
         _wifiSquaresCamera = squares[0].Square.Center();
         WifiSquaresTitle = squares.Count == 1
-            ? $"Wi-Fi position: square {squares[0].Square}, {top} AP vote(s)"
-            : $"Wi-Fi position: best square {squares[0].Square} ({top} votes), {squares.Count - 1} more shaded by votes";
+            ? Localization.Loc.T("Map_WifiSquareOne", squares[0].Square, top)
+            : Localization.Loc.T("Map_WifiSquareMany", squares[0].Square, top, squares.Count - 1);
         HasWifiSquares = true;
         StatusMessage = WifiSquaresTitle;
         DrawWifiSquares();

@@ -63,4 +63,8 @@
     <value>製造商</value>
     <comment>Vistumbler Chinese_Traditional.ini Column_Manufacturer</comment>
   </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>取消</value>
+    <comment>Vistumbler Chinese_Traditional.ini Cancel</comment>
+  </data>
 </root>

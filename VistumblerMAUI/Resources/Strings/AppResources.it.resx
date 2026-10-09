@@ -87,4 +87,16 @@
     <value>Segnale</value>
     <comment>Vistumbler Italiano.ini Column_Signal</comment>
   </data>
+  <data name="Status_Ready" xml:space="preserve">
+    <value>Pronto</value>
+    <comment>Vistumbler Italiano.ini Ready</comment>
+  </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>Annulla</value>
+    <comment>Vistumbler Italiano.ini Cancel</comment>
+  </data>
+  <data name="Map_NewSession" xml:space="preserve">
+    <value>Nuova Sessione</value>
+    <comment>Vistumbler Italiano.ini NewSession</comment>
+  </data>
 </root>

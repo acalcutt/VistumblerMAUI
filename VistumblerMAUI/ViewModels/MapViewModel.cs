@@ -6,6 +6,7 @@ using MapLibreNative.Maui;
 using MapLibreNative.Maui.Handlers;
 using Vistumbler.Core.Models;
 using Vistumbler.Core.Services;
+using VistumblerMAUI.Localization;
 using VistumblerMAUI.Services;
 
 namespace VistumblerMAUI.ViewModels;
@@ -42,7 +43,7 @@ public partial class MapViewModel : ObservableObject
     // True while MapLibre is forced offline (serving only cached tiles). Drives the
     // "Save Area / Go Offline·Go Online" toolbar items on MapPage.
     [ObservableProperty] private bool _isOffline;
-    public string OfflineToggleLabel => IsOffline ? "Saved maps only ✓" : "Saved maps only";
+    public string OfflineToggleLabel => Loc.T(IsOffline ? "Map_SavedMapsOnlyOn" : "Map_SavedMapsOnly");
     partial void OnIsOfflineChanged(bool value) => OnPropertyChanged(nameof(OfflineToggleLabel));
 
     // Live-scan circle paint. Color is per-sectype (open/WEP/secure) AND active/dead:
@@ -95,7 +96,7 @@ public partial class MapViewModel : ObservableObject
     // fix is appended to a LineString drawn as a yellow line on the map. Points live
     // here (singleton VM) so the track survives page navigation and style reloads.
     [ObservableProperty] private bool _isTrackEnabled;
-    public string TrackToggleLabel => IsTrackEnabled ? "Disable Track" : "Enable Track";
+    public string TrackToggleLabel => Loc.T(IsTrackEnabled ? "Map_DisableTrack" : "Map_EnableTrack");
     partial void OnIsTrackEnabledChanged(bool value) => OnPropertyChanged(nameof(TrackToggleLabel));
 
     // The track is a list of line segments rather than one line: a long silence
@@ -125,7 +126,7 @@ public partial class MapViewModel : ObservableObject
     {
         _trackSegments.Clear();
         if (_trackLayerAdded) _controller?.SetGeoJsonSource("track-source", TrackGeoJson());
-        StatusMessage = "Track cleared (exports keep full history)";
+        StatusMessage = Loc.T("Map_TrackCleared");
     }
 
     private string TrackGeoJson()
@@ -213,7 +214,7 @@ public partial class MapViewModel : ObservableObject
     {
         MappableAps   = new List<AccessPoint>();
         ApsGeoJson    = EmptyGeoJson;
-        StatusMessage = "New session";
+        StatusMessage = Loc.T("Map_NewSession");
     }
 
     private void OnGpsData(object? sender, GpsDataReceivedEventArgs e)
@@ -414,16 +415,16 @@ public partial class MapViewModel : ObservableObject
         // ActiveColor = open-network color — used as the toggle-button highlight tint.
         var defs = new HistoryLayerState[]
         {
-            new() { Id = "daily",     Label = "Daily",     ActiveColor = "#1aff66", Buckets = ["daily"] },
-            new() { Id = "weekly",    Label = "Weekly",    ActiveColor = "#1aff66", Buckets = ["weekly"] },
-            new() { Id = "monthly",   Label = "Monthly",   ActiveColor = "#1aff66", Buckets = ["monthly"] },
-            new() { Id = "0to1year",  Label = "0-1 Year",  ActiveColor = "#1aff66", Buckets = ["0to1year"] },
-            new() { Id = "1to2year",  Label = "1-2 Year",  ActiveColor = "#00e64d", Buckets = ["1to2year"] },
-            new() { Id = "2to3year",  Label = "2-3 Year",  ActiveColor = "#00b33c", Buckets = ["2to3year"] },
-            new() { Id = "3to5year",  Label = "3-5 Year",  ActiveColor = "#009933", Buckets = ["3to5year"] },
-            new() { Id = "5to10year", Label = "5-10 Year", ActiveColor = "#00802b", Buckets = ["5to10year"] },
-            new() { Id = "10yrplus",  Label = "10+ Year",  ActiveColor = "#005c1f", Buckets = ["10yrplus"] },
-            new() { Id = "cells",     Label = "Cell Networks", ActiveColor = "#885fcd", Buckets = CellBuckets },
+            new() { Id = "daily",     LabelKey = "Layer_Daily", ActiveColor = "#1aff66", Buckets = ["daily"] },
+            new() { Id = "weekly",    LabelKey = "Layer_Weekly", ActiveColor = "#1aff66", Buckets = ["weekly"] },
+            new() { Id = "monthly",   LabelKey = "Layer_Monthly", ActiveColor = "#1aff66", Buckets = ["monthly"] },
+            new() { Id = "0to1year",  LabelKey = "Layer_0to1Year", ActiveColor = "#1aff66", Buckets = ["0to1year"] },
+            new() { Id = "1to2year",  LabelKey = "Layer_1to2Year", ActiveColor = "#00e64d", Buckets = ["1to2year"] },
+            new() { Id = "2to3year",  LabelKey = "Layer_2to3Year", ActiveColor = "#00b33c", Buckets = ["2to3year"] },
+            new() { Id = "3to5year",  LabelKey = "Layer_3to5Year", ActiveColor = "#009933", Buckets = ["3to5year"] },
+            new() { Id = "5to10year", LabelKey = "Layer_5to10Year", ActiveColor = "#00802b", Buckets = ["5to10year"] },
+            new() { Id = "10yrplus",  LabelKey = "Layer_10PlusYear", ActiveColor = "#005c1f", Buckets = ["10yrplus"] },
+            new() { Id = "cells",     LabelKey = "Layer_CellNetworks", ActiveColor = "#885fcd", Buckets = CellBuckets },
         };
 
         foreach (var layer in defs)
@@ -507,7 +508,7 @@ public partial class MapViewModel : ObservableObject
                 ? $"Offline map area ready — {p.CompletedResources} tiles, {p.CompletedBytes / 1024} KB cached"
                 : $"Caching map area… {p.CompletedResources} tiles, {p.CompletedBytes / 1024} KB");
         _offline.RegionError += e => MainThread.BeginInvokeOnMainThread(() =>
-            StatusMessage = $"Offline download error: {e.Message}");
+            StatusMessage = Loc.T("Map_OfflineError", e.Message));
         return _offline;
     }
 
@@ -518,13 +519,11 @@ public partial class MapViewModel : ObservableObject
     {
         if (_controller is null)
         {
-            StatusMessage = "Map not ready — wait for the style to load";
+            StatusMessage = Loc.T("Map_NotReady");
             return;
         }
-        if (!await Shell.Current.DisplayAlertAsync("Save map for offline use",
-                "Download the map you're looking at, plus two closer zoom levels, so it still shows without an " +
-                "internet connection? Then turn on \"Saved maps only\" to use just the saved maps. A large area " +
-                "can take a while and use a lot of data.", "Download", "Cancel"))
+        if (!await Shell.Current.DisplayAlertAsync(Loc.T("Map_SaveOfflineTitle"), Loc.T("Map_SaveOfflineQuestion"),
+                Loc.T("Map_Download"), Loc.T("Common_Cancel")))
             return;
 
         try
@@ -532,7 +531,7 @@ public partial class MapViewModel : ObservableObject
             var (latSw, lonSw, latNe, lonNe) = _controller.GetVisibleBounds();
             if (double.IsNaN(latSw))
             {
-                StatusMessage = "Map not ready — pan/zoom the map, then try again";
+                StatusMessage = Loc.T("Map_NotReadyPan");
                 return;
             }
 
@@ -540,7 +539,7 @@ public partial class MapViewModel : ObservableObject
             double maxZoom = Math.Min(minZoom + 2, 16);
 
             var mgr = GetOfflineManager();
-            StatusMessage = $"Caching map area (z{minZoom:0}–{maxZoom:0})…";
+            StatusMessage = Loc.T("Map_Caching", minZoom.ToString("0"), maxZoom.ToString("0"));
 
             var region = await mgr.CreateRegionAsync(
                 StyleUrl, latSw, lonSw, latNe, lonNe, minZoom, maxZoom,
@@ -551,7 +550,7 @@ public partial class MapViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            StatusMessage = $"Offline download failed: {ex.Message}";
+            StatusMessage = Loc.T("Map_OfflineFailed", ex.Message);
         }
     }
 
@@ -575,7 +574,7 @@ public partial class MapViewModel : ObservableObject
         // map shows active vs dead exactly as the Scan list does, and updates as scanning runs.
         MappableAps  = _scan.AllKnownAps.Where(a => a.Latitude.HasValue && a.Longitude.HasValue).ToList();
         ApsGeoJson   = BuildGeoJson(MappableAps);
-        StatusMessage = $"{MappableAps.Count} APs with GPS";
+        StatusMessage = Loc.T("Map_ApsWithGps", MappableAps.Count);
         return Task.CompletedTask;
     }
 
@@ -585,7 +584,7 @@ public partial class MapViewModel : ObservableObject
     {
         if (_controller is null)
         {
-            StatusMessage = "Map not ready — wait for style to load";
+            StatusMessage = Loc.T("Map_NotReady");
             return Task.CompletedTask;
         }
 
@@ -647,7 +646,7 @@ public partial class MapViewModel : ObservableObject
 
             _addedVectorLayers.Add(layerId);
         }
-        StatusMessage = $"{layer.Label} layer on";
+        StatusMessage = Loc.T("Map_LayerOn", layer.Label);
     }
 
     private void RemoveVectorLayer(HistoryLayerState layer)
@@ -660,7 +659,7 @@ public partial class MapViewModel : ObservableObject
             _controller.RemoveLayer(layerId);
             _addedVectorLayers.Remove(layerId);
         }
-        StatusMessage = $"{layer.Label} layer off";
+        StatusMessage = Loc.T("Map_LayerOff", layer.Label);
     }
 
     /// Adds cell layers for whichever wifi-age tiers are currently active,
@@ -696,7 +695,7 @@ public partial class MapViewModel : ObservableObject
                 });
             _addedVectorLayers.Add(layerId);
         }
-        StatusMessage = "Cells layer on";
+        StatusMessage = Loc.T("Map_LayerOn", Loc.T("Layer_CellNetworks"));
     }
 
     /// Removes all currently-visible cell layers regardless of which tiers they cover.
@@ -709,7 +708,7 @@ public partial class MapViewModel : ObservableObject
             _controller.RemoveLayer(layerId);
             _addedVectorLayers.Remove(layerId);
         }
-        StatusMessage = "Cells layer off";
+        StatusMessage = Loc.T("Map_LayerOff", Loc.T("Layer_CellNetworks"));
     }
 
     // ── Tap-to-inspect popup ──────────────────────────────────────────────────
@@ -730,7 +729,7 @@ public partial class MapViewModel : ObservableObject
         // time (rather than a combined comma-list) lets us know exactly which
         // layer/source schema produced the hit, since the different tile layers
         // use different property names (bssid vs mac, channel vs chan, etc).
-        var candidateLayers = new List<(string LayerId, string SourceLabel)> { ("ap-circles", "Live scan") };
+        var candidateLayers = new List<(string LayerId, string SourceLabel)> { ("ap-circles", Loc.T("Map_LiveScan")) };
         foreach (var layer in HistoryLayers)
         {
             if (!layer.IsActive) continue;

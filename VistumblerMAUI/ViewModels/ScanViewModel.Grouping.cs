@@ -74,19 +74,19 @@ public partial class ScanViewModel
     /// <summary>The group an AP falls in, with how the groups are ordered. Channels sort by number.</summary>
     private (string Title, double Order) GroupOf(AccessPoint ap) => SelectedGroupBy switch
     {
-        "Channel"       => ($"Channel {ap.Channel}", ap.Channel),
+        "Channel"       => (Localization.Loc.T("Group_Channel", ap.Channel), ap.Channel),
         "Band"          => ap.FrequencyMhz >= 5925 ? ("6 GHz", 3) : ap.FrequencyMhz >= 4900 ? ("5 GHz", 2)
                          : ap.FrequencyMhz > 0 || ap.Channel is >= 1 and <= 14 ? ("2.4 GHz", 1) : ("5 GHz", 2),
-        "Security type" => Services.ApFilter.SecurityType(ap) switch { 1 => ("Open", 1), 2 => ("WEP", 2), _ => ("Secure", 3) },
+        "Security type" => Services.ApFilter.SecurityType(ap) switch { 1 => (Localization.Loc.T("Group_Open"), 1), 2 => ("WEP", 2), _ => (Localization.Loc.T("Group_Secure"), 3) },
         "Authentication" => (Named(ap.AuthText), 0),
         "Encryption"    => (Named(ap.EncryptionText), 0),
-        "Network type"  => (ap.NetworkType == NetworkType.Adhoc ? "Ad Hoc" : "Infrastructure", 0),
+        "Network type"  => (Localization.Loc.T(ap.NetworkType == NetworkType.Adhoc ? "Group_AdHoc" : "Group_Infrastructure"), 0),
         "Manufacturer"  => (Named(ap.Manufacturer), 0),
-        "SSID"          => (string.IsNullOrEmpty(ap.Ssid) ? "(hidden)" : ap.Ssid, 0),
+        "SSID"          => (string.IsNullOrEmpty(ap.Ssid) ? Localization.Loc.T("Group_Hidden") : ap.Ssid, 0),
         _               => ("", 0),
     };
 
-    private static string Named(string? text) => string.IsNullOrWhiteSpace(text) ? "(unknown)" : text;
+    private static string Named(string? text) => string.IsNullOrWhiteSpace(text) ? Localization.Loc.T("Group_Unknown") : text;
 
     /// <summary>
     /// Brings <see cref="Groups"/> in line with the flat list (already filtered, searched and sorted), moving

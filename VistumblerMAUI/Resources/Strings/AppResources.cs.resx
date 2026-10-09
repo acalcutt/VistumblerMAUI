@@ -79,4 +79,16 @@
     <value>Signál</value>
     <comment>Vistumbler Czech.ini Column_Signal</comment>
   </data>
+  <data name="Status_Ready" xml:space="preserve">
+    <value>Připraven</value>
+    <comment>Vistumbler Czech.ini Ready</comment>
+  </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>Konec</value>
+    <comment>Vistumbler Czech.ini Cancel</comment>
+  </data>
+  <data name="Map_NewSession" xml:space="preserve">
+    <value>Nová relace</value>
+    <comment>Vistumbler Czech.ini NewSession</comment>
+  </data>
 </root>

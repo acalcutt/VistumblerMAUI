@@ -51,13 +51,13 @@ public partial class MapViewModel
     {
         await _db.InitializeAsync();
         var ap = await _db.GetAccessPointByBssidAsync(bssid);
-        if (ap is null) { if (recentre) StatusMessage = $"{bssid} isn't in this session"; return; }
+        if (ap is null) { if (recentre) StatusMessage = Localization.Loc.T("Map_NotInSession", bssid); return; }
 
         var points = (await _db.GetSignalHistoryAsync(ap.ApId))
             .Where(h => h.Signal > 0 && h.Latitude is { } lat && h.Longitude is { } lon && (lat != 0 || lon != 0))
             .Select(h => (Lat: h.Latitude!.Value, Lon: h.Longitude!.Value, h.Signal, h.Rssi))
             .ToList();
-        if (points.Count == 0) { if (recentre) StatusMessage = $"{bssid} has no GPS positions to map"; return; }
+        if (points.Count == 0) { if (recentre) StatusMessage = Localization.Loc.T("Map_NoPositions", bssid); return; }
         if (!recentre && points.Count == _apMapCount) return;   // nothing new
         if (!recentre && _apMapBssid != bssid) return;          // cleared while loading
         _apMapBssid = bssid;
@@ -69,7 +69,7 @@ public partial class MapViewModel
 
         _apMapGeoJson = (PointsGeoJson(points), CircleGeoJson(best.Lat, best.Lon, signalRadius), CircleGeoJson(best.Lat, best.Lon, rangeRadius));
         if (recentre) _apMapCamera = (best.Lat, best.Lon, ZoomForRadius(best.Lat, rangeRadius));
-        ApMapTitle = $"{(string.IsNullOrEmpty(ap.Ssid) ? ap.Bssid : ap.Ssid)}: {points.Count} positions, range {rangeRadius:0} m";
+        ApMapTitle = Localization.Loc.T("Map_ApMapTitle", string.IsNullOrEmpty(ap.Ssid) ? ap.Bssid : ap.Ssid, points.Count, rangeRadius.ToString("0"));
         HasApMap = true;
         if (recentre) StatusMessage = ApMapTitle;
         if (recentre || !_apMapDrawn) DrawApMap();
@@ -166,7 +166,7 @@ public partial class MapViewModel
     private async Task ExportApMapAsync()
     {
         if (_apMapBssid is not { } bssid) return;
-        var choice = await Shell.Current.DisplayActionSheetAsync("Export signal map", "Cancel", null, "GeoJSON", "KML");
+        var choice = await Shell.Current.DisplayActionSheetAsync(Localization.Loc.T("Map_ExportSignalMap"), Localization.Loc.T("Common_Cancel"), null, "GeoJSON", "KML");
         if (choice is not ("GeoJSON" or "KML")) return;
         try
         {
@@ -179,14 +179,14 @@ public partial class MapViewModel
                 ? Services.SignalMapExport.WriteKmlSignalMapAsync(path, new[] { ap }, $"{ap.Ssid} {ap.Bssid}")
                 : Services.SignalMapExport.WriteGeoJsonAsync(path, new[] { ap }, signalMap: true))
                 ?? throw new IOException("Nothing was written.");
-            StatusMessage = $"Saved {Services.SaveFolder.Describe(saved)}";
+            StatusMessage = Localization.Loc.T("Common_Saved", Services.SaveFolder.Describe(saved));
             var (local, _) = await Services.SaveFolder.GetLocalFileAsync(saved);
             try { await Share.Default.RequestAsync(new ShareFileRequest { Title = name, File = new ShareFile(local) }); }
             catch { /* saved either way */ }
         }
         catch (Exception ex)
         {
-            StatusMessage = $"Export failed: {ex.Message}";
+            StatusMessage = Localization.Loc.T("Common_ExportFailed", ex.Message);
         }
     }
 

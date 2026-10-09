@@ -95,4 +95,16 @@
     <value>Σήμα</value>
     <comment>Vistumbler Greek.ini Column_Signal</comment>
   </data>
+  <data name="Status_Ready" xml:space="preserve">
+    <value>Έτοιμο</value>
+    <comment>Vistumbler Greek.ini Ready</comment>
+  </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>Ακύρωση</value>
+    <comment>Vistumbler Greek.ini Cancel</comment>
+  </data>
+  <data name="Map_NewSession" xml:space="preserve">
+    <value>Νέο αρχείο</value>
+    <comment>Vistumbler Greek.ini NewSession</comment>
+  </data>
 </root>

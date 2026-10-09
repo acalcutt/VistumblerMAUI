@@ -95,4 +95,16 @@
     <value>Сигнал</value>
     <comment>Vistumbler Bulgarian.ini Column_Signal</comment>
   </data>
+  <data name="Status_Ready" xml:space="preserve">
+    <value>Готово</value>
+    <comment>Vistumbler Bulgarian.ini Ready</comment>
+  </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>Отказ</value>
+    <comment>Vistumbler Bulgarian.ini Cancel</comment>
+  </data>
+  <data name="Map_NewSession" xml:space="preserve">
+    <value>Нова сесия</value>
+    <comment>Vistumbler Bulgarian.ini NewSession</comment>
+  </data>
 </root>

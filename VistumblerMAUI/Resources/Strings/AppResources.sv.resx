@@ -91,4 +91,16 @@
     <value>Tillverkare</value>
     <comment>Vistumbler Swedish.ini Column_Manufacturer</comment>
   </data>
+  <data name="Status_Ready" xml:space="preserve">
+    <value>Klar</value>
+    <comment>Vistumbler Swedish.ini Ready</comment>
+  </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>Avbryt</value>
+    <comment>Vistumbler Swedish.ini Cancel</comment>
+  </data>
+  <data name="Map_NewSession" xml:space="preserve">
+    <value>Ny session</value>
+    <comment>Vistumbler Swedish.ini NewSession</comment>
+  </data>
 </root>

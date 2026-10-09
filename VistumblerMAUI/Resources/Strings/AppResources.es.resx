@@ -95,4 +95,16 @@
     <value>Señal</value>
     <comment>Vistumbler Spanish2.ini Column_Signal</comment>
   </data>
+  <data name="Status_Ready" xml:space="preserve">
+    <value>Listo</value>
+    <comment>Vistumbler Spanish2.ini Ready</comment>
+  </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>Cancelar</value>
+    <comment>Vistumbler Spanish2.ini Cancel</comment>
+  </data>
+  <data name="Map_NewSession" xml:space="preserve">
+    <value>Nueva Sesión</value>
+    <comment>Vistumbler Spanish2.ini NewSession</comment>
+  </data>
 </root>

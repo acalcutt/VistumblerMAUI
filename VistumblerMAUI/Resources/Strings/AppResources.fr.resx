@@ -91,4 +91,16 @@
     <value>Fabricant</value>
     <comment>Vistumbler French.ini Column_Manufacturer</comment>
   </data>
+  <data name="Status_Ready" xml:space="preserve">
+    <value>Prêt</value>
+    <comment>Vistumbler French.ini Ready</comment>
+  </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>Annuler</value>
+    <comment>Vistumbler French.ini Cancel</comment>
+  </data>
+  <data name="Map_NewSession" xml:space="preserve">
+    <value>Nouvelle Session</value>
+    <comment>Vistumbler French.ini NewSession</comment>
+  </data>
 </root>

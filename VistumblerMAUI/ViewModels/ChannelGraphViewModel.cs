@@ -49,7 +49,7 @@ public partial class ChannelGraphViewModel : ObservableObject
         }
 
         Graph.SetEntries(entries);
-        StatusText = $"{entries.Count} active APs on {SelectedBand}";
+        StatusText = Localization.Loc.T("Channels_Status", entries.Count, SelectedBand);
         GraphUpdated?.Invoke();
     }
 

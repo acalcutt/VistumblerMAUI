@@ -12,7 +12,7 @@
   <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
 
   <!-- Language -->
-  <data name="Language_System" xml:space="preserve"><value>Phone's language</value></data>
+  <data name="Language_System" xml:space="preserve"><value>Device language</value></data>
   <data name="Settings_Language" xml:space="preserve"><value>Language</value></data>
 
   <!-- Tabs -->
@@ -42,6 +42,41 @@
   <data name="Bar_Total" xml:space="preserve"><value>Total: {0}</value></data>
   <data name="Bar_Active" xml:space="preserve"><value>Active: {0}</value></data>
 
+  <!-- Status line and GPS status (scan bar) -->
+  <data name="Status_Ready" xml:space="preserve"><value>Ready</value></data>
+  <data name="Status_TotalAps" xml:space="preserve"><value>{0} total APs</value></data>
+  <data name="Status_Cleared" xml:space="preserve"><value>Cleared</value></data>
+  <data name="Status_SavedAndCleared" xml:space="preserve"><value>Saved {0} APs to {1} and cleared</value></data>
+  <data name="Status_SaveFailed" xml:space="preserve"><value>Save failed, list not cleared: {0}</value></data>
+  <data name="Status_SavedAps" xml:space="preserve"><value>Saved {0} APs to {1}</value></data>
+  <data name="Status_UploadingWifiDb" xml:space="preserve"><value>Uploading to WifiDB…</value></data>
+  <data name="Status_WifiDbNotYet" xml:space="preserve"><value>Not uploaded to WifiDB yet ({0}); it will be retried</value></data>
+  <data name="Status_UploadedWifiDb" xml:space="preserve"><value>Uploaded to WifiDB</value></data>
+  <data name="Status_WigleNotYet" xml:space="preserve"><value>Not uploaded to WiGLE yet ({0}); it will be retried</value></data>
+  <data name="Status_UploadedWigle" xml:space="preserve"><value>Uploaded to WiGLE</value></data>
+  <data name="Status_Queued" xml:space="preserve"><value>queued</value></data>
+  <data name="Status_NeedLocation" xml:space="preserve"><value>Location permission is needed to scan for Wi-Fi</value></data>
+  <data name="Status_Scanning" xml:space="preserve"><value>Scanning…</value></data>
+  <data name="Status_Stopped" xml:space="preserve"><value>Stopped — {0} total APs</value></data>
+  <data name="Status_ActiveTotal" xml:space="preserve"><value>{0} active / {1} total</value></data>
+  <data name="Status_DbWriteFailed" xml:space="preserve"><value>DB write failed — retrying next cycle</value></data>
+  <data name="Status_Error" xml:space="preserve"><value>Error: {0}</value></data>
+  <data name="Gps_Off" xml:space="preserve"><value>GPS off</value></data>
+  <data name="Gps_PermissionDenied" xml:space="preserve"><value>GPS: location permission denied</value></data>
+  <data name="Gps_NoFix" xml:space="preserve"><value>GPS: no fix for {0} s, position cleared</value></data>
+  <data name="Gps_Position" xml:space="preserve"><value>GPS {0}</value></data>
+  <data name="Gps_Error" xml:space="preserve"><value>GPS: {0}</value></data>
+  <data name="Filter_None" xml:space="preserve"><value>No filter</value></data>
+
+  <!-- Group headers on the Scan page -->
+  <data name="Group_Channel" xml:space="preserve"><value>Channel {0}</value></data>
+  <data name="Group_Open" xml:space="preserve"><value>Open</value></data>
+  <data name="Group_Secure" xml:space="preserve"><value>Secure</value></data>
+  <data name="Group_AdHoc" xml:space="preserve"><value>Ad Hoc</value></data>
+  <data name="Group_Infrastructure" xml:space="preserve"><value>Infrastructure</value></data>
+  <data name="Group_Hidden" xml:space="preserve"><value>(hidden)</value></data>
+  <data name="Group_Unknown" xml:space="preserve"><value>(unknown)</value></data>
+
   <!-- Scan page -->
   <data name="Scan_SearchPlaceholder" xml:space="preserve"><value>Search SSID, BSSID, manufacturer…</value></data>
   <data name="Scan_Sort" xml:space="preserve"><value>Sort</value></data>
@@ -52,6 +87,59 @@
   <data name="Scan_RadioShown" xml:space="preserve"><value>{0} shown · strongest first</value></data>
   <data name="Scan_RadioEmpty" xml:space="preserve"><value>Nothing recorded yet. Turn it on under Settings → Scanning, then scan.</value></data>
   <data name="Scan_TapToBegin" xml:space="preserve"><value>Tap Scan APs to begin</value></data>
+
+  <!-- Shared -->
+  <data name="Common_Cancel" xml:space="preserve"><value>Cancel</value></data>
+  <data name="Common_Saved" xml:space="preserve"><value>Saved {0}</value></data>
+  <data name="Common_ExportFailed" xml:space="preserve"><value>Export failed: {0}</value></data>
+
+  <!-- Map tab -->
+  <data name="Map_ApMapHelp" xml:space="preserve"><value>Dots: where it was heard, red (weak) to green (strong), adding new ones while scanning. Orange: signal circle. Blue: farthest heard. ⇪ exports it as GeoJSON or KML.</value></data>
+  <data name="Map_WifiSquaresHelp" xml:space="preserve"><value>Purple: 1 km squares the APs in range were seen in, darker where more agree.</value></data>
+  <data name="Map_Manufacturer" xml:space="preserve"><value>Manufacturer: {0}</value></data>
+  <data name="Map_ViewInList" xml:space="preserve"><value>View in AP List</value></data>
+  <data name="Map_ClearTrack" xml:space="preserve"><value>Clear Track</value></data>
+  <data name="Map_EnableTrack" xml:space="preserve"><value>Enable Track</value></data>
+  <data name="Map_DisableTrack" xml:space="preserve"><value>Disable Track</value></data>
+  <data name="Map_SaveOffline" xml:space="preserve"><value>Save map for offline</value></data>
+  <data name="Map_SavedMapsOnly" xml:space="preserve"><value>Saved maps only</value></data>
+  <data name="Map_SavedMapsOnlyOn" xml:space="preserve"><value>Saved maps only ✓</value></data>
+  <data name="Map_SaveOfflineTitle" xml:space="preserve"><value>Save map for offline use</value></data>
+  <data name="Map_SaveOfflineQuestion" xml:space="preserve"><value>Download the map you're looking at, plus two closer zoom levels, so it still shows without an internet connection? Then turn on "Saved maps only" to use just the saved maps. A large area can take a while and use a lot of data.</value></data>
+  <data name="Map_Download" xml:space="preserve"><value>Download</value></data>
+  <data name="Map_TrackCleared" xml:space="preserve"><value>Track cleared (exports keep full history)</value></data>
+  <data name="Map_NewSession" xml:space="preserve"><value>New session</value></data>
+  <data name="Map_NotReady" xml:space="preserve"><value>Map not ready — wait for the style to load</value></data>
+  <data name="Map_NotReadyPan" xml:space="preserve"><value>Map not ready — pan/zoom the map, then try again</value></data>
+  <data name="Map_Caching" xml:space="preserve"><value>Caching map area (z{0}–{1})…</value></data>
+  <data name="Map_OfflineFailed" xml:space="preserve"><value>Offline download failed: {0}</value></data>
+  <data name="Map_OfflineError" xml:space="preserve"><value>Offline download error: {0}</value></data>
+  <data name="Map_ApsWithGps" xml:space="preserve"><value>{0} APs with GPS</value></data>
+  <data name="Map_LayerOn" xml:space="preserve"><value>{0} layer on</value></data>
+  <data name="Map_LayerOff" xml:space="preserve"><value>{0} layer off</value></data>
+  <data name="Map_LiveScan" xml:space="preserve"><value>Live scan</value></data>
+  <data name="Map_NotInSession" xml:space="preserve"><value>{0} isn't in this session</value></data>
+  <data name="Map_NoPositions" xml:space="preserve"><value>{0} has no GPS positions to map</value></data>
+  <data name="Map_ApMapTitle" xml:space="preserve"><value>{0}: {1} positions, range {2} m</value></data>
+  <data name="Map_ExportSignalMap" xml:space="preserve"><value>Export signal map</value></data>
+  <data name="Map_WifiSquareOne" xml:space="preserve"><value>Wi-Fi position: square {0}, {1} AP vote(s)</value></data>
+  <data name="Map_WifiSquareMany" xml:space="preserve"><value>Wi-Fi position: best square {0} ({1} votes), {2} more shaded by votes</value></data>
+  <data name="Layer_Daily" xml:space="preserve"><value>Daily</value></data>
+  <data name="Layer_Weekly" xml:space="preserve"><value>Weekly</value></data>
+  <data name="Layer_Monthly" xml:space="preserve"><value>Monthly</value></data>
+  <data name="Layer_0to1Year" xml:space="preserve"><value>0-1 Year</value></data>
+  <data name="Layer_1to2Year" xml:space="preserve"><value>1-2 Year</value></data>
+  <data name="Layer_2to3Year" xml:space="preserve"><value>2-3 Year</value></data>
+  <data name="Layer_3to5Year" xml:space="preserve"><value>3-5 Year</value></data>
+  <data name="Layer_5to10Year" xml:space="preserve"><value>5-10 Year</value></data>
+  <data name="Layer_10PlusYear" xml:space="preserve"><value>10+ Year</value></data>
+  <data name="Layer_CellNetworks" xml:space="preserve"><value>Cell Networks</value></data>
+
+  <!-- Channels tab -->
+  <data name="Channels_Band" xml:space="preserve"><value>Band</value></data>
+  <data name="Channels_Rssi" xml:space="preserve"><value>RSSI</value></data>
+  <data name="Channels_Status" xml:space="preserve"><value>{0} active APs on {1}</value></data>
+  <data name="Graph_NoHistory" xml:space="preserve"><value>No signal history yet</value></data>
 
   <!-- Picker choices, keyed by the value they stand for (spaces and punctuation removed); see LocValueConverter -->
   <data name="Opt_Nogrouping" xml:space="preserve"><value>No grouping</value></data>

@@ -63,4 +63,8 @@
     <value>Fabrikant</value>
     <comment>Vistumbler Danish.ini Column_Manufacturer</comment>
   </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>Annuler</value>
+    <comment>Vistumbler Danish.ini Cancel</comment>
+  </data>
 </root>

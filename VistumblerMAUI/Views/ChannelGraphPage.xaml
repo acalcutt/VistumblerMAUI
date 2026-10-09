@@ -3,9 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:VistumblerMAUI.ViewModels"
              xmlns:controls="clr-namespace:VistumblerMAUI.Controls"
+             xmlns:loc="clr-namespace:VistumblerMAUI.Localization"
              x:DataType="vm:ChannelGraphViewModel"
              x:Class="VistumblerMAUI.Views.ChannelGraphPage"
-             Title="Channels">
+             Title="{loc:T Tab_Channels}">
 
     <Grid RowDefinitions="Auto,Auto,*,Auto">
 
@@ -14,11 +15,11 @@
 
         <!-- Band selector + RSSI/percent toggle -->
         <Grid Grid.Row="1" ColumnDefinitions="Auto,*,Auto,Auto" Padding="12,6" ColumnSpacing="8">
-            <Label Grid.Column="0" Text="Band" VerticalOptions="Center" />
+            <Label Grid.Column="0" Text="{loc:T Channels_Band}" VerticalOptions="Center" />
             <Picker Grid.Column="1"
                     ItemsSource="{Binding BandOptions}"
                     SelectedItem="{Binding SelectedBand}" />
-            <Label Grid.Column="2" Text="RSSI" VerticalOptions="Center" />
+            <Label Grid.Column="2" Text="{loc:T Channels_Rssi}" VerticalOptions="Center" />
             <Switch Grid.Column="3" IsToggled="{Binding UseRssi}" VerticalOptions="Center" />
         </Grid>
 

@@ -83,4 +83,16 @@
     <value>Hersteller</value>
     <comment>Vistumbler Deutsch.ini Column_Manufacturer</comment>
   </data>
+  <data name="Status_Ready" xml:space="preserve">
+    <value>Bereit</value>
+    <comment>Vistumbler Deutsch.ini Ready</comment>
+  </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>Abbrechen</value>
+    <comment>Vistumbler Deutsch.ini Cancel</comment>
+  </data>
+  <data name="Map_NewSession" xml:space="preserve">
+    <value>Neue Sitzung</value>
+    <comment>Vistumbler Deutsch.ini NewSession</comment>
+  </data>
 </root>

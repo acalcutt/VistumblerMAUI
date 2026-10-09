@@ -33,7 +33,7 @@ public class SignalGraphDrawable : IDrawable
         {
             canvas.FontColor = Color.FromArgb("#9E9E9E");
             canvas.FontSize  = 12;
-            canvas.DrawString("No signal history yet", dirtyRect, HorizontalAlignment.Center, VerticalAlignment.Center);
+            canvas.DrawString(Localization.Loc.T("Graph_NoHistory"), dirtyRect, HorizontalAlignment.Center, VerticalAlignment.Center);
             return;
         }
 

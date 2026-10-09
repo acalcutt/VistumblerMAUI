@@ -83,4 +83,12 @@
     <value>Sinal</value>
     <comment>Vistumbler Brazilian_Portuguese.ini Column_Signal</comment>
   </data>
+  <data name="Status_Ready" xml:space="preserve">
+    <value>Pronto</value>
+    <comment>Vistumbler Brazilian_Portuguese.ini Ready</comment>
+  </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>Cancelar</value>
+    <comment>Vistumbler Brazilian_Portuguese.ini Cancel</comment>
+  </data>
 </root>

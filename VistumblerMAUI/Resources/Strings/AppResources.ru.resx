@@ -79,4 +79,12 @@
     <value>Сила сигнала</value>
     <comment>Vistumbler Russian.ini Column_Signal</comment>
   </data>
+  <data name="Status_Ready" xml:space="preserve">
+    <value>Готово</value>
+    <comment>Vistumbler Russian.ini Ready</comment>
+  </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>Отмена</value>
+    <comment>Vistumbler Russian.ini Cancel</comment>
+  </data>
 </root>

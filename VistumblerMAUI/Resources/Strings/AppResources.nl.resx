@@ -91,4 +91,16 @@
     <value>Signaal</value>
     <comment>Vistumbler Dutch.ini Column_Signal</comment>
   </data>
+  <data name="Status_Ready" xml:space="preserve">
+    <value>Klaar</value>
+    <comment>Vistumbler Dutch.ini Ready</comment>
+  </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>Afbreken</value>
+    <comment>Vistumbler Dutch.ini Cancel</comment>
+  </data>
+  <data name="Map_NewSession" xml:space="preserve">
+    <value>Nieuwe Sessie</value>
+    <comment>Vistumbler Dutch.ini NewSession</comment>
+  </data>
 </root>

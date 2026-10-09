@@ -16,8 +16,11 @@ public partial class HistoryLayerState : ObservableObject
     /// <summary>Stable ID used to name the MapLibre layer (e.g. "hist_daily_circles").</summary>
     public string  Id                { get; init; } = "";
 
+    /// <summary>The label's key in AppResources (Layer_…); looked up each time, so it follows the language.</summary>
+    public string  LabelKey          { get; init; } = "";
+
     /// <summary>Button label shown in the UI.</summary>
-    public string  Label             { get; init; } = "";
+    public string  Label => Localization.Loc.T(LabelKey);
 
     /// <summary>Hex color for the active button state and circle paint.</summary>
     public string  ActiveColor       { get; init; } = "#3BB2D0";

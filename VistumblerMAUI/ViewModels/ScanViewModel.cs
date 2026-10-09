@@ -57,13 +57,13 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
     [ObservableProperty] private bool   _isGpsEnabled;
     [ObservableProperty] private int    _totalCount;
     [ObservableProperty] private int    _activeCount;
-    [ObservableProperty] private string _statusMessage = "Ready";
-    [ObservableProperty] private string _gpsStatus     = "GPS off";
+    [ObservableProperty] private string _statusMessage = Localization.Loc.T("Status_Ready");
+    [ObservableProperty] private string _gpsStatus     = Localization.Loc.T("Gps_Off");
     [ObservableProperty] private double _loopTimeMs;
     [ObservableProperty] private string _searchText = string.Empty;
 
     /// <summary>The filter in use (Filters page), shown on the Scan page's Filter button.</summary>
-    [ObservableProperty] private string _filterLabel = Services.ApFilterStore.Active?.Name ?? "No filter";
+    [ObservableProperty] private string _filterLabel = Services.ApFilterStore.Active?.Name ?? Localization.Loc.T("Filter_None");
 
     [RelayCommand]
     private static Task OpenFiltersAsync() => Shell.Current.GoToAsync(nameof(Views.FiltersPage));
@@ -140,7 +140,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         _manufacturers.Changed += (_, _) => MainThread.BeginInvokeOnMainThread(RefreshManufacturers);
         Services.ApFilterStore.Changed += (_, _) => MainThread.BeginInvokeOnMainThread(() =>
         {
-            FilterLabel = Services.ApFilterStore.Active?.Name ?? "No filter";
+            FilterLabel = Services.ApFilterStore.Active?.Name ?? Localization.Loc.T("Filter_None");
             RebuildDisplayedList();
         });
 
@@ -186,7 +186,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         ActiveCount = 0;
         RebuildDisplayedList();
         if (!IsScanning)
-            StatusMessage = $"{TotalCount} total APs";
+            StatusMessage = Localization.Loc.T("Status_TotalAps", TotalCount);
     }
 
     /// <summary>Stop capture and clear in-memory state, closing the current session DB so a
@@ -201,7 +201,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         _loaded       = false;
         TotalCount    = 0;
         ActiveCount   = 0;
-        StatusMessage = "New session";
+        StatusMessage = Localization.Loc.T("Map_NewSession");
         await _db.CloseAsync();
     }
 
@@ -212,7 +212,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         try
         {
             await _db.ClearAllAccessPointsAsync();
-            await MainThread.InvokeOnMainThreadAsync(() => ClearInMemory("Cleared"));
+            await MainThread.InvokeOnMainThreadAsync(() => ClearInMemory(Localization.Loc.T("Status_Cleared")));
         }
         finally
         {
@@ -279,12 +279,12 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
                 await _db.ClearAllAccessPointsAsync();
                 _lastSaveAndClear = DateTime.UtcNow;
                 await MainThread.InvokeOnMainThreadAsync(() =>
-                    ClearInMemory($"Saved {count} APs to {fileName} and cleared"));
+                    ClearInMemory(Localization.Loc.T("Status_SavedAndCleared", count, fileName)));
             }
             catch (Exception ex)
             {
                 // The list is only cleared after the file is written, so a failure keeps everything
-                var failed = $"Save failed, list not cleared: {ex.Message}";
+                var failed = Localization.Loc.T("Status_SaveFailed", ex.Message);
                 await MainThread.InvokeOnMainThreadAsync(() => StatusMessage = failed);
                 return new(null, 0, failed);
             }
@@ -293,7 +293,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
                 _persistLock.Release();
             }
 
-            var message = $"Saved {count} APs to {Services.SaveFolder.Describe(path)}";
+            var message = Localization.Loc.T("Status_SavedAps", count, Services.SaveFolder.Describe(path));
             if (Services.SaveAndClearSettings.UploadToWifiDb)
             {
                 // Queued, so a file that can't go now (offline, WifiDB down, no account yet) is retried later
@@ -325,11 +325,11 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
     /// <summary>Works through the WifiDB upload queue and describes what happened to <paramref name="path"/>.</summary>
     private async Task<string> UploadQueuedAsync(string path)
     {
-        await MainThread.InvokeOnMainThreadAsync(() => StatusMessage = "Uploading to WifiDB…");
+        await MainThread.InvokeOnMainThreadAsync(() => StatusMessage = Localization.Loc.T("Status_UploadingWifiDb"));
         await _uploadQueue.ProcessAsync(waitForRunning: true);
         var outcome = _uploadQueue.Contains(path)
-            ? $"Not uploaded to WifiDB yet ({_uploadQueue.ErrorFor(path) ?? "queued"}); it will be retried"
-            : "Uploaded to WifiDB";
+            ? Localization.Loc.T("Status_WifiDbNotYet", _uploadQueue.ErrorFor(path) ?? Localization.Loc.T("Status_Queued"))
+            : Localization.Loc.T("Status_UploadedWifiDb");
         await MainThread.InvokeOnMainThreadAsync(() => StatusMessage = outcome);
         return outcome;
     }
@@ -339,8 +339,8 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
     {
         await _wigleQueue.ProcessAsync(waitForRunning: true);
         var outcome = _wigleQueue.Count > 0
-            ? $"Not uploaded to WiGLE yet ({_wigleQueue.LastError ?? "queued"}); it will be retried"
-            : "Uploaded to WiGLE";
+            ? Localization.Loc.T("Status_WigleNotYet", _wigleQueue.LastError ?? Localization.Loc.T("Status_Queued"))
+            : Localization.Loc.T("Status_UploadedWigle");
         await MainThread.InvokeOnMainThreadAsync(() => StatusMessage = outcome);
         return outcome;
     }
@@ -416,14 +416,14 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
     {
         if (!await EnsureLocationPermissionAsync())
         {
-            StatusMessage = "Location permission is needed to scan for Wi-Fi";
+            StatusMessage = Localization.Loc.T("Status_NeedLocation");
             return;
         }
         await _db.InitializeAsync();
         _scanCts = new CancellationTokenSource();
         _wifi.ScanIntervalMs = Preferences.Get(ScanIntervalKey, 1000);   // honour the setting
         IsScanning    = true;
-        StatusMessage = "Scanning…";
+        StatusMessage = Localization.Loc.T("Status_Scanning");
         _lastSaveAndClear = DateTime.UtcNow;   // Auto Save And Clear's timer counts scanning time
         _ = _wifi.StartScanningAsync(_scanCts.Token);
         StartRadio();
@@ -436,7 +436,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         _wifi.StopScanning();
         StopRadio();
         IsScanning    = false;
-        StatusMessage = $"Stopped — {TotalCount} total APs";
+        StatusMessage = Localization.Loc.T("Status_Stopped", TotalCount);
         UpdateKeepAlive();
     }
 
@@ -444,7 +444,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
     {
         if (!await EnsureLocationPermissionAsync())
         {
-            GpsStatus = "GPS: location permission denied";
+            GpsStatus = Localization.Loc.T("Gps_PermissionDenied");
             return;
         }
         _gpsCts = new CancellationTokenSource();
@@ -577,7 +577,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
 
             TotalCount    = _apMap.Count;
             ActiveCount   = _apMap.Values.Count(a => a.IsActive);
-            StatusMessage = $"{ActiveCount} active / {TotalCount} total";
+            StatusMessage = Localization.Loc.T("Status_ActiveTotal", ActiveCount, TotalCount);
             MergeScanResults();
             ScanCycleMerged?.Invoke(this, toPersist);
         });
@@ -604,7 +604,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         catch (Exception ex)
         {
             System.Diagnostics.Debug.WriteLine($"[ScanVM] SaveScanCycleAsync failed (cycle dropped): {ex.Message}");
-            StatusMessage = "DB write failed — retrying next cycle";
+            StatusMessage = Localization.Loc.T("Status_DbWriteFailed");
             try { await _db.CloseAsync(); } catch { /* reopened on next cycle */ }
             return;
         }
@@ -758,7 +758,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
             return;
         if (DateTime.UtcNow - _lastFixUtc <= Services.GpsSettings.NoFixTimeout) return;
         _currentGps = null;
-        GpsStatus = $"GPS: no fix for {Services.GpsSettings.NoFixTimeout.TotalSeconds:0} s, position cleared";
+        GpsStatus = Localization.Loc.T("Gps_NoFix", Services.GpsSettings.NoFixTimeout.TotalSeconds.ToString("0"));
     }
 
     private void OnGpsData(object? sender, GpsDataReceivedEventArgs e)
@@ -777,7 +777,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
             _lastGpsPointSaved = DateTime.UtcNow;
             _ = SaveGpsPointAsync(e.GpsData);
         }
-        var text = $"GPS {GpsFormatter.ToText(e.GpsData.Latitude, e.GpsData.Longitude)}";
+        var text = Localization.Loc.T("Gps_Position", GpsFormatter.ToText(e.GpsData.Latitude, e.GpsData.Longitude));
         // The GPS callback runs on a background thread; the status label only refreshes
         // when the bound property changes on the UI thread.
         MainThread.BeginInvokeOnMainThread(() => GpsStatus = text);
@@ -788,7 +788,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         // Surface why GPS didn't start (e.g. permission denied / location off) instead of
         // leaving the status stuck on "GPS starting…".
         if (!IsGpsEnabled) return;
-        MainThread.BeginInvokeOnMainThread(() => GpsStatus = $"GPS: {e.ErrorMessage}");
+        MainThread.BeginInvokeOnMainThread(() => GpsStatus = Localization.Loc.T("Gps_Error", e.ErrorMessage));
 
         // The original's error sound when GPS drops; at most every 30 s, since a receiver can keep retrying
         if (DateTime.UtcNow - _lastGpsErrorSound >= TimeSpan.FromSeconds(30))
@@ -803,6 +803,6 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
     private void OnScanError(object? sender, ScanErrorEventArgs e)
     {
         MainThread.BeginInvokeOnMainThread(() =>
-            StatusMessage = $"Error: {e.ErrorMessage}");
+            StatusMessage = Localization.Loc.T("Status_Error", e.ErrorMessage));
     }
 }

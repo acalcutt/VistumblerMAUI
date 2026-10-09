@@ -87,4 +87,12 @@
     <value>シグナルの強さ</value>
     <comment>Vistumbler Japanese.ini Column_Signal</comment>
   </data>
+  <data name="Status_Ready" xml:space="preserve">
+    <value>準備完了</value>
+    <comment>Vistumbler Japanese.ini Ready</comment>
+  </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>キャンセル(C)</value>
+    <comment>Vistumbler Japanese.ini Cancel</comment>
+  </data>
 </root>
