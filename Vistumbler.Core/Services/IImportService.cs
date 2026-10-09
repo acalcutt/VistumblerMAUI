@@ -36,4 +36,10 @@ public interface IImportService
     /// Import from CSV format (supports Vistumbler Detailed and WiGLE)
     /// </summary>
     Task<List<AccessPoint>> ImportFromCsvAsync(string filePath);
+
+    /// <summary>
+    /// Imports a WarDrive (Android app) .db3 database: its <c>networks</c> table, one row per network with the
+    /// position it was logged at. Port of the original Vistumbler's _ImportWardriveDb3.
+    /// </summary>
+    Task<List<AccessPoint>> ImportFromWardriveDb3Async(string filePath);
 }

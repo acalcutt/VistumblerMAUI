@@ -27,6 +27,15 @@ public class ImportService : IImportService
             if (!File.Exists(filePath)) return accessPoints;
 
             using var fs = File.OpenRead(filePath);
+
+            // NetStumbler's text export ("wi-scan") starts with a "# $Creator:" comment; the binary .ns1 with "NetS".
+            // Detected by content, as the original's _ImportNS1Auto does, since both are often named .ns1 or .txt.
+            if (fs.Length > 0 && fs.ReadByte() == '#')
+            {
+                fs.Close();
+                return ParseNs1Text(filePath);
+            }
+            fs.Position = 0;
             using var reader = new BinaryReader(fs);
 
             // Read Header
@@ -947,6 +956,171 @@ public class ImportService : IImportService
     }
 
     /// <summary>
+    /// NetStumbler's text export (wi-scan), a port of the original's _ImportNS1: one tab-separated line per
+    /// sighting, "Latitude  Longitude  ( SSID )  Type  ( BSSID )  Time (GMT)  [ SNR Sig Noise ]  # ( Name )
+    /// Flags  Channelbits  BcnIntvl  DataRate  LastChannel", with the date in a "# $DateGMT:" comment. Only
+    /// WEP is recorded as security. Sightings of the same BSSID become one AP with a signal history.
+    /// </summary>
+    private static List<AccessPoint> ParseNs1Text(string filePath)
+    {
+        var byBssid = new Dictionary<string, AccessPoint>(StringComparer.OrdinalIgnoreCase);
+        var date = DateTime.UtcNow.Date;
+        bool writtenByVistumbler = false;
+
+        foreach (var line in File.ReadLines(filePath))
+        {
+            if (line.StartsWith("# $Creator:", StringComparison.Ordinal))
+                writtenByVistumbler = line.Contains("Vistumbler", StringComparison.OrdinalIgnoreCase);
+            if (line.StartsWith("# $DateGMT:", StringComparison.Ordinal) &&
+                DateTime.TryParse(line[11..].Trim(), CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal | DateTimeStyles.AssumeUniversal, out var d))
+                date = d.Date;
+            if (line.Length == 0 || line[0] == '#') continue;
+
+            var p = line.Split('\t');
+            if (p.Length != 13) continue;
+
+            // "[ SNR Sig Noise ]"; -32618 means no reading. NetStumbler's SNR is over a -95 dBm noise floor, so
+            // dBm = SNR - 95 (the original's import). Vistumbler's own export writes Sig = dBm + 50 and Noise = 50
+            // instead (wiki: Wi-Scan-Format), so its files are read back with dBm = Sig - 50; using SNR - 95 for
+            // them, as the original did, put every AP 95 dB too weak.
+            var nums = p[6].Trim('[', ']', ' ').Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            if (nums.Length == 0 || !int.TryParse(nums[0], out var snrValue) || snrValue == -32618) continue;
+            int rssi = writtenByVistumbler && nums.Length > 1 && int.TryParse(nums[1], out var sigDisplay)
+                ? sigDisplay - 50
+                : snrValue - 95;
+
+            var bssid = p[4].Trim().TrimStart('(').TrimEnd(')').Trim().ToUpperInvariant();
+            if (bssid.Length == 0) continue;
+            var ssid = p[2].Trim();
+            if (ssid.StartsWith("( ") && ssid.EndsWith(" )")) ssid = ssid[2..^2];
+
+            var time = p[5].Replace("(GMT)", "").Trim();
+            var when = TimeSpan.TryParse(time, CultureInfo.InvariantCulture, out var t) ? date + t : date;
+            uint flags = uint.TryParse(p[8].Trim(), NumberStyles.HexNumber, CultureInfo.InvariantCulture, out var f) ? f : 0;
+            int channel = int.TryParse(p[12].Trim(), out var ch) ? ch : 0;
+
+            var hist = new SignalHistory { Timestamp = when, Rssi = rssi, Signal = DbToPercent(rssi) };
+            // "N 360.0000000" / "E 720.0000000" is NetStumbler's "no fix"
+            if (ParseNs1Coordinate(p[0]) is { } lat && ParseNs1Coordinate(p[1]) is { } lon && (lat != 0 || lon != 0))
+            {
+                hist.Latitude  = lat;
+                hist.Longitude = lon;
+            }
+
+            if (!byBssid.TryGetValue(bssid, out var ap))
+            {
+                ap = new AccessPoint
+                {
+                    Bssid = bssid,
+                    Ssid = ssid,
+                    FirstSeen = when,
+                    LastSeen = when,
+                    NetworkType = (flags & 0x2) != 0 ? NetworkType.Adhoc : NetworkType.Infrastructure,
+                    Authentication = AuthenticationType.Open,
+                    Encryption = (flags & 0x10) != 0 ? EncryptionType.WEP : EncryptionType.None,
+                };
+                byBssid[bssid] = ap;
+            }
+            ap.SignalHistory.Add(hist);
+            if (when < ap.FirstSeen) ap.FirstSeen = when;
+            if (when >= ap.LastSeen)
+            {
+                ap.LastSeen = when;
+                ap.Signal = hist.Signal;
+                ap.Rssi = rssi;
+                if (channel > 0) ap.Channel = channel;
+            }
+            if (rssi > (ap.HighestRssi ?? int.MinValue))
+            {
+                ap.HighestRssi = rssi;
+                ap.HighestSignal = hist.Signal;
+                // Placed where its signal was strongest, as Vistumbler does
+                if (hist.Latitude.HasValue) { ap.Latitude = hist.Latitude; ap.Longitude = hist.Longitude; }
+            }
+            if (ap.Channel == 0 && channel > 0) ap.Channel = channel;
+        }
+        return byBssid.Values.ToList();
+    }
+
+    // "N 48.1173000" / "W 11.5166667" → signed decimal degrees; null when unreadable
+    private static double? ParseNs1Coordinate(string text)
+    {
+        text = text.Trim();
+        if (text.Length < 3) return null;
+        if (!double.TryParse(text[1..].Trim(), NumberStyles.Float, CultureInfo.InvariantCulture, out var v)) return null;
+        if (v >= 360) return 0;   // no fix
+        return text[0] is 'S' or 's' or 'W' or 'w' ? -v : v;
+    }
+
+    public async Task<List<AccessPoint>> ImportFromWardriveDb3Async(string filePath)
+    {
+        var accessPoints = new List<AccessPoint>();
+        if (!File.Exists(filePath)) return accessPoints;
+
+        var conn = new SQLiteAsyncConnection(filePath, SQLiteOpenFlags.ReadOnly);
+        try
+        {
+            var table = await conn.ExecuteScalarAsync<string>(
+                "SELECT name FROM sqlite_master WHERE type='table' AND name='networks'");
+            if (string.IsNullOrEmpty(table)) return accessPoints;
+
+            var rows = await conn.QueryAsync<WardriveNetworkRow>(@"
+                SELECT bssid AS Bssid, ssid AS Ssid, capabilities AS Capabilities, level AS Level,
+                       frequency AS Frequency, lat AS Lat, lon AS Lon, timestamp AS Timestamp
+                FROM networks");
+
+            foreach (var row in rows)
+            {
+                if (string.IsNullOrWhiteSpace(row.Bssid)) continue;
+                ParseWigleAuthMode(row.Capabilities ?? "", out var auth, out var encr, out var netType);
+                // WarDrive stores Unix time in milliseconds
+                var when = row.Timestamp > 0 ? DateTimeOffset.FromUnixTimeMilliseconds(row.Timestamp).UtcDateTime : DateTime.UtcNow;
+                int signal = DbToPercent(row.Level);
+
+                var ap = new AccessPoint
+                {
+                    Bssid = row.Bssid.ToUpperInvariant(),
+                    Ssid = row.Ssid ?? "",
+                    Authentication = auth,
+                    Encryption = encr,
+                    NetworkType = netType,
+                    FrequencyMhz = row.Frequency,
+                    Channel = GetChannelFromFreq(row.Frequency),
+                    RadioType = row.Frequency >= 5925 ? "802.11 6 GHz" : row.Frequency >= 5000 ? "802.11 5 GHz" : "802.11 2.4 GHz",
+                    Rssi = row.Level, HighestRssi = row.Level,
+                    Signal = signal, HighestSignal = signal,
+                    FirstSeen = when, LastSeen = when,
+                };
+                var hist = new SignalHistory { Timestamp = when, Rssi = row.Level, Signal = signal };
+                if (row.Lat != 0 || row.Lon != 0)
+                {
+                    ap.Latitude = hist.Latitude = row.Lat;
+                    ap.Longitude = hist.Longitude = row.Lon;
+                }
+                ap.SignalHistory.Add(hist);
+                accessPoints.Add(ap);
+            }
+        }
+        finally
+        {
+            await conn.CloseAsync();
+        }
+        return accessPoints;
+    }
+
+    private sealed class WardriveNetworkRow
+    {
+        public string? Bssid { get; set; }
+        public string? Ssid { get; set; }
+        public string? Capabilities { get; set; }
+        public int Level { get; set; }
+        public int Frequency { get; set; }
+        public double Lat { get; set; }
+        public double Lon { get; set; }
+        public long Timestamp { get; set; }
+    }
+
+    /// <summary>
     /// Port of _WigleCSV_ParseAuthMode: parses WiGLE capability flags to Vistumbler auth/encr/netType.
     /// </summary>
     private static void ParseWigleAuthMode(string authMode, out AuthenticationType auth, out EncryptionType encr, out NetworkType netType)
@@ -999,6 +1173,7 @@ public class ImportService : IImportService
         if (freqMhz == 2484) return 14;
         if (freqMhz >= 2412 && freqMhz <= 2477) return (freqMhz - 2407) / 5;
         if (freqMhz >= 5180 && freqMhz <= 5885) return (freqMhz - 5000) / 5;
+        if (freqMhz >= 5955 && freqMhz <= 7115) return (freqMhz - 5950) / 5;   // 6 GHz: channel 1 = 5955
         return 0;
     }
 

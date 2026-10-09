@@ -187,7 +187,9 @@ public partial class ImportViewModel : ObservableObject
             ImportType.Netstumbler => await _importService.ImportFromNs1Async(path),
             ImportType.VistumblerDetailedCsv => await _importService.ImportFromCsvAsync(path),
             ImportType.WigleCsv => await _importService.ImportFromCsvAsync(path),
-            ImportType.WardriveAndroid => await _importService.ImportFromCsvAsync(path),
+            ImportType.WardriveAndroid => Ext(".csv")
+                ? await _importService.ImportFromCsvAsync(path)
+                : await _importService.ImportFromWardriveDb3Async(path),   // the app's .db3 database
             ImportType.KismetFiles => Ext(".netxml")
                 ? await _importService.ImportFromNetXmlAsync(path)
                 : await _importService.ImportFromKismetDbAsync(path),
@@ -208,6 +210,7 @@ public partial class ImportViewModel : ObservableObject
     {
         ImportType.VistumblerFile => new[] { ".vs1", ".vsz", ".txt" },
         ImportType.Netstumbler    => new[] { ".ns1" },
+        ImportType.WardriveAndroid => new[] { ".db3", ".csv" },
         ImportType.KismetFiles    => new[] { ".kismet", ".netxml" },
         _                         => new[] { ".csv" },
     };
@@ -231,6 +234,12 @@ public partial class ImportViewModel : ObservableObject
         ImportType.Netstumbler => new FilePickerFileType(new Dictionary<DevicePlatform, IEnumerable<string>>
         {
             { DevicePlatform.WinUI, new[] { ".ns1", ".txt" } },
+            { DevicePlatform.Android, new[] { "*/*" } },
+            { DevicePlatform.iOS, new[] { "public.data" } },
+        }),
+        ImportType.WardriveAndroid => new FilePickerFileType(new Dictionary<DevicePlatform, IEnumerable<string>>
+        {
+            { DevicePlatform.WinUI, new[] { ".db3", ".csv" } },
             { DevicePlatform.Android, new[] { "*/*" } },
             { DevicePlatform.iOS, new[] { "public.data" } },
         }),
