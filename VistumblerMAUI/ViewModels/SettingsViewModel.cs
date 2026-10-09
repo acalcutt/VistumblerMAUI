@@ -20,7 +20,15 @@ public partial class SettingsViewModel : ObservableObject
     // ── Sound (SoundSettings) ─────────────────────────────────────────────────
     public IReadOnlyList<string> NewApSoundOptions { get; } =
         new[] { "Once for each scan that finds new APs", "Once for each new AP", "Once for each new AP, louder for a stronger signal" };
-    public IReadOnlyList<string> SpeakVoiceOptions { get; } = new[] { "The device's voice", "Vistumbler's recorded words" };
+    public IReadOnlyList<string> SpeakVoiceOptions { get; } =
+        new[] { "The device's voice", "Vistumbler's recorded words", "A tone, higher for a stronger signal" };
+    public IReadOnlyList<string> SpeakValueOptions { get; } = new[] { "Signal (%)", "RSSI (dBm)" };
+    [ObservableProperty] private string _selectedSpeakValue = string.Empty;
+    partial void OnSelectedSpeakValueChanged(string value)
+    {
+        int i = SpeakValueOptions.ToList().IndexOf(value);
+        if (i >= 0) SoundSettings.Value = (SpeakValue)i;
+    }
 
     [ObservableProperty] private string _selectedNewApSound = string.Empty;
     [ObservableProperty] private string _selectedSpeakVoice = string.Empty;
@@ -450,6 +458,7 @@ public partial class SettingsViewModel : ObservableObject
         RefreshManufacturersText();
         _selectedNewApSound = NewApSoundOptions[(int)SoundSettings.NewApMode];
         _selectedSpeakVoice = SpeakVoiceOptions[(int)SoundSettings.Voice];
+        _selectedSpeakValue = SpeakValueOptions[(int)SoundSettings.Value];
         if (HasAdapterChoice) _ = RefreshAdaptersAsync();
 
         // Show the chosen receiver without asking for the Bluetooth permission just to open Settings;

@@ -13,6 +13,14 @@ public enum SpeakVoice
 {
     TextToSpeech,       // the device's voice (the original used Windows SAPI)
     VistumblerSounds,   // the original's recorded words (Sounds/one.wav … percent.wav)
+    Tone,               // a beep whose pitch follows the signal, standing in for the original's MIDI notes
+}
+
+/// <summary>What Speak signal says.</summary>
+public enum SpeakValue
+{
+    SignalPercent,      // "65 percent"
+    Rssi,               // "minus 65 dBm"
 }
 
 /// <summary>Sound settings (Settings → Sound), backed by MAUI <see cref="Preferences"/>.</summary>
@@ -24,6 +32,7 @@ public static class SoundSettings
     private const string SpeakKey      = "Sound_SpeakSignal";
     private const string VoiceKey      = "Sound_SpeakVoice";
     private const string PercentKey    = "Sound_SpeakPercent";
+    private const string ValueKey      = "Sound_SpeakValue";
     private const string IntervalKey   = "Sound_SpeakIntervalMs";
 
     /// <summary>Play a sound when new APs are found (the original's default is on).</summary>
@@ -57,6 +66,13 @@ public static class SoundSettings
     {
         get => (SpeakVoice)Preferences.Get(VoiceKey, (int)SpeakVoice.TextToSpeech);
         set => Preferences.Set(VoiceKey, (int)value);
+    }
+
+    /// <summary>Speak the signal in percent (the original) or the RSSI in dBm.</summary>
+    public static SpeakValue Value
+    {
+        get => (SpeakValue)Preferences.Get(ValueKey, (int)SpeakValue.SignalPercent);
+        set => Preferences.Set(ValueKey, (int)value);
     }
 
     /// <summary>Say "percent" after the number.</summary>

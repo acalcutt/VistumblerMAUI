@@ -17,6 +17,9 @@ public interface ISoundService
     /// <summary>Plays the error sound, e.g. when a GPS receiver stops sending data.</summary>
     Task PlayErrorAsync();
 
-    /// <summary>Speaks a signal value (0-100), with text to speech or the original's recorded words.</summary>
-    Task SpeakSignalAsync(int signal);
+    /// <summary>
+    /// Speaks an AP's signal (0-100 %) or its RSSI (dBm), as set, with text to speech or the original's recorded
+    /// words, or plays a tone whose pitch follows the signal (the original's MIDI option).
+    /// </summary>
+    Task SpeakSignalAsync(int signal, int? rssi);
 }

@@ -52,20 +52,31 @@ public class MauiSoundService : ISoundService
         finally { _playing.Release(); }
     }
 
-    public async Task SpeakSignalAsync(int signal)
+    public async Task SpeakSignalAsync(int signal, int? rssi)
     {
         signal = Math.Clamp(signal, 0, 100);
         if (!await _playing.WaitAsync(0)) return;   // skip a reading rather than fall behind
         try
         {
-            if (SoundSettings.Voice == SpeakVoice.VistumblerSounds)
+            // RSSI when chosen and known; out of range there is none, so fall back to the signal (0 %)
+            bool sayRssi = SoundSettings.Value == SpeakValue.Rssi && rssi is not null && signal > 0;
+            switch (SoundSettings.Voice)
             {
-                foreach (var word in Words(signal)) await PlayAsync(word + ".wav");
-                if (SoundSettings.SayPercent) await PlayAsync("percent.wav");
-            }
-            else
-            {
-                await TextToSpeech.Default.SpeakAsync(SoundSettings.SayPercent ? $"{signal} percent" : $"{signal}");
+                case SpeakVoice.Tone:
+                    await PlayToneAsync(signal);
+                    break;
+                case SpeakVoice.VistumblerSounds:
+                    // The recordings only go up to "one hundred" and have no "minus", so RSSI is said as its size
+                    int number = sayRssi ? Math.Min(100, Math.Abs(rssi!.Value)) : signal;
+                    foreach (var word in Words(number)) await PlayAsync(word + ".wav");
+                    if (!sayRssi && SoundSettings.SayPercent) await PlayAsync("percent.wav");
+                    break;
+                default:
+                    var text = sayRssi
+                        ? (SoundSettings.SayPercent ? $"{rssi} dBm" : $"{rssi}")
+                        : (SoundSettings.SayPercent ? $"{signal} percent" : $"{signal}");
+                    await TextToSpeech.Default.SpeakAsync(text);
+                    break;
             }
         }
         catch (Exception ex)
@@ -91,6 +102,44 @@ public class MauiSoundService : ISoundService
         if (n == 100) return new[] { "one", "hundred" };
         if (n < 20) return new[] { Ones[n] };
         return n % 10 == 0 ? new[] { Tens[n / 10] } : new[] { Tens[n / 10], Ones[n % 10] };
+    }
+
+    /// <summary>
+    /// A short beep whose pitch follows the signal, like the original's MIDI notes: from about 220 Hz at 0 %
+    /// to 1760 Hz at 100 %, three octaves, so a stronger signal is plainly higher. Generated as a WAV in memory.
+    /// </summary>
+    private static async Task PlayToneAsync(int signal)
+    {
+        const int sampleRate = 22050, millis = 180;
+        double frequency = 220 * Math.Pow(2, 3 * signal / 100.0);
+        int samples = sampleRate * millis / 1000;
+        using var wav = new MemoryStream();
+        using (var w = new BinaryWriter(wav, System.Text.Encoding.ASCII, leaveOpen: true))
+        {
+            w.Write("RIFF"u8.ToArray()); w.Write(36 + samples * 2); w.Write("WAVE"u8.ToArray());
+            w.Write("fmt "u8.ToArray()); w.Write(16); w.Write((short)1); w.Write((short)1);
+            w.Write(sampleRate); w.Write(sampleRate * 2); w.Write((short)2); w.Write((short)16);
+            w.Write("data"u8.ToArray()); w.Write(samples * 2);
+            for (int i = 0; i < samples; i++)
+            {
+                // Short fade in and out so it doesn't click
+                double envelope = Math.Min(1, Math.Min(i, samples - i) / (sampleRate * 0.01));
+                w.Write((short)(Math.Sin(2 * Math.PI * frequency * i / sampleRate) * envelope * 0.6 * short.MaxValue));
+            }
+        }
+        wav.Position = 0;
+        try
+        {
+            using var player = AudioManager.Current.CreatePlayer(wav);
+            var ended = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+            player.PlaybackEnded += (_, _) => ended.TrySetResult();
+            player.Play();
+            await Task.WhenAny(ended.Task, Task.Delay(TimeSpan.FromSeconds(2)));
+        }
+        catch (Exception ex)
+        {
+            DebugLog.Write($"[Sound] tone: {ex.Message}");
+        }
     }
 
     /// <summary>Plays a sound from Resources/Raw/Sounds and waits for it to finish. Sound never stops the app.</summary>

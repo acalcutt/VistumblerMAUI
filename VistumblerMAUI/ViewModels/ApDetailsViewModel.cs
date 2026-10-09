@@ -47,7 +47,7 @@ public partial class ApDetailsViewModel : ObservableObject, IQueryAttributable
         // Out of range counts as 0, as in the original
         var live = _scan.AllKnownAps.FirstOrDefault(a => string.Equals(a.Bssid, bssid, StringComparison.OrdinalIgnoreCase));
         int signal = live is { IsActive: true } ? live.Signal ?? 0 : 0;
-        _ = _sound.SpeakSignalAsync(signal);
+        _ = _sound.SpeakSignalAsync(signal, live is { IsActive: true } ? live.Rssi : null);
     }
 
     [ObservableProperty] private AccessPoint? _ap;
