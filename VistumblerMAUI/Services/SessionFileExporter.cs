@@ -19,12 +19,21 @@ public static class SessionFileExporter
         foreach (var ap in aps)
             ap.SignalHistory = await db.GetSignalHistoryAsync(ap.ApId);
         var gpsFixes = await db.GetAllGpsAsync();
+        var radios = await LoadRadiosAsync(db);   // cell towers and Bluetooth, as #RADIO lines
 
         Directory.CreateDirectory(Path.GetDirectoryName(path)!);
         if (format == SaveFileFormat.Vsz)
-            await export.ExportToVszAsync(path, aps, gpsFixes);
+            await export.ExportToVszAsync(path, aps, gpsFixes, radios);
         else
-            await export.ExportToVs1Async(path, aps, gpsFixes);
+            await export.ExportToVs1Async(path, aps, gpsFixes, radios);
         return aps.Count;
+    }
+
+    /// <summary>The session's cell towers and Bluetooth devices, each with its readings.</summary>
+    public static async Task<List<Vistumbler.Core.Models.RadioNetwork>> LoadRadiosAsync(IDatabaseService db)
+    {
+        var radios = await db.GetAllRadioNetworksAsync();
+        foreach (var n in radios) n.History = await db.GetRadioHistoryAsync(n.Id);
+        return radios;
     }
 }

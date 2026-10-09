@@ -213,10 +213,10 @@ public partial class ExportViewModel : ObservableObject
                         await _exportService.ExportToWigleCsvAsync(path, aps, FilteredOnly ? null : await LoadRadiosAsync());
                         break;
                     case ExportFormat.Vs1:
-                        await _exportService.ExportToVs1Async(path, aps, gpsFixes);
+                        await _exportService.ExportToVs1Async(path, aps, gpsFixes, FilteredOnly ? null : await LoadRadiosAsync());
                         break;
                     case ExportFormat.Vsz:
-                        await _exportService.ExportToVszAsync(path, aps, gpsFixes);
+                        await _exportService.ExportToVszAsync(path, aps, gpsFixes, FilteredOnly ? null : await LoadRadiosAsync());
                         break;
                     case ExportFormat.GeoJson:
                         await Services.SignalMapExport.WriteGeoJsonAsync(path, aps, signalMap: false);
@@ -274,13 +274,7 @@ public partial class ExportViewModel : ObservableObject
         }
     }
 
-    /// <summary>The session's cell towers and Bluetooth devices, with their readings.</summary>
-    private async Task<List<RadioNetwork>> LoadRadiosAsync()
-    {
-        var radios = await _databaseService.GetAllRadioNetworksAsync();
-        foreach (var n in radios) n.History = await _databaseService.GetRadioHistoryAsync(n.Id);
-        return radios;
-    }
+    private Task<List<RadioNetwork>> LoadRadiosAsync() => Services.SessionFileExporter.LoadRadiosAsync(_databaseService);
 
     private bool CanExport() => !IsExporting;
 

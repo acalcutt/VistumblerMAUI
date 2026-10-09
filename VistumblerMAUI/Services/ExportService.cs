@@ -810,7 +810,7 @@ public class ExportService : IExportService
     // Vistumbler VS1 "Detailed Export Version 4.0" — must match official Vistumbler exactly
     // so it round-trips. The importer picks line type by pipe-field COUNT (12 = GPS, 15 = AP)
     // and reads coordinates as "<hemisphere> ddmm.mmmm"; AP history references GPS ids.
-    public async Task ExportToVs1Async(string filePath, List<AccessPoint> accessPoints, List<GpsData> gpsFixes)
+    public async Task ExportToVs1Async(string filePath, List<AccessPoint> accessPoints, List<GpsData> gpsFixes, IReadOnlyList<RadioNetwork>? radios = null)
     {
         var inv = System.Globalization.CultureInfo.InvariantCulture;
         const string sep = "# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------";
@@ -877,6 +877,31 @@ public class ExportService : IExportService
                 Vs1Field(ap.Label),
                 history));
         }
+
+        // Cell towers and Bluetooth devices, as comment lines: the original Vistumbler and WifiDB skip lines starting
+        // with '#' (WifiDB reads one as an AP only when its second field is a MAC, which these never have), so files
+        // stay readable everywhere while this app, and WifiDB in time, can read them back.
+        if (radios is { Count: > 0 })
+        {
+            await writer.WriteLineAsync("# ---------------------------------------------------------------------------------------------------------------------------------------------------------");
+            await writer.WriteLineAsync("# Cell towers and Bluetooth devices (WiGLE CSV fields), readings pointing at the GPS lines above:");
+            await writer.WriteLineAsync("# #RADIO|Type|Key|Name|Capabilities|Channel|Frequency|MfgrId|Manufacturer|GID,RSSI");
+            await writer.WriteLineAsync("# ---------------------------------------------------------------------------------------------------------------------------------------------------------");
+            foreach (var n in radios)
+            {
+                var readings = string.Join('\\', n.History.Where(r => r.GpsId > 0).Select(r => $"{r.GpsId},{r.Rssi.ToString(inv)}"));
+                await writer.WriteLineAsync(ImportService.Vs1RadioPrefix + string.Join('|',
+                    n.Type,
+                    Vs1Field(n.Key),
+                    Vs1Field(n.Name),
+                    Vs1Field(n.Capabilities),
+                    n.Channel?.ToString(inv) ?? "",
+                    n.Frequency.ToString(inv),
+                    n.MfgrId?.ToString(inv) ?? "",
+                    Vs1Field(n.Manufacturer),
+                    readings));
+            }
+        }
     }
 
     // Keep a value inside a single VS1 pipe-field: strip pipes and newlines so the row's
@@ -898,12 +923,12 @@ public class ExportService : IExportService
     // Rough signal% → dBm (0%→-100, 100%→-50), matching Vistumbler's estimate when RSSI is absent.
     private static int SignalPercentToDb(int percent) => percent / 2 - 100;
 
-    public async Task ExportToVszAsync(string filePath, List<AccessPoint> accessPoints, List<GpsData> gpsFixes)
+    public async Task ExportToVszAsync(string filePath, List<AccessPoint> accessPoints, List<GpsData> gpsFixes, IReadOnlyList<RadioNetwork>? radios = null)
     {
         var tempVs1 = Path.GetTempFileName();
         try
         {
-            await ExportToVs1Async(tempVs1, accessPoints, gpsFixes);
+            await ExportToVs1Async(tempVs1, accessPoints, gpsFixes, radios);
 
             if (File.Exists(filePath))
                 File.Delete(filePath);

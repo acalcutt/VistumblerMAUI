@@ -50,12 +50,12 @@ public interface IExportService
     /// its SignalHistory populated (with GpsId), and <paramref name="gpsFixes"/> must contain
     /// every GPS fix the history references, so the file round-trips into official Vistumbler.
     /// </summary>
-    Task ExportToVs1Async(string filePath, List<AccessPoint> accessPoints, List<GpsData> gpsFixes);
+    Task ExportToVs1Async(string filePath, List<AccessPoint> accessPoints, List<GpsData> gpsFixes, IReadOnlyList<RadioNetwork>? radios = null);
 
     /// <summary>
     /// Export to VSZ (zipped VS1) format.
     /// </summary>
-    Task ExportToVszAsync(string filePath, List<AccessPoint> accessPoints, List<GpsData> gpsFixes);
+    Task ExportToVszAsync(string filePath, List<AccessPoint> accessPoints, List<GpsData> gpsFixes, IReadOnlyList<RadioNetwork>? radios = null);
 }
 
 public class ExportOptions
