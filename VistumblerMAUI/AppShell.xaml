@@ -3,6 +3,7 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:views="clr-namespace:VistumblerMAUI.Views"
        xmlns:services="clr-namespace:VistumblerMAUI.Services"
+       xmlns:loc="clr-namespace:VistumblerMAUI.Localization"
        x:Class="VistumblerMAUI.AppShell"
        Shell.FlyoutBehavior="Flyout"
        FlyoutHeaderBehavior="Fixed"
@@ -10,38 +11,38 @@
 
     <!-- Bottom tabs (primary navigation) -->
     <TabBar>
-        <ShellContent Title="Scan"
+        <ShellContent Title="{loc:T Tab_Scan}"
                       Icon="tab_scan.png"
                       ContentTemplate="{DataTemplate views:ScanPage}"
                       Route="ScanPage" />
-        <ShellContent Title="Map"
+        <ShellContent Title="{loc:T Tab_Map}"
                       Icon="tab_map.png"
                       ContentTemplate="{DataTemplate views:MapPage}"
                       Route="MapPage" />
-        <ShellContent Title="Channels"
+        <ShellContent Title="{loc:T Tab_Channels}"
                       Icon="tab_map.png"
                       ContentTemplate="{DataTemplate views:ChannelGraphPage}"
                       Route="ChannelGraphPage" />
-        <ShellContent Title="Settings"
+        <ShellContent Title="{loc:T Tab_Settings}"
                       Icon="tab_settings.png"
                       ContentTemplate="{DataTemplate views:SettingsPage}"
                       Route="SettingsPage" />
     </TabBar>
 
     <!-- Hamburger menu actions (data + session) -->
-    <MenuItem Text="New Session"    Clicked="OnNewSessionClicked" />
-    <MenuItem Text="Import…"        Clicked="OnImportClicked" />
-    <MenuItem Text="Export…"        Clicked="OnExportClicked" />
+    <MenuItem Text="{loc:T Menu_NewSession}"    Clicked="OnNewSessionClicked" />
+    <MenuItem Text="{loc:T Menu_Import}"        Clicked="OnImportClicked" />
+    <MenuItem Text="{loc:T Menu_Export}"        Clicked="OnExportClicked" />
     <!-- Clears the AP list, offering to save it first (the original's Save &amp; Clear and Clear All) -->
-    <MenuItem Text="Clear…"         Clicked="OnClearClicked" />
-    <MenuItem Text="Upload to WifiDB…" Clicked="OnUploadToWifiDbClicked" />
+    <MenuItem Text="{loc:T Menu_Clear}"         Clicked="OnClearClicked" />
+    <MenuItem Text="{loc:T Menu_UploadWifiDb}"  Clicked="OnUploadToWifiDbClicked" />
     <!-- Hidden where there's nothing to check, e.g. the Google Play build, which Play updates -->
-    <MenuItem Text="Check for Updates…" Clicked="OnCheckForUpdatesClicked"
+    <MenuItem Text="{loc:T Menu_CheckForUpdates}" Clicked="OnCheckForUpdatesClicked"
               Shell.FlyoutItemIsVisible="{x:Static services:AppUpdater.IsSupported}" />
-    <MenuItem Text="GPS details"    Clicked="OnGpsDetailsClicked" />
-    <MenuItem Text="Site survey"    Clicked="OnSurveyClicked" />
-    <MenuItem Text="Links…"         Clicked="OnLinksClicked" />
-    <MenuItem Text="Exit (Save DB)" Clicked="OnExitSaveClicked" />
-    <MenuItem Text="Exit"           Clicked="OnExitDiscardClicked" />
+    <MenuItem Text="{loc:T Menu_GpsDetails}"    Clicked="OnGpsDetailsClicked" />
+    <MenuItem Text="{loc:T Menu_SiteSurvey}"    Clicked="OnSurveyClicked" />
+    <MenuItem Text="{loc:T Menu_Links}"         Clicked="OnLinksClicked" />
+    <MenuItem Text="{loc:T Menu_ExitSaveDb}"    Clicked="OnExitSaveClicked" />
+    <MenuItem Text="{loc:T Menu_Exit}"          Clicked="OnExitDiscardClicked" />
 
 </Shell>

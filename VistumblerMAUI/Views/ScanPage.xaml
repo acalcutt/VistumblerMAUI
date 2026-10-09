@@ -4,9 +4,10 @@
              xmlns:vm="clr-namespace:VistumblerMAUI.ViewModels"
              xmlns:models="clr-namespace:Vistumbler.Core.Models;assembly=Vistumbler.Core"
              xmlns:controls="clr-namespace:VistumblerMAUI.Controls"
+             xmlns:loc="clr-namespace:VistumblerMAUI.Localization"
              x:DataType="vm:ScanViewModel"
              x:Class="VistumblerMAUI.Views.ScanPage"
-             Title="Scan">
+             Title="{loc:T Tab_Scan}">
 
     <ContentPage.Resources>
         <!-- One AP row, shared by the flat and the grouped list -->
@@ -23,8 +24,8 @@
                     <Label Text="{Binding Bssid}" FontSize="11" TextColor="Gray" />
                     <Label Text="{Binding Manufacturer}" FontSize="11" TextColor="Gray"
                            IsVisible="{Binding Manufacturer, Converter={StaticResource IsNotNullOrEmpty}}" />
-                    <Label FontSize="10" TextColor="Gray" Text="{Binding FirstSeenText, StringFormat='First: {0}'}" />
-                    <Label FontSize="10" TextColor="Gray" Text="{Binding LastSeenText, StringFormat='Last: {0}'}" />
+                    <Label FontSize="10" TextColor="Gray" Text="{Binding FirstSeenText, StringFormat={loc:T Scan_FirstSeen}}" />
+                    <Label FontSize="10" TextColor="Gray" Text="{Binding LastSeenText, StringFormat={loc:T Scan_LastSeen}}" />
                     <Label FontSize="10" TextColor="Gray"
                            Text="{Binding GpsText, StringFormat='⌖ {0}'}"
                            IsVisible="{Binding HasGps}" />
@@ -37,7 +38,7 @@
                 </VerticalStackLayout>
                 <!-- Channel + band + security (authentication AND encryption) -->
                 <VerticalStackLayout Grid.Column="2" WidthRequest="96" HorizontalOptions="End" VerticalOptions="Center" Spacing="2">
-                    <Label Text="{Binding Channel, StringFormat='Ch {0}'}" FontSize="12" HorizontalOptions="End" />
+                    <Label Text="{Binding Channel, StringFormat={loc:T Scan_Channel}}" FontSize="12" HorizontalOptions="End" />
                     <Label Text="{Binding FrequencyMhz, Converter={StaticResource FreqToBand}}" FontSize="10" TextColor="Gray" HorizontalOptions="End" />
                     <Label Text="{Binding AuthText}" FontSize="10" TextColor="#546E7A" HorizontalOptions="End" LineBreakMode="TailTruncation" />
                     <Label Text="{Binding EncryptionText}" FontSize="10" TextColor="#78909C" HorizontalOptions="End" />
@@ -55,12 +56,13 @@
         <Grid Grid.Row="1" ColumnDefinitions="*,Auto,Auto,Auto" Padding="8,4" ColumnSpacing="6">
             <SearchBar Grid.Column="0"
                        Text="{Binding SearchText}"
-                       Placeholder="Search SSID, BSSID, manufacturer…" />
+                       Placeholder="{loc:T Scan_SearchPlaceholder}" />
             <Picker Grid.Column="1"
-                    Title="Sort"
+                    Title="{loc:T Scan_Sort}"
                     WidthRequest="120"
                     VerticalOptions="Center"
                     ItemsSource="{Binding SortOptions}"
+                    ItemDisplayBinding="{Binding ., Converter={StaticResource LocValue}, x:DataType=x:String}"
                     SelectedItem="{Binding SelectedSortOption}" />
             <Button Grid.Column="2"
                     Text="{Binding SortDirectionGlyph}"
@@ -87,16 +89,18 @@
             <Picker Grid.Column="0" FontSize="13" WidthRequest="110"
                     IsVisible="{Binding HasListTypes}"
                     ItemsSource="{Binding ListTypes}"
+                    ItemDisplayBinding="{Binding ., Converter={StaticResource LocValue}, x:DataType=x:String}"
                     SelectedItem="{Binding SelectedListType}" />
-            <Label Grid.Column="1" Text="Group by" FontSize="12" TextColor="Gray" VerticalOptions="Center"
+            <Label Grid.Column="1" Text="{loc:T Scan_GroupBy}" FontSize="12" TextColor="Gray" VerticalOptions="Center"
                    IsVisible="{Binding IsWifiList}" />
             <Picker Grid.Column="2" FontSize="13"
                     IsVisible="{Binding IsWifiList}"
                     ItemsSource="{Binding GroupByOptions}"
+                    ItemDisplayBinding="{Binding ., Converter={StaticResource LocValue}, x:DataType=x:String}"
                     SelectedItem="{Binding SelectedGroupBy}" />
             <Label Grid.Column="1" Grid.ColumnSpan="2" FontSize="12" TextColor="Gray" VerticalOptions="Center"
                    IsVisible="{Binding IsWifiList, Converter={StaticResource InvertBool}}"
-                   Text="{Binding RadioNetworks.Count, StringFormat='{0} shown · strongest first'}" />
+                   Text="{Binding RadioNetworks.Count, StringFormat={loc:T Scan_RadioShown}}" />
         </Grid>
 
         <!-- AP list -->
@@ -135,7 +139,7 @@
                         IsVisible="{Binding IsWifiList, Converter={StaticResource InvertBool}}"
                         SelectionMode="None">
             <CollectionView.EmptyView>
-                <Label Text="Nothing recorded yet. Turn it on under Settings → Scanning, then scan."
+                <Label Text="{loc:T Scan_RadioEmpty}"
                        FontSize="13" TextColor="Gray" HorizontalOptions="Center" Margin="16,24" />
             </CollectionView.EmptyView>
             <CollectionView.ItemTemplate>
@@ -151,14 +155,14 @@
                             <Label Text="{Binding Key}" FontSize="11" TextColor="Gray" />
                             <Label Text="{Binding Manufacturer}" FontSize="11" TextColor="Gray"
                                    IsVisible="{Binding Manufacturer, Converter={StaticResource IsNotNullOrEmpty}}" />
-                            <Label FontSize="10" TextColor="Gray" Text="{Binding LastSeenText, StringFormat='Last: {0}'}" />
+                            <Label FontSize="10" TextColor="Gray" Text="{Binding LastSeenText, StringFormat={loc:T Scan_LastSeen}}" />
                         </VerticalStackLayout>
                         <VerticalStackLayout Grid.Column="1" WidthRequest="110" HorizontalOptions="End" VerticalOptions="Center" Spacing="2">
                             <Label Text="{Binding Rssi, StringFormat='{0} dBm'}" FontSize="13" HorizontalOptions="End" />
                             <Label Text="{Binding TypeText}" FontSize="10" TextColor="#546E7A" HorizontalOptions="End" />
                             <Label Text="{Binding CapabilitiesText}" FontSize="10" TextColor="#78909C" HorizontalOptions="End"
                                    LineBreakMode="TailTruncation" />
-                            <Label Text="{Binding Channel, StringFormat='Ch {0}'}" FontSize="10" TextColor="Gray" HorizontalOptions="End"
+                            <Label Text="{Binding Channel, StringFormat={loc:T Scan_Channel}}" FontSize="10" TextColor="Gray" HorizontalOptions="End"
                                    IsVisible="{Binding IsCell}" />
                         </VerticalStackLayout>
                     </Grid>
@@ -167,7 +171,7 @@
         </CollectionView>
 
         <!-- Bottom hint -->
-        <Label Grid.Row="4" Text="Tap Scan APs to begin" HorizontalOptions="Center"
+        <Label Grid.Row="4" Text="{loc:T Scan_TapToBegin}" HorizontalOptions="Center"
                FontSize="12" TextColor="Gray" Padding="8"
                IsVisible="{Binding IsScanning, Converter={StaticResource InvertBool}}" />
     </Grid>

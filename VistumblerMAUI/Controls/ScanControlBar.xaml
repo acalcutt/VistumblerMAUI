@@ -2,6 +2,7 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:VistumblerMAUI.ViewModels"
+             xmlns:loc="clr-namespace:VistumblerMAUI.Localization"
              x:DataType="vm:ScanViewModel"
              x:Class="VistumblerMAUI.Controls.ScanControlBar">
 
@@ -21,30 +22,30 @@
         <Grid ColumnDefinitions="Auto,Auto,*" Padding="12,6" ColumnSpacing="8"
               BackgroundColor="{AppThemeBinding Light=#F5F5F5, Dark=#1B1B1B}">
             <Button Grid.Column="0"
-                    Text="Scan APs"
+                    Text="{loc:T Bar_ScanAps}"
                     Command="{Binding ToggleScanCommand}"
                     BackgroundColor="{Binding IsScanning, Converter={StaticResource RunningToColor}}"
                     TextColor="White" WidthRequest="92">
                 <Button.Triggers>
                     <DataTrigger TargetType="Button" Binding="{Binding IsScanning}" Value="True">
-                        <Setter Property="Text" Value="Stop" />
+                        <Setter Property="Text" Value="{loc:T Bar_Stop}" />
                     </DataTrigger>
                 </Button.Triggers>
             </Button>
             <Button Grid.Column="1"
-                    Text="Use GPS"
+                    Text="{loc:T Bar_UseGps}"
                     Command="{Binding ToggleGpsCommand}"
                     BackgroundColor="{Binding IsGpsEnabled, Converter={StaticResource RunningToColor}}"
                     TextColor="White" WidthRequest="92">
                 <Button.Triggers>
                     <DataTrigger TargetType="Button" Binding="{Binding IsGpsEnabled}" Value="True">
-                        <Setter Property="Text" Value="Stop GPS" />
+                        <Setter Property="Text" Value="{loc:T Bar_StopGps}" />
                     </DataTrigger>
                 </Button.Triggers>
             </Button>
             <VerticalStackLayout Grid.Column="2" Spacing="0" VerticalOptions="Center" HorizontalOptions="End">
-                <Label Text="{Binding TotalCount, StringFormat='Total: {0}'}" FontSize="12" HorizontalOptions="End" />
-                <Label Text="{Binding ActiveCount, StringFormat='Active: {0}'}" FontSize="12" TextColor="#1565C0" HorizontalOptions="End" />
+                <Label Text="{Binding TotalCount, StringFormat={loc:T Bar_Total}}" FontSize="12" HorizontalOptions="End" />
+                <Label Text="{Binding ActiveCount, StringFormat={loc:T Bar_Active}}" FontSize="12" TextColor="#1565C0" HorizontalOptions="End" />
             </VerticalStackLayout>
         </Grid>
 

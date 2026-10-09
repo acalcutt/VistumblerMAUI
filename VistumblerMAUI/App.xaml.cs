@@ -16,6 +16,8 @@ public partial class App : Application
 
     public App(IServiceProvider services)
     {
+        // The text language from Settings → Language, before App.xaml or any page reads its text
+        Localization.LanguageSettings.Apply();
         InitializeComponent();
         _services = services;
         // Coordinate format and Wi-Fi adapter from Settings, before anything is shown or scanned

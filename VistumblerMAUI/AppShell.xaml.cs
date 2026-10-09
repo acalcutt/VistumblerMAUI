@@ -30,10 +30,15 @@ public partial class AppShell : Shell
         Loaded += OnFirstLoaded;
     }
 
+    private static bool _started;
+
     // Like the original Vistumbler: offer a newer release at startup (quietly does nothing when offline)
     private async void OnFirstLoaded(object? sender, EventArgs e)
     {
         Loaded -= OnFirstLoaded;
+        // Once per run: the shell is built again when the language changes (Settings → Language)
+        if (_started) return;
+        _started = true;
         // Retry WifiDB uploads left over from earlier saves, now and whenever the connection comes back
         _services.GetRequiredService<WifiDbUploadQueue>().Start();
         _services.GetRequiredService<WigleUploadQueue>().Start();   // the same for WiGLE, when it's turned on

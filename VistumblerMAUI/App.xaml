@@ -2,6 +2,7 @@
 <Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:conv="clr-namespace:VistumblerMAUI.Converters"
+             xmlns:loc="clr-namespace:VistumblerMAUI.Localization"
              x:Class="VistumblerMAUI.App">
     <Application.Resources>
         <ResourceDictionary>
@@ -20,6 +21,7 @@
             <conv:HexToColorConverter       x:Key="HexToColor" />
             <conv:FrequencyToBandConverter  x:Key="FreqToBand" />
             <conv:RunningToColorConverter   x:Key="RunningToColor" />
+            <loc:LocValueConverter          x:Key="LocValue" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

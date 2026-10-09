@@ -3,15 +3,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:VistumblerMAUI.ViewModels"
              xmlns:controls="clr-namespace:VistumblerMAUI.Controls"
+             xmlns:loc="clr-namespace:VistumblerMAUI.Localization"
              x:DataType="vm:SettingsViewModel"
              x:Class="VistumblerMAUI.Views.SettingsPage"
-             Title="Settings">
+             Title="{loc:T Tab_Settings}">
 
     <Grid RowDefinitions="Auto,*">
         <controls:ScanControlBar x:Name="ScanBar" Grid.Row="0" />
 
         <ScrollView Grid.Row="1">
         <VerticalStackLayout Spacing="0" Padding="0,8">
+
+            <!-- Language (SettingsViewModel.Language.cs) -->
+            <Grid ColumnDefinitions="Auto,*" Padding="16,8" ColumnSpacing="12">
+                <Label Grid.Column="0" Text="{loc:T Settings_Language}" VerticalOptions="Center" />
+                <Picker Grid.Column="1" ItemsSource="{Binding LanguageNames}" SelectedItem="{Binding SelectedLanguageName}" />
+            </Grid>
+            <BoxView HeightRequest="1" Color="#EEEEEE" Margin="16,0" />
 
             <!-- Scanning -->
             <Label Text="SCANNING" Style="{StaticResource SectionHeader}" />
