@@ -2,10 +2,26 @@
 
 ## master
 ### ✨ Features and improvements
-- _...Add new stuff here..._
+- **An AP's signal and range maps (Map on its details page)** — the original's KML "Selected AP" maps, drawn on the built-in map instead of in Google Earth: every place the AP was heard, coloured from red (weak) to green (strong) in the original's six signal bands, its signal circle (100 + RSSI metres around where it was strongest) and its range circle (out to the farthest place it was heard). The ✕ on the bar above the map clears them.
+- **NetStumbler text (wi-scan) import** — NetStumbler's text export now imports, under Netstumbler on the Import page; it was offered before but imported nothing, since only the binary .ns1 was read. Text or binary is told apart by the file's content, as in the original. Each sighting becomes part of the AP's signal history, placed where its signal was strongest.
+- **WarDrive (Android) .db3 import** — the WarDrive app's database now imports, under Wardrive on the Import page, with each network's security, band, position and time. The option read every file as CSV before.
+- **Record the GPS track even when no APs are found (Settings → GPS)** — the original's "Save all GPS data", on by default like there: GPS points are kept when a scan finds no APs, and while GPS is on without scanning, so exported tracks (VS1, KML, GPX) have no gaps.
+
+- **Filters** — the original's View → Filters: saved filters in a list (the Filter button on the Scan page), one of which narrows the AP list at a time, and the Export page can export only the APs it shows (the original's "Filtered APs" exports). Simple fields suit a phone: SSID contains, BSSID starts with, open/WEP/secure, 2.4/5/6 GHz, channels, minimum signal, active or dead. **Advanced rules** take the original's per-field syntax (lists `1,6,11`, ranges `1-6` or `-80--60`, `<>` for not, `%` wildcards), with one change: a value with a dash such as `WPA2-Personal` now matches itself instead of being read as a range, which matched nothing unless written `WPA2\-Personal`. APs leave the list as they stop matching, e.g. when they go dead under an "active only" filter.
+- **Group by on the Scan page** — the phone version of the original's tree view: group the AP list by channel, band, security type (open/WEP/secure), authentication, encryption, network type, manufacturer or SSID. Each group shows how many APs it has and collapses or expands with a tap; search, filter and sort apply within the groups.
+- **Clear (menu)** — replaces Save & Clear in the menu: clears the AP list, asking whether to save it to a file first. The Clear button on the Scan page, which cleared without asking, is now the Filter button.
+- **The last session reopens by itself** — with a single earlier session, the app opens it where you left off instead of asking. With several, it still asks; and if reopening a session automatically ever crashes the app, the next start asks instead of trying again.
+- **Speak RSSI, or a tone (Settings → Sound)** — Speak signal can say the RSSI ("minus 65 dBm") instead of the signal percentage, and a third voice plays a short tone whose pitch rises with the signal, in place of the original's MIDI notes.
+- **Settings reordered** — Scanning, Map, GPS and WifiDB come first, then Save & Clear, Sound and the rest. The map AP colors moved to their own page (Map AP colors… under Map), since the grid took up much of Settings.
+- **Offline maps under the map** — Save Area and Go Offline moved from the toolbar to the buttons under the map as **Save map for offline** (now explaining what it downloads before it starts) and **Saved maps only**. New Session moved to the top of the menu.
 
 ### 🐞 Bug fixes
-- _...Add new stuff here..._
+- **Map dots no longer vanish during long scans** — the live AP layer was built by pasting text together, which let an SSID with control characters (hidden networks often broadcast \0 bytes) or a comma-decimal phone language produce invalid JSON, and then every dot disappeared. It's now written with a JSON writer.
+- **KML and NetXML exports no longer fail on hidden-network SSIDs** — characters XML can't hold made the whole export fail; they're now left out of the file.
+- **Update manufacturers works on Android** — IEEE refuses Android's default user agent (HTTP 418); the app now identifies itself.
+- **WEP networks are shown and exported as WEP** — the map colored them as open, and VS1 exports gave them the open security type, because WEP networks report Open authentication. WEP is now told by its encryption, as in the original.
+- **6 GHz channels from WiGLE CSV, Kismet and WarDrive imports** — 6 GHz networks came in as channel 0.
+- **Wi-scan files written by Vistumbler keep their signal on import** — the original's import treated every wi-scan file as NetStumbler's (dBm = SNR - 95), while its own wi-scan export writes Sig = dBm + 50, so its files came back 95 dB too weak. Files whose creator is Vistumbler are now read with the export's formula.
 
 ## 0.7.0
 ### ✨ Features and improvements

@@ -15,8 +15,8 @@ Legend: ✅ has it · 🟡 partly, or done differently · ❌ missing · ➕ new
 | Clear All, New Session, Exit / Exit (Save DB) | ✓ | ✅ |
 | Auto Recovery VS1 / recover a crashed session | ✓ | 🟡 each session's database is kept and can be resumed from the session chooser |
 | Sort, Auto Sort | ✓ | ✅ sort field and direction; new APs are inserted in sorted position |
-| Filters (named, add/remove) | ✓ | ❌ only a search box (SSID, BSSID, manufacturer) |
-| Tree view (APs grouped by channel, security and so on) | ✓ | ❌ |
+| Filters (named, add/remove) | ✓ | ✅ saved filters; simple fields plus the original's syntax as advanced rules |
+| Tree view (APs grouped by channel, security and so on) | ✓ | ✅ Group by on the Scan page, with collapsible groups |
 | Copy AP details | ✓ | ✅ Copy on the AP details page: all details, BSSID, SSID or GPS position |
 | Select connected AP, auto-select connected or highest signal | ✓ | ❌ |
 | Add new APs to top, auto-scroll | ✓ | ❌ (sorting covers part of this) |
@@ -32,7 +32,7 @@ Legend: ✅ has it · 🟡 partly, or done differently · ❌ missing · ➕ new
 |---|---|---|
 | Graph 1 / Graph 2 (selected AP's signal over time) | ✓ in the main window | 🟡 a signal history graph on the AP details page |
 | 2.4 GHz / 5 GHz channel graphs | ✓ experimental | ✅ plus 6 GHz |
-| Use RSSI in graphs, graph dead time | ✓ | ❌ |
+| Use RSSI in graphs, graph dead time | ✓ | ❌ (Speak signal can say RSSI) |
 
 ## GPS
 
@@ -42,7 +42,7 @@ Legend: ✅ has it · 🟡 partly, or done differently · ❌ missing · ➕ new
 | Disconnect after 10 s / reset position after 30 s without data | ✓ | ✅ reconnects instead of turning GPS off |
 | GPS coordinate display format (ddmm.mmmm and others) | ✓ | ✅ decimal plus the original's three formats |
 | GPS Details and GPS Compass windows | ✓ | ✅ one GPS details page with a compass |
-| Save all GPS data, even with no APs | ✓ | ❌ GPS is only recorded once per scan cycle |
+| Save all GPS data, even with no APs | ✓ | ✅ on by default, as in the original |
 | Phone GPS, Bluetooth and USB receivers, GLONASS/Galileo/BeiDou | n/a | ➕ |
 | Camera trigger script | ✓ experimental | ❌ |
 
@@ -53,8 +53,8 @@ Legend: ✅ has it · 🟡 partly, or done differently · ❌ missing · ➕ new
 | Live view of active/dead APs and the GPS track | Auto KML + network link | ✅ live map with active/dead colours, track and follow modes |
 | Open the KML network link | ✓ | 🟡 no longer needed, since the map is built in |
 | Export to KML, all APs | ✓ | ✅ |
-| Export to KML, filtered | ✓ | ❌ there are no filters |
-| Signal and range circle maps for a selected AP | ✓ | ❌ |
+| Export to KML, filtered | ✓ | ✅ "only APs the filter shows" on the Export page |
+| Signal and range circle maps for a selected AP | ✓ | ✅ drawn on the map from the AP's details page |
 | WifiDB history layers (age buckets) and cell layer | n/a | ➕ |
 | Basemap styles, 3D terrain, saving map areas for offline use, AP colours, point size | n/a | ➕ |
 
@@ -68,10 +68,10 @@ Legend: ✅ has it · 🟡 partly, or done differently · ❌ missing · ➕ new
 | Kismet (.kismet, .netxml) | ✓ / ✓ | ✅ / ✅ |
 | GPX | n/a / ✓ | n/a / ✅ |
 | NS1 binary | ✓ / ✓ | 🟡 / ✅ import only reads format version 12 |
-| NS1 text (wi-scan) | ✓ / ✓ | ❌ / ❌ the picker accepts `.txt`, but the file imports nothing |
-| WarDrive DB3 | ✓ / n/a | ❌ the "Wardrive" option parses the file as CSV, not as the DB3 SQLite database |
+| NS1 text (wi-scan) | ✓ / ✓ | ✅ / n/a import only: it was a way in from NetStumbler |
+| WarDrive DB3 | ✓ / n/a | ✅ / n/a |
 | Import a whole folder | ✓ | ✅ |
-| Export only the filtered APs | ✓ | ❌ |
+| Export only the filtered APs | ✓ | ✅ |
 | Export/import settings, Open Save Folder | ✓ | ❌ (the share sheet replaces Open Save Folder) |
 
 ## Sound
@@ -82,7 +82,7 @@ Legend: ✅ has it · 🟡 partly, or done differently · ❌ missing · ➕ new
 | Speak signal | ✓ | ✅ device voice or the original's recorded words |
 | Error sound | ✓ | ✅ when the GPS receiver has a problem |
 | Sound for a new GPS fix | ✓ | ❌ (the original never shipped new_gps.wav) |
-| MIDI signal sounds | ✓ | ❌ |
+| MIDI signal sounds | ✓ | 🟡 a tone whose pitch follows the signal, as a Speak signal voice |
 
 ## WifiDB
 
@@ -108,10 +108,8 @@ Legend: ✅ has it · 🟡 partly, or done differently · ❌ missing · ➕ new
 
 ## Gaps worth closing next
 
-1. **NS1 text and WarDrive DB3 import:** offered on the Import page but they import nothing.
-2. **Filters:** these also unlock filtered exports.
-3. **Signal and range circle maps for a selected AP:** the one Google Earth feature the built-in map doesn't cover yet.
-4. **Save all GPS data, even with no APs.**
+1. **Graph options:** RSSI instead of signal %, and graph dead time.
 
 Closed since this was first written: manufacturer lookup, sounds and speak signal, Import Folder, Locate in WifiDB,
-GPS Details and Compass, Copy, coordinate formats, adapter choice, Auto Scan on launch, and the Help/WifiDB links.
+GPS Details and Compass, Copy, coordinate formats, adapter choice, Auto Scan on launch, the Help/WifiDB links, NS1
+text and WarDrive DB3 import, Save all GPS data, an AP's signal and range maps, filters with filtered exports, and grouped AP views.
