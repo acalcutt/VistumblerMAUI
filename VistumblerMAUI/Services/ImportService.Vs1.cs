@@ -6,8 +6,8 @@ namespace VistumblerMAUI.Services;
 /// <summary>
 /// The VS1 reader, a port of the original Vistumbler's _ImportVS1: GPS lines (12 fields, or 6 in old files) first,
 /// then AP lines (15 fields in v4, 13 in v3) whose GID,SIGNAL,RSSI history points at those GPS lines, so each AP
-/// comes in with its readings, positions and first/last seen times. Version 4.1 adds 10-field lines for cell towers
-/// and Bluetooth devices, which older readers skip as a field count they don't know.
+/// comes in with its readings, positions and first/last seen times. Also reads the "#RADIO|" lines this app writes
+/// for cell towers and Bluetooth devices, which older readers skip as comments.
 /// </summary>
 public partial class ImportService
 {
@@ -29,13 +29,18 @@ public partial class ImportService
         var aps = new List<AccessPoint>();
         foreach (var line in lines)
         {
-            if (string.IsNullOrWhiteSpace(line) || line[0] == '#') continue;
+            if (string.IsNullOrWhiteSpace(line)) continue;
+            if (line.StartsWith(Vs1RadioPrefix, StringComparison.Ordinal))
+            {
+                ParseVs1RadioLine(line.Split('|'), gps);
+                continue;
+            }
+            if (line[0] == '#') continue;
             var p = line.Split('|');
             AccessPoint? ap = p.Length switch
             {
                 15 when IsMacAddress(p[1].Trim()) => ParseVs1ApLine(p, gps, v4: true),
                 13 when IsMacAddress(p[1].Trim()) => ParseVs1ApLine(p, gps, v4: false),
-                10 when ParseVs1RadioLine(p, gps) => null,   // 4.1: a cell tower or Bluetooth device, kept apart
                 >= 19 when p[0] == "AP" => ParseVs1Line(p),   // this app's own early format
                 _ => null,
             };
@@ -134,26 +139,25 @@ public partial class ImportService
         return ap;
     }
 
-    // 4.1: Type|Key|Name|Capabilities|Channel|Frequency|MfgrId|Manufacturer|High RSSI|GID,RSSI\GID,RSSI…
-    // Adds the network to _radios with its readings; false when the line isn't one.
-    private bool ParseVs1RadioLine(string[] p, Dictionary<int, Vs1Gps> gps)
+    /// <summary>The comment prefix of a cell tower or Bluetooth line in a VS1 file (see ExportService.ExportToVs1Async).</summary>
+    public const string Vs1RadioPrefix = "#RADIO|";
+
+    // #RADIO|Type|Key|Name|Capabilities|Channel|Frequency|MfgrId|Manufacturer|GID,RSSI\GID,RSSI…
+    private void ParseVs1RadioLine(string[] p, Dictionary<int, Vs1Gps> gps)
     {
-        // The type is a name ("LTE", "BLE"); Enum.TryParse would also take a number
-        if (p.Length != 10 || int.TryParse(p[0], out _) || !Enum.TryParse<RadioNetworkType>(p[0].Trim(), true, out var type)) return false;
-        string key = p[1].Trim();
-        if (key.Length == 0) return false;
-        if (!_radios.TryGetValue(key, out var n))
+        if (p.Length < 10 || !Enum.TryParse<RadioNetworkType>(p[1], true, out var type) || p[2].Length == 0) return;
+        if (!_radios.TryGetValue(p[2], out var n))
         {
-            _radios[key] = n = new RadioNetwork
+            _radios[p[2]] = n = new RadioNetwork
             {
-                Key = key,
+                Key = p[2],
                 Type = type,
-                Name = p[2],
-                Capabilities = p[3],
-                Channel = int.TryParse(p[4], out var ch) ? ch : null,
-                Frequency = ParseInt(p[5]),
-                MfgrId = int.TryParse(p[6], out var m) ? m : null,
-                Manufacturer = p[7],
+                Name = p[3],
+                Capabilities = p[4],
+                Channel = int.TryParse(p[5], out var ch) ? ch : null,
+                Frequency = ParseInt(p[6]),
+                MfgrId = int.TryParse(p[7], out var m) ? m : null,
+                Manufacturer = p[8],
             };
         }
         foreach (var entry in p[9].Split('\\', StringSplitOptions.RemoveEmptyEntries))
@@ -166,8 +170,5 @@ public partial class ImportService
             if (g.Time >= n.LastSeen) { n.LastSeen = g.Time; n.Rssi = rssi; }
             if (rssi >= n.HighestRssi && g.Lat is not null) { n.HighestRssi = rssi; n.Latitude = g.Lat; n.Longitude = g.Lon; }
         }
-        // Readings without a GPS fix aren't written, so a network heard only without one still has its strongest RSSI
-        if (n.HighestRssi == int.MinValue && int.TryParse(p[8], out var high)) n.HighestRssi = n.Rssi = high;
-        return true;
     }
 }
