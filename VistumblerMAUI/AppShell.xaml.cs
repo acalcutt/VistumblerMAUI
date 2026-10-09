@@ -20,6 +20,7 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(ExportPage), typeof(ExportPage));
         Routing.RegisterRoute(nameof(WifiDbScanPage), typeof(WifiDbScanPage));
         Routing.RegisterRoute(nameof(WifiDbUploadPage), typeof(WifiDbUploadPage));
+        Routing.RegisterRoute(nameof(GpsDetailsPage), typeof(GpsDetailsPage));
         Routing.RegisterRoute(nameof(ApDetailsPage), typeof(ApDetailsPage));
 
         Loaded += OnFirstLoaded;
@@ -31,6 +32,8 @@ public partial class AppShell : Shell
         Loaded -= OnFirstLoaded;
         // Retry WifiDB uploads left over from earlier saves, now and whenever the connection comes back
         _services.GetRequiredService<WifiDbUploadQueue>().Start();
+        // The original's "Auto Scan APs on launch", plus the same for GPS (Settings → Scanning)
+        await _services.GetRequiredService<ScanViewModel>().StartOnLaunchAsync();
         await _services.GetRequiredService<AppUpdater>().CheckOnStartupAsync(ExitForUpdateAsync);
     }
 
@@ -91,6 +94,24 @@ public partial class AppShell : Shell
             }
             catch { /* the file is saved either way */ }
         }
+    }
+
+    private async void OnGpsDetailsClicked(object? sender, EventArgs e)
+    {
+        FlyoutIsPresented = false;
+        await GoToAsync(nameof(GpsDetailsPage));
+    }
+
+    // The original's Help, WifiDB and Support Vistumbler web pages, in one list
+    private async void OnLinksClicked(object? sender, EventArgs e)
+    {
+        FlyoutIsPresented = false;
+        var links = AppLinks.All;
+        var choice = await DisplayActionSheet("Links", "Cancel", null, links.Select(l => l.Title).ToArray());
+        var url = links.FirstOrDefault(l => l.Title == choice).Url;
+        if (url is null) return;
+        try { await Launcher.Default.OpenAsync(new Uri(url)); }
+        catch (Exception ex) { await DisplayAlert("Links", $"Couldn't open {url}: {ex.Message}", "OK"); }
     }
 
     private async void OnUploadToWifiDbClicked(object? sender, EventArgs e)

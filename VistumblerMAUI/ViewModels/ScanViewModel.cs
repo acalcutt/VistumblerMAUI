@@ -22,6 +22,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
     private readonly Services.IKeepAliveService _keepAlive;
     private readonly IExportService      _export;
     private readonly Services.WifiDbUploadQueue _uploadQueue;
+    private readonly Services.ManufacturerDatabase _manufacturers;
 
     // Serializes a scan cycle's database write with clearing the session (Clear All, Save & Clear), so a
     // clear never lands in the middle of a write. Each clear bumps _clearGeneration (on the UI thread); a
@@ -104,7 +105,8 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         ISoundService       sound,
         Services.IKeepAliveService keepAlive,
         IExportService      export,
-        Services.WifiDbUploadQueue uploadQueue)
+        Services.WifiDbUploadQueue uploadQueue,
+        Services.ManufacturerDatabase manufacturers)
     {
         _wifi      = wifi;
         _gps       = gps;
@@ -113,6 +115,8 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         _keepAlive = keepAlive;
         _export    = export;
         _uploadQueue = uploadQueue;
+        _manufacturers = manufacturers;
+        _manufacturers.Changed += (_, _) => MainThread.BeginInvokeOnMainThread(RefreshManufacturers);
 
         // Restore the persisted sort choice (set the fields directly so the change
         // handlers don't fire before construction finishes).
@@ -149,6 +153,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
             ap.IsActive = false;
             _apMap[ap.Bssid] = ap;
         }
+        _manufacturers.FillMissing(_apMap.Values);   // sessions saved before the lookup existed
 
         TotalCount  = _apMap.Count;
         ActiveCount = 0;
@@ -298,6 +303,29 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         else            await StartScanAsync();
     }
 
+    /// <summary>
+    /// Looks every AP's manufacturer up again, once the list has loaded or been updated (Settings → Data →
+    /// Update manufacturers). A name the list doesn't have, e.g. one from an imported file, is kept. UI thread.
+    /// </summary>
+    private void RefreshManufacturers()
+    {
+        foreach (var ap in _apMap.Values)
+            if (_manufacturers.Lookup(ap.Bssid) is { Length: > 0 } name)
+                ap.Manufacturer = name;
+    }
+
+    /// <summary>Starts scanning and/or GPS when Settings → Scanning says to when the app opens.</summary>
+    public async Task StartOnLaunchAsync()
+    {
+        if (Services.ScanSettings.ScanOnLaunch && !IsScanning)
+        {
+            await LoadCommand.ExecuteAsync(null);   // list the session's saved APs before new ones arrive
+            await StartScanAsync();
+        }
+        if (Services.ScanSettings.GpsOnLaunch && !IsGpsEnabled)
+            await StartGpsAsync();
+    }
+
     [RelayCommand]
     private async Task ToggleGpsAsync()
     {
@@ -403,6 +431,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         var gps      = _currentGps;
         var detected = e.AccessPoints;
         int newCount = 0;
+        var newSignals = new List<int>();   // for the new-AP sound
 
         // The canonical AP object to persist for each detection: the merged in-memory row for
         // an existing AP, or the new AP itself. Persisting the *detected* object for an existing
@@ -448,6 +477,8 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
                         existing.Longitude = gps.Longitude;
                     }
                     existing.IsActive = true;
+                    if (string.IsNullOrEmpty(existing.Manufacturer))
+                        existing.Manufacturer = _manufacturers.Lookup(existing.Bssid);
                     target = existing;
                 }
                 else
@@ -456,6 +487,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
                     ap.HighestSignal = ap.Signal;
                     ap.HighestRssi   = ap.Rssi;
                     ap.IsActive      = true;
+                    ap.Manufacturer  = _manufacturers.Lookup(ap.Bssid);
                     if (gps != null)
                     {
                         ap.Latitude  = gps.Latitude;
@@ -463,6 +495,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
                     }
                     _apMap[ap.Bssid] = ap;
                     newCount++;
+                    newSignals.Add(ap.Signal ?? 0);
                     target = ap;
                 }
 
@@ -509,8 +542,8 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
             _persistLock.Release();
         }
 
-        if (newCount > 0 && _sound.SoundEnabled)
-            await _sound.PlayNewNetworkAsync();
+        if (newCount > 0 && _sound.SoundEnabled)  // not awaited by the next scan: sounds play alongside
+            _ = _sound.PlayNewNetworksAsync(newSignals);
 
         await AutoSaveAndClearIfDueAsync();
     }
@@ -627,7 +660,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         // logging every raw fix here, which produced GPS rows nothing referenced).
         _currentGps = e.GpsData;
         _lastFixUtc = DateTime.UtcNow;
-        var text = $"GPS {e.GpsData.Latitude:F5}, {e.GpsData.Longitude:F5}";
+        var text = $"GPS {GpsFormatter.ToText(e.GpsData.Latitude, e.GpsData.Longitude)}";
         // The GPS callback runs on a background thread; the status label only refreshes
         // when the bound property changes on the UI thread.
         MainThread.BeginInvokeOnMainThread(() => GpsStatus = text);
@@ -639,7 +672,16 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         // leaving the status stuck on "GPS starting…".
         if (!IsGpsEnabled) return;
         MainThread.BeginInvokeOnMainThread(() => GpsStatus = $"GPS: {e.ErrorMessage}");
+
+        // The original's error sound when GPS drops; at most every 30 s, since a receiver can keep retrying
+        if (DateTime.UtcNow - _lastGpsErrorSound >= TimeSpan.FromSeconds(30))
+        {
+            _lastGpsErrorSound = DateTime.UtcNow;
+            _ = _sound.PlayErrorAsync();
+        }
     }
+
+    private DateTime _lastGpsErrorSound = DateTime.MinValue;
 
     private void OnScanError(object? sender, ScanErrorEventArgs e)
     {

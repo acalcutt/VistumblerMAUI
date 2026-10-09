@@ -12,6 +12,10 @@ public partial class App : Application
     {
         InitializeComponent();
         _services = services;
+        // Coordinate format and Wi-Fi adapter from Settings, before anything is shown or scanned
+        Services.ScanSettings.Apply(services.GetRequiredService<IWiFiScannerService>());
+        // Manufacturer names (about 40,000) load in the background; scans fill them in once loaded
+        _ = services.GetRequiredService<Services.ManufacturerDatabase>().LoadAsync();
     }
 
     protected override Window CreateWindow(IActivationState? activationState)

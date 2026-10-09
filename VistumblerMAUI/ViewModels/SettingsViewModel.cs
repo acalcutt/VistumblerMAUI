@@ -14,7 +14,39 @@ public partial class SettingsViewModel : ObservableObject
 
     private const string ScanIntervalKey = "Scan_IntervalMs";
     [ObservableProperty] private int  _scanIntervalMs = Preferences.Get(ScanIntervalKey, 1000);
-    [ObservableProperty] private bool _soundEnabled   = true;
+    [ObservableProperty] private bool _soundEnabled   = SoundSettings.NewApSound;
+    partial void OnSoundEnabledChanged(bool value) => SoundSettings.NewApSound = value;
+
+    // ── Sound (SoundSettings) ─────────────────────────────────────────────────
+    public IReadOnlyList<string> NewApSoundOptions { get; } =
+        new[] { "Once for each scan that finds new APs", "Once for each new AP", "Once for each new AP, louder for a stronger signal" };
+    public IReadOnlyList<string> SpeakVoiceOptions { get; } = new[] { "The device's voice", "Vistumbler's recorded words" };
+
+    [ObservableProperty] private string _selectedNewApSound = string.Empty;
+    [ObservableProperty] private string _selectedSpeakVoice = string.Empty;
+    [ObservableProperty] private bool   _errorSound = SoundSettings.ErrorSound;
+    [ObservableProperty] private bool   _sayPercent = SoundSettings.SayPercent;
+    [ObservableProperty] private string _speakIntervalSeconds = (SoundSettings.SpeakIntervalMs / 1000.0).ToString("0.#");
+
+    partial void OnSelectedNewApSoundChanged(string value)
+    {
+        int i = NewApSoundOptions.ToList().IndexOf(value);
+        if (i >= 0) SoundSettings.NewApMode = (NewApSoundMode)i;
+    }
+
+    partial void OnSelectedSpeakVoiceChanged(string value)
+    {
+        int i = SpeakVoiceOptions.ToList().IndexOf(value);
+        if (i >= 0) SoundSettings.Voice = (SpeakVoice)i;
+    }
+
+    partial void OnErrorSoundChanged(bool value) => SoundSettings.ErrorSound = value;
+    partial void OnSayPercentChanged(bool value) => SoundSettings.SayPercent = value;
+
+    partial void OnSpeakIntervalSecondsChanged(string value)
+    {
+        if (double.TryParse(value, out var s) && s > 0) SoundSettings.SpeakIntervalMs = (int)(s * 1000);
+    }
     [ObservableProperty] private bool _gpsEnabled     = true;
 
     // Persist the scan interval so the scan loop can honour it (min cadence between scans).
@@ -25,6 +57,63 @@ public partial class SettingsViewModel : ObservableObject
     // this is just the vistumbler-android-style convenience for watching live.
     [ObservableProperty] private bool _keepScreenOn = Preferences.Get("keep_screen_on", false);
     partial void OnKeepScreenOnChanged(bool value) => Preferences.Set("keep_screen_on", value);
+
+    // ── Start on launch, Wi-Fi adapter, coordinate format (ScanSettings) ─────────
+    [ObservableProperty] private bool _scanOnLaunch = ScanSettings.ScanOnLaunch;
+    [ObservableProperty] private bool _gpsOnLaunch  = ScanSettings.GpsOnLaunch;
+    partial void OnScanOnLaunchChanged(bool value) => ScanSettings.ScanOnLaunch = value;
+    partial void OnGpsOnLaunchChanged(bool value)  => ScanSettings.GpsOnLaunch  = value;
+
+    /// <summary>Only Windows lets the app choose an adapter; phones have one.</summary>
+    public bool HasAdapterChoice => OperatingSystem.IsWindows();
+    public ObservableCollection<Vistumbler.Core.Models.WiFiAdapter> Adapters { get; } = new();
+    [ObservableProperty] private Vistumbler.Core.Models.WiFiAdapter? _selectedAdapter;
+    private bool _loadingAdapters;
+
+    partial void OnSelectedAdapterChanged(Vistumbler.Core.Models.WiFiAdapter? value)
+    {
+        if (value is null || _loadingAdapters) return;
+        ScanSettings.AdapterId = value.Id;
+        IPlatformApplication.Current?.Services.GetService<Vistumbler.Core.Services.IWiFiScannerService>()?.SetActiveAdapter(value.Id);
+    }
+
+    [RelayCommand]
+    private async Task RefreshAdaptersAsync()
+    {
+        var wifi = IPlatformApplication.Current?.Services.GetService<Vistumbler.Core.Services.IWiFiScannerService>();
+        if (wifi is null || !HasAdapterChoice) return;
+        _loadingAdapters = true;
+        try
+        {
+            Adapters.Clear();
+            Adapters.Add(new Vistumbler.Core.Models.WiFiAdapter { Id = string.Empty, Name = "All adapters" });
+            foreach (var a in await wifi.GetAvailableAdaptersAsync()) Adapters.Add(a);
+            // Keep a chosen adapter that isn't plugged in right now, so the choice isn't lost
+            var chosen = Adapters.FirstOrDefault(a => a.Id == ScanSettings.AdapterId);
+            if (chosen is null && ScanSettings.AdapterId.Length > 0)
+                Adapters.Add(chosen = new Vistumbler.Core.Models.WiFiAdapter { Id = ScanSettings.AdapterId, Name = "Chosen adapter (not found)" });
+            SelectedAdapter = chosen ?? Adapters[0];
+        }
+        catch { /* leave the list as it is */ }
+        finally
+        {
+            _loadingAdapters = false;
+        }
+    }
+
+    public IReadOnlyList<string> GpsFormatOptions { get; } = new[]
+    {
+        "Decimal (48.11730, -11.51667)",
+        "dd.dddd (N 48.1173000)",
+        "ddmm.mmmm (N 4807.0380)",
+        "dd mm ss (N 48° 7' 2.28\")",
+    };
+    [ObservableProperty] private string _selectedGpsFormat = string.Empty;
+    partial void OnSelectedGpsFormatChanged(string value)
+    {
+        int index = GpsFormatOptions.ToList().IndexOf(value);
+        if (index >= 0) ScanSettings.GpsFormat = (Vistumbler.Core.Models.GpsDisplayFormat)index;
+    }
 
     // ── Updates ──────────────────────────────────────────────────────────────────
     [ObservableProperty] private bool _autoCheckForUpdates = AppUpdater.AutoCheck;
@@ -354,6 +443,11 @@ public partial class SettingsViewModel : ObservableObject
         _manualFollowZoom   = MapFollowSettings.ManualZoom.ToString("0.#");
 
         RefreshComPorts();
+        _selectedGpsFormat = GpsFormatOptions[(int)ScanSettings.GpsFormat];
+        RefreshManufacturersText();
+        _selectedNewApSound = NewApSoundOptions[(int)SoundSettings.NewApMode];
+        _selectedSpeakVoice = SpeakVoiceOptions[(int)SoundSettings.Voice];
+        if (HasAdapterChoice) _ = RefreshAdaptersAsync();
 
         // Show the chosen receiver without asking for the Bluetooth permission just to open Settings;
         // Refresh lists the rest
@@ -430,6 +524,43 @@ public partial class SettingsViewModel : ObservableObject
     /// <summary>Open the camera to scan a WifiDB registration QR code (mobile).</summary>
     [RelayCommand]
     private async Task ScanWifiDbQrAsync() => await Shell.Current.GoToAsync(nameof(WifiDbScanPage));
+
+    // ── Manufacturers (ManufacturerDatabase) ──────────────────────────────────
+    [ObservableProperty] private string _manufacturersText = string.Empty;
+    [ObservableProperty] private bool   _isUpdatingManufacturers;
+
+    private static ManufacturerDatabase? Manufacturers => ManufacturerDatabase.Current;
+
+    private void RefreshManufacturersText()
+    {
+        if (Manufacturers is not { } db) return;
+        var source = db.UpdatedOn is { } on ? $"updated {on:yyyy-MM-dd}" : "the list that came with the app";
+        ManufacturersText = db.Count == 0 ? "Loading the manufacturer list…" : $"{db.Count:N0} manufacturers ({source})";
+    }
+
+    /// <summary>The original's Extra → Update Manufacturers: download IEEE's current list.</summary>
+    [RelayCommand]
+    private async Task UpdateManufacturersAsync()
+    {
+        if (Manufacturers is not { } db) return;
+        IsUpdatingManufacturers = true;
+        ManufacturersText = "Downloading IEEE's manufacturer list…";
+        try
+        {
+            using var http = new HttpClient { Timeout = TimeSpan.FromMinutes(3) };
+            int count = await db.UpdateAsync(http);
+            RefreshManufacturersText();
+        }
+        catch (Exception ex)
+        {
+            RefreshManufacturersText();
+            ManufacturersText += $"\nUpdate failed: {ex.Message}";
+        }
+        finally
+        {
+            IsUpdatingManufacturers = false;
+        }
+    }
 
     [RelayCommand]
     private async Task GoToImportAsync() => await Shell.Current.GoToAsync(nameof(ImportPage));

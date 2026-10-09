@@ -7,6 +7,8 @@
              Title="{Binding Title}">
 
     <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Copy" Command="{Binding CopyCommand}" />
+        <ToolbarItem Text="WifiDB" Command="{Binding LocateInWifiDbCommand}" />
         <ToolbarItem Text="Back" Clicked="OnBackClicked" />
     </ContentPage.ToolbarItems>
 
@@ -18,6 +20,11 @@
                     HorizontalOptions="Start"
                     BackgroundColor="Transparent" TextColor="#1565C0" Padding="0"
                     FontSize="14" />
+
+            <Grid ColumnDefinitions="*,Auto">
+                <Label Grid.Column="0" Text="Speak signal while scanning" VerticalOptions="Center" />
+                <Switch Grid.Column="1" IsToggled="{Binding SpeakSignal}" />
+            </Grid>
 
             <!-- Signal graph -->
             <Label Text="SIGNAL HISTORY" FontSize="12" FontAttributes="Bold" TextColor="#1565C0" />

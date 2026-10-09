@@ -60,6 +60,8 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Maui.Controls" Version="10.0.20" />
     <PackageReference Include="CommunityToolkit.Maui" Version="9.0.3" />
+    <!-- The original Vistumbler's sounds (Resources/Raw/Sounds): MIT, by Gerald Versluis -->
+    <PackageReference Include="Plugin.Maui.Audio" Version="4.0.0" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.9.172" />

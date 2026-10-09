@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:VistumblerMAUI.ViewModels"
+             x:DataType="vm:GpsDetailsViewModel"
+             x:Class="VistumblerMAUI.Views.GpsDetailsPage"
+             Title="GPS details">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="10">
+
+            <Label Text="{Binding Source}" FontAttributes="Bold" />
+            <Label Text="{Binding Status}" FontSize="12" TextColor="Gray" />
+
+            <Grid ColumnDefinitions="110,*" RowSpacing="6" ColumnSpacing="10"
+                  RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+                <Label Grid.Row="0" Grid.Column="0" Text="Position" TextColor="Gray" />
+                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Position}" />
+                <Label Grid.Row="1" Grid.Column="0" Text="Altitude" TextColor="Gray" />
+                <Label Grid.Row="1" Grid.Column="1" Text="{Binding Altitude}" />
+                <Label Grid.Row="2" Grid.Column="0" Text="Satellites" TextColor="Gray" />
+                <Label Grid.Row="2" Grid.Column="1" Text="{Binding Satellites}" />
+                <Label Grid.Row="3" Grid.Column="0" Text="Accuracy" TextColor="Gray" />
+                <Label Grid.Row="3" Grid.Column="1" Text="{Binding Accuracy}" />
+                <Label Grid.Row="4" Grid.Column="0" Text="Speed" TextColor="Gray" />
+                <Label Grid.Row="4" Grid.Column="1" Text="{Binding Speed}" />
+                <Label Grid.Row="5" Grid.Column="0" Text="Heading" TextColor="Gray" />
+                <Label Grid.Row="5" Grid.Column="1" Text="{Binding Heading}" />
+                <Label Grid.Row="6" Grid.Column="0" Text="Fix quality" TextColor="Gray" />
+                <Label Grid.Row="6" Grid.Column="1" Text="{Binding Quality}" />
+                <Label Grid.Row="7" Grid.Column="0" Text="Fix time" TextColor="Gray" />
+                <Label Grid.Row="7" Grid.Column="1" Text="{Binding FixTime}" />
+            </Grid>
+
+            <Label Text="COMPASS" FontSize="12" FontAttributes="Bold" TextColor="#1565C0" Margin="0,8,0,0" />
+            <GraphicsView x:Name="CompassView" HeightRequest="240" WidthRequest="240" HorizontalOptions="Center" />
+            <Label Text="Points along your direction of travel, as the GPS reports it while you're moving."
+                   FontSize="11" TextColor="Gray" HorizontalOptions="Center" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

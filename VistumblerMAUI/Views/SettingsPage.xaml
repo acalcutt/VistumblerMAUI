@@ -19,6 +19,21 @@
                 <Label Grid.Column="0" Text="Scan interval (ms)" VerticalOptions="Center" />
                 <Entry Grid.Column="1" Text="{Binding ScanIntervalMs}" Keyboard="Numeric" WidthRequest="80" />
             </Grid>
+            <Grid ColumnDefinitions="*,Auto" Padding="16,4">
+                <Label Grid.Column="0" Text="Start scanning when the app opens" VerticalOptions="Center" />
+                <Switch Grid.Column="1" IsToggled="{Binding ScanOnLaunch}" />
+            </Grid>
+            <Grid ColumnDefinitions="*,Auto" Padding="16,4">
+                <Label Grid.Column="0" Text="Turn on GPS when the app opens" VerticalOptions="Center" />
+                <Switch Grid.Column="1" IsToggled="{Binding GpsOnLaunch}" />
+            </Grid>
+            <!-- Windows: which Wi-Fi adapter to scan with (the original's Interface menu) -->
+            <Grid ColumnDefinitions="Auto,*,Auto" Padding="16,8" ColumnSpacing="8" IsVisible="{Binding HasAdapterChoice}">
+                <Label Grid.Column="0" Text="Wi-Fi adapter" VerticalOptions="Center" />
+                <Picker Grid.Column="1" ItemsSource="{Binding Adapters}" SelectedItem="{Binding SelectedAdapter}" />
+                <Button Grid.Column="2" Text="Refresh" Command="{Binding RefreshAdaptersCommand}"
+                        Padding="10,4" FontSize="12" />
+            </Grid>
             <BoxView HeightRequest="1" Color="#EEEEEE" Margin="16,0" />
 
             <!-- Map -->
@@ -161,11 +176,30 @@
             </VerticalStackLayout>
             <BoxView HeightRequest="1" Color="#EEEEEE" Margin="16,8,16,0" />
 
-            <!-- Notifications -->
-            <Label Text="NOTIFICATIONS" Style="{StaticResource SectionHeader}" />
-            <Grid ColumnDefinitions="*,Auto" Padding="16,12">
-                <Label Grid.Column="0" Text="Sound alerts" VerticalOptions="Center" />
+            <!-- Sound (the original Vistumbler's sounds) -->
+            <Label Text="SOUND" Style="{StaticResource SectionHeader}" />
+            <Grid ColumnDefinitions="*,Auto" Padding="16,8">
+                <Label Grid.Column="0" Text="Play a sound when new APs are found" VerticalOptions="Center" />
                 <Switch Grid.Column="1" IsToggled="{Binding SoundEnabled}" />
+            </Grid>
+            <Picker Margin="16,0,16,4" IsVisible="{Binding SoundEnabled}"
+                    ItemsSource="{Binding NewApSoundOptions}" SelectedItem="{Binding SelectedNewApSound}" />
+            <Grid ColumnDefinitions="*,Auto" Padding="16,8">
+                <Label Grid.Column="0" Text="Play a sound when the GPS receiver has a problem" VerticalOptions="Center" />
+                <Switch Grid.Column="1" IsToggled="{Binding ErrorSound}" />
+            </Grid>
+            <Label Text="Speaking an AP's signal: turn it on from the AP's details page."
+                   FontSize="12" Margin="16,8,16,0" />
+            <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" Padding="16,8" ColumnSpacing="12" RowSpacing="8">
+                <Label Grid.Row="0" Grid.Column="0" Text="Voice" VerticalOptions="Center" />
+                <Picker Grid.Row="0" Grid.Column="1" ItemsSource="{Binding SpeakVoiceOptions}" SelectedItem="{Binding SelectedSpeakVoice}" />
+                <Label Grid.Row="1" Grid.Column="0" Text="Speak every (seconds)" VerticalOptions="Center" />
+                <Entry Grid.Row="1" Grid.Column="1" Text="{Binding SpeakIntervalSeconds}" Keyboard="Numeric"
+                       WidthRequest="80" HorizontalOptions="Start" />
+            </Grid>
+            <Grid ColumnDefinitions="*,Auto" Padding="16,4,16,8">
+                <Label Grid.Column="0" Text="Say &quot;percent&quot; after the number" VerticalOptions="Center" />
+                <Switch Grid.Column="1" IsToggled="{Binding SayPercent}" />
             </Grid>
             <BoxView HeightRequest="1" Color="#EEEEEE" Margin="16,0" />
 
@@ -176,6 +210,12 @@
                 <Picker Grid.Column="1"
                         ItemsSource="{Binding GpsSourceOptions}"
                         SelectedItem="{Binding SelectedGpsSource}" />
+            </Grid>
+            <Grid ColumnDefinitions="Auto,*" Padding="16,8" ColumnSpacing="12">
+                <Label Grid.Column="0" Text="Coordinate format" VerticalOptions="Center" />
+                <Picker Grid.Column="1"
+                        ItemsSource="{Binding GpsFormatOptions}"
+                        SelectedItem="{Binding SelectedGpsFormat}" />
             </Grid>
             <!-- Serial (NMEA) settings, shown only when the serial source is selected -->
             <VerticalStackLayout IsVisible="{Binding IsSerialGps}" Padding="16,0,16,8" Spacing="8">
@@ -288,6 +328,14 @@
             <Button Text="Export…"
                     Command="{Binding GoToExportCommand}"
                     Margin="16,4" HorizontalOptions="Fill" />
+            <Button Text="Update manufacturers"
+                    Command="{Binding UpdateManufacturersCommand}"
+                    Margin="16,4" HorizontalOptions="Fill" />
+            <HorizontalStackLayout Margin="16,0,16,8" Spacing="8">
+                <ActivityIndicator IsRunning="{Binding IsUpdatingManufacturers}" IsVisible="{Binding IsUpdatingManufacturers}"
+                                   HeightRequest="20" />
+                <Label Text="{Binding ManufacturersText}" FontSize="11" TextColor="Gray" VerticalOptions="Center" />
+            </HorizontalStackLayout>
 
             <!-- Updates -->
             <Label Text="UPDATES" Style="{StaticResource SectionHeader}" />

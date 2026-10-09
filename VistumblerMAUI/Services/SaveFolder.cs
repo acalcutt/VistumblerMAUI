@@ -92,6 +92,15 @@ public static class SaveFolder
 #endif
     }
 
+    /// <summary>The files directly in a folder (not its subfolders), as (name, location).</summary>
+    public static IReadOnlyList<(string Name, string Location)> ListFiles(string folder)
+    {
+#if ANDROID
+        if (IsContentUri(folder)) return SafStorage.ListFiles(folder);
+#endif
+        return Directory.EnumerateFiles(folder).Select(f => (Path.GetFileName(f), f)).ToList();
+    }
+
     public static string FileName(string location)
     {
 #if ANDROID

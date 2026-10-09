@@ -110,6 +110,7 @@ public partial class ExportViewModel : ObservableObject
                 StatusMessage = "No access points to export";
                 return;
             }
+            Services.ManufacturerDatabase.Current?.FillMissing(aps);   // APs saved before the lookup existed have none
 
             // Load each AP's full signal/GPS history + the GPS fixes. Every format that
             // records per-observation data (NS1, KismetDB, WiGLE, VS1/VSZ, GPS tracks in

@@ -44,6 +44,7 @@ public static partial class MauiProgram
         services.AddSingleton<IImportService,    ImportService>();
         services.AddSingleton<AppUpdater>();
         services.AddSingleton<WifiDbUploadQueue>();
+        services.AddSingleton<ManufacturerDatabase>();
 
         // Platform WiFi scanner registered in platform-specific startup
         RegisterPlatformServices(services);
@@ -55,6 +56,7 @@ public static partial class MauiProgram
         services.AddTransient<ImportViewModel>();
         services.AddTransient<ExportViewModel>();
         services.AddTransient<WifiDbUploadViewModel>();
+        services.AddTransient<GpsDetailsViewModel>();
         services.AddTransient<ApDetailsViewModel>();
         services.AddTransient<SessionChooserViewModel>();
         services.AddTransient<ChannelGraphViewModel>();
@@ -70,6 +72,7 @@ public static partial class MauiProgram
         services.AddTransient<ExportPage>();
         services.AddTransient<WifiDbScanPage>();
         services.AddTransient<WifiDbUploadPage>();
+        services.AddTransient<GpsDetailsPage>();
         services.AddTransient<ApDetailsPage>();
 
         Debug.WriteLine("[MauiProgram] CreateMauiApp EXIT (build)");

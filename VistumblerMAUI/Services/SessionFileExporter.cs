@@ -14,6 +14,7 @@ public static class SessionFileExporter
         await db.InitializeAsync();
         var aps = await db.GetAllAccessPointsAsync();
         if (aps.Count == 0) return 0;
+        ManufacturerDatabase.Current?.FillMissing(aps);   // APs saved before the lookup existed have none
 
         foreach (var ap in aps)
             ap.SignalHistory = await db.GetSignalHistoryAsync(ap.ApId);

@@ -95,7 +95,7 @@ public partial class AccessPoint : ObservableObject
 
     /// <summary>GPS position as "lat, lon" (5 dp), or empty when unknown.</summary>
     public string GpsText => HasGps
-        ? $"{Latitude!.Value:F5}, {Longitude!.Value:F5}"
+        ? GpsFormatter.ToText(Latitude!.Value, Longitude!.Value)
         : string.Empty;
 
     /// <summary>Friendly authentication name (Vistumbler-style, e.g. "WPA2-Personal").</summary>

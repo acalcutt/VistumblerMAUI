@@ -28,6 +28,13 @@
                     Margin="16,16,16,4"
                     HorizontalOptions="Fill" />
 
+            <Button Text="Import a folder…"
+                    Command="{Binding ImportFolderCommand}"
+                    Margin="16,4"
+                    HorizontalOptions="Fill" />
+            <Label Text="Imports every file of the chosen type in a folder (not its subfolders)."
+                   FontSize="11" TextColor="Gray" Margin="16,0,16,4" />
+
             <Button Text="Cancel"
                     Command="{Binding CancelCommand}"
                     Margin="16,0,16,8"

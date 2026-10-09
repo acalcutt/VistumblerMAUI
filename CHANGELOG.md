@@ -2,7 +2,17 @@
 
 ## master
 ### ✨ Features and improvements
-- _...Add new stuff here..._
+- **Start scanning and GPS when the app opens (Settings → Scanning)** — the original's "Auto Scan APs on launch", plus the same for GPS. Both off by default.
+- **Choose the Wi-Fi adapter on Windows (Settings → Scanning)** — the original's Interface menu: scan with one adapter, or all of them (the default).
+- **Coordinate format (Settings → GPS)** — coordinates can be shown as decimal degrees (the default), or in the original's three styles: `dd.dddd` (N 48.1173000), `ddmm.mmmm` (N 4807.0380) and `dd mm ss` (N 48° 7' 2.28").
+- **Copy an AP's details** — Copy on the AP details page copies all its details, or just the BSSID, SSID or GPS position, like the original's Copy.
+- **Links (menu)** — the Vistumbler website, wiki and forum, the VistumblerMAUI source code, and the WifiDB website and live AP page, as in the original's Help and WifiDB menus. Donate and Store are there too, except in the Google Play build.
+- **Manufacturers for scanned APs** — the Manufacturer column now fills in while scanning, from the first three bytes of each BSSID, instead of only for imported files. A list of about 40,000 manufacturers (IEEE's) comes with the app, so it works offline from the first scan, and **Update manufacturers** in Settings → Data downloads IEEE's current list, like the original's Update Manufacturers and VistumblerCS's. Saved sessions, imports and exports get names filled in too.
+- **Sounds** — the original's sounds now play: new_ap.wav when new APs are found (once per scan, once per new AP, or once per AP louder for a stronger signal), and error.wav when the GPS receiver has a problem (at most every 30 seconds). Settings → Sound. The "Sound alerts" switch was there before but nothing played.
+- **Speak signal** — on an AP's details page, **Speak signal while scanning** says its signal every few seconds, with the device's voice or the original's recorded words, so you can walk towards an AP without watching the screen. Voice, interval and "percent" are in Settings → Sound.
+- **Import a folder** — the Import page can import every file of the chosen type in a folder, like the original's Import Folder. On Android the folder comes from the system picker.
+- **Look an AP up in WifiDB** — WifiDB on an AP's details page shows what WifiDB has for it (first and last seen, best signal, position), with a link to its WifiDB page. The original's Locate in WifiDB posted to an API that no longer answers this; this uses WifiDB's search.
+- **GPS details (menu)** — the original's GPS Details and GPS Compass windows on one page: position, altitude, satellites, accuracy, speed, heading, fix quality and time, and a compass pointing along your direction of travel.
 
 ### 🐞 Bug fixes
 - _...Add new stuff here..._

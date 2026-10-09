@@ -74,6 +74,27 @@ internal static class SafStorage
         return doc.ToString()!;
     }
 
+    /// <summary>The files directly in a picked folder (not in its subfolders), as (name, document URI).</summary>
+    public static List<(string Name, string Location)> ListFiles(string treeUri)
+    {
+        var tree = AndroidUri.Parse(treeUri)!;
+        var children = DocumentsContract.BuildChildDocumentsUriUsingTree(tree, DocumentsContract.GetTreeDocumentId(tree))!;
+        var files = new List<(string, string)>();
+        using var cursor = Resolver.Query(children, new[]
+        {
+            DocumentsContract.Document.ColumnDocumentId,
+            DocumentsContract.Document.ColumnDisplayName,
+            DocumentsContract.Document.ColumnMimeType,
+        }, null, null, null);
+        while (cursor is not null && cursor.MoveToNext())
+        {
+            if (cursor.GetString(2) == DocumentsContract.Document.MimeTypeDir) continue;
+            var doc = DocumentsContract.BuildDocumentUriUsingTree(tree, cursor.GetString(0))!;
+            files.Add((cursor.GetString(1) ?? "", doc.ToString()!));
+        }
+        return files;
+    }
+
     public static Stream OpenRead(string documentUri) =>
         Resolver.OpenInputStream(AndroidUri.Parse(documentUri)!) ?? throw new IOException("Couldn't open the saved file.");
 

@@ -37,6 +37,8 @@
     <!-- Hidden where there's nothing to check, e.g. the Google Play build, which Play updates -->
     <MenuItem Text="Check for Updates…" Clicked="OnCheckForUpdatesClicked"
               Shell.FlyoutItemIsVisible="{x:Static services:AppUpdater.IsSupported}" />
+    <MenuItem Text="GPS details"    Clicked="OnGpsDetailsClicked" />
+    <MenuItem Text="Links…"         Clicked="OnLinksClicked" />
     <MenuItem Text="Exit (Save DB)" Clicked="OnExitSaveClicked" />
     <MenuItem Text="Exit"           Clicked="OnExitDiscardClicked" />
 

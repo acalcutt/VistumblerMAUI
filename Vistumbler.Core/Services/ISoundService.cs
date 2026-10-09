@@ -1,12 +1,22 @@
 namespace Vistumbler.Core.Services;
 
 /// <summary>
-/// Plays notification sounds (new AP discovered, specific SSID matched, etc.)
-/// Uses Plugin.Maui.Audio cross-platform.
+/// Plays the original Vistumbler's sounds: the new-AP sound, the error sound, and speaking an AP's signal.
 /// </summary>
 public interface ISoundService
 {
+    /// <summary>Whether the new-AP sound plays (Settings → Sound).</summary>
     bool SoundEnabled { get; set; }
-    Task PlayNewNetworkAsync();
-    Task PlayConnectedNetworkAsync();
+
+    /// <summary>
+    /// Plays the new-AP sound for one scan cycle's newly found APs, given their signals (0-100): once for the
+    /// cycle, or once per AP, optionally at a volume that follows its signal, depending on the settings.
+    /// </summary>
+    Task PlayNewNetworksAsync(IReadOnlyList<int> signals);
+
+    /// <summary>Plays the error sound, e.g. when a GPS receiver stops sending data.</summary>
+    Task PlayErrorAsync();
+
+    /// <summary>Speaks a signal value (0-100), with text to speech or the original's recorded words.</summary>
+    Task SpeakSignalAsync(int signal);
 }
