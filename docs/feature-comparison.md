@@ -1,3 +1,4 @@
+| Cell towers and Bluetooth/BLE devices, in their own list | n/a | ➕ Android; in WiGLE CSV, and in VS1 as `#RADIO` lines |
 | GeoJSON (APs, and a signal map of every reading, with WifiDB's property names) | n/a | n/a / ➕ |
 | KML signal map (every reading, coloured by RSSI) | n/a | n/a / ➕ also per AP, from its live map |
 | Indoor site survey on a floor plan (tap-to-mark, heatmap) | n/a | ➕ Site survey in the menu; PNG and CSV export |
