@@ -100,6 +100,7 @@ Legend: ✅ has it · 🟡 partly, or done differently · ❌ missing · ➕ new
 | Find GPS position from WifiDB, update geolocations | ✓ experimental | ❌ |
 | Open the live AP page, the WifiDB website, the PHP graph | ✓ | 🟡 Links menu opens the website and live page; no PHP graph |
 | Account set up by QR code or registration link | n/a | ➕ |
+| Also upload to WiGLE (optional, off by default) | n/a | ➕ Wi-Fi, cells and Bluetooth as WiGLE CSV, from the Upload page and Save & Clear |
 
 ## Everything else
 
