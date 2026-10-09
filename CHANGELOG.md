@@ -7,7 +7,7 @@
 - **Optional uploads to WiGLE (Settings → WiGLE)** — off by default and secondary to WifiDB: turned on, with the API name and token from your WiGLE account, the Upload page can also send the session to WiGLE, and each Save & Clear can too. Uploads are WiGLE CSV with the Wi-Fi, cell tower and Bluetooth records, as WiGLE's own client sends them; a save that can't go yet waits and is retried, apart from the WifiDB queue. Turning it on shows WiGLE's terms, and WiGLE's "donate for commercial use" is a separate choice, off by default.
 
 ### 🐞 Bug fixes
-- _...Add new stuff here..._
+- **The current Vistumbler logo on Windows** — the taskbar and program icon still showed an old placeholder design.
 
 ## 0.8.0
 ### ✨ Features and improvements
