@@ -2,6 +2,13 @@
 
 ## master
 ### ✨ Features and improvements
+- _...Add new stuff here..._
+
+### 🐞 Bug fixes
+- _...Add new stuff here..._
+
+## 0.9.0
+### ✨ Features and improvements
 - **Cells and Bluetooth in VS1 as a section of their own (VS1 4.1)** — instead of 0.8.0's `#RADIO` comment lines, a VS1 file with cell towers or Bluetooth devices is version 4.1 and lists them after the APs as 10-field lines (`Type|Key|Name|Capabilities|Channel|Frequency|MfgrId|Manufacturer|High RSSI|GID,RSSI`), whose readings point at the GPS lines as the APs' do. VS1 readers tell lines apart by their field count, so older versions of Vistumbler skip them; a file without cells or Bluetooth is still 4.0.
 - **Languages (Settings → Language)** — the app can now be shown in another language, the device's by default. The whole app is translated into 17 languages: Bulgarian, Chinese (Traditional), Czech, Danish, Dutch, French, German, Greek, Italian, Japanese, Norwegian, Polish, Portuguese (Brazil), Russian, Spanish, Swedish and Turkish. Translations start from the ones users contributed to the original Vistumbler. Machine-translated drafts fill in the rest, and each draft is marked for review in the language's file.
 - **Optional uploads to WiGLE (Settings → WiGLE)** — off by default and secondary to WifiDB: turned on, with the API name and token from your WiGLE account, the Upload page can also send the session to WiGLE, and each Save & Clear can too. Uploads are WiGLE CSV with the Wi-Fi, cell tower and Bluetooth records, as WiGLE's own client sends them; a save that can't go yet waits and is retried, apart from the WifiDB queue. Turning it on shows WiGLE's terms, and WiGLE's "donate for commercial use" is a separate choice, off by default.
