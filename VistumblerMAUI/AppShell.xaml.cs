@@ -36,6 +36,7 @@ public partial class AppShell : Shell
         Loaded -= OnFirstLoaded;
         // Retry WifiDB uploads left over from earlier saves, now and whenever the connection comes back
         _services.GetRequiredService<WifiDbUploadQueue>().Start();
+        _services.GetRequiredService<WigleUploadQueue>().Start();   // the same for WiGLE, when it's turned on
         // The original's "Auto Scan APs on launch", plus the same for GPS (Settings → Scanning)
         await _services.GetRequiredService<ScanViewModel>().StartOnLaunchAsync();
         // Once the session (resumed automatically or not) has run a few seconds without crashing, an automatic

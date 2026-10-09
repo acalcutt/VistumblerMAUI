@@ -22,6 +22,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
     private readonly Services.IKeepAliveService _keepAlive;
     private readonly IExportService      _export;
     private readonly Services.WifiDbUploadQueue _uploadQueue;
+    private readonly Services.WigleUploadQueue _wigleQueue;
     private readonly Services.ManufacturerDatabase _manufacturers;
 
     // Serializes a scan cycle's database write with clearing the session (Clear All, Save & Clear), so a
@@ -122,6 +123,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         Services.IKeepAliveService keepAlive,
         IExportService      export,
         Services.WifiDbUploadQueue uploadQueue,
+        Services.WigleUploadQueue wigleQueue,
         Services.ManufacturerDatabase manufacturers,
         IRadioScannerService radio)
     {
@@ -132,6 +134,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         _keepAlive = keepAlive;
         _export    = export;
         _uploadQueue = uploadQueue;
+        _wigleQueue  = wigleQueue;
         _manufacturers = manufacturers;
         InitRadio(radio);   // cell towers and Bluetooth (ScanViewModel.Radio.cs)
         _manufacturers.Changed += (_, _) => MainThread.BeginInvokeOnMainThread(RefreshManufacturers);
@@ -247,6 +250,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
             // The saved file's location: a path, or a content:// URI in a folder picked on Android
             string path;
             int count = 0;
+            bool wigleQueued = false;
             var fileName = Services.SaveAndClearSettings.BuildFileName(DateTime.Now);
             await _persistLock.WaitAsync();
             try
@@ -257,6 +261,20 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
                 if (saved is null || count == 0)
                     return new(null, 0, "No access points to save");
                 path = saved;
+
+                // WiGLE (optional): its CSV has to be written now, before the session is cleared
+                if (Services.WigleSettings.Enabled && Services.WigleSettings.UploadEachSave)
+                {
+                    try
+                    {
+                        if (await Services.WigleUploader.WriteSessionAsync(_db, _export, Services.WigleUploadQueue.NewPath()) > 0)
+                            wigleQueued = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        Services.DebugLog.Write($"[SaveAndClear] couldn't write the WiGLE file: {ex.Message}");
+                    }
+                }
 
                 await _db.ClearAllAccessPointsAsync();
                 _lastSaveAndClear = DateTime.UtcNow;
@@ -286,6 +304,16 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
                 else
                     _ = upload;   // an automatic save doesn't wait; the status line reports the outcome
             }
+            if (wigleQueued)
+            {
+                // After WifiDB, which stays the main destination; queued, so it's retried if it can't go now
+                _wigleQueue.Added();
+                var wigle = UploadWigleAsync();
+                if (waitForUpload)
+                    message += $"\n{await wigle}";
+                else
+                    _ = wigle;
+            }
             return new(path, count, message);
         }
         finally
@@ -302,6 +330,17 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         var outcome = _uploadQueue.Contains(path)
             ? $"Not uploaded to WifiDB yet ({_uploadQueue.ErrorFor(path) ?? "queued"}); it will be retried"
             : "Uploaded to WifiDB";
+        await MainThread.InvokeOnMainThreadAsync(() => StatusMessage = outcome);
+        return outcome;
+    }
+
+    /// <summary>Works through the WiGLE upload queue and describes how it went.</summary>
+    private async Task<string> UploadWigleAsync()
+    {
+        await _wigleQueue.ProcessAsync(waitForRunning: true);
+        var outcome = _wigleQueue.Count > 0
+            ? $"Not uploaded to WiGLE yet ({_wigleQueue.LastError ?? "queued"}); it will be retried"
+            : "Uploaded to WiGLE";
         await MainThread.InvokeOnMainThreadAsync(() => StatusMessage = outcome);
         return outcome;
     }

@@ -45,6 +45,7 @@ public static partial class MauiProgram
         services.AddSingleton<IImportService,    ImportService>();
         services.AddSingleton<AppUpdater>();
         services.AddSingleton<WifiDbUploadQueue>();
+        services.AddSingleton<WigleUploadQueue>();   // optional, off by default (Settings → WiGLE)
         services.AddSingleton<ManufacturerDatabase>();
 
         // Platform WiFi scanner registered in platform-specific startup

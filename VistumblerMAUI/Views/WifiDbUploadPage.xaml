@@ -40,6 +40,12 @@
                 <Picker Grid.Row="3" Grid.Column="1" ItemsSource="{Binding Formats}" SelectedItem="{Binding SelectedFormat}" />
             </Grid>
 
+            <!-- WiGLE, optional: only when turned on in Settings → WiGLE -->
+            <Grid ColumnDefinitions="Auto,*" Padding="16,4" ColumnSpacing="8" IsVisible="{Binding ShowWigle}">
+                <CheckBox Grid.Column="0" IsChecked="{Binding AlsoWigle}" VerticalOptions="Center" />
+                <Label Grid.Column="1" Text="{Binding WigleText}" FontSize="13" VerticalOptions="Center" />
+            </Grid>
+
             <Button Text="Upload" Command="{Binding UploadCommand}" Margin="16,8" HorizontalOptions="Fill" />
             <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Margin="16,0" />
             <Label Text="{Binding StatusMessage}" Margin="16,8" />

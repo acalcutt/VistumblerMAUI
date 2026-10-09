@@ -208,6 +208,53 @@
                    FontSize="12" TextColor="Gray" Margin="16,0,16,4" />
             <BoxView HeightRequest="1" Color="#EEEEEE" Margin="16,4" />
 
+            <!-- WiGLE: optional, secondary to WifiDB, off by default (SettingsViewModel.Wigle.cs) -->
+            <Label Text="WIGLE (OPTIONAL)" Style="{StaticResource SectionHeader}" />
+            <Grid ColumnDefinitions="*,Auto" Padding="16,4" ColumnSpacing="8">
+                <VerticalStackLayout Grid.Column="0" VerticalOptions="Center">
+                    <Label Text="Also upload to WiGLE" />
+                    <Label Text="Optional, alongside WifiDB. Sends Wi-Fi, cell towers and Bluetooth as a WiGLE CSV."
+                           FontSize="11" TextColor="Gray" />
+                </VerticalStackLayout>
+                <Switch Grid.Column="1" IsToggled="{Binding WigleEnabled}" />
+            </Grid>
+            <VerticalStackLayout IsVisible="{Binding WigleEnabled}" Spacing="4">
+                <Label Text="{Binding WigleTerms}" FontSize="12" TextColor="#795548" Margin="16,4,16,0" />
+                <Button Text="Read WiGLE's terms of use" Command="{Binding OpenWigleTermsCommand}"
+                        Margin="16,0" HorizontalOptions="Start" Padding="0" HeightRequest="32"
+                        BackgroundColor="Transparent" TextColor="#1565C0" FontSize="13" />
+                <Grid ColumnDefinitions="Auto,*" Padding="16,4" ColumnSpacing="12" RowSpacing="8" RowDefinitions="Auto,Auto">
+                    <Label Grid.Row="0" Grid.Column="0" Text="API name" VerticalOptions="Center" />
+                    <Entry Grid.Row="0" Grid.Column="1" Text="{Binding WigleApiName}" Placeholder="AID…" />
+                    <Label Grid.Row="1" Grid.Column="0" Text="API token" VerticalOptions="Center" />
+                    <Entry Grid.Row="1" Grid.Column="1" Text="{Binding WigleApiToken}" Placeholder="API token" IsPassword="True" />
+                </Grid>
+                <Button Text="Get my API name and token (wigle.net)" Command="{Binding OpenWigleAccountCommand}"
+                        Margin="16,0" HorizontalOptions="Start" Padding="0" HeightRequest="32"
+                        BackgroundColor="Transparent" TextColor="#1565C0" FontSize="13" />
+                <Grid ColumnDefinitions="*,Auto" Padding="16,4" ColumnSpacing="8">
+                    <Label Grid.Column="0" Text="Upload each Save &amp; Clear to WiGLE" VerticalOptions="Center" />
+                    <Switch Grid.Column="1" IsToggled="{Binding WigleUploadEachSave}" />
+                </Grid>
+                <Grid ColumnDefinitions="*,Auto" Padding="16,4" ColumnSpacing="8">
+                    <VerticalStackLayout Grid.Column="0" VerticalOptions="Center">
+                        <Label Text="Donate for commercial use" />
+                        <Label Text="Lets WiGLE also license your uploads commercially (WiGLE's &quot;donate&quot;)."
+                               FontSize="11" TextColor="Gray" />
+                    </VerticalStackLayout>
+                    <Switch Grid.Column="1" IsToggled="{Binding WigleDonate}" />
+                </Grid>
+                <VerticalStackLayout IsVisible="{Binding HasPendingWigle}" Margin="16,4" Spacing="4">
+                    <Label Text="{Binding PendingWigleText}" FontSize="12" TextColor="#C62828" />
+                    <HorizontalStackLayout Spacing="8">
+                        <Button Text="Retry now" Command="{Binding RetryWigleCommand}" Padding="12,0" HeightRequest="36" />
+                        <Button Text="Stop" Command="{Binding ClearWigleCommand}" Padding="12,0" HeightRequest="36"
+                                BackgroundColor="Transparent" TextColor="Gray" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+            <BoxView HeightRequest="1" Color="#EEEEEE" Margin="16,4" />
+
             <!-- Save & Clear -->
             <Label Text="SAVE &amp; CLEAR" Style="{StaticResource SectionHeader}" />
             <Label Margin="16,0,16,4" FontSize="12" TextColor="Gray"

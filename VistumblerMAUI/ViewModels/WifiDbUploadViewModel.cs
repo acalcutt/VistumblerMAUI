@@ -27,6 +27,13 @@ public partial class WifiDbUploadViewModel : ObservableObject
 
     public bool CanCheckStatus => !string.IsNullOrEmpty(FileHash) && !IsBusy;
 
+    // WiGLE, optional (Settings → WiGLE): offered only when it's turned on, and ticked when it has an account
+    public bool ShowWigle => WigleSettings.Enabled;
+    [ObservableProperty] private bool _alsoWigle = WigleSettings.Ready;
+    public string WigleText => WigleSettings.HasAccount
+        ? "Also upload to WiGLE (Wi-Fi, cell towers and Bluetooth)"
+        : "Also upload to WiGLE: set its API name and token in Settings → WiGLE first";
+
     // The account comes from Settings → WifiDB. WifiDB needs a username to import (with the API key when the
     // account requires one), so without one the page points to Settings instead of offering the upload.
     public bool HasAccount => !string.IsNullOrWhiteSpace(WifiDbSettings.User);
@@ -42,6 +49,8 @@ public partial class WifiDbUploadViewModel : ObservableObject
         OnPropertyChanged(nameof(HasAccount));
         OnPropertyChanged(nameof(NeedsAccount));
         OnPropertyChanged(nameof(AccountText));
+        OnPropertyChanged(nameof(ShowWigle));
+        OnPropertyChanged(nameof(WigleText));
         UploadCommand.NotifyCanExecuteChanged();
     }
 
@@ -93,6 +102,9 @@ public partial class WifiDbUploadViewModel : ObservableObject
             {
                 StatusMessage = result.Message;
             }
+
+            if (ShowWigle && AlsoWigle && WigleSettings.HasAccount)
+                StatusMessage += "\n" + await UploadToWigleAsync();
         }
         catch (Exception ex)
         {
@@ -102,6 +114,24 @@ public partial class WifiDbUploadViewModel : ObservableObject
         {
             try { File.Delete(path); } catch { /* temporary copy */ }
             IsBusy = false;
+        }
+    }
+
+    /// <summary>The same session as a gzipped WiGLE CSV, with its cell towers and Bluetooth devices, sent to WiGLE.</summary>
+    private async Task<string> UploadToWigleAsync()
+    {
+        var gz = Path.Combine(FileSystem.CacheDirectory, $"WigleWifi_{DateTime.Now:yyyyMMddHHmmss}.csv.gz");
+        try
+        {
+            StatusMessage += "\nUploading to WiGLE…";
+            if (await WigleUploader.WriteSessionAsync(_db, _export, gz) == 0) return "Nothing to upload to WiGLE.";
+            var result = await WigleUploader.UploadAsync(gz);
+            StatusMessage = StatusMessage.Replace("\nUploading to WiGLE…", "");
+            return result.Message;
+        }
+        finally
+        {
+            try { File.Delete(gz); } catch { /* temporary copy */ }
         }
     }
 
