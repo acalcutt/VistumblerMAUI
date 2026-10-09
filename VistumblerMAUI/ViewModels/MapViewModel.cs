@@ -42,7 +42,7 @@ public partial class MapViewModel : ObservableObject
     // True while MapLibre is forced offline (serving only cached tiles). Drives the
     // "Save Area / Go Offline·Go Online" toolbar items on MapPage.
     [ObservableProperty] private bool _isOffline;
-    public string OfflineToggleLabel => IsOffline ? "Go Online" : "Go Offline";
+    public string OfflineToggleLabel => IsOffline ? "Saved maps only ✓" : "Saved maps only";
     partial void OnIsOfflineChanged(bool value) => OnPropertyChanged(nameof(OfflineToggleLabel));
 
     // Live-scan circle paint. Color is per-sectype (open/WEP/secure) AND active/dead:
@@ -520,6 +520,11 @@ public partial class MapViewModel : ObservableObject
             StatusMessage = "Map not ready — wait for the style to load";
             return;
         }
+        if (!await Shell.Current.DisplayAlertAsync("Save map for offline use",
+                "Download the map you're looking at, plus two closer zoom levels, so it still shows without an " +
+                "internet connection? Then turn on \"Saved maps only\" to use just the saved maps. A large area " +
+                "can take a while and use a lot of data.", "Download", "Cancel"))
+            return;
 
         try
         {
