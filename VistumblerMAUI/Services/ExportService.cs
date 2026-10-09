@@ -437,13 +437,13 @@ public class ExportService : IExportService
 
         await writer.WriteStartElementAsync(null, "essid", null);
         await writer.WriteAttributeStringAsync(null, "cloaked", null, string.IsNullOrEmpty(ap.Ssid) ? "true" : "false");
-        await writer.WriteStringAsync(ap.Ssid);
+        await writer.WriteStringAsync(XmlText(ap.Ssid));
         await writer.WriteEndElementAsync(); // essid
 
         await writer.WriteEndElementAsync(); // SSID
 
         await writer.WriteElementStringAsync(null, "BSSID", null, ap.Bssid);
-        await writer.WriteElementStringAsync(null, "manuf", null, ap.Manufacturer);
+        await writer.WriteElementStringAsync(null, "manuf", null, XmlText(ap.Manufacturer));
         await writer.WriteElementStringAsync(null, "channel", null, ap.Channel.ToString());
         await writer.WriteElementStringAsync(null, "freqmhz", null, $"{GetFreqFromChannel(ap.Channel)} 0");
         await writer.WriteElementStringAsync(null, "maxseenrate", null, "54");
@@ -608,7 +608,7 @@ public class ExportService : IExportService
             await writer.WriteAttributeStringAsync(null, "lat", null, ap.Latitude!.Value.ToString("F6"));
             await writer.WriteAttributeStringAsync(null, "lon", null, ap.Longitude!.Value.ToString("F6"));
 
-            await writer.WriteElementStringAsync(null, "name", null, ap.Ssid);
+            await writer.WriteElementStringAsync(null, "name", null, XmlText(ap.Ssid));
             await writer.WriteElementStringAsync(null, "desc", null,
                 $"BSSID: {ap.Bssid}, Signal: {ap.Signal}%, Channel: {ap.Channel}");
 
@@ -816,8 +816,7 @@ public class ExportService : IExportService
         // AP section (15 fields each). The 15th field is the GID,SIG,RSSI history, '\'-joined.
         foreach (var ap in accessPoints)
         {
-            int secType = ap.Authentication == AuthenticationType.Open
-                ? 1 : (ap.Encryption == EncryptionType.WEP ? 2 : 3);
+            int secType = ApFilter.SecurityType(ap);   // WEP reports Open authentication; told by its encryption
 
             var history = string.Join('\\', ap.SignalHistory
                 .Where(h => h.GpsId > 0)
@@ -929,7 +928,7 @@ public class ExportService : IExportService
     {
         await writer.WriteStartElementAsync(null, "Placemark", null);
 
-        await writer.WriteElementStringAsync(null, "name", null, string.IsNullOrEmpty(ap.Ssid) ? ap.Bssid : ap.Ssid);
+        await writer.WriteElementStringAsync(null, "name", null, string.IsNullOrEmpty(ap.Ssid) ? ap.Bssid : XmlText(ap.Ssid));
 
         var description = $"BSSID: {ap.Bssid}\n" +
                          $"Channel: {ap.Channel}\n" +
@@ -939,7 +938,7 @@ public class ExportService : IExportService
                          $"Encryption: {ap.Encryption}\n" +
                          $"Manufacturer: {ap.Manufacturer}";
 
-        await writer.WriteElementStringAsync(null, "description", null, description);
+        await writer.WriteElementStringAsync(null, "description", null, XmlText(description));
 
         if (options.UseSignalColors)
         {
@@ -978,5 +977,23 @@ public class ExportService : IExportService
         }
 
         return value;
+    }
+
+    /// <summary>
+    /// Text safe for an XML document: drops characters XML can't hold (XmlWriter throws on them), such as the
+    /// runs of \0 hidden networks often broadcast as their SSID. Without this one such AP failed the whole export.
+    /// </summary>
+    private static string XmlText(string? text)
+    {
+        if (string.IsNullOrEmpty(text)) return string.Empty;
+        var sb = new StringBuilder(text.Length);
+        for (int i = 0; i < text.Length; i++)
+        {
+            char c = text[i];
+            if (XmlConvert.IsXmlChar(c)) sb.Append(c);
+            // Emoji and other characters outside the BMP are a surrogate pair; keep whole pairs
+            else if (i + 1 < text.Length && XmlConvert.IsXmlSurrogatePair(text[i + 1], c)) { sb.Append(c).Append(text[i + 1]); i++; }
+        }
+        return sb.ToString();
     }
 }

@@ -836,32 +836,58 @@ public partial class MapViewModel : ObservableObject
 
     // ── Helpers ───────────────────────────────────────────────────────────────
 
+    // Written with Utf8JsonWriter rather than string pasting: SSIDs can hold control characters (hidden networks
+    // often broadcast runs of \0), which hand-escaping missed, and on a phone set to a comma-decimal language
+    // "{lon:F6}" wrote "11,516670". Either made the whole FeatureCollection invalid, and with it every live dot
+    // vanished; the longer a scan ran, the likelier such an AP was to turn up.
     private static string BuildGeoJson(List<AccessPoint> aps)
     {
         if (aps.Count == 0) return EmptyGeoJson;
-        var features = aps.Select(ap =>
+        using var buffer = new MemoryStream();
+        using (var w = new Utf8JsonWriter(buffer))
         {
-            var ssid   = ap.Ssid?.Replace("\\", "\\\\").Replace("\"", "\\\"") ?? "";
-            var bssid  = ap.Bssid?.Replace("\"", "\\\"") ?? "";
-            var auth   = ap.AuthText.Replace("\"", "\\\"");
-            var encry  = ap.EncryptionText.Replace("\"", "\\\"");
-            var radio  = (ap.RadioType ?? "").Replace("\"", "\\\"");
-            var manuf  = ap.Manufacturer?.Replace("\\", "\\\\").Replace("\"", "\\\"") ?? "";
-            var active = ap.IsActive ? "true" : "false";
-            // sectype 1=open, 2=WEP, 3=secure; styidx folds active/dead + sectype into a
-            // single 1..6 value the live layer colors from (active 1/2/3, dead 4/5/6).
-            int sectype = ap.Authentication == AuthenticationType.Open
-                ? 1 : (ap.Encryption == EncryptionType.WEP ? 2 : 3);
-            int styidx  = ap.IsActive ? sectype : sectype + 3;
-            return $"{{\"type\":\"Feature\","
-                 + $"\"geometry\":{{\"type\":\"Point\",\"coordinates\":[{ap.Longitude:F6},{ap.Latitude:F6}]}},"
-                 + $"\"properties\":{{\"ssid\":\"{ssid}\",\"bssid\":\"{bssid}\","
-                 + $"\"auth\":\"{auth}\",\"encry\":\"{encry}\",\"radio\":\"{radio}\","
-                 + $"\"manuf\":\"{manuf}\",\"rssi\":{ap.Rssi ?? 0},"
-                 + $"\"signal\":{ap.Signal ?? 0},\"channel\":{ap.Channel},\"isActive\":{active},"
-                 + $"\"sectype\":{sectype},\"styidx\":{styidx}}}}}";
-        });
-        return $"{{\"type\":\"FeatureCollection\",\"features\":[{string.Join(",", features)}]}}";
+            w.WriteStartObject();
+            w.WriteString("type", "FeatureCollection");
+            w.WriteStartArray("features");
+            foreach (var ap in aps)
+            {
+                if (ap.Longitude is not { } lon || ap.Latitude is not { } lat ||
+                    !double.IsFinite(lon) || !double.IsFinite(lat)) continue;
+                // sectype 1=open, 2=WEP, 3=secure; styidx folds active/dead + sectype into a
+                // single 1..6 value the live layer colors from (active 1/2/3, dead 4/5/6).
+                // WEP networks report Open authentication, so WEP is told by its encryption (the original's SecType)
+                int sectype = Services.ApFilter.SecurityType(ap);
+                int styidx  = ap.IsActive ? sectype : sectype + 3;
+
+                w.WriteStartObject();
+                w.WriteString("type", "Feature");
+                w.WriteStartObject("geometry");
+                w.WriteString("type", "Point");
+                w.WriteStartArray("coordinates");
+                w.WriteNumberValue(Math.Round(lon, 6));
+                w.WriteNumberValue(Math.Round(lat, 6));
+                w.WriteEndArray();
+                w.WriteEndObject();
+                w.WriteStartObject("properties");
+                w.WriteString("ssid", ap.Ssid ?? "");
+                w.WriteString("bssid", ap.Bssid ?? "");
+                w.WriteString("auth", ap.AuthText);
+                w.WriteString("encry", ap.EncryptionText);
+                w.WriteString("radio", ap.RadioType ?? "");
+                w.WriteString("manuf", ap.Manufacturer ?? "");
+                w.WriteNumber("rssi", ap.Rssi ?? 0);
+                w.WriteNumber("signal", ap.Signal ?? 0);
+                w.WriteNumber("channel", ap.Channel);
+                w.WriteBoolean("isActive", ap.IsActive);
+                w.WriteNumber("sectype", sectype);
+                w.WriteNumber("styidx", styidx);
+                w.WriteEndObject();
+                w.WriteEndObject();
+            }
+            w.WriteEndArray();
+            w.WriteEndObject();
+        }
+        return System.Text.Encoding.UTF8.GetString(buffer.GetBuffer(), 0, (int)buffer.Length);
     }
 }
 
