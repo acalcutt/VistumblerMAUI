@@ -2059,4 +2059,24 @@
     <value>檢查匯入狀態</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
+  <data name="Settings_WigleQr" xml:space="preserve">
+    <value>使用 WiGLE QR 碼設定</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WigleScan_Title" xml:space="preserve">
+    <value>掃描 WiGLE QR</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WigleScan_PointTheCamera" xml:space="preserve">
+    <value>將相機對準 WiGLE 帳戶頁面 (wigle.net/account) 上的 QR 碼。</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WigleScan_NeedCamera" xml:space="preserve">
+    <value>掃描需要相機權限。請改為輸入 API 名稱與權杖。</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WigleScan_Saved" xml:space="preserve">
+    <value>已為 {0} 儲存 WiGLE API 名稱與權杖。</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
 </root>

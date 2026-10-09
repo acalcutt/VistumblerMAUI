@@ -550,6 +550,8 @@ public partial class SettingsViewModel : ObservableObject
         WifiDbUrl    = WifiDbSettings.Url;
         WifiDbUser   = WifiDbSettings.User;
         WifiDbApiKey = WifiDbSettings.ApiKey;
+        WigleApiName  = WigleSettings.ApiName;
+        WigleApiToken = WigleSettings.ApiToken;
     }
 
     /// <summary>Open the camera to scan a WifiDB registration QR code (mobile).</summary>

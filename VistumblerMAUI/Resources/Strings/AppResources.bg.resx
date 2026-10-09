@@ -2059,4 +2059,24 @@
     <value>Провери състоянието на импорта</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
+  <data name="Settings_WigleQr" xml:space="preserve">
+    <value>Настройка с QR код на WiGLE</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WigleScan_Title" xml:space="preserve">
+    <value>Сканирай WiGLE QR</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WigleScan_PointTheCamera" xml:space="preserve">
+    <value>Насочете камерата към QR кода на страницата на акаунта ви в WiGLE (wigle.net/account).</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WigleScan_NeedCamera" xml:space="preserve">
+    <value>За сканиране е нужно разрешение за камера. Въведете API името и токена ръчно.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WigleScan_Saved" xml:space="preserve">
+    <value>API името и токенът на WiGLE са записани за {0}.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
 </root>

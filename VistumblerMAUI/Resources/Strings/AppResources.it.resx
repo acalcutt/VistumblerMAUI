@@ -2059,4 +2059,24 @@
     <value>Wi-Fi</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
+  <data name="Settings_WigleQr" xml:space="preserve">
+    <value>Configura con codice QR WiGLE</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WigleScan_Title" xml:space="preserve">
+    <value>Scansiona QR WiGLE</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WigleScan_PointTheCamera" xml:space="preserve">
+    <value>Inquadra con la fotocamera il codice QR nella pagina del tuo account WiGLE (wigle.net/account).</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WigleScan_NeedCamera" xml:space="preserve">
+    <value>Per la scansione serve l'autorizzazione alla fotocamera. Inserisci invece nome e token API.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WigleScan_Saved" xml:space="preserve">
+    <value>Nome e token API WiGLE salvati per {0}.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
 </root>

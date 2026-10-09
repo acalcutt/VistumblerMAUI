@@ -2059,4 +2059,24 @@
     <value>Wi-Fi</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
+  <data name="Settings_WigleQr" xml:space="preserve">
+    <value>Konfigurera med WiGLE-QR-kod</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WigleScan_Title" xml:space="preserve">
+    <value>Skanna WiGLE-QR</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WigleScan_PointTheCamera" xml:space="preserve">
+    <value>Rikta kameran mot QR-koden på din WiGLE-kontosida (wigle.net/account).</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WigleScan_NeedCamera" xml:space="preserve">
+    <value>Kamerabehörighet krävs för att skanna. Ange API-namn och token i stället.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WigleScan_Saved" xml:space="preserve">
+    <value>WiGLE API-namn och token sparade för {0}.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
 </root>

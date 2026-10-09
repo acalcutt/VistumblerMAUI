@@ -2059,4 +2059,24 @@
     <value>インポート状況を確認</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
+  <data name="Settings_WigleQr" xml:space="preserve">
+    <value>WiGLE の QR コードで設定</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WigleScan_Title" xml:space="preserve">
+    <value>WiGLE QR をスキャン</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WigleScan_PointTheCamera" xml:space="preserve">
+    <value>WiGLE のアカウントページ (wigle.net/account) の QR コードにカメラを向けてください。</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WigleScan_NeedCamera" xml:space="preserve">
+    <value>スキャンにはカメラの権限が必要です。代わりに API 名とトークンを入力してください。</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WigleScan_Saved" xml:space="preserve">
+    <value>{0} の WiGLE API 名とトークンを保存しました。</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
 </root>

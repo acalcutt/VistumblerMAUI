@@ -2059,4 +2059,24 @@
     <value>Wi-Fi</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
+  <data name="Settings_WigleQr" xml:space="preserve">
+    <value>Настроить по QR-коду WiGLE</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WigleScan_Title" xml:space="preserve">
+    <value>Сканировать QR WiGLE</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WigleScan_PointTheCamera" xml:space="preserve">
+    <value>Наведите камеру на QR-код на странице вашей учётной записи WiGLE (wigle.net/account).</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WigleScan_NeedCamera" xml:space="preserve">
+    <value>Для сканирования нужно разрешение на камеру. Введите имя и токен API вручную.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WigleScan_Saved" xml:space="preserve">
+    <value>Имя и токен API WiGLE сохранены для {0}.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
 </root>

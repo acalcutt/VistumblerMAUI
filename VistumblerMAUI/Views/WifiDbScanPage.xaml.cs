@@ -5,19 +5,28 @@ using VistumblerMAUI.Services;
 namespace VistumblerMAUI.Views;
 
 /// <summary>
-/// Camera page that scans a WifiDB registration QR code (a …/redeem_link.php?token=…
-/// URL), redeems it for the account's username/API key, persists them via
-/// <see cref="WifiDbSettings"/>, and returns to Settings. Mirrors vistumbler-android's
-/// ActivateActivity WifiDB flow. Uses BarcodeScanning.Native.Maui (native MLKit/Vision).
+/// Camera page that scans an account QR code and returns to Settings. By default it reads a WifiDB
+/// registration code (a …/redeem_link.php?token=… URL), redeems it for the account's username/API key and
+/// persists them via <see cref="WifiDbSettings"/>. With <c>?mode=wigle</c> it reads the code on the WiGLE
+/// account page ("username:apiName:apiToken") into <see cref="WigleSettings"/>. Mirrors vistumbler-android's
+/// ActivateActivity. Uses BarcodeScanning.Native.Maui (native MLKit/Vision).
 /// </summary>
-public partial class WifiDbScanPage : ContentPage
+public partial class WifiDbScanPage : ContentPage, IQueryAttributable
 {
     private static readonly HttpClient _http = new() { Timeout = TimeSpan.FromSeconds(20) };
     private bool _handled;
+    private bool _wigle;
 
     public WifiDbScanPage()
     {
         InitializeComponent();
+    }
+
+    public void ApplyQueryAttributes(IDictionary<string, object> query)
+    {
+        _wigle = query.TryGetValue("mode", out var mode) && string.Equals(mode as string, "wigle", StringComparison.OrdinalIgnoreCase);
+        Title = Loc.T(_wigle ? "WigleScan_Title" : "WifiDbScan_ScanWifiDBQR");
+        StatusLabel.Text = Loc.T(_wigle ? "WigleScan_PointTheCamera" : "WifiDbScan_PointTheCameraAtYour");
     }
 
     protected override async void OnAppearing()
@@ -32,7 +41,7 @@ public partial class WifiDbScanPage : ContentPage
         }
         else
         {
-            StatusLabel.Text = Loc.T("WifiDbScan_NeedCamera");
+            StatusLabel.Text = Loc.T(_wigle ? "WigleScan_NeedCamera" : "WifiDbScan_NeedCamera");
         }
     }
 
@@ -45,6 +54,19 @@ public partial class WifiDbScanPage : ContentPage
     private void OnDetectionFinished(object? sender, OnDetectionFinishedEventArg e)
     {
         if (_handled || e.BarcodeResults is null) return;
+
+        if (_wigle)
+        {
+            foreach (var r in e.BarcodeResults)
+            {
+                if (!WigleSettings.TryParseActivationCode(r.DisplayValue, out var user, out var apiName, out var apiToken)) continue;
+                _handled = true;
+                Camera.CameraEnabled = false;
+                MainThread.BeginInvokeOnMainThread(async () => await SaveWigleAndReturnAsync(user, apiName, apiToken));
+                return;
+            }
+            return; // keep scanning; ignore other codes
+        }
 
         string? link = null;
         foreach (var r in e.BarcodeResults)
@@ -62,6 +84,14 @@ public partial class WifiDbScanPage : ContentPage
 
         // Detection callbacks run off the UI thread — hop back before touching UI/navigation.
         MainThread.BeginInvokeOnMainThread(async () => await RedeemAndReturnAsync(link));
+    }
+
+    private async Task SaveWigleAndReturnAsync(string user, string apiName, string apiToken)
+    {
+        WigleSettings.ApiName = apiName;
+        WigleSettings.ApiToken = apiToken;
+        await DisplayAlert("WiGLE", Loc.T("WigleScan_Saved", string.IsNullOrWhiteSpace(user) ? apiName : user), "OK");
+        await Shell.Current.GoToAsync("..");
     }
 
     private async Task RedeemAndReturnAsync(string link)

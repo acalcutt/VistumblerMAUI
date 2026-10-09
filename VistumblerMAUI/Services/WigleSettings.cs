@@ -36,6 +36,24 @@ public static class WigleSettings
         set => Preferences.Set(ApiTokenKey, value?.Trim() ?? string.Empty);
     }
 
+    /// <summary>
+    /// Read the QR code on the WiGLE account page, "username:apiName:apiToken", as WiGLE's own client
+    /// (and vistumbler-android's ActivateActivity) do. The last two parts are the API name and token.
+    /// </summary>
+    public static bool TryParseActivationCode(string? text, out string user, out string apiName, out string apiToken)
+    {
+        user = apiName = apiToken = string.Empty;
+        var parts = text?.Trim().Split(':');
+        if (parts is not { Length: >= 3 }) return false;
+        apiName = parts[^2];
+        apiToken = parts[^1];
+        if (apiName.Length == 0 || apiToken.Length == 0 ||
+            !apiName.All(char.IsAsciiLetterOrDigit) || !apiToken.All(char.IsAsciiLetterOrDigit))
+            return false;
+        user = string.Join(':', parts[..^2]);
+        return true;
+    }
+
     /// <summary>WiGLE's "donate": also let WiGLE license the data for commercial use. Off unless the user chooses it.</summary>
     public static bool Donate
     {

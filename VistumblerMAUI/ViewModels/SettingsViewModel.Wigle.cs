@@ -82,6 +82,10 @@ public partial class SettingsViewModel
         RefreshPendingWigle();
     }
 
+    /// <summary>Scan the QR code on the WiGLE account page for the API name and token (Views.WifiDbScanPage, WiGLE mode).</summary>
+    [RelayCommand]
+    private static Task ScanWigleQrAsync() => Shell.Current.GoToAsync($"{nameof(Views.WifiDbScanPage)}?mode=wigle");
+
     [RelayCommand]
     private static Task OpenWigleAccountAsync() => Browser.Default.OpenAsync(WigleSettings.AccountUrl, BrowserLaunchMode.SystemPreferred);
 

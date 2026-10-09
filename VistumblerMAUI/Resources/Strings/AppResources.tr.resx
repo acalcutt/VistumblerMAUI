@@ -2059,4 +2059,24 @@
     <value>İçe aktarma durumunu denetle</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
+  <data name="Settings_WigleQr" xml:space="preserve">
+    <value>WiGLE QR koduyla ayarla</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WigleScan_Title" xml:space="preserve">
+    <value>WiGLE QR tara</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WigleScan_PointTheCamera" xml:space="preserve">
+    <value>Kamerayı WiGLE hesap sayfanızdaki QR koda doğrultun (wigle.net/account).</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WigleScan_NeedCamera" xml:space="preserve">
+    <value>Tarama için kamera izni gerekli. Bunun yerine API adını ve belirtecini girin.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WigleScan_Saved" xml:space="preserve">
+    <value>WiGLE API adı ve belirteci {0} için kaydedildi.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
 </root>

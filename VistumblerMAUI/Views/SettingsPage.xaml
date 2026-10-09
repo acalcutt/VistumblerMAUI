@@ -237,6 +237,9 @@
                     <Label Grid.Row="1" Grid.Column="0" Text="{loc:T Settings_APIToken}" VerticalOptions="Center" />
                     <Entry Grid.Row="1" Grid.Column="1" Text="{Binding WigleApiToken}" Placeholder="{loc:T Settings_APIToken}" IsPassword="True" />
                 </Grid>
+                <Button Text="{loc:T Settings_WigleQr}"
+                        Command="{Binding ScanWigleQrCommand}"
+                        Margin="16,4" HorizontalOptions="Fill" />
                 <Button Text="{loc:T Settings_GetMyAPINameAnd}" Command="{Binding OpenWigleAccountCommand}"
                         Margin="16,0" HorizontalOptions="Start" Padding="0" HeightRequest="32"
                         BackgroundColor="Transparent" TextColor="#1565C0" FontSize="13" />

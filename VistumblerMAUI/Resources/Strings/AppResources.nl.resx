@@ -2059,4 +2059,24 @@
     <value>Importstatus controleren</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
+  <data name="Settings_WigleQr" xml:space="preserve">
+    <value>Instellen met WiGLE-QR-code</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WigleScan_Title" xml:space="preserve">
+    <value>WiGLE-QR scannen</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WigleScan_PointTheCamera" xml:space="preserve">
+    <value>Richt de camera op de QR-code op je WiGLE-accountpagina (wigle.net/account).</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WigleScan_NeedCamera" xml:space="preserve">
+    <value>Voor scannen is cameratoestemming nodig. Vul in plaats daarvan de API-naam en het token in.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="WigleScan_Saved" xml:space="preserve">
+    <value>WiGLE-API-naam en token opgeslagen voor {0}.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
 </root>

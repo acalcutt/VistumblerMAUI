@@ -594,6 +594,11 @@
   <!-- WifiDbScanPage.xaml -->
   <data name="WifiDbScan_ScanWifiDBQR" xml:space="preserve"><value>Scan WifiDB QR</value></data>
   <data name="WifiDbScan_PointTheCameraAtYour" xml:space="preserve"><value>Point the camera at your WifiDB registration QR code.</value></data>
+  <data name="Settings_WigleQr" xml:space="preserve"><value>Set up with WiGLE QR code</value></data>
+  <data name="WigleScan_Title" xml:space="preserve"><value>Scan WiGLE QR</value></data>
+  <data name="WigleScan_PointTheCamera" xml:space="preserve"><value>Point the camera at the QR code on your WiGLE account page (wigle.net/account).</value></data>
+  <data name="WigleScan_NeedCamera" xml:space="preserve"><value>Camera permission is required to scan. Enter the API name and token instead.</value></data>
+  <data name="WigleScan_Saved" xml:space="preserve"><value>WiGLE API name and token saved for {0}.</value></data>
 
   <!-- WifiDbUploadPage.xaml -->
   <data name="WifiDbUpload_UploadToWifiDB" xml:space="preserve"><value>Upload to WifiDB</value></data>
