@@ -151,6 +151,11 @@ public partial class ApDetailsViewModel : ObservableObject, IQueryAttributable
         HistoryStatus = $"Copied {choice!.ToLowerInvariant()}";
     }
 
+    /// <summary>The original's KML "Selected AP" maps (signal map, signal circle, range circle), on the Map tab.</summary>
+    [RelayCommand]
+    private Task ShowOnMapAsync() =>
+        Ap is { } ap ? Shell.Current.GoToAsync($"//MapPage?apmap={Uri.EscapeDataString(ap.Bssid)}") : Task.CompletedTask;
+
     /// <summary>The original's Locate in WifiDB: what WifiDB knows about this AP, with a link to its page there.</summary>
     [RelayCommand]
     private async Task LocateInWifiDbAsync()

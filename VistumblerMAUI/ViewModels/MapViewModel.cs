@@ -457,6 +457,7 @@ public partial class MapViewModel : ObservableObject
     {
         _controller = controller;
         _addedVectorLayers.Clear();
+        _apMapDrawn = false;   // the new style has none of the AP map layers
 
         // Find out whether WifiDB's TileJSON endpoint can be reached, so the history
         // layers fall back to the archives directly if it cannot. Deliberately not
@@ -486,6 +487,9 @@ public partial class MapViewModel : ObservableObject
             if (layer.Id == "cells") AddCellLayers();
             else                     AddVectorLayer(layer);
         }
+
+        // An AP map opened from the AP details page (MapViewModel.ApMap.cs), on top of the history layers
+        DrawApMap();
     }
 
     // ── Offline map caching ───────────────────────────────────────────────────

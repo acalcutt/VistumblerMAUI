@@ -5,11 +5,19 @@ using VistumblerMAUI.ViewModels;
 
 namespace VistumblerMAUI.Views;
 
-public partial class MapPage : ContentPage
+public partial class MapPage : ContentPage, IQueryAttributable
 {
     private const string LogTag = "[MapPage]";
 
     private readonly MapViewModel _vm;
+
+    // "//MapPage?apmap=<bssid>" from the AP details page: draw that AP's signal and range maps
+    public void ApplyQueryAttributes(IDictionary<string, object> query)
+    {
+        if (query.TryGetValue("apmap", out var raw) && raw is string bssid && !string.IsNullOrWhiteSpace(bssid))
+            _ = _vm.ShowApMapAsync(Uri.UnescapeDataString(bssid));
+        query.Clear();   // so returning to the tab later doesn't draw it again
+    }
     private IDispatcherTimer? _liveTimer;   // periodic reload while the map is visible
     private bool _mapReadyFired;
     private bool _styleLoadedFired;
