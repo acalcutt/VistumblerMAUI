@@ -79,7 +79,13 @@ public sealed class ManufacturerDatabase
     /// </summary>
     public async Task<int> UpdateAsync(HttpClient http, CancellationToken ct = default)
     {
-        var text = await http.GetStringAsync(IeeeUrl, ct);
+        // IEEE answers 418 to Android's default user agent ("Dalvik/2.1.0 …"), so name the app instead
+        using var request = new HttpRequestMessage(HttpMethod.Get, IeeeUrl);
+        request.Headers.UserAgent.ParseAdd($"VistumblerMAUI/{AppUpdater.CurrentVersion}");
+        request.Headers.UserAgent.ParseAdd("(+https://gitlab.techidiots.net/techidiots-llc/VistumblerMAUI)");
+        using var response = await http.SendAsync(request, ct);
+        response.EnsureSuccessStatusCode();
+        var text = await response.Content.ReadAsStringAsync(ct);
         var entries = ParseIeee(text);
         if (entries.Count < 1000)
             throw new InvalidDataException($"IEEE's list had only {entries.Count} entries; keeping the current one.");
