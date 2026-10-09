@@ -3,6 +3,7 @@ using BarcodeScanning;
 using CommunityToolkit.Maui;
 using MapLibreNative.Maui.Handlers;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Vistumbler.Core.Services;
 using VistumblerMAUI.Services;
 using VistumblerMAUI.ViewModels;
@@ -48,6 +49,8 @@ public static partial class MauiProgram
 
         // Platform WiFi scanner registered in platform-specific startup
         RegisterPlatformServices(services);
+        // Cell towers and Bluetooth: Android registers its scanner above; elsewhere there's none
+        services.TryAddSingleton<IRadioScannerService, NoRadioScannerService>();
 
         // ── ViewModels ───────────────────────────────────────────────────────
         services.AddSingleton<ScanViewModel>();

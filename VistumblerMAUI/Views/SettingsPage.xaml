@@ -27,6 +27,15 @@
                 <Label Grid.Column="0" Text="Turn on GPS when the app opens" VerticalOptions="Center" />
                 <Switch Grid.Column="1" IsToggled="{Binding GpsOnLaunch}" />
             </Grid>
+            <!-- Android: cell towers and Bluetooth devices, kept apart from the APs (the type picker on the Scan page) -->
+            <Grid ColumnDefinitions="*,Auto" Padding="16,4" IsVisible="{Binding HasCellScanning}">
+                <Label Grid.Column="0" Text="Also record cell towers" VerticalOptions="Center" />
+                <Switch Grid.Column="1" IsToggled="{Binding ScanCells}" />
+            </Grid>
+            <Grid ColumnDefinitions="*,Auto" Padding="16,4" IsVisible="{Binding HasBluetoothScanning}">
+                <Label Grid.Column="0" Text="Also record Bluetooth devices" VerticalOptions="Center" />
+                <Switch Grid.Column="1" IsToggled="{Binding ScanBluetooth}" />
+            </Grid>
             <!-- Windows: which Wi-Fi adapter to scan with (the original's Interface menu) -->
             <Grid ColumnDefinitions="Auto,*,Auto" Padding="16,8" ColumnSpacing="8" IsVisible="{Binding HasAdapterChoice}">
                 <Label Grid.Column="0" Text="Wi-Fi adapter" VerticalOptions="Center" />

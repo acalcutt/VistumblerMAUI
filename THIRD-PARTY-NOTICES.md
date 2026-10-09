@@ -5,7 +5,7 @@ VistumblerMAUI includes code adapted from the projects below. Their licences req
 ## WiGLE WiFi Wardriving
 
 The Magic 8 Ball (m8b) file format and its writer (`VistumblerMAUI/Services/M8b/M8bFile.cs`), and the
-MGRS/UTM conversion by way of its Java port (`VistumblerMAUI/Services/M8b/Mgrs.cs`), are adapted from
+MGRS/UTM conversion by way of its Java port (`VistumblerMAUI/Services/M8b/Mgrs.cs`), and the cell tower and Bluetooth collection (`VistumblerMAUI/Platforms/Android/AndroidRadioScannerService.cs`: cell keys, validity checks and the Bluetooth device class names) are adapted from
 [WiGLE WiFi Wardriving](https://github.com/wiglenet/wigle-wifi-wardriving).
 
 ```

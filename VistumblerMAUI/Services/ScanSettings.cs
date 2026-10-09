@@ -13,6 +13,25 @@ public static class ScanSettings
     private const string AdapterKey      = "Scan_AdapterId";
     private const string GpsFormatKey    = "Gps_DisplayFormat";
     private const string SaveGpsKey      = "Gps_SaveWithoutAps";
+    private const string CellsKey        = "Scan_Cells";
+    private const string BluetoothKey    = "Scan_Bluetooth";
+
+    /// <summary>Raised when cell or Bluetooth scanning is turned on or off, so a running scan can follow.</summary>
+    public static event EventHandler? RadioChanged;
+
+    /// <summary>Also record cell towers while scanning (Android). Off by default.</summary>
+    public static bool ScanCells
+    {
+        get => Preferences.Get(CellsKey, false);
+        set { Preferences.Set(CellsKey, value); RadioChanged?.Invoke(null, EventArgs.Empty); }
+    }
+
+    /// <summary>Also record Bluetooth and Bluetooth LE devices while scanning (Android). Off by default.</summary>
+    public static bool ScanBluetooth
+    {
+        get => Preferences.Get(BluetoothKey, false);
+        set { Preferences.Set(BluetoothKey, value); RadioChanged?.Invoke(null, EventArgs.Empty); }
+    }
 
     /// <summary>Start scanning for APs as soon as the app opens (after a session is chosen).</summary>
     public static bool ScanOnLaunch
