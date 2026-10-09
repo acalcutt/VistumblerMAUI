@@ -34,7 +34,7 @@
                 <VerticalStackLayout Grid.Column="1" WidthRequest="64" HorizontalOptions="Center" VerticalOptions="Center" Spacing="2">
                     <Label Text="{Binding Signal, StringFormat='{0}%'}" HorizontalOptions="Center" FontSize="13" />
                     <ProgressBar Progress="{Binding Signal, Converter={StaticResource IntToProgress}}" HeightRequest="6" />
-                    <Label Text="{Binding Rssi, StringFormat='{0} dBm'}" HorizontalOptions="Center" FontSize="10" TextColor="Gray" />
+                    <Label Text="{Binding Rssi, StringFormat={loc:T ApDetails_0DBm}}" HorizontalOptions="Center" FontSize="10" TextColor="Gray" />
                 </VerticalStackLayout>
                 <!-- Channel + band + security (authentication AND encryption) -->
                 <VerticalStackLayout Grid.Column="2" WidthRequest="96" HorizontalOptions="End" VerticalOptions="Center" Spacing="2">
@@ -158,7 +158,7 @@
                             <Label FontSize="10" TextColor="Gray" Text="{Binding LastSeenText, StringFormat={loc:T Scan_LastSeen}}" />
                         </VerticalStackLayout>
                         <VerticalStackLayout Grid.Column="1" WidthRequest="110" HorizontalOptions="End" VerticalOptions="Center" Spacing="2">
-                            <Label Text="{Binding Rssi, StringFormat='{0} dBm'}" FontSize="13" HorizontalOptions="End" />
+                            <Label Text="{Binding Rssi, StringFormat={loc:T ApDetails_0DBm}}" FontSize="13" HorizontalOptions="End" />
                             <Label Text="{Binding TypeText}" FontSize="10" TextColor="#546E7A" HorizontalOptions="End" />
                             <Label Text="{Binding CapabilitiesText}" FontSize="10" TextColor="#78909C" HorizontalOptions="End"
                                    LineBreakMode="TailTruncation" />

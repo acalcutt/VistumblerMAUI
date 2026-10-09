@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:loc="clr-namespace:VistumblerMAUI.Localization"
              xmlns:vm="clr-namespace:VistumblerMAUI.ViewModels"
              x:DataType="vm:SettingsViewModel"
              x:Class="VistumblerMAUI.Views.MapColorsPage"
-             Title="Map AP colors">
+             Title="{loc:T MapColors_MapAPColors}">
 
     <!-- Moved out of Settings, where the grid took up much of the page; edits save as they're made -->
     <ScrollView>
         <VerticalStackLayout Spacing="0" Padding="0,8">
             <Label Margin="16,0,16,4" FontSize="12" TextColor="Gray"
-                   Text="Circle colors per age bucket, by security type (hex RRGGBB). The live scan's active APs are brightest; dead and older buckets darken with age." />
+                   Text="{loc:T MapColors_CircleColorsPerAgeBucket}" />
             <Grid ColumnDefinitions="110,*,*,*" Padding="16,0,16,2" ColumnSpacing="6">
-                <Label Grid.Column="0" Text="Bucket"  FontSize="11" FontAttributes="Bold" />
-                <Label Grid.Column="1" Text="Open"    FontSize="11" FontAttributes="Bold" />
-                <Label Grid.Column="2" Text="WEP"     FontSize="11" FontAttributes="Bold" />
-                <Label Grid.Column="3" Text="Secure"  FontSize="11" FontAttributes="Bold" />
+                <Label Grid.Column="0" Text="{loc:T MapColors_Bucket}"  FontSize="11" FontAttributes="Bold" />
+                <Label Grid.Column="1" Text="{loc:T Group_Open}"    FontSize="11" FontAttributes="Bold" />
+                <Label Grid.Column="2" Text="{loc:T FilterEdit_WEP}"     FontSize="11" FontAttributes="Bold" />
+                <Label Grid.Column="3" Text="{loc:T Group_Secure}"  FontSize="11" FontAttributes="Bold" />
             </Grid>
             <VerticalStackLayout BindableLayout.ItemsSource="{Binding MapBucketColors}" Spacing="0">
                 <BindableLayout.ItemTemplate>

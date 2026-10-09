@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:loc="clr-namespace:VistumblerMAUI.Localization"
              xmlns:vm="clr-namespace:VistumblerMAUI.ViewModels"
              xmlns:svc="clr-namespace:Vistumbler.Core.Services;assembly=Vistumbler.Core"
              x:DataType="vm:SessionChooserViewModel"
              x:Class="VistumblerMAUI.Views.SessionChooserPage"
-             Title="VistumblerMAUI — Sessions">
+             Title="{loc:T SessionChooser_VistumblerMAUISessions}">
 
     <Grid RowDefinitions="Auto,*,Auto" Padding="16" RowSpacing="12">
 
         <Label Grid.Row="0"
-               Text="Recover a previous session or start a new one."
+               Text="{loc:T SessionChooser_RecoverAPreviousSessionOr}"
                FontSize="15" />
 
         <CollectionView Grid.Row="1"
                         ItemsSource="{Binding Sessions}"
                         SelectionMode="None">
             <CollectionView.EmptyView>
-                <Label Text="No saved sessions." TextColor="Gray" HorizontalOptions="Center" Margin="0,20" />
+                <Label Text="{loc:T SessionChooser_NoSavedSessions}" TextColor="Gray" HorizontalOptions="Center" Margin="0,20" />
             </CollectionView.EmptyView>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="svc:SessionInfo">
@@ -25,15 +26,15 @@
                         <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8">
                             <VerticalStackLayout Grid.Column="0" Spacing="2" VerticalOptions="Center">
                                 <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="14" />
-                                <Label Text="{Binding Created, StringFormat='{0:yyyy-MM-dd HH:mm:ss}'}" FontSize="11" TextColor="Gray" />
+                                <Label Text="{Binding Created, StringFormat={loc:T SessionChooser_0YyyyMMDdHH}}" FontSize="11" TextColor="Gray" />
                             </VerticalStackLayout>
                             <Button Grid.Column="1"
-                                    Text="Resume"
+                                    Text="{loc:T SessionChooser_Resume}"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type vm:SessionChooserViewModel}}, Path=ResumeCommand}"
                                     CommandParameter="{Binding .}"
                                     BackgroundColor="#1565C0" TextColor="White" Padding="14,6" />
                             <Button Grid.Column="2"
-                                    Text="Delete"
+                                    Text="{loc:T Filters_Delete}"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type vm:SessionChooserViewModel}}, Path=DeleteCommand}"
                                     CommandParameter="{Binding .}"
                                     BackgroundColor="Transparent" TextColor="#B00020" Padding="10,6" />
@@ -44,7 +45,7 @@
         </CollectionView>
 
         <Button Grid.Row="2"
-                Text="Start New Session"
+                Text="{loc:T SessionChooser_StartNewSession}"
                 Command="{Binding NewSessionCommand}"
                 BackgroundColor="#2E7D32" TextColor="White"
                 HeightRequest="48" />

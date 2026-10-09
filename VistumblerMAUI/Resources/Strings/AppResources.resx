@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!--
   The app's text in English, the default language and the fallback for every other. Each language is a copy of this
   file named AppResources.<code>.resx (AppResources.de.resx…) with the values translated; a string missing there shows
@@ -159,4 +159,234 @@
   <data name="Opt_WiFi" xml:space="preserve"><value>Wi-Fi</value></data>
   <data name="Opt_Bluetooth" xml:space="preserve"><value>Bluetooth</value></data>
   <data name="Opt_Celltowers" xml:space="preserve"><value>Cell towers</value></data>
+
+
+  <!-- SettingsPage.xaml -->
+  <data name="Settings_SCANNING" xml:space="preserve"><value>SCANNING</value></data>
+  <data name="Settings_ScanIntervalMs" xml:space="preserve"><value>Scan interval (ms)</value></data>
+  <data name="Settings_StartScanningWhenTheApp" xml:space="preserve"><value>Start scanning when the app opens</value></data>
+  <data name="Settings_TurnOnGPSWhenThe" xml:space="preserve"><value>Turn on GPS when the app opens</value></data>
+  <data name="Settings_AlsoRecordCellTowers" xml:space="preserve"><value>Also record cell towers</value></data>
+  <data name="Settings_AlsoRecordBluetoothDevices" xml:space="preserve"><value>Also record Bluetooth devices</value></data>
+  <data name="Settings_WiFiAdapter" xml:space="preserve"><value>Wi-Fi adapter</value></data>
+  <data name="Settings_Refresh" xml:space="preserve"><value>Refresh</value></data>
+  <data name="Settings_MAP" xml:space="preserve"><value>MAP</value></data>
+  <data name="Settings_BasemapStyle" xml:space="preserve"><value>Basemap style</value></data>
+  <data name="Settings_GPSFollowZoom" xml:space="preserve"><value>GPS follow zoom</value></data>
+  <data name="Settings_ZoomLevel122" xml:space="preserve"><value>Zoom level (1–22)</value></data>
+  <data name="Settings_ZoomAppliedWhenTheMap" xml:space="preserve"><value>Zoom applied when the map's GPS button enters Follow mode. Auto picks a level where the fix's accuracy circle is visible; pinch-zooming afterwards sticks until Follow is re-entered.</value></data>
+  <data name="Settings_APPointSize" xml:space="preserve"><value>AP point size</value></data>
+  <data name="Settings_SizeOfTheAccessPoint" xml:space="preserve"><value>Size of the access point dots on the map, live scan and WifiDB history alike.</value></data>
+  <data name="Settings_MapAPColors" xml:space="preserve"><value>Map AP colors…</value></data>
+  <data name="Settings_GPS" xml:space="preserve"><value>GPS</value></data>
+  <data name="Settings_GPSSource" xml:space="preserve"><value>GPS source</value></data>
+  <data name="Settings_RecordTheGPSTrackEven" xml:space="preserve"><value>Record the GPS track even when no APs are found</value></data>
+  <data name="Settings_CoordinateFormat" xml:space="preserve"><value>Coordinate format</value></data>
+  <data name="Settings_COMPort" xml:space="preserve"><value>COM port</value></data>
+  <data name="Settings_BaudRate" xml:space="preserve"><value>Baud rate</value></data>
+  <data name="Settings_ChooseTheCOMPortYour" xml:space="preserve"><value>Choose the COM port your GPS receiver uses. A Bluetooth receiver paired with Windows appears as a COM port too.</value></data>
+  <data name="Settings_ReconnectTheReceiverWhenNo" xml:space="preserve"><value>Reconnect the receiver when no data is received for 10 seconds</value></data>
+  <data name="Settings_ResetGPSPositionWhenNo" xml:space="preserve"><value>Reset GPS position when no fix is received for 30 seconds</value></data>
+  <data name="Settings_TurnOffTheReconnectFor" xml:space="preserve"><value>Turn off the reconnect for a receiver that pauses its output. Resetting the position stops APs being placed at the receiver's last position after it loses its fix.</value></data>
+  <data name="Settings_PlugTheReceiverInWith" xml:space="preserve"><value>Plug the receiver in with a USB OTG adapter; Android asks to let the app use it. Works with Prolific PL2303 (GlobalSat), Silicon Labs CP210x, FTDI, CH340 and u-blox receivers. GlobalSat receivers usually run at 4800 baud, u-blox at 9600.</value></data>
+  <data name="Settings_Receiver" xml:space="preserve"><value>Receiver</value></data>
+  <data name="Settings_PairTheReceiverInAndroid" xml:space="preserve"><value>Pair the receiver in Android's Bluetooth settings first, then choose it here. It must send NMEA over the serial port profile (SPP), as most Bluetooth GPS receivers do.</value></data>
+  <data name="Settings_WIFIDB" xml:space="preserve"><value>WIFIDB</value></data>
+  <data name="Settings_BaseURL" xml:space="preserve"><value>Base URL</value></data>
+  <data name="Settings_Username" xml:space="preserve"><value>Username</value></data>
+  <data name="Settings_Username2" xml:space="preserve"><value>username</value></data>
+  <data name="Settings_APIKey" xml:space="preserve"><value>API key</value></data>
+  <data name="Settings_DataURL" xml:space="preserve"><value>Data URL</value></data>
+  <data name="Settings_DataURLServesTheMap" xml:space="preserve"><value>Data URL serves the map history archives and the feed listing them — a different host from the site above.</value></data>
+  <data name="Settings_RegisterWithQRCode" xml:space="preserve"><value>Register with QR code</value></data>
+  <data name="Settings_RegisterWithLink" xml:space="preserve"><value>Register with link…</value></data>
+  <data name="Settings_WIGLEOPTIONAL" xml:space="preserve"><value>WIGLE (OPTIONAL)</value></data>
+  <data name="Settings_AlsoUploadToWiGLE" xml:space="preserve"><value>Also upload to WiGLE</value></data>
+  <data name="Settings_OptionalAlongsideWifiDBSendsWi" xml:space="preserve"><value>Optional, alongside WifiDB. Sends Wi-Fi, cell towers and Bluetooth as a WiGLE CSV.</value></data>
+  <data name="Settings_ReadWiGLESTermsOf" xml:space="preserve"><value>Read WiGLE's terms of use</value></data>
+  <data name="Settings_APIName" xml:space="preserve"><value>API name</value></data>
+  <data name="Settings_AID" xml:space="preserve"><value>AID…</value></data>
+  <data name="Settings_APIToken" xml:space="preserve"><value>API token</value></data>
+  <data name="Settings_GetMyAPINameAnd" xml:space="preserve"><value>Get my API name and token (wigle.net)</value></data>
+  <data name="Settings_UploadEachSaveClearTo" xml:space="preserve"><value>Upload each Save &amp; Clear to WiGLE</value></data>
+  <data name="Settings_DonateForCommercialUse" xml:space="preserve"><value>Donate for commercial use</value></data>
+  <data name="Settings_LetsWiGLEAlsoLicenseYour" xml:space="preserve"><value>Lets WiGLE also license your uploads commercially (WiGLE's "donate").</value></data>
+  <data name="Settings_RetryNow" xml:space="preserve"><value>Retry now</value></data>
+  <data name="Settings_SAVECLEAR" xml:space="preserve"><value>SAVE &amp; CLEAR</value></data>
+  <data name="Settings_SaveClearMenuSavesThe" xml:space="preserve"><value>Save &amp; Clear (menu) saves the access points to a file here, then clears the list while scanning carries on. Auto Save And Clear does it for you.</value></data>
+  <data name="Settings_Browse" xml:space="preserve"><value>Browse…</value></data>
+  <data name="Settings_UseDefaultFolder" xml:space="preserve"><value>Use default folder</value></data>
+  <data name="Settings_FileName" xml:space="preserve"><value>File name</value></data>
+  <data name="Settings_AutoSave" xml:space="preserve"><value>AutoSave</value></data>
+  <data name="Settings_FileType" xml:space="preserve"><value>File type</value></data>
+  <data name="Settings_AutoSaveAndClear" xml:space="preserve"><value>Auto Save And Clear</value></data>
+  <data name="Settings_SaveOnceTheListHas" xml:space="preserve"><value>Save once the list has this many APs</value></data>
+  <data name="Settings_SaveEveryThisManyMinutes" xml:space="preserve"><value>Save every this many minutes of scanning</value></data>
+  <data name="Settings_UploadEachSaveToWifiDB" xml:space="preserve"><value>Upload each save to WifiDB</value></data>
+  <data name="Settings_DeleteTheSavedFileOnce" xml:space="preserve"><value>Delete the saved file once WifiDB has it</value></data>
+  <data name="Settings_UsesTheWifiDBAccountBelow" xml:space="preserve"><value>Uses the WifiDB account below. The file is kept unless you choose to delete it after the upload. A file that can't be uploaded (no connection, WifiDB unreachable, no account yet) waits and is retried when the connection comes back, when the app starts and after the next save.</value></data>
+  <data name="Settings_StopUploading" xml:space="preserve"><value>Stop uploading</value></data>
+  <data name="Settings_ForExample0" xml:space="preserve"><value>For example: {0}</value></data>
+  <data name="Settings_SOUND" xml:space="preserve"><value>SOUND</value></data>
+  <data name="Settings_PlayASoundWhenNew" xml:space="preserve"><value>Play a sound when new APs are found</value></data>
+  <data name="Settings_PlayASoundWhenThe" xml:space="preserve"><value>Play a sound when the GPS receiver has a problem</value></data>
+  <data name="Settings_SpeakingAnAPSSignal" xml:space="preserve"><value>Speaking an AP's signal: turn it on from the AP's details page.</value></data>
+  <data name="Settings_Voice" xml:space="preserve"><value>Voice</value></data>
+  <data name="Settings_Say" xml:space="preserve"><value>Say</value></data>
+  <data name="Settings_SpeakEverySeconds" xml:space="preserve"><value>Speak every (seconds)</value></data>
+  <data name="Settings_SayTheUnitPercentOr" xml:space="preserve"><value>Say the unit ("percent" or "dBm") after the number</value></data>
+  <data name="Settings_TheTonePlaysTheSignal" xml:space="preserve"><value>The tone plays the signal as pitch, like the original's MIDI sounds. The recorded words can't say "minus", so they say RSSI as a plain number.</value></data>
+  <data name="Settings_DATA" xml:space="preserve"><value>DATA</value></data>
+  <data name="Settings_UpdateManufacturers" xml:space="preserve"><value>Update manufacturers</value></data>
+  <data name="Settings_UPDATES" xml:space="preserve"><value>UPDATES</value></data>
+  <data name="Settings_CheckForUpdatesAtStartup" xml:space="preserve"><value>Check for updates at startup</value></data>
+  <data name="Settings_IncludePreReleases" xml:space="preserve"><value>Include pre-releases</value></data>
+  <data name="Settings_PreReleasesEG0" xml:space="preserve"><value>Pre-releases (e.g. 0.5.0-rc.1) get new features first but may be less stable.</value></data>
+  <data name="Settings_CheckForUpdates" xml:space="preserve"><value>Check for Updates</value></data>
+  <data name="Settings_ADVANCED" xml:space="preserve"><value>ADVANCED</value></data>
+  <data name="Settings_KeepScreenOnWhileScanning" xml:space="preserve"><value>Keep screen on while scanning</value></data>
+  <data name="Settings_DebugLogging" xml:space="preserve"><value>Debug logging</value></data>
+  <data name="Settings_WritesGPSFixesAndMap" xml:space="preserve"><value>Writes GPS fixes and map layer refreshes to the debug log (adb logcat) for troubleshooting.</value></data>
+
+  <!-- ApDetailsPage.xaml -->
+  <data name="ApDetails_Copy" xml:space="preserve"><value>Copy</value></data>
+  <data name="ApDetails_WifiDB" xml:space="preserve"><value>WifiDB</value></data>
+  <data name="ApDetails_Back" xml:space="preserve"><value>Back</value></data>
+  <data name="ApDetails_BackToScanList" xml:space="preserve"><value>‹ Back to scan list</value></data>
+  <data name="ApDetails_SpeakSignalWhileScanning" xml:space="preserve"><value>Speak signal while scanning</value></data>
+  <data name="ApDetails_SIGNALHISTORY" xml:space="preserve"><value>SIGNAL HISTORY</value></data>
+  <data name="ApDetails_DETAILS" xml:space="preserve"><value>DETAILS</value></data>
+  <data name="ApDetails_Radio" xml:space="preserve"><value>Radio</value></data>
+  <data name="ApDetails_FirstActive" xml:space="preserve"><value>First active</value></data>
+  <data name="ApDetails_LastActive" xml:space="preserve"><value>Last active</value></data>
+  <data name="ApDetails_0DBm" xml:space="preserve"><value>{0} dBm</value></data>
+
+  <!-- ExportPage.xaml -->
+  <data name="Export_Export" xml:space="preserve"><value>Export</value></data>
+  <data name="Export_FORMAT" xml:space="preserve"><value>FORMAT</value></data>
+  <data name="Export_FILENAME" xml:space="preserve"><value>FILE NAME</value></data>
+  <data name="Export_VistumblerExport" xml:space="preserve"><value>vistumbler_export</value></data>
+  <data name="Export_LOCATION" xml:space="preserve"><value>LOCATION</value></data>
+  <data name="Export_TheFileIsOfferedTo" xml:space="preserve"><value>The file is offered to the share sheet after every export, so it can be sent on wherever it was written.</value></data>
+  <data name="Export_KMLOPTIONS" xml:space="preserve"><value>KML OPTIONS</value></data>
+  <data name="Export_IncludeOpenNetworks" xml:space="preserve"><value>Include open networks</value></data>
+  <data name="Export_IncludeWEPNetworks" xml:space="preserve"><value>Include WEP networks</value></data>
+  <data name="Export_IncludeSecureNetworks" xml:space="preserve"><value>Include secure networks</value></data>
+  <data name="Export_ColourPinsBySignal" xml:space="preserve"><value>Colour pins by signal</value></data>
+  <data name="Export_IncludeGPSTrack" xml:space="preserve"><value>Include GPS track</value></data>
+
+  <!-- ImportPage.xaml -->
+  <data name="Import_Import" xml:space="preserve"><value>Import</value></data>
+  <data name="Import_FILE" xml:space="preserve"><value>FILE</value></data>
+  <data name="Import_ImportAFolder" xml:space="preserve"><value>Import a folder…</value></data>
+  <data name="Import_ImportsEveryFileOfThe" xml:space="preserve"><value>Imports every file of the chosen type in a folder (not its subfolders).</value></data>
+
+  <!-- GpsDetailsPage.xaml -->
+  <data name="GpsDetails_Position" xml:space="preserve"><value>Position</value></data>
+  <data name="GpsDetails_Altitude" xml:space="preserve"><value>Altitude</value></data>
+  <data name="GpsDetails_Satellites" xml:space="preserve"><value>Satellites</value></data>
+  <data name="GpsDetails_Accuracy" xml:space="preserve"><value>Accuracy</value></data>
+  <data name="GpsDetails_Speed" xml:space="preserve"><value>Speed</value></data>
+  <data name="GpsDetails_Heading" xml:space="preserve"><value>Heading</value></data>
+  <data name="GpsDetails_FixQuality" xml:space="preserve"><value>Fix quality</value></data>
+  <data name="GpsDetails_FixTime" xml:space="preserve"><value>Fix time</value></data>
+  <data name="GpsDetails_COMPASS" xml:space="preserve"><value>COMPASS</value></data>
+  <data name="GpsDetails_PointsAlongYourDirectionOf" xml:space="preserve"><value>Points along your direction of travel, as the GPS reports it while you're moving.</value></data>
+  <data name="GpsDetails_WIFIPOSITIONOFFLINE" xml:space="preserve"><value>WI-FI POSITION (OFFLINE)</value></data>
+  <data name="GpsDetails_ShowOnMap" xml:space="preserve"><value>Show on map</value></data>
+  <data name="GpsDetails_AlsoSearchThisSessionS" xml:space="preserve"><value>Also search this session's APs</value></data>
+  <data name="GpsDetails_Magic8BallM8bFiles" xml:space="preserve"><value>Magic 8 Ball (m8b) files</value></data>
+  <data name="GpsDetails_NoneImportedExportOneFrom" xml:space="preserve"><value>None imported. Export one from a session (Export → M8b), or use one from WiGLE WiFi Wardriving.</value></data>
+  <data name="GpsDetails_Remove" xml:space="preserve"><value>Remove</value></data>
+  <data name="GpsDetails_ImportM8bFile" xml:space="preserve"><value>Import m8b file…</value></data>
+  <data name="GpsDetails_EachAPInRangeVotes" xml:space="preserve"><value>Each AP in range votes for the 1 km squares it has been seen in; the square most agree on is the estimate. Works with no GPS or network, e.g. indoors. The m8b format comes from WiGLE WiFi Wardriving.</value></data>
+
+  <!-- FiltersPage.xaml -->
+  <data name="Filters_Filters" xml:space="preserve"><value>Filters</value></data>
+  <data name="Filters_Add" xml:space="preserve"><value>Add</value></data>
+  <data name="Filters_TapAFilterToUse" xml:space="preserve"><value>Tap a filter to use it. The filter in use narrows the AP list, and the Export page can export only the APs it shows.</value></data>
+  <data name="Filters_NoFilterShowAllAPs" xml:space="preserve"><value>No filter (show all APs)</value></data>
+  <data name="Filters_Edit" xml:space="preserve"><value>Edit</value></data>
+  <data name="Filters_Delete" xml:space="preserve"><value>Delete</value></data>
+  <data name="Filters_NoSavedFiltersYetTap" xml:space="preserve"><value>No saved filters yet. Tap Add to make one.</value></data>
+  <data name="Filters_AddAFilter" xml:space="preserve"><value>Add a filter</value></data>
+
+  <!-- FilterEditPage.xaml -->
+  <data name="FilterEdit_Name" xml:space="preserve"><value>Name</value></data>
+  <data name="FilterEdit_SHOWAPSTHAT" xml:space="preserve"><value>SHOW APS THAT</value></data>
+  <data name="FilterEdit_SSIDContains" xml:space="preserve"><value>SSID contains</value></data>
+  <data name="FilterEdit_Any" xml:space="preserve"><value>any</value></data>
+  <data name="FilterEdit_BSSIDStartsWith" xml:space="preserve"><value>BSSID starts with</value></data>
+  <data name="FilterEdit_AnyEG0011" xml:space="preserve"><value>any, e.g. 00:11:22</value></data>
+  <data name="FilterEdit_AnyEG16" xml:space="preserve"><value>any, e.g. 1,6,11 or 36-64</value></data>
+  <data name="FilterEdit_SignalAtLeast" xml:space="preserve"><value>Signal at least (%)</value></data>
+  <data name="FilterEdit_WEP" xml:space="preserve"><value>WEP</value></data>
+  <data name="FilterEdit_SecureWPAAndUp" xml:space="preserve"><value>Secure (WPA and up)</value></data>
+  <data name="FilterEdit_24GHz" xml:space="preserve"><value>2.4 GHz</value></data>
+  <data name="FilterEdit_5GHz" xml:space="preserve"><value>5 GHz</value></data>
+  <data name="FilterEdit_6GHz" xml:space="preserve"><value>6 GHz</value></data>
+  <data name="FilterEdit_AdvancedRules" xml:space="preserve"><value>Advanced rules</value></data>
+  <data name="FilterEdit_TheOriginalVistumblerSFilter" xml:space="preserve"><value>The original Vistumbler's filter syntax, per field. * or empty = any · 6 = equal · 1,6,11 = any of · 1-6 or -80--60 = between · &lt;&gt; in front = not (&lt;&gt;6, &lt;&gt;1-6, &lt;&gt;6,&lt;&gt;11) · % = any text (Linksys%, %guest%) · \, \- \% = a literal comma, dash or percent. Text fields ignore case.</value></data>
+  <data name="FilterEdit_EGWPA2PersonalWPA3" xml:space="preserve"><value>e.g. WPA2-Personal,WPA3-Personal</value></data>
+  <data name="FilterEdit_EGCCMP" xml:space="preserve"><value>e.g. CCMP</value></data>
+  <data name="FilterEdit_RadioType" xml:space="preserve"><value>Radio type</value></data>
+  <data name="FilterEdit_EG5GHz" xml:space="preserve"><value>e.g. %5 GHz</value></data>
+  <data name="FilterEdit_InfrastructureOrAdHoc" xml:space="preserve"><value>Infrastructure or Ad Hoc</value></data>
+  <data name="FilterEdit_Signal" xml:space="preserve"><value>Signal (%)</value></data>
+  <data name="FilterEdit_HighSignal" xml:space="preserve"><value>High signal (%)</value></data>
+  <data name="FilterEdit_RSSIDBm" xml:space="preserve"><value>RSSI (dBm)</value></data>
+  <data name="FilterEdit_EG700" xml:space="preserve"><value>e.g. -70-0</value></data>
+  <data name="FilterEdit_HighRSSIDBm" xml:space="preserve"><value>High RSSI (dBm)</value></data>
+  <data name="FilterEdit_Active1Or0" xml:space="preserve"><value>Active (1 or 0)</value></data>
+  <data name="FilterEdit_SaveAndUse" xml:space="preserve"><value>Save and use</value></data>
+  <data name="FilterEdit_Save" xml:space="preserve"><value>Save</value></data>
+
+  <!-- MapColorsPage.xaml -->
+  <data name="MapColors_MapAPColors" xml:space="preserve"><value>Map AP colors</value></data>
+  <data name="MapColors_CircleColorsPerAgeBucket" xml:space="preserve"><value>Circle colors per age bucket, by security type (hex RRGGBB). The live scan's active APs are brightest; dead and older buckets darken with age.</value></data>
+  <data name="MapColors_Bucket" xml:space="preserve"><value>Bucket</value></data>
+
+  <!-- SessionChooserPage.xaml -->
+  <data name="SessionChooser_VistumblerMAUISessions" xml:space="preserve"><value>VistumblerMAUI — Sessions</value></data>
+  <data name="SessionChooser_RecoverAPreviousSessionOr" xml:space="preserve"><value>Recover a previous session or start a new one.</value></data>
+  <data name="SessionChooser_NoSavedSessions" xml:space="preserve"><value>No saved sessions.</value></data>
+  <data name="SessionChooser_Resume" xml:space="preserve"><value>Resume</value></data>
+  <data name="SessionChooser_StartNewSession" xml:space="preserve"><value>Start New Session</value></data>
+  <data name="SessionChooser_0YyyyMMDdHH" xml:space="preserve"><value>{0:yyyy-MM-dd HH:mm:ss}</value></data>
+
+  <!-- SurveyPage.xaml -->
+  <data name="Survey_Survey" xml:space="preserve"><value>Survey ▾</value></data>
+  <data name="Survey_Network" xml:space="preserve"><value>Network</value></data>
+  <data name="Survey_Heatmap" xml:space="preserve"><value>Heatmap</value></data>
+  <data name="Survey_StartScanning" xml:space="preserve"><value>Start scanning</value></data>
+  <data name="Survey_UndoLast" xml:space="preserve"><value>Undo last</value></data>
+  <data name="Survey_SaveImage" xml:space="preserve"><value>Save image</value></data>
+  <data name="Survey_100DBm" xml:space="preserve"><value>-100 dBm</value></data>
+  <data name="Survey_40DBm" xml:space="preserve"><value>-40 dBm</value></data>
+
+  <!-- UpdatePage.xaml -->
+  <data name="Update_UpdateAvailable" xml:space="preserve"><value>Update Available</value></data>
+  <data name="Update_RELEASENOTES" xml:space="preserve"><value>RELEASE NOTES</value></data>
+  <data name="Update_ReleasePage" xml:space="preserve"><value>Release Page</value></data>
+  <data name="Update_Later" xml:space="preserve"><value>Later</value></data>
+
+  <!-- WifiDbScanPage.xaml -->
+  <data name="WifiDbScan_ScanWifiDBQR" xml:space="preserve"><value>Scan WifiDB QR</value></data>
+  <data name="WifiDbScan_PointTheCameraAtYour" xml:space="preserve"><value>Point the camera at your WifiDB registration QR code.</value></data>
+
+  <!-- WifiDbUploadPage.xaml -->
+  <data name="WifiDbUpload_UploadToWifiDB" xml:space="preserve"><value>Upload to WifiDB</value></data>
+  <data name="WifiDbUpload_UploadsTheCurrentSessionS" xml:space="preserve"><value>Uploads the current session's access points to WifiDB. WifiDB queues the file and imports it shortly after.</value></data>
+  <data name="WifiDbUpload_ACCOUNT" xml:space="preserve"><value>ACCOUNT</value></data>
+  <data name="WifiDbUpload_SetUpWifiDBAccount" xml:space="preserve"><value>Set up WifiDB account</value></data>
+  <data name="WifiDbUpload_ChangeAccountInSettings" xml:space="preserve"><value>Change account in Settings</value></data>
+  <data name="WifiDbUpload_UPLOAD" xml:space="preserve"><value>UPLOAD</value></data>
+  <data name="WifiDbUpload_Title" xml:space="preserve"><value>Title</value></data>
+  <data name="WifiDbUpload_Notes" xml:space="preserve"><value>Notes</value></data>
+  <data name="WifiDbUpload_Optional" xml:space="preserve"><value>optional</value></data>
+  <data name="WifiDbUpload_OtherUsers" xml:space="preserve"><value>Other users</value></data>
+  <data name="WifiDbUpload_OptionalCommaSeparated" xml:space="preserve"><value>optional, comma separated</value></data>
+  <data name="WifiDbUpload_Upload" xml:space="preserve"><value>Upload</value></data>
+  <data name="WifiDbUpload_CheckImportStatus" xml:space="preserve"><value>Check import status</value></data>
+  <data name="WifiDbUpload_Close" xml:space="preserve"><value>Close</value></data>
 </root>

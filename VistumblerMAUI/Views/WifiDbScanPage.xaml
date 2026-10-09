@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:loc="clr-namespace:VistumblerMAUI.Localization"
              xmlns:scanner="clr-namespace:BarcodeScanning;assembly=BarcodeScanning.Native.Maui"
              x:Class="VistumblerMAUI.Views.WifiDbScanPage"
-             Title="Scan WifiDB QR">
+             Title="{loc:T WifiDbScan_ScanWifiDBQR}">
 
     <Grid>
         <scanner:CameraView x:Name="Camera"
@@ -16,11 +17,11 @@
                              Spacing="10"
                              BackgroundColor="#99000000">
             <Label x:Name="StatusLabel"
-                   Text="Point the camera at your WifiDB registration QR code."
+                   Text="{loc:T WifiDbScan_PointTheCameraAtYour}"
                    TextColor="White"
                    HorizontalTextAlignment="Center"
                    FontSize="13" />
-            <Button Text="Cancel" Clicked="OnCancel" />
+            <Button Text="{loc:T Common_Cancel}" Clicked="OnCancel" />
         </VerticalStackLayout>
     </Grid>
 

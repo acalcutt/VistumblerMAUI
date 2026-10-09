@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:loc="clr-namespace:VistumblerMAUI.Localization"
              x:Class="VistumblerMAUI.Views.UpdatePage"
-             Title="Update Available">
+             Title="{loc:T Update_UpdateAvailable}">
 
     <Grid RowDefinitions="Auto,Auto,Auto,*,Auto,Auto,Auto" Padding="16" RowSpacing="8">
 
         <Label x:Name="HeadingLabel" Grid.Row="0" FontSize="20" FontAttributes="Bold" />
         <Label x:Name="VersionLabel" Grid.Row="1" />
 
-        <Label Grid.Row="2" Text="RELEASE NOTES" Style="{StaticResource SectionHeader}" Margin="0,8,0,0" />
+        <Label Grid.Row="2" Text="{loc:T Update_RELEASENOTES}" Style="{StaticResource SectionHeader}" Margin="0,8,0,0" />
         <Border Grid.Row="3" Stroke="#DDDDDD" StrokeThickness="1" Padding="8">
             <ScrollView>
                 <Label x:Name="NotesLabel" FontSize="13" />
@@ -24,10 +25,10 @@
         </VerticalStackLayout>
 
         <Grid Grid.Row="6" ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8">
-            <Button x:Name="ReleasePageButton" Grid.Column="0" Text="Release Page" HorizontalOptions="Start"
+            <Button x:Name="ReleasePageButton" Grid.Column="0" Text="{loc:T Update_ReleasePage}" HorizontalOptions="Start"
                     Clicked="OnReleasePageClicked" />
             <Button x:Name="PrimaryButton" Grid.Column="1" Clicked="OnPrimaryClicked" />
-            <Button x:Name="LaterButton" Grid.Column="2" Text="Later" Clicked="OnLaterClicked" />
+            <Button x:Name="LaterButton" Grid.Column="2" Text="{loc:T Update_Later}" Clicked="OnLaterClicked" />
         </Grid>
     </Grid>
 

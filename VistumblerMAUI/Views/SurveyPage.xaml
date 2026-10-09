@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:loc="clr-namespace:VistumblerMAUI.Localization"
              xmlns:vm="clr-namespace:VistumblerMAUI.ViewModels"
              x:DataType="vm:SurveyViewModel"
              x:Class="VistumblerMAUI.Views.SurveyPage"
              Title="{Binding Title}">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Survey ▾" Command="{Binding SurveyMenuCommand}" />
+        <ToolbarItem Text="{loc:T Survey_Survey}" Command="{Binding SurveyMenuCommand}" />
     </ContentPage.ToolbarItems>
 
     <Grid RowDefinitions="Auto,*,Auto">
 
         <!-- Which network the colours show, and whether to fill in between the spots -->
         <Grid Grid.Row="0" ColumnDefinitions="*,Auto,Auto" Padding="12,4" ColumnSpacing="6">
-            <Picker Grid.Column="0" Title="Network" FontSize="13"
+            <Picker Grid.Column="0" Title="{loc:T Survey_Network}" FontSize="13"
                     ItemsSource="{Binding Networks}"
                     SelectedItem="{Binding SelectedNetwork}" />
-            <Label Grid.Column="1" Text="Heatmap" FontSize="12" VerticalOptions="Center" />
+            <Label Grid.Column="1" Text="{loc:T Survey_Heatmap}" FontSize="12" VerticalOptions="Center" />
             <Switch Grid.Column="2" IsToggled="{Binding ShowHeatmap}" VerticalOptions="Center" />
         </Grid>
 
@@ -33,16 +34,16 @@
         <VerticalStackLayout Grid.Row="2" Padding="12,6" Spacing="6">
             <Label Text="{Binding Status}" FontSize="13" />
             <FlexLayout Wrap="Wrap" JustifyContent="Start">
-                <Button Text="Start scanning" Command="{Binding StartScanningCommand}" Margin="0,0,6,6"
+                <Button Text="{loc:T Survey_StartScanning}" Command="{Binding StartScanningCommand}" Margin="0,0,6,6"
                         IsVisible="{Binding IsScanning, Converter={StaticResource InvertBool}}" />
-                <Button Text="Cancel" Command="{Binding CancelMarkCommand}" Margin="0,0,6,6"
+                <Button Text="{loc:T Common_Cancel}" Command="{Binding CancelMarkCommand}" Margin="0,0,6,6"
                         IsVisible="{Binding IsWaiting}" />
-                <Button Text="Undo last" Command="{Binding UndoMarkCommand}" Margin="0,0,6,6" />
-                <Button Text="Save image" Clicked="OnSaveImage" Margin="0,0,6,6" />
+                <Button Text="{loc:T Survey_UndoLast}" Command="{Binding UndoMarkCommand}" Margin="0,0,6,6" />
+                <Button Text="{loc:T Survey_SaveImage}" Clicked="OnSaveImage" Margin="0,0,6,6" />
             </FlexLayout>
             <!-- Colour key: WifiDB's signal-map colours -->
             <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="6">
-                <Label Grid.Column="0" Text="-100 dBm" FontSize="10" TextColor="Gray" />
+                <Label Grid.Column="0" Text="{loc:T Survey_100DBm}" FontSize="10" TextColor="Gray" />
                 <BoxView Grid.Column="1" HeightRequest="8" VerticalOptions="Center">
                     <BoxView.Background>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
@@ -55,7 +56,7 @@
                         </LinearGradientBrush>
                     </BoxView.Background>
                 </BoxView>
-                <Label Grid.Column="2" Text="-40 dBm" FontSize="10" TextColor="Gray" />
+                <Label Grid.Column="2" Text="{loc:T Survey_40DBm}" FontSize="10" TextColor="Gray" />
             </Grid>
         </VerticalStackLayout>
     </Grid>

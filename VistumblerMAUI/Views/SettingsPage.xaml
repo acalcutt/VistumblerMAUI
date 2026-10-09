@@ -22,41 +22,41 @@
             <BoxView HeightRequest="1" Color="#EEEEEE" Margin="16,0" />
 
             <!-- Scanning -->
-            <Label Text="SCANNING" Style="{StaticResource SectionHeader}" />
+            <Label Text="{loc:T Settings_SCANNING}" Style="{StaticResource SectionHeader}" />
             <Grid ColumnDefinitions="*,Auto" Padding="16,12" ColumnSpacing="12">
-                <Label Grid.Column="0" Text="Scan interval (ms)" VerticalOptions="Center" />
+                <Label Grid.Column="0" Text="{loc:T Settings_ScanIntervalMs}" VerticalOptions="Center" />
                 <Entry Grid.Column="1" Text="{Binding ScanIntervalMs}" Keyboard="Numeric" WidthRequest="80" />
             </Grid>
             <Grid ColumnDefinitions="*,Auto" Padding="16,4">
-                <Label Grid.Column="0" Text="Start scanning when the app opens" VerticalOptions="Center" />
+                <Label Grid.Column="0" Text="{loc:T Settings_StartScanningWhenTheApp}" VerticalOptions="Center" />
                 <Switch Grid.Column="1" IsToggled="{Binding ScanOnLaunch}" />
             </Grid>
             <Grid ColumnDefinitions="*,Auto" Padding="16,4">
-                <Label Grid.Column="0" Text="Turn on GPS when the app opens" VerticalOptions="Center" />
+                <Label Grid.Column="0" Text="{loc:T Settings_TurnOnGPSWhenThe}" VerticalOptions="Center" />
                 <Switch Grid.Column="1" IsToggled="{Binding GpsOnLaunch}" />
             </Grid>
             <!-- Android: cell towers and Bluetooth devices, kept apart from the APs (the type picker on the Scan page) -->
             <Grid ColumnDefinitions="*,Auto" Padding="16,4" IsVisible="{Binding HasCellScanning}">
-                <Label Grid.Column="0" Text="Also record cell towers" VerticalOptions="Center" />
+                <Label Grid.Column="0" Text="{loc:T Settings_AlsoRecordCellTowers}" VerticalOptions="Center" />
                 <Switch Grid.Column="1" IsToggled="{Binding ScanCells}" />
             </Grid>
             <Grid ColumnDefinitions="*,Auto" Padding="16,4" IsVisible="{Binding HasBluetoothScanning}">
-                <Label Grid.Column="0" Text="Also record Bluetooth devices" VerticalOptions="Center" />
+                <Label Grid.Column="0" Text="{loc:T Settings_AlsoRecordBluetoothDevices}" VerticalOptions="Center" />
                 <Switch Grid.Column="1" IsToggled="{Binding ScanBluetooth}" />
             </Grid>
             <!-- Windows: which Wi-Fi adapter to scan with (the original's Interface menu) -->
             <Grid ColumnDefinitions="Auto,*,Auto" Padding="16,8" ColumnSpacing="8" IsVisible="{Binding HasAdapterChoice}">
-                <Label Grid.Column="0" Text="Wi-Fi adapter" VerticalOptions="Center" />
+                <Label Grid.Column="0" Text="{loc:T Settings_WiFiAdapter}" VerticalOptions="Center" />
                 <Picker Grid.Column="1" ItemsSource="{Binding Adapters}" SelectedItem="{Binding SelectedAdapter}" />
-                <Button Grid.Column="2" Text="Refresh" Command="{Binding RefreshAdaptersCommand}"
+                <Button Grid.Column="2" Text="{loc:T Settings_Refresh}" Command="{Binding RefreshAdaptersCommand}"
                         Padding="10,4" FontSize="12" />
             </Grid>
             <BoxView HeightRequest="1" Color="#EEEEEE" Margin="16,0" />
 
             <!-- Map -->
-            <Label Text="MAP" Style="{StaticResource SectionHeader}" />
+            <Label Text="{loc:T Settings_MAP}" Style="{StaticResource SectionHeader}" />
             <Grid ColumnDefinitions="Auto,*" Padding="16,12" ColumnSpacing="12">
-                <Label Grid.Column="0" Text="Basemap style" VerticalOptions="Center" />
+                <Label Grid.Column="0" Text="{loc:T Settings_BasemapStyle}" VerticalOptions="Center" />
                 <Picker Grid.Column="1"
                         ItemsSource="{Binding MapStyleOptions}"
                         SelectedItem="{Binding SelectedMapStyle}" />
@@ -67,14 +67,14 @@
                    Placeholder="https://…/style.json"
                    Keyboard="Url" />
             <Grid ColumnDefinitions="Auto,*" Padding="16,12" ColumnSpacing="12">
-                <Label Grid.Column="0" Text="GPS follow zoom" VerticalOptions="Center" />
+                <Label Grid.Column="0" Text="{loc:T Settings_GPSFollowZoom}" VerticalOptions="Center" />
                 <Picker Grid.Column="1"
                         ItemsSource="{Binding FollowZoomOptions}"
                         SelectedItem="{Binding SelectedFollowZoom}" />
             </Grid>
             <Grid ColumnDefinitions="Auto,*" Padding="16,0,16,8" ColumnSpacing="12"
                   IsVisible="{Binding IsManualFollowZoom}">
-                <Label Grid.Column="0" Text="Zoom level (1–22)" VerticalOptions="Center" />
+                <Label Grid.Column="0" Text="{loc:T Settings_ZoomLevel122}" VerticalOptions="Center" />
                 <Entry Grid.Column="1"
                        Text="{Binding ManualFollowZoom}"
                        Keyboard="Numeric"
@@ -82,33 +82,33 @@
                        HorizontalOptions="Start" />
             </Grid>
             <Label Margin="16,0,16,8" FontSize="12" TextColor="Gray"
-                   Text="Zoom applied when the map's GPS button enters Follow mode. Auto picks a level where the fix's accuracy circle is visible; pinch-zooming afterwards sticks until Follow is re-entered." />
+                   Text="{loc:T Settings_ZoomAppliedWhenTheMap}" />
             <Grid ColumnDefinitions="Auto,*,Auto" Padding="16,8" ColumnSpacing="12">
-                <Label Grid.Column="0" Text="AP point size" VerticalOptions="Center" />
+                <Label Grid.Column="0" Text="{loc:T Settings_APPointSize}" VerticalOptions="Center" />
                 <Slider Grid.Column="1" Minimum="0.5" Maximum="3" Value="{Binding MapPointScale}" />
                 <Label Grid.Column="2" Text="{Binding MapPointScaleText}" WidthRequest="48"
                        HorizontalTextAlignment="End" VerticalOptions="Center" />
             </Grid>
             <Label Margin="16,0,16,8" FontSize="12" TextColor="Gray"
-                   Text="Size of the access point dots on the map, live scan and WifiDB history alike." />
-            <Button Text="Map AP colors…" Command="{Binding OpenMapColorsCommand}"
+                   Text="{loc:T Settings_SizeOfTheAccessPoint}" />
+            <Button Text="{loc:T Settings_MapAPColors}" Command="{Binding OpenMapColorsCommand}"
                     Margin="16,4" HorizontalOptions="Fill" />
             <BoxView HeightRequest="1" Color="#EEEEEE" Margin="16,0" />
 
             <!-- GPS -->
-            <Label Text="GPS" Style="{StaticResource SectionHeader}" />
+            <Label Text="{loc:T Settings_GPS}" Style="{StaticResource SectionHeader}" />
             <Grid ColumnDefinitions="Auto,*" Padding="16,8" ColumnSpacing="12">
-                <Label Grid.Column="0" Text="GPS source" VerticalOptions="Center" />
+                <Label Grid.Column="0" Text="{loc:T Settings_GPSSource}" VerticalOptions="Center" />
                 <Picker Grid.Column="1"
                         ItemsSource="{Binding GpsSourceOptions}"
                         SelectedItem="{Binding SelectedGpsSource}" />
             </Grid>
             <Grid ColumnDefinitions="*,Auto" Padding="16,4">
-                <Label Grid.Column="0" Text="Record the GPS track even when no APs are found" VerticalOptions="Center" />
+                <Label Grid.Column="0" Text="{loc:T Settings_RecordTheGPSTrackEven}" VerticalOptions="Center" />
                 <Switch Grid.Column="1" IsToggled="{Binding SaveGpsWithoutAps}" />
             </Grid>
             <Grid ColumnDefinitions="Auto,*" Padding="16,8" ColumnSpacing="12">
-                <Label Grid.Column="0" Text="Coordinate format" VerticalOptions="Center" />
+                <Label Grid.Column="0" Text="{loc:T Settings_CoordinateFormat}" VerticalOptions="Center" />
                 <Picker Grid.Column="1"
                         ItemsSource="{Binding GpsFormatOptions}"
                         SelectedItem="{Binding SelectedGpsFormat}" />
@@ -116,98 +116,98 @@
             <!-- Serial (NMEA) settings, shown only when the serial source is selected -->
             <VerticalStackLayout IsVisible="{Binding IsSerialGps}" Padding="16,0,16,8" Spacing="8">
                 <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
-                    <Label Grid.Column="0" Text="COM port" VerticalOptions="Center" />
+                    <Label Grid.Column="0" Text="{loc:T Settings_COMPort}" VerticalOptions="Center" />
                     <Picker Grid.Column="1"
                             ItemsSource="{Binding ComPorts}"
                             SelectedItem="{Binding SelectedComPort}" />
-                    <Button Grid.Column="2" Text="Refresh"
+                    <Button Grid.Column="2" Text="{loc:T Settings_Refresh}"
                             Command="{Binding RefreshComPortsCommand}"
                             Padding="10,4" FontSize="12" />
                 </Grid>
                 <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
-                    <Label Grid.Column="0" Text="Baud rate" VerticalOptions="Center" />
+                    <Label Grid.Column="0" Text="{loc:T Settings_BaudRate}" VerticalOptions="Center" />
                     <Picker Grid.Column="1"
                             ItemsSource="{Binding BaudRateOptions}"
                             SelectedItem="{Binding SelectedBaudRate}" />
                 </Grid>
-                <Label Text="Choose the COM port your GPS receiver uses. A Bluetooth receiver paired with Windows appears as a COM port too."
+                <Label Text="{loc:T Settings_ChooseTheCOMPortYour}"
                        FontSize="11" TextColor="Gray" />
             </VerticalStackLayout>
             <!-- Options for external NMEA receivers (COM port, Bluetooth, USB), from the original Vistumbler -->
             <VerticalStackLayout IsVisible="{Binding IsExternalGps}" Padding="0,0,0,4">
                 <Grid ColumnDefinitions="*,Auto" Padding="16,4">
-                    <Label Grid.Column="0" Text="Reconnect the receiver when no data is received for 10 seconds" VerticalOptions="Center" />
+                    <Label Grid.Column="0" Text="{loc:T Settings_ReconnectTheReceiverWhenNo}" VerticalOptions="Center" />
                     <Switch Grid.Column="1" IsToggled="{Binding ReconnectGpsWhenNoData}" />
                 </Grid>
                 <Grid ColumnDefinitions="*,Auto" Padding="16,4">
-                    <Label Grid.Column="0" Text="Reset GPS position when no fix is received for 30 seconds" VerticalOptions="Center" />
+                    <Label Grid.Column="0" Text="{loc:T Settings_ResetGPSPositionWhenNo}" VerticalOptions="Center" />
                     <Switch Grid.Column="1" IsToggled="{Binding ResetGpsPositionWhenNoFix}" />
                 </Grid>
-                <Label Text="Turn off the reconnect for a receiver that pauses its output. Resetting the position stops APs being placed at the receiver's last position after it loses its fix."
+                <Label Text="{loc:T Settings_TurnOffTheReconnectFor}"
                        FontSize="11" TextColor="Gray" Margin="16,0,16,4" />
             </VerticalStackLayout>
             <!-- USB (NMEA) receiver, Android -->
             <VerticalStackLayout IsVisible="{Binding IsUsbGps}" Padding="16,0,16,8" Spacing="8">
                 <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
-                    <Label Grid.Column="0" Text="Baud rate" VerticalOptions="Center" />
+                    <Label Grid.Column="0" Text="{loc:T Settings_BaudRate}" VerticalOptions="Center" />
                     <Picker Grid.Column="1"
                             ItemsSource="{Binding BaudRateOptions}"
                             SelectedItem="{Binding SelectedUsbBaudRate}" />
                 </Grid>
                 <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
                     <Label Grid.Column="0" Text="{Binding UsbDevicesText}" FontSize="12" VerticalOptions="Center" />
-                    <Button Grid.Column="1" Text="Refresh"
+                    <Button Grid.Column="1" Text="{loc:T Settings_Refresh}"
                             Command="{Binding RefreshUsbDevicesCommand}"
                             Padding="10,4" FontSize="12" />
                 </Grid>
-                <Label Text="Plug the receiver in with a USB OTG adapter; Android asks to let the app use it. Works with Prolific PL2303 (GlobalSat), Silicon Labs CP210x, FTDI, CH340 and u-blox receivers. GlobalSat receivers usually run at 4800 baud, u-blox at 9600."
+                <Label Text="{loc:T Settings_PlugTheReceiverInWith}"
                        FontSize="11" TextColor="Gray" />
             </VerticalStackLayout>
             <!-- Bluetooth (NMEA) receiver, Android -->
             <VerticalStackLayout IsVisible="{Binding IsBluetoothGps}" Padding="16,0,16,8" Spacing="8">
                 <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
-                    <Label Grid.Column="0" Text="Receiver" VerticalOptions="Center" />
+                    <Label Grid.Column="0" Text="{loc:T Settings_Receiver}" VerticalOptions="Center" />
                     <Picker Grid.Column="1"
                             ItemsSource="{Binding BluetoothDevices}"
                             SelectedItem="{Binding SelectedBluetoothDevice}" />
-                    <Button Grid.Column="2" Text="Refresh"
+                    <Button Grid.Column="2" Text="{loc:T Settings_Refresh}"
                             Command="{Binding RefreshBluetoothDevicesCommand}"
                             Padding="10,4" FontSize="12" />
                 </Grid>
                 <Label Text="{Binding BluetoothStatus}"
                        IsVisible="{Binding BluetoothStatus, Converter={StaticResource IsNotNullOrEmpty}}"
                        FontSize="12" TextColor="Gray" />
-                <Label Text="Pair the receiver in Android's Bluetooth settings first, then choose it here. It must send NMEA over the serial port profile (SPP), as most Bluetooth GPS receivers do."
+                <Label Text="{loc:T Settings_PairTheReceiverInAndroid}"
                        FontSize="11" TextColor="Gray" />
             </VerticalStackLayout>
             <BoxView HeightRequest="1" Color="#EEEEEE" Margin="16,0" />
 
             <!-- WifiDB -->
-            <Label Text="WIFIDB" Style="{StaticResource SectionHeader}" />
+            <Label Text="{loc:T Settings_WIFIDB}" Style="{StaticResource SectionHeader}" />
             <Grid ColumnDefinitions="Auto,*" Padding="16,8" ColumnSpacing="12" RowSpacing="8"
                   RowDefinitions="Auto,Auto,Auto,Auto">
-                <Label Grid.Row="0" Grid.Column="0" Text="Base URL" VerticalOptions="Center" />
+                <Label Grid.Row="0" Grid.Column="0" Text="{loc:T Settings_BaseURL}" VerticalOptions="Center" />
                 <Entry Grid.Row="0" Grid.Column="1" Text="{Binding WifiDbUrl}"
                        Placeholder="https://wifidb.net/" Keyboard="Url" />
 
-                <Label Grid.Row="1" Grid.Column="0" Text="Username" VerticalOptions="Center" />
-                <Entry Grid.Row="1" Grid.Column="1" Text="{Binding WifiDbUser}" Placeholder="username" />
+                <Label Grid.Row="1" Grid.Column="0" Text="{loc:T Settings_Username}" VerticalOptions="Center" />
+                <Entry Grid.Row="1" Grid.Column="1" Text="{Binding WifiDbUser}" Placeholder="{loc:T Settings_Username2}" />
 
-                <Label Grid.Row="2" Grid.Column="0" Text="API key" VerticalOptions="Center" />
+                <Label Grid.Row="2" Grid.Column="0" Text="{loc:T Settings_APIKey}" VerticalOptions="Center" />
                 <Entry Grid.Row="2" Grid.Column="1" Text="{Binding WifiDbApiKey}"
-                       Placeholder="API key" IsPassword="True" />
+                       Placeholder="{loc:T Settings_APIKey}" IsPassword="True" />
 
-                <Label Grid.Row="3" Grid.Column="0" Text="Data URL" VerticalOptions="Center" />
+                <Label Grid.Row="3" Grid.Column="0" Text="{loc:T Settings_DataURL}" VerticalOptions="Center" />
                 <Entry Grid.Row="3" Grid.Column="1" Text="{Binding WifiDbDataUrl}"
                        Placeholder="https://data.wifidb.net" Keyboard="Url" />
             </Grid>
-            <Label Text="Data URL serves the map history archives and the feed listing them — a different host from the site above."
+            <Label Text="{loc:T Settings_DataURLServesTheMap}"
                    FontSize="11" TextColor="Gray" Margin="16,0" />
 
-            <Button Text="Register with QR code"
+            <Button Text="{loc:T Settings_RegisterWithQRCode}"
                     Command="{Binding ScanWifiDbQrCommand}"
                     Margin="16,4" HorizontalOptions="Fill" />
-            <Button Text="Register with link…"
+            <Button Text="{loc:T Settings_RegisterWithLink}"
                     Command="{Binding RedeemWifiDbLinkCommand}"
                     Margin="16,0,16,4" HorizontalOptions="Fill"
                     BackgroundColor="Transparent" TextColor="#1565C0" />
@@ -217,37 +217,37 @@
             <BoxView HeightRequest="1" Color="#EEEEEE" Margin="16,4" />
 
             <!-- WiGLE: optional, secondary to WifiDB, off by default (SettingsViewModel.Wigle.cs) -->
-            <Label Text="WIGLE (OPTIONAL)" Style="{StaticResource SectionHeader}" />
+            <Label Text="{loc:T Settings_WIGLEOPTIONAL}" Style="{StaticResource SectionHeader}" />
             <Grid ColumnDefinitions="*,Auto" Padding="16,4" ColumnSpacing="8">
                 <VerticalStackLayout Grid.Column="0" VerticalOptions="Center">
-                    <Label Text="Also upload to WiGLE" />
-                    <Label Text="Optional, alongside WifiDB. Sends Wi-Fi, cell towers and Bluetooth as a WiGLE CSV."
+                    <Label Text="{loc:T Settings_AlsoUploadToWiGLE}" />
+                    <Label Text="{loc:T Settings_OptionalAlongsideWifiDBSendsWi}"
                            FontSize="11" TextColor="Gray" />
                 </VerticalStackLayout>
                 <Switch Grid.Column="1" IsToggled="{Binding WigleEnabled}" />
             </Grid>
             <VerticalStackLayout IsVisible="{Binding WigleEnabled}" Spacing="4">
                 <Label Text="{Binding WigleTerms}" FontSize="12" TextColor="#795548" Margin="16,4,16,0" />
-                <Button Text="Read WiGLE's terms of use" Command="{Binding OpenWigleTermsCommand}"
+                <Button Text="{loc:T Settings_ReadWiGLESTermsOf}" Command="{Binding OpenWigleTermsCommand}"
                         Margin="16,0" HorizontalOptions="Start" Padding="0" HeightRequest="32"
                         BackgroundColor="Transparent" TextColor="#1565C0" FontSize="13" />
                 <Grid ColumnDefinitions="Auto,*" Padding="16,4" ColumnSpacing="12" RowSpacing="8" RowDefinitions="Auto,Auto">
-                    <Label Grid.Row="0" Grid.Column="0" Text="API name" VerticalOptions="Center" />
-                    <Entry Grid.Row="0" Grid.Column="1" Text="{Binding WigleApiName}" Placeholder="AID…" />
-                    <Label Grid.Row="1" Grid.Column="0" Text="API token" VerticalOptions="Center" />
-                    <Entry Grid.Row="1" Grid.Column="1" Text="{Binding WigleApiToken}" Placeholder="API token" IsPassword="True" />
+                    <Label Grid.Row="0" Grid.Column="0" Text="{loc:T Settings_APIName}" VerticalOptions="Center" />
+                    <Entry Grid.Row="0" Grid.Column="1" Text="{Binding WigleApiName}" Placeholder="{loc:T Settings_AID}" />
+                    <Label Grid.Row="1" Grid.Column="0" Text="{loc:T Settings_APIToken}" VerticalOptions="Center" />
+                    <Entry Grid.Row="1" Grid.Column="1" Text="{Binding WigleApiToken}" Placeholder="{loc:T Settings_APIToken}" IsPassword="True" />
                 </Grid>
-                <Button Text="Get my API name and token (wigle.net)" Command="{Binding OpenWigleAccountCommand}"
+                <Button Text="{loc:T Settings_GetMyAPINameAnd}" Command="{Binding OpenWigleAccountCommand}"
                         Margin="16,0" HorizontalOptions="Start" Padding="0" HeightRequest="32"
                         BackgroundColor="Transparent" TextColor="#1565C0" FontSize="13" />
                 <Grid ColumnDefinitions="*,Auto" Padding="16,4" ColumnSpacing="8">
-                    <Label Grid.Column="0" Text="Upload each Save &amp; Clear to WiGLE" VerticalOptions="Center" />
+                    <Label Grid.Column="0" Text="{loc:T Settings_UploadEachSaveClearTo}" VerticalOptions="Center" />
                     <Switch Grid.Column="1" IsToggled="{Binding WigleUploadEachSave}" />
                 </Grid>
                 <Grid ColumnDefinitions="*,Auto" Padding="16,4" ColumnSpacing="8">
                     <VerticalStackLayout Grid.Column="0" VerticalOptions="Center">
-                        <Label Text="Donate for commercial use" />
-                        <Label Text="Lets WiGLE also license your uploads commercially (WiGLE's &quot;donate&quot;)."
+                        <Label Text="{loc:T Settings_DonateForCommercialUse}" />
+                        <Label Text="{loc:T Settings_LetsWiGLEAlsoLicenseYour}"
                                FontSize="11" TextColor="Gray" />
                     </VerticalStackLayout>
                     <Switch Grid.Column="1" IsToggled="{Binding WigleDonate}" />
@@ -255,8 +255,8 @@
                 <VerticalStackLayout IsVisible="{Binding HasPendingWigle}" Margin="16,4" Spacing="4">
                     <Label Text="{Binding PendingWigleText}" FontSize="12" TextColor="#C62828" />
                     <HorizontalStackLayout Spacing="8">
-                        <Button Text="Retry now" Command="{Binding RetryWigleCommand}" Padding="12,0" HeightRequest="36" />
-                        <Button Text="Stop" Command="{Binding ClearWigleCommand}" Padding="12,0" HeightRequest="36"
+                        <Button Text="{loc:T Settings_RetryNow}" Command="{Binding RetryWigleCommand}" Padding="12,0" HeightRequest="36" />
+                        <Button Text="{loc:T Bar_Stop}" Command="{Binding ClearWigleCommand}" Padding="12,0" HeightRequest="36"
                                 BackgroundColor="Transparent" TextColor="Gray" />
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
@@ -264,15 +264,15 @@
             <BoxView HeightRequest="1" Color="#EEEEEE" Margin="16,4" />
 
             <!-- Save & Clear -->
-            <Label Text="SAVE &amp; CLEAR" Style="{StaticResource SectionHeader}" />
+            <Label Text="{loc:T Settings_SAVECLEAR}" Style="{StaticResource SectionHeader}" />
             <Label Margin="16,0,16,4" FontSize="12" TextColor="Gray"
-                   Text="Save &amp; Clear (menu) saves the access points to a file here, then clears the list while scanning carries on. Auto Save And Clear does it for you." />
+                   Text="{loc:T Settings_SaveClearMenuSavesThe}" />
             <Grid ColumnDefinitions="*,Auto" Margin="16,4" ColumnSpacing="8">
                 <Label Grid.Column="0" Text="{Binding SaveFolder}" LineBreakMode="HeadTruncation" VerticalOptions="Center" />
-                <Button Grid.Column="1" Text="Browse…" Command="{Binding BrowseSaveFolderCommand}"
+                <Button Grid.Column="1" Text="{loc:T Settings_Browse}" Command="{Binding BrowseSaveFolderCommand}"
                         Padding="12,0" HeightRequest="36" />
             </Grid>
-            <Button Text="Use default folder" Command="{Binding UseDefaultSaveFolderCommand}"
+            <Button Text="{loc:T Settings_UseDefaultFolder}" Command="{Binding UseDefaultSaveFolderCommand}"
                     IsVisible="{Binding IsCustomSaveFolder}"
                     Margin="16,0" HorizontalOptions="Start" Padding="12,0" HeightRequest="32"
                     BackgroundColor="Transparent" TextColor="Gray" />
@@ -280,45 +280,45 @@
                    IsVisible="{Binding SaveFolderStatus, Converter={StaticResource IsNotNullOrEmpty}}"
                    FontSize="12" TextColor="Gray" Margin="16,0,16,4" />
             <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" Padding="16,8" ColumnSpacing="12" RowSpacing="8">
-                <Label Grid.Row="0" Grid.Column="0" Text="File name" VerticalOptions="Center" />
-                <Entry Grid.Row="0" Grid.Column="1" Text="{Binding SaveFileName}" Placeholder="AutoSave" />
-                <Label Grid.Row="1" Grid.Column="0" Text="File type" VerticalOptions="Center" />
+                <Label Grid.Row="0" Grid.Column="0" Text="{loc:T Settings_FileName}" VerticalOptions="Center" />
+                <Entry Grid.Row="0" Grid.Column="1" Text="{Binding SaveFileName}" Placeholder="{loc:T Settings_AutoSave}" />
+                <Label Grid.Row="1" Grid.Column="0" Text="{loc:T Settings_FileType}" VerticalOptions="Center" />
                 <Picker Grid.Row="1" Grid.Column="1" ItemsSource="{Binding SaveFormatOptions}"
                         SelectedItem="{Binding SelectedSaveFormat}" />
             </Grid>
-            <Label Text="{Binding SaveFileNameExample, StringFormat='For example: {0}'}"
+            <Label Text="{Binding SaveFileNameExample, StringFormat={loc:T Settings_ForExample0}}"
                    FontSize="11" TextColor="Gray" Margin="16,0,16,4" />
             <Grid ColumnDefinitions="*,Auto" Padding="16,8">
-                <Label Grid.Column="0" Text="Auto Save And Clear" VerticalOptions="Center" />
+                <Label Grid.Column="0" Text="{loc:T Settings_AutoSaveAndClear}" VerticalOptions="Center" />
                 <Switch Grid.Column="1" IsToggled="{Binding AutoSaveAndClear}" />
             </Grid>
             <VerticalStackLayout IsVisible="{Binding AutoSaveAndClear}" Padding="16,0,16,8" Spacing="8">
                 <Picker ItemsSource="{Binding AutoSaveTriggerOptions}" SelectedItem="{Binding SelectedAutoSaveTrigger}" />
                 <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12" IsVisible="{Binding IsAutoSaveByTime, Converter={StaticResource InvertBool}}">
-                    <Label Grid.Column="0" Text="Save once the list has this many APs" VerticalOptions="Center" />
+                    <Label Grid.Column="0" Text="{loc:T Settings_SaveOnceTheListHas}" VerticalOptions="Center" />
                     <Entry Grid.Column="1" Text="{Binding AutoSaveApCount}" Keyboard="Numeric" WidthRequest="80" />
                 </Grid>
                 <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12" IsVisible="{Binding IsAutoSaveByTime}">
-                    <Label Grid.Column="0" Text="Save every this many minutes of scanning" VerticalOptions="Center" />
+                    <Label Grid.Column="0" Text="{loc:T Settings_SaveEveryThisManyMinutes}" VerticalOptions="Center" />
                     <Entry Grid.Column="1" Text="{Binding AutoSaveMinutes}" Keyboard="Numeric" WidthRequest="80" />
                 </Grid>
             </VerticalStackLayout>
             <Grid ColumnDefinitions="*,Auto" Padding="16,8">
-                <Label Grid.Column="0" Text="Upload each save to WifiDB" VerticalOptions="Center" />
+                <Label Grid.Column="0" Text="{loc:T Settings_UploadEachSaveToWifiDB}" VerticalOptions="Center" />
                 <Switch Grid.Column="1" IsToggled="{Binding UploadSavesToWifiDb}" />
             </Grid>
             <Grid ColumnDefinitions="*,Auto" Padding="16,4" IsVisible="{Binding UploadSavesToWifiDb}">
-                <Label Grid.Column="0" Text="Delete the saved file once WifiDB has it" VerticalOptions="Center" />
+                <Label Grid.Column="0" Text="{loc:T Settings_DeleteTheSavedFileOnce}" VerticalOptions="Center" />
                 <Switch Grid.Column="1" IsToggled="{Binding DeleteSavesAfterUpload}" />
             </Grid>
-            <Label Text="Uses the WifiDB account below. The file is kept unless you choose to delete it after the upload. A file that can't be uploaded (no connection, WifiDB unreachable, no account yet) waits and is retried when the connection comes back, when the app starts and after the next save."
+            <Label Text="{loc:T Settings_UsesTheWifiDBAccountBelow}"
                    FontSize="11" TextColor="Gray" Margin="16,0,16,8" />
             <VerticalStackLayout IsVisible="{Binding HasPendingUploads}" Padding="16,0,16,8" Spacing="4">
                 <Label Text="{Binding PendingUploadsText}" FontSize="12" />
                 <HorizontalStackLayout Spacing="8">
-                    <Button Text="Retry now" Command="{Binding RetryUploadsCommand}"
+                    <Button Text="{loc:T Settings_RetryNow}" Command="{Binding RetryUploadsCommand}"
                             Padding="12,0" HeightRequest="32" />
-                    <Button Text="Stop uploading" Command="{Binding ClearUploadsCommand}"
+                    <Button Text="{loc:T Settings_StopUploading}" Command="{Binding ClearUploadsCommand}"
                             Padding="12,0" HeightRequest="32"
                             BackgroundColor="Transparent" TextColor="Gray" />
                     <ActivityIndicator IsRunning="{Binding IsRetryingUploads}" IsVisible="{Binding IsRetryingUploads}"
@@ -328,45 +328,45 @@
             <BoxView HeightRequest="1" Color="#EEEEEE" Margin="16,0" />
 
             <!-- Sound (the original Vistumbler's sounds) -->
-            <Label Text="SOUND" Style="{StaticResource SectionHeader}" />
+            <Label Text="{loc:T Settings_SOUND}" Style="{StaticResource SectionHeader}" />
             <Grid ColumnDefinitions="*,Auto" Padding="16,8">
-                <Label Grid.Column="0" Text="Play a sound when new APs are found" VerticalOptions="Center" />
+                <Label Grid.Column="0" Text="{loc:T Settings_PlayASoundWhenNew}" VerticalOptions="Center" />
                 <Switch Grid.Column="1" IsToggled="{Binding SoundEnabled}" />
             </Grid>
             <Picker Margin="16,0,16,4" IsVisible="{Binding SoundEnabled}"
                     ItemsSource="{Binding NewApSoundOptions}" SelectedItem="{Binding SelectedNewApSound}" />
             <Grid ColumnDefinitions="*,Auto" Padding="16,8">
-                <Label Grid.Column="0" Text="Play a sound when the GPS receiver has a problem" VerticalOptions="Center" />
+                <Label Grid.Column="0" Text="{loc:T Settings_PlayASoundWhenThe}" VerticalOptions="Center" />
                 <Switch Grid.Column="1" IsToggled="{Binding ErrorSound}" />
             </Grid>
-            <Label Text="Speaking an AP's signal: turn it on from the AP's details page."
+            <Label Text="{loc:T Settings_SpeakingAnAPSSignal}"
                    FontSize="12" Margin="16,8,16,0" />
             <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto" Padding="16,8" ColumnSpacing="12" RowSpacing="8">
-                <Label Grid.Row="0" Grid.Column="0" Text="Voice" VerticalOptions="Center" />
+                <Label Grid.Row="0" Grid.Column="0" Text="{loc:T Settings_Voice}" VerticalOptions="Center" />
                 <Picker Grid.Row="0" Grid.Column="1" ItemsSource="{Binding SpeakVoiceOptions}" SelectedItem="{Binding SelectedSpeakVoice}" />
-                <Label Grid.Row="1" Grid.Column="0" Text="Say" VerticalOptions="Center" />
+                <Label Grid.Row="1" Grid.Column="0" Text="{loc:T Settings_Say}" VerticalOptions="Center" />
                 <Picker Grid.Row="1" Grid.Column="1" ItemsSource="{Binding SpeakValueOptions}" SelectedItem="{Binding SelectedSpeakValue}" />
-                <Label Grid.Row="2" Grid.Column="0" Text="Speak every (seconds)" VerticalOptions="Center" />
+                <Label Grid.Row="2" Grid.Column="0" Text="{loc:T Settings_SpeakEverySeconds}" VerticalOptions="Center" />
                 <Entry Grid.Row="2" Grid.Column="1" Text="{Binding SpeakIntervalSeconds}" Keyboard="Numeric"
                        WidthRequest="80" HorizontalOptions="Start" />
             </Grid>
             <Grid ColumnDefinitions="*,Auto" Padding="16,4,16,8">
-                <Label Grid.Column="0" Text="Say the unit (&quot;percent&quot; or &quot;dBm&quot;) after the number" VerticalOptions="Center" />
+                <Label Grid.Column="0" Text="{loc:T Settings_SayTheUnitPercentOr}" VerticalOptions="Center" />
                 <Switch Grid.Column="1" IsToggled="{Binding SayPercent}" />
             </Grid>
-            <Label Text="The tone plays the signal as pitch, like the original's MIDI sounds. The recorded words can't say &quot;minus&quot;, so they say RSSI as a plain number."
+            <Label Text="{loc:T Settings_TheTonePlaysTheSignal}"
                    FontSize="11" TextColor="Gray" Margin="16,0,16,8" />
             <BoxView HeightRequest="1" Color="#EEEEEE" Margin="16,0" />
 
             <!-- Data -->
-            <Label Text="DATA" Style="{StaticResource SectionHeader}" />
-            <Button Text="Import…"
+            <Label Text="{loc:T Settings_DATA}" Style="{StaticResource SectionHeader}" />
+            <Button Text="{loc:T Menu_Import}"
                     Command="{Binding GoToImportCommand}"
                     Margin="16,8" HorizontalOptions="Fill" />
-            <Button Text="Export…"
+            <Button Text="{loc:T Menu_Export}"
                     Command="{Binding GoToExportCommand}"
                     Margin="16,4" HorizontalOptions="Fill" />
-            <Button Text="Update manufacturers"
+            <Button Text="{loc:T Settings_UpdateManufacturers}"
                     Command="{Binding UpdateManufacturersCommand}"
                     Margin="16,4" HorizontalOptions="Fill" />
             <HorizontalStackLayout Margin="16,0,16,8" Spacing="8">
@@ -376,19 +376,19 @@
             </HorizontalStackLayout>
 
             <!-- Updates -->
-            <Label Text="UPDATES" Style="{StaticResource SectionHeader}" />
+            <Label Text="{loc:T Settings_UPDATES}" Style="{StaticResource SectionHeader}" />
             <VerticalStackLayout IsVisible="{Binding UpdatesSupported}">
                 <Grid ColumnDefinitions="*,Auto" Padding="16,8">
-                    <Label Grid.Column="0" Text="Check for updates at startup" VerticalOptions="Center" />
+                    <Label Grid.Column="0" Text="{loc:T Settings_CheckForUpdatesAtStartup}" VerticalOptions="Center" />
                     <Switch Grid.Column="1" IsToggled="{Binding AutoCheckForUpdates}" />
                 </Grid>
                 <Grid ColumnDefinitions="*,Auto" Padding="16,8">
-                    <Label Grid.Column="0" Text="Include pre-releases" VerticalOptions="Center" />
+                    <Label Grid.Column="0" Text="{loc:T Settings_IncludePreReleases}" VerticalOptions="Center" />
                     <Switch Grid.Column="1" IsToggled="{Binding IncludePrereleaseUpdates}" />
                 </Grid>
-                <Label Text="Pre-releases (e.g. 0.5.0-rc.1) get new features first but may be less stable."
+                <Label Text="{loc:T Settings_PreReleasesEG0}"
                        FontSize="11" TextColor="Gray" Margin="16,0,16,4" />
-                <Button Text="Check for Updates"
+                <Button Text="{loc:T Settings_CheckForUpdates}"
                         Command="{Binding CheckForUpdatesCommand}"
                         Margin="16,8" HorizontalOptions="Fill" />
             </VerticalStackLayout>
@@ -399,16 +399,16 @@
             <BoxView HeightRequest="1" Color="#EEEEEE" Margin="16,4" />
 
             <!-- Advanced -->
-            <Label Text="ADVANCED" Style="{StaticResource SectionHeader}" />
+            <Label Text="{loc:T Settings_ADVANCED}" Style="{StaticResource SectionHeader}" />
             <Grid ColumnDefinitions="*,Auto" Padding="16,8">
-                <Label Grid.Column="0" Text="Keep screen on while scanning" VerticalOptions="Center" />
+                <Label Grid.Column="0" Text="{loc:T Settings_KeepScreenOnWhileScanning}" VerticalOptions="Center" />
                 <Switch Grid.Column="1" IsToggled="{Binding KeepScreenOn}" />
             </Grid>
             <Grid ColumnDefinitions="*,Auto" Padding="16,8">
-                <Label Grid.Column="0" Text="Debug logging" VerticalOptions="Center" />
+                <Label Grid.Column="0" Text="{loc:T Settings_DebugLogging}" VerticalOptions="Center" />
                 <Switch Grid.Column="1" IsToggled="{Binding DebugLogging}" />
             </Grid>
-            <Label Text="Writes GPS fixes and map layer refreshes to the debug log (adb logcat) for troubleshooting."
+            <Label Text="{loc:T Settings_WritesGPSFixesAndMap}"
                    FontSize="11" TextColor="Gray" Margin="16,0,16,8" />
 
         </VerticalStackLayout>
