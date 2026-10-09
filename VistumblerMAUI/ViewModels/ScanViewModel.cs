@@ -624,6 +624,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
             else
                 AccessPoints.Insert(i, item);
         }
+        SyncGroups();
     }
 
     /// <summary>
@@ -657,6 +658,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
             while (idx < AccessPoints.Count && cmp(AccessPoints[idx], ap) <= 0) idx++;
             AccessPoints.Insert(idx, ap);
         }
+        SyncGroups();
     }
 
     private DateTime _lastGpsPointSaved = DateTime.MinValue;
