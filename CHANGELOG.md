@@ -2,6 +2,13 @@
 
 ## master
 ### ✨ Features and improvements
+- _...Add new stuff here..._
+
+### 🐞 Bug fixes
+- _...Add new stuff here..._
+
+## 0.8.0
+### ✨ Features and improvements
 - **An AP's signal and range maps (Map on its details page)** — the original's KML "Selected AP" maps, drawn on the built-in map instead of in Google Earth: every place the AP was heard, coloured from red (weak) to green (strong) in the original's six signal bands, its signal circle (100 + RSSI metres around where it was strongest) and its range circle (out to the farthest place it was heard). The ✕ on the bar above the map clears them.
 - **NetStumbler text (wi-scan) import** — NetStumbler's text export now imports, under Netstumbler on the Import page; it was offered before but imported nothing, since only the binary .ns1 was read. Text or binary is told apart by the file's content, as in the original. Each sighting becomes part of the AP's signal history, placed where its signal was strongest.
 - **WarDrive (Android) .db3 import** — the WarDrive app's database now imports, under Wardrive on the Import page, with each network's security, band, position and time. The option read every file as CSV before.
