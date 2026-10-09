@@ -13,8 +13,15 @@ public static class Loc
     private static readonly ResourceManager Strings =
         new("VistumblerMAUI.Resources.Strings.AppResources", typeof(Loc).Assembly);
 
+    /// <summary>
+    /// The language text is shown in (<see cref="LanguageSettings.Apply"/>). Kept here rather than read from
+    /// CultureInfo.CurrentUICulture, which follows the async flow it was set in: a page built later, e.g. from a tab
+    /// tap, would get the device's language again.
+    /// </summary>
+    public static CultureInfo Culture { get; set; } = CultureInfo.CurrentUICulture;
+
     /// <summary>The text for <paramref name="key"/>; the key itself when there's none, so a missing one is easy to spot.</summary>
-    public static string T(string key) => Strings.GetString(key, CultureInfo.CurrentUICulture) ?? key;
+    public static string T(string key) => Strings.GetString(key, Culture) ?? key;
 
     public static string T(string key, params object?[] args) =>
         string.Format(CultureInfo.CurrentCulture, T(key), args);
