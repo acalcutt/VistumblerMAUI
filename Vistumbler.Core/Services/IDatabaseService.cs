@@ -47,6 +47,17 @@ public interface IDatabaseService
     Task<string> GetManufacturerAsync(string ouiPrefix);
     Task BulkUpsertManufacturersAsync(IEnumerable<(string OuiPrefix, string Manufacturer)> entries);
 
+    // Cell towers and Bluetooth devices, kept apart from the APs (as WiGLE and WifiDB keep them)
+    /// <summary>
+    /// Persist one cell/Bluetooth scan in a single transaction: one GPS row for the fix (if any), each network
+    /// upserted by its key, and a reading appended for each.
+    /// </summary>
+    Task SaveRadioCycleAsync(IReadOnlyList<RadioNetwork> networks, GpsData? gps, DateTime scanTime);
+    /// <summary>Import cell/Bluetooth networks with their <see cref="RadioNetwork.History"/> (e.g. from a WiGLE CSV).</summary>
+    Task ImportRadioNetworksAsync(IReadOnlyList<RadioNetwork> networks);
+    Task<List<RadioNetwork>> GetAllRadioNetworksAsync();
+    Task<List<RadioReading>> GetRadioHistoryAsync(int networkId);
+
     // Labels (user-assigned friendly names per BSSID)
     Task<string?> GetLabelAsync(string bssid);
     Task SetLabelAsync(string bssid, string label);

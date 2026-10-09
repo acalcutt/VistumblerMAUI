@@ -8,7 +8,7 @@ namespace VistumblerMAUI.Services;
 /// SQLite database service using sqlite-net-pcl (async API).
 /// Stores access points, signal history, GPS track, and OUI lookups.
 /// </summary>
-public class SqliteDatabaseService : IDatabaseService
+public partial class SqliteDatabaseService : IDatabaseService
 {
     private readonly ISessionService _session;
     private SQLiteAsyncConnection? _db;
@@ -42,6 +42,8 @@ public class SqliteDatabaseService : IDatabaseService
             await _db.CreateTableAsync<DbGpsData>();
             await _db.CreateTableAsync<DbManufacturer>();
             await _db.CreateTableAsync<DbLabel>();
+            await _db.CreateTableAsync<DbRadioNetwork>();   // SqliteDatabaseService.Radio.cs
+            await _db.CreateTableAsync<DbRadioReading>();
             _initialized = true;
         }
         finally { _initLock.Release(); }
@@ -170,6 +172,8 @@ public class SqliteDatabaseService : IDatabaseService
     {
         await _db!.DeleteAllAsync<DbAccessPoint>();
         await _db.DeleteAllAsync<DbSignalHistory>();
+        await _db.DeleteAllAsync<DbRadioNetwork>();
+        await _db.DeleteAllAsync<DbRadioReading>();
         await _db.DeleteAllAsync<DbGpsData>();
     }
 
