@@ -67,7 +67,11 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
     [RelayCommand]
     private static Task OpenFiltersAsync() => Shell.Current.GoToAsync(nameof(Views.FiltersPage));
 
-    partial void OnSearchTextChanged(string value) => RebuildDisplayedList();
+    partial void OnSearchTextChanged(string value)
+    {
+        RebuildDisplayedList();
+        RebuildRadioList();
+    }
 
     // APs not re-seen within this many seconds are marked dead (dimmed, still listed).
     private const int DeadAfterSeconds = 30;
@@ -118,7 +122,8 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         Services.IKeepAliveService keepAlive,
         IExportService      export,
         Services.WifiDbUploadQueue uploadQueue,
-        Services.ManufacturerDatabase manufacturers)
+        Services.ManufacturerDatabase manufacturers,
+        IRadioScannerService radio)
     {
         _wifi      = wifi;
         _gps       = gps;
@@ -128,6 +133,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         _export    = export;
         _uploadQueue = uploadQueue;
         _manufacturers = manufacturers;
+        InitRadio(radio);   // cell towers and Bluetooth (ScanViewModel.Radio.cs)
         _manufacturers.Changed += (_, _) => MainThread.BeginInvokeOnMainThread(RefreshManufacturers);
         Services.ApFilterStore.Changed += (_, _) => MainThread.BeginInvokeOnMainThread(() =>
         {
@@ -171,6 +177,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
             _apMap[ap.Bssid] = ap;
         }
         _manufacturers.FillMissing(_apMap.Values);   // sessions saved before the lookup existed
+        await LoadRadioAsync();
 
         TotalCount  = _apMap.Count;
         ActiveCount = 0;
@@ -187,6 +194,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         if (IsGpsEnabled) StopGps();
         _apMap.Clear();
         AccessPoints.Clear();
+        ClearRadioInMemory();
         _loaded       = false;
         TotalCount    = 0;
         ActiveCount   = 0;
@@ -214,6 +222,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
     {
         _clearGeneration++;
         _apMap.Clear();
+        ClearRadioInMemory();
         TotalCount    = 0;
         ActiveCount   = 0;
         RebuildDisplayedList();
@@ -378,6 +387,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         StatusMessage = "Scanning…";
         _lastSaveAndClear = DateTime.UtcNow;   // Auto Save And Clear's timer counts scanning time
         _ = _wifi.StartScanningAsync(_scanCts.Token);
+        StartRadio();
         UpdateKeepAlive();
     }
 
@@ -385,6 +395,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
     {
         _scanCts?.Cancel();
         _wifi.StopScanning();
+        StopRadio();
         IsScanning    = false;
         StatusMessage = $"Stopped — {TotalCount} total APs";
         UpdateKeepAlive();
