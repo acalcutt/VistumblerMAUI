@@ -1,9 +1,3 @@
-| Cell towers and Bluetooth/BLE devices, in their own list | n/a | ➕ Android; in WiGLE CSV, and in VS1 as `#RADIO` lines |
-| GeoJSON (APs, and a signal map of every reading, with WifiDB's property names) | n/a | n/a / ➕ |
-| KML signal map (every reading, coloured by RSSI) | n/a | n/a / ➕ also per AP, from its live map |
-| Indoor site survey on a floor plan (tap-to-mark, heatmap) | n/a | ➕ Site survey in the menu; PNG and CSV export |
-| WiGLE Magic 8 Ball (.m8b) | n/a | ➕ / ➕ imported on the GPS details page, for offline position |
-| Offline position from the APs in range (Magic 8 Ball, m8b files) | n/a | ➕ on the GPS details page, from imported m8b files and the open session |
 # Feature comparison: VistumblerMDB and VistumblerMAUI
 
 How VistumblerMAUI compares with the original AutoIt Vistumbler (VistumblerMDB, `Vistumbler.au3`), feature by
@@ -27,6 +21,7 @@ Legend: ✅ has it · 🟡 partly, or done differently · ❌ missing · ➕ new
 | Select connected AP, auto-select connected or highest signal | ✓ | ❌ |
 | Add new APs to top, auto-scroll | ✓ | ❌ (sorting covers part of this) |
 | Manufacturer lookup during a scan, Update Manufacturers | ✓ | ✅ IEEE list of about 40,000 comes with the app; Update manufacturers in Settings → Data |
+| Cell towers and Bluetooth/BLE devices, in their own list | n/a | ➕ Android; in WiGLE CSV, and in VS1 4.1 as a section of their own |
 | MAC labels | ✓ | ❌ |
 | Choosing the Wi-Fi adapter (Interface menu) | ✓ | ✅ Windows, in Settings → Scanning |
 | Auto Scan APs on launch | ✓ | ✅ plus turning GPS on at launch |
@@ -50,6 +45,7 @@ Legend: ✅ has it · 🟡 partly, or done differently · ❌ missing · ➕ new
 | GPS Details and GPS Compass windows | ✓ | ✅ one GPS details page with a compass |
 | Save all GPS data, even with no APs | ✓ | ✅ on by default, as in the original |
 | Phone GPS, Bluetooth and USB receivers, GLONASS/Galileo/BeiDou | n/a | ➕ |
+| Offline position from the APs in range (Magic 8 Ball, m8b files) | n/a | ➕ on the GPS details page, from imported m8b files and the open session |
 | Camera trigger script | ✓ experimental | ❌ |
 
 ## Map, replacing Google Earth
@@ -60,6 +56,8 @@ Legend: ✅ has it · 🟡 partly, or done differently · ❌ missing · ➕ new
 | Open the KML network link | ✓ | 🟡 no longer needed, since the map is built in |
 | Export to KML, all APs | ✓ | ✅ |
 | Export to KML, filtered | ✓ | ✅ "only APs the filter shows" on the Export page |
+| KML signal map (every reading, coloured by RSSI) | n/a | ➕ on the Export page, and per AP from its live map |
+| Indoor site survey on a floor plan (tap-to-mark, heatmap) | n/a | ➕ Site survey in the menu; PNG and CSV export |
 | Signal and range circle maps for a selected AP | ✓ | ✅ drawn on the map from the AP's details page |
 | WifiDB history layers (age buckets) and cell layer | n/a | ➕ |
 | Basemap styles, 3D terrain, saving map areas for offline use, AP colours, point size | n/a | ➕ |
@@ -76,6 +74,8 @@ Legend: ✅ has it · 🟡 partly, or done differently · ❌ missing · ➕ new
 | NS1 binary | ✓ / ✓ | 🟡 / ✅ import only reads format version 12 |
 | NS1 text (wi-scan) | ✓ / ✓ | ✅ / n/a import only: it was a way in from NetStumbler |
 | WarDrive DB3 | ✓ / n/a | ✅ / n/a |
+| WiGLE Magic 8 Ball (.m8b) | n/a | ➕ / ➕ imported on the GPS details page, for offline position |
+| GeoJSON (APs, and a signal map of every reading, with WifiDB's property names) | n/a | n/a / ➕ |
 | Import a whole folder | ✓ | ✅ |
 | Export only the filtered APs | ✓ | ✅ |
 | Export/import settings, Open Save Folder | ✓ | ❌ (the share sheet replaces Open Save Folder) |

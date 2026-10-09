@@ -2,7 +2,7 @@
 
 ## master
 ### ✨ Features and improvements
-- _...Add new stuff here..._
+- **Cells and Bluetooth in VS1 as a section of their own (VS1 4.1)** — instead of 0.8.0's `#RADIO` comment lines, a VS1 file with cell towers or Bluetooth devices is version 4.1 and lists them after the APs as 10-field lines (`Type|Key|Name|Capabilities|Channel|Frequency|MfgrId|Manufacturer|High RSSI|GID,RSSI`), whose readings point at the GPS lines as the APs' do. VS1 readers tell lines apart by their field count, so older versions of Vistumbler skip them; a file without cells or Bluetooth is still 4.0. Files from 0.8.0 still import.
 
 ### 🐞 Bug fixes
 - _...Add new stuff here..._
@@ -30,6 +30,9 @@
 - **Cells and Bluetooth in exports** — WiGLE CSV includes them as WiGLE writes them, which WifiDB imports into its cell table; VS1/VSZ files (including Save & Clear, autosave and WifiDB uploads) carry them as `#RADIO` comment lines, which the original Vistumbler and WifiDB skip. WiGLE CSV and VS1 imports read them back.
 
 ### 🐞 Bug fixes
+- **VS1 imports keep their GPS positions and signal history** — the import read only each AP's summary, so imported APs had no readings or positions and were dated to the import. The GPS section and each AP's history are now read, as in the original.
+- **VSZ files open in Vistumbler and WifiDB** — the VS1 inside was named after the file, but the original Vistumbler and WifiDB only look for `data.vs1`, so WifiDB uploads of VSZ files imported nothing.
+- **WiGLE CSV imports no longer turn cell towers and Bluetooth devices into Wi-Fi APs.**
 - **Map dots no longer vanish during long scans** — the live AP layer was built by pasting text together, which let an SSID with control characters (hidden networks often broadcast \0 bytes) or a comma-decimal phone language produce invalid JSON, and then every dot disappeared. It's now written with a JSON writer.
 - **KML and NetXML exports no longer fail on hidden-network SSIDs** — characters XML can't hold made the whole export fail; they're now left out of the file.
 - **Update manufacturers works on Android** — IEEE refuses Android's default user agent (HTTP 418); the app now identifies itself.
