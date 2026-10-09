@@ -69,6 +69,14 @@ public sealed class ManufacturerDatabase
                 ap.Manufacturer = name;
     }
 
+    /// <summary>The same for Bluetooth devices; cell towers have no MAC.</summary>
+    public void FillMissing(IEnumerable<Vistumbler.Core.Models.RadioNetwork> networks)
+    {
+        foreach (var n in networks)
+            if (n.IsBluetooth && string.IsNullOrEmpty(n.Manufacturer) && Lookup(n.Key) is { Length: > 0 } name)
+                n.Manufacturer = name;
+    }
+
     /// <summary>The app's instance, for code outside dependency injection.</summary>
     public static ManufacturerDatabase? Current =>
         IPlatformApplication.Current?.Services.GetService(typeof(ManufacturerDatabase)) as ManufacturerDatabase;

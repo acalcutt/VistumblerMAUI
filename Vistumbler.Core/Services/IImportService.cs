@@ -8,6 +8,12 @@ namespace Vistumbler.Core.Services;
 public interface IImportService
 {
     /// <summary>
+    /// The cell towers and Bluetooth devices the last import found (WiGLE CSV and VS1 carry them beside the APs),
+    /// handed over once: the list is emptied by the call.
+    /// </summary>
+    IReadOnlyList<RadioNetwork> TakeRadioNetworks();
+
+    /// <summary>
     /// Import from VS1 format (Vistumbler native text)
     /// </summary>
     Task<List<AccessPoint>> ImportFromVs1Async(string filePath);

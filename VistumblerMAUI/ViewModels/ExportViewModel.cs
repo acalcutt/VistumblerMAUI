@@ -209,7 +209,8 @@ public partial class ExportViewModel : ObservableObject
                         await _exportService.ExportToCsvAsync(path, aps, gpsFixes);
                         break;
                     case ExportFormat.WigleCsv:
-                        await _exportService.ExportToWigleCsvAsync(path, aps);
+                        // Cell towers and Bluetooth devices too, as WiGLE writes them; WifiDB imports both
+                        await _exportService.ExportToWigleCsvAsync(path, aps, FilteredOnly ? null : await LoadRadiosAsync());
                         break;
                     case ExportFormat.Vs1:
                         await _exportService.ExportToVs1Async(path, aps, gpsFixes);
@@ -271,6 +272,14 @@ public partial class ExportViewModel : ObservableObject
         {
             // The file is written; where it goes next is the platform's business.
         }
+    }
+
+    /// <summary>The session's cell towers and Bluetooth devices, with their readings.</summary>
+    private async Task<List<RadioNetwork>> LoadRadiosAsync()
+    {
+        var radios = await _databaseService.GetAllRadioNetworksAsync();
+        foreach (var n in radios) n.History = await _databaseService.GetRadioHistoryAsync(n.Id);
+        return radios;
     }
 
     private bool CanExport() => !IsExporting;

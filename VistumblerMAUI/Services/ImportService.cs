@@ -19,6 +19,16 @@ namespace VistumblerMAUI.Services;
 /// </summary>
 public class ImportService : IImportService
 {
+    // Cell towers and Bluetooth devices met during the current import, by key (see TakeRadioNetworks)
+    private readonly Dictionary<string, RadioNetwork> _radios = new(StringComparer.OrdinalIgnoreCase);
+
+    public IReadOnlyList<RadioNetwork> TakeRadioNetworks()
+    {
+        var list = _radios.Values.ToList();
+        _radios.Clear();
+        return list;
+    }
+
     public async Task<List<AccessPoint>> ImportFromNs1Async(string filePath)
     {
         return await Task.Run(() =>
@@ -794,7 +804,10 @@ public class ImportService : IImportService
             for (int i = 1; i < lines.Length; i++)
             {
                 if (string.IsNullOrWhiteSpace(lines[i])) continue;
-                var ap = ParseWigleLine(SplitCsvLine(lines[i]));
+                var parts = SplitCsvLine(lines[i]);
+                if (parts[0] == "MAC") continue;   // the column header
+                if (ParseWigleRadioLine(parts)) continue;   // a cell tower or Bluetooth device, kept apart
+                var ap = ParseWigleLine(parts);
                 if (ap != null) accessPoints.Add(ap);
             }
             return accessPoints;
@@ -909,6 +922,56 @@ public class ImportService : IImportService
         {
             return null; // Skip malformed lines
         }
+    }
+
+    /// <summary>
+    /// A WiGLE CSV row for a cell tower or Bluetooth device (Type GSM, CDMA, WCDMA, LTE, NR, BT or BLE): adds it to
+    /// <see cref="_radios"/> with the reading, and returns true. False for Wi-Fi rows, left to
+    /// <see cref="ParseWigleLine"/>. v1.6 has 14 columns, v1.4 11 (no Frequency, RCOIs or MfgrId).
+    /// </summary>
+    private bool ParseWigleRadioLine(string[] parts)
+    {
+        bool v16 = parts.Length >= 14;
+        if (!v16 && parts.Length < 11) return false;
+        string typeText = parts[v16 ? 13 : 10].Trim();
+        if (typeText.Equals("WIFI", StringComparison.OrdinalIgnoreCase) || !Enum.TryParse<RadioNetworkType>(typeText, true, out var type))
+            return false;
+
+        string key = parts[0].Trim();
+        if (key.Length == 0) return true;
+        int rssi = ParseInt(parts[v16 ? 6 : 5]);
+        double? lat = ParseDouble(parts[v16 ? 7 : 6]), lon = ParseDouble(parts[v16 ? 8 : 7]);
+        if (lat == 0 && lon == 0) lat = lon = null;
+        var when = DateTime.TryParse(parts[3], CultureInfo.InvariantCulture,
+            DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal, out var t) ? t : DateTime.UtcNow;
+
+        if (!_radios.TryGetValue(key, out var n))
+        {
+            int channel = ParseInt(parts[4]);
+            _radios[key] = n = new RadioNetwork
+            {
+                Key = type is RadioNetworkType.BT or RadioNetworkType.BLE ? key.ToUpperInvariant() : key,
+                Type = type,
+                Name = parts[1],
+                Capabilities = parts[2],
+                Channel = channel > 0 ? channel : null,
+                Frequency = v16 ? ParseInt(parts[5]) : channel,
+                MfgrId = v16 && int.TryParse(parts[12], out var mfgr) ? mfgr : null,
+                Rssi = rssi,
+                FirstSeen = when,
+                LastSeen = when,
+            };
+        }
+        if (when < n.FirstSeen) n.FirstSeen = when;
+        if (when > n.LastSeen) { n.LastSeen = when; n.Rssi = rssi; }
+        if (rssi >= n.HighestRssi && lat is not null)
+        {
+            n.HighestRssi = rssi;
+            n.Latitude = lat;
+            n.Longitude = lon;
+        }
+        n.History.Add(new RadioReading { Rssi = rssi, Latitude = lat, Longitude = lon, Altitude = ParseDouble(parts[v16 ? 9 : 8]), Timestamp = when });
+        return true;
     }
 
     private AccessPoint? ParseWigleLine(string[] parts)

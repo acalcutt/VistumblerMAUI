@@ -80,15 +80,17 @@ public partial class ImportViewModel : ObservableObject
         try
         {
             var importedAps = await ParseAsync(_filePath, SelectedImportType);
+            var radios = _importService.TakeRadioNetworks();
 
-            if (importedAps.Count > 0)
+            if (importedAps.Count > 0 || radios.Count > 0)
             {
                 StatusMessage = $"Saving {importedAps.Count} access points…";
                 ProgressValue = 0.5;
-                await SaveAsync(importedAps);
+                await SaveAsync(importedAps, radios);
 
                 ProgressValue = 1;
-                StatusMessage = $"Done — imported {importedAps.Count} access point(s)";
+                StatusMessage = $"Done — imported {importedAps.Count} access point(s)"
+                                + (radios.Count > 0 ? $" and {radios.Count} cell tower(s) and Bluetooth device(s)" : "");
             }
             else
             {
@@ -153,7 +155,8 @@ public partial class ImportViewModel : ObservableObject
                     var (local, isCopy) = await Services.SaveFolder.GetLocalFileAsync(location);
                     if (isCopy) copy = local;
                     var aps = await ParseAsync(local, SelectedImportType);
-                    if (aps.Count > 0) await SaveAsync(aps);
+                    var radios = _importService.TakeRadioNetworks();
+                    if (aps.Count > 0 || radios.Count > 0) await SaveAsync(aps, radios);
                     totalAps += aps.Count;
                 }
                 catch (Exception ex)
@@ -197,13 +200,16 @@ public partial class ImportViewModel : ObservableObject
         };
     }
 
-    private async Task SaveAsync(List<AccessPoint> aps)
+    private async Task SaveAsync(List<AccessPoint> aps, IReadOnlyList<RadioNetwork> radios)
     {
         await _databaseService.InitializeAsync();
         // Files from other tools (and older Vistumbler versions) often have no manufacturer
         Services.ManufacturerDatabase.Current?.FillMissing(aps);
         // Writes AP + HIST + GPS rows and (re)computes each AP's history links.
         await _databaseService.ImportAccessPointsAsync(aps);
+        // Cell towers and Bluetooth devices (WiGLE CSV), into their own tables
+        Services.ManufacturerDatabase.Current?.FillMissing(radios);
+        await _databaseService.ImportRadioNetworksAsync(radios);
     }
 
     private static string[] GetExtensions(ImportType type) => type switch

@@ -40,9 +40,10 @@ public interface IExportService
     Task ExportToCsvAsync(string filePath, List<AccessPoint> accessPoints, List<GpsData> gpsFixes);
 
     /// <summary>
-    /// Export access points to WiGLE CSV format
+    /// Export to WiGLE CSV: a row per reading of each AP, then of each cell tower and Bluetooth device in
+    /// <paramref name="radios"/> (their <see cref="RadioNetwork.History"/> loaded), which WiGLE and WifiDB both import.
     /// </summary>
-    Task ExportToWigleCsvAsync(string filePath, List<AccessPoint> accessPoints);
+    Task ExportToWigleCsvAsync(string filePath, List<AccessPoint> accessPoints, IReadOnlyList<RadioNetwork>? radios = null);
 
     /// <summary>
     /// Export to VS1 text format (Vistumbler native, Detailed Export v4). Each AP must have

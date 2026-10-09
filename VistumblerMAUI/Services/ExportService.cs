@@ -687,7 +687,43 @@ public class ExportService : IExportService
         }
     }
 
-    public async Task ExportToWigleCsvAsync(string filePath, List<AccessPoint> accessPoints)
+    public async Task ExportToWigleCsvAsync(string filePath, List<AccessPoint> accessPoints, IReadOnlyList<RadioNetwork>? radios = null)
+    {
+        await WriteWigleCsvAsync(filePath, accessPoints);
+        if (radios is { Count: > 0 }) await AppendWigleRadioRowsAsync(filePath, radios);
+    }
+
+    /// <summary>
+    /// Cell tower and Bluetooth rows, as WiGLE WiFi Wardriving writes them (ObservationUploader): the key as MAC, the
+    /// name as SSID, the capabilities as AuthMode, channel and frequency blank when unknown, MfgrId for BLE, and the
+    /// Type. A row per positioned reading, or one at the strongest position when there are none.
+    /// </summary>
+    private static async Task AppendWigleRadioRowsAsync(string filePath, IReadOnlyList<RadioNetwork> radios)
+    {
+        var inv = System.Globalization.CultureInfo.InvariantCulture;
+        await using var writer = new StreamWriter(filePath, append: true, new UTF8Encoding(false));
+        static string Clean(string s) => s.Replace(",", "").Replace("\r", "").Replace("\n", "");
+
+        foreach (var n in radios)
+        {
+            string head = $"{n.Key},{Clean(n.Name)},{Clean(n.Capabilities)}";
+            string channel = n.Channel is { } c ? c.ToString(inv) : "";
+            string freq = n.Frequency != 0 ? n.Frequency.ToString(inv) : "";
+            string mfgr = n.MfgrId is { } m and not 0 ? m.ToString(inv) : "";
+            string Row(DateTime when, int rssi, double lat, double lon, double? alt) =>
+                $"{head},{when.ToString("yyyy-MM-dd HH:mm:ss", inv)},{channel},{freq},{rssi.ToString(inv)}," +
+                $"{lat.ToString(inv)},{lon.ToString(inv)},{(alt ?? 0).ToString(inv)},0,,{mfgr},{n.Type}";
+
+            var readings = n.History.Where(r => r.Latitude is { } la && r.Longitude is { } lo && (la != 0 || lo != 0)).ToList();
+            if (readings.Count > 0)
+                foreach (var r in readings)
+                    await writer.WriteLineAsync(Row(r.Timestamp, r.Rssi, r.Latitude!.Value, r.Longitude!.Value, r.Altitude));
+            else if (n.HasGps)
+                await writer.WriteLineAsync(Row(n.FirstSeen, n.HighestRssi, n.Latitude!.Value, n.Longitude!.Value, null));
+        }
+    }
+
+    private async Task WriteWigleCsvAsync(string filePath, List<AccessPoint> accessPoints)
     {
         using var writer = new StreamWriter(filePath, false, Encoding.UTF8);
 
