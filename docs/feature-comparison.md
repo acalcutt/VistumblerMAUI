@@ -1,3 +1,5 @@
+| WiGLE Magic 8 Ball (.m8b) | n/a | ➕ / ➕ imported on the GPS details page, for offline position |
+| Offline position from the APs in range (Magic 8 Ball, m8b files) | n/a | ➕ on the GPS details page, from imported m8b files and the open session |
 # Feature comparison: VistumblerMDB and VistumblerMAUI
 
 How VistumblerMAUI compares with the original AutoIt Vistumbler (VistumblerMDB, `Vistumbler.au3`), feature by

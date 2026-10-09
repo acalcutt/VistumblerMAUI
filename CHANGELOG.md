@@ -14,6 +14,8 @@
 - **Speak RSSI, or a tone (Settings → Sound)** — Speak signal can say the RSSI ("minus 65 dBm") instead of the signal percentage, and a third voice plays a short tone whose pitch rises with the signal, in place of the original's MIDI notes.
 - **Settings reordered** — Scanning, Map, GPS and WifiDB come first, then Save & Clear, Sound and the rest. The map AP colors moved to their own page (Map AP colors… under Map), since the grid took up much of Settings.
 - **Offline maps under the map** — Save Area and Go Offline moved from the toolbar to the buttons under the map as **Save map for offline** (now explaining what it downloads before it starts) and **Saved maps only**. New Session moved to the top of the menu.
+- **Wi-Fi position, offline (GPS details)** — an estimate of where you are from the APs in range, with no GPS or network, e.g. indoors: each AP votes for the 1 km squares it has been seen in, and the square most agree on is shown, with how far it is from the GPS fix and **Show on map** to see the squares. It searches the open session's APs and any imported **Magic 8 Ball (.m8b)** files, the format from WiGLE WiFi Wardriving, so their exports work too.
+- **Export to M8b** — writes a session as a Magic 8 Ball file (each AP's best-signal position), to import on another device for offline position.
 
 ### 🐞 Bug fixes
 - **Map dots no longer vanish during long scans** — the live AP layer was built by pasting text together, which let an SSID with control characters (hidden networks often broadcast \0 bytes) or a comma-decimal phone language produce invalid JSON, and then every dot disappeared. It's now written with a JSON writer.
