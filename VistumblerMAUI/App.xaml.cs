@@ -8,6 +8,12 @@ public partial class App : Application
 {
     private readonly IServiceProvider _services;
 
+    /// <summary>
+    /// The session being resumed automatically, until the app has finished loading it. Still set at the next
+    /// launch means that resume crashed the app, so the chooser is shown instead of trying it again.
+    /// </summary>
+    public const string AutoResumeKey = "Session_AutoResumePending";
+
     public App(IServiceProvider services)
     {
         InitializeComponent();
@@ -22,11 +28,21 @@ public partial class App : Application
     {
         var session = _services.GetRequiredService<ISessionService>();
 
-        // If prior sessions exist, let the user recover/remove one or start new; otherwise
-        // begin a fresh session straight away.
+        // A single earlier session (the app was exited, or closed without meaning to) is picked up where it
+        // left off. Several, or one whose automatic resume crashed the app last time, go to the chooser to
+        // recover, remove or start new; none starts a fresh session straight away.
         Page start;
-        if (session.ListSessions().Count > 0)
+        var sessions = session.ListSessions();
+        var pending = Preferences.Get(AutoResumeKey, string.Empty);
+        if (sessions.Count == 1 && pending != sessions[0].Path)
         {
+            Preferences.Set(AutoResumeKey, sessions[0].Path);   // cleared once the app has loaded (AppShell)
+            session.ResumeSession(sessions[0].Path);
+            start = _services.GetRequiredService<AppShell>();
+        }
+        else if (sessions.Count > 0)
+        {
+            Preferences.Remove(AutoResumeKey);
             start = _services.GetRequiredService<SessionChooserPage>();
         }
         else

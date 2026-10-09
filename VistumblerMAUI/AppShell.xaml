@@ -29,11 +29,12 @@
     </TabBar>
 
     <!-- Hamburger menu actions (data + session) -->
+    <MenuItem Text="New Session"    Clicked="OnNewSessionClicked" />
     <MenuItem Text="Import…"        Clicked="OnImportClicked" />
     <MenuItem Text="Export…"        Clicked="OnExportClicked" />
-    <MenuItem Text="Save &amp; Clear" Clicked="OnSaveAndClearClicked" />
+    <!-- Clears the AP list, offering to save it first (the original's Save &amp; Clear and Clear All) -->
+    <MenuItem Text="Clear…"         Clicked="OnClearClicked" />
     <MenuItem Text="Upload to WifiDB…" Clicked="OnUploadToWifiDbClicked" />
-    <MenuItem Text="New Session"    Clicked="OnNewSessionClicked" />
     <!-- Hidden where there's nothing to check, e.g. the Google Play build, which Play updates -->
     <MenuItem Text="Check for Updates…" Clicked="OnCheckForUpdatesClicked"
               Shell.FlyoutItemIsVisible="{x:Static services:AppUpdater.IsSupported}" />

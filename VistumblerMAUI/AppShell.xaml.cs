@@ -37,6 +37,9 @@ public partial class AppShell : Shell
         _services.GetRequiredService<WifiDbUploadQueue>().Start();
         // The original's "Auto Scan APs on launch", plus the same for GPS (Settings → Scanning)
         await _services.GetRequiredService<ScanViewModel>().StartOnLaunchAsync();
+        // Once the session (resumed automatically or not) has run a few seconds without crashing, an automatic
+        // resume of it is safe again; see App.AutoResumeKey
+        _ = Task.Delay(TimeSpan.FromSeconds(5)).ContinueWith(_ => Preferences.Remove(App.AutoResumeKey));
         await _services.GetRequiredService<AppUpdater>().CheckOnStartupAsync(ExitForUpdateAsync);
     }
 
@@ -65,17 +68,25 @@ public partial class AppShell : Shell
         await GoToAsync(nameof(ExportPage));
     }
 
-    // Like the original Vistumbler's Save & Clear button: keep the scan in a file, then start the list
-    // over without stopping the scan
-    private async void OnSaveAndClearClicked(object? sender, EventArgs e)
+    // The original's Clear All and Save & Clear in one: clear the AP list, offering to save it to a file first
+    // (Settings → Save & Clear sets where). Scanning carries on either way.
+    private async void OnClearClicked(object? sender, EventArgs e)
     {
         FlyoutIsPresented = false;
+        const string save = "Save to a file, then clear", discard = "Clear without saving";
         var (folder, _) = SaveAndClearSettings.Resolve();
-        bool ok = await DisplayAlert("Save & Clear",
-            $"Save the access points to a file in {SaveFolder.Describe(folder)}, then clear the list? Scanning carries on.",
-            "Save & Clear", "Cancel");
-        if (!ok) return;
+        var choice = await DisplayActionSheet(
+            $"Clear the AP list? Scanning carries on. Saved files go to {SaveFolder.Describe(folder)}.",
+            "Cancel", discard, save);
+        if (choice == save)
+            await SaveAndClearAsync();
+        else if (choice == discard)
+            await _services.GetRequiredService<ScanViewModel>().ClearAllCommand.ExecuteAsync(null);
+    }
 
+    // Keep the scan in a file, then start the list over without stopping the scan
+    private async Task SaveAndClearAsync()
+    {
         var result = await _services.GetRequiredService<ScanViewModel>().SaveAndClearAsync();
         if (result.Path is null)
         {
