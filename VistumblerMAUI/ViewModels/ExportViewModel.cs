@@ -16,7 +16,8 @@ public enum ExportFormat
     Csv,
     WigleCsv,
     Vs1,
-    Vsz
+    Vsz,
+    M8b
 }
 
 /// <summary>
@@ -213,6 +214,15 @@ public partial class ExportViewModel : ObservableObject
                     case ExportFormat.Vsz:
                         await _exportService.ExportToVszAsync(path, aps, gpsFixes);
                         break;
+                    case ExportFormat.M8b:
+                        // WiGLE's Magic 8 Ball: each AP's best-signal position, for offline "where am I"
+                        await Task.Run(() =>
+                        {
+                            using var stream = File.Create(path);
+                            Services.M8b.M8bFile.Write(stream, aps.Where(a => a.HasGps)
+                                .Select(a => (a.Bssid, a.Latitude!.Value, a.Longitude!.Value)));
+                        });
+                        break;
                 }
             }
         }
@@ -265,6 +275,7 @@ public partial class ExportViewModel : ObservableObject
         ExportFormat.WigleCsv => ".csv",
         ExportFormat.Vs1 => ".vs1",
         ExportFormat.Vsz => ".vsz",
+        ExportFormat.M8b => ".m8b",
         _ => ".txt"
     };
 }
