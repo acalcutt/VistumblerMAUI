@@ -2,7 +2,7 @@
 
 ## master
 ### ✨ Features and improvements
-- **Cells and Bluetooth in VS1 as a section of their own (VS1 4.1)** — instead of 0.8.0's `#RADIO` comment lines, a VS1 file with cell towers or Bluetooth devices is version 4.1 and lists them after the APs as 10-field lines (`Type|Key|Name|Capabilities|Channel|Frequency|MfgrId|Manufacturer|High RSSI|GID,RSSI`), whose readings point at the GPS lines as the APs' do. VS1 readers tell lines apart by their field count, so older versions of Vistumbler skip them; a file without cells or Bluetooth is still 4.0. Files from 0.8.0 still import.
+- **Cells and Bluetooth in VS1 as a section of their own (VS1 4.1)** — instead of 0.8.0's `#RADIO` comment lines, a VS1 file with cell towers or Bluetooth devices is version 4.1 and lists them after the APs as 10-field lines (`Type|Key|Name|Capabilities|Channel|Frequency|MfgrId|Manufacturer|High RSSI|GID,RSSI`), whose readings point at the GPS lines as the APs' do. VS1 readers tell lines apart by their field count, so older versions of Vistumbler skip them; a file without cells or Bluetooth is still 4.0.
 
 ### 🐞 Bug fixes
 - _...Add new stuff here..._

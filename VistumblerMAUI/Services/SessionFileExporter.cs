@@ -19,7 +19,7 @@ public static class SessionFileExporter
         foreach (var ap in aps)
             ap.SignalHistory = await db.GetSignalHistoryAsync(ap.ApId);
         var gpsFixes = await db.GetAllGpsAsync();
-        var radios = await LoadRadiosAsync(db);   // cell towers and Bluetooth, as #RADIO lines
+        var radios = await LoadRadiosAsync(db);   // cell towers and Bluetooth, VS1 4.1's third section
 
         Directory.CreateDirectory(Path.GetDirectoryName(path)!);
         if (format == SaveFileFormat.Vsz)

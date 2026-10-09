@@ -29,16 +29,7 @@ public partial class ImportService
         var aps = new List<AccessPoint>();
         foreach (var line in lines)
         {
-            if (string.IsNullOrWhiteSpace(line)) continue;
-            // VistumblerMAUI 0.8.0 wrote cells and Bluetooth as "#RADIO|Type|…|Manufacturer|GID,RSSI" comment lines,
-            // without the High RSSI field; read them as the 4.1 lines that replaced them
-            if (line.StartsWith("#RADIO|", StringComparison.Ordinal))
-            {
-                var old = line.Split('|');
-                if (old.Length == 10) ParseVs1RadioLine([.. old[1..9], "", old[9]], gps);
-                continue;
-            }
-            if (line[0] == '#') continue;
+            if (string.IsNullOrWhiteSpace(line) || line[0] == '#') continue;
             var p = line.Split('|');
             AccessPoint? ap = p.Length switch
             {
