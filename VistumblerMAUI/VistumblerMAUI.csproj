@@ -75,7 +75,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#3B52CC" />
+    <!-- The Vistumbler logo (RIEI-Logos/Vistumbler/VistumblerIcon.png) for the Windows taskbar/exe and iOS icons.
+         Android uses vistumbler-android's adaptive launcher icons instead (Platforms/Android/Resources). -->
+    <MauiIcon Include="Resources\AppIcon\appicon.png" Color="Transparent" />
     <!-- The Vistumbler logo (RIEI-Logos/Vistumbler/VistumblerIcon.png) at 62% of a transparent canvas: Android 12+
          shows the splash icon through a circle two-thirds of its size, which would otherwise clip the logo's edge.
          White background so the blue logo stands out. -->
