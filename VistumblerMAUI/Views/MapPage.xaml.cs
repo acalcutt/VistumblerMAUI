@@ -313,6 +313,7 @@ public partial class MapPage : ContentPage, IQueryAttributable
             // so ticks never overlap.
             if (_vm.LoadMappableApsCommand.CanExecute(null))
                 _ = _vm.LoadMappableApsCommand.ExecuteAsync(null);
+            _ = _vm.RefreshApMapAsync();   // an open AP map fills in as it's heard in new places
         };
         return timer;
     }

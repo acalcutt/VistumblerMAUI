@@ -27,34 +27,60 @@ public partial class MapViewModel
     // The original's SigCat1 … SigCat6: 1-16, 17-32, 33-48, 49-64, 65-80, 81-100 %
     private static readonly string[] SignalBandColors = { "#d7191c", "#fd8d3c", "#fecc5c", "#a6d96a", "#1a9641", "#006837" };
 
+    private string? _apMapBssid;
+    private int _apMapCount;
+    private bool _apMapRefreshing;
+
     /// <summary>Loads an AP's signal history and draws its maps, centring the map on them.</summary>
-    public async Task ShowApMapAsync(string bssid)
+    public Task ShowApMapAsync(string bssid) => LoadApMapAsync(bssid, recentre: true);
+
+    /// <summary>
+    /// Redraws the AP map if the AP has been heard somewhere new since, so it fills in live while scanning: WiGLE's
+    /// site survey. Called by the map's live timer.
+    /// </summary>
+    public async Task RefreshApMapAsync()
+    {
+        if (_apMapBssid is not { } bssid || _apMapRefreshing) return;
+        _apMapRefreshing = true;
+        try { await LoadApMapAsync(bssid, recentre: false); }
+        catch (Exception ex) { Services.DebugLog.Write($"[ApMap] refresh failed: {ex.Message}"); }
+        finally { _apMapRefreshing = false; }
+    }
+
+    private async Task LoadApMapAsync(string bssid, bool recentre)
     {
         await _db.InitializeAsync();
         var ap = await _db.GetAccessPointByBssidAsync(bssid);
-        if (ap is null) { StatusMessage = $"{bssid} isn't in this session"; return; }
+        if (ap is null) { if (recentre) StatusMessage = $"{bssid} isn't in this session"; return; }
 
         var points = (await _db.GetSignalHistoryAsync(ap.ApId))
             .Where(h => h.Signal > 0 && h.Latitude is { } lat && h.Longitude is { } lon && (lat != 0 || lon != 0))
             .Select(h => (Lat: h.Latitude!.Value, Lon: h.Longitude!.Value, h.Signal, h.Rssi))
             .ToList();
-        if (points.Count == 0) { StatusMessage = $"{bssid} has no GPS positions to map"; return; }
+        if (points.Count == 0) { if (recentre) StatusMessage = $"{bssid} has no GPS positions to map"; return; }
+        if (!recentre && points.Count == _apMapCount) return;   // nothing new
+        if (!recentre && _apMapBssid != bssid) return;          // cleared while loading
+        _apMapBssid = bssid;
+        _apMapCount = points.Count;
 
         var best = points.MaxBy(p => (p.Rssi ?? int.MinValue, p.Signal));
         double signalRadius = best.Rssi is { } rssi ? Math.Max(1, 100 + rssi) : Math.Max(1, best.Signal);
         double rangeRadius = Math.Max(10, points.Max(p => DistanceMeters(best.Lat, best.Lon, p.Lat, p.Lon)));
 
         _apMapGeoJson = (PointsGeoJson(points), CircleGeoJson(best.Lat, best.Lon, signalRadius), CircleGeoJson(best.Lat, best.Lon, rangeRadius));
-        _apMapCamera = (best.Lat, best.Lon, ZoomForRadius(best.Lat, rangeRadius));
+        if (recentre) _apMapCamera = (best.Lat, best.Lon, ZoomForRadius(best.Lat, rangeRadius));
         ApMapTitle = $"{(string.IsNullOrEmpty(ap.Ssid) ? ap.Bssid : ap.Ssid)}: {points.Count} positions, range {rangeRadius:0} m";
         HasApMap = true;
-        StatusMessage = ApMapTitle;
-        DrawApMap();
+        if (recentre) StatusMessage = ApMapTitle;
+        if (recentre || !_apMapDrawn) DrawApMap();
+        else UpdateApMapSources();
     }
 
     [RelayCommand]
     private void ClearApMap()
     {
+        _apMapBssid = null;
+        _apMapCount = 0;
         RemoveApMapLayers();
         _apMapGeoJson = null;
         _apMapCamera = null;
@@ -115,6 +141,52 @@ public partial class MapViewModel
         catch (Exception ex)
         {
             Services.DebugLog.Write($"[ApMap] couldn't draw: {ex.Message}");   // style not ready; redrawn when it is
+        }
+    }
+
+    // New data for the drawn layers, without removing and re-adding them (which would flicker)
+    private void UpdateApMapSources()
+    {
+        if (_controller is null || _apMapGeoJson is not { } g) return;
+        try
+        {
+            _controller.SetGeoJsonSource(ApMapRange, g.Range);
+            _controller.SetGeoJsonSource(ApMapSignal, g.Signal);
+            _controller.SetGeoJsonSource(ApMapPoints, g.Points);
+        }
+        catch (Exception ex)
+        {
+            Services.DebugLog.Write($"[ApMap] couldn't update: {ex.Message}");
+            DrawApMap();
+        }
+    }
+
+    /// <summary>Saves the AP's signal map as GeoJSON or KML (WiGLE's site survey export) and offers it to share.</summary>
+    [RelayCommand]
+    private async Task ExportApMapAsync()
+    {
+        if (_apMapBssid is not { } bssid) return;
+        var choice = await Shell.Current.DisplayActionSheetAsync("Export signal map", "Cancel", null, "GeoJSON", "KML");
+        if (choice is not ("GeoJSON" or "KML")) return;
+        try
+        {
+            var ap = await _db.GetAccessPointByBssidAsync(bssid);
+            if (ap is null) return;
+            ap.SignalHistory = await _db.GetSignalHistoryAsync(ap.ApId);
+            string name = $"signalmap_{bssid.Replace(":", "")}_{DateTime.Now:yyyyMMdd_HHmmss}" + (choice == "KML" ? ".kml" : ".geojson");
+            var (folder, _) = Services.ExportLocation.Resolve();
+            var saved = await Services.SaveFolder.SaveAsync(folder, name, path => choice == "KML"
+                ? Services.SignalMapExport.WriteKmlSignalMapAsync(path, new[] { ap }, $"{ap.Ssid} {ap.Bssid}")
+                : Services.SignalMapExport.WriteGeoJsonAsync(path, new[] { ap }, signalMap: true))
+                ?? throw new IOException("Nothing was written.");
+            StatusMessage = $"Saved {Services.SaveFolder.Describe(saved)}";
+            var (local, _) = await Services.SaveFolder.GetLocalFileAsync(saved);
+            try { await Share.Default.RequestAsync(new ShareFileRequest { Title = name, File = new ShareFile(local) }); }
+            catch { /* saved either way */ }
+        }
+        catch (Exception ex)
+        {
+            StatusMessage = $"Export failed: {ex.Message}";
         }
     }
 
