@@ -77,7 +77,10 @@ foreach (var (file, culture, codePage) in files)
         doc.Root.AddFirst(new XComment($" {new CultureInfo(culture).EnglishName} text for VistumblerMAUI. Strings not here show in English (AppResources.resx). " +
                                        "Seeded from the original Vistumbler's user-contributed language files by build/tools/ImportVistumblerLanguages.cs. "));
     }
-    var existing = doc.Root!.Elements("data").Select(d => (string)d.Attribute("name")!).ToHashSet();
+    // A machine-translated draft (comment "Draft…", build/tools/ApplyDraftTranslations.cs) gives way to a person's
+    // translation from the original's files; anything else already there is kept
+    static bool IsDraft(XElement d) => ((string?)d.Element("comment"))?.StartsWith("Draft", StringComparison.Ordinal) == true;
+    var existing = doc.Root!.Elements("data").Where(d => !IsDraft(d)).Select(d => (string)d.Attribute("name")!).ToHashSet();
 
     int added = 0;
     foreach (var (key, value) in ours)
@@ -86,6 +89,7 @@ foreach (var (file, culture, codePage) in files)
         var match = originalEnglish.FirstOrDefault(o => Normalize(o.Value) == Normalize(value));
         if (match.Key is null || !translated.TryGetValue(match.Key, out var translation)) continue;
         if (Normalize(translation) == Normalize(match.Value) && culture != "en") continue;   // never translated, still English
+        doc.Root.Elements("data").Where(d => (string)d.Attribute("name")! == key).Remove();   // the draft it replaces
 
         var text = translation.Replace("&&", "\u0001").Replace("&", "").Replace("\u0001", "&").Trim();
         if (value.EndsWith('…') && !text.EndsWith('…')) text = text.TrimEnd('.', ':', ' ') + "…";
