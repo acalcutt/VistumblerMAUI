@@ -36,11 +36,12 @@ public class MauiGeolocationGpsService : ILocationGpsService
             return;
         }
 
-        // Show a cached fix immediately if one is available.
+        // Show a cached fix immediately if a recent one is available. An old one (wherever the device last had
+        // a fix) would be stamped on APs as if it were current until a live fix replaced it
         try
         {
             var last = await Geolocation.GetLastKnownLocationAsync();
-            if (last is not null) Publish(last);
+            if (last is not null && DateTimeOffset.UtcNow - last.Timestamp <= GpsSettings.NoFixTimeout) Publish(last);
         }
         catch { /* fall through to live updates */ }
 

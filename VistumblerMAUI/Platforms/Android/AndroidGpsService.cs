@@ -55,9 +55,16 @@ public class AndroidGpsService : Java.Lang.Object, ILocationGpsService, ILocatio
 
         try
         {
-            // Show a cached fix immediately while waiting for the first live update.
+            // Show a cached fix immediately while waiting for the first live update, but only a recent one:
+            // the last known location can be hours old and far away (wherever the phone last had a fix), and
+            // would be stamped on APs as if it were current until a live fix replaced it
             var last = GetBestLastKnown(_lm);
-            if (last is not null) Publish(last);
+            if (last is not null)
+            {
+                var age = TimeSpan.FromMilliseconds((SystemClock.ElapsedRealtimeNanos() - last.ElapsedRealtimeNanos) / 1_000_000.0);
+                if (age <= GpsSettings.NoFixTimeout) Publish(last);
+                else DebugLog.Write($"[GpsSvc-Android] skipping last known fix, {age.TotalMinutes:F0} min old");
+            }
 
             // WiGLE-style: subscribe to every live provider (fused, gps, …) rather than
             // betting on one — if any single provider starves (fused indoors quirks,
