@@ -2079,4 +2079,113 @@
     <value>WiGLE API-namn och token sparade för {0}.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
+  <data name="Menu_Uploads" xml:space="preserve">
+    <value>Uppladdningar</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_SavesSummary" xml:space="preserve">
+    <value>Spara och rensa: {0} · {1:N0} AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_SavedThisSession" xml:space="preserve">
+    <value>Sparade denna session</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_SavedPoints" xml:space="preserve">
+    <value>Sparade denna session: {0:N0} AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Title" xml:space="preserve">
+    <value>Uppladdningar</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_THISSESSION" xml:space="preserve">
+    <value>DENNA SESSION</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_NoSaves" xml:space="preserve">
+    <value>Spara och rensa har inte sparat något i denna session än.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_SaveDetail" xml:space="preserve">
+    <value>Sparad {0} · {1:N0} AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_OnPhone" xml:space="preserve">
+    <value>Väntar på uppladdning från den här enheten: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_NotUploaded" xml:space="preserve">
+    <value>Behålls på den här enheten (uppladdning av varje sparning till WifiDB var av)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Uploaded" xml:space="preserve">
+    <value>Uppladdad till WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_InQueue" xml:space="preserve">
+    <value>I WifiDB:s importkö</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Importing" xml:space="preserve">
+    <value>WifiDB importerar den</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_ImportingProgress" xml:space="preserve">
+    <value>WifiDB importerar den ({0} AP)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Imported" xml:space="preserve">
+    <value>Importerad i WifiDB som nr {0}: {1:N0} AP, {2:N0} GPS-punkter</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Failed" xml:space="preserve">
+    <value>WifiDB kunde inte importera den: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_OpenOnWifiDb" xml:space="preserve">
+    <value>Öppna i WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_HowStatusWorks" xml:space="preserve">
+    <value>Varje sparning matchas mot WifiDB med filens MD5, så statusen syns även efter att filen tagits bort. Dra nedåt eller tryck på Uppdatera för att kontrollera igen.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_ALLTIME" xml:space="preserve">
+    <value>TOTALT PÅ WIFIDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Checking" xml:space="preserve">
+    <value>Frågar WifiDB…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_AccountTitle" xml:space="preserve">
+    <value>{0} på {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_AccountTotals" xml:space="preserve">
+    <value>{0:N0} importer · {1:N0} AP ({2:N0} nya) · {3:N0} GPS-punkter
+{4:N0} nya mobilmaster · {5:N0} nya Bluetooth-enheter</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Efficiency" xml:space="preserve">
+    <value>{0} % nya</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_ImportDates" xml:space="preserve">
+    <value>Första import {0} · senaste {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_ProfileFailed" xml:space="preserve">
+    <value>Det gick inte att hämta din WifiDB-profil: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_OpenProfile" xml:space="preserve">
+    <value>Öppna min WifiDB-profil</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_NeedAccount" xml:space="preserve">
+    <value>Konfigurera ditt WifiDB-konto för att se dina totaler.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
 </root>

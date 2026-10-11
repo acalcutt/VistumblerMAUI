@@ -2079,4 +2079,113 @@
     <value>Nombre y token de API de WiGLE guardados para {0}.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
+  <data name="Menu_Uploads" xml:space="preserve">
+    <value>Envíos</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_SavesSummary" xml:space="preserve">
+    <value>Guardar y vaciar: {0} · {1:N0} AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_SavedThisSession" xml:space="preserve">
+    <value>Guardados en esta sesión</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_SavedPoints" xml:space="preserve">
+    <value>Guardados en esta sesión: {0:N0} AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Title" xml:space="preserve">
+    <value>Envíos</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_THISSESSION" xml:space="preserve">
+    <value>ESTA SESIÓN</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_NoSaves" xml:space="preserve">
+    <value>Guardar y vaciar aún no ha guardado nada en esta sesión.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_SaveDetail" xml:space="preserve">
+    <value>Guardado {0} · {1:N0} AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_OnPhone" xml:space="preserve">
+    <value>Esperando para enviarse desde este dispositivo: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_NotUploaded" xml:space="preserve">
+    <value>Conservado en este dispositivo (enviar cada guardado a WifiDB estaba desactivado)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Uploaded" xml:space="preserve">
+    <value>Enviado a WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_InQueue" xml:space="preserve">
+    <value>En la cola de importación de WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Importing" xml:space="preserve">
+    <value>WifiDB lo está importando</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_ImportingProgress" xml:space="preserve">
+    <value>WifiDB lo está importando ({0} AP)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Imported" xml:space="preserve">
+    <value>Importado en WifiDB como n.º {0}: {1:N0} AP, {2:N0} puntos GPS</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Failed" xml:space="preserve">
+    <value>WifiDB no pudo importarlo: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_OpenOnWifiDb" xml:space="preserve">
+    <value>Abrir en WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_HowStatusWorks" xml:space="preserve">
+    <value>Cada guardado se asocia a WifiDB por el MD5 del archivo, así que su estado se sigue viendo después de borrar el archivo. Deslice hacia abajo o toque Actualizar para comprobarlo de nuevo.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_ALLTIME" xml:space="preserve">
+    <value>TOTAL EN WIFIDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Checking" xml:space="preserve">
+    <value>Consultando WifiDB…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_AccountTitle" xml:space="preserve">
+    <value>{0} en {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_AccountTotals" xml:space="preserve">
+    <value>{0:N0} importaciones · {1:N0} AP ({2:N0} nuevos) · {3:N0} puntos GPS
+{4:N0} antenas de telefonía nuevas · {5:N0} dispositivos Bluetooth nuevos</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Efficiency" xml:space="preserve">
+    <value>{0} % nuevos</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_ImportDates" xml:space="preserve">
+    <value>Primera importación {0} · última {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_ProfileFailed" xml:space="preserve">
+    <value>No se pudo obtener su perfil de WifiDB: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_OpenProfile" xml:space="preserve">
+    <value>Abrir mi perfil de WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_NeedAccount" xml:space="preserve">
+    <value>Configure su cuenta de WifiDB para ver sus totales.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
 </root>

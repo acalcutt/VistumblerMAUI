@@ -2079,4 +2079,113 @@
     <value>WiGLE-API-naam en token opgeslagen voor {0}.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
+  <data name="Menu_Uploads" xml:space="preserve">
+    <value>Uploads</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_SavesSummary" xml:space="preserve">
+    <value>Opslaan en wissen: {0} · {1:N0} AP's</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_SavedThisSession" xml:space="preserve">
+    <value>Opgeslagen deze sessie</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_SavedPoints" xml:space="preserve">
+    <value>Opgeslagen deze sessie: {0:N0} AP's</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Title" xml:space="preserve">
+    <value>Uploads</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_THISSESSION" xml:space="preserve">
+    <value>DEZE SESSIE</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_NoSaves" xml:space="preserve">
+    <value>Opslaan en wissen heeft in deze sessie nog niets opgeslagen.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_SaveDetail" xml:space="preserve">
+    <value>Opgeslagen {0} · {1:N0} AP's</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_OnPhone" xml:space="preserve">
+    <value>Wacht op upload vanaf dit apparaat: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_NotUploaded" xml:space="preserve">
+    <value>Bewaard op dit apparaat (elke opslag uploaden naar WifiDB stond uit)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Uploaded" xml:space="preserve">
+    <value>Geüpload naar WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_InQueue" xml:space="preserve">
+    <value>In de importwachtrij van WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Importing" xml:space="preserve">
+    <value>WifiDB importeert het bestand</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_ImportingProgress" xml:space="preserve">
+    <value>WifiDB importeert het bestand ({0} AP's)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Imported" xml:space="preserve">
+    <value>Geïmporteerd in WifiDB als nr. {0}: {1:N0} AP's, {2:N0} GPS-punten</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Failed" xml:space="preserve">
+    <value>WifiDB kon het niet importeren: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_OpenOnWifiDb" xml:space="preserve">
+    <value>Openen in WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_HowStatusWorks" xml:space="preserve">
+    <value>Elke opslag wordt via de MD5 van het bestand aan WifiDB gekoppeld, dus de status blijft zichtbaar nadat het bestand is verwijderd. Trek omlaag of tik op Vernieuwen om opnieuw te controleren.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_ALLTIME" xml:space="preserve">
+    <value>TOTAAL OP WIFIDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Checking" xml:space="preserve">
+    <value>WifiDB wordt geraadpleegd…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_AccountTitle" xml:space="preserve">
+    <value>{0} op {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_AccountTotals" xml:space="preserve">
+    <value>{0:N0} imports · {1:N0} AP's ({2:N0} nieuw) · {3:N0} GPS-punten
+{4:N0} nieuwe zendmasten · {5:N0} nieuwe Bluetooth-apparaten</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Efficiency" xml:space="preserve">
+    <value>{0}% nieuw</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_ImportDates" xml:space="preserve">
+    <value>Eerste import {0} · laatste {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_ProfileFailed" xml:space="preserve">
+    <value>Je WifiDB-profiel kon niet worden opgehaald: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_OpenProfile" xml:space="preserve">
+    <value>Mijn WifiDB-profiel openen</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_NeedAccount" xml:space="preserve">
+    <value>Stel je WifiDB-account in om je totalen te zien.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
 </root>

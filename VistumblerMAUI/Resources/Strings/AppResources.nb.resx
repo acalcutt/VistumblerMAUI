@@ -2079,4 +2079,113 @@
     <value>WiGLE API-navn og token lagret for {0}.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
+  <data name="Menu_Uploads" xml:space="preserve">
+    <value>Opplastinger</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_SavesSummary" xml:space="preserve">
+    <value>Lagre og tøm: {0} · {1:N0} AP-er</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_SavedThisSession" xml:space="preserve">
+    <value>Lagret i denne økten</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_SavedPoints" xml:space="preserve">
+    <value>Lagret i denne økten: {0:N0} AP-er</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Title" xml:space="preserve">
+    <value>Opplastinger</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_THISSESSION" xml:space="preserve">
+    <value>DENNE ØKTEN</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_NoSaves" xml:space="preserve">
+    <value>Lagre og tøm har ikke lagret noe i denne økten ennå.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_SaveDetail" xml:space="preserve">
+    <value>Lagret {0} · {1:N0} AP-er</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_OnPhone" xml:space="preserve">
+    <value>Venter på opplasting fra denne enheten: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_NotUploaded" xml:space="preserve">
+    <value>Beholdt på denne enheten (opplasting av hver lagring til WifiDB var av)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Uploaded" xml:space="preserve">
+    <value>Lastet opp til WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_InQueue" xml:space="preserve">
+    <value>I importkøen til WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Importing" xml:space="preserve">
+    <value>WifiDB importerer den</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_ImportingProgress" xml:space="preserve">
+    <value>WifiDB importerer den ({0} AP-er)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Imported" xml:space="preserve">
+    <value>Importert i WifiDB som nr. {0}: {1:N0} AP-er, {2:N0} GPS-punkter</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Failed" xml:space="preserve">
+    <value>WifiDB kunne ikke importere den: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_OpenOnWifiDb" xml:space="preserve">
+    <value>Åpne i WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_HowStatusWorks" xml:space="preserve">
+    <value>Hver lagring matches mot WifiDB med filens MD5, så statusen vises også etter at filen er slettet. Dra ned eller trykk Oppdater for å sjekke igjen.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_ALLTIME" xml:space="preserve">
+    <value>TOTALT PÅ WIFIDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Checking" xml:space="preserve">
+    <value>Spør WifiDB…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_AccountTitle" xml:space="preserve">
+    <value>{0} på {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_AccountTotals" xml:space="preserve">
+    <value>{0:N0} importer · {1:N0} AP-er ({2:N0} nye) · {3:N0} GPS-punkter
+{4:N0} nye mobilmaster · {5:N0} nye Bluetooth-enheter</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Efficiency" xml:space="preserve">
+    <value>{0} % nye</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_ImportDates" xml:space="preserve">
+    <value>Første import {0} · siste {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_ProfileFailed" xml:space="preserve">
+    <value>Kunne ikke hente WifiDB-profilen din: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_OpenProfile" xml:space="preserve">
+    <value>Åpne WifiDB-profilen min</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_NeedAccount" xml:space="preserve">
+    <value>Konfigurer WifiDB-kontoen din for å se totalene dine.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
 </root>

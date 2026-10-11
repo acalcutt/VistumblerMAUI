@@ -2079,4 +2079,113 @@
     <value>已為 {0} 儲存 WiGLE API 名稱與權杖。</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
+  <data name="Menu_Uploads" xml:space="preserve">
+    <value>上傳</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_SavesSummary" xml:space="preserve">
+    <value>儲存並清除: {0} 次 · {1:N0} 個 AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_SavedThisSession" xml:space="preserve">
+    <value>本工作階段已儲存</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_SavedPoints" xml:space="preserve">
+    <value>本工作階段已儲存: {0:N0} 個 AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Title" xml:space="preserve">
+    <value>上傳</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_THISSESSION" xml:space="preserve">
+    <value>本工作階段</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_NoSaves" xml:space="preserve">
+    <value>本工作階段的「儲存並清除」尚未儲存任何內容。</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_SaveDetail" xml:space="preserve">
+    <value>儲存於 {0} · {1:N0} 個 AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_OnPhone" xml:space="preserve">
+    <value>等待從此裝置上傳: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_NotUploaded" xml:space="preserve">
+    <value>保留在此裝置 (每次儲存都上傳到 WifiDB 已關閉)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Uploaded" xml:space="preserve">
+    <value>已上傳到 WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_InQueue" xml:space="preserve">
+    <value>在 WifiDB 的匯入佇列中</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Importing" xml:space="preserve">
+    <value>WifiDB 正在匯入</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_ImportingProgress" xml:space="preserve">
+    <value>WifiDB 正在匯入 ({0} 個 AP)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Imported" xml:space="preserve">
+    <value>已匯入 WifiDB,編號 #{0}: {1:N0} 個 AP、{2:N0} 個 GPS 點</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Failed" xml:space="preserve">
+    <value>WifiDB 無法匯入: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_OpenOnWifiDb" xml:space="preserve">
+    <value>在 WifiDB 中開啟</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_HowStatusWorks" xml:space="preserve">
+    <value>每次儲存都以檔案的 MD5 與 WifiDB 比對,因此檔案刪除後仍可看到狀態。向下拉或點選「重新整理」即可再次檢查。</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_ALLTIME" xml:space="preserve">
+    <value>WIFIDB 總計</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Checking" xml:space="preserve">
+    <value>正在查詢 WifiDB…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_AccountTitle" xml:space="preserve">
+    <value>{1} 上的 {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_AccountTotals" xml:space="preserve">
+    <value>{0:N0} 次匯入 · {1:N0} 個 AP (新增 {2:N0}) · {3:N0} 個 GPS 點
+新增 {4:N0} 個行動基地台 · 新增 {5:N0} 個藍牙裝置</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Efficiency" xml:space="preserve">
+    <value>新增 {0}%</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_ImportDates" xml:space="preserve">
+    <value>首次匯入 {0} · 最近 {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_ProfileFailed" xml:space="preserve">
+    <value>無法取得您的 WifiDB 個人資料: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_OpenProfile" xml:space="preserve">
+    <value>開啟我的 WifiDB 個人資料</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_NeedAccount" xml:space="preserve">
+    <value>設定您的 WifiDB 帳戶以查看總計。</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
 </root>

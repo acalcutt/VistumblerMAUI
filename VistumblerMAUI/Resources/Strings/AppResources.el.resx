@@ -2079,4 +2079,113 @@
     <value>Το όνομα και το token API του WiGLE αποθηκεύτηκαν για {0}.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
+  <data name="Menu_Uploads" xml:space="preserve">
+    <value>Αποστολές</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Scan_SavesSummary" xml:space="preserve">
+    <value>Αποθήκευση και εκκαθάριση: {0} · {1:N0} AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Layer_SavedThisSession" xml:space="preserve">
+    <value>Αποθηκευμένα αυτής της συνεδρίας</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Map_SavedPoints" xml:space="preserve">
+    <value>Αποθηκευμένα αυτής της συνεδρίας: {0:N0} AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Title" xml:space="preserve">
+    <value>Αποστολές</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_THISSESSION" xml:space="preserve">
+    <value>ΑΥΤΗ Η ΣΥΝΕΔΡΙΑ</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_NoSaves" xml:space="preserve">
+    <value>Η «Αποθήκευση και εκκαθάριση» δεν έχει αποθηκεύσει τίποτα ακόμη σε αυτή τη συνεδρία.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_SaveDetail" xml:space="preserve">
+    <value>Αποθηκεύτηκε {0} · {1:N0} AP</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_OnPhone" xml:space="preserve">
+    <value>Αναμένει αποστολή από αυτή τη συσκευή: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_NotUploaded" xml:space="preserve">
+    <value>Παραμένει σε αυτή τη συσκευή (η αποστολή κάθε αποθήκευσης στο WifiDB ήταν ανενεργή)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Uploaded" xml:space="preserve">
+    <value>Στάλθηκε στο WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_InQueue" xml:space="preserve">
+    <value>Στην ουρά εισαγωγής του WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Importing" xml:space="preserve">
+    <value>Το WifiDB το εισάγει</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_ImportingProgress" xml:space="preserve">
+    <value>Το WifiDB το εισάγει ({0} AP)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Imported" xml:space="preserve">
+    <value>Εισήχθη στο WifiDB ως #{0}: {1:N0} AP, {2:N0} σημεία GPS</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Failed" xml:space="preserve">
+    <value>Το WifiDB δεν μπόρεσε να το εισαγάγει: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_OpenOnWifiDb" xml:space="preserve">
+    <value>Άνοιγμα στο WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_HowStatusWorks" xml:space="preserve">
+    <value>Κάθε αποθήκευση αντιστοιχίζεται στο WifiDB με το MD5 του αρχείου, οπότε η κατάστασή της φαίνεται και μετά τη διαγραφή του αρχείου. Σύρετε προς τα κάτω ή πατήστε Ανανέωση για νέο έλεγχο.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_ALLTIME" xml:space="preserve">
+    <value>ΣΥΝΟΛΟ ΣΤΟ WIFIDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Checking" xml:space="preserve">
+    <value>Ερώτημα στο WifiDB…</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_AccountTitle" xml:space="preserve">
+    <value>{0} στο {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_AccountTotals" xml:space="preserve">
+    <value>{0:N0} εισαγωγές · {1:N0} AP ({2:N0} νέα) · {3:N0} σημεία GPS
+{4:N0} νέες κεραίες κινητής · {5:N0} νέες συσκευές Bluetooth</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_Efficiency" xml:space="preserve">
+    <value>{0}% νέα</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_ImportDates" xml:space="preserve">
+    <value>Πρώτη εισαγωγή {0} · τελευταία {1}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_ProfileFailed" xml:space="preserve">
+    <value>Δεν ήταν δυνατή η λήψη του προφίλ σας στο WifiDB: {0}</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_OpenProfile" xml:space="preserve">
+    <value>Άνοιγμα του προφίλ μου στο WifiDB</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Uploads_NeedAccount" xml:space="preserve">
+    <value>Ρυθμίστε τον λογαριασμό σας στο WifiDB για να δείτε τα σύνολά σας.</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
 </root>
