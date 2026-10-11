@@ -33,7 +33,7 @@ public partial class ExportViewModel : ObservableObject
     private readonly IExportService _exportService;
     private readonly IDatabaseService _databaseService;
 
-    [ObservableProperty] private ExportFormat _selectedFormat = ExportFormat.Kml;
+    [ObservableProperty] private ExportFormat _selectedFormat = ExportFormat.Vs1;
     [ObservableProperty] private string _fileName = $"vistumbler_{DateTime.Now:yyyyMMdd_HHmmss}";
     [ObservableProperty] private string _statusMessage = "Ready";
     [ObservableProperty] private bool _isExporting;
@@ -51,7 +51,20 @@ public partial class ExportViewModel : ObservableObject
     [ObservableProperty] private bool _useSignalColors = true;
     [ObservableProperty] private bool _includeGpsTrack = true;   // KML/GPX <trk>/LineString
 
-    public List<ExportFormat> Formats { get; } = Enum.GetValues<ExportFormat>().ToList();
+    // Vistumbler's own formats first, then WiGLE's, then the rest by how recently the format itself was last
+    // released or updated, so the ones no longer maintained (NetXML, GPX 1.1, NetStumbler's NS1) are last.
+    // Signal maps stay beside the format they're written in.
+    public List<ExportFormat> Formats { get; } =
+    [
+        ExportFormat.Vs1, ExportFormat.Vsz, ExportFormat.Csv,
+        ExportFormat.WigleCsv, ExportFormat.M8b,
+        ExportFormat.KismetDb,
+        ExportFormat.GeoJson, ExportFormat.GeoJsonSignalMap,
+        ExportFormat.Kml, ExportFormat.KmlSignalMap,
+        ExportFormat.NetXml,
+        ExportFormat.Gpx,
+        ExportFormat.Ns1,
+    ];
 
     private readonly ScanViewModel _scan;
 
