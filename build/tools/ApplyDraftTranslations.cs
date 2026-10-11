@@ -16,7 +16,7 @@ var strings = args.Length > 1 ? args[1] : Path.Combine("VistumblerMAUI", "Resour
 var english = XDocument.Load(Path.Combine(strings, "AppResources.resx")).Root!.Elements("data")
     .ToDictionary(d => (string)d.Attribute("name")!, d => (string?)d.Element("value") ?? "");
 
-static int Placeholders(string s) => Regex.Matches(s, @"\{\d+\}").Select(m => m.Value).Distinct().Count();
+static int Placeholders(string s) => Regex.Matches(s, @"\{(\d+)(:[^}]*)?\}").Select(m => m.Groups[1].Value).Distinct().Count();
 
 foreach (var file in Directory.GetFiles(drafts, "*.txt").OrderBy(f => f))
 {
