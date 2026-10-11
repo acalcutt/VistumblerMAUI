@@ -2188,4 +2188,20 @@
     <value>設定您的 WifiDB 帳戶以查看總計。</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
+  <data name="ExportFormat_Csv" xml:space="preserve">
+    <value>Detailed Comma Delimited file</value>
+    <comment>Vistumbler Chinese_Traditional.ini DetailedFile</comment>
+  </data>
+  <data name="ExportFormat_Vsz" xml:space="preserve">
+    <value>Vistumbler VSZ (壓縮的 VS1)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ExportFormat_GeoJsonSignalMap" xml:space="preserve">
+    <value>GeoJSON 訊號地圖</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ExportFormat_KmlSignalMap" xml:space="preserve">
+    <value>KML 訊號地圖</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
 </root>

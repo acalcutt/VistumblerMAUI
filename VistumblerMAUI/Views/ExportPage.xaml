@@ -13,6 +13,7 @@
             <Label Text="{loc:T Export_FORMAT}" Style="{StaticResource SectionHeader}" />
             <Picker Margin="16,0"
                     ItemsSource="{Binding Formats}"
+                    ItemDisplayBinding="{Binding ., Converter={StaticResource ExportFormatName}, x:DataType=vm:ExportFormat}"
                     SelectedItem="{Binding SelectedFormat}" />
             <BoxView HeightRequest="1" Color="#EEEEEE" Margin="16,8" />
 

@@ -2188,4 +2188,20 @@
     <value>Настройте учётную запись WifiDB, чтобы видеть свои итоги.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
+  <data name="ExportFormat_Vsz" xml:space="preserve">
+    <value>Vistumbler VSZ (сжатый VS1)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ExportFormat_Csv" xml:space="preserve">
+    <value>Подробный CSV Vistumbler</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ExportFormat_GeoJsonSignalMap" xml:space="preserve">
+    <value>Карта сигнала GeoJSON</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ExportFormat_KmlSignalMap" xml:space="preserve">
+    <value>Карта сигнала KML</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
 </root>

@@ -2188,4 +2188,20 @@
     <value>Nastavte účet WifiDB, abyste viděli své součty.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
+  <data name="ExportFormat_Vsz" xml:space="preserve">
+    <value>Vistumbler VSZ (zazipovaný VS1)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ExportFormat_Csv" xml:space="preserve">
+    <value>Podrobné CSV Vistumbleru</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ExportFormat_GeoJsonSignalMap" xml:space="preserve">
+    <value>Mapa signálu GeoJSON</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ExportFormat_KmlSignalMap" xml:space="preserve">
+    <value>Mapa signálu KML</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
 </root>

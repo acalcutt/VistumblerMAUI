@@ -2188,4 +2188,20 @@
     <value>Opsæt din WifiDB-konto for at se dine totaler.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
+  <data name="ExportFormat_Vsz" xml:space="preserve">
+    <value>Vistumbler VSZ (zippet VS1)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ExportFormat_Csv" xml:space="preserve">
+    <value>Vistumbler detaljeret CSV</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ExportFormat_GeoJsonSignalMap" xml:space="preserve">
+    <value>GeoJSON-signalkort</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ExportFormat_KmlSignalMap" xml:space="preserve">
+    <value>KML-signalkort</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
 </root>

@@ -2188,4 +2188,20 @@
     <value>Configure su cuenta de WifiDB para ver sus totales.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
+  <data name="ExportFormat_Csv" xml:space="preserve">
+    <value>Coma detallado archivo delimitado</value>
+    <comment>Vistumbler Spanish2.ini DetailedFile</comment>
+  </data>
+  <data name="ExportFormat_Vsz" xml:space="preserve">
+    <value>Vistumbler VSZ (VS1 comprimido)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ExportFormat_GeoJsonSignalMap" xml:space="preserve">
+    <value>Mapa de señal GeoJSON</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ExportFormat_KmlSignalMap" xml:space="preserve">
+    <value>Mapa de señal KML</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
 </root>

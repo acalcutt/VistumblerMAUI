@@ -2188,4 +2188,20 @@
     <value>合計を見るには WifiDB アカウントを設定してください。</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
+  <data name="ExportFormat_Vsz" xml:space="preserve">
+    <value>Vistumbler VSZ (圧縮した VS1)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ExportFormat_Csv" xml:space="preserve">
+    <value>Vistumbler 詳細 CSV</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ExportFormat_GeoJsonSignalMap" xml:space="preserve">
+    <value>GeoJSON 信号マップ</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ExportFormat_KmlSignalMap" xml:space="preserve">
+    <value>KML 信号マップ</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
 </root>

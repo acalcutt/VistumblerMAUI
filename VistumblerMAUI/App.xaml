@@ -17,6 +17,7 @@
             <conv:InvertBoolConverter      x:Key="InvertBool" />
             <conv:IsKmlFormatConverter     x:Key="IsKmlFormat" />
             <conv:IsTrackFormatConverter   x:Key="IsTrackFormat" />
+            <conv:ExportFormatNameConverter x:Key="ExportFormatName" />
             <conv:IsNotNullOrEmptyConverter x:Key="IsNotNullOrEmpty" />
             <conv:HexToColorConverter       x:Key="HexToColor" />
             <conv:FrequencyToBandConverter  x:Key="FreqToBand" />

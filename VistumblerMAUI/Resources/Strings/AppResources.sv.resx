@@ -2188,4 +2188,20 @@
     <value>Konfigurera ditt WifiDB-konto för att se dina totaler.</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
+  <data name="ExportFormat_Csv" xml:space="preserve">
+    <value>Detaljerad kommaseparerad fil</value>
+    <comment>Vistumbler Swedish.ini DetailedFile</comment>
+  </data>
+  <data name="ExportFormat_Vsz" xml:space="preserve">
+    <value>Vistumbler VSZ (zippad VS1)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ExportFormat_GeoJsonSignalMap" xml:space="preserve">
+    <value>GeoJSON-signalkarta</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="ExportFormat_KmlSignalMap" xml:space="preserve">
+    <value>KML-signalkarta</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
 </root>

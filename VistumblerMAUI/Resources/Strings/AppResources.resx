@@ -594,6 +594,19 @@
   <!-- WifiDbScanPage.xaml -->
   <data name="WifiDbScan_ScanWifiDBQR" xml:space="preserve"><value>Scan WifiDB QR</value></data>
   <data name="WifiDbScan_PointTheCameraAtYour" xml:space="preserve"><value>Point the camera at your WifiDB registration QR code.</value></data>
+  <data name="ExportFormat_Vs1" xml:space="preserve"><value>Vistumbler VS1</value></data>
+  <data name="ExportFormat_Vsz" xml:space="preserve"><value>Vistumbler VSZ (zipped VS1)</value></data>
+  <data name="ExportFormat_Csv" xml:space="preserve"><value>Vistumbler Detailed CSV</value></data>
+  <data name="ExportFormat_WigleCsv" xml:space="preserve"><value>WiGLE CSV</value></data>
+  <data name="ExportFormat_M8b" xml:space="preserve"><value>WiGLE Magic 8 Ball (m8b)</value></data>
+  <data name="ExportFormat_KismetDb" xml:space="preserve"><value>Kismet (.kismet)</value></data>
+  <data name="ExportFormat_GeoJson" xml:space="preserve"><value>GeoJSON</value></data>
+  <data name="ExportFormat_GeoJsonSignalMap" xml:space="preserve"><value>GeoJSON signal map</value></data>
+  <data name="ExportFormat_Kml" xml:space="preserve"><value>KML (Google Earth)</value></data>
+  <data name="ExportFormat_KmlSignalMap" xml:space="preserve"><value>KML signal map</value></data>
+  <data name="ExportFormat_NetXml" xml:space="preserve"><value>Kismet NetXML</value></data>
+  <data name="ExportFormat_Gpx" xml:space="preserve"><value>GPX</value></data>
+  <data name="ExportFormat_Ns1" xml:space="preserve"><value>NetStumbler NS1</value></data>
   <data name="Menu_Uploads" xml:space="preserve"><value>Uploads</value></data>
   <data name="Scan_SavesSummary" xml:space="preserve"><value>Save &amp; Clear: {0} · {1:N0} APs</value></data>
   <data name="Layer_SavedThisSession" xml:space="preserve"><value>Saved this session</value></data>
