@@ -21,6 +21,7 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(ExportPage), typeof(ExportPage));
         Routing.RegisterRoute(nameof(WifiDbScanPage), typeof(WifiDbScanPage));
         Routing.RegisterRoute(nameof(WifiDbUploadPage), typeof(WifiDbUploadPage));
+        Routing.RegisterRoute(nameof(UploadsPage), typeof(UploadsPage));
         Routing.RegisterRoute(nameof(GpsDetailsPage), typeof(GpsDetailsPage));
         Routing.RegisterRoute(nameof(SurveyPage), typeof(SurveyPage));
         Routing.RegisterRoute(nameof(FiltersPage), typeof(FiltersPage));
@@ -147,6 +148,12 @@ public partial class AppShell : Shell
     {
         FlyoutIsPresented = false;
         await GoToAsync(nameof(WifiDbUploadPage));
+    }
+
+    private async void OnUploadsClicked(object? sender, EventArgs e)
+    {
+        FlyoutIsPresented = false;
+        await GoToAsync(nameof(UploadsPage));
     }
 
     private async void OnNewSessionClicked(object? sender, EventArgs e)

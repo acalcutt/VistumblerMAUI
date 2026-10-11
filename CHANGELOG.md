@@ -2,6 +2,9 @@
 
 ## master
 ### ✨ Features and improvements
+- **Uploads page (menu → Uploads)** — this session's Save & Clear files and what became of each: still waiting to upload from the device, in WifiDB's queue, importing (with its progress), imported (with the import's number, AP and GPS counts and a link to it), or refused (with WifiDB's reason). Saves are matched to WifiDB by the file's MD5, recorded when it's saved, so the status still shows after "Delete the saved file once it's in WifiDB" has removed it. Below that, the WifiDB account's all-time totals: imports, APs (and how many were new), GPS points, and new cell towers and Bluetooth devices. Uses WifiDB's new profile API (api/v2/profile.php), which only answers for the account the API key belongs to.
+- **A running Save & Clear total on the Scan page** — once Save & Clear (by hand or automatically) has cleared the list, the counters show how many saves and APs the session has saved so far, e.g. "Save & Clear: 2 · 10,015 APs"; tapping it opens the Uploads page. Automatic Save & Clear used to leave just a list that had suddenly got short.
+- **Saved this session (map layer)** — a layer button beside the WifiDB history layers that shows the APs Save & Clear took out of this session's list, each where it was strongest, in the dimmer "no longer in range" colours, so the earlier part of a long drive stays on the map. Tapping one shows its details. Kept in the session file, so a resumed session has them; a new session starts without.
 - **Set up WiGLE from its QR code (Settings → WiGLE)** — **Set up with WiGLE QR code** scans the code on the WiGLE account page and fills in the API name and token, as WiGLE's own client does, instead of typing them.
 
 ### 🐞 Bug fixes

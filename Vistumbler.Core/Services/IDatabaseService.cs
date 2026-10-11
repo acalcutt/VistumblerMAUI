@@ -47,6 +47,12 @@ public interface IDatabaseService
     Task<string> GetManufacturerAsync(string ouiPrefix);
     Task BulkUpsertManufacturersAsync(IEnumerable<(string OuiPrefix, string Manufacturer)> entries);
 
+    // Save & Clear: each save of the session, and where its APs were, which outlive the clear
+    /// <summary>Record a save and its APs' points; returns the save's id. Run before the APs are cleared.</summary>
+    Task<int> AddSessionSaveAsync(SessionSave save, IReadOnlyList<SavedPoint> points);
+    Task<List<SessionSave>> GetSessionSavesAsync();
+    Task<List<SavedPoint>> GetSavedPointsAsync();
+
     // Cell towers and Bluetooth devices, kept apart from the APs (as WiGLE and WifiDB keep them)
     /// <summary>
     /// Persist one cell/Bluetooth scan in a single transaction: one GPS row for the fix (if any), each network

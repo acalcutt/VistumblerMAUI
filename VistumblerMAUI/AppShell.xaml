@@ -36,6 +36,7 @@
     <!-- Clears the AP list, offering to save it first (the original's Save &amp; Clear and Clear All) -->
     <MenuItem Text="{loc:T Menu_Clear}"         Clicked="OnClearClicked" />
     <MenuItem Text="{loc:T Menu_UploadWifiDb}"  Clicked="OnUploadToWifiDbClicked" />
+    <MenuItem Text="{loc:T Menu_Uploads}"       Clicked="OnUploadsClicked" />
     <!-- Hidden where there's nothing to check, e.g. the Google Play build, which Play updates -->
     <MenuItem Text="{loc:T Menu_CheckForUpdates}" Clicked="OnCheckForUpdatesClicked"
               Shell.FlyoutItemIsVisible="{x:Static services:AppUpdater.IsSupported}" />

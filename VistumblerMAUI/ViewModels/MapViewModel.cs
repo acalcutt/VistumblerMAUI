@@ -187,6 +187,7 @@ public partial class MapViewModel : ObservableObject
         _scan = scan;
         _gps.GpsDataReceived += OnGpsData;
         InitHistoryLayers();
+        HookSavedPoints();
         RefreshMapColors();
     }
 
@@ -302,17 +303,17 @@ public partial class MapViewModel : ObservableObject
 
     /// Returns the id of the nearest newer layer already in the style for the
     /// given history layer, so it can be inserted below that layer.
-    /// Falls back to "ap-circles" (always present above all history layers).
+    /// Falls back to <see cref="TopHistoryAnchor"/>.
     private string BelowLayerFor(string layerId)
     {
         int idx = Array.IndexOf(LayerOrder, layerId);
-        if (idx <= 0) return "ap-circles";
+        if (idx <= 0) return TopHistoryAnchor;
         for (int i = idx - 1; i >= 0; i--)
         {
             if (_addedVectorLayers.Contains(LayerOrder[i]))
                 return LayerOrder[i];
         }
-        return "ap-circles";
+        return TopHistoryAnchor;
     }
 
     /// Returns the cell bucket names matching whichever wifi-age layers are
@@ -415,6 +416,8 @@ public partial class MapViewModel : ObservableObject
         // ActiveColor = open-network color — used as the toggle-button highlight tint.
         var defs = new HistoryLayerState[]
         {
+            // Not a WifiDB layer: the APs Save & Clear took out of this session's list (MapViewModel.Saved.cs)
+            new() { Id = SavedLayerId, LabelKey = "Layer_SavedThisSession", ActiveColor = "#78909C" },
             new() { Id = "daily",     LabelKey = "Layer_Daily", ActiveColor = "#1aff66", Buckets = ["daily"] },
             new() { Id = "weekly",    LabelKey = "Layer_Weekly", ActiveColor = "#1aff66", Buckets = ["weekly"] },
             new() { Id = "monthly",   LabelKey = "Layer_Monthly", ActiveColor = "#1aff66", Buckets = ["monthly"] },
@@ -459,6 +462,7 @@ public partial class MapViewModel : ObservableObject
         _controller = controller;
         _addedVectorLayers.Clear();
         _apMapDrawn = false;   // the new style has none of the AP map layers
+        _savedDrawn = false;   // nor the saved points (MapViewModel.Saved.cs)
 
         // Find out whether WifiDB's TileJSON endpoint can be reached, so the history
         // layers fall back to the archives directly if it cannot. Deliberately not
@@ -479,8 +483,9 @@ public partial class MapViewModel : ObservableObject
         if (_gps.IsActive && _gps.CurrentGpsData is { } d && d.Quality != GpsQuality.Invalid)
             OnGpsData(this, new GpsDataReceivedEventArgs { GpsData = d });
 
+        if (SavedLayer?.IsActive == true) _ = DrawSavedPointsAsync();
         foreach (var layer in HistoryLayers
-            .Where(l => l.IsActive)
+            .Where(l => l.IsActive && l.Id != SavedLayerId)
             .OrderBy(l => l.Id == "cells" ? int.MaxValue   // cells last
                 : Array.IndexOf(LayerOrder,
                     l.Buckets?.Length > 0 ? $"hist_{l.Buckets[0]}_circles" : "")))
@@ -590,6 +595,8 @@ public partial class MapViewModel : ObservableObject
 
         layer.IsActive = !layer.IsActive;
 
+        if (layer.Id == SavedLayerId)
+            return ToggleSavedLayerAsync(layer);
         if (layer.Id == "cells")
         {
             // Only activate cell sub-buckets for the wifi-age tiers currently visible,
@@ -733,6 +740,7 @@ public partial class MapViewModel : ObservableObject
         foreach (var layer in HistoryLayers)
         {
             if (!layer.IsActive) continue;
+            if (layer.Id == SavedLayerId) candidateLayers.Add((SavedCircles, layer.Label));
             if (layer.Buckets is { } buckets)
                 foreach (var bucket in buckets)
                     candidateLayers.Add(($"hist_{bucket}_circles", layer.Label));

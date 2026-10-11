@@ -46,6 +46,13 @@
             <VerticalStackLayout Grid.Column="2" Spacing="0" VerticalOptions="Center" HorizontalOptions="End">
                 <Label Text="{Binding TotalCount, StringFormat={loc:T Bar_Total}}" FontSize="12" HorizontalOptions="End" />
                 <Label Text="{Binding ActiveCount, StringFormat={loc:T Bar_Active}}" FontSize="12" TextColor="#1565C0" HorizontalOptions="End" />
+                <!-- What Save & Clear has already taken out of the list this session; opens the Uploads page -->
+                <Label Text="{Binding SavesSummary}" FontSize="11" TextColor="Gray" HorizontalOptions="End"
+                       IsVisible="{Binding SavesSummary, Converter={StaticResource IsNotNullOrEmpty}}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OpenUploadsCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
             </VerticalStackLayout>
         </Grid>
 

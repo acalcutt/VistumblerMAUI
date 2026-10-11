@@ -44,6 +44,8 @@ public partial class SqliteDatabaseService : IDatabaseService
             await _db.CreateTableAsync<DbLabel>();
             await _db.CreateTableAsync<DbRadioNetwork>();   // SqliteDatabaseService.Radio.cs
             await _db.CreateTableAsync<DbRadioReading>();
+            await _db.CreateTableAsync<DbSessionSave>();    // SqliteDatabaseService.Saves.cs
+            await _db.CreateTableAsync<DbSavedPoint>();
             _initialized = true;
         }
         finally { _initLock.Release(); }

@@ -181,6 +181,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         }
         _manufacturers.FillMissing(_apMap.Values);   // sessions saved before the lookup existed
         await LoadRadioAsync();
+        await LoadSavesAsync();   // ScanViewModel.Saves.cs
 
         TotalCount  = _apMap.Count;
         ActiveCount = 0;
@@ -201,6 +202,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         _loaded       = false;
         TotalCount    = 0;
         ActiveCount   = 0;
+        SetSaveTotals(0, 0);
         StatusMessage = Localization.Loc.T("Map_NewSession");
         await _db.CloseAsync();
     }
@@ -275,6 +277,9 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
                         Services.DebugLog.Write($"[SaveAndClear] couldn't write the WiGLE file: {ex.Message}");
                     }
                 }
+
+                // The save and where its APs were, which outlive the clear (ScanViewModel.Saves.cs)
+                await RecordSaveAsync(path, fileName, count);
 
                 await _db.ClearAllAccessPointsAsync();
                 _lastSaveAndClear = DateTime.UtcNow;

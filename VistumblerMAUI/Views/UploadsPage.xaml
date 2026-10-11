@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:loc="clr-namespace:VistumblerMAUI.Localization"
+             xmlns:vm="clr-namespace:VistumblerMAUI.ViewModels"
+             x:DataType="vm:UploadsViewModel"
+             x:Class="VistumblerMAUI.Views.UploadsPage"
+             Title="{loc:T Uploads_Title}">
+
+    <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding RefreshCommand}">
+        <ScrollView>
+            <VerticalStackLayout Spacing="0" Padding="0,8">
+
+                <!-- This session's Save & Clear files -->
+                <Label Text="{loc:T Uploads_THISSESSION}" Style="{StaticResource SectionHeader}" />
+                <Label Text="{Binding SessionSummary}" Margin="16,4" />
+                <VerticalStackLayout BindableLayout.ItemsSource="{Binding Saves}" Spacing="0">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="vm:UploadRow">
+                            <VerticalStackLayout Padding="16,8" Spacing="2">
+                                <Label Text="{Binding Title}" FontAttributes="Bold" />
+                                <Label Text="{Binding Detail}" FontSize="12" TextColor="Gray" />
+                                <Label Text="{Binding Status}" FontSize="13" TextColor="{Binding StatusColor}" />
+                                <Button Text="{loc:T Uploads_OpenOnWifiDb}" IsVisible="{Binding HasUrl}"
+                                        Command="{Binding OpenCommand, Source={RelativeSource AncestorType={x:Type vm:UploadsViewModel}}, x:DataType=vm:UploadsViewModel}"
+                                        CommandParameter="{Binding Url}"
+                                        HorizontalOptions="Start" Padding="0" HeightRequest="32"
+                                        BackgroundColor="Transparent" TextColor="#1565C0" FontSize="13" />
+                                <BoxView HeightRequest="1" Color="#EEEEEE" Margin="0,6,0,0" />
+                            </VerticalStackLayout>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+                <Label Text="{loc:T Uploads_HowStatusWorks}" FontSize="11" TextColor="Gray" Margin="16,4,16,8" />
+
+                <!-- The account's all-time totals (WifiDB's profile API) -->
+                <Label Text="{loc:T Uploads_ALLTIME}" Style="{StaticResource SectionHeader}" />
+                <VerticalStackLayout IsVisible="{Binding HasAccount}" Spacing="4" Padding="16,4">
+                    <Label Text="{Binding AccountTitle}" FontAttributes="Bold"
+                           IsVisible="{Binding AccountTitle, Converter={StaticResource IsNotNullOrEmpty}}" />
+                    <Label Text="{Binding AccountTotals}"
+                           IsVisible="{Binding AccountTotals, Converter={StaticResource IsNotNullOrEmpty}}" />
+                    <Label Text="{Binding AccountStatus}" FontSize="12" TextColor="Gray"
+                           IsVisible="{Binding AccountStatus, Converter={StaticResource IsNotNullOrEmpty}}" />
+                    <Button Text="{loc:T Uploads_OpenProfile}" Command="{Binding OpenCommand}" CommandParameter="{Binding AccountUrl}"
+                            IsVisible="{Binding AccountUrl, Converter={StaticResource IsNotNullOrEmpty}}"
+                            HorizontalOptions="Start" Padding="0" HeightRequest="32"
+                            BackgroundColor="Transparent" TextColor="#1565C0" FontSize="13" />
+                </VerticalStackLayout>
+                <VerticalStackLayout IsVisible="{Binding NeedsAccount}" Spacing="4" Padding="16,4">
+                    <Label Text="{loc:T Uploads_NeedAccount}" />
+                    <Button Text="{loc:T WifiDbUpload_SetUpWifiDBAccount}" Command="{Binding OpenSettingsCommand}" HorizontalOptions="Fill" />
+                </VerticalStackLayout>
+
+                <Button Text="{loc:T Settings_Refresh}" Command="{Binding RefreshCommand}" Margin="16,12" HorizontalOptions="Fill" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </RefreshView>
+
+</ContentPage>

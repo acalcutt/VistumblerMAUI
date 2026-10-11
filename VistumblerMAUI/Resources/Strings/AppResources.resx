@@ -594,6 +594,34 @@
   <!-- WifiDbScanPage.xaml -->
   <data name="WifiDbScan_ScanWifiDBQR" xml:space="preserve"><value>Scan WifiDB QR</value></data>
   <data name="WifiDbScan_PointTheCameraAtYour" xml:space="preserve"><value>Point the camera at your WifiDB registration QR code.</value></data>
+  <data name="Menu_Uploads" xml:space="preserve"><value>Uploads</value></data>
+  <data name="Scan_SavesSummary" xml:space="preserve"><value>Save &amp; Clear: {0} · {1:N0} APs</value></data>
+  <data name="Layer_SavedThisSession" xml:space="preserve"><value>Saved this session</value></data>
+  <data name="Map_SavedPoints" xml:space="preserve"><value>Saved this session: {0:N0} APs</value></data>
+  <data name="Uploads_Title" xml:space="preserve"><value>Uploads</value></data>
+  <data name="Uploads_THISSESSION" xml:space="preserve"><value>THIS SESSION</value></data>
+  <data name="Uploads_NoSaves" xml:space="preserve"><value>Nothing saved by Save &amp; Clear in this session yet.</value></data>
+  <data name="Uploads_SaveDetail" xml:space="preserve"><value>Saved {0} · {1:N0} APs</value></data>
+  <data name="Uploads_OnPhone" xml:space="preserve"><value>Waiting to upload from this device: {0}</value></data>
+  <data name="Uploads_NotUploaded" xml:space="preserve"><value>Kept on this device (uploading each save to WifiDB was off)</value></data>
+  <data name="Uploads_Uploaded" xml:space="preserve"><value>Uploaded to WifiDB</value></data>
+  <data name="Uploads_InQueue" xml:space="preserve"><value>In WifiDB's import queue</value></data>
+  <data name="Uploads_Importing" xml:space="preserve"><value>WifiDB is importing it</value></data>
+  <data name="Uploads_ImportingProgress" xml:space="preserve"><value>WifiDB is importing it ({0} APs)</value></data>
+  <data name="Uploads_Imported" xml:space="preserve"><value>Imported to WifiDB as #{0}: {1:N0} APs, {2:N0} GPS points</value></data>
+  <data name="Uploads_Failed" xml:space="preserve"><value>WifiDB couldn't import it: {0}</value></data>
+  <data name="Uploads_OpenOnWifiDb" xml:space="preserve"><value>Open on WifiDB</value></data>
+  <data name="Uploads_HowStatusWorks" xml:space="preserve"><value>Each save is matched to WifiDB by the file's MD5, so its status still shows after the file is deleted. Pull down or tap Refresh to check again.</value></data>
+  <data name="Uploads_ALLTIME" xml:space="preserve"><value>ALL TIME ON WIFIDB</value></data>
+  <data name="Uploads_Checking" xml:space="preserve"><value>Checking WifiDB…</value></data>
+  <data name="Uploads_AccountTitle" xml:space="preserve"><value>{0} on {1}</value></data>
+  <data name="Uploads_AccountTotals" xml:space="preserve"><value>{0:N0} imports · {1:N0} APs ({2:N0} new) · {3:N0} GPS points
+{4:N0} new cell towers · {5:N0} new Bluetooth devices</value></data>
+  <data name="Uploads_Efficiency" xml:space="preserve"><value>{0}% new</value></data>
+  <data name="Uploads_ImportDates" xml:space="preserve"><value>First import {0} · last {1}</value></data>
+  <data name="Uploads_ProfileFailed" xml:space="preserve"><value>Couldn't get your WifiDB profile: {0}</value></data>
+  <data name="Uploads_OpenProfile" xml:space="preserve"><value>Open my WifiDB profile</value></data>
+  <data name="Uploads_NeedAccount" xml:space="preserve"><value>Set up your WifiDB account to see your totals.</value></data>
   <data name="Settings_WigleQr" xml:space="preserve"><value>Set up with WiGLE QR code</value></data>
   <data name="WigleScan_Title" xml:space="preserve"><value>Scan WiGLE QR</value></data>
   <data name="WigleScan_PointTheCamera" xml:space="preserve"><value>Point the camera at the QR code on your WiGLE account page (wigle.net/account).</value></data>
