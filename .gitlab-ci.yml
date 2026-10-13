@@ -2,7 +2,8 @@
 #
 #   ci-windows, ci-android  Merge requests and pushes to main: publish the Windows app (win-x64, win-arm64) and a
 #                           debug-signed Android APK as job artifacts (7 days). Port of .github/workflows/ci.yml.
-#                           The iOS simulator build is not ported: it needs a macOS runner.
+#   ci-ios-simulator        Same, on the macOS runner (tag "macos"): the iOS simulator app as a job artifact (7 days).
+#                           Port of the GitHub build-ios job; MACOS_RUNNER "false" skips it.
 #   release-*               Push to main: if no GitLab release exists for <ApplicationDisplayVersion>, publish the
 #                           Windows zips, a Windows NSIS installer per architecture (build/installer.nsi) and the
 #                           release-signed Android APK, and create the release with the CHANGELOG.md notes.
@@ -52,6 +53,9 @@ variables:
     value: "completed"
     options: ["completed", "draft"]
     description: "Google Play release status. Use draft until the app's first release is published in Play Console."
+  MACOS_RUNNER:
+    value: "true"
+    description: "Build the iOS simulator app on the runner tagged macos ('false' to skip it)."
 
 default:
   tags: [windows]
@@ -138,6 +142,53 @@ ci-android:
     name: ci-app-android
     paths:
       - VistumblerMAUI-*.apk
+    expire_in: 7 days
+
+# iOS simulator build on the macOS runner (tag "macos"; see the gitlab-runner-install project). Port of the GitHub
+# build-ios job. A build, not a publish: there is no iOS release, and a device build would need signing assets CI
+# doesn't have; the simulator .app is the runnable artifact. Pinned like the other jobs (SDK 10.0.4xx, workload set
+# 10.0.401, which builds with Xcode 26). The runner's architecture picks the simulator: iossimulator-x64 on an Intel
+# Mac, iossimulator-arm64 on Apple silicon. Set MACOS_RUNNER to "false" to skip it while no macOS runner is online.
+ci-ios-simulator:
+  stage: build
+  tags: [macos]
+  rules:
+    - if: $MACOS_RUNNER != "true" || $BUMP_VERSION != "none"
+      when: never
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  script:
+    - |
+      # dotnet-workload-env gives these pins a .NET install of their own, so other jobs on the Mac can't change it
+      if command -v dotnet-workload-env > /dev/null; then
+        eval "$(dotnet-workload-env --sdk 10.0.4xx --workload-set 10.0.401)"
+      else
+        dotnet workload restore VistumblerMAUI.sln --version 10.0.401
+      fi
+      dotnet --version
+    - |
+      # The iOS platform is a separate Xcode download (the runner script skips it with --skip-ios-platform)
+      if ! xcodebuild -showsdks 2>/dev/null | grep -q iphonesimulator; then
+        echo "Xcode on this runner has no iOS platform. Re-run install-macos-runner.sh without --skip-ios-platform,"
+        echo "or run: xcodebuild -downloadPlatform iOS"
+        exit 1
+      fi
+    - if [ "$(uname -m)" = arm64 ]; then RID=iossimulator-arm64; else RID=iossimulator-x64; fi
+    # -p:EnableWindowsTargeting=true: the csproj also targets Windows, and restore evaluates every TargetFramework
+    # even when -f picks one (NETSDK1100 otherwise). No separate restore: the explicit RID needs a RID-aware restore.
+    - dotnet build VistumblerMAUI/VistumblerMAUI.csproj -f net10.0-ios -c Release -p:EnableWindowsTargeting=true -p:RuntimeIdentifier=$RID
+    - |
+      BASE=VistumblerMAUI/bin/Release/net10.0-ios/$RID
+      APP=$(find "$BASE" -maxdepth 1 -name '*.app' -type d | head -1)
+      [ -z "$APP" ] && APP=$(find "$BASE" -name '*.app' -type d | head -1)
+      if [ -z "$APP" ]; then echo "No .app bundle found under $BASE"; find "$BASE" -maxdepth 3 || true; exit 1; fi
+      VERSION=$(sed -n 's:.*<ApplicationDisplayVersion>\(.*\)</ApplicationDisplayVersion>.*:\1:p' VistumblerMAUI/VistumblerMAUI.csproj | head -1)
+      # ditto keeps the bundle's executable bits and symlinks, without which the simulator won't launch it
+      ditto -c -k --sequesterRsrc --keepParent "$APP" "VistumblerMAUI-v$VERSION-ci$CI_PIPELINE_IID-$CI_COMMIT_SHORT_SHA-$RID.zip"
+  artifacts:
+    name: ci-app-ios-simulator
+    paths:
+      - VistumblerMAUI-*-iossimulator-*.zip
     expire_in: 7 days
 
 # ── Release ─────────────────────────────────────────────────────────────────────────────────────────
