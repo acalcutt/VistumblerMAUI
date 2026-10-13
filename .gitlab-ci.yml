@@ -80,13 +80,25 @@ stages:
 .rid-matrix: &rid-matrix
   - RID: [win-x64, win-arm64]
 
+# .NET for the jobs that build the app: SDK band 10.0.4xx with workload set 10.0.401 (MAUI 10.0.20, as the csproj uses).
+# The runner's dotnet-workload-env (gitlab-runner-install) gives these pins a .NET install of their own, so parallel
+# jobs don't restore workloads into the shared C:\Program Files\dotnet at once (which fails with "being used by another
+# process"). Its full path is tried too, for a runner service that hasn't been restarted since it was installed.
+# Without it, the shared install's workloads are restored as before.
+.dotnet-windows: &dotnet-windows
+  - |
+    $envHelper = Get-Command dotnet-workload-env -ErrorAction SilentlyContinue
+    if (-not $envHelper -and (Test-Path 'C:\GitLab-Runner\bin\dotnet-workload-env.ps1')) { $envHelper = 'C:\GitLab-Runner\bin\dotnet-workload-env.ps1' }
+    if ($envHelper) { & $envHelper -Sdk 10.0.4xx -WorkloadSet 10.0.401 }
+    else { dotnet workload restore VistumblerMAUI.sln }
+
 # Windows publish, shared by CI and release.
 # -r with -p:UseMonoRuntime=false: this csproj also targets Android/iOS, so an explicit RID otherwise makes NuGet
 # look for a Mono runtime pack for the Windows head, which doesn't exist (NU1101). The RID is needed to
 # cross-build win-arm64 on the x64 runner. No separate restore: publish does a RID-aware restore (NETSDK1112).
 # --self-contained + WindowsAppSDKSelfContained bundle both runtimes. No PublishSingleFile: WinUI 3 doesn't support it.
 .publish-windows: &publish-windows
-  - dotnet workload restore VistumblerMAUI.sln
+  - *dotnet-windows
   - dotnet publish VistumblerMAUI/VistumblerMAUI.csproj -f net10.0-windows10.0.19041.0 -c Release -r $env:RID
       --self-contained true -p:WindowsPackageType=None -p:UseMonoRuntime=false -p:WindowsAppSDKSelfContained=true
       --output ./publish/$env:RID
@@ -112,7 +124,7 @@ ci-android:
   stage: build
   rules: *ci-rules
   script:
-    - dotnet workload restore VistumblerMAUI.sln
+    - *dotnet-windows
     - dotnet restore VistumblerMAUI.sln
     # Not release-signed: .NET Android falls back to a debug key that differs per run, so this APK installs on a
     # clean device but won't upgrade a release install. No -r: one universal APK with android-arm64 + android-x64.
@@ -176,7 +188,7 @@ release-windows:
   - $keyPassword = if ($env:ANDROID_KEY_PASSWORD) { $env:ANDROID_KEY_PASSWORD } else { $env:ANDROID_KEYSTORE_PASSWORD }
   - $signing = @('-p:AndroidKeyStore=true', "-p:AndroidSigningKeyStore=$keystore", "-p:AndroidSigningStorePass=$env:ANDROID_KEYSTORE_PASSWORD",
       "-p:AndroidSigningKeyAlias=$env:ANDROID_KEY_ALIAS", "-p:AndroidSigningKeyPass=$keyPassword")
-  - dotnet workload restore VistumblerMAUI.sln
+  - *dotnet-windows
   - dotnet restore VistumblerMAUI.sln
 
 .android-signing-cleanup: &android-signing-cleanup
