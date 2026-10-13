@@ -3,6 +3,7 @@
 ## master
 ### ✨ Features and improvements
 - _...Add new stuff here..._
+- **macOS app (preview)**: a Mac Catalyst build that scans Wi-Fi with CoreWLAN. macOS only shows network names and BSSIDs to apps allowed to use Location Services, so it asks for location permission when scanning starts.
 
 ### 🐞 Bug fixes
 - _...Add new stuff here..._

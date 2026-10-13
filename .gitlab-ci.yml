@@ -4,6 +4,7 @@
 #                           debug-signed Android APK as job artifacts (7 days). Port of .github/workflows/ci.yml.
 #   ci-ios-simulator        Same, on the macOS runner (tag "macos"): the iOS simulator app as a job artifact (7 days).
 #                           Port of the GitHub build-ios job; MACOS_RUNNER "false" skips it.
+#   ci-maccatalyst          Same: the macOS app (Mac Catalyst, universal, ad-hoc signed) as a job artifact (7 days).
 #   release-*               Push to main: if no GitLab release exists for <ApplicationDisplayVersion>, publish the
 #                           Windows zips, a Windows NSIS installer per architecture (build/installer.nsi) and the
 #                           release-signed Android APK, and create the release with the CHANGELOG.md notes.
@@ -55,7 +56,7 @@ variables:
     description: "Google Play release status. Use draft until the app's first release is published in Play Console."
   MACOS_RUNNER:
     value: "true"
-    description: "Build the iOS simulator app on the runner tagged macos ('false' to skip it)."
+    description: "Build the iOS simulator and macOS apps on the runner tagged macos ('false' to skip them)."
 
 default:
   tags: [windows]
@@ -189,6 +190,43 @@ ci-ios-simulator:
     name: ci-app-ios-simulator
     paths:
       - VistumblerMAUI-*-iossimulator-*.zip
+    expire_in: 7 days
+
+# The macOS app (Mac Catalyst) on the macOS runner: one universal .app for Apple silicon and Intel Macs, ad-hoc signed
+# (no Developer ID yet: the first launch needs right-click › Open), as a job artifact. Pinned like the iOS job.
+ci-maccatalyst:
+  stage: build
+  tags: [macos]
+  rules:
+    - if: $MACOS_RUNNER != "true" || $BUMP_VERSION != "none"
+      when: never
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  script:
+    - |
+      if command -v dotnet-workload-env > /dev/null; then
+        eval "$(dotnet-workload-env --sdk 10.0.4xx --workload-set 10.0.401)"
+      else
+        dotnet workload restore VistumblerMAUI.sln --version 10.0.401
+      fi
+      dotnet --version
+    # A build, not a publish (publish wraps the app in an installer .pkg). EnableWindowsTargeting: restore evaluates the
+    # Windows TargetFramework too (NETSDK1100 otherwise). Signed ad-hoc below instead of looking for a certificate.
+    - dotnet build VistumblerMAUI/VistumblerMAUI.csproj -f net10.0-maccatalyst -c Release -p:EnableWindowsTargeting=true -p:EnableCodeSigning=false
+    - |
+      BASE=VistumblerMAUI/bin/Release/net10.0-maccatalyst
+      APP=$(find "$BASE" -maxdepth 1 -name '*.app' -type d | head -1)
+      [ -z "$APP" ] && APP=$(find "$BASE" -maxdepth 2 -name '*.app' -type d | head -1)
+      if [ -z "$APP" ]; then echo "No .app bundle found under $BASE"; find "$BASE" -maxdepth 3 || true; exit 1; fi
+      lipo -info "$APP/Contents/MacOS/"* || true
+      # Apple silicon refuses to run unsigned code; an ad-hoc signature is enough to launch
+      codesign --force --deep --sign - "$APP"
+      VERSION=$(sed -n 's:.*<ApplicationDisplayVersion>\(.*\)</ApplicationDisplayVersion>.*:\1:p' VistumblerMAUI/VistumblerMAUI.csproj | head -1)
+      ditto -c -k --sequesterRsrc --keepParent "$APP" "VistumblerMAUI-v$VERSION-ci$CI_PIPELINE_IID-$CI_COMMIT_SHORT_SHA-macos.zip"
+  artifacts:
+    name: ci-app-macos
+    paths:
+      - VistumblerMAUI-*-macos.zip
     expire_in: 7 days
 
 # ── Release ─────────────────────────────────────────────────────────────────────────────────────────

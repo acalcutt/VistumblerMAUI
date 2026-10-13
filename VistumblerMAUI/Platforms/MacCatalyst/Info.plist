@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>UIDeviceFamily</key>
+	<array>
+		<integer>2</integer>
+	</array>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>XSAppIconAssets</key>
+	<string>Assets.xcassets/appicon.appiconset</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.utilities</string>
+	<!-- macOS 14+ hides Wi-Fi network names and BSSIDs from apps without Location Services permission; the GPS uses
+	     it too. Without these the permission request is refused without asking. -->
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>VistumblerMAUI uses your location to record where access points are, and macOS requires it to show Wi-Fi network names and BSSIDs.</string>
+	<key>NSLocationUsageDescription</key>
+	<string>VistumblerMAUI uses your location to record where access points are, and macOS requires it to show Wi-Fi network names and BSSIDs.</string>
+</dict>
+</plist>
