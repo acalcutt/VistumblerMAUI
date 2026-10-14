@@ -147,8 +147,8 @@ ci-android:
 # iOS simulator build on the macOS runner (tag "macos"; see the gitlab-runner-install project). Port of the GitHub
 # build-ios job. A build, not a publish: there is no iOS release, and a device build would need signing assets CI
 # doesn't have; the simulator .app is the runnable artifact. Pinned like the other jobs (SDK 10.0.4xx, workload set
-# 10.0.401, which builds with Xcode 26). The runner's architecture picks the simulator: iossimulator-x64 on an Intel
-# Mac, iossimulator-arm64 on Apple silicon. Set MACOS_RUNNER to "false" to skip it while no macOS runner is online.
+# 10.0.401, which builds with Xcode 26). Always iossimulator-arm64, as on GitHub: MapLibre's iOS framework has no Intel
+# simulator slice, and Xcode cross-builds arm64 on an Intel Mac (the app then runs in Apple silicon simulators). Set MACOS_RUNNER to "false" to skip it while no macOS runner is online.
 ci-ios-simulator:
   stage: build
   tags: [macos]
@@ -173,7 +173,7 @@ ci-ios-simulator:
         echo "or run: xcodebuild -downloadPlatform iOS"
         exit 1
       fi
-    - if [ "$(uname -m)" = arm64 ]; then RID=iossimulator-arm64; else RID=iossimulator-x64; fi
+    - RID=iossimulator-arm64
     # -p:EnableWindowsTargeting=true: the csproj also targets Windows, and restore evaluates every TargetFramework
     # even when -f picks one (NETSDK1100 otherwise). No separate restore: the explicit RID needs a RID-aware restore.
     - dotnet build VistumblerMAUI/VistumblerMAUI.csproj -f net10.0-ios -c Release -p:EnableWindowsTargeting=true -p:RuntimeIdentifier=$RID
