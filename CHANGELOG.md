@@ -6,6 +6,7 @@
 
 ### 🐞 Bug fixes
 - _...Add new stuff here..._
+- **NS1 exports carry each reading's GPS details** — every data point with a position had zero altitude, satellites, speed, track and HDOP. They now come from the reading's GPS fix, as VistumblerCS writes them. MaxSNR is now set as the original Vistumbler sets it (the strongest signal + 100) instead of 0.
 
 ## 0.10.0
 ### ✨ Features and improvements

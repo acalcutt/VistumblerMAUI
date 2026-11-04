@@ -19,9 +19,10 @@ public interface IExportService
     Task ExportToGpxAsync(string filePath, List<AccessPoint> accessPoints, List<GpsData> gpsFixes);
 
     /// <summary>
-    /// Export access points to NS1 format (NetStumbler binary)
+    /// Export access points to NS1 format (NetStumbler binary). With the GPS fixes, each data point carries its
+    /// fix's altitude, satellites, speed, track and HDOP, looked up by the reading's GpsId.
     /// </summary>
-    Task ExportToNs1Async(string filePath, List<AccessPoint> accessPoints);
+    Task ExportToNs1Async(string filePath, List<AccessPoint> accessPoints, IReadOnlyList<GpsData>? gpsFixes = null);
 
     /// <summary>
     /// Export access points to KismetDB format

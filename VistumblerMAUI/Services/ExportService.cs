@@ -17,8 +17,12 @@ namespace VistumblerMAUI.Services;
 /// </summary>
 public class ExportService : IExportService
 {
-    public async Task ExportToNs1Async(string filePath, List<AccessPoint> accessPoints)
+    public async Task ExportToNs1Async(string filePath, List<AccessPoint> accessPoints, IReadOnlyList<GpsData>? gpsFixes = null)
     {
+        // A reading's fix, for the data point's altitude, satellites, speed, track and HDOP
+        var gpsById = (gpsFixes ?? Array.Empty<GpsData>()).Where(g => g.GpsId != 0)
+            .GroupBy(g => g.GpsId).ToDictionary(grp => grp.Key, grp => grp.First());
+
         await Task.Run(() =>
         {
             using var fs = File.Create(filePath);
@@ -58,9 +62,9 @@ public class ExportService : IExportService
                 int maxSignal = dps.Count > 0 ? dps.Max(d => d.Dbm) : -100;
                 int minSignal = dps.Count > 0 ? dps.Min(d => d.Dbm) : -100;
 
-                writer.Write(maxSignal);   // MaxSignal (dBm)
-                writer.Write(-150);        // MinNoise (dBm)
-                writer.Write(0);           // MaxSNR
+                writer.Write(maxSignal);         // MaxSignal (dBm)
+                writer.Write(-150);              // MinNoise (dBm)
+                writer.Write(maxSignal + 100);   // MaxSNR, as the original's _ExportNS1Binary
 
                 // Flags
                 uint flags = 0;
@@ -91,15 +95,16 @@ public class ExportService : IExportService
 
                     if (hist.Latitude.HasValue && hist.Longitude.HasValue)
                     {
+                        gpsById.TryGetValue(hist.GpsId, out var g);
                         writer.Write((int)1); // LocationSource = GPS
                         writer.Write(hist.Latitude.Value);
                         writer.Write(hist.Longitude.Value);
-                        writer.Write((double)0); // Altitude (not tracked on flat SignalHistory)
-                        writer.Write((uint)0);   // NumberOfSatellites
-                        writer.Write((double)0); // Speed (KMH)
-                        writer.Write((double)0); // TrackAngle
+                        writer.Write(g?.Altitude ?? 0);
+                        writer.Write((uint)(g?.NumberOfSatellites ?? 0));
+                        writer.Write(g?.SpeedKmh ?? 0);
+                        writer.Write(g?.TrackAngle ?? 0);
                         writer.Write((double)0); // MagVar
-                        writer.Write((double)0); // HorizontalDilution
+                        writer.Write(g?.HorizontalDilution ?? 0);
                     }
                     else
                     {

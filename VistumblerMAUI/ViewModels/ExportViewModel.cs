@@ -211,7 +211,7 @@ public partial class ExportViewModel : ObservableObject
                             IncludeGpsTrack ? gpsFixes : new List<GpsData>());
                         break;
                     case ExportFormat.Ns1:
-                        await _exportService.ExportToNs1Async(path, aps);
+                        await _exportService.ExportToNs1Async(path, aps, gpsFixes);
                         break;
                     case ExportFormat.KismetDb:
                         await _exportService.ExportToKismetDbAsync(path, aps);
