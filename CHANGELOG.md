@@ -6,6 +6,10 @@
 
 ### 🐞 Bug fixes
 - _...Add new stuff here..._
+- **GPX and KML: the track breaks at gaps, every locale, and the security filter**
+  - **GPX track** is now split into a segment per stretch, broken where fixes are more than 3 minutes apart, as the KML track already was. A stop or a second day is no longer drawn as a straight line across the map. Track points also carry satellites and HDOP.
+  - **Locale:** GPX waypoints and KML placemarks were written in the phone's locale, so a German locale wrote `42,36` and put every AP in the wrong place.
+  - **KML open/WEP/secure options:** they counted only TKIP and AES as secure, so unticking "secure" still exported CCMP and GCMP APs. They now sort APs as the list's filter does.
 - **NS1 exports carry each reading's GPS details** — every data point with a position had zero altitude, satellites, speed, track and HDOP. They now come from the reading's GPS fix, as VistumblerCS writes them. MaxSNR is now set as the original Vistumbler sets it (the strongest signal + 100) instead of 0.
 
 ## 0.10.0

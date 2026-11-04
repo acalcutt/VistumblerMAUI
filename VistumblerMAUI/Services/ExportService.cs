@@ -610,8 +610,8 @@ public class ExportService : IExportService
         foreach (var ap in accessPoints.Where(a => a.Latitude.HasValue && a.Longitude.HasValue))
         {
             await writer.WriteStartElementAsync(null, "wpt", null);
-            await writer.WriteAttributeStringAsync(null, "lat", null, ap.Latitude!.Value.ToString("F6"));
-            await writer.WriteAttributeStringAsync(null, "lon", null, ap.Longitude!.Value.ToString("F6"));
+            await writer.WriteAttributeStringAsync(null, "lat", null, ap.Latitude!.Value.ToString("F6", System.Globalization.CultureInfo.InvariantCulture));
+            await writer.WriteAttributeStringAsync(null, "lon", null, ap.Longitude!.Value.ToString("F6", System.Globalization.CultureInfo.InvariantCulture));
 
             await writer.WriteElementStringAsync(null, "name", null, XmlText(ap.Ssid));
             await writer.WriteElementStringAsync(null, "desc", null,
@@ -620,23 +620,35 @@ public class ExportService : IExportService
             await writer.WriteEndElementAsync(); // wpt
         }
 
-        // GPS track (<trk><trkseg><trkpt>…) from the recorded fixes, ordered by time.
+        // GPS track (<trk><trkseg><trkpt>…) from the recorded fixes, ordered by time: a segment per stretch, broken
+        // where the fixes are more than 3 minutes apart (as the KML track is), so a stop or another day isn't drawn
+        // as a straight line across the map
         if (gpsFixes.Count > 0)
         {
             var inv = System.Globalization.CultureInfo.InvariantCulture;
             await writer.WriteStartElementAsync(null, "trk", null);
             await writer.WriteElementStringAsync(null, "name", null, "GPS Track");
-            await writer.WriteStartElementAsync(null, "trkseg", null);
-            foreach (var g in gpsFixes.OrderBy(g => g.Timestamp))
+            bool open = false;
+            DateTime prev = default;
+            foreach (var g in gpsFixes.Where(g => g.Latitude != 0 || g.Longitude != 0).OrderBy(g => g.Timestamp))
             {
+                if (!open || (g.Timestamp - prev).TotalSeconds > 180)
+                {
+                    if (open) await writer.WriteEndElementAsync(); // trkseg
+                    await writer.WriteStartElementAsync(null, "trkseg", null);
+                    open = true;
+                }
+                prev = g.Timestamp;
                 await writer.WriteStartElementAsync(null, "trkpt", null);
                 await writer.WriteAttributeStringAsync(null, "lat", null, g.Latitude.ToString("F7", inv));
                 await writer.WriteAttributeStringAsync(null, "lon", null, g.Longitude.ToString("F7", inv));
-                await writer.WriteElementStringAsync(null, "ele", null, (g.Altitude ?? 0).ToString("0.0", inv));
-                await writer.WriteElementStringAsync(null, "time", null, g.Timestamp.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ"));
+                if (g.Altitude is { } alt) await writer.WriteElementStringAsync(null, "ele", null, alt.ToString("0.0", inv));
+                await writer.WriteElementStringAsync(null, "time", null, g.Timestamp.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ", inv));
+                if (g.NumberOfSatellites > 0) await writer.WriteElementStringAsync(null, "sat", null, g.NumberOfSatellites.ToString(inv));
+                if (g.HorizontalDilution is { } hdop) await writer.WriteElementStringAsync(null, "hdop", null, hdop.ToString(inv));
                 await writer.WriteEndElementAsync(); // trkpt
             }
-            await writer.WriteEndElementAsync(); // trkseg
+            if (open) await writer.WriteEndElementAsync(); // trkseg
             await writer.WriteEndElementAsync(); // trk
         }
 
@@ -952,18 +964,12 @@ public class ExportService : IExportService
 
     private List<AccessPoint> FilterAccessPoints(List<AccessPoint> accessPoints, ExportOptions options)
     {
-        return accessPoints.Where(ap =>
+        // Open, WEP or secure, as the list's filter has it: everything that's not open or WEP is secure (CCMP, GCMP, …)
+        return accessPoints.Where(ap => ApFilter.SecurityType(ap) switch
         {
-            if (ap.Encryption == EncryptionType.None && !options.IncludeOpenNetworks)
-                return false;
-
-            if (ap.Encryption == EncryptionType.WEP && !options.IncludeWepNetworks)
-                return false;
-
-            if ((ap.Encryption == EncryptionType.TKIP || ap.Encryption == EncryptionType.AES) && !options.IncludeSecureNetworks)
-                return false;
-
-            return true;
+            1 => options.IncludeOpenNetworks,
+            2 => options.IncludeWepNetworks,
+            _ => options.IncludeSecureNetworks,
         }).ToList();
     }
 
@@ -1015,7 +1021,7 @@ public class ExportService : IExportService
 
         await writer.WriteStartElementAsync(null, "Point", null);
         await writer.WriteElementStringAsync(null, "coordinates", null,
-            $"{ap.Longitude},{ap.Latitude},0");
+            string.Create(System.Globalization.CultureInfo.InvariantCulture, $"{ap.Longitude},{ap.Latitude},0"));
         await writer.WriteEndElementAsync(); // Point
 
         await writer.WriteEndElementAsync(); // Placemark
