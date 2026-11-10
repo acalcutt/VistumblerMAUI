@@ -6,6 +6,11 @@
 
 ### 🐞 Bug fixes
 - _...Add new stuff here..._
+
+## 0.11.0
+### ✨ Features and improvements
+
+### 🐞 Bug fixes
 - **GPX and KML: the track breaks at gaps, every locale, and the security filter**
   - **GPX track** is now split into a segment per stretch, broken where fixes are more than 3 minutes apart, as the KML track already was. A stop or a second day is no longer drawn as a straight line across the map. Track points also carry satellites and HDOP.
   - **Locale:** GPX waypoints and KML placemarks were written in the phone's locale, so a German locale wrote `42,36` and put every AP in the wrong place.
