@@ -577,7 +577,7 @@
   <data name="SessionChooser_0YyyyMMDdHH" xml:space="preserve"><value>{0:yyyy-MM-dd HH:mm:ss}</value></data>
 
   <!-- SurveyPage.xaml -->
-  <data name="Survey_Survey" xml:space="preserve"><value>Survey ▾</value></data>
+  <data name="Survey_Survey" xml:space="preserve"><value>Survey ▴</value></data>
   <data name="Survey_Network" xml:space="preserve"><value>Network</value></data>
   <data name="Survey_Heatmap" xml:space="preserve"><value>Heatmap</value></data>
   <data name="Survey_StartScanning" xml:space="preserve"><value>Start scanning</value></data>

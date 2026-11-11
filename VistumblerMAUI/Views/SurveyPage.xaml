@@ -7,10 +7,6 @@
              x:Class="VistumblerMAUI.Views.SurveyPage"
              Title="{Binding Title}">
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="{loc:T Survey_Survey}" Command="{Binding SurveyMenuCommand}" />
-    </ContentPage.ToolbarItems>
-
     <Grid RowDefinitions="Auto,*,Auto">
 
         <!-- Which network the colours show, and whether to fill in between the spots -->
@@ -31,9 +27,38 @@
             <Button Text="⤢" Clicked="OnFit" WidthRequest="44" HeightRequest="44" Padding="0" FontSize="18" />
         </VerticalStackLayout>
 
+        <!-- The Survey menu, opening upward from its button below. A tap anywhere else on the plan closes it
+             (and isn't taken as a measurement). -->
+        <BoxView Grid.Row="1" Color="Transparent" IsVisible="{Binding IsMenuOpen}">
+            <BoxView.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding CloseMenuCommand}" />
+            </BoxView.GestureRecognizers>
+        </BoxView>
+        <Border Grid.Row="1" IsVisible="{Binding IsMenuOpen}"
+                HorizontalOptions="Start" VerticalOptions="End" Margin="12,0,12,4" Padding="0,6"
+                StrokeShape="RoundRectangle 10" Stroke="{AppThemeBinding Light=#DDDDDD, Dark=#444444}"
+                BackgroundColor="{AppThemeBinding Light=White, Dark=#2B2B2B}">
+            <Border.Shadow>
+                <Shadow Brush="Black" Opacity="0.3" Radius="8" Offset="0,2" />
+            </Border.Shadow>
+            <VerticalStackLayout BindableLayout.ItemsSource="{Binding MenuItems}" MinimumWidthRequest="200">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="vm:SurveyMenuItem">
+                        <Label Text="{Binding Label}" FontSize="14" Padding="16,10">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Command}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </VerticalStackLayout>
+        </Border>
+
         <VerticalStackLayout Grid.Row="2" Padding="12,6" Spacing="6">
             <Label Text="{Binding Status}" FontSize="13" />
             <FlexLayout Wrap="Wrap" JustifyContent="Start">
+                <!-- First, so new surveys, opening one and the floor plan are easy to find -->
+                <Button Text="{loc:T Survey_Survey}" Command="{Binding ToggleMenuCommand}" Margin="0,0,6,6" />
                 <Button Text="{loc:T Survey_StartScanning}" Command="{Binding StartScanningCommand}" Margin="0,0,6,6"
                         IsVisible="{Binding IsScanning, Converter={StaticResource InvertBool}}" />
                 <Button Text="{loc:T Common_Cancel}" Command="{Binding CancelMarkCommand}" Margin="0,0,6,6"

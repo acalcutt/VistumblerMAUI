@@ -17,6 +17,9 @@ public sealed record SurveyNetwork(string Label, string? Ssid, string? Bssid)
     public override string ToString() => Label;
 }
 
+/// <summary>A choice in the Survey menu.</summary>
+public sealed record SurveyMenuItem(string Label, IAsyncRelayCommand Command);
+
 /// <summary>
 /// Site survey (tap-to-mark), for indoors where GPS can't place readings: stand somewhere, tap that spot on the
 /// floor plan, and the next scan's readings are kept there. Marks are drawn coloured by the chosen network's RSSI,
@@ -286,23 +289,32 @@ public partial class SurveyViewModel : ObservableObject
 
     // ── Surveys and plans ─────────────────────────────────────────────────────
 
+    /// <summary>The Survey menu, which opens upward from its button at the start of the buttons under the plan.</summary>
+    [ObservableProperty] private bool _isMenuOpen;
+
+    private IReadOnlyList<SurveyMenuItem>? _menuItems;
+
+    /// <summary>The Survey menu's choices.</summary>
+    public IReadOnlyList<SurveyMenuItem> MenuItems => _menuItems ??=
+    [
+        MenuItem("Survey_New",       () => { Open(NewSurveyObject()); return Task.CompletedTask; }),
+        MenuItem("Survey_Open",      OpenSurveyAsync),
+        MenuItem("Survey_FloorPlan", PickPlanAsync),
+        MenuItem("Survey_UseGrid",   () => { UseGrid(); return Task.CompletedTask; }),
+        MenuItem("Survey_Rename",    RenameAsync),
+        MenuItem("Survey_ExportCsv", ExportCsvAsync),
+        MenuItem("Survey_Delete",    DeleteAsync),
+    ];
+
+    // Each choice closes the menu before it runs, so its dialogs aren't under the menu
+    private SurveyMenuItem MenuItem(string key, Func<Task> run) =>
+        new(Loc.T(key), new AsyncRelayCommand(async () => { IsMenuOpen = false; await run(); }));
+
     [RelayCommand]
-    private async Task SurveyMenuAsync()
-    {
-        var actions = new (string Label, Func<Task> Run)[]
-        {
-            (Loc.T("Survey_New"),        () => { Open(NewSurveyObject()); return Task.CompletedTask; }),
-            (Loc.T("Survey_Open"),       OpenSurveyAsync),
-            (Loc.T("Survey_FloorPlan"),  PickPlanAsync),
-            (Loc.T("Survey_UseGrid"),    () => { UseGrid(); return Task.CompletedTask; }),
-            (Loc.T("Survey_Rename"),     RenameAsync),
-            (Loc.T("Survey_ExportCsv"),  ExportCsvAsync),
-            (Loc.T("Survey_Delete"),     DeleteAsync),
-        };
-        var choice = await Shell.Current.DisplayActionSheetAsync(_survey.Name, Loc.T("Common_Cancel"), null,
-            actions.Select(a => a.Label).ToArray());
-        if (actions.FirstOrDefault(a => a.Label == choice).Run is { } run) await run();
-    }
+    private void ToggleMenu() => IsMenuOpen = !IsMenuOpen;
+
+    [RelayCommand]
+    private void CloseMenu() => IsMenuOpen = false;
 
     private async Task OpenSurveyAsync()
     {
