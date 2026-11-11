@@ -3,6 +3,8 @@
 ## master
 ### ✨ Features and improvements
 - _...Add new stuff here..._
+- **Site survey: the Survey menu beside the buttons** — the Survey menu (new survey, open, floor plan image, use a grid, rename, export, delete) moved from the corner of the title bar to the first of the buttons under the plan, and opens upward from there, so the floor plan option is easy to find. Tapping the plan closes it.
+- **Site survey: pick an AP before measuring** — the network picker now also lists the SSIDs and APs the scan hears right now (active in the last 30 seconds), not only those heard at spots already measured, so one AP can be chosen and followed from the first spot. APs are listed as "SSID · BSSID", the most measured first. The chosen one stays in the list once it's out of range.
 
 ### 🐞 Bug fixes
 - _...Add new stuff here..._
@@ -13,8 +15,6 @@
 - **Sort and Group by in one menu** — the Scan page's Sort picker, direction arrow and Group by row are now one button beside the search box ("⇅ Signal ▼"). Its menu lists the sort fields, Reverse order, and Group by, which opens the grouping choices. The search box gets the room the picker took, and the list a row more.
 - **Two-line AP rows** — each AP in the Scan list now takes two lines instead of up to six: the SSID, then the BSSID and manufacturer, with the signal, channel and band, and security beside them. About twice as many APs fit on a phone screen (three to four times on a desktop). Hidden networks show "(hidden)" instead of a blank line. First / last seen and the position are on the AP's details page.
 - **Wi-Fi, Bluetooth and Cell tower tabs** — on Android, where Bluetooth devices and cell towers can be recorded too, the Scan page switches lists with tabs showing each list's count ("Wi-Fi 149 · Bluetooth 12 · Cell towers 3") instead of a picker. Devices that only record Wi-Fi, such as Windows, don't show the row.
-- **Site survey: the Survey menu beside the buttons** — the Survey menu (new survey, open, floor plan image, use a grid, rename, export, delete) moved from the corner of the title bar to the first of the buttons under the plan, and opens upward from there, so the floor plan option is easy to find. Tapping the plan closes it.
-- **Site survey: pick an AP before measuring** — the network picker now also lists the SSIDs and APs the scan hears right now (active in the last 30 seconds), not only those heard at spots already measured, so one AP can be chosen and followed from the first spot. APs are listed as "SSID · BSSID", the most measured first. The chosen one stays in the list once it's out of range.
 
 ### 🐞 Bug fixes
 
