@@ -1,14 +1,25 @@
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Vistumbler.Core.Models;
 using Vistumbler.Core.Services;
 
 namespace VistumblerMAUI.ViewModels;
 
+/// <summary>One of the Scan page's list tabs (Wi-Fi, Bluetooth, cell towers), with how many it holds.</summary>
+public sealed partial class ListTypeTab(string type) : ObservableObject
+{
+    /// <summary>The list's English name, as <see cref="ScanViewModel.SelectedListType"/> holds it.</summary>
+    public string Type { get; } = type;
+
+    [ObservableProperty] private string _label = Localization.Loc.Opt(type);
+    [ObservableProperty] private bool _isSelected;
+}
+
 /// <summary>
 /// Cell towers and Bluetooth devices, recorded alongside the Wi-Fi scan when Settings → Scanning says to
-/// (Android). They're kept apart from the APs, in their own tables and their own list, chosen with the type picker
-/// on the Scan page.
+/// (Android). They're kept apart from the APs, in their own tables and their own list, chosen with the tabs above
+/// the Scan page's list.
 /// </summary>
 public partial class ScanViewModel
 {
@@ -20,8 +31,11 @@ public partial class ScanViewModel
 
     public const string WifiListName = "Wi-Fi", BluetoothListName = "Bluetooth", CellListName = "Cell towers";
 
-    /// <summary>The lists the Scan page can show; only Wi-Fi when this device records neither of the others.</summary>
-    public IReadOnlyList<string> ListTypes { get; private set; } = new[] { WifiListName };
+    /// <summary>
+    /// The tabs above the Scan page's list, one per list it can show. Only Wi-Fi, and so not shown, when this device
+    /// records neither of the others.
+    /// </summary>
+    public IReadOnlyList<ListTypeTab> ListTabs { get; private set; } = [];
 
     [ObservableProperty] private string _selectedListType = WifiListName;
     [ObservableProperty] private bool _isWifiList = true;
@@ -41,7 +55,8 @@ public partial class ScanViewModel
         var types = new List<string> { WifiListName };
         if (radio.SupportsBluetooth) types.Add(BluetoothListName);
         if (radio.SupportsCells) types.Add(CellListName);
-        ListTypes = types;
+        ListTabs =types.Select(t => new ListTypeTab(t) { IsSelected = t == SelectedListType }).ToList();
+        UpdateListTabLabels();
         HasListTypes = types.Count > 1;
         radio.NetworksDetected += OnRadioNetworksDetected;
         Services.ScanSettings.RadioChanged += (_, _) => MainThread.BeginInvokeOnMainThread(() =>
@@ -53,6 +68,7 @@ public partial class ScanViewModel
     partial void OnSelectedListTypeChanged(string value)
     {
         IsWifiList = value == WifiListName;
+        foreach (var tab in ListTabs) tab.IsSelected = tab.Type == value;
         RebuildRadioList();
     }
 
@@ -169,6 +185,22 @@ public partial class ScanViewModel
     {
         BluetoothCount = _radioMap.Values.Count(n => n.IsBluetooth);
         CellCount = _radioMap.Count - BluetoothCount;
+        UpdateListTabLabels();
+    }
+
+    [RelayCommand]
+    private void SelectListType(ListTypeTab tab) => SelectedListType = tab.Type;
+
+    partial void OnTotalCountChanged(int value) => UpdateListTabLabels();
+
+    /// <summary>"Wi-Fi 149", "Bluetooth 12"…: each tab with how many that list holds.</summary>
+    private void UpdateListTabLabels()
+    {
+        foreach (var tab in ListTabs)
+        {
+            int count = tab.Type switch { BluetoothListName => BluetoothCount, CellListName => CellCount, _ => TotalCount };
+            tab.Label = $"{Localization.Loc.Opt(tab.Type)} {count:N0}";
+        }
     }
 
     /// <summary>Brings the Bluetooth or cell list in line with what's recorded: searched, strongest active first. UI thread.</summary>
