@@ -56,7 +56,10 @@ public partial class SurveyViewModel : ObservableObject
         if (_survey.Marks.Count == 0 && _survey.PlanImage is null)
             Open(SurveyStore.Load(SurveyStore.LastId) ?? NewSurveyObject());
         else
+        {
+            RebuildNetworks();   // what the scan hears now
             UpdateStatus();
+        }
     }
 
     public void Stop()
@@ -170,7 +173,11 @@ public partial class SurveyViewModel : ObservableObject
 
     private void OnScanCycle(object? sender, IReadOnlyList<AccessPoint> heard)
     {
-        if (Drawable.Pending is not { } at || heard.Count == 0) return;
+        if (Drawable.Pending is not { } at || heard.Count == 0)
+        {
+            RebuildNetworks();   // APs the scan now hears join the network picker
+            return;
+        }
         _survey.Marks.Add(new SurveyMark
         {
             X = at.X,
@@ -231,25 +238,56 @@ public partial class SurveyViewModel : ObservableObject
 
     partial void OnSelectedNetworkChanged(SurveyNetwork? value) => Refresh(refit: false);
 
+    /// <summary>
+    /// The network picker's choices: the strongest at each spot, each SSID, then each AP. The SSIDs and APs are
+    /// those heard at the measured spots and those the scan hears now (active in the last 30 seconds), so one AP
+    /// can be chosen before the first spot is measured. Every spot keeps every AP it heard, so the choice only
+    /// changes what's drawn. Only rebuilt when the choices change, as it's called after every scan.
+    /// </summary>
     private void RebuildNetworks()
     {
         var keep = SelectedNetwork;
-        var readings = _survey.Marks.SelectMany(m => m.Readings).ToList();
-        var options = new List<SurveyNetwork> { Strongest };
-        options.AddRange(readings.Where(r => !string.IsNullOrEmpty(r.Ssid))
-            .GroupBy(r => r.Ssid)
-            .Select(g => (g.Key, Aps: g.Select(r => r.Bssid).Distinct(StringComparer.OrdinalIgnoreCase).Count(), Marks: g.Count()))
-            .OrderByDescending(g => g.Marks).ThenBy(g => g.Key, StringComparer.CurrentCultureIgnoreCase)
-            .Select(g => new SurveyNetwork(Loc.T("Survey_SsidAps", g.Key, g.Aps), g.Key, null)));
-        options.AddRange(readings
-            .GroupBy(r => r.Bssid, StringComparer.OrdinalIgnoreCase)
-            .OrderByDescending(g => g.Count())
-            .Select(g => new SurveyNetwork($"{g.Key} {(string.IsNullOrEmpty(g.First().Ssid) ? Loc.T("Group_Hidden") : g.First().Ssid)}", null, g.Key)));
+        var heard = _survey.Marks.SelectMany(m => m.Readings.Select(r => (r.Bssid, r.Ssid)))
+            .Concat(_scan.AllKnownAps.Where(a => a.IsActive).Select(a => (a.Bssid, a.Ssid)))
+            .DistinctBy(a => a.Bssid, StringComparer.OrdinalIgnoreCase)
+            .ToList();
+        // How many spots heard each AP, so the most measured come first
+        var spots = _survey.Marks.SelectMany(m => m.Readings.Select(r => r.Bssid).Distinct(StringComparer.OrdinalIgnoreCase))
+            .GroupBy(b => b, StringComparer.OrdinalIgnoreCase)
+            .ToDictionary(g => g.Key, g => g.Count(), StringComparer.OrdinalIgnoreCase);
+        int SpotsFor(string bssid) => spots.GetValueOrDefault(bssid);
 
-        Networks.Clear();
-        foreach (var o in options) Networks.Add(o);
-        SelectedNetwork = options.FirstOrDefault(o => o == keep) ?? Strongest;
+        var options = new List<SurveyNetwork> { Strongest };
+        options.AddRange(heard.Where(a => !string.IsNullOrEmpty(a.Ssid))
+            .GroupBy(a => a.Ssid)
+            .OrderByDescending(g => g.Max(a => SpotsFor(a.Bssid)))
+            .ThenBy(g => g.Key, StringComparer.CurrentCultureIgnoreCase)
+            .Select(g => new SurveyNetwork(Loc.T("Survey_SsidAps", g.Key, g.Count()), g.Key, null)));
+        options.AddRange(heard
+            .OrderByDescending(a => SpotsFor(a.Bssid))
+            .ThenBy(a => string.IsNullOrEmpty(a.Ssid))
+            .ThenBy(a => a.Ssid, StringComparer.CurrentCultureIgnoreCase)
+            .ThenBy(a => a.Bssid, StringComparer.OrdinalIgnoreCase)
+            .Select(a => new SurveyNetwork($"{(string.IsNullOrEmpty(a.Ssid) ? Loc.T("Group_Hidden") : a.Ssid)} · {a.Bssid}", null, a.Bssid)));
+
+        // The chosen one stays, even once it's no longer heard
+        var selected = keep is null ? null : options.FirstOrDefault(o => SameNetwork(o, keep));
+        if (selected is null && keep is not null && keep != Strongest)
+        {
+            options.Add(keep);
+            selected = keep;
+        }
+
+        if (!Networks.Select(n => n.Label).SequenceEqual(options.Select(o => o.Label)))
+        {
+            Networks.Clear();
+            foreach (var o in options) Networks.Add(o);
+        }
+        SelectedNetwork = Networks.FirstOrDefault(o => selected is not null && SameNetwork(o, selected)) ?? Strongest;
     }
+
+    private static bool SameNetwork(SurveyNetwork a, SurveyNetwork b) =>
+        string.Equals(a.Bssid, b.Bssid, StringComparison.OrdinalIgnoreCase) && a.Ssid == b.Ssid;
 
     /// <summary>The chosen network's RSSI at a mark: its strongest matching reading, or null if none heard it.</summary>
     private double? ValueAt(SurveyMark mark)
