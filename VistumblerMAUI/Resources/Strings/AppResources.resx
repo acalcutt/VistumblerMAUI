@@ -267,6 +267,12 @@
   <data name="Survey_Open" xml:space="preserve"><value>Open survey…</value></data>
   <data name="Survey_FloorPlan" xml:space="preserve"><value>Floor plan image…</value></data>
   <data name="Survey_UseGrid" xml:space="preserve"><value>Use a grid</value></data>
+  <data name="Survey_LineUpPlan" xml:space="preserve"><value>Line up plan on map…</value></data>
+  <data name="Survey_PlaceNeedsImage" xml:space="preserve"><value>Choose a floor plan image first, then line it up on the map.</value></data>
+  <data name="Survey_PlaceHint" xml:space="preserve"><value>Move, zoom and rotate the map under the plan until they line up, then tap Pin here.</value></data>
+  <data name="Survey_PinHere" xml:space="preserve"><value>Pin here</value></data>
+  <data name="Survey_MapView" xml:space="preserve"><value>Map</value></data>
+  <data name="Survey_PlanView" xml:space="preserve"><value>Plan</value></data>
   <data name="Survey_Rename" xml:space="preserve"><value>Rename…</value></data>
   <data name="Survey_ExportCsv" xml:space="preserve"><value>Export readings (CSV)</value></data>
   <data name="Survey_Delete" xml:space="preserve"><value>Delete this survey</value></data>

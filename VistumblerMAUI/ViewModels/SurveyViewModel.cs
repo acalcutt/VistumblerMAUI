@@ -111,11 +111,15 @@ public partial class SurveyViewModel : ObservableObject
         _survey = survey;
         SurveyStore.LastId = survey.Id;
         Title = survey.Name;
+        _pending = null;
         Drawable.Pending = null;
         IsWaiting = false;
+        IsPlacingPlan = false;
         LoadPlanImage();
         RebuildNetworks();
         Refresh(refit: true);
+        IsMapView = survey.OnMap;
+        PlanChanged?.Invoke();
     }
 
     private void LoadPlanImage()
@@ -150,21 +154,45 @@ public partial class SurveyViewModel : ObservableObject
         int hit = SpotNear(x, y);
         if (hit >= 0)
         {
-            var mark = _survey.Marks[hit];
-            string delete = Loc.T("Survey_DeleteSpot"), again = Loc.T("Survey_MeasureAgain");
-            var choice = await Shell.Current.DisplayActionSheetAsync(Describe(hit), Loc.T("Common_Cancel"), delete, again);
-            if (choice != delete && choice != again) return;
-            _survey.Marks.Remove(mark);
-            Save();
-            RebuildNetworks();
-            Refresh(refit: false);
-            if (choice == delete) return;
-            (x, y) = (mark.X, mark.Y);
+            if (await SpotActionAsync(hit) is { } again) Measure(again);
+            return;
         }
-        MarkAt(x, y);
+        Measure(new PendingSpot(x, y, null, null));
     }
 
-    // The measured spot within a fingertip of a point, or -1
+    /// <summary>
+    /// A tap on the map view, at a map position. <paramref name="hit"/> is the measured spot drawn there, or -1.
+    /// </summary>
+    public async Task MapTapAsync(double lat, double lon, int hit)
+    {
+        if (IsPlacingPlan) return;
+        if (hit >= 0 && hit < _survey.Marks.Count)
+        {
+            if (await SpotActionAsync(hit) is { } again) Measure(again);
+            return;
+        }
+        Measure(new PendingSpot(null, null, lat, lon));
+    }
+
+    /// <summary>
+    /// A tap on a measured spot: shows it and offers to delete it or measure again there. Deletes it either way
+    /// but cancel; for measure again, returns where it was, to measure there.
+    /// </summary>
+    private async Task<PendingSpot?> SpotActionAsync(int hit)
+    {
+        var mark = _survey.Marks[hit];
+        string delete = Loc.T("Survey_DeleteSpot"), again = Loc.T("Survey_MeasureAgain");
+        var choice = await Shell.Current.DisplayActionSheetAsync(Describe(hit), Loc.T("Common_Cancel"), delete, again);
+        if (choice != delete && choice != again) return null;
+        _survey.Marks.Remove(mark);
+        Save();
+        RebuildNetworks();
+        Refresh(refit: false);
+        if (choice == delete) return null;
+        return mark.OnPlan ? new PendingSpot(mark.X, mark.Y, null, null) : new PendingSpot(null, null, mark.Latitude, mark.Longitude);
+    }
+
+    // The measured spot within a fingertip of a point on the plan, or -1
     private int SpotNear(double x, double y)
     {
         double reach = 20 / Drawable.Scale;
@@ -172,7 +200,7 @@ public partial class SurveyViewModel : ObservableObject
         double best = reach * reach;
         for (int i = 0; i < _survey.Marks.Count; i++)
         {
-            var m = _survey.Marks[i];
+            if (PlanOf(_survey.Marks[i]) is not { } m) continue;
             double d2 = (m.X - x) * (m.X - x) + (m.Y - y) * (m.Y - y);
             if (d2 <= best) { best = d2; hit = i; }
         }
@@ -186,14 +214,33 @@ public partial class SurveyViewModel : ObservableObject
         lines.Add(ValueAt(mark) is { } v ? $"{MapNetwork.Label}: {v:0} dBm" : Loc.T("Survey_NotHeard", MapNetwork.Label));
         if (mark.Readings.OrderByDescending(r => r.Rssi).FirstOrDefault() is { } top)
             lines.Add(Loc.T("Survey_StrongestAp", string.IsNullOrEmpty(top.Ssid) ? top.Bssid : top.Ssid, top.Rssi));
+        if (GeoOf(mark) is { } geo)
+            lines.Add("⌖ " + GpsFormatter.ToText(geo.Lat, geo.Lon));
         return string.Join(Environment.NewLine, lines);
     }
 
-    private void MarkAt(double x, double y)
+    /// <summary>Where the next scan's readings go: a plan position (tapped on the plan) or a map one.</summary>
+    private sealed record PendingSpot(double? X, double? Y, double? Lat, double? Lon);
+
+    private PendingSpot? _pending;
+
+    private void Measure(PendingSpot spot)
     {
-        Drawable.Pending = (x, y);
+        _pending = spot;
         IsWaiting = true;
+        ShowPending();
         UpdateStatus();
+    }
+
+    // Draws the pending spot on the plan, where it has a plan position (or the plan is on the map)
+    private void ShowPending()
+    {
+        Drawable.Pending = _pending switch
+        {
+            { X: { } x, Y: { } y } => (x, y),
+            { Lat: { } lat, Lon: { } lon } when _survey.Corners is { } c => c.ToPlan(_survey.PlanWidth, _survey.PlanHeight, lat, lon),
+            _ => null,
+        };
         Redraw?.Invoke(false);
     }
 
@@ -202,15 +249,18 @@ public partial class SurveyViewModel : ObservableObject
         // The live list is this scan, which is just what a spot tapped now records (every AP it heard)
         if (heard.Count > 0) _lastHeard = heard;
         RefreshHeardHere();
-        if (Drawable.Pending is not { } at || heard.Count == 0)
+        if (_pending is not { } at || heard.Count == 0)
         {
             RebuildNetworks();   // APs the scan now hears join the network picker
             return;
         }
         _survey.Marks.Add(new SurveyMark
         {
-            X = at.X,
-            Y = at.Y,
+            X = at.X ?? 0,
+            Y = at.Y ?? 0,
+            OnPlan = at.X is not null,
+            Latitude = at.X is null ? at.Lat : null,
+            Longitude = at.X is null ? at.Lon : null,
             Time = DateTime.UtcNow,
             Readings = heard.Select(ap => new SurveyReading
             {
@@ -224,6 +274,7 @@ public partial class SurveyViewModel : ObservableObject
                 Encryption = ap.EncryptionText,
             }).ToList(),
         });
+        _pending = null;
         Drawable.Pending = null;
         IsWaiting = false;
         Save();
@@ -238,6 +289,7 @@ public partial class SurveyViewModel : ObservableObject
     [RelayCommand]
     private void CancelMark()
     {
+        _pending = null;
         Drawable.Pending = null;
         IsWaiting = false;
         UpdateStatus();
@@ -364,7 +416,11 @@ public partial class SurveyViewModel : ObservableObject
 
     private void Refresh(bool refit)
     {
-        Drawable.Marks = _survey.Marks.Select(m => (m.X, m.Y, ValueAt(m))).ToList();
+        Drawable.Marks = _survey.Marks
+            .Select(m => (Plan: PlanOf(m), Rssi: ValueAt(m)))
+            .Where(m => m.Plan is not null)
+            .Select(m => (m.Plan!.Value.X, m.Plan!.Value.Y, m.Rssi))
+            .ToList();
         Drawable.RebuildHeatmap();
         UpdateStatus();
         Redraw?.Invoke(refit);
@@ -372,7 +428,9 @@ public partial class SurveyViewModel : ObservableObject
 
     private void UpdateStatus()
     {
-        if (IsWaiting)
+        if (IsPlacingPlan)
+            Status = Loc.T("Survey_PlaceHint");
+        else if (IsWaiting)
             Status = _scan.IsScanning ? Loc.T("Survey_Measuring") : Loc.T("Survey_StartToMeasure");
         else if (!_scan.IsScanning)
             Status = Loc.T("Survey_StartThenTap");
@@ -401,6 +459,7 @@ public partial class SurveyViewModel : ObservableObject
         MenuItem("Survey_New",       () => { Open(NewSurveyObject()); return Task.CompletedTask; }),
         MenuItem("Survey_Open",      OpenSurveyAsync),
         MenuItem("Survey_FloorPlan", PickPlanAsync),
+        MenuItem("Survey_LineUpPlan", () => { StartPlacing(); return Task.CompletedTask; }),
         MenuItem("Survey_UseGrid",   () => { UseGrid(); return Task.CompletedTask; }),
         MenuItem("Survey_Rename",    RenameAsync),
         MenuItem("Survey_ExportCsv", ExportCsvAsync),
@@ -447,9 +506,12 @@ public partial class SurveyViewModel : ObservableObject
                 _survey.PlanHeight = image.Height;
                 image.Dispose();
             }
+            _survey.Corners = null;   // a new image isn't lined up on the map yet
             Save();
             LoadPlanImage();
             Refresh(refit: true);
+            PlanChanged?.Invoke();
+            if (IsMapView) StartPlacing();   // over the map: line it up straight away
         }
         catch (Exception ex)
         {
@@ -462,9 +524,12 @@ public partial class SurveyViewModel : ObservableObject
         if (_survey.PlanImagePath is { } old) try { File.Delete(old); } catch (IOException) { }
         _survey.PlanImage = null;
         _survey.PlanWidth = _survey.PlanHeight = Survey.GridSize;
+        _survey.Corners = null;
+        IsPlacingPlan = false;
         Save();
         LoadPlanImage();
         Refresh(refit: true);
+        PlanChanged?.Invoke();
     }
 
     private async Task RenameAsync()
@@ -485,20 +550,28 @@ public partial class SurveyViewModel : ObservableObject
 
     // ── Export ────────────────────────────────────────────────────────────────
 
-    /// <summary>Every reading at every spot, one row each, with the spot's plan position.</summary>
+    /// <summary>
+    /// Every reading at every spot, one row each, with the spot's plan position and, once known, its map position
+    /// (last, so the earlier columns stay where they were). Either can be blank: a spot tapped on the map has no
+    /// plan position until the plan is lined up on the map, and one tapped on the plan has no map position until then.
+    /// </summary>
     private async Task ExportCsvAsync()
     {
         if (_survey.Marks.Count == 0) { Status = Loc.T("Survey_NothingMeasured"); return; }
         var inv = CultureInfo.InvariantCulture;
-        var sb = new StringBuilder("Spot,X,Y,Time (UTC),BSSID,SSID,RSSI,Signal,Channel,Frequency,Authentication,Encryption\n");
+        var sb = new StringBuilder("Spot,X,Y,Time (UTC),BSSID,SSID,RSSI,Signal,Channel,Frequency,Authentication,Encryption,Latitude,Longitude\n");
         for (int i = 0; i < _survey.Marks.Count; i++)
         {
             var m = _survey.Marks[i];
+            var plan = PlanOf(m);
+            var geo = GeoOf(m);
+            string x = plan?.X.ToString("0.#", inv) ?? "", y = plan?.Y.ToString("0.#", inv) ?? "";
+            string lat = geo?.Lat.ToString("0.0000000", inv) ?? "", lon = geo?.Lon.ToString("0.0000000", inv) ?? "";
             foreach (var r in m.Readings)
-                sb.Append(i + 1).Append(',').Append(m.X.ToString("0.#", inv)).Append(',').Append(m.Y.ToString("0.#", inv)).Append(',')
+                sb.Append(i + 1).Append(',').Append(x).Append(',').Append(y).Append(',')
                   .Append(m.Time.ToString("yyyy-MM-dd HH:mm:ss", inv)).Append(',').Append(r.Bssid).Append(',').Append(Csv(r.Ssid)).Append(',')
                   .Append(r.Rssi).Append(',').Append(r.Signal).Append(',').Append(r.Channel).Append(',').Append(r.FrequencyMhz).Append(',')
-                  .Append(Csv(r.Auth)).Append(',').Append(Csv(r.Encryption)).Append('\n');
+                  .Append(Csv(r.Auth)).Append(',').Append(Csv(r.Encryption)).Append(',').Append(lat).Append(',').Append(lon).Append('\n');
         }
         await SaveAndShareAsync(FileNameFor(".csv"), path => File.WriteAllTextAsync(path, sb.ToString()));
     }

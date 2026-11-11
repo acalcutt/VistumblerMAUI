@@ -5,8 +5,10 @@ namespace VistumblerMAUI.Services.Survey;
 
 /// <summary>
 /// An indoor site survey: a plan (a floor-plan image, or a plain grid), and the places on it where you stood and
-/// measured, each with the APs one scan heard there. Positions are in plan units: the image's pixels, or a
-/// 1000 × 1000 grid. Saved as survey.json in its own folder, beside a copy of the plan image.
+/// measured, each with the APs one scan heard there. Positions are in plan units (the image's pixels, or a
+/// 1000 × 1000 grid) for spots tapped on the plan, and latitude / longitude for spots tapped on the map; once the
+/// plan is lined up on the map (<see cref="Corners"/>), each converts to the other. Saved as survey.json in its own
+/// folder, beside a copy of the plan image.
 /// </summary>
 public sealed class Survey
 {
@@ -21,17 +23,35 @@ public sealed class Survey
     public double PlanWidth { get; set; } = GridSize;
     public double PlanHeight { get; set; } = GridSize;
 
+    /// <summary>Where the plan image sits on the map, once lined up there; null until then.</summary>
+    public PlanCorners? Corners { get; set; }
+
+    /// <summary>Shown over the map (true) or as the plan alone (false), as last left.</summary>
+    public bool OnMap { get; set; }
+
     public List<SurveyMark> Marks { get; set; } = new();
 
     [JsonIgnore] public string Folder => Path.Combine(SurveyStore.Root, Id);
     [JsonIgnore] public string? PlanImagePath => PlanImage is null ? null : Path.Combine(Folder, PlanImage);
 }
 
-/// <summary>A place on the plan where a scan was taken.</summary>
+/// <summary>
+/// A place where a scan was taken. Tapped on the plan, it's kept in plan units (<see cref="X"/>, <see cref="Y"/>)
+/// and its map position follows the plan's corners. Tapped on the map, it's kept as a latitude and longitude, and
+/// shows on the plan once the plan is lined up on the map.
+/// </summary>
 public sealed class SurveyMark
 {
     public double X { get; set; }
     public double Y { get; set; }
+
+    /// <summary>False for a spot tapped on the map, whose <see cref="X"/> and <see cref="Y"/> mean nothing.</summary>
+    public bool OnPlan { get; set; } = true;
+
+    /// <summary>A spot tapped on the map: where. Null for one tapped on the plan.</summary>
+    public double? Latitude { get; set; }
+    public double? Longitude { get; set; }
+
     public DateTime Time { get; set; }
     public List<SurveyReading> Readings { get; set; } = new();
 }

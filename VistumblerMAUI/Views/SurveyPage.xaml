@@ -74,9 +74,19 @@
         </VerticalStackLayout>
 
         <!-- The plan: tap to measure, pinch to zoom, drag to move -->
-        <GraphicsView Grid.Row="1" x:Name="Canvas" />
+        <GraphicsView Grid.Row="1" x:Name="Canvas"
+                      IsVisible="{Binding IsMapView, Converter={StaticResource InvertBool}}" />
 
-        <VerticalStackLayout Grid.Row="1" HorizontalOptions="End" VerticalOptions="Start" Margin="8" Spacing="6">
+        <!-- Over the map: the map is made here the first time it's shown (SurveyPage.xaml.cs) -->
+        <ContentView Grid.Row="1" x:Name="MapHost" IsVisible="{Binding IsMapView}" />
+
+        <!-- Lining the plan up: the image held still and see-through over the map, which moves under it.
+             Taps and drags go through it to the map. -->
+        <Image Grid.Row="1" x:Name="PlaceImage" Aspect="AspectFit" Opacity="0.55" Margin="24"
+               InputTransparent="True" IsVisible="{Binding IsPlacingPlan}" />
+
+        <VerticalStackLayout Grid.Row="1" HorizontalOptions="End" VerticalOptions="Start" Margin="8" Spacing="6"
+                             IsVisible="{Binding IsMapView, Converter={StaticResource InvertBool}}">
             <Button Text="+" Clicked="OnZoomIn" WidthRequest="44" HeightRequest="44" Padding="0" FontSize="20" />
             <Button Text="−" Clicked="OnZoomOut" WidthRequest="44" HeightRequest="44" Padding="0" FontSize="20" />
             <Button Text="⤢" Clicked="OnFit" WidthRequest="44" HeightRequest="44" Padding="0" FontSize="18" />
@@ -114,12 +124,28 @@
             <FlexLayout Wrap="Wrap" JustifyContent="Start">
                 <!-- First, so new surveys, opening one and the floor plan are easy to find -->
                 <Button Text="{loc:T Survey_Survey}" Command="{Binding ToggleMenuCommand}" Margin="0,0,6,6" />
+                <!-- Lining the plan up on the map -->
+                <Button Text="{loc:T Survey_PinHere}" Clicked="OnPinHere" Margin="0,0,6,6"
+                        IsVisible="{Binding IsPlacingPlan}" />
+                <Button Text="{loc:T Common_Cancel}" Command="{Binding CancelPlacingCommand}" Margin="0,0,6,6"
+                        IsVisible="{Binding IsPlacingPlan}" />
+                <!-- Plan alone, or over the map; the button names the other one -->
+                <Button Text="{loc:T Survey_MapView}" Command="{Binding ToggleMapViewCommand}" Margin="0,0,6,6"
+                        IsVisible="{Binding IsPlacingPlan, Converter={StaticResource InvertBool}}">
+                    <Button.Triggers>
+                        <DataTrigger TargetType="Button" Binding="{Binding IsMapView}" Value="True">
+                            <Setter Property="Text" Value="{loc:T Survey_PlanView}" />
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
                 <Button Text="{loc:T Survey_StartScanning}" Command="{Binding StartScanningCommand}" Margin="0,0,6,6"
                         IsVisible="{Binding IsScanning, Converter={StaticResource InvertBool}}" />
                 <Button Text="{loc:T Common_Cancel}" Command="{Binding CancelMarkCommand}" Margin="0,0,6,6"
                         IsVisible="{Binding IsWaiting}" />
                 <Button Text="{loc:T Survey_UndoLast}" Command="{Binding UndoMarkCommand}" Margin="0,0,6,6" />
-                <Button Text="{loc:T Survey_SaveImage}" Clicked="OnSaveImage" Margin="0,0,6,6" />
+                <!-- Saves the plan view's drawing, so only there -->
+                <Button Text="{loc:T Survey_SaveImage}" Clicked="OnSaveImage" Margin="0,0,6,6"
+                        IsVisible="{Binding IsMapView, Converter={StaticResource InvertBool}}" />
             </FlexLayout>
             <!-- Colour key: WifiDB's signal-map colours -->
             <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="6">

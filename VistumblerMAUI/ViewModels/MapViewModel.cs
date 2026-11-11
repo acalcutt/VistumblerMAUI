@@ -727,6 +727,24 @@ public partial class MapViewModel : ObservableObject
     /// whichever one matched first, and merges in the local DB record if this
     /// BSSID has ever been scanned by this device.
     /// </summary>
+    /// <summary>
+    /// Where the Map tab's map is looking, for the site survey's map to start there. Null before the Map tab has
+    /// been shown (its map isn't made until then).
+    /// </summary>
+    public (double Lat, double Lon, double Zoom)? CurrentCamera()
+    {
+        try
+        {
+            if (_controller is null) return null;
+            var center = _controller.GetCenter();
+            return (center.Latitude, center.Longitude, _controller.GetZoom());
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
     public async Task OnMapTappedAsync(double screenX, double screenY)
     {
         if (_controller is null) return;

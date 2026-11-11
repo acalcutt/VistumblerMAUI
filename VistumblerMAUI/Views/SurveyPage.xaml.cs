@@ -7,19 +7,27 @@ namespace VistumblerMAUI.Views;
 public partial class SurveyPage : ContentPage
 {
     private readonly SurveyViewModel _vm;
+    private readonly MapViewModel _mapTab;
     private bool _fitPending = true;
     private double _panStartX, _panStartY;
 
-    public SurveyPage(SurveyViewModel vm)
+    public SurveyPage(SurveyViewModel vm, MapViewModel mapTab)
     {
         InitializeComponent();
         BindingContext = _vm = vm;
+        _mapTab = mapTab;
         Canvas.Drawable = vm.Drawable;
         vm.Redraw += refit =>
         {
             if (refit) _fitPending = true;
             if (_fitPending) Fit();
             Canvas.Invalidate();
+            DrawSpotsOnMap();   // SurveyPage.Map.cs
+        };
+        vm.PlanChanged += OnPlanChanged;
+        vm.PropertyChanged += (_, e) =>
+        {
+            if (e.PropertyName == nameof(SurveyViewModel.IsMapView)) OnMapViewChanged();
         };
         Canvas.SizeChanged += (_, _) => { if (_fitPending) { Fit(); Canvas.Invalidate(); } };
 
