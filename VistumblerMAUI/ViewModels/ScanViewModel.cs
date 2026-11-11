@@ -95,12 +95,16 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
     [ObservableProperty] private string _selectedSortOption;
     [ObservableProperty] private bool   _sortDescending;
 
-    /// <summary>Arrow glyph for the direction toggle button.</summary>
+    /// <summary>Arrow glyph for the sort direction.</summary>
     public string SortDirectionGlyph => SortDescending ? "▼" : "▲";
+
+    /// <summary>The sort button's text: the field and direction, e.g. "Signal ▼".</summary>
+    public string SortButtonText => $"{Localization.Loc.Opt(SelectedSortOption)} {SortDirectionGlyph}";
 
     partial void OnSelectedSortOptionChanged(string value)
     {
         Preferences.Set(SortOptionKey, value);
+        OnPropertyChanged(nameof(SortButtonText));
         RebuildDisplayedList();
     }
 
@@ -108,11 +112,37 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
     {
         Preferences.Set(SortDescKey, value);
         OnPropertyChanged(nameof(SortDirectionGlyph));
+        OnPropertyChanged(nameof(SortButtonText));
         RebuildDisplayedList();
     }
 
+    /// <summary>
+    /// The sort button's menu: the sort fields (the current one ticked), reverse the order, and the grouping, which
+    /// opens a second menu. One button in place of the sort picker, the direction arrow and the Group by row.
+    /// </summary>
     [RelayCommand]
-    private void ToggleSortDirection() => SortDescending = !SortDescending;
+    private async Task OpenSortMenuAsync()
+    {
+        var fields = SortOptions.Select(o => Ticked(Localization.Loc.Opt(o), o == SelectedSortOption)).ToList();
+        var reverse = $"{Localization.Loc.T("Scan_ReverseOrder")} {(SortDescending ? "▲" : "▼")}";
+        var groupBy = $"{Localization.Loc.T("Scan_GroupBy")}: {Localization.Loc.Opt(SelectedGroupBy)}…";
+
+        var choice = await Shell.Current.DisplayActionSheetAsync(Localization.Loc.T("Scan_Sort"),
+            Localization.Loc.T("Common_Cancel"), null, [.. fields, reverse, groupBy]);
+        if (choice == reverse) SortDescending = !SortDescending;
+        else if (choice == groupBy) await OpenGroupByMenuAsync();
+        else if (choice is not null && fields.IndexOf(choice) is >= 0 and var i) SelectedSortOption = SortOptions[i];
+    }
+
+    private async Task OpenGroupByMenuAsync()
+    {
+        var options = GroupByOptions.Select(o => Ticked(Localization.Loc.Opt(o), o == SelectedGroupBy)).ToList();
+        var choice = await Shell.Current.DisplayActionSheetAsync(Localization.Loc.T("Scan_GroupBy"),
+            Localization.Loc.T("Common_Cancel"), null, [.. options]);
+        if (choice is not null && options.IndexOf(choice) is >= 0 and var i) SelectedGroupBy = GroupByOptions[i];
+    }
+
+    private static string Ticked(string text, bool on) => on ? "✓ " + text : text;
 
     // Current GPS fix (updated by GPS service)
     private GpsData? _currentGps;

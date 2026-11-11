@@ -81,6 +81,7 @@
   <data name="Scan_SearchPlaceholder" xml:space="preserve"><value>Search SSID, BSSID, manufacturer…</value></data>
   <data name="Scan_Sort" xml:space="preserve"><value>Sort</value></data>
   <data name="Scan_GroupBy" xml:space="preserve"><value>Group by</value></data>
+  <data name="Scan_ReverseOrder" xml:space="preserve"><value>Reverse order</value></data>
   <data name="Scan_FirstSeen" xml:space="preserve"><value>First: {0}</value></data>
   <data name="Scan_LastSeen" xml:space="preserve"><value>Last: {0}</value></data>
   <data name="Scan_Channel" xml:space="preserve"><value>Ch {0}</value></data>

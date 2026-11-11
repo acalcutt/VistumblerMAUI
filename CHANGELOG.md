@@ -4,6 +4,7 @@
 ### ✨ Features and improvements
 - _...Add new stuff here..._
 - **Scan and GPS buttons in the title bar** — the Scan / GPS toggles and the active / total counts now sit in the title bar of each tab, in place of the page name (the tabs already show it), and the blue status bar is gone. Messages such as "Saved and cleared" or an upload result appear in a thin line under the title bar for 10 seconds; errors stay until dismissed with ✕. Pages opened from a tab, such as AP details, keep their title and back button.
+- **Sort and Group by in one menu** — the Scan page's Sort picker, direction arrow and Group by row are now one button beside the search box ("⇅ Signal ▼"). Its menu lists the sort fields, Reverse order, and Group by, which opens the grouping choices. The search box gets the room the picker took, and the list a row more.
 
 ### 🐞 Bug fixes
 - _...Add new stuff here..._
