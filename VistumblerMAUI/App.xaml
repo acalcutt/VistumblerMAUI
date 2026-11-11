@@ -22,6 +22,7 @@
             <conv:HexToColorConverter       x:Key="HexToColor" />
             <conv:FrequencyToBandConverter  x:Key="FreqToBand" />
             <conv:RunningToColorConverter   x:Key="RunningToColor" />
+            <conv:SeparatedConverter       x:Key="Separated" />
             <loc:LocValueConverter          x:Key="LocValue" />
         </ResourceDictionary>
     </Application.Resources>

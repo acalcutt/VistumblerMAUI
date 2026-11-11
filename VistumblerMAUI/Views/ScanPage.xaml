@@ -10,38 +10,61 @@
              Title="{loc:T Tab_Scan}">
 
     <ContentPage.Resources>
-        <!-- One AP row, shared by the flat and the grouped list -->
+        <!-- One AP row, shared by the flat and the grouped list: two lines, so a phone screen holds about twice
+             as many. First / last seen and the position are on the AP's details page (tap the row). -->
         <DataTemplate x:Key="ApRowTemplate" x:DataType="models:AccessPoint">
-            <Grid ColumnDefinitions="*,Auto,Auto" Padding="12,8" ColumnSpacing="8">
+            <Grid ColumnDefinitions="*,Auto,Auto" Padding="12,5" ColumnSpacing="8">
                 <Grid.Triggers>
                     <!-- Dead (not re-seen within the timeout) APs are dimmed but stay listed. -->
                     <DataTrigger TargetType="Grid" Binding="{Binding IsActive}" Value="False">
                         <Setter Property="Opacity" Value="0.4" />
                     </DataTrigger>
                 </Grid.Triggers>
-                <VerticalStackLayout Grid.Column="0" Spacing="2">
-                    <Label Text="{Binding Ssid}" FontAttributes="Bold" FontSize="14" />
-                    <Label Text="{Binding Bssid}" FontSize="11" TextColor="Gray" />
-                    <Label Text="{Binding Manufacturer}" FontSize="11" TextColor="Gray"
-                           IsVisible="{Binding Manufacturer, Converter={StaticResource IsNotNullOrEmpty}}" />
-                    <Label FontSize="10" TextColor="Gray" Text="{Binding FirstSeenText, StringFormat={loc:T Scan_FirstSeen}}" />
-                    <Label FontSize="10" TextColor="Gray" Text="{Binding LastSeenText, StringFormat={loc:T Scan_LastSeen}}" />
-                    <Label FontSize="10" TextColor="Gray"
-                           Text="{Binding GpsText, StringFormat='⌖ {0}'}"
-                           IsVisible="{Binding HasGps}" />
+                <!-- SSID, then BSSID · manufacturer -->
+                <VerticalStackLayout Grid.Column="0" Spacing="1" VerticalOptions="Center">
+                    <Label Text="{Binding Ssid}" FontAttributes="Bold" FontSize="14" LineBreakMode="TailTruncation">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding Ssid}" Value="">
+                                <Setter Property="Text" Value="{loc:T Group_Hidden}" />
+                                <Setter Property="FontAttributes" Value="Italic" />
+                                <Setter Property="TextColor" Value="Gray" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                    <Label FontSize="11" TextColor="Gray" LineBreakMode="TailTruncation">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding Bssid}" />
+                                <Span Text="{Binding Manufacturer, Converter={StaticResource Separated}}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
                 </VerticalStackLayout>
-                <!-- Signal % + RSSI -->
-                <VerticalStackLayout Grid.Column="1" WidthRequest="64" HorizontalOptions="Center" VerticalOptions="Center" Spacing="2">
-                    <Label Text="{Binding Signal, StringFormat='{0}%'}" HorizontalOptions="Center" FontSize="13" />
-                    <ProgressBar Progress="{Binding Signal, Converter={StaticResource IntToProgress}}" HeightRequest="6" />
+                <!-- Signal % + bar + RSSI -->
+                <VerticalStackLayout Grid.Column="1" WidthRequest="60" VerticalOptions="Center" Spacing="1">
+                    <Label Text="{Binding Signal, StringFormat='{0}%'}" HorizontalOptions="Center" FontSize="12" />
+                    <ProgressBar Progress="{Binding Signal, Converter={StaticResource IntToProgress}}" HeightRequest="4" />
                     <Label Text="{Binding Rssi, StringFormat={loc:T ApDetails_0DBm}}" HorizontalOptions="Center" FontSize="10" TextColor="Gray" />
                 </VerticalStackLayout>
-                <!-- Channel + band + security (authentication AND encryption) -->
-                <VerticalStackLayout Grid.Column="2" WidthRequest="96" HorizontalOptions="End" VerticalOptions="Center" Spacing="2">
-                    <Label Text="{Binding Channel, StringFormat={loc:T Scan_Channel}}" FontSize="12" HorizontalOptions="End" />
-                    <Label Text="{Binding FrequencyMhz, Converter={StaticResource FreqToBand}}" FontSize="10" TextColor="Gray" HorizontalOptions="End" />
-                    <Label Text="{Binding AuthText}" FontSize="10" TextColor="#546E7A" HorizontalOptions="End" LineBreakMode="TailTruncation" />
-                    <Label Text="{Binding EncryptionText}" FontSize="10" TextColor="#78909C" HorizontalOptions="End" />
+                <!-- Channel · band, then security (authentication · encryption) -->
+                <VerticalStackLayout Grid.Column="2" WidthRequest="126" VerticalOptions="Center" Spacing="1">
+                    <Label FontSize="12" HorizontalOptions="End">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding Channel, StringFormat={loc:T Scan_Channel}}" />
+                                <Span Text=" · " TextColor="Gray" FontSize="10" />
+                                <Span Text="{Binding FrequencyMhz, Converter={StaticResource FreqToBand}}" TextColor="Gray" FontSize="10" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label FontSize="10" TextColor="#78909C" HorizontalOptions="End" LineBreakMode="TailTruncation">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding AuthText}" />
+                                <Span Text="{Binding EncryptionText, Converter={StaticResource Separated}}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
                 </VerticalStackLayout>
             </Grid>
         </DataTemplate>
