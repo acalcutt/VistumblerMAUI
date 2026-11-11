@@ -61,6 +61,16 @@ public partial class SurveyViewModel : ObservableObject
 
     [ObservableProperty] private bool _showHeardHere;
 
+    /// <summary>The live list open (or folded to its one-line header, to leave the plan its room). Remembered.</summary>
+    [ObservableProperty] private bool _heardHereExpanded = Preferences.Get(HeardHereExpandedKey, true);
+
+    private const string HeardHereExpandedKey = "Survey_HeardHereExpanded";
+
+    partial void OnHeardHereExpandedChanged(bool value) => Preferences.Set(HeardHereExpandedKey, value);
+
+    [RelayCommand]
+    private void ToggleHeardHere() => HeardHereExpanded = !HeardHereExpanded;
+
     public SurveyViewModel(ScanViewModel scan) => _scan = scan;
 
     public void Start()

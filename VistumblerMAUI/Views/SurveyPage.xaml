@@ -21,9 +21,30 @@
 
             <!-- "All APs heard here now": the latest scan, which is what a spot tapped now records -->
             <VerticalStackLayout IsVisible="{Binding ShowHeardHere}" Padding="0,0,0,4">
-                <Label Text="{Binding HeardHere.Count, StringFormat={loc:T Survey_HeardHereHint}}"
-                       FontSize="11" TextColor="Gray" Padding="12,0,12,4" />
-                <CollectionView ItemsSource="{Binding HeardHere}" HeightRequest="180" SelectionMode="None">
+                <!-- Tap the header to fold the list away (one line) or open it again -->
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="6" Padding="12,0,12,4">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ToggleHeardHereCommand}" />
+                    </Grid.GestureRecognizers>
+                    <Label Grid.Column="0" Text="▾" FontSize="13" TextColor="Gray" VerticalOptions="Start">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding HeardHereExpanded}" Value="False">
+                                <Setter Property="Text" Value="▸" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                    <Label Grid.Column="1" Text="{Binding HeardHere.Count, StringFormat={loc:T Survey_HeardHereHint}}"
+                           FontSize="11" TextColor="Gray">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding HeardHereExpanded}" Value="False">
+                                <Setter Property="MaxLines" Value="1" />
+                                <Setter Property="LineBreakMode" Value="TailTruncation" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                </Grid>
+                <CollectionView ItemsSource="{Binding HeardHere}" HeightRequest="180" SelectionMode="None"
+                                IsVisible="{Binding HeardHereExpanded}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="vm:HeardAp">
                             <Grid ColumnDefinitions="*,Auto" Padding="12,3" ColumnSpacing="8">
