@@ -11,11 +11,17 @@ using VistumblerMAUI.Services.Survey;
 
 namespace VistumblerMAUI.ViewModels;
 
-/// <summary>A choice in the survey's network picker: everything, one SSID, or one AP.</summary>
-public sealed record SurveyNetwork(string Label, string? Ssid, string? Bssid)
+/// <summary>
+/// A choice in the survey's network picker: everything, one SSID, or one AP; or, with <paramref name="HeardHere"/>,
+/// the live list of what's heard where you're standing (the plan then shows everything, as for the strongest).
+/// </summary>
+public sealed record SurveyNetwork(string Label, string? Ssid, string? Bssid, bool HeardHere = false)
 {
     public override string ToString() => Label;
 }
+
+/// <summary>An AP in the "heard here now" list: its name, BSSID, latest RSSI, and channel and security.</summary>
+public sealed record HeardAp(string Name, string Bssid, int Rssi, string Detail);
 
 /// <summary>A choice in the Survey menu.</summary>
 public sealed record SurveyMenuItem(string Label, IAsyncRelayCommand Command);
@@ -45,11 +51,21 @@ public partial class SurveyViewModel : ObservableObject
     public ObservableCollection<SurveyNetwork> Networks { get; } = new();
 
     private static readonly SurveyNetwork Strongest = new(Loc.T("Survey_Strongest"), null, null);
+    private static readonly SurveyNetwork HeardHereNow = new(Loc.T("Survey_HeardHere"), null, null, HeardHere: true);
+
+    /// <summary>What the plan's colours show: the chosen network, or the strongest while the live list is chosen.</summary>
+    private SurveyNetwork MapNetwork => SelectedNetwork is { HeardHere: false } n ? n : Strongest;
+
+    /// <summary>While "All APs heard here now" is chosen: every AP the scan hears now, strongest first.</summary>
+    public ObservableCollection<HeardAp> HeardHere { get; } = new();
+
+    [ObservableProperty] private bool _showHeardHere;
 
     public SurveyViewModel(ScanViewModel scan) => _scan = scan;
 
     public void Start()
     {
+        _lastHeard = [];   // until this visit's first scan
         _scan.ScanCycleMerged += OnScanCycle;
         _scan.PropertyChanged += OnScanPropertyChanged;
         IsScanning = _scan.IsScanning;
@@ -157,7 +173,7 @@ public partial class SurveyViewModel : ObservableObject
     {
         var mark = _survey.Marks[index];
         var lines = new List<string> { Loc.T("Survey_SpotInfo", index + 1, mark.Readings.Count, mark.Time.ToLocalTime().ToString("t")) };
-        lines.Add(ValueAt(mark) is { } v ? $"{SelectedNetwork?.Label}: {v:0} dBm" : Loc.T("Survey_NotHeard", SelectedNetwork?.Label));
+        lines.Add(ValueAt(mark) is { } v ? $"{MapNetwork.Label}: {v:0} dBm" : Loc.T("Survey_NotHeard", MapNetwork.Label));
         if (mark.Readings.OrderByDescending(r => r.Rssi).FirstOrDefault() is { } top)
             lines.Add(Loc.T("Survey_StrongestAp", string.IsNullOrEmpty(top.Ssid) ? top.Bssid : top.Ssid, top.Rssi));
         return string.Join(Environment.NewLine, lines);
@@ -173,6 +189,9 @@ public partial class SurveyViewModel : ObservableObject
 
     private void OnScanCycle(object? sender, IReadOnlyList<AccessPoint> heard)
     {
+        // The live list is this scan, which is just what a spot tapped now records (every AP it heard)
+        if (heard.Count > 0) _lastHeard = heard;
+        RefreshHeardHere();
         if (Drawable.Pending is not { } at || heard.Count == 0)
         {
             RebuildNetworks();   // APs the scan now hears join the network picker
@@ -236,7 +255,41 @@ public partial class SurveyViewModel : ObservableObject
         Redraw?.Invoke(false);
     }
 
-    partial void OnSelectedNetworkChanged(SurveyNetwork? value) => Refresh(refit: false);
+    partial void OnSelectedNetworkChanged(SurveyNetwork? value)
+    {
+        ShowHeardHere = value?.HeardHere == true;
+        RefreshHeardHere();
+        Refresh(refit: false);
+    }
+
+    // The APs the latest scan heard, with that scan's signal: what a spot tapped now would record
+    private IReadOnlyList<AccessPoint> _lastHeard = [];
+
+    /// <summary>
+    /// Fills the "heard here now" list, strongest first: the latest scan's APs, as a spot tapped now records them
+    /// (every one of them goes in the survey and its CSV). Before this page's first scan, the list's active APs.
+    /// UI thread.
+    /// </summary>
+    private void RefreshHeardHere()
+    {
+        HeardHere.Clear();
+        if (!ShowHeardHere) return;
+        var source = _lastHeard.Count > 0 ? _lastHeard : _scan.AllKnownAps.Where(a => a.IsActive);
+        var heard = source
+            .Select(a => new HeardAp(
+                string.IsNullOrEmpty(a.Ssid) ? Loc.T("Group_Hidden") : a.Ssid,
+                a.Bssid,
+                a.Rssi ?? SignalToRssi(a.Signal ?? 0),
+                $"{Loc.T("Scan_Channel", a.Channel)} · {a.AuthText}"))
+            .OrderByDescending(a => a.Rssi)
+            .ThenBy(a => a.Name, StringComparer.CurrentCultureIgnoreCase);
+        foreach (var ap in heard) HeardHere.Add(ap);
+    }
+
+    /// <summary>A tap on an AP in the "heard here now" list: follow that AP on the plan.</summary>
+    [RelayCommand]
+    private void FollowAp(HeardAp ap) =>
+        SelectedNetwork = Networks.FirstOrDefault(n => string.Equals(n.Bssid, ap.Bssid, StringComparison.OrdinalIgnoreCase)) ?? SelectedNetwork;
 
     /// <summary>
     /// The network picker's choices: the strongest at each spot, each SSID, then each AP. The SSIDs and APs are
@@ -257,7 +310,7 @@ public partial class SurveyViewModel : ObservableObject
             .ToDictionary(g => g.Key, g => g.Count(), StringComparer.OrdinalIgnoreCase);
         int SpotsFor(string bssid) => spots.GetValueOrDefault(bssid);
 
-        var options = new List<SurveyNetwork> { Strongest };
+        var options = new List<SurveyNetwork> { Strongest, HeardHereNow };
         options.AddRange(heard.Where(a => !string.IsNullOrEmpty(a.Ssid))
             .GroupBy(a => a.Ssid)
             .OrderByDescending(g => g.Max(a => SpotsFor(a.Bssid)))
@@ -272,7 +325,7 @@ public partial class SurveyViewModel : ObservableObject
 
         // The chosen one stays, even once it's no longer heard
         var selected = keep is null ? null : options.FirstOrDefault(o => SameNetwork(o, keep));
-        if (selected is null && keep is not null && keep != Strongest)
+        if (selected is null && keep is not null && keep != Strongest && keep != HeardHereNow)
         {
             options.Add(keep);
             selected = keep;
@@ -287,12 +340,12 @@ public partial class SurveyViewModel : ObservableObject
     }
 
     private static bool SameNetwork(SurveyNetwork a, SurveyNetwork b) =>
-        string.Equals(a.Bssid, b.Bssid, StringComparison.OrdinalIgnoreCase) && a.Ssid == b.Ssid;
+        string.Equals(a.Bssid, b.Bssid, StringComparison.OrdinalIgnoreCase) && a.Ssid == b.Ssid && a.HeardHere == b.HeardHere;
 
     /// <summary>The chosen network's RSSI at a mark: its strongest matching reading, or null if none heard it.</summary>
     private double? ValueAt(SurveyMark mark)
     {
-        var n = SelectedNetwork ?? Strongest;
+        var n = MapNetwork;
         var matching = mark.Readings.Where(r =>
             n.Bssid is not null ? string.Equals(r.Bssid, n.Bssid, StringComparison.OrdinalIgnoreCase)
             : n.Ssid is null || r.Ssid == n.Ssid);

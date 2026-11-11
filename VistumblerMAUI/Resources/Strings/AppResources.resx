@@ -273,6 +273,8 @@
   <data name="Survey_DeleteSpot" xml:space="preserve"><value>Delete spot</value></data>
   <data name="Survey_MeasureAgain" xml:space="preserve"><value>Measure again here</value></data>
   <data name="Survey_Strongest" xml:space="preserve"><value>Strongest network at each spot</value></data>
+  <data name="Survey_HeardHere" xml:space="preserve"><value>All APs heard here now</value></data>
+  <data name="Survey_HeardHereHint" xml:space="preserve"><value>{0} APs in the last scan. Tap the plan where you're standing to record them all there; tap one to follow it.</value></data>
   <data name="Survey_PlanLoadFailed" xml:space="preserve"><value>Couldn't load the plan image: {0}</value></data>
   <data name="Survey_SpotInfo" xml:space="preserve"><value>Spot {0}: {1} AP(s) at {2}</value></data>
   <data name="Survey_NotHeard" xml:space="preserve"><value>{0}: not heard</value></data>

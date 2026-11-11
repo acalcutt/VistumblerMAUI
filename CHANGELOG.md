@@ -5,6 +5,7 @@
 - _...Add new stuff here..._
 - **Site survey: the Survey menu beside the buttons** — the Survey menu (new survey, open, floor plan image, use a grid, rename, export, delete) moved from the corner of the title bar to the first of the buttons under the plan, and opens upward from there, so the floor plan option is easy to find. Tapping the plan closes it.
 - **Site survey: pick an AP before measuring** — the network picker now also lists the SSIDs and APs the scan hears right now (active in the last 30 seconds), not only those heard at spots already measured, so one AP can be chosen and followed from the first spot. APs are listed as "SSID · BSSID", the most measured first. The chosen one stays in the list once it's out of range.
+- **Site survey: All APs heard here now** — a choice in the network picker that lists every AP the latest scan heard, strongest first, with its RSSI, channel and security, so you can see what's at your position before measuring. A spot tapped now records all of them, as every spot does, and the survey's CSV export has a row for each AP at each spot. Tapping an AP in the list follows that AP on the plan.
 
 ### 🐞 Bug fixes
 - _...Add new stuff here..._

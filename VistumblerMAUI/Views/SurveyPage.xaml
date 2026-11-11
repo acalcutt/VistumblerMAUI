@@ -9,14 +9,48 @@
 
     <Grid RowDefinitions="Auto,*,Auto">
 
-        <!-- Which network the colours show, and whether to fill in between the spots -->
-        <Grid Grid.Row="0" ColumnDefinitions="*,Auto,Auto" Padding="12,4" ColumnSpacing="6">
-            <Picker Grid.Column="0" Title="{loc:T Survey_Network}" FontSize="13"
-                    ItemsSource="{Binding Networks}"
-                    SelectedItem="{Binding SelectedNetwork}" />
-            <Label Grid.Column="1" Text="{loc:T Survey_Heatmap}" FontSize="12" VerticalOptions="Center" />
-            <Switch Grid.Column="2" IsToggled="{Binding ShowHeatmap}" VerticalOptions="Center" />
-        </Grid>
+        <VerticalStackLayout Grid.Row="0">
+            <!-- Which network the colours show, and whether to fill in between the spots -->
+            <Grid ColumnDefinitions="*,Auto,Auto" Padding="12,4" ColumnSpacing="6">
+                <Picker Grid.Column="0" Title="{loc:T Survey_Network}" FontSize="13"
+                        ItemsSource="{Binding Networks}"
+                        SelectedItem="{Binding SelectedNetwork}" />
+                <Label Grid.Column="1" Text="{loc:T Survey_Heatmap}" FontSize="12" VerticalOptions="Center" />
+                <Switch Grid.Column="2" IsToggled="{Binding ShowHeatmap}" VerticalOptions="Center" />
+            </Grid>
+
+            <!-- "All APs heard here now": the latest scan, which is what a spot tapped now records -->
+            <VerticalStackLayout IsVisible="{Binding ShowHeardHere}" Padding="0,0,0,4">
+                <Label Text="{Binding HeardHere.Count, StringFormat={loc:T Survey_HeardHereHint}}"
+                       FontSize="11" TextColor="Gray" Padding="12,0,12,4" />
+                <CollectionView ItemsSource="{Binding HeardHere}" HeightRequest="180" SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="vm:HeardAp">
+                            <Grid ColumnDefinitions="*,Auto" Padding="12,3" ColumnSpacing="8">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:SurveyViewModel}}, Path=FollowApCommand, x:DataType=vm:SurveyViewModel}"
+                                        CommandParameter="{Binding .}" />
+                                </Grid.GestureRecognizers>
+                                <VerticalStackLayout Grid.Column="0" Spacing="0">
+                                    <Label Text="{Binding Name}" FontSize="13" FontAttributes="Bold" LineBreakMode="TailTruncation" />
+                                    <Label FontSize="10" TextColor="Gray" LineBreakMode="TailTruncation">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Bssid}" />
+                                                <Span Text="{Binding Detail, Converter={StaticResource Separated}}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </VerticalStackLayout>
+                                <Label Grid.Column="1" Text="{Binding Rssi, StringFormat={loc:T ApDetails_0DBm}}"
+                                       FontSize="13" VerticalOptions="Center" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
 
         <!-- The plan: tap to measure, pinch to zoom, drag to move -->
         <GraphicsView Grid.Row="1" x:Name="Canvas" />
