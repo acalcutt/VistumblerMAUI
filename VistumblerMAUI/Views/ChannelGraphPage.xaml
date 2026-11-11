@@ -8,10 +8,15 @@
              x:Class="VistumblerMAUI.Views.ChannelGraphPage"
              Title="{loc:T Tab_Channels}">
 
+    <!-- The scan/GPS toggles and counts take the title bar; the tab already says which page this is -->
+    <Shell.TitleView>
+        <controls:ScanControlBar x:Name="ScanBar" />
+    </Shell.TitleView>
+
     <Grid RowDefinitions="Auto,Auto,*,Auto">
 
-        <!-- Shared scan/GPS control bar -->
-        <controls:ScanControlBar x:Name="ScanBar" Grid.Row="0" />
+        <!-- One-off messages and the Save & Clear total, only while there are any -->
+        <controls:NoticeBar x:Name="Notices" Grid.Row="0" />
 
         <!-- Band selector + RSSI/percent toggle -->
         <Grid Grid.Row="1" ColumnDefinitions="Auto,*,Auto,Auto" Padding="12,6" ColumnSpacing="8">

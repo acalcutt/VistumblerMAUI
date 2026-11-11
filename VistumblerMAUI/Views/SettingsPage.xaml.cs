@@ -11,6 +11,7 @@ public partial class SettingsPage : ContentPage
         InitializeComponent();
         BindingContext = _vm = vm;
         ScanBar.BindingContext = scan;   // shared control bar reflects the live scan state
+        Notices.BindingContext = scan;
     }
 
     // Refresh the WifiDB fields when returning to this page (e.g. after the QR scanner

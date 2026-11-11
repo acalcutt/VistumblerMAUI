@@ -8,8 +8,14 @@
              x:Class="VistumblerMAUI.Views.SettingsPage"
              Title="{loc:T Tab_Settings}">
 
+    <!-- The scan/GPS toggles and counts take the title bar; the tab already says which page this is -->
+    <Shell.TitleView>
+        <controls:ScanControlBar x:Name="ScanBar" />
+    </Shell.TitleView>
+
     <Grid RowDefinitions="Auto,*">
-        <controls:ScanControlBar x:Name="ScanBar" Grid.Row="0" />
+        <!-- One-off messages and the Save & Clear total, only while there are any -->
+        <controls:NoticeBar x:Name="Notices" Grid.Row="0" />
 
         <ScrollView Grid.Row="1">
         <VerticalStackLayout Spacing="0" Padding="0,8">

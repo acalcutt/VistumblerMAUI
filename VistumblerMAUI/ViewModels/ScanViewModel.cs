@@ -55,10 +55,12 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
     [ObservableProperty] private ObservableCollection<AccessPoint> _accessPoints = new();
     [ObservableProperty] private bool   _isScanning;
     [ObservableProperty] private bool   _isGpsEnabled;
-    [ObservableProperty] private int    _totalCount;
-    [ObservableProperty] private int    _activeCount;
-    [ObservableProperty] private string _statusMessage = Localization.Loc.T("Status_Ready");
+    [ObservableProperty, NotifyPropertyChangedFor(nameof(CountsText))] private int _totalCount;
+    [ObservableProperty, NotifyPropertyChangedFor(nameof(CountsText))] private int _activeCount;
     [ObservableProperty] private string _gpsStatus     = Localization.Loc.T("Gps_Off");
+
+    /// <summary>"76 active / 149 total", for the title bar.</summary>
+    public string CountsText => Localization.Loc.T("Status_ActiveTotal", ActiveCount, TotalCount);
     [ObservableProperty] private double _loopTimeMs;
     [ObservableProperty] private string _searchText = string.Empty;
 
@@ -186,8 +188,6 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         TotalCount  = _apMap.Count;
         ActiveCount = 0;
         RebuildDisplayedList();
-        if (!IsScanning)
-            StatusMessage = Localization.Loc.T("Status_TotalAps", TotalCount);
     }
 
     /// <summary>Stop capture and clear in-memory state, closing the current session DB so a
@@ -203,7 +203,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         TotalCount    = 0;
         ActiveCount   = 0;
         SetSaveTotals(0, 0);
-        StatusMessage = Localization.Loc.T("Map_NewSession");
+        ShowNotice(Localization.Loc.T("Map_NewSession"));
         await _db.CloseAsync();
     }
 
@@ -231,7 +231,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         TotalCount    = 0;
         ActiveCount   = 0;
         RebuildDisplayedList();
-        StatusMessage = status;
+        ShowNotice(status);
     }
 
     /// <param name="Path">The file written, or null when nothing was saved.</param>
@@ -290,7 +290,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
             {
                 // The list is only cleared after the file is written, so a failure keeps everything
                 var failed = Localization.Loc.T("Status_SaveFailed", ex.Message);
-                await MainThread.InvokeOnMainThreadAsync(() => StatusMessage = failed);
+                await MainThread.InvokeOnMainThreadAsync(() => ShowNotice(failed, sticky: true));
                 return new(null, 0, failed);
             }
             finally
@@ -330,12 +330,12 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
     /// <summary>Works through the WifiDB upload queue and describes what happened to <paramref name="path"/>.</summary>
     private async Task<string> UploadQueuedAsync(string path)
     {
-        await MainThread.InvokeOnMainThreadAsync(() => StatusMessage = Localization.Loc.T("Status_UploadingWifiDb"));
+        await MainThread.InvokeOnMainThreadAsync(() => ShowNotice(Localization.Loc.T("Status_UploadingWifiDb"), sticky: true));
         await _uploadQueue.ProcessAsync(waitForRunning: true);
         var outcome = _uploadQueue.Contains(path)
             ? Localization.Loc.T("Status_WifiDbNotYet", _uploadQueue.ErrorFor(path) ?? Localization.Loc.T("Status_Queued"))
             : Localization.Loc.T("Status_UploadedWifiDb");
-        await MainThread.InvokeOnMainThreadAsync(() => StatusMessage = outcome);
+        await MainThread.InvokeOnMainThreadAsync(() => ShowNotice(outcome));
         return outcome;
     }
 
@@ -346,7 +346,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         var outcome = _wigleQueue.Count > 0
             ? Localization.Loc.T("Status_WigleNotYet", _wigleQueue.LastError ?? Localization.Loc.T("Status_Queued"))
             : Localization.Loc.T("Status_UploadedWigle");
-        await MainThread.InvokeOnMainThreadAsync(() => StatusMessage = outcome);
+        await MainThread.InvokeOnMainThreadAsync(() => ShowNotice(outcome));
         return outcome;
     }
 
@@ -421,14 +421,13 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
     {
         if (!await EnsureLocationPermissionAsync())
         {
-            StatusMessage = Localization.Loc.T("Status_NeedLocation");
+            ShowNotice(Localization.Loc.T("Status_NeedLocation"), sticky: true);
             return;
         }
         await _db.InitializeAsync();
         _scanCts = new CancellationTokenSource();
         _wifi.ScanIntervalMs = Preferences.Get(ScanIntervalKey, 1000);   // honour the setting
         IsScanning    = true;
-        StatusMessage = Localization.Loc.T("Status_Scanning");
         _lastSaveAndClear = DateTime.UtcNow;   // Auto Save And Clear's timer counts scanning time
         _ = _wifi.StartScanningAsync(_scanCts.Token);
         StartRadio();
@@ -441,7 +440,6 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         _wifi.StopScanning();
         StopRadio();
         IsScanning    = false;
-        StatusMessage = Localization.Loc.T("Status_Stopped", TotalCount);
         UpdateKeepAlive();
     }
 
@@ -582,7 +580,6 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
 
             TotalCount    = _apMap.Count;
             ActiveCount   = _apMap.Values.Count(a => a.IsActive);
-            StatusMessage = Localization.Loc.T("Status_ActiveTotal", ActiveCount, TotalCount);
             MergeScanResults();
             ScanCycleMerged?.Invoke(this, toPersist);
         });
@@ -609,7 +606,7 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         catch (Exception ex)
         {
             System.Diagnostics.Debug.WriteLine($"[ScanVM] SaveScanCycleAsync failed (cycle dropped): {ex.Message}");
-            StatusMessage = Localization.Loc.T("Status_DbWriteFailed");
+            MainThread.BeginInvokeOnMainThread(() => ShowNotice(Localization.Loc.T("Status_DbWriteFailed"), sticky: true));
             try { await _db.CloseAsync(); } catch { /* reopened on next cycle */ }
             return;
         }
@@ -808,6 +805,6 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
     private void OnScanError(object? sender, ScanErrorEventArgs e)
     {
         MainThread.BeginInvokeOnMainThread(() =>
-            StatusMessage = Localization.Loc.T("Status_Error", e.ErrorMessage));
+            ShowNotice(Localization.Loc.T("Status_Error", e.ErrorMessage), sticky: true));
     }
 }

@@ -6,55 +6,38 @@
              x:DataType="vm:ScanViewModel"
              x:Class="VistumblerMAUI.Controls.ScanControlBar">
 
-    <!-- Always-visible scan/GPS controls + status, shared across all tabs
-         (bound to the singleton ScanViewModel). -->
-    <VerticalStackLayout Spacing="0">
-
-        <!-- Status line -->
-        <Grid ColumnDefinitions="*,Auto"
-              BackgroundColor="{AppThemeBinding Light=#1565C0, Dark=#0D47A1}"
-              Padding="12,6">
-            <Label Grid.Column="0" Text="{Binding StatusMessage}" TextColor="White" FontSize="13" VerticalOptions="Center" />
-            <Label Grid.Column="1" Text="{Binding GpsStatus}"     TextColor="#B3E5FC" FontSize="12" VerticalOptions="Center" HorizontalOptions="End" />
-        </Grid>
-
-        <!-- Toggles + counters -->
-        <Grid ColumnDefinitions="Auto,Auto,*" Padding="12,6" ColumnSpacing="8"
-              BackgroundColor="{AppThemeBinding Light=#F5F5F5, Dark=#1B1B1B}">
-            <Button Grid.Column="0"
-                    Text="{loc:T Bar_ScanAps}"
-                    Command="{Binding ToggleScanCommand}"
-                    BackgroundColor="{Binding IsScanning, Converter={StaticResource RunningToColor}}"
-                    TextColor="White" WidthRequest="92">
-                <Button.Triggers>
-                    <DataTrigger TargetType="Button" Binding="{Binding IsScanning}" Value="True">
-                        <Setter Property="Text" Value="{loc:T Bar_Stop}" />
-                    </DataTrigger>
-                </Button.Triggers>
-            </Button>
-            <Button Grid.Column="1"
-                    Text="{loc:T Bar_UseGps}"
-                    Command="{Binding ToggleGpsCommand}"
-                    BackgroundColor="{Binding IsGpsEnabled, Converter={StaticResource RunningToColor}}"
-                    TextColor="White" WidthRequest="92">
-                <Button.Triggers>
-                    <DataTrigger TargetType="Button" Binding="{Binding IsGpsEnabled}" Value="True">
-                        <Setter Property="Text" Value="{loc:T Bar_StopGps}" />
-                    </DataTrigger>
-                </Button.Triggers>
-            </Button>
-            <VerticalStackLayout Grid.Column="2" Spacing="0" VerticalOptions="Center" HorizontalOptions="End">
-                <Label Text="{Binding TotalCount, StringFormat={loc:T Bar_Total}}" FontSize="12" HorizontalOptions="End" />
-                <Label Text="{Binding ActiveCount, StringFormat={loc:T Bar_Active}}" FontSize="12" TextColor="#1565C0" HorizontalOptions="End" />
-                <!-- What Save & Clear has already taken out of the list this session; opens the Uploads page -->
-                <Label Text="{Binding SavesSummary}" FontSize="11" TextColor="Gray" HorizontalOptions="End"
-                       IsVisible="{Binding SavesSummary, Converter={StaticResource IsNotNullOrEmpty}}">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding OpenUploadsCommand}" />
-                    </Label.GestureRecognizers>
-                </Label>
-            </VerticalStackLayout>
-        </Grid>
-
-    </VerticalStackLayout>
+    <!-- The scan/GPS toggles and the counts, in the title bar of each tab (Shell.TitleView), in place of the
+         page's name, which the tabs already show. Bound to the singleton ScanViewModel. One row, so it fits a
+         phone's title bar beside the menu button; the GPS line truncates first when it's narrow. -->
+    <Grid ColumnDefinitions="Auto,Auto,*" ColumnSpacing="6" Padding="4,0,12,0"
+          HorizontalOptions="Fill" VerticalOptions="Center">
+        <Button Grid.Column="0"
+                Style="{StaticResource TitleBarButton}"
+                Text="{loc:T Bar_ScanAps}"
+                Command="{Binding ToggleScanCommand}"
+                BackgroundColor="{Binding IsScanning, Converter={StaticResource RunningToColor}}">
+            <Button.Triggers>
+                <DataTrigger TargetType="Button" Binding="{Binding IsScanning}" Value="True">
+                    <Setter Property="Text" Value="{loc:T Bar_Stop}" />
+                </DataTrigger>
+            </Button.Triggers>
+        </Button>
+        <Button Grid.Column="1"
+                Style="{StaticResource TitleBarButton}"
+                Text="{loc:T Bar_UseGps}"
+                Command="{Binding ToggleGpsCommand}"
+                BackgroundColor="{Binding IsGpsEnabled, Converter={StaticResource RunningToColor}}">
+            <Button.Triggers>
+                <DataTrigger TargetType="Button" Binding="{Binding IsGpsEnabled}" Value="True">
+                    <Setter Property="Text" Value="{loc:T Bar_StopGps}" />
+                </DataTrigger>
+            </Button.Triggers>
+        </Button>
+        <VerticalStackLayout Grid.Column="2" Spacing="0" VerticalOptions="Center" HorizontalOptions="End">
+            <Label Text="{Binding CountsText}" FontSize="13" HorizontalOptions="End" LineBreakMode="TailTruncation"
+                   TextColor="{AppThemeBinding Light=#1565C0, Dark=#90CAF9}" />
+            <Label Text="{Binding GpsStatus}" FontSize="11" HorizontalOptions="End" LineBreakMode="TailTruncation"
+                   TextColor="Gray" />
+        </VerticalStackLayout>
+    </Grid>
 </ContentView>

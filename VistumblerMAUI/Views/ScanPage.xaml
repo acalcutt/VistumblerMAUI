@@ -47,10 +47,15 @@
         </DataTemplate>
     </ContentPage.Resources>
 
+    <!-- The scan/GPS toggles and counts take the title bar; the tab already says which page this is -->
+    <Shell.TitleView>
+        <controls:ScanControlBar x:Name="ScanBar" />
+    </Shell.TitleView>
+
     <Grid RowDefinitions="Auto,Auto,Auto,*,Auto">
 
-        <!-- Shared scan/GPS control bar (also shown on the other tabs) -->
-        <controls:ScanControlBar Grid.Row="0" />
+        <!-- One-off messages and the Save & Clear total, only while there are any -->
+        <controls:NoticeBar x:Name="Notices" Grid.Row="0" />
 
         <!-- Search bar + sort controls + clear -->
         <Grid Grid.Row="1" ColumnDefinitions="*,Auto,Auto,Auto" Padding="8,4" ColumnSpacing="6">

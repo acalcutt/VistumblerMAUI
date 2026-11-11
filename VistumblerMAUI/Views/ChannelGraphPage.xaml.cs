@@ -12,6 +12,7 @@ public partial class ChannelGraphPage : ContentPage
         InitializeComponent();
         BindingContext = _vm = vm;
         ScanBar.BindingContext = scan;      // shared control bar
+        Notices.BindingContext = scan;
 
         GraphView.Drawable = _vm.Graph;
         _vm.GraphUpdated += () => MainThread.BeginInvokeOnMainThread(GraphView.Invalidate);

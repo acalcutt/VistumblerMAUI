@@ -11,6 +11,7 @@ public partial class ScanPage : ContentPage
     {
         InitializeComponent();
         BindingContext = _vm = vm;
+        ScanBar.BindingContext = vm;   // the title bar (Shell.TitleView), as the other tabs set it
     }
 
     protected override async void OnAppearing()

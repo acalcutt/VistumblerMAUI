@@ -44,6 +44,7 @@ public partial class MapPage : ContentPage, IQueryAttributable
 
         BindingContext = _vm = vm;
         ScanBar.BindingContext = scan;   // shared control bar reflects the live scan state
+        Notices.BindingContext = scan;
         Log($"ctor: BindingContext set, StyleUrl='{_vm.StyleUrl}'");
 
         // Redraw the live AP layer whenever its GeoJSON changes (scan/timer refresh).

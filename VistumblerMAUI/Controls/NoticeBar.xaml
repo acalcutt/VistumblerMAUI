@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:VistumblerMAUI.ViewModels"
+             x:DataType="vm:ScanViewModel"
+             x:Class="VistumblerMAUI.Controls.NoticeBar">
+
+    <!-- Under the title bar on each tab: the latest one-off message (ScanViewModel.Notice.cs) and the session's
+         Save & Clear total. Takes no room while there's neither. -->
+    <VerticalStackLayout Spacing="0">
+
+        <Grid ColumnDefinitions="*,Auto" Padding="12,4,4,4" ColumnSpacing="4"
+              BackgroundColor="{AppThemeBinding Light=#1565C0, Dark=#0D47A1}"
+              IsVisible="{Binding HasNotice}">
+            <Label Grid.Column="0" Text="{Binding Notice}" TextColor="White" FontSize="12"
+                   VerticalOptions="Center" LineBreakMode="WordWrap" MaxLines="2" />
+            <Label Grid.Column="1" Text="✕" TextColor="White" FontSize="14" Padding="8,0"
+                   VerticalOptions="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding DismissNoticeCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+        </Grid>
+
+        <!-- What Save & Clear has already taken out of the list this session; opens the Uploads page -->
+        <Label Text="{Binding SavesSummary}" FontSize="11" TextColor="Gray" Padding="12,2"
+               HorizontalOptions="End"
+               IsVisible="{Binding SavesSummary, Converter={StaticResource IsNotNullOrEmpty}}">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding OpenUploadsCommand}" />
+            </Label.GestureRecognizers>
+        </Label>
+
+    </VerticalStackLayout>
+</ContentView>
