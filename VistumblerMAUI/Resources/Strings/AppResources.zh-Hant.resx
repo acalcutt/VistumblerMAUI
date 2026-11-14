@@ -2196,4 +2196,16 @@
     <value>KML 訊號地圖</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
+  <data name="Settings_WiFiAdapters" xml:space="preserve">
+    <value>用於掃描的 Wi-Fi 介面卡</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_CellTowersFromModems" xml:space="preserve">
+    <value>來自這些數據機的基地台</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ModemNotFound" xml:space="preserve">
+    <value>所選數據機 (找不到)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
 </root>

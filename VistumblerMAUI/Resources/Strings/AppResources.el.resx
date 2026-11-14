@@ -2196,4 +2196,16 @@
     <value>Χάρτης σήματος KML</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
+  <data name="Settings_WiFiAdapters" xml:space="preserve">
+    <value>Προσαρμογείς Wi-Fi για σάρωση</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_CellTowersFromModems" xml:space="preserve">
+    <value>Κεραίες κινητής από αυτά τα μόντεμ</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ModemNotFound" xml:space="preserve">
+    <value>Επιλεγμένο μόντεμ (δεν βρέθηκε)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
 </root>

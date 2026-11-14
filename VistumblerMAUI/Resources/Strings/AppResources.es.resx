@@ -2196,4 +2196,16 @@
     <value>Mapa de señal KML</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
+  <data name="Settings_WiFiAdapters" xml:space="preserve">
+    <value>Adaptadores Wi-Fi para escanear</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_CellTowersFromModems" xml:space="preserve">
+    <value>Torres de telefonía de estos módems</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ModemNotFound" xml:space="preserve">
+    <value>Módem elegido (no encontrado)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
 </root>

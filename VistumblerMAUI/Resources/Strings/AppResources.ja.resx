@@ -2196,4 +2196,16 @@
     <value>KML 信号マップ</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
+  <data name="Settings_WiFiAdapters" xml:space="preserve">
+    <value>スキャンに使う Wi-Fi アダプター</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_CellTowersFromModems" xml:space="preserve">
+    <value>これらのモデムからの基地局</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ModemNotFound" xml:space="preserve">
+    <value>選択したモデム (見つかりません)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
 </root>

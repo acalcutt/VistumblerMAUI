@@ -2196,4 +2196,16 @@
     <value>KML-signalkort</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
+  <data name="Settings_WiFiAdapters" xml:space="preserve">
+    <value>Wi-Fi-adaptere at scanne med</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_CellTowersFromModems" xml:space="preserve">
+    <value>Mobilmaster fra disse modemer</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ModemNotFound" xml:space="preserve">
+    <value>Valgt modem (ikke fundet)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
 </root>

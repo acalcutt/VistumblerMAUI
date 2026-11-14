@@ -2196,4 +2196,16 @@
     <value>KML sinyal haritası</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
+  <data name="Settings_WiFiAdapters" xml:space="preserve">
+    <value>Tarama için Wi-Fi bağdaştırıcıları</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_CellTowersFromModems" xml:space="preserve">
+    <value>Bu modemlerden baz istasyonları</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
+  <data name="Settings_ModemNotFound" xml:space="preserve">
+    <value>Seçilen modem (bulunamadı)</value>
+    <comment>Draft (machine translation), please review</comment>
+  </data>
 </root>
