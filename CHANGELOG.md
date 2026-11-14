@@ -3,11 +3,16 @@
 ## master
 ### ✨ Features and improvements
 - _...Add new stuff here..._
+
+### 🐞 Bug fixes
+- _...Add new stuff here..._
+
+## 0.14.0
+### ✨ Features and improvements
 - **Windows: Bluetooth devices and cell towers** — Settings → Scanning now has **Also record Bluetooth devices** on Windows too, when the PC has Bluetooth: Bluetooth LE advertisements and classic Bluetooth inquiry are recorded with each scan, as on Android and in VistumblerCS, and listed in the Scan page's Bluetooth tab. On a PC with a mobile broadband (cellular) modem, **Also record cell towers** reads the GSM, UMTS, LTE and CDMA cells the modem reports, every 5 seconds, into the Cell towers tab. They're saved and exported (VS1 4.1, WiGLE CSV, the WifiDB and WiGLE uploads) as Android's are, with the same device class names. Reading cells hasn't been tried with a real modem yet.
 - **Windows: scan with several Wi-Fi adapters, and choose the modems** — Settings → Scanning lists each Wi-Fi adapter with a tick box in place of the one-adapter picker, as the Interface menu does in Vistumbler and VistumblerCS: scan with any of them at once (an AP two adapters hear is listed once, at the stronger signal). All are ticked to begin with, and an adapter plugged in later is scanned with too until the choice is narrowed; the last one ticked can't be unticked. An adapter chosen before this version stays the one chosen. On a PC with cellular modems, each is listed under **Cell towers from these modems** to tick on its own. The lists are filled as Settings opens; **Refresh** lists again after plugging one in. Choosing one adapter now also keeps only the APs that adapter heard; before, the other adapters' APs still came through.
 
 ### 🐞 Bug fixes
-- _...Add new stuff here..._
 - **Imported files show straight away, cell towers and Bluetooth included** — an import was saved into the session but the Scan page's list and the map only showed it after the app was restarted. The APs, cell towers and Bluetooth devices a file brings in now appear as soon as it's imported (not in range, as a loaded session's are). The Bluetooth and Cell towers tabs also appear whenever the session has any, so a VS1 4.1 file or WiGLE CSV with cell towers shows them on a PC with no modem, or on an iPhone, which can't record them.
 - **Windows: Install and Restart failed with "The downloaded installer isn't validly signed"** — the releases are signed with Vistumbler's own certificate, which Windows doesn't know, and the updater insisted on a certificate Windows trusts, so every update stopped there. It now accepts an installer signed with exactly the certificate the running app is signed with, and still refuses one that has been changed or is signed by anyone else. This takes effect from the version after the one you have: to get it, install this release from the release page once; later updates install from inside the app.
 
