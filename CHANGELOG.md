@@ -10,6 +10,7 @@
 
 ### 🐞 Bug fixes
 - _...Add new stuff here..._
+- **Map renderer updated to MapLibreNative.Maui.Handlers 5.0.0-pre.4** (from 5.0.0-pre.3). With 3D terrain on, dragging, pinching and tilting the map now turn around the ground you're looking at, not a point under the mountain, and a tap lands on the ground under your finger. On Windows, a terrain view no longer comes back lower after switching to another tab and back. On Android, tapping with two fingers zooms the map out.
 
 ## 0.12.0
 ### ✨ Features and improvements
