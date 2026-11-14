@@ -23,7 +23,7 @@ Legend: ✅ has it · 🟡 partly, or done differently · ❌ missing · ➕ new
 | Manufacturer lookup during a scan, Update Manufacturers | ✓ | ✅ IEEE list of about 40,000 comes with the app; Update manufacturers in Settings → Data |
 | Cell towers and Bluetooth/BLE devices, in their own list | n/a | ➕ Android and Windows (cell towers from a mobile broadband modem); in WiGLE CSV, and in VS1 4.1 as a section of their own |
 | MAC labels | ✓ | ❌ |
-| Choosing the Wi-Fi adapter (Interface menu) | ✓ | ✅ Windows, in Settings → Scanning |
+| Choosing the Wi-Fi adapter (Interface menu) | ✓ | ✅ Windows, in Settings → Scanning; ➕ several at once, and which cellular modems to read cell towers from |
 | Auto Scan APs on launch | ✓ | ✅ plus turning GPS on at launch |
 | Scanning with the screen off | n/a | ➕ on Android, through a background service |
 

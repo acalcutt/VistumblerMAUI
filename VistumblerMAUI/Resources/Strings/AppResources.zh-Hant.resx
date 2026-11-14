@@ -571,10 +571,6 @@
     <value>尚無訊號歷史</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
-  <data name="Settings_AllAdapters" xml:space="preserve">
-    <value>所有介面卡</value>
-    <comment>Draft (machine translation), please review</comment>
-  </data>
   <data name="Settings_AdapterNotFound" xml:space="preserve">
     <value>所選介面卡 (找不到)</value>
     <comment>Draft (machine translation), please review</comment>
@@ -1681,10 +1677,6 @@
   </data>
   <data name="Settings_AlsoRecordBluetoothDevices" xml:space="preserve">
     <value>同時記錄藍牙裝置</value>
-    <comment>Draft (machine translation), please review</comment>
-  </data>
-  <data name="Settings_WiFiAdapter" xml:space="preserve">
-    <value>Wi-Fi 介面卡</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_Refresh" xml:space="preserve">

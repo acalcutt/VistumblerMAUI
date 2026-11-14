@@ -3,14 +3,16 @@ using Vistumbler.Core.Models;
 namespace VistumblerMAUI.Services;
 
 /// <summary>
-/// Scanning and display settings from the original Vistumbler: Auto Scan APs on launch, the Wi-Fi adapter
-/// (Interface menu) and the GPS coordinate format. Backed by MAUI <see cref="Preferences"/>.
+/// Scanning and display settings from the original Vistumbler: Auto Scan APs on launch, the Wi-Fi adapters and
+/// modems (Interface menu) and the GPS coordinate format. Backed by MAUI <see cref="Preferences"/>.
 /// </summary>
 public static class ScanSettings
 {
     private const string ScanOnLaunchKey = "Scan_OnLaunch";
     private const string GpsOnLaunchKey  = "Gps_OnLaunch";
-    private const string AdapterKey      = "Scan_AdapterId";
+    private const string OldAdapterKey   = "Scan_AdapterId";   // one adapter, before several could be chosen
+    private const string AdaptersKey     = "Scan_AdapterIds";
+    private const string CellModemsKey   = "Scan_CellModemIds";
     private const string GpsFormatKey    = "Gps_DisplayFormat";
     private const string SaveGpsKey      = "Gps_SaveWithoutAps";
     private const string CellsKey        = "Scan_Cells";
@@ -47,12 +49,32 @@ public static class ScanSettings
         set => Preferences.Set(GpsOnLaunchKey, value);
     }
 
-    /// <summary>The Wi-Fi adapter to scan with on Windows; empty scans with all of them.</summary>
-    public static string AdapterId
+    /// <summary>
+    /// The Wi-Fi adapters to scan with on Windows, by id (the original's Interface menu); empty scans with all of them.
+    /// Kept joined by '|', as VistumblerCS keeps them. The one adapter chosen before several could be carries over.
+    /// </summary>
+    public static IReadOnlyList<string> AdapterIds
     {
-        get => Preferences.Get(AdapterKey, string.Empty);
-        set => Preferences.Set(AdapterKey, value ?? string.Empty);
+        get => Split(Preferences.ContainsKey(AdaptersKey) ? Preferences.Get(AdaptersKey, string.Empty)
+                                                          : Preferences.Get(OldAdapterKey, string.Empty));
+        set
+        {
+            Preferences.Set(AdaptersKey, string.Join('|', value));
+            Preferences.Remove(OldAdapterKey);
+        }
     }
+
+    /// <summary>
+    /// The cellular modems to read cell towers from on Windows, by id. <see cref="ScanCells"/> stays the switch: on
+    /// Windows it's on while any modem is chosen.
+    /// </summary>
+    public static IReadOnlyList<string> CellModemIds
+    {
+        get => Split(Preferences.Get(CellModemsKey, string.Empty));
+        set => Preferences.Set(CellModemsKey, string.Join('|', value));
+    }
+
+    private static string[] Split(string ids) => ids.Split('|', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
 
     /// <summary>
     /// The original's "Save all GPS data" (on by default there too): record GPS points even when a scan finds
@@ -75,9 +97,10 @@ public static class ScanSettings
     }
 
     /// <summary>Applies the saved settings that other code reads directly. Call once at startup.</summary>
-    public static void Apply(Vistumbler.Core.Services.IWiFiScannerService wifi)
+    public static void Apply(Vistumbler.Core.Services.IWiFiScannerService wifi, Vistumbler.Core.Services.IRadioScannerService radio)
     {
         GpsFormatter.Format = GpsFormat;
-        wifi.SetActiveAdapter(AdapterId);
+        wifi.SetActiveAdapters(AdapterIds);
+        radio.SetCellularModems(CellModemIds);
     }
 }

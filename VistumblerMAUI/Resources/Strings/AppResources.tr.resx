@@ -595,10 +595,6 @@
     <value>Henüz sinyal geçmişi yok</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
-  <data name="Settings_AllAdapters" xml:space="preserve">
-    <value>Tüm bağdaştırıcılar</value>
-    <comment>Draft (machine translation), please review</comment>
-  </data>
   <data name="Settings_AdapterNotFound" xml:space="preserve">
     <value>Seçili bağdaştırıcı (bulunamadı)</value>
     <comment>Draft (machine translation), please review</comment>
@@ -1681,10 +1677,6 @@
   </data>
   <data name="Settings_AlsoRecordBluetoothDevices" xml:space="preserve">
     <value>Bluetooth aygıtlarını da kaydet</value>
-    <comment>Draft (machine translation), please review</comment>
-  </data>
-  <data name="Settings_WiFiAdapter" xml:space="preserve">
-    <value>Wi-Fi bağdaştırıcısı</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_Refresh" xml:space="preserve">

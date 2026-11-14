@@ -599,10 +599,6 @@
     <value>Pas encore d'historique de signal</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
-  <data name="Settings_AllAdapters" xml:space="preserve">
-    <value>Tous les adaptateurs</value>
-    <comment>Draft (machine translation), please review</comment>
-  </data>
   <data name="Settings_AdapterNotFound" xml:space="preserve">
     <value>Adaptateur choisi (introuvable)</value>
     <comment>Draft (machine translation), please review</comment>
@@ -1677,10 +1673,6 @@
   </data>
   <data name="Settings_AlsoRecordBluetoothDevices" xml:space="preserve">
     <value>Enregistrer aussi les appareils Bluetooth</value>
-    <comment>Draft (machine translation), please review</comment>
-  </data>
-  <data name="Settings_WiFiAdapter" xml:space="preserve">
-    <value>Adaptateur Wi-Fi</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_Refresh" xml:space="preserve">

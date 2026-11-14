@@ -599,10 +599,6 @@
     <value>信号履歴はまだありません</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
-  <data name="Settings_AllAdapters" xml:space="preserve">
-    <value>すべてのアダプター</value>
-    <comment>Draft (machine translation), please review</comment>
-  </data>
   <data name="Settings_AdapterNotFound" xml:space="preserve">
     <value>選択したアダプター (見つかりません)</value>
     <comment>Draft (machine translation), please review</comment>
@@ -1681,10 +1677,6 @@
   </data>
   <data name="Settings_AlsoRecordBluetoothDevices" xml:space="preserve">
     <value>Bluetooth デバイスも記録</value>
-    <comment>Draft (machine translation), please review</comment>
-  </data>
-  <data name="Settings_WiFiAdapter" xml:space="preserve">
-    <value>Wi-Fi アダプター</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_Refresh" xml:space="preserve">

@@ -28,7 +28,6 @@ public class AndroidWiFiScannerService : IWiFiScannerService
     private ScanReceiver? _receiver;
     private bool          _receiverRegistered;
     private bool          _isScanning;
-    private string?       _activeAdapterId;
 
     public event EventHandler<AccessPointsDetectedEventArgs>? AccessPointsDetected;
     public event EventHandler<ScanErrorEventArgs>?            ScanError;
@@ -211,7 +210,7 @@ public class AndroidWiFiScannerService : IWiFiScannerService
             new WiFiAdapter { Id = "wlan0", Name = "Wi-Fi" }
         });
 
-    public void SetActiveAdapter(string adapterId) => _activeAdapterId = adapterId;
+    public void SetActiveAdapters(IReadOnlyCollection<string> adapterIds) { }   // a phone has the one
 
     public Task<string?> GetConnectedBssidAsync()
     {

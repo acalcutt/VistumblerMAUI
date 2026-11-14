@@ -25,7 +25,12 @@ public interface IWiFiScannerService
     void StopScanning();
 
     Task<List<WiFiAdapter>> GetAvailableAdaptersAsync();
-    void SetActiveAdapter(string adapterId);
+
+    /// <summary>
+    /// The adapters to scan with, by id: any number of them (Windows; a phone has one). Empty, or none of them
+    /// plugged in, scans with every adapter.
+    /// </summary>
+    void SetActiveAdapters(IReadOnlyCollection<string> adapterIds);
 
     /// <summary>Returns the BSSID of the currently associated AP, or null.</summary>
     Task<string?> GetConnectedBssidAsync();

@@ -615,10 +615,6 @@
     <value>Δεν υπάρχει ακόμη ιστορικό σήματος</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
-  <data name="Settings_AllAdapters" xml:space="preserve">
-    <value>Όλοι οι προσαρμογείς</value>
-    <comment>Draft (machine translation), please review</comment>
-  </data>
   <data name="Settings_AdapterNotFound" xml:space="preserve">
     <value>Επιλεγμένος προσαρμογέας (δεν βρέθηκε)</value>
     <comment>Draft (machine translation), please review</comment>
@@ -1689,10 +1685,6 @@
   </data>
   <data name="Settings_AlsoRecordBluetoothDevices" xml:space="preserve">
     <value>Καταγραφή και συσκευών Bluetooth</value>
-    <comment>Draft (machine translation), please review</comment>
-  </data>
-  <data name="Settings_WiFiAdapter" xml:space="preserve">
-    <value>Προσαρμογέας Wi-Fi</value>
     <comment>Draft (machine translation), please review</comment>
   </data>
   <data name="Settings_Refresh" xml:space="preserve">

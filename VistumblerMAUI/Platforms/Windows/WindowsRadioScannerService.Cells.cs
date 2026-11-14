@@ -20,11 +20,16 @@ public sealed partial class WindowsRadioScannerService
 
     private readonly Task<IReadOnlyList<CellularModem>> _modemsAtStartup = Task.Run(FindModemsAsync);
     private readonly List<MobileBroadbandModem> _modems = new();
+    private volatile IReadOnlyCollection<string> _chosenModems = [];
     private Timer? _cellTimer;
     private int _cellPolling;
 
     /// <summary>Whether there's a modem to read cells from (looked for at startup).</summary>
     public bool SupportsCells => _modemsAtStartup.Wait(DetectWait) && _modemsAtStartup.Result.Count > 0;
+
+    public Task<IReadOnlyList<CellularModem>> GetCellularModemsAsync() => FindModemsAsync();
+
+    public void SetCellularModems(IReadOnlyCollection<string> modemIds) => _chosenModems = modemIds.ToArray();
 
     private static async Task<IReadOnlyList<CellularModem>> FindModemsAsync()
     {
@@ -41,12 +46,14 @@ public sealed partial class WindowsRadioScannerService
     }
 
     // Started after the modems are listed again (one may have been plugged in since startup), unless Stop or another
-    // Start came first
+    // Start came first. Only the chosen ones are read, or all of them when none is chosen.
     private async Task StartCellsAsync(int generation)
     {
+        var chosen = _chosenModems;
         var found = new List<MobileBroadbandModem>();
         foreach (var modem in await FindModemsAsync())
         {
+            if (chosen.Count > 0 && !chosen.Contains(modem.Id)) continue;
             try
             {
                 if (MobileBroadbandModem.FromId(modem.Id) is { } m) found.Add(m);

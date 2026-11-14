@@ -19,6 +19,15 @@ public interface IRadioScannerService
     /// <summary>Asks for what scanning them needs (location; Nearby devices for Bluetooth); false if refused.</summary>
     Task<bool> RequestPermissionsAsync(bool cells, bool bluetooth);
 
+    /// <summary>
+    /// The cellular modems cells can be read from, to choose among (Windows). None where cells come from the device's
+    /// own phone radio, as on Android, or where there's no modem.
+    /// </summary>
+    Task<IReadOnlyList<CellularModem>> GetCellularModemsAsync() => Task.FromResult<IReadOnlyList<CellularModem>>([]);
+
+    /// <summary>The modems to read cells from at the next <see cref="Start"/>, by id; empty reads every one.</summary>
+    void SetCellularModems(IReadOnlyCollection<string> modemIds) { }
+
     /// <summary>Starts whichever of cells and Bluetooth are asked for; permissions must already be granted.</summary>
     void Start(bool cells, bool bluetooth);
     void Stop();

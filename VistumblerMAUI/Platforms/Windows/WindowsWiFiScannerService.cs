@@ -14,7 +14,8 @@ namespace VistumblerMAUI.Platforms.Windows;
 public class WindowsWiFiScannerService : IWiFiScannerService
 {
     private bool  _isScanning;
-    private string? _activeAdapterId;
+    // The adapters chosen in Settings; empty, or none of them plugged in, scans with them all
+    private volatile IReadOnlyCollection<Guid> _chosenAdapters = Array.Empty<Guid>();
 
     public event EventHandler<AccessPointsDetectedEventArgs>? AccessPointsDetected;
     public event EventHandler<ScanErrorEventArgs>?            ScanError;
@@ -54,10 +55,13 @@ public class WindowsWiFiScannerService : IWiFiScannerService
     {
         try
         {
-            // Trigger a fresh scan. v3.0.2 API: ScanNetworksAsync(TimeSpan) scans all
-            // interfaces; the per-interface overload takes ScanMode + IEnumerable<Guid>.
-            if (_activeAdapterId is not null && Guid.TryParse(_activeAdapterId, out var ifaceGuid))
-                await NativeWifi.ScanNetworksAsync(ScanMode.OnlySpecified, new[] { ifaceGuid }, TimeSpan.FromSeconds(3), CancellationToken.None);
+            // The chosen adapters that are plugged in, or all of them. v3.0.2 API: ScanNetworksAsync(TimeSpan) scans
+            // all interfaces; the per-interface overload takes ScanMode + IEnumerable<Guid>.
+            var plugged = NativeWifi.EnumerateInterfaces().Select(i => i.Id).ToHashSet();
+            var active = _chosenAdapters.Where(plugged.Contains).ToHashSet();
+            if (active.Count == 0) active = plugged;
+            if (active.Count < plugged.Count)
+                await NativeWifi.ScanNetworksAsync(ScanMode.OnlySpecified, active, TimeSpan.FromSeconds(3), CancellationToken.None);
             else
                 await NativeWifi.ScanNetworksAsync(TimeSpan.FromSeconds(3));
 
@@ -67,14 +71,18 @@ public class WindowsWiFiScannerService : IWiFiScannerService
             // lookup from EnumerateAvailableNetworks() (which exposes the WLAN
             // AuthenticationAlgorithm / CipherAlgorithm) and translate those native flags
             // into Vistumbler's enums — the same approach as VistumblerCS's NativeWiFiScanner.
-            Guid? activeGuid = _activeAdapterId is not null && Guid.TryParse(_activeAdapterId, out var g) ? g : null;
             var security = NativeWifi.EnumerateAvailableNetworks()
-                .Where(n => !activeGuid.HasValue || n.Interface.Id == activeGuid.Value)
+                .Where(n => active.Contains(n.InterfaceInfo.Id))
                 .GroupBy(n => n.Ssid.ToString())
                 .ToDictionary(grp => grp.Key, grp => grp.First(), StringComparer.Ordinal);
 
-            // EnumerateBssNetworks() returns per-BSSID detail in v3.0.2
-            foreach (var bss in NativeWifi.EnumerateBssNetworks())
+            // EnumerateBssNetworks() returns per-BSSID detail in v3.0.2, from every adapter: only the chosen ones'
+            // are kept, and an AP two of them heard is listed once, as the stronger reading
+            var heard = NativeWifi.EnumerateBssNetworks()
+                .Where(b => active.Contains(b.InterfaceInfo.Id))
+                .GroupBy(b => b.Bssid.ToString(), StringComparer.OrdinalIgnoreCase)
+                .Select(grp => grp.MaxBy(b => b.Rssi)!);
+            foreach (var bss in heard)
             {
                 var ssid = bss.Ssid.ToString();
                 var ap = new AccessPoint
@@ -125,7 +133,8 @@ public class WindowsWiFiScannerService : IWiFiScannerService
         return Task.FromResult(adapters);
     }
 
-    public void SetActiveAdapter(string adapterId) => _activeAdapterId = adapterId;
+    public void SetActiveAdapters(IReadOnlyCollection<string> adapterIds) =>
+        _chosenAdapters = adapterIds.Select(id => Guid.TryParse(id, out var g) ? g : (Guid?)null).OfType<Guid>().ToArray();
 
     public async Task<string?> GetConnectedBssidAsync()
     {

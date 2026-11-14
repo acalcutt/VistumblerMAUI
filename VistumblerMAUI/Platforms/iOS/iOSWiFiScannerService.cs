@@ -55,7 +55,7 @@ public class iOSWiFiScannerService : IWiFiScannerService
             new WiFiAdapter { Id = "wifi0", Name = "Wi-Fi" }
         });
 
-    public void SetActiveAdapter(string adapterId) { }
+    public void SetActiveAdapters(IReadOnlyCollection<string> adapterIds) { }
 
     public async Task<string?> GetConnectedBssidAsync()
     {

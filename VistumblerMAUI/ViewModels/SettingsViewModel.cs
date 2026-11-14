@@ -94,41 +94,82 @@ public partial class SettingsViewModel : ObservableObject
     [ObservableProperty] private bool _saveGpsWithoutAps = ScanSettings.SaveGpsWithoutAps;
     partial void OnSaveGpsWithoutApsChanged(bool value) => ScanSettings.SaveGpsWithoutAps = value;
 
-    /// <summary>Only Windows lets the app choose an adapter; phones have one.</summary>
+    // ── Interfaces (Windows): the original's Interface menu, each Wi-Fi adapter and modem ticked by itself ─────────
+    /// <summary>Only Windows lets the app choose its adapters and modems; a phone has one of each.</summary>
     public bool HasAdapterChoice => OperatingSystem.IsWindows();
-    public ObservableCollection<Vistumbler.Core.Models.WiFiAdapter> Adapters { get; } = new();
-    [ObservableProperty] private Vistumbler.Core.Models.WiFiAdapter? _selectedAdapter;
-    private bool _loadingAdapters;
 
-    partial void OnSelectedAdapterChanged(Vistumbler.Core.Models.WiFiAdapter? value)
-    {
-        if (value is null || _loadingAdapters) return;
-        ScanSettings.AdapterId = value.Id;
-        IPlatformApplication.Current?.Services.GetService<Vistumbler.Core.Services.IWiFiScannerService>()?.SetActiveAdapter(value.Id);
-    }
+    /// <summary>Android's one switch for cells; Windows ticks its modems in <see cref="CellModems"/> instead.</summary>
+    public bool ShowCellSwitch => HasCellScanning && !HasAdapterChoice;
 
+    public ObservableCollection<InterfaceChoice> Adapters { get; } = new();
+    private HashSet<string> _pluggedAdapters = new();
+    public ObservableCollection<InterfaceChoice> CellModems { get; } = new();
+    [ObservableProperty] private bool _hasCellModems;
+
+    private static Vistumbler.Core.Services.IWiFiScannerService? WiFi =>
+        IPlatformApplication.Current?.Services.GetService<Vistumbler.Core.Services.IWiFiScannerService>();
+
+    /// <summary>
+    /// Lists the adapters and modems plugged in now, ticked as saved. Run as Settings opens, so the lists are there
+    /// without pressing Refresh; Refresh runs it again after plugging one in.
+    /// </summary>
     [RelayCommand]
-    private async Task RefreshAdaptersAsync()
+    private async Task RefreshInterfacesAsync()
     {
-        var wifi = IPlatformApplication.Current?.Services.GetService<Vistumbler.Core.Services.IWiFiScannerService>();
-        if (wifi is null || !HasAdapterChoice) return;
-        _loadingAdapters = true;
+        if (!HasAdapterChoice) return;
         try
         {
-            Adapters.Clear();
-            Adapters.Add(new Vistumbler.Core.Models.WiFiAdapter { Id = string.Empty, Name = Loc.T("Settings_AllAdapters") });
-            foreach (var a in await wifi.GetAvailableAdaptersAsync()) Adapters.Add(a);
-            // Keep a chosen adapter that isn't plugged in right now, so the choice isn't lost
-            var chosen = Adapters.FirstOrDefault(a => a.Id == ScanSettings.AdapterId);
-            if (chosen is null && ScanSettings.AdapterId.Length > 0)
-                Adapters.Add(chosen = new Vistumbler.Core.Models.WiFiAdapter { Id = ScanSettings.AdapterId, Name = Loc.T("Settings_AdapterNotFound") });
-            SelectedAdapter = chosen ?? Adapters[0];
+            if (WiFi is { } wifi)
+            {
+                // None saved scans with every adapter: all ticked
+                var saved = ScanSettings.AdapterIds;
+                var plugged = await wifi.GetAvailableAdaptersAsync();
+                _pluggedAdapters = plugged.Select(a => a.Id).ToHashSet();
+                Adapters.Clear();
+                foreach (var a in plugged)
+                    Adapters.Add(new InterfaceChoice(a.Id, a.Name, saved.Count == 0 || saved.Contains(a.Id), OnAdapterTicked));
+                // A chosen adapter that isn't plugged in now stays listed, so the choice isn't lost
+                foreach (var id in saved.Where(id => plugged.All(a => a.Id != id)))
+                    Adapters.Add(new InterfaceChoice(id, Loc.T("Settings_AdapterNotFound"), true, OnAdapterTicked));
+            }
+            if (Radio is { } radio)
+            {
+                var saved = ScanSettings.CellModemIds;
+                var modems = await radio.GetCellularModemsAsync();
+                CellModems.Clear();
+                foreach (var m in modems)
+                    CellModems.Add(new InterfaceChoice(m.Id, m.Name, ScanSettings.ScanCells && (saved.Count == 0 || saved.Contains(m.Id)), OnModemTicked));
+                foreach (var id in saved.Where(id => modems.All(m => m.Id != id)))
+                    CellModems.Add(new InterfaceChoice(id, Loc.T("Settings_ModemNotFound"), ScanSettings.ScanCells, OnModemTicked));
+                HasCellModems = CellModems.Count > 0;
+            }
         }
-        catch { /* leave the list as it is */ }
-        finally
+        catch (Exception ex)
         {
-            _loadingAdapters = false;
+            DebugLog.Write($"[Settings] listing interfaces failed: {ex.Message}");   // leave the lists as they are
         }
+    }
+
+    private void OnAdapterTicked(InterfaceChoice choice)
+    {
+        var ticked = Adapters.Where(a => a.IsChecked).Select(a => a.Id).ToList();
+        if (ticked.Count == 0)
+        {
+            choice.Reset(true);   // the last one ticked stays: something has to scan
+            return;
+        }
+        // Every adapter ticked is saved as none, so one plugged in later is scanned with too
+        IReadOnlyList<string> ids = ticked.Count == _pluggedAdapters.Count && ticked.All(_pluggedAdapters.Contains) ? [] : ticked;
+        ScanSettings.AdapterIds = ids;
+        WiFi?.SetActiveAdapters(ids);
+    }
+
+    private void OnModemTicked(InterfaceChoice choice)
+    {
+        var ids = CellModems.Where(m => m.IsChecked).Select(m => m.Id).ToList();
+        ScanSettings.CellModemIds = ids;
+        Radio?.SetCellularModems(ids);
+        ScanSettings.ScanCells = ids.Count > 0;   // restarts a running scan with the new modems
     }
 
     public IReadOnlyList<string> GpsFormatOptions { get; } = new[]
@@ -478,7 +519,7 @@ public partial class SettingsViewModel : ObservableObject
         _selectedNewApSound = NewApSoundOptions[(int)SoundSettings.NewApMode];
         _selectedSpeakVoice = SpeakVoiceOptions[(int)SoundSettings.Voice];
         _selectedSpeakValue = SpeakValueOptions[(int)SoundSettings.Value];
-        if (HasAdapterChoice) _ = RefreshAdaptersAsync();
+        if (HasAdapterChoice) _ = RefreshInterfacesAsync();   // filled as Settings opens, not only on Refresh
 
         // Show the chosen receiver without asking for the Bluetooth permission just to open Settings;
         // Refresh lists the rest

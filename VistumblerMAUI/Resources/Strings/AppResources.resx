@@ -158,8 +158,10 @@
   <data name="Graph_NoHistory" xml:space="preserve"><value>No signal history yet</value></data>
 
   <!-- Settings (view model) -->
-  <data name="Settings_AllAdapters" xml:space="preserve"><value>All adapters</value></data>
   <data name="Settings_AdapterNotFound" xml:space="preserve"><value>Chosen adapter (not found)</value></data>
+  <data name="Settings_ModemNotFound" xml:space="preserve"><value>Chosen modem (not found)</value></data>
+  <data name="Settings_WiFiAdapters" xml:space="preserve"><value>Wi-Fi adapters to scan with</value></data>
+  <data name="Settings_CellTowersFromModems" xml:space="preserve"><value>Cell towers from these modems</value></data>
   <data name="Settings_NoUsbGps" xml:space="preserve"><value>No supported USB GPS receiver is plugged in.</value></data>
   <data name="Settings_PluggedIn" xml:space="preserve"><value>Plugged in: {0}</value></data>
   <data name="Settings_UsbListFailed" xml:space="preserve"><value>Could not list USB devices: {0}</value></data>
@@ -398,7 +400,6 @@
   <data name="Settings_TurnOnGPSWhenThe" xml:space="preserve"><value>Turn on GPS when the app opens</value></data>
   <data name="Settings_AlsoRecordCellTowers" xml:space="preserve"><value>Also record cell towers</value></data>
   <data name="Settings_AlsoRecordBluetoothDevices" xml:space="preserve"><value>Also record Bluetooth devices</value></data>
-  <data name="Settings_WiFiAdapter" xml:space="preserve"><value>Wi-Fi adapter</value></data>
   <data name="Settings_Refresh" xml:space="preserve"><value>Refresh</value></data>
   <data name="Settings_MAP" xml:space="preserve"><value>MAP</value></data>
   <data name="Settings_BasemapStyle" xml:space="preserve"><value>Basemap style</value></data>
