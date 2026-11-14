@@ -73,7 +73,7 @@ public partial class SettingsViewModel : ObservableObject
     partial void OnScanOnLaunchChanged(bool value) => ScanSettings.ScanOnLaunch = value;
     partial void OnGpsOnLaunchChanged(bool value)  => ScanSettings.GpsOnLaunch  = value;
 
-    // Cell towers and Bluetooth (Android): asks for the permissions as each is turned on, and stays off if refused
+    // Cell towers and Bluetooth (Android and Windows): asks for the permissions as each is turned on, and stays off if refused
     private static Vistumbler.Core.Services.IRadioScannerService? Radio =>
         IPlatformApplication.Current?.Services.GetService<Vistumbler.Core.Services.IRadioScannerService>();
     public bool HasCellScanning => Radio?.SupportsCells == true;

@@ -3,8 +3,9 @@ using Vistumbler.Core.Models;
 namespace Vistumbler.Core.Services;
 
 /// <summary>
-/// Scans for cell towers and Bluetooth devices alongside the Wi-Fi scan. Android only for now; elsewhere
-/// <see cref="SupportsCells"/> and <see cref="SupportsBluetooth"/> are false and nothing is reported.
+/// Scans for cell towers and Bluetooth devices alongside the Wi-Fi scan, on Android and Windows (cell towers there
+/// from a mobile broadband modem, which most PCs don't have). Elsewhere <see cref="SupportsCells"/> and
+/// <see cref="SupportsBluetooth"/> are false and nothing is reported.
 /// </summary>
 public interface IRadioScannerService
 {
@@ -22,6 +23,9 @@ public interface IRadioScannerService
     void Start(bool cells, bool bluetooth);
     void Stop();
 }
+
+/// <summary>A cellular modem to read cell towers from (Windows).</summary>
+public sealed record CellularModem(string Id, string Name);
 
 /// <summary>For platforms with neither.</summary>
 public sealed class NoRadioScannerService : IRadioScannerService

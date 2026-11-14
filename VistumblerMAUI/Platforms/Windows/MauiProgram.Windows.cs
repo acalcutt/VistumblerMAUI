@@ -14,6 +14,7 @@ public static partial class MauiProgram
         services.AddSingleton<ISerialGpsService,    SerialNmeaGpsService>();
         services.AddSingleton<ILocationGpsService,  MauiGeolocationGpsService>();
         services.AddSingleton<IKeepAliveService,    NullKeepAliveService>();
+        services.AddSingleton<IRadioScannerService, WindowsRadioScannerService>();
     }
 }
 #endif

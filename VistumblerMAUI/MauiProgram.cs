@@ -50,7 +50,7 @@ public static partial class MauiProgram
 
         // Platform WiFi scanner registered in platform-specific startup
         RegisterPlatformServices(services);
-        // Cell towers and Bluetooth: Android registers its scanner above; elsewhere there's none
+        // Cell towers and Bluetooth: Android and Windows register their scanners above; elsewhere there's none
         services.TryAddSingleton<IRadioScannerService, NoRadioScannerService>();
 
         // ── ViewModels ───────────────────────────────────────────────────────

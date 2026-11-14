@@ -18,7 +18,7 @@ public sealed partial class ListTypeTab(string type) : ObservableObject
 
 /// <summary>
 /// Cell towers and Bluetooth devices, recorded alongside the Wi-Fi scan when Settings → Scanning says to
-/// (Android). They're kept apart from the APs, in their own tables and their own list, chosen with the tabs above
+/// (Android and Windows). They're kept apart from the APs, in their own tables and their own list, chosen with the tabs above
 /// the Scan page's list.
 /// </summary>
 public partial class ScanViewModel

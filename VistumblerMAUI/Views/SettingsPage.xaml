@@ -41,7 +41,7 @@
                 <Label Grid.Column="0" Text="{loc:T Settings_TurnOnGPSWhenThe}" VerticalOptions="Center" />
                 <Switch Grid.Column="1" IsToggled="{Binding GpsOnLaunch}" />
             </Grid>
-            <!-- Android: cell towers and Bluetooth devices, kept apart from the APs (the type picker on the Scan page) -->
+            <!-- Android and Windows: cell towers and Bluetooth devices, kept apart from the APs (the type picker on the Scan page) -->
             <Grid ColumnDefinitions="*,Auto" Padding="16,4" IsVisible="{Binding HasCellScanning}">
                 <Label Grid.Column="0" Text="{loc:T Settings_AlsoRecordCellTowers}" VerticalOptions="Center" />
                 <Switch Grid.Column="1" IsToggled="{Binding ScanCells}" />
