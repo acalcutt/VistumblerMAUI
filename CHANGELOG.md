@@ -10,6 +10,7 @@
 
 ### 🐞 Bug fixes
 - _...Add new stuff here..._
+- **Windows: Install and Restart failed with "The downloaded installer isn't validly signed"** — the releases are signed with Vistumbler's own certificate, which Windows doesn't know, and the updater insisted on a certificate Windows trusts, so every update stopped there. It now accepts an installer signed with exactly the certificate the running app is signed with, and still refuses one that has been changed or is signed by anyone else. This takes effect from the version after the one you have: to get it, install this release from the release page once; later updates install from inside the app.
 - **Map renderer updated to MapLibreNative.Maui.Handlers 5.0.0-pre.4** (from 5.0.0-pre.3). With 3D terrain on, dragging, pinching and tilting the map now turn around the ground you're looking at, not a point under the mountain, and a tap lands on the ground under your finger. On Windows, a terrain view no longer comes back lower after switching to another tab and back. On Android, tapping with two fingers zooms the map out.
 
 ## 0.12.0
