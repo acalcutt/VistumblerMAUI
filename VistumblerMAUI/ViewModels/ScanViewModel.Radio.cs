@@ -18,8 +18,8 @@ public sealed partial class ListTypeTab(string type) : ObservableObject
 
 /// <summary>
 /// Cell towers and Bluetooth devices, recorded alongside the Wi-Fi scan when Settings → Scanning says to
-/// (Android and Windows). They're kept apart from the APs, in their own tables and their own list, chosen with the tabs above
-/// the Scan page's list.
+/// (Android and Windows), or imported from a VS1 4.1 file or a WiGLE CSV. They're kept apart from the APs, in
+/// their own tables and their own list, chosen with the tabs above the Scan page's list.
 /// </summary>
 public partial class ScanViewModel
 {
@@ -32,10 +32,11 @@ public partial class ScanViewModel
     public const string WifiListName = "Wi-Fi", BluetoothListName = "Bluetooth", CellListName = "Cell towers";
 
     /// <summary>
-    /// The tabs above the Scan page's list, one per list it can show. Only Wi-Fi, and so not shown, when this device
-    /// records neither of the others.
+    /// The tabs above the Scan page's list: Wi-Fi, and Bluetooth and Cell towers when this device records them or the
+    /// session has some (from an import, say, on a PC without a modem). Only Wi-Fi, and so not shown, otherwise.
     /// </summary>
-    public IReadOnlyList<ListTypeTab> ListTabs { get; private set; } = [];
+    public ObservableCollection<ListTypeTab> ListTabs { get; } = new();
+    private bool _recordsBluetooth, _recordsCells;
 
     [ObservableProperty] private string _selectedListType = WifiListName;
     [ObservableProperty] private bool _isWifiList = true;
@@ -52,12 +53,9 @@ public partial class ScanViewModel
     private void InitRadio(IRadioScannerService radio)
     {
         _radio = radio;
-        var types = new List<string> { WifiListName };
-        if (radio.SupportsBluetooth) types.Add(BluetoothListName);
-        if (radio.SupportsCells) types.Add(CellListName);
-        ListTabs =types.Select(t => new ListTypeTab(t) { IsSelected = t == SelectedListType }).ToList();
-        UpdateListTabLabels();
-        HasListTypes = types.Count > 1;
+        _recordsBluetooth = radio.SupportsBluetooth;
+        _recordsCells = radio.SupportsCells;
+        UpdateListTabs();
         radio.NetworksDetected += OnRadioNetworksDetected;
         Services.ScanSettings.RadioChanged += (_, _) => MainThread.BeginInvokeOnMainThread(() =>
         {
@@ -99,6 +97,19 @@ public partial class ScanViewModel
     {
         foreach (var n in await _db.GetAllRadioNetworksAsync())
         {
+            n.IsActive = false;
+            _radioMap[n.Key] = n;
+        }
+        UpdateRadioCounts();
+        RebuildRadioList();
+    }
+
+    /// <summary>Adds the ones an import brought in that aren't listed yet, not in range. UI thread.</summary>
+    private void AddLoadedRadio(IEnumerable<RadioNetwork> loaded)
+    {
+        foreach (var n in loaded)
+        {
+            if (_radioMap.ContainsKey(n.Key)) continue;
             n.IsActive = false;
             _radioMap[n.Key] = n;
         }
@@ -185,6 +196,25 @@ public partial class ScanViewModel
     {
         BluetoothCount = _radioMap.Values.Count(n => n.IsBluetooth);
         CellCount = _radioMap.Count - BluetoothCount;
+        UpdateListTabs();
+    }
+
+    /// <summary>
+    /// Shows the Bluetooth and Cell towers tabs this device records or the session has any of, and goes back to Wi-Fi
+    /// when the chosen one goes (Clear All on a device that doesn't record it). UI thread.
+    /// </summary>
+    private void UpdateListTabs()
+    {
+        var types = new List<string> { WifiListName };
+        if (_recordsBluetooth || BluetoothCount > 0) types.Add(BluetoothListName);
+        if (_recordsCells || CellCount > 0) types.Add(CellListName);
+        if (!ListTabs.Select(t => t.Type).SequenceEqual(types))
+        {
+            if (!types.Contains(SelectedListType)) SelectedListType = WifiListName;
+            ListTabs.Clear();
+            foreach (var t in types) ListTabs.Add(new ListTypeTab(t) { IsSelected = t == SelectedListType });
+        }
+        HasListTypes = types.Count > 1;
         UpdateListTabLabels();
     }
 

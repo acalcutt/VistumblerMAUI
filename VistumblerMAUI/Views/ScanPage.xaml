@@ -107,8 +107,8 @@
                     TextColor="{AppThemeBinding Light=#1565C0, Dark=#90CAF9}" FontSize="13" />
         </Grid>
 
-        <!-- Which list: tabs for Wi-Fi, Bluetooth and cells with their counts, only on devices that record more
-             than Wi-Fi. Scrolls sideways if a language's names don't fit. -->
+        <!-- Which list: tabs for Wi-Fi, Bluetooth and cells with their counts, shown when the device records more
+             than Wi-Fi or the session has some (an import). Scrolls sideways if a language's names don't fit. -->
         <ScrollView Grid.Row="2" Orientation="Horizontal" HorizontalScrollBarVisibility="Never"
                     IsVisible="{Binding HasListTypes}">
             <HorizontalStackLayout Padding="12,0,12,4" Spacing="6"

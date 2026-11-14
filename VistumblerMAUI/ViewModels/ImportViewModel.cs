@@ -25,6 +25,7 @@ public partial class ImportViewModel : ObservableObject
 {
     private readonly IImportService _importService;
     private readonly IDatabaseService _databaseService;
+    private readonly ScanViewModel _scan;
 
     [ObservableProperty] private string _fileName = string.Empty;
     private string _filePath = string.Empty;
@@ -37,10 +38,11 @@ public partial class ImportViewModel : ObservableObject
 
     public List<ImportType> ImportTypes { get; } = Enum.GetValues<ImportType>().ToList();
 
-    public ImportViewModel(IImportService importService, IDatabaseService databaseService)
+    public ImportViewModel(IImportService importService, IDatabaseService databaseService, ScanViewModel scan)
     {
         _importService = importService;
         _databaseService = databaseService;
+        _scan = scan;
     }
 
     /// <summary>Return to Settings without importing.</summary>
@@ -88,6 +90,7 @@ public partial class ImportViewModel : ObservableObject
                 StatusMessage = Loc.T("Import_Saving", importedAps.Count);
                 ProgressValue = 0.5;
                 await SaveAsync(importedAps, radios);
+                await _scan.LoadImportedAsync();   // into the Scan page's lists and the map
 
                 ProgressValue = 1;
                 StatusMessage = Loc.T("Import_Done", importedAps.Count)
@@ -170,6 +173,7 @@ public partial class ImportViewModel : ObservableObject
                     if (copy is not null) try { File.Delete(copy); } catch { /* cache */ }
                 }
             }
+            await _scan.LoadImportedAsync();   // into the Scan page's lists and the map, once for the folder
             ProgressValue = 1;
             StatusMessage = Loc.T("Import_FolderDone", files.Count, totalAps) +
                             (failed > 0 ? Loc.T("Import_FolderFailedFiles", failed) : "");

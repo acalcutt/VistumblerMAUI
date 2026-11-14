@@ -220,6 +220,30 @@ public partial class ScanViewModel : ObservableObject, IQueryAttributable
         RebuildDisplayedList();
     }
 
+    /// <summary>
+    /// After an import: adds the APs, cell towers and Bluetooth devices the file brought into the session database to
+    /// the lists (and so the map), not in range, as a loaded session's are. Ones already listed are left as they are.
+    /// Before the Scan page has loaded there's nothing to do: its first load reads them all.
+    /// </summary>
+    public async Task LoadImportedAsync()
+    {
+        if (!_loaded) return;
+        var aps = await _db.GetAllAccessPointsAsync();
+        var radios = await _db.GetAllRadioNetworksAsync();
+        await MainThread.InvokeOnMainThreadAsync(() =>
+        {
+            foreach (var ap in aps)
+            {
+                if (_apMap.ContainsKey(ap.Bssid)) continue;
+                ap.IsActive = false;
+                _apMap[ap.Bssid] = ap;
+            }
+            TotalCount = _apMap.Count;
+            RebuildDisplayedList();
+            AddLoadedRadio(radios);   // ScanViewModel.Radio.cs
+        });
+    }
+
     /// <summary>Stop capture and clear in-memory state, closing the current session DB so a
     /// new session file can be opened. Used by "New Session" and the Exit actions.</summary>
     public async Task ResetForNewSessionAsync()
