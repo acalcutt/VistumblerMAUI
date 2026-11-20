@@ -2,6 +2,13 @@
 
 VistumblerMAUI includes code adapted from the projects below. Their licences require these notices.
 
+## Vistumbler translations
+
+The translations in `VistumblerMAUI/Resources/Strings/AppResources.<language>.resx` that aren't marked as drafts come
+from the [original Vistumbler](https://gitlab.techidiots.net/techidiots-llc/Vistumbler)'s language files
+(`build/tools/ImportVistumblerLanguages.cs`), written by its translators and released with it under the GNU General
+Public License version 2.
+
 ## WiGLE WiFi Wardriving
 
 The Magic 8 Ball (m8b) file format and its writer (`VistumblerMAUI/Services/M8b/M8bFile.cs`), and the

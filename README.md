@@ -96,4 +96,8 @@ The Android release must always be signed with the same keystore (CI variables `
 * [Vistumbler CS](https://gitlab.techidiots.net/techidiots-llc/VistumblerCS): an experimental C# rewrite for Windows
 * [WiGLE WiFi Wardriving](https://github.com/wiglenet/wigle-wifi-wardriving): the Magic 8 Ball (m8b) offline-location format comes from it; see [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)
 
+## License
+
+Vistumbler MAUI is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 2 of the License, or (at your option) any later version. It is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See [LICENSE](LICENSE) for the full text. Code adapted from other projects keeps its own license; see [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
+
 Created by Andrew Calcutt, [TechIdiots LLC](https://www.techidiots.net).
