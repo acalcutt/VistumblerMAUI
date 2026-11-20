@@ -6,6 +6,7 @@
 
 ### 🐞 Bug fixes
 - _...Add new stuff here..._
+- **Android: no green edge on the app icon** — the launcher icon's background layer was still Android Studio's green-and-grid placeholder, which could show as a green rim on launchers that use a larger icon shape or animate the icon. It's now plain blue to match.
 
 ## 0.14.0
 ### ✨ Features and improvements
