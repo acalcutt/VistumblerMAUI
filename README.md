@@ -21,24 +21,32 @@ The Windows downloads are self-contained, so there's no separate .NET or Windows
 ### Requirements
 
 * **Android** 8.0 or later. Location permission is needed for WiFi scanning and GPS.
-* **Windows** 10 or 11, x64 or ARM64, with a WiFi adapter. A GPS receiver is optional.
+* **Windows** 10 or 11, x64 or ARM64, with a WiFi adapter. A GPS receiver is optional. Recording Bluetooth devices needs a Bluetooth radio, and cell towers a mobile broadband (cellular) modem.
+
+Android limits how often apps can scan for WiFi (Android 9 and later). For faster updates, turn off **WiFi scan throttling** in the phone's Developer options.
 
 ## Features
 
-* Live access point list with details for each network
-* Map with your GPS position and track, live access points, WiFiDB history layers, 3D terrain and offline map caching
-* GPS from the device's location service, or a serial NMEA receiver on Windows
-* Background scanning on Android, and an option to keep the screen on while scanning
-* Channel graph
-* Import and export of scans, including the GPS track, to a folder you choose
-* [WiFiDB](https://wifidb.net/wifidb/) account support, including registration by QR code or link
+* **Scanning:** live access point list with SSID, BSSID, manufacturer, signal, channel, band and security; sort, group by channel, security and more, and saved filters; details for each network with its signal history
+* **Bluetooth and cell towers:** Bluetooth and Bluetooth LE devices and cell towers recorded alongside the WiFi, each in its own list (Android, and Windows with Bluetooth or a cellular modem), and shown from imported files on any device
+* **Several WiFi adapters at once** on Windows, chosen in **Settings → Scanning**
+* **Background scanning** on Android, and an option to keep the screen on while scanning
+* **Channel graphs** for 2.4, 5 and 6 GHz
+* **GPS** from the device's location service, a Bluetooth or USB NMEA receiver on Android, or a serial NMEA receiver on Windows; a GPS details page with a compass
+* **Map** with your position and track, live access points, WiFiDB history layers, 3D terrain, several map styles and offline map areas
+* **Site survey:** mark spots on a floor plan, or on the map, and see a signal heat map; PNG and CSV export
+* **Import and export:** Vistumbler VS1/VSZ and CSV, WiGLE CSV, KML (with signal maps), GPX, GeoJSON, Kismet and NetStumbler NS1; imports also read WarDrive files and whole folders
+* **[WiFiDB](https://wifidb.net/wifidb/):** uploads with an import status page and automatic upload of saves, account setup by QR code or link, and finding an AP in WiFiDB
+* **WiGLE:** optional upload of WiFi, Bluetooth and cell towers alongside WiFiDB (off by default)
+* **Sounds** for new access points and spoken signal strength
+* **18 languages** (Settings → Language): English plus translations seeded from the original Vistumbler's language files, the rest machine-translated drafts awaiting review
 
 ## Using Vistumbler MAUI
 
 * **Tabs:** **Scan** (access point list), **Map**, **Channels** and **Settings**. Start and stop scanning and GPS from the bar at the top.
-* **Menu** (☰): Import, Export, New Session, Check for Updates, and the two exit options.
+* **Menu** (☰): New Session, Import, Export, Clear, Upload to WifiDB, Uploads, Check for Updates, GPS details, Site survey, Links, and the two exit options.
 * **Sessions:** scans are saved per session. On startup you can resume a previous session or start a new one. **Exit (Save DB)** keeps the session, while **Exit** discards it.
-* **Updates:** checks for a new version at startup, or on request from the menu or **Settings → Updates**. You can turn the startup check off there, and choose whether to include pre-releases. On Windows, an installed copy downloads and runs the new installer, then restarts with your session kept. On Android, the new APK opens in your browser to install.
+* **Updates:** checks for a new version at startup, or on request from the menu or **Settings → Updates**. You can turn the startup check off there, and choose whether to include pre-releases. On Windows, an installed copy downloads and runs the new installer, then restarts with your session kept. On Android, the new APK opens in your browser to install. A copy installed from Google Play is updated by Play instead, so it has no update check.
 
 ## Building from source
 
