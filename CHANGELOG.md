@@ -3,10 +3,15 @@
 ## master
 ### ✨ Features and improvements
 - _...Add new stuff here..._
-- **Privacy policy** — menu → Links… now has a Privacy policy link to [vistumbler.net/maui/privacy.html](https://www.vistumbler.net/maui/privacy.html), which says what the app records, what it sends and when (only uploads you choose, lookups, and map tiles), and that it has no ads, analytics or tracking.
 
 ### 🐞 Bug fixes
 - _...Add new stuff here..._
+
+## 0.15.0
+### ✨ Features and improvements
+- **Privacy policy** — menu → Links… now has a Privacy policy link to [vistumbler.net/maui/privacy.html](https://www.vistumbler.net/maui/privacy.html), which says what the app records, what it sends and when (only uploads you choose, lookups, and map tiles), and that it has no ads, analytics or tracking.
+
+### 🐞 Bug fixes
 - **Android: no green edge on the app icon** — the launcher icon's background layer was still Android Studio's green-and-grid placeholder, which could show as a green rim on launchers that use a larger icon shape or animate the icon. It's now plain blue to match.
 
 ## 0.14.0
