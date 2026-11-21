@@ -8,6 +8,8 @@
 # Play rejects a versionCode it has seen before, so when the bundle's <ApplicationVersion> is already in Play this
 # does nothing: re-running a pipeline is safe.
 #
+# Also uploads MapLibre's native debug symbols for the bundle when its release has them (build/Get-MapLibreSymbols.ps1).
+#
 # The API can't create the app or its first release: upload the first AAB by hand in Play Console.
 param(
     [Parameter(Mandatory)][string]$Aab,
@@ -97,6 +99,24 @@ try {
         -TimeoutSec 1800
     if ([long]$bundle.versionCode -ne $versionCode) {
         throw "Uploaded bundle has versionCode $($bundle.versionCode), but $Project says $versionCode"
+    }
+
+    # MapLibre's native debug symbols, so its crashes are readable in Android vitals. Optional: a release never
+    # fails over them.
+    $symbols = Join-Path ([IO.Path]::GetTempPath()) "native-symbols-$versionCode.zip"
+    try {
+        if (& "$PSScriptRoot/Get-MapLibreSymbols.ps1" -Aab $Aab -Project $Project -OutFile $symbols) {
+            Invoke-RestMethod -Method Post -Headers $headers -ContentType 'application/octet-stream' -InFile $symbols `
+                -Uri "https://androidpublisher.googleapis.com/upload/androidpublisher/v3/applications/$packageName/edits/$edit/apks/$versionCode/deobfuscationFiles/nativeCode?uploadType=media" `
+                -TimeoutSec 1800 | Out-Null
+            Write-Host 'Uploaded the native debug symbols.'
+        }
+    }
+    catch {
+        Write-Warning "Native debug symbols not uploaded: $($_.Exception.Message)"
+    }
+    finally {
+        Remove-Item $symbols -ErrorAction SilentlyContinue
     }
 
     $release = @{
