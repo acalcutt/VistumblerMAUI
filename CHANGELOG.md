@@ -3,6 +3,7 @@
 ## master
 ### ✨ Features and improvements
 - _...Add new stuff here..._
+- **Privacy policy** — menu → Links… now has a Privacy policy link to [vistumbler.net/maui/privacy.html](https://www.vistumbler.net/maui/privacy.html), which says what the app records, what it sends and when (only uploads you choose, lookups, and map tiles), and that it has no ads, analytics or tracking.
 
 ### 🐞 Bug fixes
 - _...Add new stuff here..._

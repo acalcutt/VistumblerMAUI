@@ -16,6 +16,9 @@ public static class AppLinks
     public const bool ShowSupportLinks = true;
 #endif
 
+    /// <summary>The app's privacy policy, also given in its Google Play listing.</summary>
+    public const string PrivacyPolicyUrl = "https://www.vistumbler.net/maui/privacy.html";
+
     public static IReadOnlyList<(string Title, string Url)> All
     {
         get
@@ -29,6 +32,7 @@ public static class AppLinks
                 ("VistumblerMAUI source code",  "https://gitlab.techidiots.net/techidiots-llc/VistumblerMAUI"),
                 ("WifiDB website",              wifiDb),
                 ("WifiDB live APs",             wifiDb + "opt/live.php"),
+                ("Privacy policy",              PrivacyPolicyUrl),
             };
             if (ShowSupportLinks)
             {
